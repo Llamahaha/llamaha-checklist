@@ -25,9 +25,17 @@
     </header>
 
     <main class="guide-layout">
-      <aside class="guide-nav-card">
-        <p class="section-kicker">Vendors</p>
-        <nav id="vendorNav" class="guide-nav"></nav>
+      <aside class="guide-sidebar">
+        <section class="guide-nav-card">
+          <p class="section-kicker">Vendors</p>
+          <nav id="vendorNav" class="guide-nav"></nav>
+        </section>
+
+        <section class="guide-issue-card">
+          <p class="section-kicker">Common Fixes</p>
+          <h3>General Use Issues</h3>
+          <ul id="usageIssues" class="issue-list"></ul>
+        </section>
       </aside>
 
       <section class="guide-content">
@@ -53,8 +61,13 @@
           </section>
 
           <section class="guide-card">
-            <h2>Watch For</h2>
-            <ul id="watchFor"></ul>
+            <h2>FAQ</h2>
+            <div id="faqList" class="faq-list"></div>
+          </section>
+
+          <section class="guide-card full">
+            <h2>Install / Uninstall Issues</h2>
+            <ul id="installIssues" class="issue-list"></ul>
           </section>
 
           <section class="guide-card full">

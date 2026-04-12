@@ -1,4 +1,9 @@
 import { vendorGuides, vendorOrder } from "./guideData.js";
+import {
+  vendorFaqs,
+  vendorInstallIssues,
+  vendorUsageIssues
+} from "./guideExtras.js";
 
 const vendorKey = document.body.dataset.vendor;
 const guide = vendorGuides[vendorKey];
@@ -7,13 +12,19 @@ const vendorTitle = document.getElementById("vendorTitle");
 const vendorSummary = document.getElementById("vendorSummary");
 const vendorProducts = document.getElementById("vendorProducts");
 const vendorNav = document.getElementById("vendorNav");
+const faqList = document.getElementById("faqList");
 const licenseSteps = document.getElementById("licenseSteps");
 const installSteps = document.getElementById("installSteps");
 const uninstallSteps = document.getElementById("uninstallSteps");
-const watchFor = document.getElementById("watchFor");
+const installIssues = document.getElementById("installIssues");
+const usageIssues = document.getElementById("usageIssues");
 const supportLinks = document.getElementById("supportLinks");
 
 function renderList(container, items) {
+  if (!container) {
+    return;
+  }
+
   container.innerHTML = "";
 
   items.forEach(item => {
@@ -24,6 +35,10 @@ function renderList(container, items) {
 }
 
 function renderLinks(container, items) {
+  if (!container) {
+    return;
+  }
+
   container.innerHTML = "";
 
   items.forEach(item => {
@@ -38,7 +53,52 @@ function renderLinks(container, items) {
   });
 }
 
+function renderFaqs(container, items) {
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  items.forEach(item => {
+    const article = document.createElement("article");
+    article.className = "faq-item";
+
+    const question = document.createElement("h3");
+    question.textContent = item.q;
+
+    const answer = document.createElement("p");
+    answer.textContent = item.a;
+
+    article.append(question, answer);
+    container.appendChild(article);
+  });
+}
+
+function renderIssueList(container, items) {
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  items.forEach(item => {
+    const li = document.createElement("li");
+    const issue = document.createElement("strong");
+    issue.textContent = `${item.issue}:`;
+
+    const text = document.createTextNode(` ${item.fix}`);
+
+    li.append(issue, text);
+    container.appendChild(li);
+  });
+}
+
 function renderNav() {
+  if (!vendorNav) {
+    return;
+  }
+
   vendorOrder.forEach(key => {
     const item = document.createElement("a");
     item.href = `${key}.html`;
@@ -66,7 +126,9 @@ if (!guide) {
   renderList(licenseSteps, guide.licenseSteps);
   renderList(installSteps, guide.installSteps);
   renderList(uninstallSteps, guide.uninstallSteps);
-  renderList(watchFor, guide.watchFor);
+  renderFaqs(faqList, vendorFaqs[vendorKey] ?? []);
+  renderIssueList(installIssues, vendorInstallIssues[vendorKey] ?? []);
+  renderIssueList(usageIssues, vendorUsageIssues[vendorKey] ?? []);
   renderLinks(supportLinks, guide.supportLinks);
 }
 
