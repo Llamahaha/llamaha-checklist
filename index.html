@@ -17,8 +17,8 @@
         <div class="builder-header">
           <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
-            <p class="section-kicker">MSP Operations Hub</p>
-            <h1>Start from the right workflow instead of landing straight in the generator</h1>
+            <p class="section-kicker">IT Operations Hub</p>
+            <h1>Checklists, app guidance, and troubleshooting in one place</h1>
             <p class="builder-copy">
               Use this page as the control panel for onboarding and offboarding runbooks, application licensing guides,
               install and uninstall references, FAQ and troubleshooting notes, and Microsoft 365 plan comparison help.
@@ -75,6 +75,20 @@
           <p>Use the M365 Maps matrix when clients ask which bundle includes apps, mailbox size, Entra features, or security/compliance capabilities.</p>
           <a class="hub-link" href="#m365Matrix">Review matrix notes</a>
         </article>
+
+        <article class="hub-card">
+          <p class="section-kicker">Section</p>
+          <h2>Common Microsoft App Issues</h2>
+          <p>Jump into quick troubleshooting notes for Word, Excel, Teams, OneDrive, SharePoint, and MFA with Authenticator.</p>
+          <a class="hub-link" href="#microsoftIssues">Open Microsoft issue notes</a>
+        </article>
+
+        <article class="hub-card">
+          <p class="section-kicker">Section</p>
+          <h2>Common Computer Issues</h2>
+          <p>Use this section for quick triage help with share drives, printers, VPN and network problems, disk space, and common Windows workstation issues.</p>
+          <a class="hub-link" href="#computerIssues">Open computer issue notes</a>
+        </article>
       </section>
 
       <section id="guideDirectory" class="results-card hub-section">
@@ -118,6 +132,33 @@
           </p>
           <a class="hub-link" href="https://m365maps.com/matrix.htm" target="_blank" rel="noreferrer">Open M365 Maps Matrix</a>
         </div>
+      </section>
+
+      <section id="microsoftIssues" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Microsoft App Issues</p>
+            <h2>Common Microsoft productivity and identity issues</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">
+          These are the Microsoft-side problem areas that usually show up in MSP tickets first: Office app sign-in,
+          Teams reliability, OneDrive sync, SharePoint access, and MFA / Authenticator headaches.
+        </p>
+        <div id="microsoftIssuesGrid" class="issue-grid"></div>
+      </section>
+
+      <section id="computerIssues" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Computer Issues</p>
+            <h2>Common workstation, print, network, and storage issues</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">
+          Use these quick notes for common endpoint and network support calls before you have to dive into a full rebuild or escalation path.
+        </p>
+        <div id="computerIssuesGrid" class="issue-grid"></div>
       </section>
     </main>
   </div>
