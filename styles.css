@@ -1,5 +1,5 @@
 :root {
-  --bg: #ffffff;
+  --bg: #f9eedc;
   --surface: #ffffff;
   --surface-strong: #ffffff;
   --ink: #36499b;
@@ -21,9 +21,9 @@ body {
   font-family: "Plus Jakarta Sans", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(54, 73, 155, 0.12), transparent 26%),
-    radial-gradient(circle at top right, rgba(111, 34, 119, 0.12), transparent 24%),
-    linear-gradient(180deg, #ffffff 0%, #f7f8ff 52%, #ffffff 100%);
+    radial-gradient(circle at top left, rgba(54, 73, 155, 0.08), transparent 28%),
+    radial-gradient(circle at top right, rgba(111, 34, 119, 0.08), transparent 26%),
+    linear-gradient(180deg, #f9eedc 0%, #f7ecda 52%, #fbf4e9 100%);
   min-height: 100vh;
 }
 
@@ -49,11 +49,6 @@ body {
   font-weight: 700;
 }
 
-.page-nav strong {
-  margin-right: auto;
-}
-
-.page-contact-link,
 .contact-btn {
   display: inline-flex;
   align-items: center;
@@ -127,11 +122,6 @@ body {
   gap: 16px;
 }
 
-.hero-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .toc-shell {
   display: grid;
   gap: 14px;
@@ -161,12 +151,16 @@ body {
   transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
 }
 
-.page-contact-link:hover,
 .contact-btn:hover,
 .toc-links a:hover {
   transform: translateY(-1px);
   border-color: rgba(111, 34, 119, 0.28);
   background: rgba(111, 34, 119, 0.08);
+}
+
+.contact-panel {
+  display: grid;
+  gap: 14px;
 }
 
 .controls-card,
