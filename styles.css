@@ -1,0 +1,25 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.task {
+  margin-top: 20px;
+  padding: 10px;
+  border-left: 4px solid #333;
+  background: #fafafa;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+}
