@@ -3,7 +3,6 @@ export const vendorOrder = [
   "bentley",
   "esri",
   "ptc",
-  "sketchup",
   "trimble",
   "adobe",
   "bluebeam",

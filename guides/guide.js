@@ -192,13 +192,7 @@ if (!guide) {
   document.title = `${guide.title} Guide`;
   vendorTitle.textContent = guide.title;
   vendorSummary.textContent = guide.summary;
-
-  guide.products.forEach(product => {
-    const chip = document.createElement("span");
-    chip.className = "product-chip";
-    chip.textContent = product;
-    vendorProducts.appendChild(chip);
-  });
+  renderList(vendorProducts, guide.products);
 
   renderList(licenseSteps, guide.licenseSteps);
   renderList(installSteps, guide.installSteps);

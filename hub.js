@@ -170,29 +170,12 @@ function renderVendorDirectory() {
 
     titleBlock.append(title, summary);
 
-    const count = document.createElement("span");
-    count.className = "vendor-count";
-    count.textContent = `${apps.length || guide.products.length} focus areas`;
+    header.append(titleBlock);
 
-    header.append(titleBlock, count);
-
-    const chipRow = document.createElement("div");
-    chipRow.className = "vendor-chip-row";
-
-    const sampleApps = (apps.length ? apps.map(item => item.name) : guide.products).slice(0, 6);
-    sampleApps.forEach(name => {
-      const chip = document.createElement("span");
-      chip.className = "chip";
-      chip.textContent = name;
-      chipRow.appendChild(chip);
-    });
-
-    if ((apps.length ? apps.length : guide.products.length) > sampleApps.length) {
-      const moreChip = document.createElement("span");
-      moreChip.className = "chip";
-      moreChip.textContent = `+${(apps.length ? apps.length : guide.products.length) - sampleApps.length} more`;
-      chipRow.appendChild(moreChip);
-    }
+    const coverage = document.createElement("p");
+    coverage.className = "vendor-coverage";
+    const coverageItems = (apps.length ? apps.map(item => item.name) : guide.products);
+    coverage.textContent = `Coverage: ${coverageItems.join(", ")}`;
 
     const links = document.createElement("nav");
     links.className = "vendor-links";
@@ -207,7 +190,7 @@ function renderVendorDirectory() {
       { label: "Common Errors", href: `guides/${key}.html#common-fixes` }
     ].forEach(item => links.appendChild(makeLink(item.label, item.href)));
 
-    card.append(header, chipRow, links);
+    card.append(header, coverage, links);
     vendorDirectory.appendChild(card);
   });
 }
@@ -227,15 +210,9 @@ function renderM365Lanes() {
     const text = document.createElement("p");
     text.textContent = lane.text;
 
-    const rowList = document.createElement("div");
-    rowList.className = "vendor-chip-row";
-
-    lane.rows.forEach(row => {
-      const chip = document.createElement("span");
-      chip.className = "chip";
-      chip.textContent = row;
-      rowList.appendChild(chip);
-    });
+    const rowList = document.createElement("p");
+    rowList.className = "m365-row-list";
+    rowList.textContent = `Rows to compare: ${lane.rows.join(", ")}`;
 
     card.append(title, text, rowList);
     m365LaneGrid.appendChild(card);

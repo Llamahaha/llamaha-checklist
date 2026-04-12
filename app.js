@@ -10,7 +10,6 @@ const output = document.getElementById("output");
 const emptyState = document.getElementById("emptyState");
 const emptyStateText = emptyState.querySelector("p");
 const resultsTitle = document.getElementById("resultsTitle");
-const summaryChips = document.getElementById("summaryChips");
 const overviewGrid = document.getElementById("overviewGrid");
 const insightsPanel = document.getElementById("insightsPanel");
 const copyBtn = document.getElementById("copyBtn");
@@ -50,9 +49,9 @@ const workstationLabelMap = {
 };
 
 const impactMeta = {
-  critical: { label: "Critical", className: "impact-critical" },
-  high: { label: "High", className: "impact-high" },
-  normal: { label: "Standard", className: "impact-normal" }
+  critical: { label: "Critical" },
+  high: { label: "High" },
+  normal: { label: "Standard" }
 };
 
 const tagMeta = {
@@ -367,10 +366,9 @@ function buildInsights(options) {
 }
 
 function renderSummary(tasks, options) {
-  summaryChips.innerHTML = "";
   const metrics = getProgressMetrics(tasks);
 
-  const chips = [
+  resultsTitle.dataset.summary = [
     `${titleCase(options.type)} flow`,
     `${titleCase(options.environment)} environment`,
     options.accessProfile === "privileged" ? "Privileged access" : "Standard access",
@@ -378,14 +376,7 @@ function renderSummary(tasks, options) {
     `${options.systems.length} platforms`,
     `${tasks.length} tasks`,
     `${metrics.completedTasks} completed`
-  ];
-
-  chips.forEach(label => {
-    const chip = document.createElement("span");
-    chip.className = "chip";
-    chip.textContent = label;
-    summaryChips.appendChild(chip);
-  });
+  ].join(" | ");
 }
 
 function renderOverview(tasks, options, licenses) {
@@ -457,13 +448,6 @@ function renderSupportPanels(insights, licenses, options) {
   }
 }
 
-function appendChip(container, label, className) {
-  const chip = document.createElement("span");
-  chip.className = className;
-  chip.textContent = label;
-  container.appendChild(chip);
-}
-
 function renderChecklist(tasks, options) {
   output.innerHTML = "";
   overviewGrid.innerHTML = "";
@@ -529,11 +513,10 @@ function renderChecklist(tasks, options) {
       const summary = document.createElement("p");
       summary.className = "task-summary";
       summary.textContent = task.summary;
-      titleBlock.append(taskTitle, summary);
-
-      const impact = document.createElement("span");
-      impact.className = `impact-pill ${impactMeta[task.impact]?.className ?? "impact-normal"}`;
-      impact.textContent = impactMeta[task.impact]?.label ?? "Standard";
+      const taskPriority = document.createElement("p");
+      taskPriority.className = "task-priority";
+      taskPriority.textContent = `Priority: ${impactMeta[task.impact]?.label ?? "Standard"}`;
+      titleBlock.append(taskTitle, summary, taskPriority);
 
       const taskTools = document.createElement("div");
       taskTools.className = "task-card-tools";
@@ -556,19 +539,23 @@ function renderChecklist(tasks, options) {
       taskToggleText.textContent = "Done";
 
       taskToggle.append(taskCheckbox, taskToggleText);
-      taskTools.append(metrics, taskToggle, impact);
+      taskTools.append(metrics, taskToggle);
       header.append(titleBlock, taskTools);
 
       const metaRow = document.createElement("div");
       metaRow.className = "task-meta";
 
-      task.systems.forEach(system => {
-        appendChip(metaRow, getSystemLabel(system), "meta-chip system-chip");
-      });
+      const systemsLine = document.createElement("p");
+      systemsLine.className = "task-meta-line";
+      systemsLine.textContent = `Systems: ${task.systems.map(getSystemLabel).join(", ")}`;
+      metaRow.appendChild(systemsLine);
 
-      (task.tags ?? []).forEach(tag => {
-        appendChip(metaRow, tagMeta[tag] ?? tag, "meta-chip tag-chip");
-      });
+      if ((task.tags ?? []).length) {
+        const tagsLine = document.createElement("p");
+        tagsLine.className = "task-meta-line";
+        tagsLine.textContent = `Notes: ${(task.tags ?? []).map(tag => tagMeta[tag] ?? tag).join(", ")}`;
+        metaRow.appendChild(tagsLine);
+      }
 
       const list = document.createElement("ol");
       list.className = "task-step-list";
