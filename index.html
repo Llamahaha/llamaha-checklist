@@ -16,16 +16,17 @@
         <p class="eyebrow">MSP OPERATIONS WORKBENCH</p>
         <h1>Build cleaner onboarding and offboarding runbooks in seconds.</h1>
         <p class="hero-text">
-          Generate service-desk ready checklists for cloud, hybrid, and on-prem clients with role-aware tasks,
-          system targeting, and grouped execution steps.
+          Generate service-desk ready runbooks for cloud, hybrid, and on-prem clients with stack-aware tasks for
+          Microsoft licensing, Datto RMM, Autotask, IT Glue, RocketCyber, Bitdefender, FortiClient, CAD tooling,
+          PDF licensing, and the security cleanup that tends to get missed later.
         </p>
       </div>
       <div class="hero-panel">
         <p class="panel-label">Built for</p>
         <ul class="hero-points">
-          <li>Microsoft 365 and Entra ID</li>
-          <li>Hybrid AD environments</li>
-          <li>RMM, backup, VPN, and security tooling</li>
+          <li>Microsoft 365, Entra ID, and hybrid AD</li>
+          <li>Datto RMM, Autotask, and IT Glue workflows</li>
+          <li>RocketCyber, Bitdefender, FortiClient, CAD, and PDF platforms</li>
         </ul>
       </div>
     </header>
@@ -63,23 +64,71 @@
                 <option value="privileged">Privileged User</option>
               </select>
             </label>
+
+            <label class="field">
+              <span>Workstation Profile</span>
+              <select id="workstationProfile" name="workstationProfile">
+                <option value="standard">Standard Productivity</option>
+                <option value="shared">Shared / Kiosk</option>
+                <option value="cad">CAD / Engineering</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="preset-bar" aria-label="Quick presets">
+            <button type="button" class="preset-btn" data-preset="core">Core MSP</button>
+            <button type="button" class="preset-btn" data-preset="remote">Remote Secure User</button>
+            <button type="button" class="preset-btn" data-preset="cad">CAD / Engineering</button>
+            <button type="button" class="preset-btn" data-preset="admin">Privileged Admin</button>
           </div>
 
           <fieldset class="system-picker">
             <legend>Platforms in Scope</legend>
-            <div class="checkbox-grid">
-              <label><input type="checkbox" name="systems" value="m365" checked> Microsoft 365</label>
-              <label><input type="checkbox" name="systems" value="ad" checked> Active Directory</label>
-              <label><input type="checkbox" name="systems" value="vpn"> VPN</label>
-              <label><input type="checkbox" name="systems" value="datto" checked> Datto RMM</label>
-              <label><input type="checkbox" name="systems" value="backup"> Backup Platform</label>
-              <label><input type="checkbox" name="systems" value="security"> Security Stack</label>
-              <label><input type="checkbox" name="systems" value="knowbe4" checked> KnowBe4</label>
-              <label><input type="checkbox" name="systems" value="lob"> Line-of-Business Apps</label>
+            <div class="system-groups">
+              <div class="system-group">
+                <p class="system-group-title">Core Identity & Device</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="m365" checked> Microsoft 365 & Entra</label>
+                  <label><input type="checkbox" name="systems" value="ad" checked> Active Directory</label>
+                  <label><input type="checkbox" name="systems" value="windows" checked> Windows Workstation</label>
+                  <label><input type="checkbox" name="systems" value="backup" checked> Backup Platform</label>
+                </div>
+              </div>
+
+              <div class="system-group">
+                <p class="system-group-title">MSP Internal Stack</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="datto" checked> Datto RMM</label>
+                  <label><input type="checkbox" name="systems" value="autotask" checked> Autotask</label>
+                  <label><input type="checkbox" name="systems" value="itglue" checked> IT Glue</label>
+                  <label><input type="checkbox" name="systems" value="lob"> Other LoB Apps</label>
+                </div>
+              </div>
+
+              <div class="system-group">
+                <p class="system-group-title">Security & Remote Access</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="rocketcyber" checked> RocketCyber</label>
+                  <label><input type="checkbox" name="systems" value="bitdefender" checked> Bitdefender</label>
+                  <label><input type="checkbox" name="systems" value="forticlient" checked> FortiClient VPN</label>
+                </div>
+              </div>
+
+              <div class="system-group">
+                <p class="system-group-title">Engineering & Document Apps</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="autodesk"> Autodesk</label>
+                  <label><input type="checkbox" name="systems" value="bentley"> Bentley</label>
+                  <label><input type="checkbox" name="systems" value="esri"> Esri</label>
+                  <label><input type="checkbox" name="systems" value="bluebeam"> Bluebeam</label>
+                  <label><input type="checkbox" name="systems" value="adobe"> Adobe Acrobat</label>
+                  <label><input type="checkbox" name="systems" value="foxit"> Foxit PDF</label>
+                </div>
+              </div>
             </div>
           </fieldset>
 
-          <div class="toggle-row">
+          <div class="toggle-grid">
             <label class="toggle">
               <input type="checkbox" id="includeManagerTasks" name="includeManagerTasks" checked>
               <span>Include manager / handoff items</span>
@@ -87,6 +136,18 @@
             <label class="toggle">
               <input type="checkbox" id="includeAssetTasks" name="includeAssetTasks" checked>
               <span>Include endpoint / asset handling</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="includeLicenseTasks" name="includeLicenseTasks" checked>
+              <span>Include license recovery / seat assignment</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="includeDocumentationTasks" name="includeDocumentationTasks" checked>
+              <span>Include Autotask / IT Glue completion</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="includeSecurityReview" name="includeSecurityReview" checked>
+              <span>Include extra security review items</span>
             </label>
           </div>
 
@@ -111,6 +172,8 @@
           <p>Generate a checklist to see grouped tasks, execution order, and quick export actions.</p>
         </div>
 
+        <div id="overviewGrid" class="overview-grid"></div>
+        <div id="insightsPanel" class="insights-panel"></div>
         <div id="output" class="output"></div>
       </section>
     </main>

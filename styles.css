@@ -81,7 +81,7 @@ body {
 .hero-points,
 .section-heading,
 .task-group-heading p,
-.task-systems,
+.task-summary,
 .empty-state {
   color: var(--muted);
 }
@@ -133,14 +133,14 @@ body {
 
 .field-grid,
 .checkbox-grid,
-.toggle-row,
+.toggle-grid,
 .action-row {
   display: grid;
   gap: 16px;
 }
 
 .field-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .field {
@@ -184,6 +184,53 @@ select {
   font-weight: 700;
 }
 
+.preset-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.preset-btn {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.66);
+  color: var(--ink);
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.preset-btn:hover,
+.preset-btn.is-active {
+  transform: translateY(-1px);
+  border-color: rgba(247, 127, 0, 0.48);
+  background: rgba(247, 127, 0, 0.14);
+}
+
+.system-groups {
+  display: grid;
+  gap: 16px;
+}
+
+.system-group {
+  border: 1px solid rgba(20, 33, 61, 0.08);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.46);
+}
+
+.system-group-title {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
 .checkbox-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -202,8 +249,12 @@ input[type="checkbox"] {
   margin-top: 3px;
 }
 
-.toggle-row,
+.toggle-grid,
 .action-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.toggle-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -271,6 +322,59 @@ input[type="checkbox"] {
   background: rgba(255, 255, 255, 0.36);
 }
 
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.overview-card,
+.support-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.overview-card {
+  padding: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.overview-card strong {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.overview-card span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.insights-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.support-card {
+  padding: 18px;
+}
+
+.support-card h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.support-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .output {
   display: grid;
   gap: 18px;
@@ -293,7 +397,7 @@ input[type="checkbox"] {
 }
 
 .task-group-heading p,
-.task-systems {
+.task-summary {
   margin: 0;
 }
 
@@ -312,35 +416,105 @@ input[type="checkbox"] {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  align-items: center;
-  font-weight: 700;
-  margin-bottom: 8px;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
-.task-order {
+.task-card h4 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.task-summary {
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.meta-chip,
+.impact-pill {
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.76rem;
+  line-height: 1;
+}
+
+.meta-chip {
+  padding: 8px 10px;
+}
+
+.system-chip {
+  background: rgba(20, 33, 61, 0.08);
+  color: var(--ink);
+}
+
+.tag-chip {
+  background: rgba(247, 127, 0, 0.14);
+  color: var(--accent-deep);
+}
+
+.impact-pill {
+  padding: 10px 12px;
+  border: 1px solid transparent;
+}
+
+.impact-critical {
+  background: rgba(183, 28, 28, 0.1);
+  border-color: rgba(183, 28, 28, 0.18);
+  color: #9c1d1d;
+}
+
+.impact-high {
+  background: rgba(247, 127, 0, 0.14);
+  border-color: rgba(247, 127, 0, 0.18);
+  color: var(--accent-deep);
+}
+
+.impact-normal {
+  background: rgba(31, 111, 80, 0.12);
+  border-color: rgba(31, 111, 80, 0.18);
   color: var(--success);
 }
 
-.task-systems {
-  margin-bottom: 14px;
-  font-size: 0.88rem;
-}
-
-.task-card ol {
+.task-card ol,
+.completion-box ul {
   margin: 0;
   padding-left: 20px;
   line-height: 1.7;
+}
+
+.completion-box {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(20, 33, 61, 0.05);
+}
+
+.completion-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--success);
 }
 
 @media (max-width: 980px) {
   .hero,
   .workspace,
   .field-grid,
-  .action-row {
+  .action-row,
+  .overview-grid,
+  .insights-panel {
     grid-template-columns: 1fr;
   }
 
-  .toggle-row,
+  .toggle-grid,
   .checkbox-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -366,7 +540,7 @@ input[type="checkbox"] {
   }
 
   .checkbox-grid,
-  .toggle-row,
+  .toggle-grid,
   .results-header {
     grid-template-columns: 1fr;
   }
@@ -381,6 +555,10 @@ input[type="checkbox"] {
 
   .task-card-title {
     align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .preset-bar {
     flex-direction: column;
   }
 }
@@ -398,7 +576,8 @@ input[type="checkbox"] {
   .hero,
   .controls-card,
   .action-row,
-  .empty-state {
+  .empty-state,
+  .preset-bar {
     display: none;
   }
 
