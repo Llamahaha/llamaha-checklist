@@ -1,33 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MSP Checklist Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">MSP OPERATIONS WORKBENCH</p>
+        <h1>Build cleaner onboarding and offboarding runbooks in seconds.</h1>
+        <p class="hero-text">
+          Generate service-desk ready checklists for cloud, hybrid, and on-prem clients with role-aware tasks,
+          system targeting, and grouped execution steps.
+        </p>
+      </div>
+      <div class="hero-panel">
+        <p class="panel-label">Built for</p>
+        <ul class="hero-points">
+          <li>Microsoft 365 and Entra ID</li>
+          <li>Hybrid AD environments</li>
+          <li>RMM, backup, VPN, and security tooling</li>
+        </ul>
+      </div>
+    </header>
 
-  <div class="container">
-    <h1>MSP Checklist Generator</h1>
+    <main class="workspace">
+      <section class="controls-card">
+        <div class="section-heading">
+          <p class="section-kicker">Checklist Builder</p>
+          <h2>Choose the scenario</h2>
+        </div>
 
-    <form id="generatorForm">
+        <form id="generatorForm" class="generator-form">
+          <div class="field-grid">
+            <label class="field">
+              <span>Request Type</span>
+              <select id="type" name="type">
+                <option value="offboarding">Offboarding</option>
+                <option value="onboarding">Onboarding</option>
+              </select>
+            </label>
 
-      <label>Type</label>
-      <select id="type">
-        <option value="offboarding">Offboarding</option>
-        <option value="onboarding">Onboarding</option>
-      </select>
+            <label class="field">
+              <span>Environment</span>
+              <select id="environment" name="environment">
+                <option value="cloud">Cloud</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="onprem">On-Prem</option>
+              </select>
+            </label>
 
-      <label>Environment</label>
-      <select id="environment">
-        <option value="cloud">Cloud</option>
-        <option value="hybrid">Hybrid</option>
-        <option value="onprem">On-Prem</option>
-      </select>
+            <label class="field">
+              <span>Access Profile</span>
+              <select id="accessProfile" name="accessProfile">
+                <option value="standard">Standard User</option>
+                <option value="privileged">Privileged User</option>
+              </select>
+            </label>
+          </div>
 
-      <button type="submit">Generate</button>
-    </form>
+          <fieldset class="system-picker">
+            <legend>Platforms in Scope</legend>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="systems" value="m365" checked> Microsoft 365</label>
+              <label><input type="checkbox" name="systems" value="ad" checked> Active Directory</label>
+              <label><input type="checkbox" name="systems" value="vpn"> VPN</label>
+              <label><input type="checkbox" name="systems" value="datto" checked> Datto RMM</label>
+              <label><input type="checkbox" name="systems" value="backup"> Backup Platform</label>
+              <label><input type="checkbox" name="systems" value="security"> Security Stack</label>
+              <label><input type="checkbox" name="systems" value="knowbe4" checked> KnowBe4</label>
+              <label><input type="checkbox" name="systems" value="lob"> Line-of-Business Apps</label>
+            </div>
+          </fieldset>
 
-    <div id="output"></div>
+          <div class="toggle-row">
+            <label class="toggle">
+              <input type="checkbox" id="includeManagerTasks" name="includeManagerTasks" checked>
+              <span>Include manager / handoff items</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="includeAssetTasks" name="includeAssetTasks" checked>
+              <span>Include endpoint / asset handling</span>
+            </label>
+          </div>
+
+          <div class="action-row">
+            <button type="submit" class="primary-btn">Generate Checklist</button>
+            <button type="button" id="copyBtn" class="secondary-btn">Copy as Text</button>
+            <button type="button" id="printBtn" class="secondary-btn">Print</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="results-card">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Generated Runbook</p>
+            <h2 id="resultsTitle">Ready when you are</h2>
+          </div>
+          <div id="summaryChips" class="summary-chips"></div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <p>Generate a checklist to see grouped tasks, execution order, and quick export actions.</p>
+        </div>
+
+        <div id="output" class="output"></div>
+      </section>
+    </main>
   </div>
 
   <script type="module" src="app.js"></script>
