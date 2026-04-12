@@ -6,7 +6,7 @@ import {
 } from "./applicationCatalog.js";
 import { getAppGuideContent } from "./appGuideContent.js";
 import { vendorFaqs, vendorInstallIssues, vendorUsageIssues } from "./guideExtras.js";
-import { handoffTemplates, snippetLibrary } from "../resourceLibrary.js";
+import { snippetLibrary } from "../resourceLibrary.js";
 
 const pageType = document.body.dataset.pageType ?? "vendor";
 const vendorSlug = document.body.dataset.vendor;
@@ -33,12 +33,8 @@ const appUrl = (slug, childSlug) => `${rootPath}/${buildAppGuideUrl(slug, childS
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
-  if (className) {
-    node.className = className;
-  }
-  if (text) {
-    node.textContent = text;
-  }
+  if (className) node.className = className;
+  if (text) node.textContent = text;
   return node;
 }
 
@@ -70,9 +66,7 @@ function section(id, kicker, title, intro) {
   const wrapper = el("section", "guide-section");
   wrapper.id = id;
   wrapper.append(el("p", "section-kicker", kicker), el("h2", "guide-section-title", title));
-  if (intro) {
-    wrapper.appendChild(el("p", "guide-section-copy", intro));
-  }
+  if (intro) wrapper.appendChild(el("p", "guide-section-copy", intro));
   return wrapper;
 }
 
@@ -100,14 +94,8 @@ function unique(items = []) {
 }
 
 function normalizeIssue(item) {
-  if (!item) {
-    return null;
-  }
-
-  if (item.title) {
-    return item;
-  }
-
+  if (!item) return null;
+  if (item.title) return item;
   return {
     title: item.issue,
     symptom: item.issue,
@@ -120,10 +108,6 @@ function normalizeIssue(item) {
 function relatedSnippetEntries(ids = []) {
   const flat = snippetLibrary.flatMap(group => group.snippets ?? []);
   return flat.filter(item => ids.includes(item.id));
-}
-
-function relatedTemplateEntries(ids = []) {
-  return handoffTemplates.filter(item => ids.includes(item.id));
 }
 
 function buildAppModel() {
@@ -155,7 +139,6 @@ function buildAppModel() {
     escalationNotes: extra.escalationNotes?.length ? extra.escalationNotes : vendor.escalationNotes,
     relatedApps: extra.relatedApps?.length ? extra.relatedApps : apps.filter(item => item.slug !== appSlug).slice(0, 3).map(item => ({ vendor: vendorSlug, app: item.slug })),
     relatedSnippets: relatedSnippetEntries(extra.relatedSnippets ?? []),
-    relatedTemplates: relatedTemplateEntries(extra.relatedTemplates ?? []),
     relatedLinks: unique([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? [])])
   };
 }
@@ -193,22 +176,16 @@ function renderBreadcrumbs() {
     { label: "Vendor Guides", url: guideHubUrl },
     { label: vendor.title, url: vendorUrl(vendorSlug) }
   ];
-
   if (pageType === "app" && app) {
     parts.push({ label: app.name, url: appUrl(vendorSlug, app.slug) });
   }
-
   elements.breadcrumbs.innerHTML = "";
   parts.forEach((item, index) => {
-    if (index) {
-      elements.breadcrumbs.appendChild(el("span", "guide-breadcrumb-sep", ">"));
-    }
-
+    if (index) elements.breadcrumbs.appendChild(el("span", "guide-breadcrumb-sep", ">"));
     if (index === parts.length - 1) {
       elements.breadcrumbs.appendChild(el("strong", "guide-breadcrumb-current", item.label));
       return;
     }
-
     const link = el("a", "guide-breadcrumb-link", item.label);
     link.href = item.url;
     elements.breadcrumbs.appendChild(link);
@@ -217,16 +194,13 @@ function renderBreadcrumbs() {
 
 function renderSidebar() {
   elements.sidebar.innerHTML = "";
-
   const vendorCard = card("Vendors", linkList(vendorOrder.map(slug => ({ label: vendorGuides[slug].title, url: vendorUrl(slug) }))));
   vendorCard.classList.add("guide-nav-card");
   elements.sidebar.appendChild(vendorCard);
-
   const appNav = linkList(apps.map(item => ({ label: item.name, url: appUrl(vendorSlug, item.slug) })));
   const appCard = card(`${vendor.title} Apps`, appNav);
   appCard.classList.add("guide-nav-card");
   elements.sidebar.appendChild(appCard);
-
   const sections = pageType === "app" ? appSections() : vendorSections();
   const sectionCard = card("Jump to Section", linkList(sections.map(item => ({ label: item[1], url: `#${item[0]}` }))));
   sectionCard.classList.add("guide-nav-card");
@@ -270,7 +244,7 @@ function renderVendorPage() {
   escalation.appendChild(card("Escalation Notes", vendor.escalationNotes));
 
   const links = section("official-links", "Links", "Official Links", "Vendor portals change often, so use these as the source of record after triage is scoped.");
-  links.appendChild(card("Vendor Links", linkList(vendor.supportLinks.map(item => ({ label: item.label, url: item.url })) )));
+  links.appendChild(card("Vendor Links", linkList(vendor.supportLinks.map(item => ({ label: item.label, url: item.url })))));
 
   elements.content.append(overview, notes, admin, directory, patterns, escalation, links);
 }
@@ -328,15 +302,12 @@ function renderAppPage() {
   const related = section("related-resources", "Related", "Related Links / Apps / Snippets", "Avoid dead-end pages by jumping directly to the next useful resource.");
   const relatedGrid = el("div", "guide-card-grid");
   relatedGrid.appendChild(card("Back to Vendor", linkList([{ label: `Back to ${vendor.title}`, url: vendorUrl(vendorSlug) }])));
-  relatedGrid.appendChild(card("Related Apps", linkList(model.relatedApps.map(item => ({ label: getApplicationGuide(item.vendor, item.app)?.name ?? item.app, url: appUrl(item.vendor, item.app) })) )));
+  relatedGrid.appendChild(card("Related Apps", linkList(model.relatedApps.map(item => ({ label: getApplicationGuide(item.vendor, item.app)?.name ?? item.app, url: appUrl(item.vendor, item.app) })))));
   relatedGrid.appendChild(card("Related Snippets", model.relatedSnippets.length
     ? linkList(model.relatedSnippets.map(item => ({ label: item.title, url: `${rootPath}/snippets.html#${item.id}` })))
     : linkList([{ label: "Open snippet library", url: `${rootPath}/snippets.html` }])));
-  relatedGrid.appendChild(card("Related Templates", model.relatedTemplates.length
-    ? linkList(model.relatedTemplates.map(item => ({ label: item.title, url: `${rootPath}/handoff-templates.html#${item.id}` })))
-    : linkList([{ label: "Open template library", url: `${rootPath}/handoff-templates.html` }])));
   if (model.relatedLinks.length) {
-    relatedGrid.appendChild(card("Official / Vendor Links", linkList(model.relatedLinks.map(item => ({ label: item.label, url: item.url })) )));
+    relatedGrid.appendChild(card("Official / Vendor Links", linkList(model.relatedLinks.map(item => ({ label: item.label, url: item.url })))));
   }
   related.appendChild(relatedGrid);
 
@@ -365,10 +336,5 @@ if (!vendor || (pageType === "app" && !app)) {
 
 if (window.location.hash) {
   const target = document.querySelector(window.location.hash);
-  target?.scrollIntoView({ block: 'start' });
+  target?.scrollIntoView({ block: "start" });
 }
-
-
-
-
-

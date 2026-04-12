@@ -1,6 +1,6 @@
 import { getVendorApplications } from "./guides/applicationCatalog.js";
 import { vendorGuides } from "./guides/guideData.js";
-import { handoffTemplates, snippetLibrary } from "./resourceLibrary.js";
+import { snippetLibrary } from "./resourceLibrary.js";
 
 const mostUsedGrid = document.getElementById("mostUsedGrid");
 const recentGrid = document.getElementById("recentGrid");
@@ -14,9 +14,9 @@ const mostUsed = [
 
 const recent = [
   { title: "Microsoft 365 guide set", text: vendorGuides.microsoft.summary, url: "guides/microsoft.html" },
-  { title: "Snippet Library refresh", text: `${snippetLibrary.length} grouped categories with MSP-ready commands and cautions.`, url: "snippets.html" },
-  { title: "Template Library refresh", text: `${handoffTemplates.length} customer-facing and internal templates organized by use case.`, url: "handoff-templates.html" },
-  { title: "Autodesk guide expansion", text: getVendorApplications("autodesk").slice(0, 4).map(item => item.name).join(", "), url: "guides/autodesk.html" }
+  { title: "Snippet Library", text: `${snippetLibrary.length} grouped categories with MSP-ready commands and cautions.`, url: "snippets.html" },
+  { title: "Emergency Playbooks", text: "First-response procedures for compromise, ransomware, lost devices, MFA lockouts, and more.", url: "emergency-playbooks.html" },
+  { title: "Autodesk guide set", text: getVendorApplications("autodesk").slice(0, 4).map(item => item.name).join(", "), url: "guides/autodesk.html" }
 ];
 
 function renderCards(target, items) {

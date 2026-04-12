@@ -10,7 +10,7 @@ import {
   microsoftIssueSections
 } from "./supportData.js";
 import { emergencyPlaybooks } from "./operationsData.js";
-import { handoffTemplates, snippetLibrary } from "./resourceLibrary.js";
+import { snippetLibrary } from "./resourceLibrary.js";
 
 function entry(title, text, url, category, typeLabel, keywords = "") {
   return { title, text, url, category, typeLabel, keywords };
@@ -23,7 +23,6 @@ export function buildSearchIndex() {
     entry("Checklist Generator", "Build onboarding and offboarding runbooks with saved local progress.", "checklist.html", "checklist", "Checklist", "onboarding offboarding checklist runbook"),
     entry("Emergency Playbooks", "First-response incident playbooks for urgent support and security events.", "emergency-playbooks.html", "playbook", "Playbook", "incident response ransomware compromise"),
     entry("Snippet Library", "Grouped MSP-ready snippets for Microsoft 365, AD, networking, Windows repair, software cleanup, and endpoint checks.", "snippets.html", "snippet", "Snippet Library", "powershell snippets commands"),
-    entry("Template Library", "Customer-facing and internal MSP templates by use case.", "handoff-templates.html", "template", "Template Library", "handoff closure outage onboarding"),
     entry("Application Licensing", "Vendor-specific licensing workflows and recovery notes.", "app-licensing.html", "hub", "Library Page", "licensing seats subscriptions"),
     entry("Install / Uninstall Guides", "Install, uninstall, cleanup, and FAQ guidance.", "install-uninstall.html", "hub", "Library Page", "install uninstall cleanup"),
     entry("Application Issues and Fixes", "Cross-app issue patterns plus vendor-specific fixes.", "application-issues.html", "issueGuide", "Issue Guide", "troubleshooting faq errors"),
@@ -87,10 +86,6 @@ export function buildSearchIndex() {
 
   emergencyPlaybooks.forEach(playbook => {
     entries.push(entry(playbook.title, `${playbook.triggers.join(" ")} ${playbook.first15.join(" ")}`, `emergency-playbooks.html#${playbook.id}`, "playbook", "Playbook", "incident emergency response"));
-  });
-
-  handoffTemplates.forEach(template => {
-    entries.push(entry(template.title, `${template.useCase} ${template.template}`, `handoff-templates.html#${template.id}`, "template", "Template", template.category));
   });
 
   snippetLibrary.forEach(group => {

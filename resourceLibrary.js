@@ -56,6 +56,28 @@ export const snippetLibrary = [
         expectedResult: "OneDrive restarts and rebuilds local sync state for the signed-in account.",
         caution: "Do not use this as the first move. Validate browser access, naming conflicts, and disk pressure first.",
         relatedGuides: [{ label: "OneDrive", url: "guides/microsoft/onedrive.html" }, { label: "SharePoint", url: "guides/microsoft/sharepoint.html" }]
+      },
+      {
+        id: "m365-mfa-methods-check",
+        title: "MFA method review for a user",
+        purpose: "List the registered authentication methods for a user to support MFA troubleshooting or pre-reset review.",
+        whenToUse: "Use before resetting MFA to document what was registered, or when a user reports push failures and you need to see all their methods.",
+        prerequisites: ["Microsoft Graph PowerShell or Entra admin center access"],
+        command: "Get-MgUserAuthenticationMethod -UserId user@domain.com | Select Id, AdditionalProperties",
+        expectedResult: "You can see the registered MFA methods including app, phone, and FIDO2 entries for the target user.",
+        caution: "Do not remove methods without confirming identity and approval. For privileged accounts, follow the approved out-of-band verification process.",
+        relatedGuides: []
+      },
+      {
+        id: "entra-signin-log-check",
+        title: "Recent sign-in log review",
+        purpose: "Pull recent sign-in events for a user to support compromise review, Conditional Access troubleshooting, or location verification.",
+        whenToUse: "Use during compromise triage, CA block investigation, or when a user reports unexpected access prompts.",
+        prerequisites: ["Entra admin center access or Microsoft Graph PowerShell with appropriate scope"],
+        command: "Get-MgAuditLogSignIn -Filter \"userPrincipalName eq 'user@domain.com'\" -Top 20 | Select CreatedDateTime, AppDisplayName, IpAddress, Location, Status",
+        expectedResult: "You can review recent sign-in events with app, IP, location, and success or failure status.",
+        caution: "Log retention in Entra is 30 days for P1/P2 and 7 days for basic tenants. Export evidence promptly during a compromise investigation.",
+        relatedGuides: []
       }
     ]
   },
@@ -116,6 +138,66 @@ export const snippetLibrary = [
         expectedResult: "The password is reset and the user must choose a new password at the next domain logon.",
         caution: "Do not use this as the only response for a compromise event. Pair with session revocation where needed.",
         relatedGuides: []
+      },
+      {
+        id: "ad-stale-computer-check",
+        title: "Find stale computer accounts",
+        purpose: "Identify computer accounts that have not logged in recently for cleanup or audit purposes.",
+        whenToUse: "Use during environment audits, device lifecycle reviews, or before decommissioning old hardware.",
+        prerequisites: ["AD PowerShell access"],
+        command: "$cutoff = (Get-Date).AddDays(-90); Get-ADComputer -Filter {LastLogonDate -lt $cutoff} -Properties LastLogonDate | Select Name, LastLogonDate, DistinguishedName | Sort LastLogonDate",
+        expectedResult: "A list of computer accounts that have not authenticated in the past 90 days.",
+        caution: "Do not disable or delete accounts without verifying the device is truly decommissioned. Laptops that are off-network will show as stale without being inactive.",
+        relatedGuides: []
+      },
+      {
+        id: "ad-user-last-logon",
+        title: "Check user last logon date",
+        purpose: "Confirm the last recorded domain logon for a user account during audits, offboarding, or stale-account reviews.",
+        whenToUse: "Use when a manager or audit needs to confirm whether a user account has been active recently.",
+        prerequisites: ["AD PowerShell access"],
+        command: "Get-ADUser jdoe -Properties LastLogonDate | Select Name, SamAccountName, Enabled, LastLogonDate",
+        expectedResult: "The user's last recorded logon date and current enabled state are returned.",
+        caution: "LastLogonDate is replicated and may be up to 14 days behind in multi-DC environments. Use LastLogon if you need the most current timestamp from a specific DC.",
+        relatedGuides: []
+      }
+    ]
+  },
+  {
+    category: "Intune / Endpoint Management",
+    snippets: [
+      {
+        id: "intune-sync-trigger",
+        title: "Trigger Intune policy sync from workstation",
+        purpose: "Force an immediate Intune policy and app sync on the local device without waiting for the default check-in interval.",
+        whenToUse: "Use after a policy change, app assignment, or compliance update that should apply to the device faster than the normal sync cycle.",
+        prerequisites: ["PowerShell access", "Device enrolled in Intune"],
+        command: "Get-ScheduledTask | Where-Object { $_.TaskPath -like '*Microsoft*EnterpriseMgmt*' } | Start-ScheduledTask",
+        expectedResult: "Intune enrollment tasks run and the device begins syncing updated policy, app, and compliance state.",
+        caution: "This triggers the scheduled enrollment task and is safe to run. It does not push changes — it asks Intune to pull the latest policy.",
+        relatedGuides: []
+      },
+      {
+        id: "intune-device-join-status",
+        title: "Check device join and enrollment status",
+        purpose: "Review the device's current Entra join state, MDM enrollment, and primary user context.",
+        whenToUse: "Use when a device is not receiving Intune policies, is missing from the portal, or shows compliance failures after enrollment.",
+        prerequisites: ["Elevated PowerShell on the target device"],
+        command: "dsregcmd /status",
+        expectedResult: "You can see AzureAdJoined, DomainJoined, MDMEnrolled, and the associated user and tenant.",
+        caution: "A device showing AzureAdJoined:YES and MDMEnrolled:YES is enrolled. If compliance is failing, the issue is usually with the policy assignment rather than the enrollment itself.",
+        relatedGuides: []
+      },
+      {
+        id: "intune-compliance-event-log",
+        title: "Read Intune compliance event log",
+        purpose: "Review local Intune compliance and MDM event logs for enrollment errors, policy failures, or CSP issues.",
+        whenToUse: "Use when a device shows as non-compliant in Intune but no clear cause is visible in the portal.",
+        prerequisites: ["PowerShell access"],
+        command: "Get-WinEvent -LogName 'Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider/Admin' -MaxEvents 30 | Select TimeCreated, Id, LevelDisplayName, Message",
+        expectedResult: "Recent MDM and enrollment events are returned for review including error codes and policy names.",
+        caution: "These logs are verbose. Filter by error level or event ID when reviewing for specific compliance failures.",
+        relatedGuides: []
       }
     ]
   },
@@ -150,7 +232,7 @@ export const snippetLibrary = [
         purpose: "Validate name resolution, port 445 reachability, and direct UNC access to a file share.",
         whenToUse: "Use when mapped drives, shared project paths, or company files fail for one user or one workstation.",
         prerequisites: ["Target share name or UNC path"],
-        command: "Test-NetConnection fileserver.contoso.local -Port 445\nTest-Path \\fileserver.contoso.local\\Shared",
+        command: "Test-NetConnection fileserver.contoso.local -Port 445\nTest-Path \\\\fileserver.contoso.local\\Shared",
         expectedResult: "You can prove whether the path resolves, the SMB port answers, and the share is reachable with the current user context.",
         caution: "A passing port check does not prove permissions. Test the real UNC path too.",
         relatedGuides: [{ label: "Civil 3D", url: "guides/autodesk/civil-3d.html" }, { label: "QuickBooks Enterprise Desktop", url: "guides/quickbooks/quickbooks-enterprise-desktop.html" }]
@@ -236,6 +318,39 @@ export const snippetLibrary = [
         expectedResult: "You can confirm which Edge policies are applied and whether startup behavior is managed.",
         caution: "If the policy is managed centrally, do not hand-edit local settings and expect them to persist.",
         relatedGuides: [{ label: "SharePoint", url: "guides/microsoft/sharepoint.html" }]
+      },
+      {
+        id: "pending-reboot-check",
+        title: "Pending reboot state check",
+        purpose: "Confirm whether the machine has a pending reboot before running installs or policy pushes that can fail silently in a reboot-pending state.",
+        whenToUse: "Use before rerunning failed installers, applying patches, or troubleshooting persistent update loops.",
+        prerequisites: ["PowerShell access"],
+        command: "$rebootKeys = @('HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Component Based Servicing\\RebootPending','HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WindowsUpdate\\Auto Update\\RebootRequired','HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager'); $rebootKeys | ForEach-Object { if (Test-Path $_) { Write-Host \"Pending reboot key found: $_\" } }",
+        expectedResult: "Any pending reboot registry keys present on the machine are reported.",
+        caution: "If any reboot key is found, restart the device before proceeding with install or update tasks.",
+        relatedGuides: []
+      },
+      {
+        id: "windows-credential-manager-clear",
+        title: "Clear stale Windows Credential Manager entries",
+        purpose: "Remove saved credentials that are causing repeated authentication prompts, wrong-account access, or stale session conflicts.",
+        whenToUse: "Use when a user keeps getting prompted for credentials on a share, portal, or app they previously accessed without issues.",
+        prerequisites: ["Elevated command prompt or PowerShell"],
+        command: "cmdkey /list\ncmdkey /delete:[target]",
+        expectedResult: "Stale saved credentials are removed and the user will be prompted for fresh authentication on the next access attempt.",
+        caution: "Review the list before deleting. Removing credentials for a service account or a shared resource can affect other users or automated tasks on that machine.",
+        relatedGuides: [{ label: "OneDrive", url: "guides/microsoft/onedrive.html" }, { label: "Outlook", url: "guides/microsoft/outlook.html" }]
+      },
+      {
+        id: "gpo-resultant-set-check",
+        title: "Group Policy resultant set check",
+        purpose: "Review which GPOs are actually applying to the machine and user context to diagnose policy-related behavior.",
+        whenToUse: "Use when a user is missing expected software, mapped drives, printer policies, or security configurations that should come from GPO.",
+        prerequisites: ["Elevated command prompt or PowerShell", "Domain-joined workstation"],
+        command: "gpresult /r\ngpresult /h C:\\Temp\\gpresult.html",
+        expectedResult: "The applied GPOs for the machine and user context are listed, including any filter or WMI exclusions.",
+        caution: "Run gpupdate /force first if recent policy changes should already be applied. Compare gpresult output against a working peer machine to spot differences.",
+        relatedGuides: []
       }
     ]
   },
@@ -323,172 +438,40 @@ export const snippetLibrary = [
         expectedResult: "You can see whether core Defender services and real-time protection are enabled.",
         caution: "Co-managed AV products can change what these values mean. Compare with the client's standard security stack.",
         relatedGuides: []
+      },
+      {
+        id: "bitlocker-status-check",
+        title: "BitLocker encryption status check",
+        purpose: "Confirm BitLocker status and recovery key presence on the local drive.",
+        whenToUse: "Use during endpoint audits, new-device validation, or before any disk-level maintenance on an endpoint.",
+        prerequisites: ["Elevated PowerShell"],
+        command: "manage-bde -status C:\nGet-BitLockerVolume -MountPoint C: | Select MountPoint, EncryptionMethod, ProtectionStatus, EncryptionPercentage",
+        expectedResult: "You can see the current encryption method, protection status, and completion percentage for the system drive.",
+        caution: "If the drive is encrypted but protection is off, the key is suspended — this is expected during Windows updates but should be re-enabled afterward.",
+        relatedGuides: []
+      },
+      {
+        id: "local-admin-account-check",
+        title: "Local administrator account review",
+        purpose: "List local administrator accounts on the workstation to support security audits or onboarding validation.",
+        whenToUse: "Use when confirming whether unauthorized local accounts exist, or to validate LAPS deployment during endpoint reviews.",
+        prerequisites: ["Elevated PowerShell"],
+        command: "Get-LocalGroupMember -Group 'Administrators' | Select Name, PrincipalSource, ObjectClass",
+        expectedResult: "A list of all current local administrator group members with their source (local, domain, or cloud).",
+        caution: "Do not remove accounts without confirming whether they are required for management tools, LAPS, or approved break-glass access.",
+        relatedGuides: []
+      },
+      {
+        id: "open-ports-listening-services",
+        title: "Open ports and listening services check",
+        purpose: "Review which ports and processes are currently listening on the workstation for security audits or service troubleshooting.",
+        whenToUse: "Use when investigating whether a service is running, a port conflict exists, or an unexpected listener is present on an endpoint.",
+        prerequisites: ["Elevated PowerShell or command prompt"],
+        command: "netstat -ano | findstr LISTENING\nGet-NetTCPConnection -State Listen | Select LocalAddress, LocalPort, OwningProcess | Sort LocalPort",
+        expectedResult: "A list of active listening ports and their associated process IDs for review.",
+        caution: "Pair process IDs with Get-Process to see which application is behind each listener. Unexpected listeners on non-standard ports should be investigated before dismissal.",
+        relatedGuides: []
       }
     ]
   }
 ];
-
-export const handoffTemplateGroups = [
-  {
-    category: "Onboarding",
-    templates: [
-      {
-        id: "new-user-onboarding-request",
-        title: "New user onboarding request",
-        audience: "Customer-facing",
-        useCase: "Collect the minimum details needed to start a clean onboarding build.",
-        template: "Hi [Client Contact],\n\nTo start onboarding for [User Name], please reply with the following:\n- Full name and preferred display name\n- Title / department / manager\n- Start date and time zone\n- Workstation need: [new / reassign / remote-only]\n- Microsoft 365 license or app set needed\n- Shared mailbox, group, file-share, VPN, or line-of-business access needed\n- MFA or phone setup notes\n\nIf this user needs elevated access, please include the approval in the ticket.\n\nThanks,\n[Tech Name]"
-      },
-      {
-        id: "portal-access-request",
-        title: "Portal access request",
-        audience: "Customer-facing",
-        useCase: "Request admin approval for vendor portal, M365, or line-of-business admin access.",
-        template: "Hi [Client Contact],\n\nWe are ready to complete access for [User / Tech], but we still need approval or sponsor confirmation for the following portal access:\n- [Portal / tenant / environment]\n- Requested role: [Role]\n- Business reason: [Reason]\n\nPlease confirm approval and any required vendor contacts or MFA expectations.\n\nThanks,\n[Tech Name]"
-      }
-    ]
-  },
-  {
-    category: "Offboarding",
-    templates: [
-      {
-        id: "termination-offboarding-confirmation",
-        title: "Termination or offboarding confirmation",
-        audience: "Customer-facing",
-        useCase: "Confirm the scope and timing of a standard or urgent offboarding request.",
-        template: "Hi [Client Contact],\n\nWe have the offboarding request for [User Name]. Please confirm the following so we can proceed correctly:\n- Effective disable time: [Date / Time / Time Zone]\n- Mailbox handling: [forward / shared conversion / delegate / hold]\n- Device handling: [pickup / ship / wipe / onsite]\n- Any urgent apps, file ownership, or vendor portals that need special handling\n\nOnce confirmed, we will complete the access removal and document any follow-up items.\n\nThanks,\n[Tech Name]"
-      },
-      {
-        id: "shared-mailbox-access-confirmation",
-        title: "Shared mailbox access confirmation",
-        audience: "Customer-facing",
-        useCase: "Confirm who should retain or gain shared mailbox access after staffing changes.",
-        template: "Hi [Client Contact],\n\nBefore we finalize this mailbox change, please confirm the intended access for [shared@domain.com]:\n- Keep current members: [Yes / No]\n- Add these users: [Names]\n- Remove these users: [Names]\n- Send As required: [Yes / No]\n\nWe will apply the mailbox changes once the access list is confirmed.\n\nThanks,\n[Tech Name]"
-      }
-    ]
-  },
-  {
-    category: "Workstation Replacement",
-    templates: [
-      {
-        id: "workstation-replacement-scheduling",
-        title: "Workstation replacement scheduling",
-        audience: "Customer-facing",
-        useCase: "Schedule replacement, swap, or rebuild time with the end user.",
-        template: "Hi [User Name],\n\nWe are ready to schedule your workstation replacement for [Device Name]. Please reply with a preferred time window from the options below:\n- [Option 1]\n- [Option 2]\n- [Option 3]\n\nBefore the swap, please confirm any locally stored files, browser bookmarks, signatures, or specialty applications we should preserve.\n\nThanks,\n[Tech Name]"
-      }
-    ]
-  },
-  {
-    category: "Software Install Requests",
-    templates: [
-      {
-        id: "software-install-approval-request",
-        title: "Software install approval request",
-        audience: "Customer-facing",
-        useCase: "Request approval and deployment details for a software install.",
-        template: "Hi [Client Contact],\n\nWe can proceed with the install request for [Application Name], but we need approval for the following before scheduling:\n- User or workstation: [User / Device]\n- Required version: [Version]\n- License or seat source: [Portal / seat / serial]\n- Business reason: [Reason]\n- Preferred install window: [Window]\n\nOnce approved, we will complete the install and validate the approved workflow with the user.\n\nThanks,\n[Tech Name]"
-      },
-      {
-        id: "mfa-reset-explanation",
-        title: "MFA reset explanation",
-        audience: "Customer-facing",
-        useCase: "Explain the next-step user impact after an MFA reset or method clear.",
-        template: "Hi [User Name],\n\nWe cleared your existing MFA registration so you can set it up again cleanly. The next time you sign in, you will be prompted to register your method again.\n\nPlease be ready with:\n- Your mobile device\n- Microsoft Authenticator if your organization uses it\n- A browser sign-in to your work account\n\nIf you see any prompts that do not match your work account, stop there and reply to this ticket with a screenshot.\n\nThanks,\n[Tech Name]"
-      }
-    ]
-  },
-  {
-    category: "Escalation / Handoff",
-    templates: [
-      {
-        id: "tier1-tier2-escalation",
-        title: "Tier 1 to Tier 2 escalation handoff",
-        audience: "Internal-only",
-        useCase: "Package evidence cleanly before the ticket moves up.",
-        template: "Summary:\n- User / device / location: [Details]\n- App or workflow affected: [App]\n- Impact: [Single user / multi-user / outage]\n\nWhat was confirmed:\n- [Access / license / version / browser result]\n- [Known-good comparison]\n- [Last known good time]\n\nWhat was tried:\n- [Step 1]\n- [Step 2]\n- [Step 3]\n\nNeed from Tier 2:\n- [Exact ask]\n\nArtifacts attached:\n- [Screenshots / logs / event IDs / file paths]"
-      },
-      {
-        id: "vendor-escalation-request",
-        title: "Tier 2 to vendor escalation handoff",
-        audience: "Internal-only",
-        useCase: "Prepare a support-ready summary for vendor case creation.",
-        template: "Vendor escalation summary:\n- Product and version: [Version]\n- Tenant / datasource / environment: [Environment]\n- Affected users count: [Count]\n- Business impact: [Impact]\n\nVerified already:\n- [Entitlement / access]\n- [Known-good comparison]\n- [Repair path completed]\n\nEvidence collected:\n- [Logs]\n- [Screenshots]\n- [Exact error text]\n\nVendor question or ask:\n- [Specific ask]\n\nCallback / owner:\n- [Owner]"
-      },
-      {
-        id: "after-hours-handoff-template",
-        title: "After-hours handoff template",
-        audience: "Internal-only",
-        useCase: "Hand off unstable or in-progress work between after-hours and business-hours coverage.",
-        template: "Current state:\n- Ticket / incident: [ID]\n- Service or app: [Service]\n- Impact: [Impact]\n- Current status: [Stable / unstable / monitoring]\n\nCompleted tonight:\n- [Action 1]\n- [Action 2]\n\nStill pending:\n- [Pending item]\n- [Customer action / vendor response]\n\nWatch for next shift:\n- [Risk]\n- [Rollback concern]\n\nNext owner:\n- [Name / team]"
-      }
-    ]
-  },
-  {
-    category: "Outage / Maintenance / Closure",
-    templates: [
-      {
-        id: "outage-acknowledgement",
-        title: "Outage acknowledgement",
-        audience: "Customer-facing",
-        useCase: "Acknowledge a live outage and set expectations early.",
-        template: "Hi [Client Contact],\n\nWe are actively investigating the issue affecting [service or app]. Current impact appears to be [impact scope].\n\nWhat we know so far:\n- Start time observed: [Time]\n- Affected area: [Scope]\n- Current action: [Action]\n\nWe will continue to update this ticket as we confirm scope and next steps.\n\nThanks,\n[Tech Name]"
-      },
-      {
-        id: "outage-update",
-        title: "Outage update",
-        audience: "Customer-facing",
-        useCase: "Provide mid-incident status without overpromising.",
-        template: "Hi [Client Contact],\n\nUpdate on [service or app]:\n- Current status: [Status]\n- Confirmed scope: [Scope]\n- Actions completed: [Actions]\n- Next checkpoint: [Next step / ETA if appropriate]\n\nWe will post another update once we confirm additional progress or full restoration.\n\nThanks,\n[Tech Name]"
-      },
-      {
-        id: "outage-resolution",
-        title: "Outage resolution notice",
-        audience: "Customer-facing",
-        useCase: "Close the loop after service is restored.",
-        template: "Hi [Client Contact],\n\nService for [service or app] has been restored as of [time].\n\nSummary:\n- Impacted scope: [Scope]\n- Resolution applied: [Action]\n- Remaining watch items: [If any]\n\nIf users continue seeing issues, please reply here with the exact time and behavior so we can compare it against the restoration work.\n\nThanks,\n[Tech Name]"
-      },
-      {
-        id: "maintenance-restart-notice",
-        title: "Maintenance or restart notice",
-        audience: "Customer-facing",
-        useCase: "Notify users of a planned restart or minor maintenance event.",
-        template: "Hi [Name],\n\nWe will be performing maintenance on [system] during [window]. During that time, users may see [brief impact].\n\nRecommended user action:\n- Save work before [time]\n- Sign out of [app] if requested\n\nIf anything unexpected continues after the window ends, reply to this ticket with the exact issue.\n\nThanks,\n[Tech Name]"
-      },
-      {
-        id: "ticket-closure-validation-request",
-        title: "Ticket closure with validation request",
-        audience: "Customer-facing",
-        useCase: "Confirm the user can validate the fix before closure.",
-        template: "Hi [Name],\n\nThe requested work for [issue] has been completed. When you have a moment, please test the following and let us know if anything is still off:\n- [Validation step 1]\n- [Validation step 2]\n\nIf everything looks good, we will close the ticket. If not, reply here with the exact behavior and time it happened.\n\nThanks,\n[Tech Name]"
-      }
-    ]
-  },
-  {
-    category: "Client Admin Coordination",
-    templates: [
-      {
-        id: "license-true-up-request",
-        title: "License true-up request",
-        audience: "Customer-facing",
-        useCase: "Request approval to purchase or reallocate seats when support work uncovered a license shortfall.",
-        template: "Hi [Client Contact],\n\nDuring this request, we confirmed that the current license pool for [product] does not cover the required user or feature set.\n\nNeeded:\n- Product: [Product]\n- Seat or feature shortfall: [Shortfall]\n- Affected users: [Users]\n\nPlease confirm whether you want us to proceed with true-up, reallocation, or temporary deferral.\n\nThanks,\n[Tech Name]"
-      },
-      {
-        id: "domain-dns-change-approval",
-        title: "Domain or DNS change approval request",
-        audience: "Customer-facing",
-        useCase: "Collect approval and rollback expectations before DNS or domain changes.",
-        template: "Hi [Client Contact],\n\nBefore we proceed with the requested DNS or domain change for [domain], please confirm approval for the following:\n- Record or change requested: [Change]\n- Requested change window: [Window]\n- Rollback contact: [Contact]\n- Risk or service impact understood: [Yes / No]\n\nOnce approved, we will document the final change set in the ticket.\n\nThanks,\n[Tech Name]"
-      }
-    ]
-  }
-];
-
-export const handoffTemplates = handoffTemplateGroups.flatMap(group =>
-  group.templates.map(template => ({
-    category: group.category,
-    ...template
-  }))
-);
-
