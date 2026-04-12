@@ -1,6 +1,5 @@
 import {
   categoryMeta,
-  licenseGuidance,
   systemMeta,
   taskLibrary
 } from "./data/taskLibrary.js";
@@ -11,7 +10,6 @@ const emptyState = document.getElementById("emptyState");
 const emptyStateText = emptyState.querySelector("p");
 const resultsTitle = document.getElementById("resultsTitle");
 const overviewGrid = document.getElementById("overviewGrid");
-const insightsPanel = document.getElementById("insightsPanel");
 const copyBtn = document.getElementById("copyBtn");
 const printBtn = document.getElementById("printBtn");
 const resetProgressBtn = document.getElementById("resetProgressBtn");
@@ -20,8 +18,6 @@ const systemAutoNote = document.getElementById("systemAutoNote");
 
 let lastGeneratedChecklist = [];
 let lastGeneratedOptions = null;
-let lastInsights = [];
-let lastLicenseItems = [];
 let currentProgressKey = "";
 let currentProgressState = {
   taskCompletion: {},
@@ -319,80 +315,6 @@ function groupTasks(tasks) {
   });
 }
 
-function getSelectedLicenseGuidance(options) {
-  return licenseGuidance.filter(item => item.systems.some(system => options.systems.includes(system)));
-}
-
-function buildInsights(options) {
-  const insights = [];
-  const hasCadStack = ["autodesk", "bentley", "esri", "trimble", "sketchup", "ptc"].some(system => options.systems.includes(system));
-
-  if (options.type === "offboarding" && options.accessProfile === "privileged") {
-    insights.push({
-      title: "Rotate what they knew, not just what they owned",
-      text: "Privileged departures should trigger a review of shared credentials, vault entries, break-glass paths, scripts, and service ties."
-    });
-  }
-
-  if (options.type === "offboarding" && options.environment === "hybrid" && options.systems.includes("m365") && options.systems.includes("ad")) {
-    insights.push({
-      title: "Hybrid cutoffs need coordination",
-      text: "Verify the AD disable, sync behavior, and cloud sign-in block line up so the account does not reappear or linger."
-    });
-  }
-
-  if (options.systems.includes("forticlient")) {
-    insights.push({
-      title: "VPN cleanup is more than disabling the user",
-      text: "Saved FortiClient profiles, cached trust, and MFA-linked remote access paths are common leftovers after a rushed change."
-    });
-  }
-
-  if (options.systems.includes("rocketcyber") || options.systems.includes("bitdefender")) {
-    insights.push({
-      title: "Check alert routing and exceptions",
-      text: "Security tools often retain named contacts, temporary exclusions, or ownership assumptions that become confusing later."
-    });
-  }
-
-  if (hasCadStack) {
-    insights.push({
-      title: "CAD environments hide local dependencies",
-      text: "Templates, plugins, project paths, and cloud entitlements should be reviewed before wiping or reassigning an engineering workstation."
-    });
-  }
-
-  if (options.systems.includes("quickbooks")) {
-    insights.push({
-      title: "Finance access needs ownership handoff",
-      text: "QuickBooks changes should confirm who now owns company-file access, approvals, bank feeds, and audit-sensitive reporting."
-    });
-  }
-
-  if (options.systems.includes("egnyte")) {
-    insights.push({
-      title: "Egnyte offboarding needs content ownership review",
-      text: "Check shared links, private folders, offline files, and user type changes so data access does not linger or disappear unexpectedly."
-    });
-  }
-
-  if (!options.includeDocumentationTasks) {
-    insights.push({
-      title: "Internal record updates are excluded",
-      text: "Autotask and IT Glue completion items are currently turned off, so the checklist will not include closeout documentation work."
-    });
-  }
-
-  if (options.type === "offboarding" && options.systems.includes("windows") && !options.includeAssetTasks) {
-    insights.push({
-      title: "Device recovery is excluded",
-      text: "Windows asset handling is turned off, so wipe, return, and local-profile cleanup work will not appear in this runbook."
-    });
-  }
-
-  return insights;
-}
-
 function renderSummary(tasks, options) {
   const metrics = getProgressMetrics(tasks);
 
@@ -407,7 +329,7 @@ function renderSummary(tasks, options) {
   ].join(" | ");
 }
 
-function renderOverview(tasks, options, licenses) {
+function renderOverview(tasks, options) {
   overviewGrid.innerHTML = "";
   const metrics = getProgressMetrics(tasks);
 
@@ -416,7 +338,6 @@ function renderOverview(tasks, options, licenses) {
     { label: "Completed Tasks", value: metrics.completedTasks },
     { label: "Completed Steps", value: `${metrics.completedSteps}/${metrics.totalSteps}` },
     { label: "Critical Items", value: tasks.filter(task => task.impact === "critical").length },
-    { label: "License Touchpoints", value: licenses.length },
     { label: "Platforms In Scope", value: options.systems.length }
   ];
 
@@ -435,64 +356,16 @@ function renderOverview(tasks, options, licenses) {
   });
 }
 
-function renderSupportPanels(insights, licenses, options) {
-  insightsPanel.innerHTML = "";
-
-  if (insights.length) {
-    const panel = document.createElement("section");
-    panel.className = "support-card";
-
-    const title = document.createElement("h3");
-    title.textContent = "Watch For";
-
-    const list = document.createElement("ul");
-    insights.forEach(item => {
-      const li = document.createElement("li");
-      li.innerHTML = `<strong>${item.title}:</strong> ${item.text}`;
-      list.appendChild(li);
-    });
-
-    panel.append(title, list);
-    insightsPanel.appendChild(panel);
-  }
-
-  if (licenses.length) {
-    const panel = document.createElement("section");
-    panel.className = "support-card";
-
-    const title = document.createElement("h3");
-    title.textContent = "License Touchpoints";
-
-    const list = document.createElement("ul");
-    licenses.forEach(item => {
-      const li = document.createElement("li");
-      const actionLines = item[options.type];
-      li.innerHTML = `<strong>${item.title}:</strong> ${item.products.join(", ")}. ${actionLines.join(" ")}`;
-      list.appendChild(li);
-    });
-
-    panel.append(title, list);
-    insightsPanel.appendChild(panel);
-  }
-}
-
 function renderChecklist(tasks, options) {
   output.innerHTML = "";
   overviewGrid.innerHTML = "";
-  insightsPanel.innerHTML = "";
-
-  const licenses = getSelectedLicenseGuidance(options);
-  const insights = buildInsights(options);
 
   lastGeneratedChecklist = tasks;
   lastGeneratedOptions = options;
-  lastLicenseItems = licenses;
-  lastInsights = insights;
   loadProgressState(options);
 
   renderSummary(tasks, options);
-  renderOverview(tasks, options, licenses);
-  renderSupportPanels(insights, licenses, options);
+  renderOverview(tasks, options);
 
   if (!options.systems.length) {
     emptyState.hidden = false;
@@ -648,7 +521,7 @@ function renderChecklist(tasks, options) {
   });
 }
 
-function buildPlainTextChecklist(tasks, options, insights, licenses) {
+function buildPlainTextChecklist(tasks, options) {
   const lines = [
     `IT ${titleCase(options.type)} Runbook`,
     `Environment: ${titleCase(options.environment)}`,
@@ -657,20 +530,6 @@ function buildPlainTextChecklist(tasks, options, insights, licenses) {
     `Platforms: ${options.systems.map(getSystemLabel).join(", ")}`,
     ""
   ];
-
-  if (insights.length) {
-    lines.push("Watch For");
-    insights.forEach(item => lines.push(`- ${item.title}: ${item.text}`));
-    lines.push("");
-  }
-
-  if (licenses.length) {
-    lines.push("License Touchpoints");
-    licenses.forEach(item => {
-      lines.push(`- ${item.title}: ${item.products.join(", ")}. ${item[options.type].join(" ")}`);
-    });
-    lines.push("");
-  }
 
   groupTasks(tasks).forEach(([category, categoryTasks]) => {
     lines.push(categoryMeta[category]?.label ?? titleCase(category));
@@ -776,7 +635,7 @@ function handleProgressChange(target) {
 
   persistProgressState();
   renderSummary(lastGeneratedChecklist, lastGeneratedOptions);
-  renderOverview(lastGeneratedChecklist, lastGeneratedOptions, lastLicenseItems);
+  renderOverview(lastGeneratedChecklist, lastGeneratedOptions);
 }
 
 async function copyChecklist() {
@@ -784,12 +643,7 @@ async function copyChecklist() {
     return;
   }
 
-  const plainText = buildPlainTextChecklist(
-    lastGeneratedChecklist,
-    lastGeneratedOptions,
-    lastInsights,
-    lastLicenseItems
-  );
+  const plainText = buildPlainTextChecklist(lastGeneratedChecklist, lastGeneratedOptions);
 
   await navigator.clipboard.writeText(plainText);
   copyBtn.textContent = "Copied";

@@ -326,8 +326,7 @@ input[type="checkbox"] {
   margin-bottom: 18px;
 }
 
-.overview-card,
-.support-card {
+.overview-card {
   border: 1px solid var(--line);
   border-radius: 20px;
   background: linear-gradient(180deg, rgba(54, 73, 155, 0.03), rgba(111, 34, 119, 0.04));
@@ -347,13 +346,6 @@ input[type="checkbox"] {
 .overview-card span {
   color: var(--muted);
   font-size: 0.9rem;
-}
-
-.insights-panel {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 18px;
 }
 
 .guide-sidebar {
@@ -408,22 +400,6 @@ input[type="checkbox"] {
   transform: translateX(2px);
   border-color: rgba(111, 34, 119, 0.28);
   background: rgba(111, 34, 119, 0.08);
-}
-
-.support-card {
-  padding: 18px;
-}
-
-.support-card h3 {
-  margin: 0 0 12px;
-  font-size: 1rem;
-}
-
-.support-card ul {
-  margin: 0;
-  padding-left: 18px;
-  color: var(--muted);
-  line-height: 1.7;
 }
 
 .output {
@@ -738,7 +714,6 @@ input[type="checkbox"] {
   .action-row,
   .results-layout,
   .overview-grid,
-  .insights-panel,
   .hub-quick-grid,
   .vendor-directory,
   .m365-lane-grid,
