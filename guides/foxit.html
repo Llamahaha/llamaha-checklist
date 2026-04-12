@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foxit Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="./guide.css">
+</head>
+<body data-vendor="foxit">
+  <div class="guide-shell">
+    <header class="guide-header">
+      <a class="back-link" href="../index.html">Back to runbook</a>
+      <div class="guide-brand">
+        <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+        <div>
+          <p class="section-kicker">Vendor Guide</p>
+          <h1 id="vendorTitle"></h1>
+          <p id="vendorSummary"></p>
+        </div>
+      </div>
+    </header>
+    <main class="guide-layout">
+      <aside class="guide-nav-card">
+        <p class="section-kicker">Vendors</p>
+        <nav id="vendorNav" class="guide-nav"></nav>
+      </aside>
+      <section class="guide-content">
+        <section class="guide-card">
+          <p class="section-kicker">In Scope</p>
+          <div id="vendorProducts" class="product-chips"></div>
+        </section>
+        <div class="guide-grid">
+          <section class="guide-card"><h2>License Process</h2><ol id="licenseSteps"></ol></section>
+          <section class="guide-card"><h2>Install Notes</h2><ol id="installSteps"></ol></section>
+          <section class="guide-card"><h2>Uninstall / Reclaim</h2><ol id="uninstallSteps"></ol></section>
+          <section class="guide-card"><h2>Watch For</h2><ul id="watchFor"></ul></section>
+          <section class="guide-card full">
+            <h2>Official Links</h2>
+            <ul id="supportLinks"></ul>
+            <p class="footer-note">Vendor portals and wording change often, so use this page as a runbook aid and confirm details in the official vendor docs before major rollout changes.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="./guide.js"></script>
+</body>
+</html>

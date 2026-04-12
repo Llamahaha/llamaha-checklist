@@ -192,7 +192,7 @@ select {
 
 .system-groups {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -276,6 +276,17 @@ input[type="checkbox"] {
   margin-bottom: 20px;
 }
 
+.results-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 18px;
+  align-items: start;
+}
+
+.results-main {
+  min-width: 0;
+}
+
 .summary-chips {
   display: flex;
   flex-wrap: wrap;
@@ -338,6 +349,54 @@ input[type="checkbox"] {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin-bottom: 18px;
+}
+
+.guide-sidebar {
+  position: sticky;
+  top: 20px;
+}
+
+.guide-sidebar-card {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(54, 73, 155, 0.04), rgba(111, 34, 119, 0.05));
+  box-shadow: var(--shadow);
+}
+
+.guide-sidebar-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.guide-sidebar-copy {
+  margin: 0 0 16px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+.guide-links {
+  display: grid;
+  gap: 10px;
+}
+
+.guide-links a {
+  display: block;
+  padding: 11px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.guide-links a:hover {
+  transform: translateX(2px);
+  border-color: rgba(111, 34, 119, 0.28);
+  background: rgba(111, 34, 119, 0.08);
 }
 
 .support-card {
@@ -489,6 +548,7 @@ input[type="checkbox"] {
   .workspace,
   .field-grid,
   .action-row,
+  .results-layout,
   .overview-grid,
   .insights-panel {
     grid-template-columns: 1fr;
@@ -547,6 +607,10 @@ input[type="checkbox"] {
     width: 92px;
     height: 92px;
   }
+
+  .guide-sidebar {
+    position: static;
+  }
 }
 
 @media print {
@@ -562,7 +626,8 @@ input[type="checkbox"] {
   .controls-card,
   .action-row,
   .empty-state,
-  .preset-bar {
+  .preset-bar,
+  .guide-sidebar {
     display: none;
   }
 

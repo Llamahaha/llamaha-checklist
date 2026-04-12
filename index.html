@@ -89,7 +89,6 @@
                   <label><input type="checkbox" name="systems" value="datto" checked> Datto RMM</label>
                   <label><input type="checkbox" name="systems" value="autotask" checked> Autotask</label>
                   <label><input type="checkbox" name="systems" value="itglue" checked> IT Glue</label>
-                  <label><input type="checkbox" name="systems" value="lob"> Other LoB Apps</label>
                 </div>
               </div>
 
@@ -108,9 +107,20 @@
                   <label><input type="checkbox" name="systems" value="autodesk"> Autodesk</label>
                   <label><input type="checkbox" name="systems" value="bentley"> Bentley</label>
                   <label><input type="checkbox" name="systems" value="esri"> Esri</label>
+                  <label><input type="checkbox" name="systems" value="trimble"> Trimble</label>
+                  <label><input type="checkbox" name="systems" value="sketchup"> SketchUp</label>
+                  <label><input type="checkbox" name="systems" value="ptc"> PTC</label>
                   <label><input type="checkbox" name="systems" value="bluebeam"> Bluebeam</label>
                   <label><input type="checkbox" name="systems" value="adobe"> Adobe Acrobat</label>
                   <label><input type="checkbox" name="systems" value="foxit"> Foxit PDF</label>
+                </div>
+              </div>
+
+              <div class="system-group">
+                <p class="system-group-title">Finance & Business Apps</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="quickbooks"> QuickBooks</label>
+                  <label><input type="checkbox" name="systems" value="lob"> Other Client Apps</label>
                 </div>
               </div>
             </div>
@@ -160,9 +170,35 @@
           <p>Generate a checklist to see grouped tasks, execution order, and quick export actions.</p>
         </div>
 
-        <div id="overviewGrid" class="overview-grid"></div>
-        <div id="insightsPanel" class="insights-panel"></div>
-        <div id="output" class="output"></div>
+        <div class="results-layout">
+          <div class="results-main">
+            <div id="overviewGrid" class="overview-grid"></div>
+            <div id="insightsPanel" class="insights-panel"></div>
+            <div id="output" class="output"></div>
+          </div>
+
+          <aside class="guide-sidebar" aria-label="Vendor guides">
+            <div class="guide-sidebar-card">
+              <p class="section-kicker">Reference Guides</p>
+              <h3>License and app help</h3>
+              <p class="guide-sidebar-copy">
+                Open these vendor pages for quick license, install, and uninstall notes alongside direct links to official docs.
+              </p>
+              <nav class="guide-links">
+                <a href="guides/autodesk.html">Autodesk</a>
+                <a href="guides/bentley.html">Bentley</a>
+                <a href="guides/esri.html">Esri</a>
+                <a href="guides/ptc.html">PTC</a>
+                <a href="guides/sketchup.html">SketchUp</a>
+                <a href="guides/trimble.html">Trimble</a>
+                <a href="guides/adobe.html">Adobe</a>
+                <a href="guides/bluebeam.html">Bluebeam</a>
+                <a href="guides/foxit.html">Foxit</a>
+                <a href="guides/quickbooks.html">QuickBooks</a>
+              </nav>
+            </div>
+          </aside>
+        </div>
       </section>
     </main>
   </div>

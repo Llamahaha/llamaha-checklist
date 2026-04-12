@@ -65,10 +65,14 @@ export const systemMeta = {
   autodesk: { label: "Autodesk" },
   bentley: { label: "Bentley" },
   esri: { label: "Esri" },
+  trimble: { label: "Trimble" },
+  sketchup: { label: "SketchUp" },
+  ptc: { label: "PTC" },
   bluebeam: { label: "Bluebeam" },
   adobe: { label: "Adobe Acrobat" },
   foxit: { label: "Foxit PDF" },
-  lob: { label: "Line-of-Business Apps" }
+  quickbooks: { label: "QuickBooks" },
+  lob: { label: "Other Apps" }
 };
 
 export const presetLibrary = {
@@ -91,7 +95,7 @@ export const presetLibrary = {
     environment: "hybrid",
     accessProfile: "standard",
     workstationProfile: "cad",
-    systems: ["m365", "ad", "windows", "datto", "autotask", "itglue", "rocketcyber", "bitdefender", "forticlient", "backup", "autodesk", "bentley", "esri", "bluebeam", "adobe", "foxit"]
+    systems: ["m365", "ad", "windows", "datto", "autotask", "itglue", "rocketcyber", "bitdefender", "forticlient", "backup", "autodesk", "bentley", "esri", "trimble", "sketchup", "ptc", "bluebeam", "adobe", "foxit"]
   },
   admin: {
     label: "Privileged Admin",
@@ -157,6 +161,24 @@ export const licenseGuidance = [
     ]
   },
   {
+    id: "license_design_apps",
+    systems: ["trimble", "sketchup", "ptc"],
+    title: "Design application licensing",
+    products: [
+      "Trimble subscription or admin-console seat",
+      "SketchUp named-user subscription",
+      "PTC entitlement, license file, or named-user access"
+    ],
+    onboarding: [
+      "Assign the product entitlement before the workstation handoff so first-run activation succeeds.",
+      "Confirm whether the client uses named-user, device, or floating-license behavior before install."
+    ],
+    offboarding: [
+      "Remove the user or device assignment from the vendor admin portal or license service.",
+      "Confirm the seat is reusable and note any license-server or entitlement cleanup that remains."
+    ]
+  },
+  {
     id: "license_pdf",
     systems: ["bluebeam", "adobe", "foxit"],
     title: "PDF application licensing",
@@ -172,6 +194,22 @@ export const licenseGuidance = [
     offboarding: [
       "Remove the user from the vendor portal or license assignment list.",
       "Validate the seat is recoverable for reuse and note any serials or admin console actions taken."
+    ]
+  },
+  {
+    id: "license_finance",
+    systems: ["quickbooks"],
+    title: "Finance application licensing",
+    products: [
+      "QuickBooks user seat, company-file access, or subscription assignment"
+    ],
+    onboarding: [
+      "Confirm whether the client uses QuickBooks Online access, QuickBooks Desktop licensing, or a hosted environment.",
+      "Assign the required role and verify the user can reach the expected company file or tenant."
+    ],
+    offboarding: [
+      "Remove the user from QuickBooks access and preserve any handoff or audit requirements.",
+      "Document whether the seat, named user, or workstation install was reclaimed."
     ]
   },
   {
@@ -238,11 +276,11 @@ export const taskLibrary = [
   {
     id: "onboard_m365_identity",
     title: "Provision the Microsoft 365 / Entra identity",
-    summary: "Create the core cloud identity first so licensing, MFA, and mailbox work have a stable anchor.",
+    summary: "Provision the cloud identity after or alongside the source account so licensing, MFA, and mailbox work have a stable anchor.",
     type: "onboarding",
     systems: ["m365"],
     category: "identity",
-    priority: 15,
+    priority: 18,
     impact: "critical",
     tags: ["security-critical"],
     steps: [
@@ -302,7 +340,7 @@ export const taskLibrary = [
     type: "onboarding",
     systems: ["ad"],
     category: "identity",
-    priority: 30,
+    priority: 12,
     impact: "high",
     tags: ["security-critical"],
     conditions: {
@@ -572,13 +610,89 @@ export const taskLibrary = [
     ]
   },
   {
+    id: "onboard_trimble_access",
+    title: "Assign Trimble licensing and deploy the required application",
+    summary: "Trimble deployments vary by product, so the safest path is to confirm subscription access and the exact product installer before handoff.",
+    type: "onboarding",
+    systems: ["trimble"],
+    category: "applications",
+    priority: 86,
+    impact: "high",
+    tags: ["license", "specialty"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Assign the user's Trimble subscription, admin-console role, or product access first.",
+      "Install the approved Trimble application or launcher for that client workflow.",
+      "Validate sign-in, project access, and any cloud-linked data locations before handoff."
+    ]
+  },
+  {
+    id: "onboard_sketchup_access",
+    title: "Assign SketchUp licensing and verify installation",
+    summary: "SketchUp is usually subscription and account driven, so seat assignment and Trimble account access need to line up before first launch.",
+    type: "onboarding",
+    systems: ["sketchup"],
+    category: "applications",
+    priority: 88,
+    impact: "normal",
+    tags: ["license", "specialty"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Assign the SketchUp seat in the Trimble admin console.",
+      "Install the approved SketchUp package and any companion tools the client standard requires.",
+      "Verify the user can authenticate with the expected Trimble identity and open the product successfully."
+    ]
+  },
+  {
+    id: "onboard_ptc_access",
+    title: "Assign PTC licensing and engineering application access",
+    summary: "PTC products often depend on the right entitlement model and client-side configuration, so install and licensing should be treated together.",
+    type: "onboarding",
+    systems: ["ptc"],
+    category: "applications",
+    priority: 90,
+    impact: "high",
+    tags: ["license", "specialty"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Confirm whether the client uses named-user, floating, or license-file based PTC access.",
+      "Assign the entitlement or point the workstation at the correct license service.",
+      "Install the approved PTC application and verify the user can launch it without licensing errors."
+    ]
+  },
+  {
+    id: "onboard_quickbooks_access",
+    title: "Provision QuickBooks access and validate the company file or tenant",
+    summary: "QuickBooks onboarding can break quietly if the user account, role, and company-file access are not all verified together.",
+    type: "onboarding",
+    systems: ["quickbooks"],
+    category: "applications",
+    priority: 92,
+    impact: "high",
+    tags: ["license", "verification"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Confirm whether the client uses QuickBooks Online, Desktop, hosted, or remote-published access.",
+      "Assign the correct role and install the approved client if a desktop component is required.",
+      "Verify the user can reach the expected company file or online tenant without permission errors."
+    ]
+  },
+  {
     id: "onboard_lob_access",
     title: "Provision line-of-business applications and SSO access",
     summary: "LoB tools are where real operational work happens, so account setup and SSO alignment need deliberate testing.",
     type: "onboarding",
     systems: ["lob"],
     category: "applications",
-    priority: 90,
+    priority: 96,
     impact: "high",
     tags: ["verification"],
     steps: [
@@ -1029,13 +1143,89 @@ export const taskLibrary = [
     ]
   },
   {
+    id: "offboard_trimble_reclaim",
+    title: "Reclaim Trimble access and product entitlements",
+    summary: "Trimble products vary by subscription and cloud service, so offboarding should remove both the user access and any workstation-specific assumptions.",
+    type: "offboarding",
+    systems: ["trimble"],
+    category: "licensing",
+    priority: 86,
+    impact: "high",
+    tags: ["license", "specialty"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Capture which Trimble products and cloud services the user was assigned.",
+      "Remove the user from the Trimble admin console or applicable product access list.",
+      "Document any remaining project ownership or data-transfer work before the seat is reused."
+    ]
+  },
+  {
+    id: "offboard_sketchup_reclaim",
+    title: "Reclaim SketchUp seat assignment",
+    summary: "SketchUp is usually simple to uninstall, but the real recovery step is removing the assigned seat in the Trimble admin console.",
+    type: "offboarding",
+    systems: ["sketchup"],
+    category: "licensing",
+    priority: 88,
+    impact: "normal",
+    tags: ["license", "specialty"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Review the SketchUp subscription assignment for the departing user.",
+      "Remove or transfer the SketchUp seat in the Trimble admin console.",
+      "Note whether any local content, extensions, or templates need to be preserved before workstation cleanup."
+    ]
+  },
+  {
+    id: "offboard_ptc_reclaim",
+    title: "Reclaim PTC entitlement and license configuration",
+    summary: "PTC environments can leave behind entitlement records or workstation license pointers if offboarding stops at uninstall only.",
+    type: "offboarding",
+    systems: ["ptc"],
+    category: "licensing",
+    priority: 90,
+    impact: "high",
+    tags: ["license", "specialty"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Capture which PTC product and license method the user relied on.",
+      "Remove or reassign the entitlement and update any named-user or license-server references.",
+      "Document any model, workspace, or vault ownership that must be transferred."
+    ]
+  },
+  {
+    id: "offboard_quickbooks_access",
+    title: "Remove QuickBooks access and preserve finance ownership",
+    summary: "QuickBooks offboarding should protect auditability by removing access without losing track of who now owns the finance workflow.",
+    type: "offboarding",
+    systems: ["quickbooks"],
+    category: "applications",
+    priority: 92,
+    impact: "high",
+    tags: ["license", "verification"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Disable the QuickBooks user or remove the role assignment in the correct QuickBooks environment.",
+      "Confirm the user no longer has access to the company file, hosted session, or online tenant.",
+      "Capture who now owns bank feeds, reports, approvals, or other finance-specific responsibilities."
+    ]
+  },
+  {
     id: "offboard_lob_access",
     title: "Remove line-of-business access and ownership",
     summary: "The long-tail business apps are often where stale access lingers because nobody remembers they exist until much later.",
     type: "offboarding",
     systems: ["lob"],
     category: "applications",
-    priority: 90,
+    priority: 96,
     impact: "high",
     tags: ["verification"],
     steps: [
@@ -1090,7 +1280,7 @@ export const taskLibrary = [
     title: "Capture CAD-related local data, templates, and project ownership",
     summary: "Engineering departures often hurt later because templates, add-ins, and local project paths were left behind on the workstation.",
     type: "offboarding",
-    systems: ["autodesk", "bentley", "esri", "windows"],
+    systems: ["autodesk", "bentley", "esri", "trimble", "sketchup", "ptc", "windows"],
     category: "continuity",
     priority: 102,
     impact: "high",

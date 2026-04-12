@@ -187,7 +187,7 @@ function getSelectedLicenseGuidance(options) {
 
 function buildInsights(options) {
   const insights = [];
-  const hasCadStack = ["autodesk", "bentley", "esri"].some(system => options.systems.includes(system));
+  const hasCadStack = ["autodesk", "bentley", "esri", "trimble", "sketchup", "ptc"].some(system => options.systems.includes(system));
 
   if (options.type === "offboarding" && options.accessProfile === "privileged") {
     insights.push({
@@ -221,6 +221,13 @@ function buildInsights(options) {
     insights.push({
       title: "CAD environments hide local dependencies",
       text: "Templates, plugins, project paths, and cloud entitlements should be reviewed before wiping or reassigning an engineering workstation."
+    });
+  }
+
+  if (options.systems.includes("quickbooks")) {
+    insights.push({
+      title: "Finance access needs ownership handoff",
+      text: "QuickBooks changes should confirm who now owns company-file access, approvals, bank feeds, and audit-sensitive reporting."
     });
   }
 
