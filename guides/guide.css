@@ -154,6 +154,42 @@ a {
   font-size: 0.98rem;
 }
 
+.application-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.application-card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(54, 73, 155, 0.04), rgba(111, 34, 119, 0.05));
+}
+
+.application-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.application-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.application-card p + p {
+  margin-top: 10px;
+}
+
+.application-card strong {
+  color: var(--ink);
+}
+
+.application-focus {
+  color: var(--ink) !important;
+}
+
 .guide-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -257,7 +293,8 @@ a {
 
 @media (max-width: 960px) {
   .guide-layout,
-  .guide-grid {
+  .guide-grid,
+  .application-grid {
     grid-template-columns: 1fr;
   }
 

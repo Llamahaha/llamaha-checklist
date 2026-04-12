@@ -8,14 +8,15 @@ export const vendorOrder = [
   "adobe",
   "bluebeam",
   "foxit",
-  "quickbooks"
+  "quickbooks",
+  "egnyte"
 ];
 
 export const vendorGuides = {
   autodesk: {
     title: "Autodesk",
-    summary: "Use this when a user needs Autodesk named-user licensing, Autodesk Access installs, or a clean seat recovery during offboarding.",
-    products: ["Autodesk Account", "Autodesk Access", "Collections / named-user products"],
+    summary: "Use this for Autodesk named-user licensing, Autodesk Access deployment, and app-specific guidance for AutoCAD, Civil 3D, Revit, ReCap Pro, and InfraWorks.",
+    products: ["AutoCAD", "Civil 3D", "Revit", "ReCap Pro", "InfraWorks"],
     licenseSteps: [
       "Confirm the exact Autodesk collection or standalone product the user needs before assigning anything.",
       "Assign the user in the Autodesk admin portal and verify the expected Autodesk identity is being used.",
@@ -43,8 +44,8 @@ export const vendorGuides = {
   },
   bentley: {
     title: "Bentley",
-    summary: "Use this when Bentley products depend on user management, CONNECTION services, entitlements, and project workspaces that need explicit setup.",
-    products: ["Bentley user management", "Bentley applications", "CONNECTION / entitlement services"],
+    summary: "Use this for Bentley entitlement work, CONNECTION Client dependencies, and product-specific notes across the civil, structural, bridge, water, and ProjectWise stack.",
+    products: ["MicroStation", "ProjectWise", "OpenRoads", "OpenBridge", "OpenFlows", "STAAD / RAM"],
     licenseSteps: [
       "Confirm the exact Bentley products and entitlement model the client uses before granting access.",
       "Add the user to the correct Bentley administration surface and verify the required role or entitlement is present.",
@@ -71,8 +72,8 @@ export const vendorGuides = {
   },
   esri: {
     title: "Esri",
-    summary: "Use this when the client relies on ArcGIS named users, ArcGIS Pro licensing, extensions, and portal content ownership.",
-    products: ["ArcGIS Online / Enterprise", "ArcGIS Pro", "Extensions and role-based access"],
+    summary: "Use this for ArcGIS Online role management, ArcGIS Pro licensing, extension control, and ownership handoff.",
+    products: ["ArcGIS Online", "ArcGIS Pro", "Extensions and role-based access"],
     licenseSteps: [
       "Assign the named user, role, and any required ArcGIS Pro or extension licenses in the correct organization.",
       "Confirm the user has the right portal membership before trying to validate the desktop application.",
@@ -100,8 +101,8 @@ export const vendorGuides = {
   },
   ptc: {
     title: "PTC",
-    summary: "Use this when the client runs PTC software that depends on named-user entitlements, license servers, or workstation-level license configuration.",
-    products: ["PTC entitlements", "PTC desktop clients", "License server or license-file settings"],
+    summary: "Use this for Mathcad Prime entitlement, install, uninstall, and workstation license-source guidance.",
+    products: ["Mathcad Prime", "PTC entitlements", "License server or license-file settings"],
     licenseSteps: [
       "Identify whether the product uses named-user access, a floating license server, or a file-based entitlement.",
       "Assign or document the correct entitlement path before the user touches the workstation.",
@@ -157,8 +158,8 @@ export const vendorGuides = {
   },
   trimble: {
     title: "Trimble",
-    summary: "Use this when the client relies on Trimble products that are administered through product-specific portals, subscriptions, or cloud access models.",
-    products: ["Trimble admin access", "Trimble desktop or cloud application", "Project / data access"],
+    summary: "Use this for Trimble-managed app access, especially SketchUp administration overlap and Trimble Business Center deployment guidance.",
+    products: ["SketchUp admin overlap", "Trimble Business Center", "Trimble identity / admin access"],
     licenseSteps: [
       "Identify the exact Trimble product first because the entitlement and installer path can vary by product family.",
       "Assign the user, subscription, or role in the appropriate Trimble administration surface.",
@@ -185,8 +186,8 @@ export const vendorGuides = {
   },
   adobe: {
     title: "Adobe",
-    summary: "Use this when Acrobat or other Adobe apps rely on Admin Console assignment, user sign-in, and organization-managed deployment packages.",
-    products: ["Adobe Admin Console", "Acrobat / Creative Cloud apps", "Organization-managed sign-in"],
+    summary: "Use this for Adobe Admin Console licensing and product-level help for Creative Cloud, Photoshop, Illustrator, and Acrobat Pro.",
+    products: ["Creative Cloud Desktop", "Photoshop", "Illustrator", "Acrobat Pro"],
     licenseSteps: [
       "Assign the user to the right Adobe product profile or seat in the Admin Console.",
       "Verify the user will sign in with the organization-managed identity expected by the client.",
@@ -214,8 +215,8 @@ export const vendorGuides = {
   },
   bluebeam: {
     title: "Bluebeam",
-    summary: "Use this when Bluebeam seats, Studio access, and Revu installs need to be coordinated during onboarding or seat recovery.",
-    products: ["Bluebeam subscriptions", "Revu install", "Bluebeam sign-in / Studio access"],
+    summary: "Use this for Bluebeam Revu 21 subscription assignment, Studio access, and current install or reclaim guidance.",
+    products: ["Bluebeam subscriptions", "Revu 21", "Bluebeam sign-in / Studio access"],
     licenseSteps: [
       "Assign the user in the Bluebeam organization or subscription admin flow before installation day.",
       "Confirm the correct user identity and subscription tier are in scope.",
@@ -242,8 +243,8 @@ export const vendorGuides = {
   },
   foxit: {
     title: "Foxit",
-    summary: "Use this when the client standard includes Foxit and you need clean seat tracking plus reliable desktop deployment.",
-    products: ["Foxit PDF Editor", "Foxit licensing / subscription", "Foxit desktop plugins"],
+    summary: "Use this for Foxit PDF Editor and Reader deployment, activation, plugin handling, and clean seat recovery.",
+    products: ["Foxit PDF Editor", "Foxit PDF Reader", "Foxit licensing / subscription"],
     licenseSteps: [
       "Confirm the client's Foxit licensing model before assigning a user or serial.",
       "Assign or document the correct subscription, serial, or admin-console seat for the user.",
@@ -271,8 +272,8 @@ export const vendorGuides = {
   },
   quickbooks: {
     title: "QuickBooks",
-    summary: "Use this when the client needs QuickBooks Online, Desktop, or hosted access and the workflow needs both the right role and the right company-file path.",
-    products: ["QuickBooks user access", "QuickBooks Desktop or Online", "Company file or hosted session access"],
+    summary: "Use this for QuickBooks Enterprise Desktop and QuickBooks Online access, install, and finance handoff workflows.",
+    products: ["QuickBooks Enterprise Desktop", "QuickBooks Online", "Company file or hosted session access"],
     licenseSteps: [
       "Confirm whether the client uses QuickBooks Online, QuickBooks Desktop, or a hosted / remote-published setup.",
       "Assign the correct role or seat and document which company file or tenant the user should access.",
@@ -296,6 +297,37 @@ export const vendorGuides = {
     supportLinks: [
       { label: "QuickBooks Learn & Support", url: "https://quickbooks.intuit.com/learn-support/" },
       { label: "QuickBooks Desktop Downloads", url: "https://downloads.quickbooks.com/app/qbdt/products" }
+    ]
+  },
+  egnyte: {
+    title: "Egnyte",
+    summary: "Use this for Egnyte user provisioning, folder-permission handoff, Desktop App rollout, and sync or deprovision cleanup.",
+    products: ["Egnyte Web UI / Admin", "Egnyte Desktop App", "User types, permissions, and content handoff"],
+    licenseSteps: [
+      "Choose the correct Egnyte user type before creating the account because Admin, Power User, and Standard User roles behave differently.",
+      "Assign the user to the right groups, folder permissions, and SSO path before testing the desktop or browser workflow.",
+      "Record whether the user needs desktop-app access, offline content, and any externally shared folders or links."
+    ],
+    installSteps: [
+      "Deploy the Egnyte Desktop App with the client's approved installer or managed deployment method if the user needs workstation access.",
+      "Validate sign-in, mapped-drive or offline behavior, and confirm the user can reach the expected folders without overpermissioning.",
+      "Document any offline-sync folders or special drive-letter configuration so support can reproduce the setup later."
+    ],
+    uninstallSteps: [
+      "Suspend or deactivate the user only after confirming who now owns private content, shared links, and folder permissions.",
+      "Remove offline files and uninstall the Desktop App with the supported managed or MSI workflow if the device no longer needs Egnyte.",
+      "Capture the ownership handoff in documentation so future restores or audits do not rely on guesswork."
+    ],
+    watchFor: [
+      "Egnyte user type affects what the user can do and whether desktop access fits the role.",
+      "Offline files and local cache should be reviewed before a device is wiped or reassigned.",
+      "Shared links and private-folder ownership are common offboarding blind spots."
+    ],
+    supportLinks: [
+      { label: "Egnyte Help Center", url: "https://helpdesk.egnyte.com/hc/en-us" },
+      { label: "Create a New User", url: "https://helpdesk.egnyte.com/hc/en-us/articles/360021277112-Create-a-New-User" },
+      { label: "Desktop App for Windows Mass Deployment", url: "https://helpdesk.egnyte.com/hc/en-us/articles/216688268-Egnyte-Desktop-App-for-Windows-Mass-Deployment" },
+      { label: "Intune Deployment for Desktop App Windows", url: "https://helpdesk.egnyte.com/hc/en-us/articles/28536918953357-Intune-Deployment-for-Desktop-App-Windows" }
     ]
   }
 };

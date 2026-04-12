@@ -1,4 +1,5 @@
 import { vendorGuides, vendorOrder } from "./guideData.js";
+import { applicationCatalog } from "./applicationCatalog.js";
 import {
   vendorFaqs,
   vendorInstallIssues,
@@ -12,6 +13,7 @@ const vendorTitle = document.getElementById("vendorTitle");
 const vendorSummary = document.getElementById("vendorSummary");
 const vendorProducts = document.getElementById("vendorProducts");
 const vendorNav = document.getElementById("vendorNav");
+const backLink = document.querySelector(".back-link");
 const faqList = document.getElementById("faqList");
 const licenseSteps = document.getElementById("licenseSteps");
 const installSteps = document.getElementById("installSteps");
@@ -19,6 +21,7 @@ const uninstallSteps = document.getElementById("uninstallSteps");
 const installIssues = document.getElementById("installIssues");
 const usageIssues = document.getElementById("usageIssues");
 const supportLinks = document.getElementById("supportLinks");
+const guideGrid = document.querySelector(".guide-grid");
 
 function renderList(container, items) {
   if (!container) {
@@ -94,6 +97,76 @@ function renderIssueList(container, items) {
   });
 }
 
+function renderApplications(items) {
+  if (!guideGrid || !items.length) {
+    return;
+  }
+
+  const supportCard = supportLinks?.closest(".guide-card");
+  const section = document.createElement("section");
+  section.className = "guide-card full";
+  section.id = "application-catalog";
+
+  const title = document.createElement("h2");
+  title.textContent = "Application Coverage";
+
+  const grid = document.createElement("div");
+  grid.className = "application-grid";
+
+  items.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "application-card";
+
+    const heading = document.createElement("h3");
+    heading.textContent = item.name;
+
+    const focus = document.createElement("p");
+    focus.className = "application-focus";
+    focus.textContent = item.focus;
+
+    const licensing = document.createElement("p");
+    licensing.innerHTML = `<strong>Licensing:</strong> ${item.licensing}`;
+
+    const install = document.createElement("p");
+    install.innerHTML = `<strong>Install:</strong> ${item.install}`;
+
+    const uninstall = document.createElement("p");
+    uninstall.innerHTML = `<strong>Uninstall / reclaim:</strong> ${item.uninstall}`;
+
+    card.append(heading, focus, licensing, install, uninstall);
+    grid.appendChild(card);
+  });
+
+  section.append(title, grid);
+
+  if (supportCard) {
+    guideGrid.insertBefore(section, supportCard);
+    return;
+  }
+
+  guideGrid.appendChild(section);
+}
+
+function applySectionAnchors() {
+  vendorProducts?.closest(".guide-card")?.setAttribute("id", "in-scope");
+  licenseSteps?.closest(".guide-card")?.setAttribute("id", "licensing");
+  installSteps?.closest(".guide-card")?.setAttribute("id", "installation");
+  uninstallSteps?.closest(".guide-card")?.setAttribute("id", "uninstallation");
+  faqList?.closest(".guide-card")?.setAttribute("id", "faq");
+  installIssues?.closest(".guide-card")?.setAttribute("id", "install-issues");
+  usageIssues?.closest(".guide-issue-card")?.setAttribute("id", "common-fixes");
+  supportLinks?.closest(".guide-card")?.setAttribute("id", "official-links");
+}
+
+function scrollToHash() {
+  if (!window.location.hash) {
+    return;
+  }
+
+  const target = document.querySelector(window.location.hash);
+  target?.scrollIntoView();
+}
+
 function renderNav() {
   if (!vendorNav) {
     return;
@@ -112,6 +185,10 @@ if (!guide) {
   vendorTitle.textContent = "Guide not found";
   vendorSummary.textContent = "The requested vendor guide is not available.";
 } else {
+  if (backLink) {
+    backLink.textContent = "Back to home";
+  }
+
   document.title = `${guide.title} Guide`;
   vendorTitle.textContent = guide.title;
   vendorSummary.textContent = guide.summary;
@@ -130,6 +207,9 @@ if (!guide) {
   renderIssueList(installIssues, vendorInstallIssues[vendorKey] ?? []);
   renderIssueList(usageIssues, vendorUsageIssues[vendorKey] ?? []);
   renderLinks(supportLinks, guide.supportLinks);
+  renderApplications(applicationCatalog[vendorKey] ?? []);
+  applySectionAnchors();
+  scrollToHash();
 }
 
 renderNav();

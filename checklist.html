@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSP Checklist Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Checklist Generator</strong>
+    </nav>
+
+    <main class="workspace">
+      <section class="controls-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Checklist Builder</p>
+            <h1>Build onboarding and offboarding runbooks</h1>
+            <p class="builder-copy">
+              Choose the stack, workstation type, and risk controls you want in scope, then generate a checkable,
+              saveable runbook below.
+            </p>
+          </div>
+        </div>
+
+        <form id="generatorForm" class="generator-form">
+          <div class="field-grid">
+            <label class="field">
+              <span>Request Type</span>
+              <select id="type" name="type">
+                <option value="offboarding">Offboarding</option>
+                <option value="onboarding">Onboarding</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Environment</span>
+              <select id="environment" name="environment">
+                <option value="cloud">Cloud</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="onprem">On-Prem</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Access Profile</span>
+              <select id="accessProfile" name="accessProfile">
+                <option value="standard">Standard User</option>
+                <option value="privileged">Privileged User</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Workstation Profile</span>
+              <select id="workstationProfile" name="workstationProfile">
+                <option value="standard">Standard Productivity</option>
+                <option value="shared">Shared / Kiosk</option>
+                <option value="cad">CAD / Engineering</option>
+              </select>
+            </label>
+          </div>
+
+          <fieldset class="system-picker">
+            <legend>Platforms in Scope</legend>
+            <div class="system-groups">
+              <div class="system-group">
+                <p class="system-group-title">Core Identity & Device</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="m365" checked> Microsoft 365 & Entra</label>
+                  <label><input type="checkbox" name="systems" value="ad" checked> Active Directory</label>
+                  <label><input type="checkbox" name="systems" value="windows" checked> Windows Workstation</label>
+                  <label><input type="checkbox" name="systems" value="backup" checked> Backup Platform</label>
+                </div>
+              </div>
+
+              <div class="system-group">
+                <p class="system-group-title">MSP Internal Stack</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="datto" checked> Datto RMM</label>
+                  <label><input type="checkbox" name="systems" value="autotask" checked> Autotask</label>
+                  <label><input type="checkbox" name="systems" value="itglue" checked> IT Glue</label>
+                </div>
+              </div>
+
+              <div class="system-group">
+                <p class="system-group-title">Security, Files, & Remote Access</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="rocketcyber" checked> RocketCyber</label>
+                  <label><input type="checkbox" name="systems" value="bitdefender" checked> Bitdefender</label>
+                  <label><input type="checkbox" name="systems" value="forticlient" checked> FortiClient VPN</label>
+                  <label><input type="checkbox" name="systems" value="egnyte"> Egnyte</label>
+                </div>
+              </div>
+
+              <div class="system-group">
+                <p class="system-group-title">Engineering & Document Apps</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="autodesk"> Autodesk</label>
+                  <label><input type="checkbox" name="systems" value="bentley"> Bentley</label>
+                  <label><input type="checkbox" name="systems" value="esri"> Esri</label>
+                  <label><input type="checkbox" name="systems" value="trimble"> Trimble</label>
+                  <label><input type="checkbox" name="systems" value="sketchup"> SketchUp</label>
+                  <label><input type="checkbox" name="systems" value="ptc"> PTC</label>
+                  <label><input type="checkbox" name="systems" value="bluebeam"> Bluebeam</label>
+                  <label><input type="checkbox" name="systems" value="adobe"> Adobe</label>
+                  <label><input type="checkbox" name="systems" value="foxit"> Foxit</label>
+                </div>
+              </div>
+
+              <div class="system-group">
+                <p class="system-group-title">Finance & Business Apps</p>
+                <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="quickbooks"> QuickBooks</label>
+                  <label><input type="checkbox" name="systems" value="lob"> Other Client Apps</label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="toggle-grid">
+            <label class="toggle">
+              <input type="checkbox" id="includeManagerTasks" name="includeManagerTasks" checked>
+              <span>Include manager / handoff items</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="includeAssetTasks" name="includeAssetTasks" checked>
+              <span>Include endpoint / asset handling</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="includeLicenseTasks" name="includeLicenseTasks" checked>
+              <span>Include license recovery / seat assignment</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="includeDocumentationTasks" name="includeDocumentationTasks" checked>
+              <span>Include Autotask / IT Glue completion</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="includeSecurityReview" name="includeSecurityReview" checked>
+              <span>Include extra security review items</span>
+            </label>
+          </div>
+
+          <div class="action-row action-row-wide">
+            <button type="submit" class="primary-btn">Generate Checklist</button>
+            <button type="button" id="copyBtn" class="secondary-btn">Copy as Text</button>
+            <button type="button" id="printBtn" class="secondary-btn">Print</button>
+            <button type="button" id="resetProgressBtn" class="secondary-btn">Reset Saved Progress</button>
+          </div>
+
+          <p id="progressStatus" class="progress-status">Checklist progress auto-saves in this browser for each unique runbook setup.</p>
+        </form>
+      </section>
+
+      <section class="results-card">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Generated Runbook</p>
+            <h2 id="resultsTitle">Ready when you are</h2>
+          </div>
+          <div id="summaryChips" class="summary-chips"></div>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <p>Generate a checklist to see grouped tasks, execution order, quick export actions, and saved progress.</p>
+        </div>
+
+        <div class="results-layout">
+          <div class="results-main">
+            <div id="overviewGrid" class="overview-grid"></div>
+            <div id="insightsPanel" class="insights-panel"></div>
+            <div id="output" class="output"></div>
+          </div>
+
+          <aside class="guide-sidebar" aria-label="Reference guides">
+            <div class="guide-sidebar-card">
+              <p class="section-kicker">Reference Guides</p>
+              <h3>Licensing, installs, FAQ, and fixes</h3>
+              <p class="guide-sidebar-copy">
+                Open the vendor guide pages for app-specific licensing, install, uninstall, FAQ, and common error notes.
+              </p>
+              <nav class="guide-links">
+                <a href="guides/autodesk.html">Autodesk</a>
+                <a href="guides/bentley.html">Bentley</a>
+                <a href="guides/esri.html">Esri</a>
+                <a href="guides/ptc.html">PTC</a>
+                <a href="guides/sketchup.html">SketchUp</a>
+                <a href="guides/trimble.html">Trimble</a>
+                <a href="guides/adobe.html">Adobe</a>
+                <a href="guides/bluebeam.html">Bluebeam</a>
+                <a href="guides/foxit.html">Foxit</a>
+                <a href="guides/quickbooks.html">QuickBooks</a>
+                <a href="guides/egnyte.html">Egnyte</a>
+              </nav>
+            </div>
+
+            <div class="guide-sidebar-card">
+              <p class="section-kicker">Microsoft Licensing</p>
+              <h3>Live M365 matrix</h3>
+              <p class="guide-sidebar-copy">
+                Use the M365 Maps matrix when you need a quick plan-to-feature comparison for mailbox, apps, identity, security, and compliance questions.
+              </p>
+              <nav class="guide-links">
+                <a href="https://m365maps.com/matrix.htm" target="_blank" rel="noreferrer">Open M365 Maps Matrix</a>
+                <a href="index.html#m365Matrix">Matrix notes on home page</a>
+              </nav>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -61,6 +61,7 @@ export const systemMeta = {
   rocketcyber: { label: "RocketCyber" },
   bitdefender: { label: "Bitdefender" },
   forticlient: { label: "FortiClient VPN" },
+  egnyte: { label: "Egnyte" },
   backup: { label: "Backup Platform" },
   autodesk: { label: "Autodesk" },
   bentley: { label: "Bentley" },
@@ -69,7 +70,7 @@ export const systemMeta = {
   sketchup: { label: "SketchUp" },
   ptc: { label: "PTC" },
   bluebeam: { label: "Bluebeam" },
-  adobe: { label: "Adobe Acrobat" },
+  adobe: { label: "Adobe" },
   foxit: { label: "Foxit PDF" },
   quickbooks: { label: "QuickBooks" },
   lob: { label: "Other Apps" }
@@ -182,6 +183,24 @@ export const licenseGuidance = [
     ]
   },
   {
+    id: "license_egnyte",
+    systems: ["egnyte"],
+    title: "Egnyte access and storage governance",
+    products: [
+      "Egnyte user type and folder permissions",
+      "Egnyte Desktop App access",
+      "Shared links, offline files, and ownership handoff"
+    ],
+    onboarding: [
+      "Assign the correct Egnyte user type, groups, and folder permissions before testing access.",
+      "Confirm whether the user also needs Desktop App deployment, offline folders, or SSO-specific setup."
+    ],
+    offboarding: [
+      "Review shared links, private folders, and offline content before disabling or deleting the user.",
+      "Document who now owns the content path and whether the Desktop App or local cache was removed."
+    ]
+  },
+  {
     id: "license_datto",
     systems: ["datto"],
     title: "Datto RMM device coverage",
@@ -253,9 +272,11 @@ export const taskLibrary = [
     impact: "critical",
     tags: ["security-critical"],
     steps: [
-      "Create the user in the authoritative source and confirm the UPN, aliases, and naming standard.",
-      "Set the initial sign-in policy and verify the account is not inheriting unwanted exclusions.",
-      "Record the account creation timestamp and any delivery instructions for first access."
+      "Create the user in the authoritative source and confirm the UPN, aliases, display name, and naming standard.",
+      "Verify usage location, department, manager, and any directory attributes that downstream licensing or automation depends on.",
+      "Set the initial sign-in policy, temporary password path, and verify the account is not inheriting unwanted exclusions.",
+      "Confirm the account appears in the expected Entra administrative view and is ready for licensing, MFA, and mailbox work.",
+      "Record the creation timestamp, operator, and any delivery instructions for first access."
     ],
     completion: [
       "User can be located in Entra ID with the expected UPN and baseline properties."
@@ -275,9 +296,11 @@ export const taskLibrary = [
       includeLicenseTasks: true
     },
     steps: [
-      "Assign the Microsoft 365 plan that matches the role and client standard.",
-      "Add required extras such as Teams Phone, Visio, Project, or device-related entitlements.",
-      "Document the assigned bundle so later offboarding can recover it cleanly."
+      "Confirm the user's role, mailbox needs, device strategy, and security requirements before picking the Microsoft bundle.",
+      "Assign the Microsoft 365 base plan that matches the client standard and the user's business function.",
+      "Add required extras such as Teams Phone, Visio, Project, Power BI, or device-related entitlements where approved.",
+      "Verify the service plans inside the bundle are enabled or disabled correctly for that client workflow.",
+      "Document the assigned bundle so later offboarding can recover it cleanly without guessing."
     ],
     completion: [
       "Assigned Microsoft licenses are documented in the ticket or client record."
@@ -297,9 +320,10 @@ export const taskLibrary = [
       includeManagerTasks: true
     },
     steps: [
-      "Assign the mailbox configuration, aliases, groups, shared mailboxes, and distribution lists required for the role.",
-      "Add the user to the right Teams and collaborative workspaces.",
-      "Verify shared calendar, room, and mailbox access with the requester or manager."
+      "Assign the mailbox configuration, aliases, shared mailboxes, distribution lists, and delegation required for the role.",
+      "Add the user to the right Microsoft 365 groups, Teams teams, channels, and SharePoint-connected workspaces.",
+      "Review room, calendar, and shared-resource access with the requester or manager instead of assuming defaults are enough.",
+      "Document any temporary forwarding, shared mailbox rights, or special approvals tied to the role."
     ]
   },
   {
@@ -316,9 +340,11 @@ export const taskLibrary = [
       environment: ["hybrid", "onprem"]
     },
     steps: [
-      "Create the AD user in the correct OU with the expected naming, expiry, and logon restrictions.",
-      "Add standard security groups and any file-share or print groups required.",
-      "Confirm directory sync behavior if the user is part of a hybrid environment."
+      "Create the AD user in the correct OU with the expected naming, expiry, logon restrictions, and baseline attributes.",
+      "Set password, account options, and workstation or hours restrictions according to the client standard.",
+      "Add standard security groups plus any file-share, print, VPN, or LoB access groups required for the role.",
+      "Verify the user is not inheriting legacy groups or template-account access that should not carry forward.",
+      "Confirm directory sync behavior if the user is part of a hybrid environment and note the expected sync timing."
     ]
   },
   {
@@ -335,9 +361,11 @@ export const taskLibrary = [
       includeAssetTasks: true
     },
     steps: [
-      "Join the device to the correct identity boundary and apply the client build standard.",
-      "Run updates, verify time zone and locale, and confirm the naming convention matches documentation.",
-      "Install standard productivity software and confirm the user profile initializes cleanly."
+      "Join the device to the correct identity boundary and confirm it lands in the expected tenant, domain, or management scope.",
+      "Apply the client build standard, naming convention, and baseline configuration for the user's location and department.",
+      "Run Windows, driver, and firmware updates and clear any pending reboot or enrollment blockers.",
+      "Install standard productivity software, browser defaults, and printers or mapped resources required on day one.",
+      "Test a first sign-in or profile initialization path so the device is not handed over with silent setup failures."
     ],
     completion: [
       "The workstation is ready for user sign-in without pending build blockers."
@@ -358,8 +386,9 @@ export const taskLibrary = [
       includeSecurityReview: true
     },
     steps: [
-      "Verify BitLocker, Windows Defender posture, and local admin group membership align with policy.",
-      "Confirm the user does not inherit unnecessary elevation or old profile artifacts on a redeployed machine.",
+      "Verify BitLocker, Windows Defender posture, local firewall, and local admin group membership align with policy.",
+      "Confirm the device is enrolled in the right security and compliance baselines and is not still carrying a staging posture.",
+      "Check that the user does not inherit unnecessary elevation, cached credentials, or old profile artifacts on a redeployed machine.",
       "Capture recovery-key location and any approved exceptions before handoff."
     ],
     completion: [
@@ -380,8 +409,9 @@ export const taskLibrary = [
       includeAssetTasks: true
     },
     steps: [
-      "Install the Datto RMM agent and verify the endpoint appears in the correct client site.",
-      "Apply monitoring, patching, and automation policies appropriate for the workstation type.",
+      "Install the Datto RMM agent and verify the endpoint appears in the correct client site and workstation group.",
+      "Apply monitoring, patching, automation, and software-management policies appropriate for the workstation type.",
+      "Confirm alert ownership, maintenance windows, and patch policy inheritance look correct after the device checks in.",
       "Remove staging or temporary exemptions created during imaging."
     ]
   },
@@ -399,8 +429,9 @@ export const taskLibrary = [
       includeAssetTasks: true
     },
     steps: [
-      "Install or confirm the Bitdefender agent and ensure the endpoint reports to the correct company.",
-      "Validate policy assignment, scan status, and any required exclusions for client software.",
+      "Install or confirm the Bitdefender agent and ensure the endpoint reports to the correct company or policy tree.",
+      "Validate policy assignment, update status, and last-contact time before handoff.",
+      "Confirm any required exclusions for client software are approved, documented, and scoped correctly.",
       "Record approved exceptions instead of leaving them implicit."
     ],
     completion: [
@@ -421,8 +452,9 @@ export const taskLibrary = [
       includeSecurityReview: true
     },
     steps: [
-      "Verify the endpoint and user context are visible where RocketCyber expects them.",
-      "Check alert ownership, escalation routing, and any user-specific contacts or watchlists.",
+      "Verify the endpoint, user context, and tenant association are visible where RocketCyber expects them.",
+      "Check alert ownership, escalation routing, suppression rules, and any user-specific contacts or watchlists.",
+      "Confirm the new user or endpoint does not inherit stale ownership from a previous device assignment.",
       "Document any monitoring gaps that need a follow-up outside the onboarding window."
     ]
   },
@@ -437,9 +469,10 @@ export const taskLibrary = [
     impact: "high",
     tags: ["security-critical"],
     steps: [
-      "Create or assign the VPN entitlement, profile, and any certificate or token prerequisites.",
-      "Install and configure FortiClient with the correct portal and connection profile.",
-      "Complete a successful test connection and record any MFA enrollment used for VPN sign-in."
+      "Create or assign the VPN entitlement, FortiClient EMS profile, and any certificate or token prerequisites.",
+      "Install and configure FortiClient with the correct portal, tunnel type, and saved connection profile.",
+      "Validate split tunnel or full tunnel behavior if the client standard depends on a specific routing model.",
+      "Complete a successful test connection and record any MFA enrollment or user guidance used for VPN sign-in."
     ],
     completion: [
       "FortiClient connection is tested and the expected authentication method is confirmed."
@@ -459,9 +492,33 @@ export const taskLibrary = [
       includeAssetTasks: true
     },
     steps: [
-      "Confirm the user or device falls under the intended backup policy.",
-      "Check for workstation folders, profile paths, or SaaS data that require explicit inclusion.",
+      "Confirm the user or device falls under the intended backup policy and the correct client retention set.",
+      "Check for workstation folders, profile paths, roaming data, or SaaS content that require explicit inclusion.",
+      "Verify the backup platform sees the endpoint, workload, or data path within the expected onboarding window.",
       "Note any exclusions so they do not become surprises later."
+    ]
+  },
+  {
+    id: "onboard_egnyte_access",
+    title: "Provision Egnyte access, folder permissions, and Desktop App setup",
+    summary: "Egnyte onboarding should cover user type, folder permissions, and desktop or offline behavior together so the user does not get a broken partial rollout.",
+    type: "onboarding",
+    systems: ["egnyte"],
+    category: "collaboration",
+    priority: 27,
+    impact: "high",
+    tags: ["verification", "license"],
+    conditions: {
+      includeLicenseTasks: true
+    },
+    steps: [
+      "Create the Egnyte user with the correct role and user type for the employee's internal or external access pattern.",
+      "Assign groups, folder permissions, and any shared-link expectations before the user signs in.",
+      "Deploy the Egnyte Desktop App if the user needs mapped-drive or offline access and confirm SSO behavior if used.",
+      "Validate the user can reach the expected folders and note any offline folders or special configuration in the ticket."
+    ],
+    completion: [
+      "Egnyte access, user type, and required desktop behavior are validated."
     ]
   },
   {
@@ -649,9 +706,10 @@ export const taskLibrary = [
       includeLicenseTasks: true
     },
     steps: [
-      "Confirm whether the client uses QuickBooks Online, Desktop, hosted, or remote-published access.",
-      "Assign the correct role and install the approved client if a desktop component is required.",
-      "Verify the user can reach the expected company file or online tenant without permission errors."
+      "Confirm whether the client uses QuickBooks Online, Enterprise Desktop, hosted, or remote-published access.",
+      "Assign the correct QuickBooks role and obtain any finance approval needed before access is granted.",
+      "Install the approved desktop or hosted-access client if a workstation component is required.",
+      "Verify the user can reach the expected company file or online tenant without permission errors and can complete required print or export workflows."
     ]
   },
   {
@@ -767,9 +825,10 @@ export const taskLibrary = [
     impact: "critical",
     tags: ["security-critical"],
     steps: [
-      "Block sign-in and confirm the disable action took effect on the intended identity.",
-      "Record the disable timestamp and operator in the ticket.",
-      "Check for sign-in risk from alternate aliases or linked identities if the client has exceptions."
+      "Block sign-in and confirm the disable action took effect on the intended identity and not a similarly named account.",
+      "Check whether conditional access, exceptions, or break-glass assumptions require a second validation path.",
+      "Record the disable timestamp, operator, and any customer-facing communication tied to the action.",
+      "Check for sign-in risk from alternate aliases, guest identities, or linked accounts if the client has exceptions."
     ],
     completion: [
       "The account is blocked from sign-in and the disable time is documented."
@@ -789,8 +848,9 @@ export const taskLibrary = [
       includeSecurityReview: true
     },
     steps: [
-      "Revoke active sessions and refresh tokens.",
-      "Review MFA methods, app passwords, and remembered sign-in artifacts tied to the user.",
+      "Revoke active sessions and refresh tokens across the Microsoft 365 identity.",
+      "Review MFA methods, app passwords, remembered browsers, and temporary access artifacts tied to the user.",
+      "Check whether mobile devices, Outlook profiles, or shared kiosks require extra follow-up after token revocation.",
       "Document any device-specific exceptions that still need follow-up."
     ],
     completion: [
@@ -811,9 +871,10 @@ export const taskLibrary = [
       includeManagerTasks: true
     },
     steps: [
-      "Handle mailbox conversion, delegation, forwarding, or auto-reply based on client approval.",
-      "Review OneDrive ownership and Teams or SharePoint ownership that may need reassignment.",
-      "Capture who approved retained access and for how long."
+      "Handle mailbox conversion, delegation, forwarding, auto-reply, or retention based on client approval.",
+      "Review OneDrive ownership and identify who now owns retained files, shortcuts, and restore requests.",
+      "Reassign Teams, M365 group, and SharePoint ownership where the departed user was the only owner or maintainer.",
+      "Capture who approved retained access, forwarding, or delegation and for how long."
     ]
   },
   {
@@ -830,8 +891,9 @@ export const taskLibrary = [
       includeLicenseTasks: true
     },
     steps: [
-      "Record the user's Microsoft bundle and any add-on licenses before making changes.",
-      "Confirm that mailbox or OneDrive retention decisions do not depend on the current licensing state.",
+      "Record the user's Microsoft bundle, add-on licenses, and any premium compliance or voice features before making changes.",
+      "Confirm that mailbox, OneDrive, archive, or legal-hold decisions do not depend on the current licensing state.",
+      "Coordinate with any M365 plan-change request so the user is not removed from a bundle before data retention is safe.",
       "Reclaim or reassign the seat once the retention window and business handoff are satisfied."
     ]
   },
@@ -849,8 +911,9 @@ export const taskLibrary = [
       environment: ["hybrid", "onprem"]
     },
     steps: [
-      "Disable the AD account and record the action taken.",
-      "Remove the user from security groups that grant file, VPN, print, or privileged access.",
+      "Disable the AD account and record the exact action taken, location, and operator.",
+      "Remove the user from security groups that grant file, VPN, print, application, or privileged access.",
+      "Check whether service accounts, scheduled tasks, or local rights depend on the account before removing every membership blindly.",
       "Confirm replication or sync status so the change is not silently delayed."
     ],
     completion: [
@@ -873,8 +936,9 @@ export const taskLibrary = [
     },
     steps: [
       "Review local admin group membership, cached profiles, and saved credential remnants on assigned devices.",
+      "Check browser profiles, credential manager entries, remote desktop history, and VPN remnants if those are common in the client standard.",
       "Preserve or confirm BitLocker recovery information before any wipe or redeployment action.",
-      "Check whether scheduled tasks, mapped drives, or scripts were running under the user's context."
+      "Check whether scheduled tasks, mapped drives, scripts, or local services were running under the user's context."
     ],
     completion: [
       "Windows access review is captured before device reuse."
@@ -894,9 +958,10 @@ export const taskLibrary = [
       includeAssetTasks: true
     },
     steps: [
-      "Confirm device return status, serial number, and physical condition.",
+      "Confirm device return status, serial number, accessories, and physical condition.",
+      "Check whether there is an approved delay for wipe because of legal hold, manager review, or engineering data recovery.",
       "Follow the approved wipe, redeploy, or storage process for the client environment.",
-      "Update asset notes so the next technician knows whether the device is ready for reissue."
+      "Update asset notes so the next technician knows whether the device is ready for reissue, still retained, or blocked on data handoff."
     ],
     completion: [
       "Device state is documented as returned, wiped, or awaiting action."
@@ -992,9 +1057,30 @@ export const taskLibrary = [
       includeManagerTasks: true
     },
     steps: [
-      "Confirm whether workstation, mailbox, or cloud data must be retained beyond normal expiration.",
-      "Document who approved the retention period and who owns the recovered data going forward.",
-      "Check for backup scopes that rely on the departing user's active license or identity."
+      "Confirm whether workstation, mailbox, cloud-data, or SaaS backup copies must be retained beyond normal expiration.",
+      "Identify who approved the retention period and who now owns the recovered data going forward.",
+      "Check for backup scopes that rely on the departing user's active license or identity and note any migration needed.",
+      "Document any restore requests, legal holds, or future review dates tied to the retained data."
+    ]
+  },
+  {
+    id: "offboard_egnyte_handoff",
+    title: "Disable Egnyte access and hand off folders, links, and offline content",
+    summary: "Egnyte offboarding is usually about permissions and content ownership as much as it is about disabling the user account.",
+    type: "offboarding",
+    systems: ["egnyte"],
+    category: "collaboration",
+    priority: 22,
+    impact: "high",
+    tags: ["handoff", "verification", "license"],
+    steps: [
+      "Review the user's Egnyte role, groups, shared links, and private-folder ownership before changing the account.",
+      "Transfer or document ownership for any content paths the team still needs after departure.",
+      "Disable or downgrade the user according to the client's Egnyte standard and remove Desktop App or offline access where required.",
+      "Document who now owns the content path and whether any retained local cache or offline files still need cleanup."
+    ],
+    completion: [
+      "Egnyte access is removed and content ownership is documented."
     ]
   },
   {
@@ -1236,8 +1322,9 @@ export const taskLibrary = [
       includeSecurityReview: true
     },
     steps: [
-      "Review whether the user knew shared admin credentials, vault entries, or emergency access accounts.",
-      "Check for scheduled tasks, scripts, services, or vendor portals still tied to the user's identity.",
+      "Review whether the user knew shared admin credentials, vault entries, emergency access accounts, or break-glass procedures.",
+      "Check for scheduled tasks, scripts, services, vendor portals, or automation tools still tied to the user's identity.",
+      "Confirm whether documentation, password vaults, and RMM scripts still reference the departed user as a trusted owner.",
       "Rotate or remediate anything that would leave invisible future access behind."
     ],
     completion: [
@@ -1297,9 +1384,10 @@ export const taskLibrary = [
     impact: "high",
     tags: ["verification", "internal"],
     steps: [
-      "Confirm internal records, alerting systems, and assigned assets no longer point to the departed user.",
-      "Verify requested handoff items were completed and documented.",
-      "Close the workflow only after unresolved issues are tracked to a new owner."
+      "Confirm internal records, alerting systems, assigned assets, and application owners no longer point to the departed user.",
+      "Verify requested handoff items, retention decisions, and seat recovery actions were completed and documented.",
+      "Check that unresolved issues have a new owner, a due date, and a visible follow-up path instead of a note buried in closeout.",
+      "Close the workflow only after the ticket history is clear enough for another technician to audit what happened."
     ],
     completion: [
       "Final verification confirms no obvious stale ownership remains."

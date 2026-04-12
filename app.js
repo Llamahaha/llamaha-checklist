@@ -15,11 +15,23 @@ const overviewGrid = document.getElementById("overviewGrid");
 const insightsPanel = document.getElementById("insightsPanel");
 const copyBtn = document.getElementById("copyBtn");
 const printBtn = document.getElementById("printBtn");
+const resetProgressBtn = document.getElementById("resetProgressBtn");
+const progressStatus = document.getElementById("progressStatus");
 
 let lastGeneratedChecklist = [];
 let lastGeneratedOptions = null;
 let lastInsights = [];
 let lastLicenseItems = [];
+let currentProgressKey = "";
+let currentProgressState = {
+  taskCompletion: {},
+  stepCompletion: {}
+};
+
+const storageKeys = {
+  form: "llamaha-checklist-form",
+  progressPrefix: "llamaha-checklist-progress"
+};
 
 const labelMap = {
   onboarding: "Onboarding",
@@ -82,6 +94,128 @@ function getFormOptions() {
     includeDocumentationTasks: formData.get("includeDocumentationTasks") === "on",
     includeSecurityReview: formData.get("includeSecurityReview") === "on",
     systems: formData.getAll("systems")
+  };
+}
+
+function loadStoredValue(key, fallback) {
+  try {
+    const rawValue = localStorage.getItem(key);
+    return rawValue ? JSON.parse(rawValue) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveStoredValue(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function removeStoredValue(key) {
+  try {
+    localStorage.removeItem(key);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function getOptionsSignature(options) {
+  return JSON.stringify({
+    ...options,
+    systems: [...options.systems].sort()
+  });
+}
+
+function getProgressStorageKey(options) {
+  return `${storageKeys.progressPrefix}:${getOptionsSignature(options)}`;
+}
+
+function setProgressStatus(message) {
+  if (progressStatus) {
+    progressStatus.textContent = message;
+  }
+}
+
+function saveFormState() {
+  const saved = saveStoredValue(storageKeys.form, getFormOptions());
+
+  if (!saved) {
+    setProgressStatus("Progress could not be saved in this browser.");
+  }
+}
+
+function restoreFormState() {
+  const savedState = loadStoredValue(storageKeys.form, null);
+
+  if (!savedState) {
+    return;
+  }
+
+  ["type", "environment", "accessProfile", "workstationProfile"].forEach(fieldName => {
+    const field = form.elements.namedItem(fieldName);
+
+    if (field && savedState[fieldName]) {
+      field.value = savedState[fieldName];
+    }
+  });
+
+  [
+    "includeManagerTasks",
+    "includeAssetTasks",
+    "includeLicenseTasks",
+    "includeDocumentationTasks",
+    "includeSecurityReview"
+  ].forEach(fieldName => {
+    const field = form.elements.namedItem(fieldName);
+
+    if (field) {
+      field.checked = Boolean(savedState[fieldName]);
+    }
+  });
+
+  const selectedSystems = new Set(savedState.systems ?? []);
+  form.querySelectorAll('input[name="systems"]').forEach(field => {
+    field.checked = selectedSystems.has(field.value);
+  });
+}
+
+function loadProgressState(options) {
+  currentProgressKey = getProgressStorageKey(options);
+  currentProgressState = loadStoredValue(currentProgressKey, {
+    taskCompletion: {},
+    stepCompletion: {}
+  });
+}
+
+function persistProgressState(message = "Checklist progress auto-saved in this browser.") {
+  if (!currentProgressKey) {
+    return;
+  }
+
+  const saved = saveStoredValue(currentProgressKey, currentProgressState);
+  setProgressStatus(saved ? message : "Progress could not be saved in this browser.");
+}
+
+function getTaskStepKey(taskId, index) {
+  return `${taskId}:${index}`;
+}
+
+function getProgressMetrics(tasks) {
+  const totalSteps = tasks.reduce((count, task) => count + task.steps.length, 0);
+  const completedSteps = tasks.reduce((count, task) => {
+    return count + task.steps.filter((step, index) => currentProgressState.stepCompletion[getTaskStepKey(task.id, index)]).length;
+  }, 0);
+  const completedTasks = tasks.filter(task => currentProgressState.taskCompletion[task.id]).length;
+
+  return {
+    completedTasks,
+    completedSteps,
+    totalSteps
   };
 }
 
@@ -208,6 +342,13 @@ function buildInsights(options) {
     });
   }
 
+  if (options.systems.includes("egnyte")) {
+    insights.push({
+      title: "Egnyte offboarding needs content ownership review",
+      text: "Check shared links, private folders, offline files, and user type changes so data access does not linger or disappear unexpectedly."
+    });
+  }
+
   if (!options.includeDocumentationTasks) {
     insights.push({
       title: "Internal record updates are excluded",
@@ -227,6 +368,7 @@ function buildInsights(options) {
 
 function renderSummary(tasks, options) {
   summaryChips.innerHTML = "";
+  const metrics = getProgressMetrics(tasks);
 
   const chips = [
     `${titleCase(options.type)} flow`,
@@ -234,7 +376,8 @@ function renderSummary(tasks, options) {
     options.accessProfile === "privileged" ? "Privileged access" : "Standard access",
     `${getWorkstationLabel(options.workstationProfile)} profile`,
     `${options.systems.length} platforms`,
-    `${tasks.length} tasks`
+    `${tasks.length} tasks`,
+    `${metrics.completedTasks} completed`
   ];
 
   chips.forEach(label => {
@@ -247,9 +390,12 @@ function renderSummary(tasks, options) {
 
 function renderOverview(tasks, options, licenses) {
   overviewGrid.innerHTML = "";
+  const metrics = getProgressMetrics(tasks);
 
   const items = [
     { label: "Runbook Tasks", value: tasks.length },
+    { label: "Completed Tasks", value: metrics.completedTasks },
+    { label: "Completed Steps", value: `${metrics.completedSteps}/${metrics.totalSteps}` },
     { label: "Critical Items", value: tasks.filter(task => task.impact === "critical").length },
     { label: "License Touchpoints", value: licenses.length },
     { label: "Platforms Selected", value: options.systems.length }
@@ -330,6 +476,7 @@ function renderChecklist(tasks, options) {
   lastGeneratedOptions = options;
   lastLicenseItems = licenses;
   lastInsights = insights;
+  loadProgressState(options);
 
   renderSummary(tasks, options);
   renderOverview(tasks, options, licenses);
@@ -371,6 +518,7 @@ function renderChecklist(tasks, options) {
     categoryTasks.forEach(task => {
       const article = document.createElement("article");
       article.className = "task-card";
+      article.dataset.taskId = task.id;
 
       const header = document.createElement("div");
       header.className = "task-card-title";
@@ -387,7 +535,29 @@ function renderChecklist(tasks, options) {
       impact.className = `impact-pill ${impactMeta[task.impact]?.className ?? "impact-normal"}`;
       impact.textContent = impactMeta[task.impact]?.label ?? "Standard";
 
-      header.append(titleBlock, impact);
+      const taskTools = document.createElement("div");
+      taskTools.className = "task-card-tools";
+
+      const metrics = document.createElement("span");
+      metrics.className = "task-progress-label";
+      metrics.textContent = `${task.steps.filter((step, index) => currentProgressState.stepCompletion[getTaskStepKey(task.id, index)]).length}/${task.steps.length} steps complete`;
+
+      const taskToggle = document.createElement("label");
+      taskToggle.className = "task-toggle";
+
+      const taskCheckbox = document.createElement("input");
+      taskCheckbox.type = "checkbox";
+      taskCheckbox.className = "task-complete-toggle";
+      taskCheckbox.dataset.kind = "task";
+      taskCheckbox.dataset.taskId = task.id;
+      taskCheckbox.checked = Boolean(currentProgressState.taskCompletion[task.id]);
+
+      const taskToggleText = document.createElement("span");
+      taskToggleText.textContent = "Done";
+
+      taskToggle.append(taskCheckbox, taskToggleText);
+      taskTools.append(metrics, taskToggle, impact);
+      header.append(titleBlock, taskTools);
 
       const metaRow = document.createElement("div");
       metaRow.className = "task-meta";
@@ -401,13 +571,41 @@ function renderChecklist(tasks, options) {
       });
 
       const list = document.createElement("ol");
+      list.className = "task-step-list";
+
       task.steps.forEach(step => {
         const item = document.createElement("li");
-        item.textContent = step;
+        item.className = "task-step-item";
+
+        const index = list.childElementCount;
+        const stepCheckbox = document.createElement("input");
+        stepCheckbox.type = "checkbox";
+        stepCheckbox.className = "task-step-checkbox";
+        stepCheckbox.dataset.kind = "step";
+        stepCheckbox.dataset.taskId = task.id;
+        stepCheckbox.dataset.stepIndex = `${index}`;
+        stepCheckbox.checked = Boolean(currentProgressState.stepCompletion[getTaskStepKey(task.id, index)]);
+
+        const text = document.createElement("span");
+        text.textContent = step;
+
+        const label = document.createElement("label");
+        label.className = "task-step-label";
+        label.append(stepCheckbox, text);
+
+        if (stepCheckbox.checked) {
+          item.classList.add("is-checked");
+        }
+
+        item.appendChild(label);
         list.appendChild(item);
       });
 
       article.append(header, metaRow, list);
+
+      if (taskCheckbox.checked) {
+        article.classList.add("is-complete");
+      }
 
       if (task.completion?.length) {
         const completion = document.createElement("div");
@@ -463,11 +661,15 @@ function buildPlainTextChecklist(tasks, options, insights, licenses) {
     lines.push(categoryMeta[category]?.label ?? titleCase(category));
 
     categoryTasks.forEach(task => {
-      lines.push(`- ${task.title}`);
+      const taskChecked = currentProgressState.taskCompletion[task.id] ? "[x]" : "[ ]";
+      lines.push(`- ${taskChecked} ${task.title}`);
       if (task.summary) {
         lines.push(`  Summary: ${task.summary}`);
       }
-      task.steps.forEach(step => lines.push(`  * ${step}`));
+      task.steps.forEach((step, index) => {
+        const stepChecked = currentProgressState.stepCompletion[getTaskStepKey(task.id, index)] ? "[x]" : "[ ]";
+        lines.push(`  * ${stepChecked} ${step}`);
+      });
       (task.completion ?? []).forEach(entry => lines.push(`  Proof: ${entry}`));
     });
 
@@ -480,7 +682,85 @@ function buildPlainTextChecklist(tasks, options, insights, licenses) {
 function runGeneration() {
   const options = getFormOptions();
   const checklist = generateChecklist(options);
+  saveFormState();
   renderChecklist(checklist, options);
+}
+
+function refreshTaskCard(taskId) {
+  const card = output.querySelector(`.task-card[data-task-id="${taskId}"]`);
+  const task = lastGeneratedChecklist.find(item => item.id === taskId);
+
+  if (!card || !task) {
+    return;
+  }
+
+  const completedSteps = task.steps.filter((step, index) => currentProgressState.stepCompletion[getTaskStepKey(task.id, index)]).length;
+  const allStepsComplete = completedSteps === task.steps.length;
+
+  currentProgressState.taskCompletion[task.id] = allStepsComplete;
+  card.classList.toggle("is-complete", allStepsComplete);
+
+  const metrics = card.querySelector(".task-progress-label");
+  if (metrics) {
+    metrics.textContent = `${completedSteps}/${task.steps.length} steps complete`;
+  }
+
+  const taskCheckbox = card.querySelector(".task-complete-toggle");
+  if (taskCheckbox) {
+    taskCheckbox.checked = allStepsComplete;
+  }
+
+  card.querySelectorAll(".task-step-item").forEach((item, index) => {
+    item.classList.toggle("is-checked", Boolean(currentProgressState.stepCompletion[getTaskStepKey(task.id, index)]));
+  });
+}
+
+function handleProgressChange(target) {
+  const taskId = target.dataset.taskId;
+
+  if (!taskId) {
+    return;
+  }
+
+  if (target.dataset.kind === "task") {
+    const task = lastGeneratedChecklist.find(item => item.id === taskId);
+
+    if (!task) {
+      return;
+    }
+
+    currentProgressState.taskCompletion[taskId] = target.checked;
+
+    task.steps.forEach((step, index) => {
+      currentProgressState.stepCompletion[getTaskStepKey(taskId, index)] = target.checked;
+    });
+
+    const card = output.querySelector(`.task-card[data-task-id="${taskId}"]`);
+    if (card) {
+      card.classList.toggle("is-complete", target.checked);
+      card.querySelectorAll(".task-step-checkbox").forEach(checkbox => {
+        checkbox.checked = target.checked;
+      });
+      card.querySelectorAll(".task-step-item").forEach(item => {
+        item.classList.toggle("is-checked", target.checked);
+      });
+
+      const metrics = card.querySelector(".task-progress-label");
+      if (metrics) {
+        metrics.textContent = target.checked ? `${task.steps.length}/${task.steps.length} steps complete` : `0/${task.steps.length} steps complete`;
+      }
+    }
+  }
+
+  if (target.dataset.kind === "step") {
+    const stepIndex = Number.parseInt(target.dataset.stepIndex, 10);
+    currentProgressState.stepCompletion[getTaskStepKey(taskId, stepIndex)] = target.checked;
+    refreshTaskCard(taskId);
+  }
+
+  persistProgressState();
+  renderSummary(lastGeneratedChecklist, lastGeneratedOptions);
+  renderOverview(lastGeneratedChecklist, lastGeneratedOptions, lastLicenseItems);
 }
 
 async function copyChecklist() {
@@ -512,6 +792,18 @@ form.addEventListener("change", () => {
   runGeneration();
 });
 
+output.addEventListener("change", event => {
+  const target = event.target;
+
+  if (!(target instanceof HTMLInputElement)) {
+    return;
+  }
+
+  if (target.matches(".task-complete-toggle, .task-step-checkbox")) {
+    handleProgressChange(target);
+  }
+});
+
 copyBtn.addEventListener("click", () => {
   copyChecklist().catch(() => {
     copyBtn.textContent = "Copy failed";
@@ -526,4 +818,25 @@ printBtn.addEventListener("click", () => {
   window.print();
 });
 
+if (resetProgressBtn) {
+  resetProgressBtn.addEventListener("click", () => {
+    if (!currentProgressKey) {
+      return;
+    }
+
+    removeStoredValue(currentProgressKey);
+    currentProgressState = {
+      taskCompletion: {},
+      stepCompletion: {}
+    };
+
+    if (lastGeneratedOptions) {
+      renderChecklist(lastGeneratedChecklist, lastGeneratedOptions);
+    }
+
+    setProgressStatus("Saved progress cleared for this runbook.");
+  });
+}
+
+restoreFormState();
 runGeneration();

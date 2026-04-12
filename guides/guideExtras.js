@@ -138,6 +138,20 @@ export const vendorFaqs = {
       q: "Does uninstalling QuickBooks remove all user risk?",
       a: "No. Offboarding still needs the right company-file access removal, user-role cleanup, and confirmation that backups or hosted sessions are handed off correctly."
     }
+  ],
+  egnyte: [
+    {
+      q: "Which Egnyte user type should we normally assign?",
+      a: "Egnyte's admin guidance distinguishes Admin, Power User, and Standard User roles. Employees who need normal internal file access are commonly Power Users, while Standard Users are better suited to limited external collaboration."
+    },
+    {
+      q: "Do users need the Desktop App for every Egnyte workflow?",
+      a: "No. Many workflows can stay in the Web UI, but users who need mapped-drive style access, offline files, or Windows integration usually need the Desktop App."
+    },
+    {
+      q: "What is the main offboarding risk in Egnyte?",
+      a: "It is often ownership and access, not just the account itself. Shared links, private folders, and offline files can survive longer than expected if they are not reviewed."
+    }
   ]
 };
 
@@ -281,6 +295,20 @@ export const vendorInstallIssues = {
       issue: "QuickBooks needs a clean reinstall",
       fix: "Use Intuit's clean-install guidance through the Tool Hub rather than deleting program folders by hand, and document the exact year and edition being reinstalled."
     }
+  ],
+  egnyte: [
+    {
+      issue: "Desktop App deployment does not mount the expected drive or tenant",
+      fix: "Egnyte's managed deployment guidance allows predefining domain, label, SSO, and drive-letter settings. Recheck those parameters before assuming the installer itself is broken."
+    },
+    {
+      issue: "Desktop App install or uninstall leaves stale sync state behind",
+      fix: "Review offline files and cached content before removal, then use Egnyte's supported MSI or managed-uninstall path instead of deleting folders by hand."
+    },
+    {
+      issue: "User cannot sign in after rollout",
+      fix: "Validate whether the account was created with the correct user type, SSO path, and folder permissions before troubleshooting the desktop client alone."
+    }
   ]
 };
 
@@ -423,6 +451,20 @@ export const vendorUsageIssues = {
     {
       issue: "PDF or print workflows fail",
       fix: "Intuit includes PDF and print repair paths inside Tool Hub. Treat printer mapping and PDF drivers as part of the QuickBooks support workflow, not a separate afterthought."
+    }
+  ],
+  egnyte: [
+    {
+      issue: "User can sign in but cannot see the expected folders",
+      fix: "Review group membership, folder permissions, and whether the user was created with the correct Egnyte role before changing the desktop app."
+    },
+    {
+      issue: "Offline files or sync behavior look wrong",
+      fix: "Check whether the folder was configured for offline use intentionally and confirm the workstation still has the correct Egnyte Desktop App configuration."
+    },
+    {
+      issue: "Departed-user content is hard to find after offboarding",
+      fix: "Use Egnyte ownership, user details, and admin search views early in the offboarding instead of waiting until the account is deleted and the content path becomes unclear."
     }
   ]
 };
