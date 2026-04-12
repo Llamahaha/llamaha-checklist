@@ -114,6 +114,18 @@ body {
   align-items: center;
 }
 
+.quick-search-card {
+  display: grid;
+  gap: 16px;
+}
+
+.embedded-search-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 16px;
+  align-items: center;
+}
+
 .search-results {
   display: grid;
   gap: 16px;
@@ -929,6 +941,7 @@ input[type="checkbox"] {
   .m365-lane-grid,
   .issue-grid,
   .search-form,
+  .embedded-search-form,
   .decision-layout,
   .tracker-grid,
   .tracker-field-grid,
