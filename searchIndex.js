@@ -1,126 +1,101 @@
 import { taskLibrary } from "./data/taskLibrary.js";
-import { applicationCatalog } from "./guides/applicationCatalog.js";
+import { getVendorApplications } from "./guides/applicationCatalog.js";
+import { getAppGuideContent } from "./guides/appGuideContent.js";
 import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { vendorFaqs, vendorInstallIssues, vendorUsageIssues } from "./guides/guideExtras.js";
 import {
   computerIssueSections,
   crossAppIssuePatterns,
   installUninstallPatterns,
-  matrixResource,
   microsoftIssueSections
 } from "./supportData.js";
-import {
-  emergencyPlaybooks,
-  handoffTemplates,
-  snippetLibrary
-} from "./operationsData.js";
+import { emergencyPlaybooks } from "./operationsData.js";
+import { handoffTemplates, snippetLibrary } from "./resourceLibrary.js";
 
-function entry(title, text, url, category, keywords = "") {
-  return { title, text, url, category, keywords };
+function entry(title, text, url, category, typeLabel, keywords = "") {
+  return { title, text, url, category, typeLabel, keywords };
 }
 
 export function buildSearchIndex() {
   const entries = [
-    entry("Checklist Generator", "Build onboarding and offboarding runbooks with saved local progress.", "checklist.html", "library", "onboarding offboarding checklist runbook"),
-    entry("Application Licensing", "Vendor-specific licensing workflows and recovery notes.", "app-licensing.html", "library", "licensing seats subscriptions"),
-    entry("Install / Uninstall Guides", "Install, uninstall, cleanup, and FAQ guidance.", "install-uninstall.html", "library", "install uninstall cleanup"),
-    entry("Application Issues and Fixes", "Cross-app issue patterns plus vendor-specific fixes.", "application-issues.html", "library", "troubleshooting faq common errors"),
-    entry("Microsoft App Issues", "Microsoft 365 app troubleshooting guidance.", "microsoft-issues.html", "microsoft", "word excel outlook teams onedrive sharepoint mfa"),
-    entry("Computer Issues", "Common endpoint troubleshooting guidance.", "computer-issues.html", "computer", "printers vpn network disk space windows"),
-    entry("Emergency Playbooks", "First-response incident playbooks for urgent support and security events.", "emergency-playbooks.html", "playbook", "incident response"),
-    entry("Customer Handoff Templates", "Copy-ready customer completion and update templates.", "handoff-templates.html", "template", "closure notes handoff"),
-    entry("Script and Snippet Library", "Safe, reusable commands for common troubleshooting workflows.", "snippets.html", "snippet", "commands powershell snippets"),
-    entry(matrixResource.title, matrixResource.text, matrixResource.url, "external", "microsoft 365 matrix licensing")
+    entry("Home", "Operations hub for guides, snippets, templates, playbooks, and checklists.", "index.html", "hub", "Hub Page", "home hub"),
+    entry("Vendor Guides", "Vendor-wide guide hub with app index pages and breadcrumbs into dedicated app guides.", "vendor-guides.html", "vendorGuide", "Vendor Guide Hub", "vendor guides applications"),
+    entry("Checklist Generator", "Build onboarding and offboarding runbooks with saved local progress.", "checklist.html", "checklist", "Checklist", "onboarding offboarding checklist runbook"),
+    entry("Emergency Playbooks", "First-response incident playbooks for urgent support and security events.", "emergency-playbooks.html", "playbook", "Playbook", "incident response ransomware compromise"),
+    entry("Snippet Library", "Grouped MSP-ready snippets for Microsoft 365, AD, networking, Windows repair, software cleanup, and endpoint checks.", "snippets.html", "snippet", "Snippet Library", "powershell snippets commands"),
+    entry("Template Library", "Customer-facing and internal MSP templates by use case.", "handoff-templates.html", "template", "Template Library", "handoff closure outage onboarding"),
+    entry("Application Licensing", "Vendor-specific licensing workflows and recovery notes.", "app-licensing.html", "hub", "Library Page", "licensing seats subscriptions"),
+    entry("Install / Uninstall Guides", "Install, uninstall, cleanup, and FAQ guidance.", "install-uninstall.html", "hub", "Library Page", "install uninstall cleanup"),
+    entry("Application Issues and Fixes", "Cross-app issue patterns plus vendor-specific fixes.", "application-issues.html", "issueGuide", "Issue Guide", "troubleshooting faq errors"),
+    entry("Microsoft App Issues", "Microsoft 365 app troubleshooting guidance.", "microsoft-issues.html", "issueGuide", "Issue Guide", "outlook teams onedrive sharepoint mfa")
   ];
 
   taskLibrary.forEach(task => {
-    entries.push(
-      entry(
-        task.title,
-        `${task.summary} ${task.steps.join(" ")}`,
-        "checklist.html",
-        "checklist",
-        `${task.type} ${task.category} ${(task.systems ?? []).join(" ")}`
-      )
-    );
+    entries.push(entry(task.title, `${task.summary} ${task.steps.join(" ")}`, "checklist.html", "checklist", "Checklist Task", `${task.type} ${task.category} ${(task.systems ?? []).join(" ")}`));
   });
 
-  vendorOrder.forEach(key => {
-    const guide = vendorGuides[key];
-    entries.push(entry(guide.title, guide.summary, `guides/${key}.html`, "vendor", guide.products.join(" ")));
+  vendorOrder.forEach(vendorSlug => {
+    const vendor = vendorGuides[vendorSlug];
+    entries.push(entry(vendor.title, `${vendor.summary} ${vendor.overview}`, `guides/${vendorSlug}.html`, "vendorGuide", "Vendor Guide", vendor.products.join(" ")));
 
-    (applicationCatalog[key] ?? []).forEach(app => {
+    getVendorApplications(vendorSlug).forEach(app => {
+      const extra = getAppGuideContent(vendorSlug, app.slug);
       entries.push(
         entry(
-          `${guide.title}: ${app.name}`,
-          `${app.focus} ${app.licensing} ${app.install} ${app.uninstall}`,
-          `guides/${key}.html#application-catalog`,
-          "application",
-          key
+          app.name,
+          `${app.focus} ${app.licensing} ${app.install} ${app.uninstall} ${(extra.highlights ?? []).join(" ")} ${(extra.askFirst ?? []).join(" ")} ${(extra.supportCheckpoints ?? []).join(" ")} ${(extra.escalationNotes ?? []).join(" ")}`,
+          `guides/${vendorSlug}/${app.slug}.html`,
+          "appGuide",
+          "App Guide",
+          `${vendorSlug} ${app.name}`
         )
       );
     });
 
-    (vendorFaqs[key] ?? []).forEach(item => {
-      entries.push(entry(`${guide.title} FAQ`, `${item.q} ${item.a}`, `guides/${key}.html#faq`, "vendor", key));
+    (vendorFaqs[vendorSlug] ?? []).forEach(item => {
+      entries.push(entry(`${vendor.title} FAQ`, `${item.q} ${item.a}`, `guides/${vendorSlug}.html#shared-notes`, "vendorGuide", "Vendor Guide", vendorSlug));
     });
 
-    (vendorInstallIssues[key] ?? []).forEach(item => {
-      entries.push(entry(`${guide.title} install issue`, `${item.issue} ${item.fix}`, `guides/${key}.html#install-issues`, "vendor", key));
+    (vendorInstallIssues[vendorSlug] ?? []).forEach(item => {
+      entries.push(entry(`${vendor.title} install issue`, `${item.issue} ${item.fix}`, `guides/${vendorSlug}.html#common-patterns`, "issueGuide", "Issue Guide", vendorSlug));
     });
 
-    (vendorUsageIssues[key] ?? []).forEach(item => {
-      entries.push(entry(`${guide.title} common fix`, `${item.issue} ${item.fix}`, `guides/${key}.html#common-fixes`, "vendor", key));
+    (vendorUsageIssues[vendorSlug] ?? []).forEach(item => {
+      entries.push(entry(`${vendor.title} common fix`, `${item.issue} ${item.fix}`, `guides/${vendorSlug}.html#common-patterns`, "issueGuide", "Issue Guide", vendorSlug));
     });
   });
 
   microsoftIssueSections.forEach(section => {
     section.items.forEach(item => {
-      entries.push(entry(item.title, `${section.title} ${item.text} ${item.fixes.join(" ")}`, "microsoft-issues.html", "microsoft", "m365 office teams onedrive sharepoint"));
+      entries.push(entry(item.title, `${section.title} ${item.text} ${item.fixes.join(" ")}`, "microsoft-issues.html", "issueGuide", "Issue Guide", "m365 office microsoft"));
     });
   });
 
   computerIssueSections.forEach(section => {
     section.items.forEach(item => {
-      entries.push(entry(item.title, `${section.title} ${item.text} ${item.fixes.join(" ")}`, "computer-issues.html", "computer", "windows endpoint network printer vpn"));
+      entries.push(entry(item.title, `${section.title} ${item.text} ${item.fixes.join(" ")}`, "computer-issues.html", "issueGuide", "Issue Guide", "windows endpoint network printer vpn"));
     });
   });
 
   crossAppIssuePatterns.forEach(item => {
-    entries.push(entry(item.title, `${item.text} ${item.fixes.join(" ")}`, "application-issues.html", "application", "cross app issues"));
+    entries.push(entry(item.title, `${item.text} ${item.fixes.join(" ")}`, "application-issues.html", "issueGuide", "Issue Guide", "cross app issues"));
   });
 
   installUninstallPatterns.forEach(item => {
-    entries.push(entry(item.title, `${item.text} ${item.fixes.join(" ")}`, "install-uninstall.html", "library", "install uninstall cleanup"));
+    entries.push(entry(item.title, `${item.text} ${item.fixes.join(" ")}`, "install-uninstall.html", "issueGuide", "Issue Guide", "install uninstall cleanup"));
   });
 
   emergencyPlaybooks.forEach(playbook => {
-    entries.push(
-      entry(
-        playbook.title,
-        `${playbook.triggers.join(" ")} ${playbook.first15.join(" ")} ${playbook.containment.join(" ")}`,
-        `emergency-playbooks.html#${playbook.id}`,
-        "playbook",
-        "incident emergency response"
-      )
-    );
+    entries.push(entry(playbook.title, `${playbook.triggers.join(" ")} ${playbook.first15.join(" ")}`, `emergency-playbooks.html#${playbook.id}`, "playbook", "Playbook", "incident emergency response"));
   });
 
   handoffTemplates.forEach(template => {
-    entries.push(entry(template.title, `${template.useCase} ${template.template}`, `handoff-templates.html#${template.id}`, "template", "closure handoff customer email"));
+    entries.push(entry(template.title, `${template.useCase} ${template.template}`, `handoff-templates.html#${template.id}`, "template", "Template", template.category));
   });
 
   snippetLibrary.forEach(group => {
     group.snippets.forEach(snippet => {
-      entries.push(
-        entry(
-          snippet.title,
-          `${group.category} ${snippet.notes} ${snippet.caution} ${snippet.command}`,
-          "snippets.html",
-          "snippet",
-          `${group.category} ${snippet.shell}`
-        )
-      );
+      entries.push(entry(snippet.title, `${group.category} ${snippet.purpose} ${snippet.whenToUse} ${snippet.command}`, `snippets.html#${snippet.id}`, "snippet", "Snippet", group.category));
     });
   });
 

@@ -18,12 +18,8 @@
           <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
             <p class="section-kicker">IT Operations Hub</p>
-            <h1>Checklists, app guidance, and troubleshooting in one place</h1>
-            <p class="builder-copy">
-              Use this page as the launcher for onboarding and offboarding runbooks, vendor licensing references,
-              install and uninstall guidance, common application troubleshooting, common endpoint fixes, emergency playbooks,
-              handoff templates, snippets, and the live Microsoft 365 feature matrix.
-            </p>
+            <h1>Operationally dense guides, snippets, templates, and checklists</h1>
+            <p class="builder-copy">Use the hub to jump into vendor guides, dedicated application pages, grouped script snippets, copy-ready templates, checklist generation, troubleshooting references, and emergency playbooks without digging through giant pages.</p>
           </div>
         </div>
       </section>
@@ -35,91 +31,30 @@
             <h2>Find the right page before you jump in</h2>
           </div>
         </div>
-        <p class="hub-section-copy">
-          Search vendor guides, issue pages, playbooks, templates, snippets, and checklist tasks from the main landing page.
-        </p>
+        <p class="hub-section-copy">Search vendor guides, app guides, snippets, templates, issue references, playbooks, and checklist tasks from the landing page.</p>
         <form class="embedded-search-form" action="search.html" method="get">
-          <input
-            type="search"
-            name="q"
-            class="search-input"
-            placeholder="Search Teams, Egnyte, printers, onboarding, ransomware..."
-            aria-label="Search the operations library"
-          >
+          <input type="search" name="q" class="search-input" placeholder="Search Outlook, ProjectWise, shared mailbox, AutoCAD, printer spooler..." aria-label="Search the operations library">
           <button type="submit" class="primary-btn">Search Library</button>
         </form>
       </section>
 
       <section class="hub-quick-grid" aria-label="Main sections">
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Onboarding / Offboarding Checklist Generator</h2>
-          <p>Generate the runbook, check off completed tasks and steps, and keep saved progress in the browser for each setup.</p>
-          <a class="hub-link" href="checklist.html">Open generator</a>
-        </article>
+        <article class="hub-card"><p class="section-kicker">Section</p><h2>Vendor Guides</h2><p>Start with vendor-wide notes, then drill into dedicated application pages for deeper support guidance.</p><a class="hub-link" href="vendor-guides.html">Open vendor guides</a></article>
+        <article class="hub-card"><p class="section-kicker">Section</p><h2>Checklist Generator</h2><p>Generate onboarding and offboarding runbooks with saved browser-side progress.</p><a class="hub-link" href="checklist.html">Open generator</a></article>
+        <article class="hub-card"><p class="section-kicker">Section</p><h2>Snippet Library</h2><p>Use grouped MSP-ready snippets with purpose, prerequisites, expected results, and caution notes.</p><a class="hub-link" href="snippets.html">Open snippet library</a></article>
+        <article class="hub-card"><p class="section-kicker">Section</p><h2>Template Library</h2><p>Grab customer-facing and internal templates for onboarding, outages, escalations, maintenance, and closure.</p><a class="hub-link" href="handoff-templates.html">Open templates</a></article>
+        <article class="hub-card"><p class="section-kicker">Section</p><h2>Application Licensing</h2><p>Review vendor-wide licensing, entitlement, and seat-recovery notes.</p><a class="hub-link" href="app-licensing.html">Open licensing library</a></article>
+        <article class="hub-card"><p class="section-kicker">Section</p><h2>Issue Libraries</h2><p>Use the Microsoft, application, and endpoint issue pages for quick pattern matching during live triage.</p><a class="hub-link" href="application-issues.html">Open issue guides</a></article>
+      </section>
 
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Application Licensing</h2>
-          <p>Open the licensing library for vendor-specific seat assignment, recovery steps, supported products, and direct links into each detailed guide.</p>
-          <a class="hub-link" href="app-licensing.html">Open licensing library</a>
-        </article>
+      <section class="results-card hub-section">
+        <div class="results-header"><div><p class="section-kicker">Most Used</p><h2>Common launch points</h2></div></div>
+        <div id="mostUsedGrid" class="hub-quick-grid"></div>
+      </section>
 
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Install / Uninstall Guides</h2>
-          <p>Use the lifecycle page for install steps, uninstall cleanup, repeated deployment failures, and vendor FAQ notes.</p>
-          <a class="hub-link" href="install-uninstall.html">Open lifecycle guides</a>
-        </article>
-
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Application FAQ, Common Errors, and Fixes</h2>
-          <p>Use the troubleshooting library for cross-app patterns plus vendor-specific FAQ and common-fix notes.</p>
-          <a class="hub-link" href="application-issues.html">Open troubleshooting library</a>
-        </article>
-
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Microsoft 365 Plan Matrix</h2>
-          <p>Open the live M365 Maps matrix when you need to compare apps, mailbox limits, Entra features, security, or compliance capabilities.</p>
-          <a class="hub-link" href="https://m365maps.com/matrix.htm" target="_blank" rel="noreferrer">Open M365 matrix</a>
-        </article>
-
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Common Microsoft App Issues</h2>
-          <p>Jump into Microsoft-focused issue guides for Word, Excel, Outlook, Teams, OneDrive, SharePoint, and MFA with Authenticator.</p>
-          <a class="hub-link" href="microsoft-issues.html">Open Microsoft issue library</a>
-        </article>
-
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Common Computer Issues</h2>
-          <p>Use the endpoint issue page for share drives, printers, VPN and network problems, disk space, performance, updates, and Windows sign-in issues.</p>
-          <a class="hub-link" href="computer-issues.html">Open endpoint issue library</a>
-        </article>
-
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Emergency Playbooks</h2>
-          <p>Use structured first-response playbooks for compromised accounts, urgent offboarding, lost devices, phishing, MFA lockouts, and ransomware events.</p>
-          <a class="hub-link" href="emergency-playbooks.html">Open playbooks</a>
-        </article>
-
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Customer Handoff / Closure Templates</h2>
-          <p>Grab clean communication templates for completed work, pending customer action, vendor escalation, and monitoring follow-up notes.</p>
-          <a class="hub-link" href="handoff-templates.html">Open templates</a>
-        </article>
-
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Script / Snippet Library</h2>
-          <p>Keep safe, general-purpose commands handy for workstation checks, Microsoft 365 triage, printer cleanup, and network diagnostics.</p>
-          <a class="hub-link" href="snippets.html">Open snippet library</a>
-        </article>
+      <section class="results-card hub-section">
+        <div class="results-header"><div><p class="section-kicker">Recently Updated</p><h2>Fresh content worth checking</h2></div></div>
+        <div id="recentGrid" class="hub-quick-grid"></div>
       </section>
 
       <section class="results-card hub-section">
@@ -127,28 +62,20 @@
           <div class="hub-note-card contact-panel">
             <p class="section-kicker">Suggestions</p>
             <h3>Suggest changes or additions</h3>
-            <p>
-              If you want something added, corrected, or expanded in the site, send your suggestions to <strong>admin@llamaha.com</strong>
-              and include the page or workflow you want updated.
-            </p>
+            <p>If you want something added, corrected, or expanded in the site, send your suggestions to <strong>admin@llamaha.com</strong> and include the page or workflow you want updated.</p>
             <a class="contact-btn" href="mailto:admin@llamaha.com?subject=Llamaha%20Site%20Suggestion%20or%20Addition">Send a suggestion</a>
           </div>
-
           <div class="hub-note-card contact-panel support-panel">
             <p class="section-kicker">Support</p>
             <h3>Buy me a coffee</h3>
-            <p>
-              If the site saves you time and you want to support more additions, you can visit <strong>buymeacoffee.com/llamaha</strong>
-              or scan the QR code below.
-            </p>
-            <a class="qr-link" href="https://buymeacoffee.com/llamaha" target="_blank" rel="noreferrer">
-              <img class="qr-image" src="assets/buymeacoffee-qr.png" alt="Buy Me a Coffee QR code for llamaha">
-            </a>
+            <p>If the site saves you time and you want to support more additions, you can visit <strong>buymeacoffee.com/llamaha</strong> or scan the QR code below.</p>
+            <a class="qr-link" href="https://buymeacoffee.com/llamaha" target="_blank" rel="noreferrer"><img class="qr-image" src="assets/buymeacoffee-qr.png" alt="Buy Me a Coffee QR code for llamaha"></a>
             <a class="contact-btn" href="https://buymeacoffee.com/llamaha" target="_blank" rel="noreferrer">Open Buy Me a Coffee</a>
           </div>
         </div>
       </section>
     </main>
   </div>
+  <script type="module" src="hub.js"></script>
 </body>
 </html>

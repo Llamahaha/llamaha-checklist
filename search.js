@@ -8,40 +8,18 @@ const resultCount = document.getElementById("resultCount");
 const searchResults = document.getElementById("searchResults");
 
 const index = buildSearchIndex();
-const categoryLabels = {
-  library: "Library Page",
-  checklist: "Checklist Task",
-  vendor: "Vendor Guide",
-  application: "Application",
-  microsoft: "Microsoft Issue",
-  computer: "Computer Issue",
-  playbook: "Emergency Playbook",
-  template: "Handoff Template",
-  snippet: "Snippet",
-  external: "External Reference",
-  workflow: "Workflow"
-};
 
 function scoreResult(item, query) {
   const haystack = `${item.title} ${item.text} ${item.keywords}`.toLowerCase();
   const title = item.title.toLowerCase();
   let score = 0;
 
-  if (title.includes(query)) {
-    score += 6;
-  }
-
-  if (haystack.includes(query)) {
-    score += 3;
-  }
+  if (title.includes(query)) score += 6;
+  if (haystack.includes(query)) score += 3;
 
   query.split(/\s+/).filter(Boolean).forEach(term => {
-    if (title.includes(term)) {
-      score += 3;
-    }
-    if (haystack.includes(term)) {
-      score += 1;
-    }
+    if (title.includes(term)) score += 3;
+    if (haystack.includes(term)) score += 1;
   });
 
   return score;
@@ -53,7 +31,7 @@ function renderResults(query = "", category = "all") {
 
   if (!normalizedQuery) {
     resultsLabel.textContent = "Start with a search term";
-    resultCount.textContent = "Try product names, issue symptoms, app names, or process terms.";
+    resultCount.textContent = "Try product names, symptoms, template scenarios, or admin tasks.";
     return;
   }
 
@@ -63,13 +41,13 @@ function renderResults(query = "", category = "all") {
     .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
 
-  resultsLabel.textContent = `Results for "${query}"`;
+  resultsLabel.textContent = `Results for \"${query}\"`;
   resultCount.textContent = `${matches.length} result${matches.length === 1 ? "" : "s"} found`;
 
   if (!matches.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "No matching results yet. Try a broader product name, issue symptom, or process term.";
+    empty.textContent = "No matching results yet. Try a broader app name, symptom, or workflow term.";
     searchResults.appendChild(empty);
     return;
   }
@@ -83,7 +61,7 @@ function renderResults(query = "", category = "all") {
 
     const meta = document.createElement("p");
     meta.className = "result-meta";
-    meta.textContent = `Category: ${categoryLabels[item.category] ?? item.category}`;
+    meta.textContent = item.typeLabel;
 
     const text = document.createElement("p");
     text.textContent = item.text;
@@ -92,7 +70,6 @@ function renderResults(query = "", category = "all") {
     link.className = "hub-link";
     link.href = item.url;
     link.textContent = "Open result";
-
     if (item.url.startsWith("http")) {
       link.target = "_blank";
       link.rel = "noreferrer";
@@ -117,17 +94,9 @@ searchForm.addEventListener("submit", event => {
   const query = searchInput.value.trim();
   const category = searchCategory.value;
   const params = new URLSearchParams();
-
-  if (query) {
-    params.set("q", query);
-  }
-
-  if (category !== "all") {
-    params.set("category", category);
-  }
-
-  const nextUrl = `${window.location.pathname}${params.toString() ? `?${params}` : ""}`;
-  window.history.replaceState({}, "", nextUrl);
+  if (query) params.set("q", query);
+  if (category !== "all") params.set("category", category);
+  window.history.replaceState({}, "", `${window.location.pathname}${params.toString() ? `?${params}` : ""}`);
   renderResults(query, category);
 });
 

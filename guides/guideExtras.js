@@ -1,4 +1,18 @@
 export const vendorFaqs = {
+  microsoft: [
+    {
+      q: "Should we troubleshoot Outlook or Teams locally before checking the tenant?",
+      a: "No. Prove the user is in the right tenant, still licensed, and healthy in the browser before you rebuild the desktop app."
+    },
+    {
+      q: "Why do open-in-app and sync problems keep crossing over?",
+      a: "Because SharePoint, OneDrive, Office sign-in, and browser trust all participate in the same workflow. Treat them as one chain."
+    },
+    {
+      q: "When should we reset MFA versus just helping the user sign in again?",
+      a: "Only after confirming the issue is not the wrong account, wrong tenant, notification permissions, or a stale prompt path."
+    }
+  ],
   autodesk: [
     {
       q: "Does uninstalling Autodesk free the license seat?",
@@ -156,6 +170,16 @@ export const vendorFaqs = {
 };
 
 export const vendorInstallIssues = {
+  microsoft: [
+    {
+      issue: "Office or Teams installs successfully but sign-in or activation still fails",
+      fix: "Confirm license assignment, usage location, tenant context, and OWA or browser access before running Office repair."
+    },
+    {
+      issue: "OneDrive or SharePoint open-in-app behavior breaks after a workstation refresh",
+      fix: "Check browser trust, Office sign-in, default associations, and whether the user is in the right tenant before resetting local sync state."
+    }
+  ],
   autodesk: [
     {
       issue: "Installer extracts but fails, rolls back, or stalls",
@@ -313,6 +337,20 @@ export const vendorInstallIssues = {
 };
 
 export const vendorUsageIssues = {
+  microsoft: [
+    {
+      issue: "The user is signed in but sees the wrong tenant or missing org data",
+      fix: "Compare browser and desktop behavior, then sign out of the wrong tenant context before treating it as an app reinstall issue."
+    },
+    {
+      issue: "OneDrive or SharePoint appears broken only on one workstation",
+      fix: "Confirm browser truth, path hygiene, and local sync roots before escalating to the tenant or wiping the profile."
+    },
+    {
+      issue: "Outlook prompts repeatedly after MFA or password changes",
+      fix: "Verify OWA first, then clear stale identities or rebuild the local profile only if the mailbox is healthy."
+    }
+  ],
   autodesk: [
     {
       issue: "User sees trial prompts or missing product tiles",
@@ -468,3 +506,5 @@ export const vendorUsageIssues = {
     }
   ]
 };
+
+

@@ -1,6 +1,39 @@
-﻿export const applicationCatalog = {
-  autodesk: [
+export const applicationCatalog = {
+  microsoft: [
     {
+      name: "Outlook",
+      slug: "outlook",
+      focus: "Exchange-backed desktop mail and calendar workflow where profile state, Modern Auth, and add-ins drive most support work.",
+      licensing: "Requires the expected Exchange Online mailbox and approved Office or Microsoft 365 Apps entitlement for desktop Outlook use.",
+      install: "Match the client-standard Office channel, sign in to Office first, and validate OWA plus desktop access before closing the build.",
+      uninstall: "Preserve signatures, PST or archive references, shared mailbox notes, and profile expectations before workstation cleanup."
+    },
+    {
+      name: "Teams",
+      slug: "teams",
+      focus: "Microsoft collaboration, meetings, and calling workflow where tenant context, policy refresh, and local client state matter more than a simple reinstall.",
+      licensing: "Requires a Teams-enabled service plan and, for voice workflows, the correct Teams Phone or related policy assignments.",
+      install: "Use the approved new Teams deployment path, confirm the right tenant, and validate chat, channel, meeting, and device behavior.",
+      uninstall: "Sign out cleanly, document tenant context and voice dependencies, and remove stale local client state only after web Teams works."
+    },
+    {
+      name: "OneDrive",
+      slug: "onedrive",
+      focus: "Sync client for personal and SharePoint-backed files where tenant selection, path conflicts, and local cache pressure create most incidents.",
+      licensing: "Requires a OneDrive-enabled Microsoft 365 license and access to the intended tenant or SharePoint libraries.",
+      install: "Validate sign-in, Files On-Demand expectations, approved sync roots, and one real upload and download test before handoff.",
+      uninstall: "Confirm pending changes are uploaded, document offline folders, then unlink and clean up old sync roots carefully."
+    },
+    {
+      name: "SharePoint",
+      slug: "sharepoint",
+      focus: "Browser and Office-integrated site and library workflow where permissions, IRM, and open-in-app behavior matter more than local installation alone.",
+      licensing: "Depends on SharePoint-enabled licensing, correct site membership, and any IRM, sensitivity, or DLP policy scope in the tenant.",
+      install: "There is no standalone app, but validate browser access, Office sign-in, open-in-app, and sync behavior for the target site or library.",
+      uninstall: "Offboarding means removing site access, preserving synced content as needed, and documenting any protected-library workflows that remain in scope."
+    }
+  ],
+  autodesk: [    {
       name: "AutoCAD",
       focus: "Base drafting platform used by many Autodesk products and add-ins.",
       licensing: "Usually covered by a named-user Autodesk entitlement or broader collection assignment.",
@@ -77,6 +110,14 @@
           a: "Because Revit projects, add-ins, and families are often tightly tied to the release and update level the project team standardized on."
         }
       ]
+    },
+    {
+      name: "Autodesk Desktop App",
+      slug: "autodesk-desktop-app",
+      focus: "Update and entitlement helper component that often influences whether the broader Autodesk stack patches and refreshes correctly.",
+      licensing: "Uses the same Autodesk identity and entitlement path as the assigned products, but should still match the client's supported updater path.",
+      install: "Install the approved Autodesk updater component and verify sign-in, update visibility, and its relationship to Autodesk Access in that environment.",
+      uninstall: "Do not remove it casually if the client still relies on it for updates or entitlement refresh. Document whether Autodesk Access replaces it first."
     },
     {
       name: "ReCap Pro",
@@ -494,3 +535,100 @@
   ]
 };
 
+
+
+const slugOverrides = {
+  microsoft: {
+    Outlook: "outlook",
+    Teams: "teams",
+    OneDrive: "onedrive",
+    SharePoint: "sharepoint"
+  },
+  autodesk: {
+    "Civil 3D": "civil-3d",
+    "Autodesk Desktop App": "autodesk-desktop-app",
+    "ReCap Pro": "recap-pro"
+  },
+  bentley: {
+    "CONNECTION Client": "connection-client",
+    "OpenRoads Designer": "openroads-designer",
+    "OpenBridge Designer": "openbridge-designer",
+    "OpenBridge Modeler": "openbridge-modeler",
+    "OpenRoads SignCAD": "openroads-signcad",
+    "OpenFlows Storm": "openflows-storm",
+    "OpenFlows Sewer": "openflows-sewer",
+    "OpenFlows Hydraulic Toolset": "openflows-hydraulic-toolset",
+    "OpenFlows Water": "openflows-water",
+    "RAM Elements": "ram-elements",
+    "Bentley View": "bentley-view",
+    "Civil Applications": "civil-applications"
+  },
+  esri: {
+    "ArcGIS Online": "arcgis-online",
+    "ArcGIS Pro": "arcgis-pro"
+  },
+  ptc: {
+    "Mathcad Prime": "mathcad-prime"
+  },
+  trimble: {
+    "Trimble Business Center": "trimble-business-center"
+  },
+  adobe: {
+    "Creative Cloud Desktop": "creative-cloud-desktop",
+    "Acrobat Pro": "acrobat-pro"
+  },
+  bluebeam: {
+    "Revu 21": "revu-21"
+  },
+  foxit: {
+    "PDF Editor": "pdf-editor",
+    "PDF Reader": "pdf-reader"
+  },
+  quickbooks: {
+    "QuickBooks Enterprise Desktop": "quickbooks-enterprise-desktop",
+    "QuickBooks Online": "quickbooks-online"
+  },
+  egnyte: {
+    "Egnyte Web UI / Admin": "egnyte-web-admin",
+    "Egnyte Desktop App": "egnyte-desktop-app"
+  }
+};
+
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export function getApplicationSlug(vendorSlug, app) {
+  if (app.slug) {
+    return app.slug;
+  }
+
+  return slugOverrides[vendorSlug]?.[app.name] ?? slugify(app.name);
+}
+
+export function getVendorApplications(vendorSlug) {
+  return (applicationCatalog[vendorSlug] ?? []).map(app => ({
+    ...app,
+    slug: getApplicationSlug(vendorSlug, app)
+  }));
+}
+
+export function getApplicationGuide(vendorSlug, appSlug) {
+  return getVendorApplications(vendorSlug).find(app => app.slug === appSlug) ?? null;
+}
+
+export function getAllApplications() {
+  return Object.keys(applicationCatalog).flatMap(vendorSlug =>
+    getVendorApplications(vendorSlug).map(app => ({
+      vendorSlug,
+      ...app
+    }))
+  );
+}
+
+export function buildAppGuideUrl(vendorSlug, appSlug) {
+  return `guides/${vendorSlug}/${appSlug}.html`;
+}
