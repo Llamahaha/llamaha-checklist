@@ -1,7 +1,6 @@
 import {
   categoryMeta,
   licenseGuidance,
-  presetLibrary,
   systemMeta,
   taskLibrary
 } from "./data/taskLibrary.js";
@@ -16,7 +15,6 @@ const overviewGrid = document.getElementById("overviewGrid");
 const insightsPanel = document.getElementById("insightsPanel");
 const copyBtn = document.getElementById("copyBtn");
 const printBtn = document.getElementById("printBtn");
-const presetButtons = Array.from(document.querySelectorAll(".preset-btn"));
 
 let lastGeneratedChecklist = [];
 let lastGeneratedOptions = null;
@@ -85,27 +83,6 @@ function getFormOptions() {
     includeSecurityReview: formData.get("includeSecurityReview") === "on",
     systems: formData.getAll("systems")
   };
-}
-
-function applyPreset(presetKey) {
-  const preset = presetLibrary[presetKey];
-
-  if (!preset) {
-    return;
-  }
-
-  form.elements.environment.value = preset.environment;
-  form.elements.accessProfile.value = preset.accessProfile;
-  form.elements.workstationProfile.value = preset.workstationProfile;
-
-  const checkboxes = form.querySelectorAll('input[name="systems"]');
-  checkboxes.forEach(checkbox => {
-    checkbox.checked = preset.systems.includes(checkbox.value);
-  });
-
-  presetButtons.forEach(button => {
-    button.classList.toggle("is-active", button.dataset.preset === presetKey);
-  });
 }
 
 function taskMatchesFilters(task, options) {
@@ -532,15 +509,7 @@ form.addEventListener("submit", event => {
 });
 
 form.addEventListener("change", () => {
-  presetButtons.forEach(button => button.classList.remove("is-active"));
   runGeneration();
-});
-
-presetButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    applyPreset(button.dataset.preset);
-    runGeneration();
-  });
 });
 
 copyBtn.addEventListener("click", () => {
@@ -557,5 +526,4 @@ printBtn.addEventListener("click", () => {
   window.print();
 });
 
-applyPreset("core");
 runGeneration();

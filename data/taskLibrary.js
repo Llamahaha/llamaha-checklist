@@ -75,37 +75,6 @@ export const systemMeta = {
   lob: { label: "Other Apps" }
 };
 
-export const presetLibrary = {
-  core: {
-    label: "Core MSP",
-    environment: "hybrid",
-    accessProfile: "standard",
-    workstationProfile: "standard",
-    systems: ["m365", "ad", "windows", "datto", "autotask", "itglue", "rocketcyber", "bitdefender", "forticlient", "backup", "lob"]
-  },
-  remote: {
-    label: "Remote Secure User",
-    environment: "cloud",
-    accessProfile: "standard",
-    workstationProfile: "standard",
-    systems: ["m365", "windows", "datto", "autotask", "itglue", "rocketcyber", "bitdefender", "forticlient", "backup", "adobe"]
-  },
-  cad: {
-    label: "CAD / Engineering",
-    environment: "hybrid",
-    accessProfile: "standard",
-    workstationProfile: "cad",
-    systems: ["m365", "ad", "windows", "datto", "autotask", "itglue", "rocketcyber", "bitdefender", "forticlient", "backup", "autodesk", "bentley", "esri", "trimble", "sketchup", "ptc", "bluebeam", "adobe", "foxit"]
-  },
-  admin: {
-    label: "Privileged Admin",
-    environment: "hybrid",
-    accessProfile: "privileged",
-    workstationProfile: "standard",
-    systems: ["m365", "ad", "windows", "datto", "autotask", "itglue", "rocketcyber", "bitdefender", "forticlient", "backup", "lob"]
-  }
-};
-
 export const licenseGuidance = [
   {
     id: "license_microsoft",
