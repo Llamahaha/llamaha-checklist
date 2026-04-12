@@ -26,8 +26,8 @@
             <p class="section-kicker">Checklist Builder</p>
             <h1>Build onboarding and offboarding runbooks</h1>
             <p class="builder-copy">
-              Choose the stack, workstation type, and risk controls you want in scope, then generate a checkable,
-              saveable runbook below.
+              Choose the environment, workstation type, and the extra stack items or applications you want in scope,
+              then generate a checkable, saveable runbook below.
             </p>
           </div>
         </div>
@@ -70,18 +70,9 @@
           </div>
 
           <fieldset class="system-picker">
-            <legend>Platforms in Scope</legend>
+            <legend>Additional Platforms in Scope</legend>
+            <p id="systemAutoNote" class="system-helper"></p>
             <div class="system-groups">
-              <div class="system-group">
-                <p class="system-group-title">Core Identity & Device</p>
-                <div class="checkbox-grid">
-                  <label><input type="checkbox" name="systems" value="m365" checked> Microsoft 365 & Entra</label>
-                  <label><input type="checkbox" name="systems" value="ad" checked> Active Directory</label>
-                  <label><input type="checkbox" name="systems" value="windows" checked> Windows Workstation</label>
-                  <label><input type="checkbox" name="systems" value="backup" checked> Backup Platform</label>
-                </div>
-              </div>
-
               <div class="system-group">
                 <p class="system-group-title">MSP Internal Stack</p>
                 <div class="checkbox-grid">
@@ -92,18 +83,20 @@
               </div>
 
               <div class="system-group">
-                <p class="system-group-title">Security, Files, & Remote Access</p>
+                <p class="system-group-title">Security, Backup, & Remote Access</p>
                 <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="backup" checked> Backup Platform</label>
                   <label><input type="checkbox" name="systems" value="rocketcyber" checked> RocketCyber</label>
                   <label><input type="checkbox" name="systems" value="bitdefender" checked> Bitdefender</label>
                   <label><input type="checkbox" name="systems" value="forticlient" checked> FortiClient VPN</label>
-                  <label><input type="checkbox" name="systems" value="egnyte"> Egnyte</label>
                 </div>
               </div>
 
               <div class="system-group">
-                <p class="system-group-title">Engineering & Document Apps</p>
+                <p class="system-group-title">Applications</p>
                 <div class="checkbox-grid">
+                  <label><input type="checkbox" name="systems" value="egnyte"> Egnyte</label>
+                  <label><input type="checkbox" name="systems" value="quickbooks"> QuickBooks</label>
                   <label><input type="checkbox" name="systems" value="autodesk"> Autodesk</label>
                   <label><input type="checkbox" name="systems" value="bentley"> Bentley</label>
                   <label><input type="checkbox" name="systems" value="esri"> Esri</label>
@@ -112,14 +105,6 @@
                   <label><input type="checkbox" name="systems" value="bluebeam"> Bluebeam</label>
                   <label><input type="checkbox" name="systems" value="adobe"> Adobe</label>
                   <label><input type="checkbox" name="systems" value="foxit"> Foxit</label>
-                </div>
-              </div>
-
-              <div class="system-group">
-                <p class="system-group-title">Finance & Business Apps</p>
-                <div class="checkbox-grid">
-                  <label><input type="checkbox" name="systems" value="quickbooks"> QuickBooks</label>
-                  <label><input type="checkbox" name="systems" value="lob"> Other Client Apps</label>
                 </div>
               </div>
             </div>

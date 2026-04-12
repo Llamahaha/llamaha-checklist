@@ -72,8 +72,7 @@ export const systemMeta = {
   bluebeam: { label: "Bluebeam" },
   adobe: { label: "Adobe" },
   foxit: { label: "Foxit PDF" },
-  quickbooks: { label: "QuickBooks" },
-  lob: { label: "Other Apps" }
+  quickbooks: { label: "QuickBooks" }
 };
 
 export const licenseGuidance = [
@@ -713,22 +712,6 @@ export const taskLibrary = [
     ]
   },
   {
-    id: "onboard_lob_access",
-    title: "Provision line-of-business applications and SSO access",
-    summary: "LoB tools are where real operational work happens, so account setup and SSO alignment need deliberate testing.",
-    type: "onboarding",
-    systems: ["lob"],
-    category: "applications",
-    priority: 96,
-    impact: "high",
-    tags: ["verification"],
-    steps: [
-      "Create the user in required business platforms and assign the right role-based permissions.",
-      "Validate SSO bindings, MFA expectations, or direct vendor authentication as applicable.",
-      "Confirm access with the requester or team lead instead of assuming the base role is sufficient."
-    ]
-  },
-  {
     id: "onboard_privileged_controls",
     title: "Provision privileged access with a separate security review",
     summary: "Admin access should be provisioned as an exception workflow, not silently bundled with normal onboarding.",
@@ -1271,22 +1254,6 @@ export const taskLibrary = [
       "Disable the QuickBooks user or remove the role assignment in the correct QuickBooks environment.",
       "Confirm the user no longer has access to the company file, hosted session, or online tenant.",
       "Capture who now owns bank feeds, reports, approvals, or other finance-specific responsibilities."
-    ]
-  },
-  {
-    id: "offboard_lob_access",
-    title: "Remove line-of-business access and ownership",
-    summary: "The long-tail business apps are often where stale access lingers because nobody remembers they exist until much later.",
-    type: "offboarding",
-    systems: ["lob"],
-    category: "applications",
-    priority: 96,
-    impact: "high",
-    tags: ["verification"],
-    steps: [
-      "Disable access in required business systems and remove role assignments.",
-      "Transfer dashboards, reports, approvals, or owned records as needed.",
-      "Capture any app-specific retention or legal hold requirements before deletion."
     ]
   },
   {

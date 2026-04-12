@@ -168,6 +168,13 @@ body {
   font-size: 0.9rem;
 }
 
+.system-helper {
+  margin: 0 0 16px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
 select,
 .primary-btn,
 .secondary-btn {

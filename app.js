@@ -16,6 +16,7 @@ const copyBtn = document.getElementById("copyBtn");
 const printBtn = document.getElementById("printBtn");
 const resetProgressBtn = document.getElementById("resetProgressBtn");
 const progressStatus = document.getElementById("progressStatus");
+const systemAutoNote = document.getElementById("systemAutoNote");
 
 let lastGeneratedChecklist = [];
 let lastGeneratedOptions = null;
@@ -79,12 +80,29 @@ function getWorkstationLabel(profile) {
   return workstationLabelMap[profile] ?? titleCase(profile);
 }
 
+function getAutomaticSystems(environment) {
+  const systems = new Set(["windows"]);
+
+  if (environment === "cloud" || environment === "hybrid") {
+    systems.add("m365");
+  }
+
+  if (environment === "hybrid" || environment === "onprem") {
+    systems.add("ad");
+  }
+
+  return [...systems];
+}
+
 function getFormOptions() {
   const formData = new FormData(form);
+  const environment = formData.get("environment");
+  const selectedSystems = formData.getAll("systems");
+  const automaticSystems = getAutomaticSystems(environment);
 
   return {
     type: formData.get("type"),
-    environment: formData.get("environment"),
+    environment,
     accessProfile: formData.get("accessProfile"),
     workstationProfile: formData.get("workstationProfile"),
     includeManagerTasks: formData.get("includeManagerTasks") === "on",
@@ -92,7 +110,8 @@ function getFormOptions() {
     includeLicenseTasks: formData.get("includeLicenseTasks") === "on",
     includeDocumentationTasks: formData.get("includeDocumentationTasks") === "on",
     includeSecurityReview: formData.get("includeSecurityReview") === "on",
-    systems: formData.getAll("systems")
+    automaticSystems,
+    systems: [...new Set([...automaticSystems, ...selectedSystems])]
   };
 }
 
@@ -132,6 +151,15 @@ function getOptionsSignature(options) {
 
 function getProgressStorageKey(options) {
   return `${storageKeys.progressPrefix}:${getOptionsSignature(options)}`;
+}
+
+function renderAutomaticSystemsNote(options) {
+  if (!systemAutoNote) {
+    return;
+  }
+
+  const automaticLabels = options.automaticSystems.map(getSystemLabel).join(", ");
+  systemAutoNote.textContent = `Included automatically from Environment and Workstation Profile: ${automaticLabels}. Select any additional stack items and applications below.`;
 }
 
 function setProgressStatus(message) {
@@ -389,7 +417,7 @@ function renderOverview(tasks, options, licenses) {
     { label: "Completed Steps", value: `${metrics.completedSteps}/${metrics.totalSteps}` },
     { label: "Critical Items", value: tasks.filter(task => task.impact === "critical").length },
     { label: "License Touchpoints", value: licenses.length },
-    { label: "Platforms Selected", value: options.systems.length }
+    { label: "Platforms In Scope", value: options.systems.length }
   ];
 
   items.forEach(item => {
@@ -670,6 +698,7 @@ function runGeneration() {
   const options = getFormOptions();
   const checklist = generateChecklist(options);
   saveFormState();
+  renderAutomaticSystemsNote(options);
   renderChecklist(checklist, options);
 }
 
