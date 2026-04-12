@@ -95,6 +95,18 @@ body {
   gap: 24px;
 }
 
+.search-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px 160px;
+  gap: 16px;
+  align-items: center;
+}
+
+.search-results {
+  display: grid;
+  gap: 16px;
+}
+
 .controls-card,
 .results-card {
   padding: 28px;
@@ -176,6 +188,9 @@ body {
 }
 
 select,
+input[type="text"],
+input[type="search"],
+textarea,
 .primary-btn,
 .secondary-btn {
   width: 100%;
@@ -184,11 +199,19 @@ select,
   font: inherit;
 }
 
-select {
+select,
+input[type="text"],
+input[type="search"],
+textarea {
   appearance: none;
   background: var(--surface-strong);
   color: var(--ink);
   padding: 14px 16px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 128px;
 }
 
 .system-picker {
@@ -291,6 +314,12 @@ input[type="checkbox"] {
   color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.6;
+}
+
+.result-meta {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
 }
 
 .results-header {
@@ -582,7 +611,8 @@ input[type="checkbox"] {
 .hub-card p:not(.section-kicker),
 .vendor-card p,
 .m365-card p,
-.hub-note-card p:not(.section-kicker) {
+.hub-note-card p:not(.section-kicker),
+.privacy-card p:not(.section-kicker) {
   color: var(--muted);
   line-height: 1.7;
 }
@@ -591,7 +621,8 @@ input[type="checkbox"] {
 .vendor-card,
 .m365-card,
 .issue-card,
-.hub-note-card {
+.hub-note-card,
+.privacy-card {
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: 20px;
@@ -602,7 +633,8 @@ input[type="checkbox"] {
 .vendor-card h3,
 .m365-card h3,
 .issue-card h3,
-.hub-note-card h3 {
+.hub-note-card h3,
+.privacy-card h2 {
   margin: 0 0 10px;
   line-height: 1.15;
 }
@@ -611,7 +643,8 @@ input[type="checkbox"] {
 .vendor-card-header p,
 .m365-card p,
 .issue-card p,
-.hub-note-card p:not(.section-kicker) {
+.hub-note-card p:not(.section-kicker),
+.privacy-card p:not(.section-kicker) {
   margin: 0;
 }
 
@@ -656,6 +689,104 @@ input[type="checkbox"] {
   text-decoration: none;
   font-weight: 700;
   background: rgba(255, 255, 255, 0.82);
+}
+
+.decision-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.decision-list {
+  display: grid;
+  gap: 12px;
+}
+
+.tree-select.is-active {
+  border-color: rgba(111, 34, 119, 0.35);
+  background: rgba(111, 34, 119, 0.08);
+}
+
+.decision-stage {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(54, 73, 155, 0.03), rgba(111, 34, 119, 0.04));
+}
+
+.tree-path {
+  margin: 0 0 18px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.decision-content {
+  display: grid;
+  gap: 16px;
+}
+
+.decision-content h3 {
+  margin: 0;
+}
+
+.decision-content ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.decision-options,
+.inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.decision-options .primary-btn,
+.inline-actions .secondary-btn,
+.compact-btn {
+  width: auto;
+}
+
+.template-text,
+.snippet-command {
+  margin: 0;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+.tracker-form {
+  display: grid;
+  gap: 18px;
+}
+
+.tracker-field-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tracker-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tracker-form .action-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.vendor-card .inline-actions {
+  margin-top: 4px;
 }
 
 .vendor-coverage,
@@ -717,7 +848,11 @@ input[type="checkbox"] {
   .hub-quick-grid,
   .vendor-directory,
   .m365-lane-grid,
-  .issue-grid {
+  .issue-grid,
+  .search-form,
+  .decision-layout,
+  .tracker-grid,
+  .tracker-field-grid {
     grid-template-columns: 1fr;
   }
 
@@ -745,7 +880,9 @@ input[type="checkbox"] {
   .checkbox-grid,
   .system-groups,
   .toggle-grid,
-  .results-header {
+  .results-header,
+  .tracker-grid,
+  .tracker-field-grid {
     grid-template-columns: 1fr;
   }
 

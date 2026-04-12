@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Search</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Global Search</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Search</p>
+            <h1>Search the whole operations library</h1>
+            <p class="builder-copy">
+              Search checklists, vendor guides, troubleshooting pages, decision trees, playbooks, templates, and snippets from one place.
+            </p>
+          </div>
+        </div>
+        <form id="searchForm" class="search-form">
+          <input id="searchInput" class="search-input" type="search" placeholder="Search Teams, Egnyte, printer queue, onboarding, ransomware..." aria-label="Search query">
+          <select id="searchCategory" class="search-select" aria-label="Search category">
+            <option value="all">All categories</option>
+            <option value="library">Library pages</option>
+            <option value="checklist">Checklist tasks</option>
+            <option value="vendor">Vendor guides</option>
+            <option value="application">Applications</option>
+            <option value="microsoft">Microsoft issues</option>
+            <option value="computer">Computer issues</option>
+            <option value="decision-tree">Decision trees</option>
+            <option value="playbook">Emergency playbooks</option>
+            <option value="template">Handoff templates</option>
+            <option value="snippet">Snippets</option>
+            <option value="tracker">Known issue tracker</option>
+          </select>
+          <button type="submit" class="primary-btn">Search</button>
+        </form>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Results</p>
+            <h2 id="resultsLabel">Start with a search term</h2>
+          </div>
+        </div>
+        <div id="resultCount" class="hub-section-copy"></div>
+        <div id="searchResults" class="search-results"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="search.js"></script>
+</body>
+</html>

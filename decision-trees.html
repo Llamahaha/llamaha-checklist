@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decision-Tree Troubleshooting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Decision-Tree Troubleshooting</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Troubleshooting Flows</p>
+            <h1>Decision-tree troubleshooting</h1>
+            <p class="builder-copy">
+              Use these guided flows when you want a fast next-step path instead of reading a full issue library page end to end.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card">
+        <div class="decision-layout">
+          <div id="treeList" class="decision-list"></div>
+          <div class="decision-stage">
+            <div id="treeHeader" class="results-header"></div>
+            <div id="treePath" class="tree-path"></div>
+            <div id="treeContent" class="decision-content"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="decision-trees.js"></script>
+</body>
+</html>
