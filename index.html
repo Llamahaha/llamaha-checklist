@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Llamaha MSP Hub</title>
+  <title>Llamaha IT Operations Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,12 +20,11 @@
             <p class="section-kicker">IT Operations Hub</p>
             <h1>Checklists, app guidance, and troubleshooting in one place</h1>
             <p class="builder-copy">
-              Use this page as the control panel for onboarding and offboarding runbooks, application licensing guides,
-              install and uninstall references, FAQ and troubleshooting notes, and Microsoft 365 plan comparison help.
+              Use this page as the launcher for onboarding and offboarding runbooks, vendor licensing references,
+              install and uninstall guidance, common application troubleshooting, common endpoint fixes, and the live Microsoft 365 feature matrix.
             </p>
           </div>
         </div>
-
       </section>
 
       <section class="hub-quick-grid" aria-label="Main sections">
@@ -39,121 +38,46 @@
         <article class="hub-card">
           <p class="section-kicker">Section</p>
           <h2>Application Licensing</h2>
-          <p>Use the vendor directory below to jump straight to licensing sections for Autodesk, Bentley, Adobe, QuickBooks, Egnyte, and the rest.</p>
-          <a class="hub-link" href="#guideDirectory">Browse licensing guides</a>
+          <p>Open the licensing library for vendor-specific seat assignment, recovery steps, supported products, and direct links into each detailed guide.</p>
+          <a class="hub-link" href="app-licensing.html">Open licensing library</a>
         </article>
 
         <article class="hub-card">
           <p class="section-kicker">Section</p>
-          <h2>Installation + Common Install Issues</h2>
-          <p>Each vendor guide now includes install steps plus common install failure patterns and fixes in the same page.</p>
-          <a class="hub-link" href="#guideDirectory">Open install references</a>
-        </article>
-
-        <article class="hub-card">
-          <p class="section-kicker">Section</p>
-          <h2>Uninstallation + Common Uninstall Issues</h2>
-          <p>Vendor pages also include reclaim guidance, local uninstall notes, and cleanup risks that usually get missed.</p>
-          <a class="hub-link" href="#guideDirectory">Open uninstall references</a>
+          <h2>Install / Uninstall Guides</h2>
+          <p>Use the lifecycle page for install steps, uninstall cleanup, repeated deployment failures, and vendor FAQ notes.</p>
+          <a class="hub-link" href="install-uninstall.html">Open lifecycle guides</a>
         </article>
 
         <article class="hub-card">
           <p class="section-kicker">Section</p>
           <h2>Application FAQ, Common Errors, and Fixes</h2>
-          <p>Use the FAQ and common-fixes sections when you need quick answers for day-to-day support instead of a full onboarding runbook.</p>
-          <a class="hub-link" href="#guideDirectory">Open FAQ and fixes</a>
+          <p>Use the troubleshooting library for cross-app patterns plus vendor-specific FAQ and common-fix notes.</p>
+          <a class="hub-link" href="application-issues.html">Open troubleshooting library</a>
         </article>
 
         <article class="hub-card">
           <p class="section-kicker">Section</p>
           <h2>Microsoft 365 Plan Matrix</h2>
-          <p>Use the M365 Maps matrix when clients ask which bundle includes apps, mailbox size, Entra features, or security/compliance capabilities.</p>
-          <a class="hub-link" href="#m365Matrix">Review matrix notes</a>
+          <p>Open the live M365 Maps matrix when you need to compare apps, mailbox limits, Entra features, security, or compliance capabilities.</p>
+          <a class="hub-link" href="https://m365maps.com/matrix.htm" target="_blank" rel="noreferrer">Open M365 matrix</a>
         </article>
 
         <article class="hub-card">
           <p class="section-kicker">Section</p>
           <h2>Common Microsoft App Issues</h2>
-          <p>Jump into quick troubleshooting notes for Word, Excel, Teams, OneDrive, SharePoint, and MFA with Authenticator.</p>
-          <a class="hub-link" href="#microsoftIssues">Open Microsoft issue notes</a>
+          <p>Jump into Microsoft-focused issue guides for Word, Excel, Outlook, Teams, OneDrive, SharePoint, and MFA with Authenticator.</p>
+          <a class="hub-link" href="microsoft-issues.html">Open Microsoft issue library</a>
         </article>
 
         <article class="hub-card">
           <p class="section-kicker">Section</p>
           <h2>Common Computer Issues</h2>
-          <p>Use this section for quick triage help with share drives, printers, VPN and network problems, disk space, and common Windows workstation issues.</p>
-          <a class="hub-link" href="#computerIssues">Open computer issue notes</a>
+          <p>Use the endpoint issue page for share drives, printers, VPN and network problems, disk space, performance, updates, and Windows sign-in issues.</p>
+          <a class="hub-link" href="computer-issues.html">Open endpoint issue library</a>
         </article>
-      </section>
-
-      <section id="guideDirectory" class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Guide Directory</p>
-            <h2>Vendor guides with section-level links</h2>
-          </div>
-        </div>
-        <p class="hub-section-copy">
-          Jump directly into application coverage, licensing, install notes, uninstall guidance, FAQ content, or common-use fixes for each platform.
-        </p>
-        <div id="vendorDirectory" class="vendor-directory"></div>
-      </section>
-
-      <section id="m365Matrix" class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Microsoft 365 Matrix</p>
-            <h2>What to compare in the live M365 Maps matrix</h2>
-          </div>
-        </div>
-
-        <p class="hub-section-copy">
-          The M365 Maps feature matrix is most useful when you already know the feature family you need to compare.
-          The cards below highlight the rows MSP teams most often need during licensing reviews or onboarding/offboarding planning.
-        </p>
-
-        <div id="m365LaneGrid" class="m365-lane-grid"></div>
-
-        <div class="hub-note-card">
-          <p class="section-kicker">Live Link</p>
-          <h3>M365 Maps Feature Matrix</h3>
-          <p>
-            Open the full matrix for the current plan-to-feature view across Office 365, Microsoft 365 Business,
-            Frontline, Enterprise, and Education bundles.
-          </p>
-          <a class="hub-link" href="https://m365maps.com/matrix.htm" target="_blank" rel="noreferrer">Open M365 Maps Matrix</a>
-        </div>
-      </section>
-
-      <section id="microsoftIssues" class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Microsoft App Issues</p>
-            <h2>Common Microsoft productivity and identity issues</h2>
-          </div>
-        </div>
-        <p class="hub-section-copy">
-          These are the Microsoft-side problem areas that usually show up in MSP tickets first: Office app sign-in,
-          Teams reliability, OneDrive sync, SharePoint access, and MFA / Authenticator headaches.
-        </p>
-        <div id="microsoftIssuesGrid" class="issue-grid"></div>
-      </section>
-
-      <section id="computerIssues" class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Computer Issues</p>
-            <h2>Common workstation, print, network, and storage issues</h2>
-          </div>
-        </div>
-        <p class="hub-section-copy">
-          Use these quick notes for common endpoint and network support calls before you have to dive into a full rebuild or escalation path.
-        </p>
-        <div id="computerIssuesGrid" class="issue-grid"></div>
       </section>
     </main>
   </div>
-
-  <script type="module" src="hub.js"></script>
 </body>
 </html>

@@ -89,6 +89,12 @@ body {
   gap: 24px;
 }
 
+.resource-page,
+.section-stack {
+  display: grid;
+  gap: 24px;
+}
+
 .controls-card,
 .results-card {
   padding: 28px;
@@ -634,6 +640,10 @@ input[type="checkbox"] {
   font-weight: 700;
 }
 
+.resource-actions {
+  margin-top: 12px;
+}
+
 .vendor-card {
   display: grid;
   gap: 16px;
@@ -672,6 +682,38 @@ input[type="checkbox"] {
   line-height: 1.7;
 }
 
+.card-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.card-block {
+  display: grid;
+  gap: 8px;
+}
+
+.card-block h4 {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.card-block p,
+.card-block ul,
+.card-block ol {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.card-block ul,
+.card-block ol {
+  padding-left: 18px;
+}
+
 .issue-card ul {
   margin: 14px 0 0;
   padding-left: 18px;
@@ -689,7 +731,11 @@ input[type="checkbox"] {
   .action-row,
   .results-layout,
   .overview-grid,
-  .insights-panel {
+  .insights-panel,
+  .hub-quick-grid,
+  .vendor-directory,
+  .m365-lane-grid,
+  .issue-grid {
     grid-template-columns: 1fr;
   }
 

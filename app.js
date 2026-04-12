@@ -622,7 +622,7 @@ function renderChecklist(tasks, options) {
 
 function buildPlainTextChecklist(tasks, options, insights, licenses) {
   const lines = [
-    `MSP ${titleCase(options.type)} Runbook`,
+    `IT ${titleCase(options.type)} Runbook`,
     `Environment: ${titleCase(options.environment)}`,
     `Access Profile: ${titleCase(options.accessProfile)}`,
     `Workstation Profile: ${getWorkstationLabel(options.workstationProfile)}`,

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install and Uninstall Guides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Install and Uninstall Guides</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Lifecycle Reference</p>
+            <h1>Install, uninstall, cleanup, and FAQ guidance</h1>
+            <p class="builder-copy">
+              Use this page for rollout and removal work, including common installer failures, uninstall leftovers, and quick answers to the vendor questions that usually show up during deployment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Common Patterns</p>
+            <h2>Install and uninstall problems that repeat across vendors</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">
+          These are the lifecycle patterns that show up repeatedly during app deployments and cleanup work, even when the actual product changes.
+        </p>
+        <div id="lifecycleGrid" class="issue-grid"></div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Vendor Workflows</p>
+            <h2>Install, uninstall, issue, and FAQ cards by platform</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">
+          Each card below keeps the practical lifecycle steps, common install or cleanup issues, and FAQ content together so you can work a ticket without bouncing across multiple pages.
+        </p>
+        <div id="vendorLifecycleGrid" class="vendor-directory"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="install-uninstall.js"></script>
+</body>
+</html>

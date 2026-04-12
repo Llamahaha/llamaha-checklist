@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Licensing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Application Licensing</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Licensing Library</p>
+            <h1>Application licensing by vendor and product family</h1>
+            <p class="builder-copy">
+              Use this page for seat assignment, entitlement review, vendor-specific licensing notes, and jump links into the detailed guide pages.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="matrixCard" class="results-card hub-section"></section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Vendor Coverage</p>
+            <h2>Licensing workflows and seat-recovery notes</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">
+          Each card below summarizes the main license workflow, coverage area, recovery risks, and direct links back into the deeper vendor guide.
+        </p>
+        <div id="licensingGrid" class="vendor-directory"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="app-licensing.js"></script>
+</body>
+</html>
