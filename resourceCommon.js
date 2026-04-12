@@ -61,6 +61,52 @@ export function createPageCard(className = "issue-card") {
   return card;
 }
 
+export function slugifyText(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export function renderPageToc(container, items, options = {}) {
+  if (!container || !items.length) {
+    return;
+  }
+
+  const {
+    kicker = "On This Page",
+    title = "Jump to a section",
+    description = "Use these quick links to move around the page faster."
+  } = options;
+
+  container.innerHTML = "";
+  container.classList.add("hub-section", "toc-shell");
+
+  const kickerEl = document.createElement("p");
+  kickerEl.className = "section-kicker";
+  kickerEl.textContent = kicker;
+
+  const titleEl = document.createElement("h2");
+  titleEl.textContent = title;
+
+  const descriptionEl = document.createElement("p");
+  descriptionEl.className = "hub-section-copy";
+  descriptionEl.textContent = description;
+
+  const nav = document.createElement("nav");
+  nav.className = "toc-links";
+  nav.setAttribute("aria-label", title);
+
+  items.forEach(item => {
+    const link = document.createElement("a");
+    link.href = `#${item.id}`;
+    link.textContent = item.label;
+    nav.appendChild(link);
+  });
+
+  container.append(kickerEl, titleEl, descriptionEl, nav);
+}
+
 export async function copyTextToClipboard(text) {
   if (navigator.clipboard?.writeText) {
     await navigator.clipboard.writeText(text);

@@ -1,11 +1,15 @@
 import { snippetLibrary } from "./operationsData.js";
-import { copyTextToClipboard, createPageCard } from "./resourceCommon.js";
+import { copyTextToClipboard, createPageCard, renderPageToc, slugifyText } from "./resourceCommon.js";
 
 const snippetSections = document.getElementById("snippetSections");
+const pageToc = document.getElementById("pageToc");
+const tocItems = [];
 
 snippetLibrary.forEach(group => {
   const section = document.createElement("section");
   section.className = "results-card hub-section";
+  section.id = slugifyText(group.category);
+  tocItems.push({ id: section.id, label: group.category });
 
   const header = document.createElement("div");
   header.className = "results-header";
@@ -60,4 +64,9 @@ snippetLibrary.forEach(group => {
 
   section.append(header, grid);
   snippetSections.appendChild(section);
+});
+
+renderPageToc(pageToc, tocItems, {
+  title: "Jump to a section",
+  description: "Use these quick links to move between the snippet categories on this page."
 });

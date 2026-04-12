@@ -36,6 +36,7 @@ body {
 .page-nav {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 18px;
   color: var(--muted);
@@ -46,6 +47,25 @@ body {
   color: var(--ink);
   text-decoration: none;
   font-weight: 700;
+}
+
+.page-nav strong {
+  margin-right: auto;
+}
+
+.page-contact-link,
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.88);
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
 }
 
 .controls-card,
@@ -105,6 +125,48 @@ body {
 .search-results {
   display: grid;
   gap: 16px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toc-shell {
+  display: grid;
+  gap: 14px;
+}
+
+.toc-shell h2 {
+  margin: 0;
+}
+
+.toc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.toc-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.84);
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.page-contact-link:hover,
+.contact-btn:hover,
+.toc-links a:hover {
+  transform: translateY(-1px);
+  border-color: rgba(111, 34, 119, 0.28);
+  background: rgba(111, 34, 119, 0.08);
 }
 
 .controls-card,

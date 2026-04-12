@@ -15,11 +15,9 @@ const categoryLabels = {
   application: "Application",
   microsoft: "Microsoft Issue",
   computer: "Computer Issue",
-  "decision-tree": "Decision Tree",
   playbook: "Emergency Playbook",
   template: "Handoff Template",
   snippet: "Snippet",
-  tracker: "Local Tracker",
   external: "External Reference",
   workflow: "Workflow"
 };

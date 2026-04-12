@@ -10,7 +10,6 @@ import {
   microsoftIssueSections
 } from "./supportData.js";
 import {
-  decisionTrees,
   emergencyPlaybooks,
   handoffTemplates,
   snippetLibrary
@@ -28,11 +27,9 @@ export function buildSearchIndex() {
     entry("Application Issues and Fixes", "Cross-app issue patterns plus vendor-specific fixes.", "application-issues.html", "library", "troubleshooting faq common errors"),
     entry("Microsoft App Issues", "Microsoft 365 app troubleshooting guidance.", "microsoft-issues.html", "microsoft", "word excel outlook teams onedrive sharepoint mfa"),
     entry("Computer Issues", "Common endpoint troubleshooting guidance.", "computer-issues.html", "computer", "printers vpn network disk space windows"),
-    entry("Decision-Tree Troubleshooting", "Guided next-step troubleshooting flows for frequent support issues.", "decision-trees.html", "decision-tree", "guided triage flow"),
     entry("Emergency Playbooks", "First-response incident playbooks for urgent support and security events.", "emergency-playbooks.html", "playbook", "incident response"),
     entry("Customer Handoff Templates", "Copy-ready customer completion and update templates.", "handoff-templates.html", "template", "closure notes handoff"),
     entry("Script and Snippet Library", "Safe, reusable commands for common troubleshooting workflows.", "snippets.html", "snippet", "commands powershell snippets"),
-    entry("Known Issue Tracker", "Local-only tracker for sanitized recurring issue notes and workarounds.", "issue-tracker.html", "tracker", "known issues workaround local only"),
     entry(matrixResource.title, matrixResource.text, matrixResource.url, "external", "microsoft 365 matrix licensing")
   ];
 
@@ -95,13 +92,6 @@ export function buildSearchIndex() {
 
   installUninstallPatterns.forEach(item => {
     entries.push(entry(item.title, `${item.text} ${item.fixes.join(" ")}`, "install-uninstall.html", "library", "install uninstall cleanup"));
-  });
-
-  decisionTrees.forEach(tree => {
-    const text = Object.values(tree.nodes)
-      .map(node => `${node.prompt ?? ""} ${node.title ?? ""} ${(node.body ?? []).join(" ")}`)
-      .join(" ");
-    entries.push(entry(tree.title, `${tree.summary} ${text}`, `decision-trees.html#${tree.id}`, "decision-tree", "decision tree troubleshooting"));
   });
 
   emergencyPlaybooks.forEach(playbook => {

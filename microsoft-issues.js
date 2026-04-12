@@ -1,8 +1,9 @@
 import { matrixResource, microsoftIssueSections } from "./supportData.js";
-import { createLinks, createList, createPageCard } from "./resourceCommon.js";
+import { createLinks, createList, createPageCard, renderPageToc, slugifyText } from "./resourceCommon.js";
 
 const issueSections = document.getElementById("issueSections");
 const matrixAction = document.getElementById("matrixAction");
+const pageToc = document.getElementById("pageToc");
 
 function renderMatrixAction() {
   if (!matrixAction) {
@@ -25,9 +26,13 @@ function renderSections() {
     return;
   }
 
+  const tocItems = [];
+
   microsoftIssueSections.forEach(section => {
     const wrapper = document.createElement("section");
     wrapper.className = "results-card hub-section";
+    wrapper.id = slugifyText(section.title);
+    tocItems.push({ id: wrapper.id, label: section.title });
 
     const heading = document.createElement("div");
     heading.className = "results-header";
@@ -72,6 +77,11 @@ function renderSections() {
 
     wrapper.append(heading, copy, grid);
     issueSections.appendChild(wrapper);
+  });
+
+  renderPageToc(pageToc, tocItems, {
+    title: "Jump to a section",
+    description: "Use these quick links to move between the Microsoft issue groups on this page."
   });
 }
 
