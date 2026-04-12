@@ -163,6 +163,32 @@ body {
   gap: 14px;
 }
 
+.support-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.support-panel {
+  justify-items: start;
+}
+
+.qr-link {
+  display: inline-flex;
+  max-width: min(100%, 280px);
+  text-decoration: none;
+}
+
+.qr-image {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  border-radius: 20px;
+  border: 1px solid rgba(54, 73, 155, 0.14);
+  background: white;
+  box-shadow: 0 14px 28px rgba(54, 73, 155, 0.12);
+}
+
 .controls-card,
 .results-card {
   padding: 28px;
@@ -908,7 +934,8 @@ input[type="checkbox"] {
   .search-form,
   .decision-layout,
   .tracker-grid,
-  .tracker-field-grid {
+  .tracker-field-grid,
+  .support-panels {
     grid-template-columns: 1fr;
   }
 
