@@ -3,29 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vendor Guides</title>
+  <title>Emergency Playbooks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="icon" href="assets/llamaha-icon.jpg">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+<body data-site-area="internal" data-root-path="..">
   <div class="page-shell">
     <nav class="page-nav" aria-label="Page">
       <a href="index.html">Home</a>
       <span>/</span>
-      <strong>Vendor Guides</strong>
+      <strong>Emergency Playbooks</strong>
     </nav>
 
     <main class="hub-shell resource-page">
       <section class="hero-card">
         <div class="builder-header">
-          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
-            <p class="section-kicker">Guides</p>
-            <h1>Browse help by vendor</h1>
-            <p class="builder-copy">Open a vendor guide to see the applications we cover, common help topics, and direct links into app-specific support articles.</p>
+            <p class="section-kicker">Response Library</p>
+            <h1>Emergency playbooks</h1>
+            <p class="builder-copy">
+              Use these when speed matters and you need a structured first-response path for account compromise, emergency offboarding, lost devices, phishing, or wider security events.
+            </p>
           </div>
         </div>
       </section>
@@ -33,17 +35,17 @@
       <section class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Vendor Guides</p>
-            <h2>Choose a vendor, then open the app you need</h2>
+            <p class="section-kicker">Playbooks</p>
+            <h2>First-response guidance by incident type</h2>
           </div>
         </div>
-        <p class="hub-section-copy">Expand a vendor to see a quick preview of covered applications and jump into the right help guide.</p>
-        <div id="vendorGuideGrid" class="accordion-stack"></div>
+        <div id="playbookGrid" class="vendor-directory"></div>
       </section>
     </main>
   </div>
 
-  <script type="module" src="siteChrome.js"></script>
-  <script type="module" src="vendor-guides.js"></script>
+  <script type="module" src="../siteChrome.js"></script>
+  <script type="module" src="../emergency-playbooks.js"></script>
 </body>
 </html>
+

@@ -26,15 +26,13 @@ vendorOrder.forEach(key => {
   const stack = document.createElement("div");
   stack.className = "card-stack";
   const usageItems = (vendorUsageIssues[key] ?? []).map(item => `${item.issue}: ${item.fix}`);
-  appendBlock(stack, "Common Issues", usageItems.length ? usageItems : guide.sharedNotes);
+  appendBlock(stack, "Common issues", usageItems.length ? usageItems : guide.sharedNotes);
   const faqItems = (vendorFaqs[key] ?? []).map(item => `${item.q}: ${item.a}`);
-  appendBlock(stack, "FAQ", faqItems.length ? faqItems : guide.escalationNotes);
-  appendBlock(stack, "Escalation", guide.escalationNotes);
+  appendBlock(stack, "Frequently asked questions", faqItems.length ? faqItems : ["Open the vendor guide for product-specific help."]);
   const links = createLinks([
     { label: "Open vendor guide", url: `guides/${key}.html` },
-    { label: "Guide hub", url: "vendor-guides.html" }
+    { label: "Vendor guide hub", url: "vendor-guides.html" }
   ]);
   card.append(title, summary, stack, links);
   vendorIssueGrid.appendChild(card);
 });
-
