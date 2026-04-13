@@ -9,6 +9,8 @@ function entry(title, text, url, category, typeLabel, keywords = "") {
 export function buildSearchIndex() {
   const entries = [
     entry("Home", "Operations hub for guides, libraries, playbooks, and checklists.", "index.html", "hub", "Hub Page", "home hub"),
+    entry("Applications", "Application directory grouped by vendor with direct links into dedicated app guides.", "applications.html", "hub", "Hub Page", "applications app directory"),
+    entry("Contact", "Contact paths for site suggestions, corrections, and library questions.", "contact.html", "hub", "Hub Page", "contact help support email"),
     entry("Vendor Guides", "Vendor-wide guide hub with app index pages and breadcrumbs into dedicated app guides.", "vendor-guides.html", "vendorGuide", "Vendor Guide Hub", "vendor guides applications"),
     entry("Checklist Generator", "Build onboarding and offboarding runbooks with saved local progress.", "checklist.html", "checklist", "Checklist", "onboarding offboarding checklist runbook"),
     entry("Emergency Playbooks", "First-response incident playbooks for urgent support and security events.", "emergency-playbooks.html", "playbook", "Playbook", "incident response ransomware compromise"),

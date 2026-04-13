@@ -4,6 +4,8 @@ import { handoffTemplates, snippetLibrary } from "./resourceLibrary.js";
 
 const mostUsedGrid = document.getElementById("mostUsedGrid");
 const recentGrid = document.getElementById("recentGrid");
+const mostUsedSection = document.getElementById("mostUsedSection");
+const recentSection = document.getElementById("recentSection");
 
 const mostUsed = [
   { title: "Vendor Guides", text: "Start with shared vendor notes and drill into dedicated app guides.", url: "vendor-guides.html" },
@@ -22,6 +24,10 @@ const recent = [
 ];
 
 function renderCards(target, items) {
+  if (!target || !items.length) {
+    return false;
+  }
+
   items.forEach(item => {
     const card = document.createElement("article");
     card.className = "hub-card";
@@ -39,7 +45,17 @@ function renderCards(target, items) {
     card.append(kicker, title, text, link);
     target.appendChild(card);
   });
+
+  return true;
 }
 
-renderCards(mostUsedGrid, mostUsed);
-renderCards(recentGrid, recent);
+const hasMostUsed = renderCards(mostUsedGrid, mostUsed);
+const hasRecent = renderCards(recentGrid, recent);
+
+if (!hasMostUsed && mostUsedSection) {
+  mostUsedSection.hidden = true;
+}
+
+if (!hasRecent && recentSection) {
+  recentSection.hidden = true;
+}
