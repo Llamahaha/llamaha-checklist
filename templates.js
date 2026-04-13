@@ -16,22 +16,31 @@ function createMetaBlock(title, text) {
   return block;
 }
 
-handoffTemplateGroups.forEach(group => {
-  const section = document.createElement("section");
-  section.className = "results-card hub-section";
+handoffTemplateGroups.forEach((group, index) => {
+  const section = document.createElement("details");
+  section.className = "results-card accordion-section";
   section.id = slugifyText(group.category);
+  section.open = index === 0;
   tocItems.push({ id: section.id, label: group.category });
 
-  const header = document.createElement("div");
-  header.className = "results-header";
+  const header = document.createElement("summary");
+  header.className = "accordion-summary";
   const headerBody = document.createElement("div");
+  headerBody.className = "accordion-summary-copy";
   const kicker = document.createElement("p");
   kicker.className = "section-kicker";
   kicker.textContent = "Template Category";
   const title = document.createElement("h2");
   title.textContent = group.category;
-  headerBody.append(kicker, title);
-  header.appendChild(headerBody);
+  const description = document.createElement("p");
+  description.textContent = `${group.templates.length} copy-ready templates in this category. Expand the section only when you need the wording.`;
+  headerBody.append(kicker, title, description);
+
+  const meta = document.createElement("span");
+  meta.className = "accordion-summary-meta";
+  meta.textContent = `${group.templates.length} items`;
+
+  header.append(headerBody, meta);
 
   const grid = document.createElement("div");
   grid.className = "vendor-directory";
@@ -100,7 +109,11 @@ handoffTemplateGroups.forEach(group => {
     grid.appendChild(card);
   });
 
-  section.append(header, grid);
+  const content = document.createElement("div");
+  content.className = "accordion-content";
+  content.appendChild(grid);
+
+  section.append(header, content);
   templateSections.appendChild(section);
 });
 
@@ -108,3 +121,23 @@ renderPageToc(pageToc, tocItems, {
   title: "Jump to a template category",
   description: "Use these quick links to move between grouped customer-facing and internal MSP templates."
 });
+
+function openHashSection(hash = window.location.hash) {
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (target instanceof HTMLDetailsElement) {
+    target.open = true;
+  }
+}
+
+pageToc?.addEventListener("click", event => {
+  const link = event.target instanceof Element ? event.target.closest("a[href^='#']") : null;
+  if (!link) return;
+  openHashSection(link.getAttribute("href"));
+});
+
+window.addEventListener("hashchange", () => {
+  openHashSection();
+});
+
+openHashSection();

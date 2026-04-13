@@ -1,3 +1,4 @@
+import "../siteChrome.js";
 import { vendorGuides, vendorOrder } from "./guideData.js";
 import {
   buildAppGuideUrl,
@@ -100,8 +101,7 @@ function normalizeIssue(item) {
     title: item.issue,
     symptom: item.issue,
     likelyFix: item.fix,
-    collect: "Capture the exact error, version, and what changed before the issue started.",
-    escalateWhen: "Escalate after base access, version, and local-state checks are confirmed."
+    collect: "Capture the exact error, version, and what changed before the issue started."
   };
 }
 
@@ -140,7 +140,6 @@ function buildAppModel() {
       ? commonIssues
       : [normalizeIssue({ issue: `${app.name} issue requires version, access, and local-state review`, fix: "Compare the workstation to a known-good build before reinstalling." })],
     usefulInfo: extra.usefulInfo ?? { paths: [], logs: [], services: [], processes: [] },
-    escalationNotes: extra.escalationNotes?.length ? extra.escalationNotes : vendor.escalationNotes,
     relatedApps: extra.relatedApps?.length ? extra.relatedApps : apps.filter(item => item.slug !== appSlug).slice(0, 3).map(item => ({ vendor: vendorSlug, app: item.slug })),
     relatedSnippets: relatedSnippetEntries(extra.relatedSnippets ?? []),
     relatedTemplates: relatedTemplateEntries(extra.relatedTemplates ?? []),
@@ -170,7 +169,6 @@ function appSections() {
     ["support-checkpoints", "Support Checkpoints"],
     ["common-issues", "Common Issues"],
     ["paths-logs", "Paths / Logs / Services"],
-    ["escalation-notes", "Escalation Notes"],
     ["related-resources", "Related Resources"]
   ];
 }
@@ -199,9 +197,18 @@ function renderBreadcrumbs() {
 
 function renderSidebar() {
   elements.sidebar.innerHTML = "";
-  const vendorCard = card("Vendors", linkList(vendorOrder.map(slug => ({ label: vendorGuides[slug].title, url: vendorUrl(slug) }))));
-  vendorCard.classList.add("guide-nav-card");
-  elements.sidebar.appendChild(vendorCard);
+  const libraryCard = card("Operations Library", linkList([
+    { label: "Global Search", url: `${rootPath}/search.html` },
+    { label: "Vendor Guides", url: guideHubUrl },
+    { label: "Snippet Library", url: `${rootPath}/snippets.html` },
+    { label: "Template Library", url: `${rootPath}/templates.html` },
+    { label: "Reference Guides", url: `${rootPath}/application-issues.html` },
+    { label: "Licensing", url: `${rootPath}/app-licensing.html` },
+    { label: "Playbooks", url: `${rootPath}/emergency-playbooks.html` }
+  ]));
+  libraryCard.classList.add("guide-nav-card");
+  elements.sidebar.appendChild(libraryCard);
+
   const appNav = linkList(apps.map(item => ({ label: item.name, url: appUrl(vendorSlug, item.slug) })));
   const appCard = card(`${vendor.title} Apps`, appNav);
   appCard.classList.add("guide-nav-card");
@@ -210,6 +217,9 @@ function renderSidebar() {
   const sectionCard = card("Jump to Section", linkList(sections.map(item => ({ label: item[1], url: `#${item[0]}` }))));
   sectionCard.classList.add("guide-nav-card");
   elements.sidebar.appendChild(sectionCard);
+  const vendorCard = card("All Vendors", linkList(vendorOrder.map(slug => ({ label: vendorGuides[slug].title, url: vendorUrl(slug) }))));
+  vendorCard.classList.add("guide-nav-card");
+  elements.sidebar.appendChild(vendorCard);
 }
 
 function renderVendorPage() {
@@ -227,7 +237,7 @@ function renderVendorPage() {
   const installItems = (vendorInstallIssues[vendorSlug] ?? []).map(item => `${item.issue}: ${item.fix}`);
   admin.appendChild(card("Install / Cleanup Patterns", installItems.length ? installItems : vendor.sharedNotes));
 
-  const directory = section("app-directory", "Applications", "Application Directory", "Each application now has its own dedicated guide page with navigation, escalation notes, and related snippets or templates.");
+  const directory = section("app-directory", "Applications", "Application Directory", "Each application now has its own dedicated guide page with stronger navigation, practical checkpoints, and related snippets or templates.");
   const grid = el("div", "guide-card-grid guide-app-grid");
   apps.forEach(item => {
     const appCard = el("article", "guide-card guide-app-card");
@@ -285,8 +295,7 @@ function renderAppPage() {
     issueCard.append(el("h3", "guide-card-title", item.title));
     issueCard.append(el("p", "guide-card-copy", item.symptom));
     issueCard.appendChild(card("Likely Fix", item.likelyFix));
-    issueCard.appendChild(card("Collect Before Escalating", item.collect));
-    issueCard.appendChild(card("Escalate When", item.escalateWhen));
+    issueCard.appendChild(card("What To Collect", item.collect));
     issueGrid.appendChild(issueCard);
   });
   issues.appendChild(issueGrid);
@@ -300,9 +309,6 @@ function renderAppPage() {
     card("Processes", model.usefulInfo.processes.length ? model.usefulInfo.processes : [`Capture the active ${model.name} process list during the failure.`])
   );
   paths.appendChild(infoGrid);
-
-  const escalation = section("escalation-notes", "Escalation", "Escalation Notes", "Collect these notes before moving the issue on.");
-  escalation.appendChild(card("Escalation Notes", model.escalationNotes));
 
   const related = section("related-resources", "Related", "Related Links / Apps / Templates", "Avoid dead-end pages by jumping directly to the next useful resource.");
   const relatedGrid = el("div", "guide-card-grid");
@@ -319,7 +325,7 @@ function renderAppPage() {
   }
   related.appendChild(relatedGrid);
 
-  elements.content.append(overview, ask, licensing, install, uninstall, support, issues, paths, escalation, related);
+  elements.content.append(overview, ask, licensing, install, uninstall, support, issues, paths, related);
 }
 
 if (!vendor || (pageType === "app" && !app)) {

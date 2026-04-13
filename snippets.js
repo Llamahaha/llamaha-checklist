@@ -16,22 +16,32 @@ function createMetaBlock(title, text) {
   return block;
 }
 
-snippetLibrary.forEach(group => {
-  const section = document.createElement("section");
-  section.className = "results-card hub-section";
+snippetLibrary.forEach((group, index) => {
+  const section = document.createElement("details");
+  section.className = "results-card accordion-section";
   section.id = slugifyText(group.category);
+  section.open = index === 0;
   tocItems.push({ id: section.id, label: group.category });
 
-  const header = document.createElement("div");
-  header.className = "results-header";
+  const header = document.createElement("summary");
+  header.className = "accordion-summary";
   const headerBody = document.createElement("div");
+  headerBody.className = "accordion-summary-copy";
   const kicker = document.createElement("p");
   kicker.className = "section-kicker";
   kicker.textContent = "Snippet Category";
   const title = document.createElement("h2");
   title.textContent = group.category;
+  const description = document.createElement("p");
+  description.textContent = `${group.snippets.length} snippets in this category. Expand only the section you need while you work.`;
   headerBody.append(kicker, title);
-  header.appendChild(headerBody);
+  headerBody.appendChild(description);
+
+  const meta = document.createElement("span");
+  meta.className = "accordion-summary-meta";
+  meta.textContent = `${group.snippets.length} items`;
+
+  header.append(headerBody, meta);
 
   const grid = document.createElement("div");
   grid.className = "vendor-directory";
@@ -90,7 +100,11 @@ snippetLibrary.forEach(group => {
     grid.appendChild(card);
   });
 
-  section.append(header, grid);
+  const content = document.createElement("div");
+  content.className = "accordion-content";
+  content.appendChild(grid);
+
+  section.append(header, content);
   snippetSections.appendChild(section);
 });
 
@@ -98,3 +112,23 @@ renderPageToc(pageToc, tocItems, {
   title: "Jump to a snippet category",
   description: "Use these quick links to move between the grouped MSP-ready snippets on this page."
 });
+
+function openHashSection(hash = window.location.hash) {
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (target instanceof HTMLDetailsElement) {
+    target.open = true;
+  }
+}
+
+pageToc?.addEventListener("click", event => {
+  const link = event.target instanceof Element ? event.target.closest("a[href^='#']") : null;
+  if (!link) return;
+  openHashSection(link.getAttribute("href"));
+});
+
+window.addEventListener("hashchange", () => {
+  openHashSection();
+});
+
+openHashSection();

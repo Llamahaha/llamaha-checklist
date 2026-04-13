@@ -3,17 +3,37 @@ import { getVendorApplications } from "./guides/applicationCatalog.js";
 
 const grid = document.getElementById("vendorGuideGrid");
 
-vendorOrder.forEach(vendorSlug => {
+vendorOrder.forEach((vendorSlug, index) => {
   const vendor = vendorGuides[vendorSlug];
   const apps = getVendorApplications(vendorSlug);
-  const card = document.createElement("article");
-  card.className = "vendor-card";
+  const card = document.createElement("details");
+  card.className = "results-card accordion-section";
+  card.id = vendorSlug;
+  card.open = index === 0;
+
+  const summary = document.createElement("summary");
+  summary.className = "accordion-summary";
+
+  const summaryCopy = document.createElement("div");
+  summaryCopy.className = "accordion-summary-copy";
+
+  const kicker = document.createElement("p");
+  kicker.className = "section-kicker";
+  kicker.textContent = "Vendor Guide";
 
   const title = document.createElement("h3");
   title.textContent = vendor.title;
 
-  const summary = document.createElement("p");
-  summary.textContent = vendor.summary;
+  const description = document.createElement("p");
+  description.textContent = vendor.summary;
+
+  summaryCopy.append(kicker, title, description);
+
+  const meta = document.createElement("span");
+  meta.className = "accordion-summary-meta";
+  meta.textContent = `${apps.length} apps`;
+
+  summary.append(summaryCopy, meta);
 
   const list = document.createElement("ul");
   list.className = "vendor-coverage";
@@ -38,6 +58,10 @@ vendorOrder.forEach(vendorSlug => {
     links.appendChild(appLink);
   });
 
-  card.append(title, summary, list, links);
+  const content = document.createElement("div");
+  content.className = "accordion-content";
+  content.append(list, links);
+
+  card.append(summary, content);
   grid.appendChild(card);
 });
