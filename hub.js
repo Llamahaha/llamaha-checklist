@@ -1,74 +1,45 @@
 import { getVendorApplications } from "./guides/applicationCatalog.js";
-import { vendorGuides, vendorOrder } from "./guides/guideData.js";
+import { vendorGuides } from "./guides/guideData.js";
+import { handoffTemplates, snippetLibrary } from "./resourceLibrary.js";
 
-const vendorGrid = document.getElementById("vendorGrid");
-const popularAppGrid = document.getElementById("popularAppGrid");
-const helpTopicGrid = document.getElementById("helpTopicGrid");
+const mostUsedGrid = document.getElementById("mostUsedGrid");
+const recentGrid = document.getElementById("recentGrid");
 
-const popularApps = [
-  { vendor: "microsoft", app: "outlook", text: "Mailbox access, profile issues, shared mailboxes, and send or receive problems." },
-  { vendor: "microsoft", app: "teams", text: "Sign-in, meetings, devices, missing channels, and common desktop app issues." },
-  { vendor: "microsoft", app: "onedrive", text: "Sync, missing folders, duplicate roots, and Files On-Demand questions." },
-  { vendor: "autodesk", app: "autocad", text: "Setup, sign-in, missing support content, plotting, and common startup issues." },
-  { vendor: "bentley", app: "projectwise", text: "Datasource access, missing project trees, check-in or check-out issues, and work area questions." },
-  { vendor: "quickbooks", app: "quickbooks-enterprise-desktop", text: "Company file access, hosting mode, print issues, and desktop troubleshooting." }
+const mostUsed = [
+  { title: "Vendor Guides", text: "Start with shared vendor notes and drill into dedicated app guides.", url: "vendor-guides.html" },
+  { title: "QuickBooks Enterprise Desktop", text: "Company file, hosting, print, and Tool Hub guidance.", url: "guides/quickbooks/quickbooks-enterprise-desktop.html" },
+  { title: "Outlook", text: "Mailbox, profile, shared mailbox, and add-in troubleshooting.", url: "guides/microsoft/outlook.html" },
+  { title: "ProjectWise", text: "Datasource, work area, and checked-out file support notes.", url: "guides/bentley/projectwise.html" },
+  { title: "Template Library", text: "Copy-ready customer and internal communication templates for handoffs, approvals, outages, and closure.", url: "templates.html" }
 ];
 
-const helpTopics = [
-  { title: "Microsoft help topics", text: "Common problems with Outlook, Teams, OneDrive, SharePoint, MFA, and Office activation.", url: "microsoft-issues.html" },
-  { title: "Software issues", text: "Shared troubleshooting patterns across common business, CAD, PDF, and file-management apps.", url: "application-issues.html" },
-  { title: "Computer issues", text: "Printer problems, mapped drives, VPN issues, performance, low disk space, and sign-in problems.", url: "computer-issues.html" },
-  { title: "Vendor guides", text: "Browse help by vendor when you know the product family but not the exact app article yet.", url: "vendor-guides.html" },
-  { title: "Applications directory", text: "See every supported application in one place and jump directly into the right help article.", url: "applications.html" },
-  { title: "Contact support", text: "Get the right contact path if the self-service steps do not solve the problem.", url: "contact.html" }
+const recent = [
+  { title: "Microsoft 365 guide set", text: vendorGuides.microsoft.summary, url: "guides/microsoft.html" },
+  { title: "Snippet Library", text: `${snippetLibrary.length} grouped categories with MSP-ready commands and cautions.`, url: "snippets.html" },
+  { title: "Template Library", text: `${handoffTemplates.length} copy-ready templates grouped by use case and audience.`, url: "templates.html" },
+  { title: "Emergency Playbooks", text: "First-response procedures for compromise, ransomware, lost devices, MFA lockouts, and more.", url: "emergency-playbooks.html" },
+  { title: "Autodesk guide set", text: getVendorApplications("autodesk").slice(0, 4).map(item => item.name).join(", "), url: "guides/autodesk.html" }
 ];
 
-function renderCard(target, title, text, url, kicker = "Help Center") {
-  const card = document.createElement("article");
-  card.className = "hub-card";
-
-  const cardKicker = document.createElement("p");
-  cardKicker.className = "section-kicker";
-  cardKicker.textContent = kicker;
-
-  const heading = document.createElement("h2");
-  heading.textContent = title;
-
-  const copy = document.createElement("p");
-  copy.textContent = text;
-
-  const link = document.createElement("a");
-  link.className = "hub-link";
-  link.href = url;
-  link.textContent = "Open";
-
-  card.append(cardKicker, heading, copy, link);
-  target.appendChild(card);
+function renderCards(target, items) {
+  items.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "hub-card";
+    const kicker = document.createElement("p");
+    kicker.className = "section-kicker";
+    kicker.textContent = "Hub Highlight";
+    const title = document.createElement("h2");
+    title.textContent = item.title;
+    const text = document.createElement("p");
+    text.textContent = item.text;
+    const link = document.createElement("a");
+    link.className = "hub-link";
+    link.href = item.url;
+    link.textContent = "Open";
+    card.append(kicker, title, text, link);
+    target.appendChild(card);
+  });
 }
 
-vendorOrder.slice(0, 6).forEach(vendorSlug => {
-  const vendor = vendorGuides[vendorSlug];
-  renderCard(
-    vendorGrid,
-    vendor.title,
-    `Browse ${vendor.title} app help for setup, sign-in, access, updates, and common problems.`,
-    `guides/${vendorSlug}.html`,
-    "Vendor Guide"
-  );
-});
-
-popularApps.forEach(item => {
-  const app = getVendorApplications(item.vendor).find(entry => entry.slug === item.app);
-  if (!app) return;
-  renderCard(
-    popularAppGrid,
-    app.name,
-    item.text,
-    `guides/${item.vendor}/${item.app}.html`,
-    vendorGuides[item.vendor]?.title ?? "Application"
-  );
-});
-
-helpTopics.forEach(item => {
-  renderCard(helpTopicGrid, item.title, item.text, item.url, "Help Topic");
-});
+renderCards(mostUsedGrid, mostUsed);
+renderCards(recentGrid, recent);

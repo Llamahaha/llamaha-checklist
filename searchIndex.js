@@ -8,38 +8,35 @@ function entry(title, text, url, category, typeLabel, keywords = "") {
 
 export function buildSearchIndex() {
   const entries = [
-    entry("Home", "Client-facing help center with search, vendor guides, applications, and support contact options.", "index.html", "page", "Page", "home help center"),
-    entry("Search", "Search vendor guides, app guides, help topics, and support pages.", "search.html", "page", "Page", "search help"),
-    entry("Vendor Guides", "Browse help by vendor and then open the application guide you need.", "vendor-guides.html", "vendorGuide", "Vendor Guide Hub", "vendor guides browse"),
-    entry("Applications", "Browse every supported application in one directory.", "applications.html", "applicationDirectory", "Applications Page", "applications app directory"),
-    entry("Contact Support", "Contact options and what to include when you still need help.", "contact.html", "page", "Support Page", "contact support help"),
-    entry("Microsoft help topics", "Common help for Outlook, Teams, OneDrive, SharePoint, MFA, and Office activation.", "microsoft-issues.html", "helpTopic", "Help Topic", "microsoft outlook teams onedrive sharepoint mfa"),
-    entry("Software issues", "Common troubleshooting patterns across software and application families.", "application-issues.html", "helpTopic", "Help Topic", "software app issues troubleshooting"),
-    entry("Computer issues", "Help with printers, VPN, mapped drives, low storage, performance, and sign-in issues.", "computer-issues.html", "helpTopic", "Help Topic", "computer printer vpn mapped drive performance"),
-    entry("Internal sign in", "Protected internal library for team-only tools and references.", "internal/index.html", "page", "Page", "internal sign in")
+    entry("Home", "Operations hub for guides, libraries, playbooks, and checklists.", "index.html", "hub", "Hub Page", "home hub"),
+    entry("Vendor Guides", "Vendor-wide guide hub with app index pages and breadcrumbs into dedicated app guides.", "vendor-guides.html", "vendorGuide", "Vendor Guide Hub", "vendor guides applications"),
+    entry("Checklist Generator", "Build onboarding and offboarding runbooks with saved local progress.", "checklist.html", "checklist", "Checklist", "onboarding offboarding checklist runbook"),
+    entry("Emergency Playbooks", "First-response incident playbooks for urgent support and security events.", "emergency-playbooks.html", "playbook", "Playbook", "incident response ransomware compromise"),
+    entry("Snippet Library", "Grouped MSP-ready snippets for Microsoft 365, AD, networking, Windows repair, software cleanup, and endpoint checks.", "snippets.html", "snippet", "Library Page", "powershell snippets commands"),
+    entry("Template Library", "Copy-ready customer-facing and internal templates for approvals, handoffs, outage notes, maintenance notices, and ticket closure.", "templates.html", "template", "Library Page", "templates handoff communication"),
+    entry("Application Licensing", "Vendor-specific licensing workflows and recovery notes.", "app-licensing.html", "hub", "Library Page", "licensing seats subscriptions"),
+    entry("Install / Uninstall Guides", "Install, uninstall, cleanup, and FAQ guidance.", "install-uninstall.html", "hub", "Library Page", "install uninstall cleanup"),
+    entry("Application Issues and Fixes", "Cross-app issue patterns plus vendor-specific fixes.", "application-issues.html", "issueGuide", "Issue Guide", "troubleshooting faq errors"),
+    entry("Microsoft App Issues", "Microsoft 365 app troubleshooting guidance.", "microsoft-issues.html", "issueGuide", "Issue Guide", "outlook teams onedrive sharepoint mfa"),
+    entry("Computer Issues", "Workstation, endpoint, printer, networking, and repair issue patterns.", "computer-issues.html", "issueGuide", "Issue Guide", "computer windows printer vpn network")
   ];
 
   vendorOrder.forEach(vendorSlug => {
     const vendor = vendorGuides[vendorSlug];
-    entries.push(entry(
-      vendor.title,
-      `Help for ${vendor.title} applications, setup, sign-in, file access, and common issues.`,
-      `guides/${vendorSlug}.html`,
-      "vendorGuide",
-      "Vendor Guide",
-      `${vendor.products.join(" ")} ${vendor.summary} ${vendor.overview}`
-    ));
+    entries.push(entry(vendor.title, `${vendor.summary} ${vendor.overview}`, `guides/${vendorSlug}.html`, "vendorGuide", "Vendor Guide", vendor.products.join(" ")));
 
     getVendorApplications(vendorSlug).forEach(app => {
       const extra = getAppGuideContent(vendorSlug, app.slug);
-      entries.push(entry(
-        app.name,
-        `Help with ${app.name} setup, access, common problems, and next steps.`,
-        `guides/${vendorSlug}/${app.slug}.html`,
-        "appGuide",
-        "App Guide",
-        `${vendorSlug} ${app.name} ${app.focus} ${(extra.highlights ?? []).join(" ")} ${(extra.askFirst ?? []).join(" ")} ${(extra.commonIssues ?? []).map(item => item.title ?? item.issue ?? "").join(" ")}`
-      ));
+      entries.push(
+        entry(
+          app.name,
+          `${app.focus} ${app.licensing} ${app.install} ${app.uninstall} ${(extra.highlights ?? []).join(" ")} ${(extra.askFirst ?? []).join(" ")} ${(extra.supportCheckpoints ?? []).join(" ")}`,
+          `guides/${vendorSlug}/${app.slug}.html`,
+          "appGuide",
+          "App Guide",
+          `${vendorSlug} ${app.name}`
+        )
+      );
     });
   });
 

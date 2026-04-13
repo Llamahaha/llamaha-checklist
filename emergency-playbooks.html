@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=internal/playbooks.html">
   <title>Emergency Playbooks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,15 +12,39 @@
 </head>
 <body>
   <div class="page-shell">
-    <main class="resource-page">
-      <section class="results-card">
-        <p class="section-kicker">Moved</p>
-        <h1>This resource moved to the internal library</h1>
-        <p class="hub-section-copy">Redirecting you to the protected area now. If the redirect does not happen automatically, use the link below.</p>
-        <p><a class="contact-btn" href="internal/playbooks.html">Open the internal playbooks</a></p>
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Emergency Playbooks</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Response Library</p>
+            <h1>Emergency playbooks</h1>
+            <p class="builder-copy">
+              Use these when speed matters and you need a structured first-response path for account compromise, emergency offboarding, lost devices, phishing, or wider security events.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Playbooks</p>
+            <h2>First-response guidance by incident type</h2>
+          </div>
+        </div>
+        <div id="playbookGrid" class="vendor-directory"></div>
       </section>
     </main>
   </div>
+
   <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="emergency-playbooks.js"></script>
 </body>
 </html>

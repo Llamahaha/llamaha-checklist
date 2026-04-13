@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Help</title>
+  <title>Global Search</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
     <nav class="page-nav" aria-label="Page">
       <a href="index.html">Home</a>
       <span>/</span>
-      <strong>Search</strong>
+      <strong>Global Search</strong>
     </nav>
 
     <main class="hub-shell resource-page">
@@ -24,19 +24,22 @@
           <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
             <p class="section-kicker">Search</p>
-            <h1>Search the help center</h1>
-            <p class="builder-copy">Search vendor guides, application guides, common help topics, and support pages from one place.</p>
+            <h1>Search the whole operations library</h1>
+            <p class="builder-copy">Search vendor guides, app guides, and library pages from one place without digging through individual snippets or templates.</p>
           </div>
         </div>
         <form id="searchForm" class="search-form">
-          <input id="searchInput" class="search-input" type="search" placeholder="Search Outlook, printer issues, AutoCAD, OneDrive sync, shared mailbox..." aria-label="Search query">
+          <input id="searchInput" class="search-input" type="search" placeholder="Search AutoCAD, MFA reset, mailbox permissions, ProjectWise, printer queue..." aria-label="Search query">
           <select id="searchCategory" class="search-select" aria-label="Search category">
-            <option value="all">All help</option>
+            <option value="all">All result types</option>
             <option value="vendorGuide">Vendor guides</option>
             <option value="appGuide">App guides</option>
-            <option value="applicationDirectory">Applications</option>
-            <option value="helpTopic">Help topics</option>
-            <option value="page">Pages</option>
+            <option value="snippet">Snippet library</option>
+            <option value="template">Template library</option>
+            <option value="checklist">Checklist tools</option>
+            <option value="playbook">Playbooks</option>
+            <option value="issueGuide">Issue guides</option>
+            <option value="hub">Hub and library pages</option>
           </select>
           <button type="submit" class="primary-btn">Search</button>
         </form>

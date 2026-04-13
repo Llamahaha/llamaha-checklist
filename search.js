@@ -31,7 +31,7 @@ function renderResults(query = "", category = "all") {
 
   if (!normalizedQuery) {
     resultsLabel.textContent = "Start with a search term";
-    resultCount.textContent = "Try an app name, vendor, or issue like printer, sign-in, Outlook, or OneDrive sync.";
+    resultCount.textContent = "Try a product name, workflow, or library title.";
     return;
   }
 
@@ -47,7 +47,7 @@ function renderResults(query = "", category = "all") {
   if (!matches.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "No matching help page yet. Try a broader app name, vendor, or issue keyword.";
+    empty.textContent = "No matching guide or library page yet. Try a broader app name, vendor, or workflow term.";
     searchResults.appendChild(empty);
     return;
   }

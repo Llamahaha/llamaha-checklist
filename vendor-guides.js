@@ -25,7 +25,7 @@ vendorOrder.forEach((vendorSlug, index) => {
   title.textContent = vendor.title;
 
   const description = document.createElement("p");
-  description.textContent = `Open ${vendor.title} for application help, common issues, and setup guidance.`;
+  description.textContent = vendor.summary;
 
   summaryCopy.append(kicker, title, description);
 

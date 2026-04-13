@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=internal/snippets.html">
-  <title>Snippet Library</title>
+  <title>Script and Snippet Library</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -13,15 +12,33 @@
 </head>
 <body>
   <div class="page-shell">
-    <main class="resource-page">
-      <section class="results-card">
-        <p class="section-kicker">Moved</p>
-        <h1>This resource moved to the internal library</h1>
-        <p class="hub-section-copy">Redirecting you to the protected area now. If the redirect does not happen automatically, use the link below.</p>
-        <p><a class="contact-btn" href="internal/snippets.html">Open the internal snippet library</a></p>
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Script and Snippet Library</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Snippet Library</p>
+            <h1>Script and snippet library</h1>
+            <p class="builder-copy">
+              Use these safe, general-purpose commands for repeat troubleshooting, workstation checks, Microsoft 365 triage, and print or network diagnostics.
+            </p>
+          </div>
+        </div>
       </section>
+
+      <section id="pageToc" class="results-card toc-shell"></section>
+
+      <div id="snippetSections" class="section-stack"></div>
     </main>
   </div>
+
   <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="snippets.js"></script>
 </body>
 </html>
