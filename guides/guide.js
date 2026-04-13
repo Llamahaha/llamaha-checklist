@@ -6,7 +6,7 @@ import {
 } from "./applicationCatalog.js";
 import { getAppGuideContent } from "./appGuideContent.js";
 import { vendorFaqs, vendorInstallIssues, vendorUsageIssues } from "./guideExtras.js";
-import { snippetLibrary } from "../resourceLibrary.js";
+import { handoffTemplates, snippetLibrary } from "../resourceLibrary.js";
 
 const pageType = document.body.dataset.pageType ?? "vendor";
 const vendorSlug = document.body.dataset.vendor;
@@ -110,6 +110,10 @@ function relatedSnippetEntries(ids = []) {
   return flat.filter(item => ids.includes(item.id));
 }
 
+function relatedTemplateEntries(ids = []) {
+  return handoffTemplates.filter(item => ids.includes(item.id));
+}
+
 function buildAppModel() {
   const extra = getAppGuideContent(vendorSlug, appSlug);
   const overview = extra.overview?.length ? extra.overview : [app.summary ?? app.focus];
@@ -139,6 +143,7 @@ function buildAppModel() {
     escalationNotes: extra.escalationNotes?.length ? extra.escalationNotes : vendor.escalationNotes,
     relatedApps: extra.relatedApps?.length ? extra.relatedApps : apps.filter(item => item.slug !== appSlug).slice(0, 3).map(item => ({ vendor: vendorSlug, app: item.slug })),
     relatedSnippets: relatedSnippetEntries(extra.relatedSnippets ?? []),
+    relatedTemplates: relatedTemplateEntries(extra.relatedTemplates ?? []),
     relatedLinks: unique([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? [])])
   };
 }
@@ -299,13 +304,16 @@ function renderAppPage() {
   const escalation = section("escalation-notes", "Escalation", "Escalation Notes", "Collect these notes before moving the issue on.");
   escalation.appendChild(card("Escalation Notes", model.escalationNotes));
 
-  const related = section("related-resources", "Related", "Related Links / Apps / Snippets", "Avoid dead-end pages by jumping directly to the next useful resource.");
+  const related = section("related-resources", "Related", "Related Links / Apps / Templates", "Avoid dead-end pages by jumping directly to the next useful resource.");
   const relatedGrid = el("div", "guide-card-grid");
   relatedGrid.appendChild(card("Back to Vendor", linkList([{ label: `Back to ${vendor.title}`, url: vendorUrl(vendorSlug) }])));
   relatedGrid.appendChild(card("Related Apps", linkList(model.relatedApps.map(item => ({ label: getApplicationGuide(item.vendor, item.app)?.name ?? item.app, url: appUrl(item.vendor, item.app) })))));
   relatedGrid.appendChild(card("Related Snippets", model.relatedSnippets.length
     ? linkList(model.relatedSnippets.map(item => ({ label: item.title, url: `${rootPath}/snippets.html#${item.id}` })))
     : linkList([{ label: "Open snippet library", url: `${rootPath}/snippets.html` }])));
+  relatedGrid.appendChild(card("Related Templates", model.relatedTemplates.length
+    ? linkList(model.relatedTemplates.map(item => ({ label: item.title, url: `${rootPath}/templates.html#${item.id}` })))
+    : linkList([{ label: "Open template library", url: `${rootPath}/templates.html` }])));
   if (model.relatedLinks.length) {
     relatedGrid.appendChild(card("Official / Vendor Links", linkList(model.relatedLinks.map(item => ({ label: item.label, url: item.url })))));
   }
@@ -334,7 +342,27 @@ if (!vendor || (pageType === "app" && !app)) {
   }
 }
 
+function scrollToHash(hash, replaceHistory = false) {
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+  if (replaceHistory) {
+    window.history.replaceState({}, "", `${window.location.pathname}${window.location.search}${hash}`);
+  }
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+elements.sidebar?.addEventListener("click", event => {
+  const link = event.target instanceof Element ? event.target.closest("a[href^='#']") : null;
+  if (!link) return;
+  event.preventDefault();
+  scrollToHash(link.getAttribute("href"), true);
+});
+
+window.addEventListener("hashchange", () => {
+  scrollToHash(window.location.hash);
+});
+
 if (window.location.hash) {
-  const target = document.querySelector(window.location.hash);
-  target?.scrollIntoView({ block: "start" });
+  scrollToHash(window.location.hash);
 }

@@ -475,3 +475,461 @@ export const snippetLibrary = [
     ]
   }
 ];
+
+export const handoffTemplateGroups = [
+  {
+    category: "Onboarding and Access Requests",
+    templates: [
+      {
+        id: "new-user-onboarding-request",
+        title: "New user onboarding request",
+        audience: "Customer-facing",
+        useCase: "Use when a manager or client contact needs to request a new starter with enough detail for account, workstation, and app setup.",
+        placeholders: ["[New Hire Name]", "[Start Date]", "[Department / Role]", "[Manager]", "[Primary Apps]", "[Shipping or Site]"],
+        template: `Hi [Name],
+
+Please use the details below to request onboarding for a new user.
+
+New hire: [New Hire Name]
+Start date: [Start Date]
+Department / role: [Department / Role]
+Manager: [Manager]
+Work location / shipping site: [Shipping or Site]
+
+Please confirm:
+- Required email address format or display name preference
+- Required Microsoft 365 access
+- Required line-of-business applications
+- Whether a new workstation is needed or an existing device will be reassigned
+- Any shared mailbox, distribution list, VPN, or admin access needs
+
+If there are licensing or approval constraints, include them in the same reply so we can scope the build correctly the first time.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: []
+      },
+      {
+        id: "portal-access-request",
+        title: "Portal access request",
+        audience: "Customer-facing",
+        useCase: "Use when the MSP needs admin access to a client portal, tenant, or vendor console before deeper troubleshooting can continue.",
+        placeholders: ["[Portal Name]", "[Requested Role]", "[Reason]", "[Requested User]"],
+        template: `Hi [Name],
+
+To continue working this request, we need access to the following portal:
+
+Portal: [Portal Name]
+Requested role or permission level: [Requested Role]
+Reason needed: [Reason]
+Requested admin account: [Requested User]
+
+If you would prefer to grant temporary access instead of standing access, that works as well. Once access is granted, please reply here so we can validate sign-in and continue troubleshooting.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: []
+      },
+      {
+        id: "software-install-approval-request",
+        title: "Software install approval request",
+        audience: "Customer-facing",
+        useCase: "Use when a requested install needs manager, licensing, or client-admin approval before the MSP proceeds.",
+        placeholders: ["[Software Name]", "[Version]", "[Device or User]", "[Business Need]", "[Licensing Impact]"],
+        template: `Hi [Name],
+
+We received a request to install the following software:
+
+Software: [Software Name]
+Version requested: [Version]
+Target device or user: [Device or User]
+Business reason: [Business Need]
+Licensing or subscription impact: [Licensing Impact]
+
+Before we proceed, please confirm approval for the install. If there is a preferred version, deployment package, or vendor standard we should follow, include that in your reply so we can avoid a rebuild or version mismatch later.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: [
+          { label: "AutoCAD", url: "guides/autodesk/autocad.html" },
+          { label: "Bluebeam Revu 21", url: "guides/bluebeam/revu-21.html" }
+        ]
+      }
+    ]
+  },
+  {
+    category: "Offboarding and Access Changes",
+    templates: [
+      {
+        id: "termination-offboarding-confirmation",
+        title: "Termination and offboarding confirmation",
+        audience: "Customer-facing",
+        useCase: "Use when confirming the approval and timing for a user offboarding or immediate access removal request.",
+        placeholders: ["[User Name]", "[Effective Time]", "[Mailbox Handling]", "[Device Return Plan]", "[Manager]"],
+        template: `Hi [Name],
+
+We are preparing to complete offboarding for [User Name].
+
+Please confirm the following before we proceed:
+- Effective disable time: [Effective Time]
+- Mailbox handling or forwarding expectation: [Mailbox Handling]
+- Device return or recovery plan: [Device Return Plan]
+- Approval owner / manager: [Manager]
+
+Once confirmed, we will complete the access-removal steps in scope and document any remaining follow-up items such as device recovery, mailbox delegation, or license cleanup.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: [
+          { label: "Outlook", url: "guides/microsoft/outlook.html" }
+        ]
+      },
+      {
+        id: "shared-mailbox-access-confirmation",
+        title: "Shared mailbox access confirmation",
+        audience: "Customer-facing",
+        useCase: "Use when you need a manager or client admin to confirm who should keep or receive access to a shared mailbox.",
+        placeholders: ["[Shared Mailbox]", "[Users to Add]", "[Users to Remove]", "[Send As Needed]"],
+        template: `Hi [Name],
+
+Before we change access to the shared mailbox below, please confirm the approved membership:
+
+Shared mailbox: [Shared Mailbox]
+Users to add: [Users to Add]
+Users to remove: [Users to Remove]
+Send As required: [Send As Needed]
+
+Once confirmed, we will update the mailbox access and note the change in the ticket so the final membership is documented.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: [
+          { label: "Outlook", url: "guides/microsoft/outlook.html" }
+        ]
+      }
+    ]
+  },
+  {
+    category: "Workstation Changes and Maintenance",
+    templates: [
+      {
+        id: "workstation-replacement-scheduling",
+        title: "Workstation replacement scheduling",
+        audience: "Customer-facing",
+        useCase: "Use when coordinating a device swap, rebuild, or replacement with an end user or manager.",
+        placeholders: ["[User Name]", "[Preferred Date]", "[Office or Shipping Location]", "[Apps to Validate]"],
+        template: `Hi [Name],
+
+We are ready to schedule the workstation replacement for [User Name].
+
+Please reply with:
+- Preferred date or time window: [Preferred Date]
+- Office or shipping location: [Office or Shipping Location]
+- Any role-critical applications or files we should validate during handoff: [Apps to Validate]
+
+During the replacement we will verify sign-in, email, Microsoft apps, printing, and the approved role-specific software in scope for this user.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: [
+          { label: "OneDrive", url: "guides/microsoft/onedrive.html" },
+          { label: "AutoCAD", url: "guides/autodesk/autocad.html" }
+        ]
+      },
+      {
+        id: "maintenance-restart-notice",
+        title: "Maintenance or restart notice",
+        audience: "Customer-facing",
+        useCase: "Use when a reboot, repair, or after-hours maintenance action needs a clear heads-up before it happens.",
+        placeholders: ["[System or User]", "[Maintenance Window]", "[Expected Impact]", "[Action Needed]"],
+        template: `Hi [Name],
+
+We are planning maintenance for [System or User] during the following window:
+
+Maintenance window: [Maintenance Window]
+Expected impact: [Expected Impact]
+Action needed from the user: [Action Needed]
+
+If the timing conflicts with a business-critical workflow, let us know before the window begins. Otherwise we will proceed as scheduled and update the ticket once the maintenance is complete.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: []
+      }
+    ]
+  },
+  {
+    category: "User Communication and Closure",
+    templates: [
+      {
+        id: "mfa-reset-explanation",
+        title: "MFA reset explanation",
+        audience: "Customer-facing",
+        useCase: "Use after identity verification when explaining what an MFA reset means and what the user should expect next.",
+        placeholders: ["[User Name]", "[Recovery Method]", "[Apps to Retest]"],
+        template: `Hi [User Name],
+
+We reset your MFA registration so you can complete a clean sign-in and set up your authentication methods again.
+
+What happens next:
+- Sign in with your work account
+- Complete MFA setup using [Recovery Method]
+- Retest the apps that were failing: [Apps to Retest]
+
+If you see prompts for an old phone number, wrong account, or a method you no longer have, stop there and reply to this ticket so we can adjust the recovery path instead of stacking more failed attempts.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: [
+          { label: "Outlook", url: "guides/microsoft/outlook.html" },
+          { label: "Teams", url: "guides/microsoft/teams.html" }
+        ]
+      },
+      {
+        id: "ticket-closure-validation-request",
+        title: "Ticket closure with validation request",
+        audience: "Customer-facing",
+        useCase: "Use when the issue appears resolved but you want one last user confirmation before final closure.",
+        placeholders: ["[Issue Summary]", "[What Was Changed]", "[What To Test]"],
+        template: `Hi [Name],
+
+The issue appears resolved from our side.
+
+Issue summary: [Issue Summary]
+What was changed: [What Was Changed]
+Please test: [What To Test]
+
+If everything is working as expected, reply here and we will close the ticket. If the issue is still present, include the exact error, what application or file you were using, and whether the behavior changed at all after the update.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: []
+      },
+      {
+        id: "outage-acknowledgement-update-resolution",
+        title: "Outage acknowledgement, update, and resolution chain",
+        audience: "Customer-facing",
+        useCase: "Use as a copy-ready framework for incident acknowledgement, progress updates, and final resolution notes.",
+        placeholders: ["[Service]", "[Impact]", "[Scope]", "[Current Status]", "[Resolution Summary]"],
+        template: `Acknowledgement
+Hi [Name],
+
+We are aware of an issue affecting [Service].
+Current impact: [Impact]
+Current scope: [Scope]
+
+We are actively investigating and will send another update as soon as we have confirmed cause, workaround, or next steps.
+
+Update
+Hi [Name],
+
+We are still working the issue affecting [Service].
+Current status: [Current Status]
+Next update target: [Time]
+
+Resolution
+Hi [Name],
+
+The issue affecting [Service] is now resolved or stabilized.
+Resolution summary: [Resolution Summary]
+
+If anyone is still impacted, please reply with the exact behavior, time observed, and whether it affects one user or multiple users.`,
+        relatedGuides: []
+      }
+    ]
+  },
+  {
+    category: "Internal Handoffs and Escalations",
+    templates: [
+      {
+        id: "tier1-tier2-escalation",
+        title: "Tier 1 to Tier 2 escalation handoff",
+        audience: "Internal-only",
+        useCase: "Use when the ticket is leaving first-touch support and needs a clean, evidence-based handoff instead of a vague summary.",
+        placeholders: ["[User / Site]", "[Business Impact]", "[What Failed]", "[What Was Tested]", "[Evidence Collected]", "[Suggested Next Step]"],
+        template: `Escalating from Tier 1 to Tier 2
+
+User / site: [User / Site]
+Business impact: [Business Impact]
+What failed: [What Failed]
+
+What was tested:
+- [What Was Tested]
+
+Evidence collected:
+- [Error text / screenshots]
+- [Version / build]
+- [Relevant logs, paths, or timestamps]
+
+What changed before failure:
+- [Recent password change / workstation swap / update / permission change]
+
+Suggested next step:
+- [Suggested Next Step]
+
+Customer expectation already set:
+- [Yes / No and what was communicated]`,
+        relatedGuides: [
+          { label: "ProjectWise", url: "guides/bentley/projectwise.html" },
+          { label: "SharePoint", url: "guides/microsoft/sharepoint.html" }
+        ]
+      },
+      {
+        id: "after-hours-handoff-template",
+        title: "After-hours handoff template",
+        audience: "Internal-only",
+        useCase: "Use when work needs to pass between shifts without losing the current state, risk, or customer expectation.",
+        placeholders: ["[Issue]", "[Current State]", "[Business Risk]", "[Next Safe Action]", "[Customer Status]"],
+        template: `After-hours handoff
+
+Issue: [Issue]
+Current state: [Current State]
+Business risk: [Business Risk]
+
+Completed so far:
+- [Action 1]
+- [Action 2]
+
+Do not repeat:
+- [Already tried / avoid repeating]
+
+Next safe action:
+- [Next Safe Action]
+
+Customer status:
+- [Customer Status]
+
+Waiting on:
+- [Approval / vendor / client contact / user validation]`,
+        relatedGuides: [
+          { label: "ProjectWise", url: "guides/bentley/projectwise.html" }
+        ]
+      },
+      {
+        id: "network-investigation-handoff",
+        title: "Network issue investigation handoff",
+        audience: "Internal-only",
+        useCase: "Use when the issue looks network-related and needs to move to the next engineer with route, DNS, and reachability facts already collected.",
+        placeholders: ["[Source Device]", "[Destination]", "[By Name Result]", "[By IP Result]", "[VPN State]", "[Port Test Result]"],
+        template: `Network investigation handoff
+
+Source device: [Source Device]
+Destination or service: [Destination]
+Result by name: [By Name Result]
+Result by IP: [By IP Result]
+VPN state: [VPN State]
+Port or reachability test result: [Port Test Result]
+
+Collected:
+- ipconfig /all
+- DNS test results
+- Route or gateway observations
+- Whether the issue is isolated or shared
+
+Question for next touch:
+- Is this DNS, route, firewall, tunnel, or service-specific?`,
+        relatedGuides: []
+      }
+    ]
+  },
+  {
+    category: "Vendor and Incident Coordination",
+    templates: [
+      {
+        id: "vendor-escalation-request",
+        title: "Vendor escalation request",
+        audience: "Internal-only",
+        useCase: "Use when the MSP is escalating to Autodesk, Bentley, Adobe, Intuit, Microsoft, or another vendor after standard checks are complete.",
+        placeholders: ["[Vendor]", "[Product]", "[Version]", "[Environment]", "[Failure]", "[What Was Tested]", "[Artifacts Attached]"],
+        template: `Vendor escalation request
+
+Vendor: [Vendor]
+Product: [Product]
+Version / build: [Version]
+Environment: [Environment]
+
+Failure summary:
+- [Failure]
+
+What we already tested:
+- [What Was Tested]
+
+Artifacts attached:
+- [Screenshots]
+- [Logs]
+- [Licensing or entitlement proof]
+- [User impact statement]
+
+Reason for vendor review:
+- Behavior persists after normal MSP-side checks and appears to require vendor-supported guidance or defect confirmation.`,
+        relatedGuides: [
+          { label: "AutoCAD", url: "guides/autodesk/autocad.html" },
+          { label: "ProjectWise", url: "guides/bentley/projectwise.html" }
+        ]
+      },
+      {
+        id: "post-incident-notes-template",
+        title: "Post-incident notes template",
+        audience: "Internal-only",
+        useCase: "Use when documenting the final record after an outage, compromise review, or other significant support event.",
+        placeholders: ["[Incident]", "[Timeline]", "[Root Cause or Current Theory]", "[Containment]", "[Follow-Up Actions]"],
+        template: `Post-incident notes
+
+Incident: [Incident]
+Timeline:
+- [Timeline]
+
+Root cause or current theory:
+- [Root Cause or Current Theory]
+
+Containment or recovery actions:
+- [Containment]
+
+Customer communication summary:
+- [What was sent and when]
+
+Follow-up actions:
+- [Follow-Up Actions]
+
+Documentation gaps noted:
+- [Missing runbook / access / contact / logging gap]`,
+        relatedGuides: []
+      },
+      {
+        id: "monitoring-alert-triage-template",
+        title: "Monitoring alert triage template",
+        audience: "Internal-only",
+        useCase: "Use for the first structured note when a monitoring alert comes in and needs quick triage without losing the initial facts.",
+        placeholders: ["[Alert Name]", "[Affected Device or Service]", "[Severity]", "[What Is Confirmed]", "[Immediate Action]"],
+        template: `Monitoring alert triage
+
+Alert name: [Alert Name]
+Affected device or service: [Affected Device or Service]
+Severity: [Severity]
+
+What is confirmed:
+- [What Is Confirmed]
+
+Immediate action taken:
+- [Immediate Action]
+
+Still unknown:
+- [Unknown 1]
+- [Unknown 2]
+
+Escalate if:
+- User impact is active
+- Security exposure is suspected
+- The alert is repeated without a clear benign cause`,
+        relatedGuides: []
+      }
+    ]
+  }
+];
+
+export const handoffTemplates = handoffTemplateGroups.flatMap(group =>
+  group.templates.map(template => ({
+    ...template,
+    category: group.category
+  }))
+);

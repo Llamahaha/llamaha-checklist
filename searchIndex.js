@@ -10,7 +10,7 @@ import {
   microsoftIssueSections
 } from "./supportData.js";
 import { emergencyPlaybooks } from "./operationsData.js";
-import { snippetLibrary } from "./resourceLibrary.js";
+import { handoffTemplates, snippetLibrary } from "./resourceLibrary.js";
 
 function entry(title, text, url, category, typeLabel, keywords = "") {
   return { title, text, url, category, typeLabel, keywords };
@@ -23,6 +23,7 @@ export function buildSearchIndex() {
     entry("Checklist Generator", "Build onboarding and offboarding runbooks with saved local progress.", "checklist.html", "checklist", "Checklist", "onboarding offboarding checklist runbook"),
     entry("Emergency Playbooks", "First-response incident playbooks for urgent support and security events.", "emergency-playbooks.html", "playbook", "Playbook", "incident response ransomware compromise"),
     entry("Snippet Library", "Grouped MSP-ready snippets for Microsoft 365, AD, networking, Windows repair, software cleanup, and endpoint checks.", "snippets.html", "snippet", "Snippet Library", "powershell snippets commands"),
+    entry("Template Library", "Copy-ready customer-facing and internal templates for approvals, handoffs, outage notes, maintenance notices, and ticket closure.", "templates.html", "hub", "Library Page", "templates handoff communication"),
     entry("Application Licensing", "Vendor-specific licensing workflows and recovery notes.", "app-licensing.html", "hub", "Library Page", "licensing seats subscriptions"),
     entry("Install / Uninstall Guides", "Install, uninstall, cleanup, and FAQ guidance.", "install-uninstall.html", "hub", "Library Page", "install uninstall cleanup"),
     entry("Application Issues and Fixes", "Cross-app issue patterns plus vendor-specific fixes.", "application-issues.html", "issueGuide", "Issue Guide", "troubleshooting faq errors"),
@@ -92,6 +93,19 @@ export function buildSearchIndex() {
     group.snippets.forEach(snippet => {
       entries.push(entry(snippet.title, `${group.category} ${snippet.purpose} ${snippet.whenToUse} ${snippet.command}`, `snippets.html#${snippet.id}`, "snippet", "Snippet", group.category));
     });
+  });
+
+  handoffTemplates.forEach(template => {
+    entries.push(
+      entry(
+        template.title,
+        `${template.category} ${template.audience} ${template.useCase} ${template.template}`,
+        `templates.html#${template.id}`,
+        "template",
+        "Template",
+        `${template.category} ${template.audience}`
+      )
+    );
   });
 
   return entries;

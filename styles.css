@@ -951,6 +951,31 @@ input[type="checkbox"] {
   overflow-x: auto;
 }
 
+.resource-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+.resource-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.resource-badge.is-accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
 /* ── Issue tracker ──────────────────────────── */
 
 .tracker-form {
