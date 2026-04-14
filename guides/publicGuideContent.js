@@ -723,6 +723,140 @@ export const publicGuideContent = {
       ]
     }
   },
+  fortinet: {
+    "forticlient-vpn": {
+      summary: "Use this guide when FortiClient VPN will not connect, keeps prompting for sign-in, drops the tunnel, or connects but you still cannot reach company resources.",
+      overview: [
+        "FortiClient VPN is used to connect your computer to your company's private network when you are away from the office.",
+        "Most FortiClient issues come from the wrong VPN profile, a local internet problem, an MFA or browser sign-in step that did not finish, or a tunnel that connects but does not reach the resource you expect."
+      ],
+      askFirst: [
+        "Does your normal internet connection work before you open FortiClient?",
+        "Are you using the exact VPN tunnel or profile your company gave you?",
+        "Is the issue connecting to the VPN, finishing MFA, or reaching an internal site, shared drive, or app after the VPN connects?",
+        "Did the problem start after a password change, phone change, update, or a new computer setup?"
+      ],
+      licensing: [
+        "FortiClient access usually depends on the company VPN profile or tunnel assigned to you rather than a separate public subscription.",
+        "Use the exact work account, username format, or sign-in method your company provided for VPN access.",
+        "If the VPN uses a browser sign-in or MFA step, finish that prompt completely before deciding the connection failed."
+      ],
+      install: [
+        "Use the company-approved FortiClient build and VPN profile instead of creating a new tunnel from scratch.",
+        "Restart the computer after installing or updating FortiClient, then open the correct VPN profile again.",
+        "After the VPN connects, test one internal website or one company file path so you know whether the tunnel itself is working."
+      ],
+      supportCheckpoints: [
+        "Confirm regular internet access works before retrying the VPN tunnel.",
+        "If FortiClient opens a browser or MFA step, complete it and wait for the VPN window to finish updating.",
+        "If the VPN says Connected but one app still fails, compare that app with a second internal website or file path before assuming the tunnel is down.",
+        "Keep the exact tunnel name and the wording of any FortiClient message before contacting support."
+      ],
+      commonIssues: [
+        {
+          title: "FortiClient will not connect at all",
+          symptom: "The VPN tunnel never finishes connecting, or FortiClient returns an immediate connection or sign-in error.",
+          likelyFix: "Confirm the computer has normal internet access, reopen the correct company VPN profile, and retry the same tunnel after restarting the computer once.",
+          collect: "Send the tunnel name, the exact FortiClient message, and whether normal internet browsing works at the same time."
+        },
+        {
+          title: "The VPN uses a browser or MFA step that never completes",
+          symptom: "FortiClient opens a browser, MFA prompt, or sign-in page, but the VPN session never finishes connecting afterward.",
+          likelyFix: "Complete the sign-in or approval flow in the browser, return to FortiClient, and note whether the issue started after a phone or password change.",
+          collect: "Send a screenshot of the sign-in or MFA page, the work account or username you used, and whether the same MFA method works elsewhere."
+        },
+        {
+          title: "FortiClient says connected, but company resources still do not open",
+          symptom: "The tunnel shows as connected, but file shares, internal websites, or remote tools still do not work.",
+          likelyFix: "Test a second internal site or path so you can tell whether the whole VPN path is failing or only one app is affected.",
+          collect: "Send the resource that fails, whether any other internal site or path works, and a screenshot showing the tunnel connected."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact FortiClient VPN message or connected screen.",
+        "The FortiClient tunnel or profile name you selected.",
+        "The work account or username format used for the VPN sign-in.",
+        "A note about whether the same problem affects every internal resource or only one site, file share, or app."
+      ],
+      relatedLinks: [
+        {
+          label: "FortiClient VPN documentation",
+          url: "https://docs.fortinet.com/document/forticlient/7.2.10/administration-guide/6364/connecting-to-ssl-or-ipsec-vpn"
+        },
+        {
+          label: "Connecting from FortiClient VPN client",
+          url: "https://docs.fortinet.com/document/fortigate/7.6.1/administration-guide/215051/connecting-from-forticlient-vpn-client"
+        }
+      ]
+    }
+  },
+  oracle: {
+    "primavera-p6": {
+      summary: "Use this guide when Oracle Primavera P6 will not sign in, shows the wrong database, opens without the projects you expect, or feels out of sync with your normal work environment.",
+      overview: [
+        "Oracle Primavera P6 is a project scheduling and planning app used to open and work with schedules, projects, and related planning data.",
+        "Most Primavera P6 issues come from the wrong login, the wrong database or environment being selected, or a cached or cloud-connected workspace that is not matching what you expect."
+      ],
+      askFirst: [
+        "Can you confirm the exact Primavera P6 environment or database your team expects you to use?",
+        "Are you signing in with the exact P6 login name your company assigned?",
+        "Is the problem signing in, opening a project, seeing a project list, or working with local cached content?",
+        "Did the issue begin after a reinstall, update, password change, or moving to a new computer?"
+      ],
+      licensing: [
+        "Primavera P6 access depends on the P6 login your company assigned and the database or environment selected in the login dialog.",
+        "Oracle's P6 login help notes that login names and passwords are case-sensitive, so type them carefully.",
+        "If your company uses a Cloud Connect or cached environment, do not reinitialize the local cache unless support specifically asks you to."
+      ],
+      install: [
+        "Use the company-approved Primavera P6 install or launcher instead of mixing installers from different sources.",
+        "Open the login dialog and confirm the correct database or environment appears before you sign in.",
+        "After sign-in works, test one smaller project first so you know whether the issue affects the whole app or one project only."
+      ],
+      supportCheckpoints: [
+        "Keep the selected database or environment name handy before you contact support.",
+        "If P6 offers more than one database, make sure you are choosing the same one your team normally uses.",
+        "If you can sign in but projects are missing, compare one expected project name before changing local data or reinstalling.",
+        "If you work remotely and P6 depends on network access, confirm your VPN or remote connection first."
+      ],
+      commonIssues: [
+        {
+          title: "The P6 login fails or opens the wrong environment",
+          symptom: "Primavera P6 opens the login dialog, but sign-in fails or the database list does not match what you expected.",
+          likelyFix: "Recheck the exact login name, password, and selected database or environment before changing the app installation.",
+          collect: "Send the database or environment name shown, the exact login message, and a screenshot of the login dialog if possible."
+        },
+        {
+          title: "Projects or schedules are missing after sign-in",
+          symptom: "You can open P6, but the expected project list, schedule, or workspace content is missing.",
+          likelyFix: "Confirm you signed into the correct database and compare one known project name before resetting anything locally.",
+          collect: "Send the project or schedule name you expected, the database or environment selected, and a screenshot of the project list."
+        },
+        {
+          title: "P6 opens slowly or local data looks out of date",
+          symptom: "The app opens, but feels unusually slow or seems to show stale local content.",
+          likelyFix: "Restart the computer and reopen P6 once before changing cache settings, especially if your team uses Cloud Connect or cached access.",
+          collect: "Send the P6 version, whether your team uses a cloud-connected or cached setup, and a screenshot if the app shows any sync or cache wording."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Primavera P6 login dialog or error.",
+        "The database or environment name selected in P6.",
+        "The project or schedule name involved in the problem.",
+        "The Primavera P6 version from Help > About Primavera P6 Professional if you can open it."
+      ],
+      relatedLinks: [
+        {
+          label: "Primavera P6 login dialog help",
+          url: "https://docs.oracle.com/cd/F37128_01/client_help/en_US/login_to_primavera_dialog_box.htm"
+        },
+        {
+          label: "Primavera P6 user guide",
+          url: "https://docs.oracle.com/cd/G48902_01/English/User_Guides/p6_pro_user/p6_pro_user.pdf"
+        }
+      ]
+    }
+  },
   browsers: {
     "google-chrome": {
       summary: "Use this guide when a work site, download, sign-in page, or file-opening action is not behaving correctly in Google Chrome.",

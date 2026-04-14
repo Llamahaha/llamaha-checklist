@@ -163,17 +163,125 @@ export const microsoftIssueSections = [
 
 export const computerIssueSections = [
   {
-    title: "Access and Connectivity",
-    description: "These are the workstation access patterns that tend to create the most confusion during support calls: shared resources, remote access, and basic network health.",
+    title: "Cloud PCs and Remote Windows Access",
+    description: "Use this section when you connect to a Windows 365 Cloud PC or another remote Windows workspace for daily work.",
     items: [
       {
-        title: "Shared drives or mapped paths keep disappearing",
-        text: "Drive mapping failures are usually permissions, DNS, cached credentials, or VPN path problems instead of a full file-server outage.",
+        title: "Your Cloud PC is missing or will not connect",
+        text: "Windows 365 access problems are usually caused by signing in with the wrong work account, using the wrong connection app, or a Cloud PC session that needs to be restarted.",
         fixes: [
-          "Confirm the user is on the right network or VPN before troubleshooting the share itself.",
-          "Test the server path by name and confirm the user still belongs to the right AD group or file-share permission set.",
-          "Remove stale mapped drives or Windows Credential Manager entries if the path keeps reconnecting with the wrong identity.",
-          "If the share works by UNC path but not as a drive letter, rebuild the mapping cleanly instead of layering another shortcut over it."
+          "Use the same work account your company assigned for Windows 365. If no Cloud PCs appear, compare the signed-in account to the one your company expected you to use.",
+          "Use a supported connection method such as Windows App or the Windows 365 web client instead of older Remote Desktop shortcuts for daily access.",
+          "If the Cloud PC card appears but will not connect, restart the local computer first, then retry the Cloud PC from the same client.",
+          "If Windows asks you which app should open a Cloud PC session file, choose Azure Virtual Desktop (HostApp) when that option appears."
+        ],
+        links: [
+          {
+            label: "Access a Cloud PC",
+            url: "https://learn.microsoft.com/en-us/windows-365/end-user-access-cloud-pc"
+          },
+          {
+            label: "Troubleshoot Windows 365 app issues",
+            url: "https://learn.microsoft.com/en-us/troubleshoot/windows-365/troubleshoot-windows-365-app"
+          }
+        ]
+      },
+      {
+        title: "The Cloud PC opens, but feels frozen, slow, or off",
+        text: "Cloud PC performance problems often come from the local internet connection, a temporary session issue, or a Cloud PC that needs to be restarted cleanly.",
+        fixes: [
+          "Confirm your local computer still has stable internet access before assuming the Cloud PC itself is down.",
+          "Disconnect and reconnect once if the session looks frozen or never finishes loading the desktop.",
+          "If the Cloud PC opens but is unusually slow, close heavy local apps and compare whether the issue affects only one Cloud PC session or every remote session you open.",
+          "Restart the Cloud PC from the supported Windows 365 or Windows App controls if the session clearly is not recovering."
+        ],
+        links: [
+          {
+            label: "Troubleshoot connection errors",
+            url: "https://learn.microsoft.com/en-us/windows-365/enterprise/connection-errors"
+          },
+          {
+            label: "Cloud PC actions in Windows App",
+            url: "https://learn.microsoft.com/en-us/windows-app/device-actions"
+          }
+        ]
+      },
+      {
+        title: "Your Cloud PC session looks out of date or missing recent work",
+        text: "Cloud PC issues that look like missing apps or stale content are often tied to the wrong account, the wrong Cloud PC, or a session that did not reconnect where you expected.",
+        fixes: [
+          "Confirm you opened the correct Cloud PC if your company provides more than one remote desktop option.",
+          "If recent work or app updates are missing, restart the Cloud PC session and sign back in with the expected work account.",
+          "If a file should be on the Cloud PC but is not, confirm whether it lives in OneDrive, SharePoint, or another synced location before moving or recreating it.",
+          "If the problem affects only one business app inside the Cloud PC, open that app's guide before treating the whole Cloud PC as broken."
+        ],
+        links: [
+          {
+            label: "Access a Cloud PC",
+            url: "https://learn.microsoft.com/en-us/windows-365/end-user-access-cloud-pc"
+          },
+          {
+            label: "Open App Help",
+            url: "vendor-guides.html",
+            external: false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Network, VPN, and Shared Access",
+    description: "Use this section when the computer can get online, but work resources such as shared drives, FortiClient VPN, or internal apps still are not reachable.",
+    items: [
+      {
+        title: "Wi-Fi, internet, or general network access is unstable",
+        text: "Most everyday network issues are caused by local Wi-Fi, an unstable internet connection, or DNS problems rather than the work app itself.",
+        fixes: [
+          "Confirm normal internet browsing works before you retry a work app, VPN, or mapped drive.",
+          "Restart the local Wi-Fi connection or the computer if the issue began after sleep, docking, or changing locations.",
+          "If only one website or one internal tool fails, compare it with a second site or app before assuming the whole computer is offline.",
+          "If the internet is unstable everywhere on the device, fix that first before troubleshooting business apps."
+        ],
+        links: [
+          {
+            label: "Fix network connection issues in Windows",
+            url: "https://support.microsoft.com/en-us/windows/fix-network-connection-issues-in-windows-10-166a28c4-14c1-bdb1-473c-09c1571455d8"
+          }
+        ]
+      },
+      {
+        title: "FortiClient VPN will not connect or keeps dropping",
+        text: "Most FortiClient problems come from the wrong VPN profile, internet issues, MFA or browser sign-in problems, or a FortiClient build that needs to be updated.",
+        fixes: [
+          "Confirm the computer has normal internet access before you retry the VPN tunnel.",
+          "Open the exact FortiClient tunnel your company expects and make sure you are signing in with the same work account or username format your company provided.",
+          "If the VPN uses a browser or MFA step, complete that prompt fully and return to FortiClient before you retry the connection.",
+          "If the VPN connects but internal file shares or sites still fail, compare whether the issue affects every internal resource or only one app."
+        ],
+        links: [
+          {
+            label: "Open FortiClient VPN guide",
+            url: "guides/fortinet/forticlient-vpn.html",
+            external: false
+          },
+          {
+            label: "Connect from FortiClient VPN client",
+            url: "https://docs.fortinet.com/document/fortigate/7.6.1/administration-guide/215051/connecting-from-forticlient-vpn-client"
+          },
+          {
+            label: "Connect to SSL or IPsec VPN",
+            url: "https://docs.fortinet.com/document/forticlient/7.2.10/administration-guide/6364/connecting-to-ssl-or-ipsec-vpn"
+          }
+        ]
+      },
+      {
+        title: "Shared drives or mapped paths keep disappearing",
+        text: "Drive mapping failures are usually permissions, cached credentials, VPN path problems, or opening the wrong server path rather than a full file-server outage.",
+        fixes: [
+          "Confirm you are on the right network or VPN before troubleshooting the shared path itself.",
+          "Test the same server path by name and compare it with another shared folder if one is available.",
+          "If Windows keeps reconnecting with the wrong account, clear old saved credentials only after you have the correct username and password ready.",
+          "If the path works by direct server path but not as a mapped drive letter, remove the old broken mapping and recreate it cleanly."
         ],
         links: [
           {
@@ -185,53 +293,21 @@ export const computerIssueSections = [
             url: "https://support.microsoft.com/en-au/windows/file-sharing-over-a-network-in-windows-b58704b2-f53a-4b82-7bc1-80f9994725bf"
           }
         ]
-      },
-      {
-        title: "VPN, Wi-Fi, or general network issues",
-        text: "Network tickets are often local connectivity, DNS, or split-tunnel problems rather than a broken remote app.",
-        fixes: [
-          "Confirm the device has normal internet connectivity before digging into VPN profiles or internal resources.",
-          "Test name resolution separately from reachability so you can tell a DNS issue from a routing issue.",
-          "If the VPN connects but apps still fail, compare expected split-tunnel behavior against what the user can and cannot reach.",
-          "Use a known-good user or device to see whether the issue is endpoint-specific before changing the shared VPN configuration."
-        ],
-        links: [
-          {
-            label: "Fix network connection issues in Windows",
-            url: "https://support.microsoft.com/en-US/windows/fix-network-connection-issues-in-windows-10-166a28c4-14c1-bdb1-473c-09c1571455d8"
-          }
-        ]
-      },
-      {
-        title: "Remote access path works for some resources but not others",
-        text: "When email and web work but shares or line-of-business apps fail, the issue is often entitlement, DNS suffix, or a stale credential path.",
-        fixes: [
-          "Check whether the user can reach the sign-in portal, internal DNS names, and one known internal share or server.",
-          "Compare behavior before and after VPN connection to see whether the tunnel is changing routing the way the client expects.",
-          "Validate MFA, certificates, and saved profiles if the VPN prompts look unusual after password or phone changes.",
-          "Document any special remote-access requirements for finance, CAD, or file-server workflows so future tickets start faster."
-        ],
-        links: [
-          {
-            label: "Fix network connection issues in Windows",
-            url: "https://support.microsoft.com/en-US/windows/fix-network-connection-issues-in-windows-10-166a28c4-14c1-bdb1-473c-09c1571455d8"
-          }
-        ]
       }
     ]
   },
   {
-    title: "Device Health and Storage",
-    description: "Low space, poor performance, and update trouble often overlap. This section gives a better first-pass checklist before a rebuild or reimage.",
+    title: "Performance, Storage, and Updates",
+    description: "Use this section when the computer starts slowly, feels sluggish, runs out of space, or refuses to install routine Windows updates.",
     items: [
       {
         title: "Low disk space or cleanup trouble",
-        text: "Storage issues usually hide in Downloads, profile caches, offline cloud folders, and temporary files rather than Windows alone.",
+        text: "Storage issues usually come from Downloads, desktop clutter, offline cloud folders, and temporary files rather than Windows alone.",
         fixes: [
-          "Check the size of Downloads, Desktop, Outlook, OneDrive, Egnyte, and application caches before deleting random folders.",
-          "Use Windows Storage and Cleanup Recommendations first so the user can see what is safe to remove.",
-          "Review cloud sync settings and offline folders if the device is pinning far more data locally than expected.",
-          "Confirm the application actually needs local free space for updates, temp conversion, or rendering before changing its configuration."
+          "Check the size of Downloads, Desktop, OneDrive, Outlook, and other large user folders before deleting random Windows folders.",
+          "Use Windows Storage or Cleanup Recommendations first so you can see what is safe to remove.",
+          "If a cloud sync folder is pinning too much data offline, unpin older content before uninstalling or moving the app.",
+          "Leave app-specific caches alone unless the guide for that app tells you they are safe to remove."
         ],
         links: [
           {
@@ -241,13 +317,13 @@ export const computerIssueSections = [
         ]
       },
       {
-        title: "Slow startup or poor overall PC performance",
-        text: "Performance complaints are often background apps, low storage, pending updates, or heavy sync and security workloads rather than bad hardware alone.",
+        title: "The PC starts slowly or feels unusually sluggish",
+        text: "Performance complaints are often caused by startup apps, low free space, pending updates, or background sync jobs rather than a hardware failure alone.",
         fixes: [
-          "Check startup apps, storage pressure, and whether large sync or scan jobs are running in the background.",
-          "Confirm Windows and key drivers are current before assuming the hardware is failing.",
-          "Remove unused apps and reduce startup load before escalating to reimage or replacement.",
-          "If only one user profile is slow, compare against a fresh profile before concluding the whole machine is unhealthy."
+          "Restart the computer fully before deeper cleanup if it has not been restarted recently.",
+          "Check startup apps, free disk space, and whether large sync or update jobs are still running in the background.",
+          "Install pending Windows updates and reopen only the apps you need for one test.",
+          "If only one app is slow, use that app's guide before assuming the whole computer is unhealthy."
         ],
         links: [
           {
@@ -261,13 +337,13 @@ export const computerIssueSections = [
         ]
       },
       {
-        title: "Windows Update failures or updates stuck",
-        text: "Update failures commonly involve low disk space, services that are stuck, third-party interference, or a device that simply needs a clean restart and rerun.",
+        title: "Windows Update fails or gets stuck",
+        text: "Update failures usually come from low disk space, a pending restart, interrupted internet access, or a device that needs to retry the update cleanly.",
         fixes: [
-          "Run the Windows Update troubleshooter first and restart before doing heavier cleanup.",
-          "Check storage availability and internet health because low space and bad connectivity can both stall updates.",
-          "If a device is hanging at the same percentage, retry after reboot and verify no pending reboot or service issue remains.",
-          "Capture the error code before deeper remediation so the ticket has real evidence if the problem returns."
+          "Restart the computer first, then check whether Windows Update shows a clearer error after the restart.",
+          "Make sure there is enough free disk space before retrying a feature update or cumulative update.",
+          "Keep the exact update error code or wording instead of retrying the same failed update over and over without capturing it.",
+          "If the update began failing only after another app install or security prompt, note that timing when you contact support."
         ],
         links: [
           {
@@ -283,17 +359,17 @@ export const computerIssueSections = [
     ]
   },
   {
-    title: "Printing, Audio, and User Sessions",
-    description: "These are the frustrating day-to-day endpoint tickets that often look random but usually reduce to the same few patterns.",
+    title: "Printing, Audio, and Sign-in",
+    description: "Use this section for the everyday PC issues that interrupt work quickly: printers, sound, headsets, docks, and Windows sign-in.",
     items: [
       {
         title: "Printer mapping, queue, or shared printer problems",
-        text: "Print issues are usually printer sharing, driver, spooler, or IP-path problems instead of a full application failure.",
+        text: "Print issues are usually caused by the printer path, the queue, or a stalled print job rather than the document app itself.",
         fixes: [
-          "Check whether the printer is online and reachable, and whether the user is hitting the correct print server or IP queue.",
-          "Clear stuck jobs and restart the print spooler when jobs are piling up but never printing.",
-          "Confirm the printer is shared correctly on the host or server if this is a shared-printer workflow.",
-          "Reinstall with the approved driver only after confirming the queue path and default printer are correct."
+          "Check whether the printer is online and reachable, and whether you are sending the job to the correct printer or shared queue.",
+          "If jobs are stuck in the queue, clear the pending jobs and retry one small print job.",
+          "If the printer is shared by another computer or print server, confirm that path still exists before reinstalling anything.",
+          "If only one app cannot print, test the printer from another app before assuming the printer is broken."
         ],
         links: [
           {
@@ -307,13 +383,13 @@ export const computerIssueSections = [
         ]
       },
       {
-        title: "Bluetooth, headset, audio, or docking weirdness",
-        text: "Peripheral issues often come from the wrong output device, stale Bluetooth pairing, enhancements, or driver problems after Windows updates.",
+        title: "Bluetooth, headset, audio, or docking issues",
+        text: "Audio and headset problems are often caused by the wrong playback or recording device, a dock change, Bluetooth pairing, or app permissions.",
         fixes: [
-          "Check the active output and input devices first, especially after docking, undocking, or joining a Teams meeting.",
-          "Turn off audio enhancements and confirm Windows is using the intended speaker or headset.",
-          "If Bluetooth is involved, recheck pairing state, battery, range, and recent driver updates before replacing hardware.",
-          "If one peripheral works on another machine, focus on the Windows device configuration instead of the headset or dock."
+          "Check the active speaker and microphone in Windows first, especially after docking, undocking, or joining a Teams meeting.",
+          "Reconnect the headset or dock once if Windows is still pointing to an old device.",
+          "If Bluetooth is involved, confirm the headset is still paired and has enough battery before deeper troubleshooting.",
+          "If only one app has no sound, test system audio or another app before changing the whole computer."
         ],
         links: [
           {
@@ -327,18 +403,18 @@ export const computerIssueSections = [
         ]
       },
       {
-        title: "Windows sign-in or profile problems",
-        text: "Login failures are often profile corruption, time drift, cached credentials, expired passwords, or confusion between local, domain, and cloud sign-in paths.",
+        title: "Windows sign-in or password issues",
+        text: "Windows sign-in problems usually come from the wrong sign-in method, cached credentials, a recent password change, or the computer not reaching the sign-in service it needs.",
         fixes: [
-          "Confirm the user is attempting the right identity context before assuming the password itself is wrong.",
-          "Check time and date, lockout status, password expiry, and reachability to the identity source.",
-          "If other users can sign in on the same machine, compare against a fresh or test profile before rebuilding Windows.",
-          "Record whether the problem affects only Windows sign-in or also browser and Microsoft 365 sign-in so the ticket is scoped correctly."
+          "Confirm you are using the correct work account, local account, PIN, or password option for that computer.",
+          "Restart the computer once if the sign-in screen looks frozen or repeatedly rejects a new password right after a reset.",
+          "If the same work account signs in fine to Microsoft 365 in the browser but not to Windows, mention that difference when you contact support.",
+          "If the issue began after a password change, try one more careful sign-in after reconnecting the device to Wi-Fi or Ethernet."
         ],
         links: [
           {
-            label: "Fix network connection issues in Windows",
-            url: "https://support.microsoft.com/en-US/windows/fix-network-connection-issues-in-windows-10-166a28c4-14c1-bdb1-473c-09c1571455d8"
+            label: "Change or reset your Windows password",
+            url: "https://support.microsoft.com/en-us/windows/change-or-reset-your-password-in-windows-532dc8d3-9b9e-7f8c-4d36-32d73cf28dc4"
           }
         ]
       }

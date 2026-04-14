@@ -10,6 +10,9 @@
 
   var vendorTitles = {
     microsoft: "Microsoft 365",
+    browsers: "Browsers",
+    fortinet: "Fortinet",
+    oracle: "Oracle",
     autodesk: "Autodesk",
     bentley: "Bentley",
     esri: "Esri",
@@ -27,6 +30,8 @@
     "microsoft/teams": "Teams",
     "microsoft/onedrive": "OneDrive",
     "microsoft/sharepoint": "SharePoint",
+    "fortinet/forticlient-vpn": "FortiClient VPN",
+    "oracle/primavera-p6": "Oracle Primavera P6",
     "adobe/acrobat-pro": "Adobe Acrobat",
     "adobe/creative-cloud-desktop": "Creative Cloud Desktop",
     "bluebeam/revu-21": "Bluebeam Revu",
@@ -715,7 +720,7 @@
       breadcrumbs.innerHTML = "";
       var parts = [
         { label: "Home", url: rootPath + "/index.html" },
-        { label: "Guides", url: rootPath + "/vendor-guides.html" },
+        { label: "App Help", url: rootPath + "/vendor-guides.html" },
         { label: vendorTitle, url: rootPath + "/guides/" + vendorSlug + ".html" }
       ];
 
@@ -919,7 +924,7 @@
       { label: "Back to " + model.vendorTitle, url: rootPath + "/guides/" + vendorSlug + ".html" }
     ])));
     relatedGrid.appendChild(createCard("Need More Help?", createLinks([
-      { label: "Open Guides", url: rootPath + "/vendor-guides.html" },
+      { label: "Open App Help", url: rootPath + "/vendor-guides.html" },
       { label: "Licensing help", url: rootPath + "/app-licensing.html" },
       { label: "Open contact page", url: rootPath + "/contact.html" }
     ])));

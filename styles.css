@@ -513,6 +513,11 @@ body {
   gap: 18px;
 }
 
+.home-support-panels {
+  grid-template-columns: minmax(0, 1.55fr) minmax(240px, 0.95fr);
+  align-items: stretch;
+}
+
 .support-panel {
   justify-items: start;
 }

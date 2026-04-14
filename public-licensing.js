@@ -33,6 +33,32 @@ const customerLicensingReference = {
       "If relevant, the browser profile or work account used in the browser"
     ]
   },
+  fortinet: {
+    summary: "FortiClient VPN access usually depends on the exact VPN profile or tunnel your company gave you, the work account or username you use for that connection, and any MFA or certificate requirement tied to it.",
+    howItWorks: [
+      "FortiClient usually uses a company-provided VPN profile or tunnel name instead of a public self-service setup.",
+      "Some environments use a browser sign-in, MFA prompt, or certificate step in addition to the FortiClient password or connection flow.",
+      "The exact VPN tunnel or profile matters, especially if your company provides more than one remote-access option."
+    ],
+    whatYouNeed: [
+      "The FortiClient VPN tunnel or profile name your company provided",
+      "The exact work account or username format you should use for VPN sign-in",
+      "If relevant, the MFA method or browser sign-in prompt used during connection"
+    ]
+  },
+  oracle: {
+    summary: "Oracle Primavera P6 access usually depends on the correct P6 login, the correct database connection, and the environment your team uses for that P6 workspace.",
+    howItWorks: [
+      "Primavera P6 can depend on a database connection as well as the login name and password you enter when the app opens.",
+      "The database or environment selection matters, especially when teams use more than one P6 environment or a cloud-connected setup.",
+      "If your company uses a local cache or offline mode with P6, that environment detail can also matter."
+    ],
+    whatYouNeed: [
+      "The exact Primavera P6 login name your company assigned",
+      "The database or environment name you should select in the P6 login dialog",
+      "If relevant, whether your team uses a cloud-connected, cached, or offline-capable P6 setup"
+    ]
+  },
   autodesk: {
     summary: "Autodesk access is usually tied to the Autodesk account email assigned to you and the exact product plus release year your team uses.",
     howItWorks: [

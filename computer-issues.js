@@ -23,7 +23,7 @@ function renderSections() {
     const headingInner = document.createElement("div");
     const kicker = document.createElement("p");
     kicker.className = "section-kicker";
-    kicker.textContent = "Computer Issues";
+    kicker.textContent = "PC Help";
 
     const title = document.createElement("h2");
     title.textContent = section.title;
@@ -50,7 +50,7 @@ function renderSections() {
       const links = createLinks(
         item.links.map(link => ({
           ...link,
-          external: true
+          external: link.external ?? /^https?:/i.test(link.url)
         }))
       );
 
@@ -64,7 +64,7 @@ function renderSections() {
 
   renderPageToc(pageToc, tocItems, {
     title: "Jump to a section",
-    description: "Use these quick links to move between the computer issue groups on this page."
+    description: "Use these quick links to move between the PC Help sections on this page."
   });
 }
 

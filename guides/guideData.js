@@ -1,6 +1,8 @@
 export const vendorOrder = [
   "microsoft",
   "browsers",
+  "fortinet",
+  "oracle",
   "autodesk",
   "bentley",
   "esri",
@@ -67,6 +69,50 @@ export const vendorGuides = {
       { label: "Microsoft Edge Help", url: "https://support.microsoft.com/microsoft-edge" },
       { label: "Firefox Help", url: "https://support.mozilla.org/products/firefox" },
       { label: "Safari User Guide", url: "https://support.apple.com/guide/safari/welcome/mac" }
+    ]
+  },
+  fortinet: {
+    title: "Fortinet",
+    summary: "Use this for FortiClient VPN access, company VPN profiles, sign-in prompts, and everyday remote-access questions.",
+    overview:
+      "FortiClient VPN is commonly used to reach internal company resources, shared file paths, and private work websites when you are away from the office. Start by confirming the right VPN profile, internet access, and sign-in method before assuming the app itself is broken.",
+    products: ["FortiClient VPN"],
+    sharedNotes: [
+      "FortiClient access usually depends on the exact VPN profile or tunnel your company gave you.",
+      "If the VPN uses MFA, a browser sign-in, or a certificate prompt, finish that step completely before retrying the connection.",
+      "If the VPN connects but a specific app still fails, compare whether the problem affects every internal resource or only one app."
+    ],
+    adminSurfaces: [
+      "FortiClient VPN profiles or company-provided connection instructions",
+      "Fortinet documentation for SSL VPN and IPsec VPN connections",
+      "Company remote-access instructions for required tunnel names, MFA, or browser prompts"
+    ],
+    escalationNotes: [],
+    supportLinks: [
+      { label: "FortiClient VPN documentation", url: "https://docs.fortinet.com/document/forticlient/7.2.10/administration-guide/6364/connecting-to-ssl-or-ipsec-vpn" },
+      { label: "Connecting from FortiClient VPN client", url: "https://docs.fortinet.com/document/fortigate/7.6.1/administration-guide/215051/connecting-from-forticlient-vpn-client" }
+    ]
+  },
+  oracle: {
+    title: "Oracle",
+    summary: "Use this for Oracle Primavera P6 access, database selection, sign-in questions, and project-opening basics.",
+    overview:
+      "Primavera P6 access often depends on the correct company login, the correct database connection, and sometimes a cloud-connected or cached workspace. Start by confirming the exact P6 environment your team expects before changing local setup.",
+    products: ["Oracle Primavera P6"],
+    sharedNotes: [
+      "Primavera P6 login names and passwords are case-sensitive, and the correct database selection matters.",
+      "If your company uses Cloud Connect or a local cache, do not reinitialize the cache unless support asks you to.",
+      "If you can sign in but projects are missing, capture the project name and the database or environment you selected."
+    ],
+    adminSurfaces: [
+      "Primavera P6 login dialog and database selection",
+      "Company-provided P6 environment or connection instructions",
+      "Oracle Primavera P6 help and installation documentation"
+    ],
+    escalationNotes: [],
+    supportLinks: [
+      { label: "Primavera P6 login dialog help", url: "https://docs.oracle.com/cd/F37128_01/client_help/en_US/login_to_primavera_dialog_box.htm" },
+      { label: "Primavera P6 user guide", url: "https://docs.oracle.com/cd/G48902_01/English/User_Guides/p6_pro_user/p6_pro_user.pdf" }
     ]
   },
   autodesk: {

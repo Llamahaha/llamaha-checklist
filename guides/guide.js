@@ -258,7 +258,7 @@ function appSections() {
 function renderBreadcrumbs() {
   const parts = [
     { label: "Home", url: homeUrl },
-    { label: "Guides", url: guideHubUrl },
+    { label: "App Help", url: guideHubUrl },
     { label: vendor.title, url: vendorUrl(vendorSlug) }
   ];
   if (pageType === "app" && app) {
@@ -419,12 +419,12 @@ if (!vendor || (pageType === "app" && !app)) {
   renderBreadcrumbs();
   renderJumpLinks();
   elements.content.innerHTML = "";
-  elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "Guides";
+  elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "App Help";
   elements.title.textContent = pageType === "app" ? app.name : vendor.title;
   elements.summary.textContent = pageType === "app" ? publicizeText(app.summary ?? app.focus) : vendor.summary;
   elements.backLink.href = pageType === "app" ? vendorUrl(vendorSlug) : guideHubUrl;
-  elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to Guides";
-  document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} Guides`;
+  elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to App Help";
+  document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} App Help`;
   if (pageType === "app") {
     renderAppPage();
   } else {

@@ -91,6 +91,26 @@ export const applicationCatalog = {
       uninstall: "Safari is built into Apple devices, so support usually focuses on settings, updates, saved site data, or defaults rather than removing the browser."
     }
   ],
+  fortinet: [
+    {
+      name: "FortiClient VPN",
+      slug: "forticlient-vpn",
+      focus: "Remote-access VPN app used to reach internal company resources, file shares, and private web tools when you are away from the office.",
+      licensing: "Access usually depends on the FortiClient VPN profile your company provided, the work account or username you sign in with, and any MFA or certificate requirement tied to that connection.",
+      install: "Use the company-approved FortiClient build and VPN profile, sign in with the exact account or username format your company expects, and test one internal site or file path after you connect.",
+      uninstall: "Before removing FortiClient, confirm you no longer need the company VPN profile and note any connection names or remote-access instructions you still need."
+    }
+  ],
+  oracle: [
+    {
+      name: "Oracle Primavera P6",
+      slug: "primavera-p6",
+      focus: "Project scheduling and planning app used to open, review, and manage Primavera P6 projects and schedules.",
+      licensing: "Access usually depends on the Primavera P6 login your company assigned, the correct database connection, and any cloud-connected or cached environment your team uses.",
+      install: "Use the company-approved Primavera P6 install or launcher, confirm the correct database appears in the login dialog, and test sign-in with the expected work login before opening live projects.",
+      uninstall: "Before removing P6, confirm you no longer need that local install and avoid deleting cached project data unless support confirms it is safe."
+    }
+  ],
   autodesk: [    {
       name: "AutoCAD",
       focus: "Base drafting platform used by many Autodesk products and add-ins.",
@@ -649,6 +669,12 @@ const slugOverrides = {
   egnyte: {
     "Egnyte Web UI / Admin": "egnyte-web-admin",
     "Egnyte Desktop App": "egnyte-desktop-app"
+  },
+  fortinet: {
+    "FortiClient VPN": "forticlient-vpn"
+  },
+  oracle: {
+    "Oracle Primavera P6": "primavera-p6"
   }
 };
 

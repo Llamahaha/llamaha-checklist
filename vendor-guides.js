@@ -68,13 +68,15 @@ const featuredApps = [
   ["microsoft", "outlook"],
   ["microsoft", "teams"],
   ["microsoft", "onedrive"],
+  ["fortinet", "forticlient-vpn"],
   ["adobe", "acrobat-pro"],
   ["bluebeam", "revu-21"],
   ["autodesk", "autocad"],
   ["autodesk", "revit"],
   ["autodesk", "civil-3d"],
   ["esri", "arcgis-pro"],
-  ["bentley", "projectwise"]
+  ["bentley", "projectwise"],
+  ["oracle", "primavera-p6"]
 ];
 
 const mobileHelpApps = [
@@ -93,6 +95,8 @@ const browserHelpApps = [
 const vendorStartHere = {
   microsoft: "Email, Teams, OneDrive, mobile setup, and Microsoft 365 account questions.",
   browsers: "Chrome, Edge, Firefox, and Safari support for sign-in pages, downloads, and everyday web use.",
+  fortinet: "FortiClient VPN help for remote access, sign-in, and company VPN connection questions.",
+  oracle: "Oracle Primavera P6 help for login, database selection, and project access questions.",
   autodesk: "AutoCAD, Revit, Civil 3D, and Autodesk sign-in or version questions.",
   bentley: "ProjectWise, CONNECTION Client, and Bentley design app help.",
   esri: "ArcGIS Pro access, portal sign-in, and extension questions.",
