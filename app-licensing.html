@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=internal/licensing.html">
-  <title>Redirecting</title>
+  <title>Licensing Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -13,15 +12,90 @@
 </head>
 <body>
   <div class="page-shell">
-    <main class="resource-page">
-      <section class="results-card">
-        <p class="section-kicker">Redirect</p>
-        <h1>This resource moved to the internal library</h1>
-        <p class="hub-section-copy">Redirecting to the internal licensing library now. If the redirect does not happen automatically, use the link below.</p>
-        <p><a class="contact-btn" href="internal/licensing.html">Open internal licensing</a></p>
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Licensing Help</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Licensing Help</p>
+            <h1>Help with access, subscriptions, and activation</h1>
+            <p class="builder-copy">Use this page when an app says you are unlicensed, a feature is missing, or you are not sure which account or subscription should be used. Start with the vendor that matches your product, then open the related guide if you need step-by-step help.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card toc-shell">
+        <p class="section-kicker">On This Page</p>
+        <h2>Jump to a section</h2>
+        <p class="hub-section-copy">Start with the basic information to collect, then open the vendor-specific licensing help that matches your product.</p>
+        <nav class="toc-links" aria-label="Licensing Help sections">
+          <a href="#beforeYouStartSection">Before You Start</a>
+          <a href="#m365MatrixSection">Microsoft Plan Reference</a>
+          <a href="#vendorCoverageSection">Vendor Licensing Help</a>
+        </nav>
+      </section>
+
+      <section id="beforeYouStartSection" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Before You Start</p>
+            <h2>Have these details ready first</h2>
+          </div>
+        </div>
+        <div class="hub-quick-grid">
+          <article class="hub-card">
+            <p class="section-kicker">Account</p>
+            <h2>Your work email</h2>
+            <p>Use the exact work account that should have access to the product. Many licensing issues come from signing in with the wrong account or profile.</p>
+          </article>
+          <article class="hub-card">
+            <p class="section-kicker">Product</p>
+            <h2>The app name and version</h2>
+            <p>Know the product name and, if possible, the version or year shown in the app. This matters most for CAD, PDF, and accounting software.</p>
+          </article>
+          <article class="hub-card">
+            <p class="section-kicker">Message</p>
+            <h2>A screenshot of the error</h2>
+            <p>Capture the exact message if the app says trial, unlicensed, subscription required, activation failed, or sign-in is needed.</p>
+          </article>
+          <article class="hub-card">
+            <p class="section-kicker">Comparison</p>
+            <h2>Browser versus desktop</h2>
+            <p>Check whether the same account works in the vendor portal or browser version. That helps separate account access problems from local app problems.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="m365MatrixSection" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Microsoft Licensing</p>
+            <h2>Need to compare Microsoft 365 plans?</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">This reference is especially useful when you are checking whether a Microsoft plan includes desktop apps, mailbox access, identity features, or other Microsoft services.</p>
+        <div id="matrixCard"></div>
+      </section>
+
+      <section id="vendorCoverageSection" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Vendor Licensing Help</p>
+            <h2>Browse licensing help by vendor</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Each card explains how access usually works for that vendor, what to check first, and where to go next for product-specific help.</p>
+        <div id="licensingGrid" class="vendor-directory"></div>
       </section>
     </main>
   </div>
   <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="public-licensing.js"></script>
 </body>
 </html>

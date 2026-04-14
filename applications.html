@@ -23,9 +23,9 @@
         <div class="builder-header">
           <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
-            <p class="section-kicker">Application Directory</p>
-            <h1>Browse applications without digging through the full site</h1>
-            <p class="builder-copy">Use this page when you already know the product name and want the fastest path into the matching guide.</p>
+            <p class="section-kicker">Application Help</p>
+            <h1>Open the product guide you need</h1>
+            <p class="builder-copy">Use this page when you already know the app you need help with. Start with a popular guide or browse the full application directory.</p>
           </div>
         </div>
       </section>
@@ -34,12 +34,13 @@
         <div class="results-header">
           <div>
             <p class="section-kicker">Quick Paths</p>
-            <h2>Start with search or jump into a vendor group</h2>
+            <h2>Need help finding the right guide?</h2>
           </div>
         </div>
         <div class="vendor-links">
           <a href="search.html">Search help</a>
           <a href="vendor-guides.html">Browse vendor guides</a>
+          <a href="app-licensing.html">Licensing help</a>
           <a href="contact.html">Need help?</a>
         </div>
       </section>
@@ -47,12 +48,23 @@
       <section class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Applications</p>
-            <h2>All application guides grouped by vendor</h2>
+            <p class="section-kicker">Popular Guides</p>
+            <h2>Start with the applications customers ask about most</h2>
           </div>
         </div>
-        <p class="hub-section-copy">Expand a vendor to see the products under it, then open the guide that matches the application you need help with.</p>
-        <div id="applicationDirectory" class="accordion-stack"></div>
+        <p class="hub-section-copy">If you already know the product name, these are usually the fastest guides to open first.</p>
+        <div id="featuredApplications" class="hub-quick-grid"></div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Application Directory</p>
+            <h2>Browse every application guide</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">This directory is organized by product, not by vendor, so you can jump straight into the application you need.</p>
+        <div id="applicationDirectory" class="vendor-directory"></div>
       </section>
     </main>
   </div>

@@ -9,7 +9,8 @@ function entry(title, text, url, category, typeLabel, keywords = "") {
 export function buildSearchIndex() {
   const entries = [
     entry("Home", "Help center landing page with search, guides, applications, and contact options.", "index.html", "helpPage", "Help Center", "home help center"),
-    entry("Applications", "Browse applications by vendor and open the product guide you need.", "applications.html", "helpPage", "Help Page", "applications app directory"),
+    entry("Applications", "Browse popular application guides and the full application directory.", "applications.html", "helpPage", "Help Page", "applications app directory"),
+    entry("Licensing Help", "Customer-facing help page for licensing, activation, subscriptions, and access questions by vendor.", "app-licensing.html", "helpPage", "Help Page", "licensing activation subscription access entitlement"),
     entry("Contact", "Contact options for help-center questions, missing content, and guide updates.", "contact.html", "helpPage", "Contact Page", "contact help support email"),
     entry("Vendor Guides", "Browse vendor help and open the application guide that matches the product you use.", "vendor-guides.html", "vendorGuide", "Guide Hub", "vendor guides applications"),
     entry("Application Issues and Fixes", "Public help page covering common application problems and general fixes.", "application-issues.html", "helpPage", "Help Page", "troubleshooting faq errors"),

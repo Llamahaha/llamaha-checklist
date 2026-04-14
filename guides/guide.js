@@ -138,14 +138,14 @@ function buildAppModel() {
 function appSections() {
   return [
     ["overview", "Overview"],
-    ["ask-first", "Ask First"],
+    ["ask-first", "Before You Start"],
     ["licensing", "Licensing / Access"],
-    ["install-setup", "Install / Setup"],
-    ["uninstall-reclaim", "Uninstall / Reclaim"],
-    ["support-checkpoints", "Support Checkpoints"],
-    ["common-issues", "Common Issues"],
-    ["paths-logs", "Paths / Logs / Services"],
-    ["related-resources", "Related Resources"]
+    ["install-setup", "Set Up / Update"],
+    ["uninstall-reclaim", "Uninstall / Move"],
+    ["support-checkpoints", "Try These Fixes First"],
+    ["common-issues", "Common Problems"],
+    ["paths-logs", "Helpful Details"],
+    ["related-resources", "Related Help"]
   ];
 }
 
@@ -197,17 +197,17 @@ function renderVendorPage() {
   overview.appendChild(card("Overview", paragraphs([vendor.overview])));
   overview.appendChild(card("In Scope", list(vendor.products)));
 
-  const notes = section("shared-notes", "Shared Notes", "What We Check First", "Use these vendor-wide checks before you dive into a single application.");
+  const notes = section("shared-notes", "Start Here", "Helpful starting points", "Use these vendor-wide tips before you dive into a single application.");
   notes.appendChild(card("Shared Notes", vendor.sharedNotes));
   const faqItems = (vendorFaqs[vendorSlug] ?? []).map(item => `${item.q}: ${item.a}`);
   notes.appendChild(card("FAQ", faqItems.length ? faqItems : ["No vendor-specific FAQ is captured yet. Use the shared notes and application guides as the first-pass reference."]));
 
-  const admin = section("admin-surfaces", "Admin Surfaces", "Where To Validate Access", "These are the admin or support surfaces most often needed during support work.");
+  const admin = section("admin-surfaces", "Access", "Accounts, setup, and official tools", "If your team manages vendor access directly, these are the portals and setup areas most often used during support.");
   admin.appendChild(card("Admin Surfaces", vendor.adminSurfaces));
   const installItems = (vendorInstallIssues[vendorSlug] ?? []).map(item => `${item.issue}: ${item.fix}`);
-  admin.appendChild(card("Install / Cleanup Patterns", installItems.length ? installItems : vendor.sharedNotes));
+  admin.appendChild(card("Setup / Update Tips", installItems.length ? installItems : vendor.sharedNotes));
 
-  const directory = section("app-directory", "Applications", "Application Directory", "Each application has its own dedicated guide page with practical checkpoints and related resources.");
+  const directory = section("app-directory", "Applications", "Application Directory", "Each application has its own guide page with helpful steps, common problems, and related links.");
   const grid = el("div", "guide-card-grid guide-app-grid");
   apps.forEach(item => {
     const appCard = el("article", "guide-card guide-app-card");
@@ -221,7 +221,7 @@ function renderVendorPage() {
   });
   directory.appendChild(grid);
 
-  const patterns = section("common-patterns", "Common Patterns", "Recurring Vendor Problems", "Keep these vendor-wide failure modes in mind as you narrow down the issue.");
+  const patterns = section("common-patterns", "Common Problems", "Recurring vendor-wide issues", "Keep these vendor-wide patterns in mind as you narrow down the issue.");
   const usageItems = (vendorUsageIssues[vendorSlug] ?? []).map(item => `${item.issue}: ${item.fix}`);
   patterns.appendChild(card("Usage Issues", usageItems.length ? usageItems : vendor.sharedNotes));
 
@@ -237,25 +237,25 @@ function renderAppPage() {
   const overview = section("overview", "Application Guide", model.name, model.summary);
   overview.appendChild(card("Overview", paragraphs(model.overview)));
   if (model.highlights.length) {
-    overview.appendChild(card("Fastest Likely Fix / Watchouts", model.highlights));
+    overview.appendChild(card("Common quick wins and watchouts", model.highlights));
   }
 
-  const ask = section("ask-first", "Triage", "What To Ask The User First", "Use these questions to narrow the issue before repair work starts.");
+  const ask = section("ask-first", "Before You Start", "What to check first", "Use these questions to narrow the issue before you change the app or device.");
   ask.appendChild(card("Ask First", model.askFirst));
 
-  const licensing = section("licensing", "Access", "Licensing / Access", "Confirm entitlement and sign-in assumptions before changing the local app.");
+  const licensing = section("licensing", "Access", "Licensing / Access", "Confirm account access and sign-in before changing the local app.");
   licensing.appendChild(card("Licensing / Access", model.licensing));
 
-  const install = section("install-setup", "Lifecycle", "Install / Setup", "Use the approved build, then validate the workflow the user actually needs.");
-  install.appendChild(card("Install / Setup", model.install));
+  const install = section("install-setup", "Setup", "Set up, reinstall, or update", "Use the approved build, then confirm the workflow you actually need works the way it should.");
+  install.appendChild(card("Set Up / Update", model.install));
 
-  const uninstall = section("uninstall-reclaim", "Lifecycle", "Uninstall / Reclaim", "Protect local data and reclaim access intentionally.");
-  uninstall.appendChild(card("Uninstall / Reclaim", model.uninstall));
+  const uninstall = section("uninstall-reclaim", "Device Changes", "Uninstall or move to a new device", "Protect local data and account access before removing the app or changing workstations.");
+  uninstall.appendChild(card("Uninstall / Move", model.uninstall));
 
-  const support = section("support-checkpoints", "Support", "Support Checkpoints", "These are the checkpoints worth capturing before deeper troubleshooting or handoff.");
-  support.appendChild(card("Support Checkpoints", model.supportCheckpoints));
+  const support = section("support-checkpoints", "Try This First", "Try these fixes first", "These checks usually help before you move into deeper troubleshooting.");
+  support.appendChild(card("Try These Fixes First", model.supportCheckpoints));
 
-  const issues = section("common-issues", "Troubleshooting", "Common Issues", "Focus on the repeated failure patterns first.");
+  const issues = section("common-issues", "Troubleshooting", "Common problems", "Focus on the repeated failure patterns first.");
   const issueGrid = el("div", "guide-card-grid");
   model.commonIssues.forEach(item => {
     const issueCard = el("article", "guide-card issue-card");
@@ -267,7 +267,7 @@ function renderAppPage() {
   });
   issues.appendChild(issueGrid);
 
-  const paths = section("paths-logs", "Reference", "Useful Paths / Logs / Services", "Collect the local context that will make the next touch faster.");
+  const paths = section("paths-logs", "Helpful Details", "Helpful details to collect", "If the problem continues, these details usually make the next support step faster.");
   const infoGrid = el("div", "guide-card-grid");
   infoGrid.append(
     card("Paths", model.usefulInfo.paths),
@@ -277,11 +277,14 @@ function renderAppPage() {
   );
   paths.appendChild(infoGrid);
 
-  const related = section("related-resources", "Related", "Related Links / Apps", "Use these links to keep moving without losing context.");
+  const related = section("related-resources", "Related Help", "Related links and next steps", "Use these links to keep moving without losing context.");
   const relatedGrid = el("div", "guide-card-grid");
   relatedGrid.appendChild(card("Back to Vendor", linkList([{ label: `Back to ${vendor.title}`, url: vendorUrl(vendorSlug) }])));
   relatedGrid.appendChild(card("Related Apps", linkList(model.relatedApps.map(item => ({ label: getApplicationGuide(item.vendor, item.app)?.name ?? item.app, url: appUrl(item.vendor, item.app) })) )));
-  relatedGrid.appendChild(card("Need More Help?", linkList([{ label: "Open contact page", url: `${rootPath}/contact.html` }])));
+  relatedGrid.appendChild(card("Need More Help?", linkList([
+    { label: "Open contact page", url: `${rootPath}/contact.html` },
+    { label: "Licensing help", url: `${rootPath}/app-licensing.html` }
+  ])));
   if (model.relatedLinks.length) {
     relatedGrid.appendChild(card("Official / Vendor Links", linkList(model.relatedLinks.map(item => ({ label: item.label, url: item.url })) )));
   }
