@@ -30,8 +30,8 @@ function renderResults(query = "", category = "all") {
   const normalizedQuery = query.trim().toLowerCase();
 
   if (!normalizedQuery) {
-    resultsLabel.textContent = "Start with a search term";
-    resultCount.textContent = "Try a product name, vendor, or help topic.";
+    resultsLabel.textContent = "Start with a search";
+    resultCount.textContent = "Try a product name, vendor, or common help topic.";
     return;
   }
 
@@ -47,7 +47,7 @@ function renderResults(query = "", category = "all") {
   if (!matches.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "No matching guide or help page was found. Try a broader app name, vendor, or help topic.";
+    empty.textContent = "No matching help page was found. Try a broader app name, vendor, or help topic.";
     searchResults.appendChild(empty);
     return;
   }
@@ -69,7 +69,7 @@ function renderResults(query = "", category = "all") {
     const link = document.createElement("a");
     link.className = "hub-link";
     link.href = item.url;
-    link.textContent = "Open result";
+    link.textContent = "Open page";
     if (item.url.startsWith("http")) {
       link.target = "_blank";
       link.rel = "noreferrer";
