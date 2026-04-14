@@ -96,7 +96,7 @@ export const applicationCatalog = {
       name: "FortiClient VPN",
       slug: "forticlient-vpn",
       focus: "Remote-access VPN app used to reach internal company resources, file shares, and private web tools when you are away from the office.",
-      licensing: "Access usually depends on the FortiClient VPN profile your company provided, the work account or username you sign in with, and any MFA or certificate requirement tied to that connection.",
+      licensing: "This environment uses the free FortiClient VPN client, so access usually depends on the company VPN profile your company provided and the sign-in method required for that connection.",
       install: "Use the company-approved FortiClient build and VPN profile, sign in with the exact account or username format your company expects, and test one internal site or file path after you connect.",
       uninstall: "Before removing FortiClient, confirm you no longer need the company VPN profile and note any connection names or remote-access instructions you still need."
     }

@@ -34,9 +34,9 @@ const customerLicensingReference = {
     ]
   },
   fortinet: {
-    summary: "FortiClient VPN access usually depends on the exact VPN profile or tunnel your company gave you, the work account or username you use for that connection, and any MFA or certificate requirement tied to it.",
+    summary: "FortiClient VPN in this environment normally uses the free client app, so what matters most is the exact VPN profile or tunnel your company gave you and the sign-in method tied to that connection.",
     howItWorks: [
-      "FortiClient usually uses a company-provided VPN profile or tunnel name instead of a public self-service setup.",
+      "FortiClient usually uses the free client plus a company-provided VPN profile or tunnel name instead of a separate paid end-user seat.",
       "Some environments use a browser sign-in, MFA prompt, or certificate step in addition to the FortiClient password or connection flow.",
       "The exact VPN tunnel or profile matters, especially if your company provides more than one remote-access option."
     ],

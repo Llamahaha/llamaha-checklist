@@ -19,6 +19,7 @@ const publicRoutes = [
   "vendor-guides.html",
   "applications.html",
   "app-licensing.html",
+  "tips-and-tricks.html",
   "contact.html"
 ];
 
@@ -211,6 +212,9 @@ function verifyPublicGuideContent() {
     "commonIssues",
     "supportArtifacts"
   ];
+  const optionalSectionsByGuide = {
+    "fortinet/forticlient-vpn": new Set(["licensing"])
+  };
 
   for (const [vendorSlug, appSlug] of populatedPublicGuides) {
     const content = getPublicGuideContent(vendorSlug, appSlug);
@@ -219,7 +223,13 @@ function verifyPublicGuideContent() {
       continue;
     }
 
+    const optionalSections = optionalSectionsByGuide[`${vendorSlug}/${appSlug}`] ?? new Set();
+
     for (const section of requiredSections) {
+      if (optionalSections.has(section)) {
+        continue;
+      }
+
       const value = content[section];
       const hasContent = Array.isArray(value) ? value.length > 0 : Boolean(value);
       if (!hasContent) {

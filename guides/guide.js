@@ -220,6 +220,14 @@ function buildAppModel() {
     : (extra.commonIssues?.length ? extra.commonIssues : (app.commonIssues ?? defaultCommonIssues()));
   const commonIssues = commonIssuesSource.map(normalizeIssue);
 
+  let licensing;
+  if (Array.isArray(publicContent.licensing)) {
+    licensing = publicContent.licensing;
+  } else {
+    const licensingItems = publicizeItems([app.licensing, ...(extra.licensing ?? [])]);
+    licensing = licensingItems.length ? licensingItems : defaultLicensing();
+  }
+
   return {
     name: app.name,
     summary: publicizeText(publicContent.summary ?? extra.summary ?? app.summary ?? app.focus ?? `Use this page for help with ${app.name}.`),
@@ -228,9 +236,7 @@ function buildAppModel() {
     askFirst: publicContent.askFirst?.length
       ? publicContent.askFirst
       : (publicizeItems(extra.askFirst ?? []).length ? publicizeItems(extra.askFirst ?? []) : defaultAskFirst()),
-    licensing: publicContent.licensing?.length
-      ? publicContent.licensing
-      : (publicizeItems([app.licensing, ...(extra.licensing ?? [])]).length ? publicizeItems([app.licensing, ...(extra.licensing ?? [])]) : defaultLicensing()),
+    licensing,
     install: publicContent.install?.length
       ? publicContent.install
       : (publicizeItems([app.install, ...(extra.install ?? [])]).length ? publicizeItems([app.install, ...(extra.install ?? [])]) : defaultInstall()),
@@ -242,17 +248,22 @@ function buildAppModel() {
   };
 }
 
-function appSections() {
-  return [
+function appSections(model) {
+  const sections = [
     ["overview", "Overview"],
     ["before-you-start", "Before You Start"],
-    ["licensing-access", "Licensing / Access"],
     ["install-update-basics", "Install / Update Basics"],
     ["common-problems", "Common Problems"],
     ["try-fixes-first", "Try These Fixes First"],
     ["what-to-send-support", "What to Send Support"],
     ["related-help", "Related Help"]
   ];
+
+  if (model.licensing?.length) {
+    sections.splice(2, 0, ["licensing-access", "Licensing / Access"]);
+  }
+
+  return sections;
 }
 
 function renderBreadcrumbs() {
@@ -277,7 +288,7 @@ function renderBreadcrumbs() {
   });
 }
 
-function renderJumpLinks() {
+function renderJumpLinks(model = null) {
   if (!elements.jumpLinks) return;
   elements.jumpLinks.innerHTML = "";
 
@@ -288,7 +299,7 @@ function renderJumpLinks() {
 
   const nav = el("nav", "guide-jump-links");
   nav.setAttribute("aria-label", "Jump to a section");
-  appSections().forEach(([id, label]) => {
+  appSections(model).forEach(([id, label]) => {
     const link = el("a", "guide-jump-link", label);
     link.href = `#${id}`;
     nav.appendChild(link);
@@ -337,9 +348,7 @@ function renderVendorPage() {
   elements.content.append(overview, notes, admin, directory, patterns, links);
 }
 
-function renderAppPage() {
-  const model = buildAppModel();
-
+function renderAppPage(model) {
   const overview = section("overview", "Application Guide", model.name, model.summary);
   overview.appendChild(card("Overview", paragraphs(model.overview)));
   if (model.highlights.length) {
@@ -348,9 +357,6 @@ function renderAppPage() {
 
   const ask = section("before-you-start", "Before You Start", "Before You Start", "Use these quick checks to narrow the problem before you change the app or computer.");
   ask.appendChild(card("Check these first", model.askFirst));
-
-  const licensing = section("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
-  licensing.appendChild(card("Licensing / Access", model.licensing));
 
   const install = section("install-update-basics", "Install / Update Basics", "Install / Update Basics", "These safe steps help with fresh installs, recent updates, and apps that stopped working after a change.");
   install.appendChild(card("Install / Update Basics", model.install));
@@ -387,7 +393,14 @@ function renderAppPage() {
   related.appendChild(relatedGrid);
 
   elements.summary.textContent = model.summary;
-  elements.content.append(overview, ask, licensing, install, issues, support, sendSupport, related);
+  const sections = [overview, ask];
+  if (model.licensing.length) {
+    const licensing = section("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
+    licensing.appendChild(card("Licensing / Access", model.licensing));
+    sections.push(licensing);
+  }
+  sections.push(install, issues, support, sendSupport, related);
+  elements.content.append(...sections);
 }
 
 function scrollToHash(hash, replaceHistory = false) {
@@ -417,7 +430,6 @@ if (!vendor || (pageType === "app" && !app)) {
   elements.summary.textContent = "The requested guide could not be located.";
 } else {
   renderBreadcrumbs();
-  renderJumpLinks();
   elements.content.innerHTML = "";
   elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "App Help";
   elements.title.textContent = pageType === "app" ? app.name : vendor.title;
@@ -426,8 +438,11 @@ if (!vendor || (pageType === "app" && !app)) {
   elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to App Help";
   document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} App Help`;
   if (pageType === "app") {
-    renderAppPage();
+    const model = buildAppModel();
+    renderJumpLinks(model);
+    renderAppPage(model);
   } else {
+    renderJumpLinks();
     renderVendorPage();
   }
 }

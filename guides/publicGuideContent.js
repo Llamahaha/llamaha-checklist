@@ -736,11 +736,7 @@ export const publicGuideContent = {
         "Is the issue connecting to the VPN, finishing MFA, or reaching an internal site, shared drive, or app after the VPN connects?",
         "Did the problem start after a password change, phone change, update, or a new computer setup?"
       ],
-      licensing: [
-        "FortiClient access usually depends on the company VPN profile or tunnel assigned to you rather than a separate public subscription.",
-        "Use the exact work account, username format, or sign-in method your company provided for VPN access.",
-        "If the VPN uses a browser sign-in or MFA step, finish that prompt completely before deciding the connection failed."
-      ],
+      licensing: [],
       install: [
         "Use the company-approved FortiClient build and VPN profile instead of creating a new tunnel from scratch.",
         "Restart the computer after installing or updating FortiClient, then open the correct VPN profile again.",

@@ -422,6 +422,186 @@ export const computerIssueSections = [
   }
 ];
 
+export const tipsAndTricksSections = [
+  {
+    title: "Keyboard Shortcuts and Faster Navigation",
+    description: "Use these Windows tips when you want to move faster without digging through menus. The shortcuts below come from Microsoft's current Windows keyboard shortcut guidance.",
+    items: [
+      {
+        title: "Everyday Windows shortcuts that save time",
+        text: "These are the shortcuts most people can use right away for day-to-day navigation and support work.",
+        fixes: [
+          "Press Windows + E to open File Explorer.",
+          "Press Windows + I to open Settings.",
+          "Press Alt + Tab to switch between open apps.",
+          "Press Windows + Left arrow or Windows + Right arrow to snap the current window to one side of the screen.",
+          "Press Windows + D to show or hide the desktop.",
+          "Press Windows + L to lock the computer when you step away."
+        ],
+        links: [
+          {
+            label: "Keyboard shortcuts in Windows",
+            url: "https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec"
+          }
+        ]
+      },
+      {
+        title: "Screenshots, clipboard history, and quick recovery shortcuts",
+        text: "These are especially useful when you need to capture an error, grab part of the screen, or quickly get to a troubleshooting tool.",
+        fixes: [
+          "Press Windows + Shift + S to capture part of the screen with Snipping Tool.",
+          "Press Alt + PrtScn to copy a screenshot of the active window.",
+          "Press Windows + V to open clipboard history if it is enabled.",
+          "Press Ctrl + Shift + Esc to open Task Manager.",
+          "Press F5 or Ctrl + R in many apps to refresh the current window or page."
+        ],
+        links: [
+          {
+            label: "Keyboard shortcuts in Windows",
+            url: "https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Browser Cache and Cookie Cleanup",
+    description: "Use these browser-specific steps when a site looks stale, loops on sign-in, or behaves differently than expected. Clearing cookies usually signs you out, so save your work first.",
+    items: [
+      {
+        title: "Clear cache and cookies in Google Chrome",
+        text: "Chrome keeps cached files and cookies to speed up websites, but stale site data can also cause sign-in loops or old pages to keep loading.",
+        fixes: [
+          "Open Chrome, then select More > Delete browsing data.",
+          "Choose a time range that matches the problem, such as Last hour or All time.",
+          "Select Cookies and other site data and Cached images and files.",
+          "Select Delete data, then reopen the affected site and sign back in if needed."
+        ],
+        links: [
+          {
+            label: "Delete, allow and manage cookies in Chrome",
+            url: "https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en"
+          }
+        ]
+      },
+      {
+        title: "Clear browsing data in Microsoft Edge",
+        text: "Edge stores history, cookies, and cached files per browser profile, so make sure you are working in the correct profile before you clear anything.",
+        fixes: [
+          "Open Edge, then select Settings and more > Settings > Privacy, search, and services.",
+          "Under Clear browsing data, select Choose what to clear.",
+          "Pick the time range you need, then select cookies or cached files based on the issue you are troubleshooting.",
+          "Select Clear now, then reopen the work site and sign back in if the site asks for it."
+        ],
+        links: [
+          {
+            label: "Clear browsing history from your device in Microsoft Edge",
+            url: "https://support.microsoft.com/en-us/windows/browsing-history-on-the-privacy-dashboard-550e772a-04c9-3e9a-3ec0-762519df5e11"
+          }
+        ]
+      },
+      {
+        title: "Clear cookies and cache in Mozilla Firefox",
+        text: "Firefox lets you clear cookies and cache separately, which is useful when you want to keep one type of data but remove the other.",
+        fixes: [
+          "Open Firefox and go to Settings > Privacy & Security.",
+          "In Cookies and Site Data, select Clear Data.",
+          "To clear cache only, leave only Temporary cached files and pages selected.",
+          "To clear cookies too, include Cookies and site data, then confirm and reopen the affected site."
+        ],
+        links: [
+          {
+            label: "How to clear the Firefox cache",
+            url: "https://support.mozilla.org/en-US/kb/how-clear-firefox-cache"
+          },
+          {
+            label: "Clear cookies and site data in Firefox",
+            url: "https://support.mozilla.org/en-US/kb/clear-cookies-and-site-data-firefox"
+          }
+        ]
+      },
+      {
+        title: "Clear Safari site data on Mac or iPhone",
+        text: "Safari cleanup steps are a little different on Mac versus iPhone or iPad, so use the steps that match your device.",
+        fixes: [
+          "On a Mac, open Safari > Settings > Privacy > Manage Website Data, then remove one site or remove all website data.",
+          "On iPhone or iPad, go to Settings > Safari > Clear History and Website Data to clear history, cookies, and cache together.",
+          "If you want to keep Safari history on iPhone or iPad, go to Settings > Safari > Advanced > Website Data and remove the website data instead.",
+          "After cleanup, reopen the site and sign back in if Safari prompts you."
+        ],
+        links: [
+          {
+            label: "Clear your cache and cookies in Safari on Mac",
+            url: "https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac"
+          },
+          {
+            label: "Delete your Safari history, cache, and cookies on iPhone",
+            url: "https://support.apple.com/en-us/105082"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Safe Cleanup and Disk Space",
+    description: "Use these cleanup tips when Windows is low on space or a browser or app seems stuck on old temporary data. The safest first choice is still Windows Storage and Cleanup Recommendations.",
+    items: [
+      {
+        title: "Clear temporary files safely",
+        text: "If you need a quick manual cleanup, start with temporary files rather than deleting random folders.",
+        fixes: [
+          "Close the apps you are using first so fewer temporary files stay locked.",
+          "Press Windows + R, enter %temp%, and remove only the files Windows allows you to delete.",
+          "Skip anything Windows says is still in use instead of forcing it.",
+          "If you want the safest first pass, use Settings > System > Storage and start with Cleanup Recommendations or Storage Sense before deleting folders by hand."
+        ],
+        links: [
+          {
+            label: "Manage drive space with Storage Sense",
+            url: "https://support.microsoft.com/en-au/windows/manage-drive-space-with-storage-sense-654f6ada-7bfc-45e5-966b-e24aded96ad5"
+          }
+        ]
+      },
+      {
+        title: "Be careful with AppData and Local AppData",
+        text: "AppData stores app settings, cached data, and offline content. Deleting the whole AppData or AppData\\Local folder can remove saved state and break app behavior.",
+        fixes: [
+          "Do not delete the entire AppData or AppData\\Local folder.",
+          "Only clear an app-specific cache when that app's own guide or support instructions say it is safe.",
+          "If your goal is reclaiming space, check Downloads, Recycle Bin, browser data, temporary files, and cloud sync settings first.",
+          "If you are unsure what a folder belongs to, stop there and use the app guide or contact page before removing it."
+        ],
+        links: [
+          {
+            label: "Free up drive space in Windows",
+            url: "https://support.microsoft.com/en-us/windows/free-up-drive-space-in-windows-85529ccb-c365-490d-b548-831022bc9b32"
+          }
+        ]
+      },
+      {
+        title: "Use Windows tools first when disk space is low",
+        text: "Windows already has built-in storage tools that are safer than deleting folders manually.",
+        fixes: [
+          "Open Settings > System > Storage to see what is using the most space.",
+          "Review Cleanup Recommendations and remove large items you no longer need, such as temporary files or old Recycle Bin content.",
+          "Turn on Storage Sense if you want Windows to clean up temporary files automatically when space gets low.",
+          "Check OneDrive or other cloud folders too, because locally available files can use a lot of space even when they are synced to the cloud."
+        ],
+        links: [
+          {
+            label: "Free up drive space in Windows",
+            url: "https://support.microsoft.com/en-us/windows/free-up-drive-space-in-windows-85529ccb-c365-490d-b548-831022bc9b32"
+          },
+          {
+            label: "Manage drive space with Storage Sense",
+            url: "https://support.microsoft.com/en-au/windows/manage-drive-space-with-storage-sense-654f6ada-7bfc-45e5-966b-e24aded96ad5"
+          }
+        ]
+      }
+    ]
+  }
+];
+
 export const crossAppIssuePatterns = [
   {
     title: "Wrong account, tenant, or identity type",

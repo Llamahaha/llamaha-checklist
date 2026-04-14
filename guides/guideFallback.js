@@ -765,13 +765,17 @@
     var items = [
       ["overview", "Overview"],
       ["before-you-start", "Before You Start"],
-      ["licensing-access", "Licensing / Access"],
       ["install-update-basics", "Install / Update Basics"],
       ["common-problems", "Common Problems"],
       ["try-fixes-first", "Try These Fixes First"],
       ["what-to-send-support", "What to Send Support"],
       ["related-help", "Related Help"]
     ];
+
+    var model = buildModel();
+    if (model.licensing.length) {
+      items.splice(2, 0, ["licensing-access", "Licensing / Access"]);
+    }
 
     var nav = createEl("nav", "guide-jump-links");
     nav.setAttribute("aria-label", "Jump to a section");
@@ -862,7 +866,7 @@
       summary: override.summary || base.summary,
       overview: override.overview || base.overview,
       beforeYouStart: override.beforeYouStart || base.beforeYouStart,
-      licensing: override.licensing || base.licensing,
+      licensing: Object.prototype.hasOwnProperty.call(override, "licensing") ? override.licensing : base.licensing,
       install: override.install || base.install,
       commonProblems: override.commonProblems || base.commonProblems,
       fixes: override.fixes || base.fixes,
@@ -892,9 +896,6 @@
 
     var before = createSection("before-you-start", "Before You Start", "Before You Start", "Use these quick checks to narrow the problem before you change the app or computer.");
     before.appendChild(createCard("Check these first", createList(model.beforeYouStart)));
-
-    var licensing = createSection("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
-    licensing.appendChild(createCard("Licensing / Access", createList(model.licensing)));
 
     var install = createSection("install-update-basics", "Install / Update Basics", "Install / Update Basics", "These safe steps help with fresh installs, recent updates, and apps that stopped working after a change.");
     install.appendChild(createCard("Install / Update Basics", createList(model.install)));
@@ -932,7 +933,11 @@
 
     content.appendChild(overview);
     content.appendChild(before);
-    content.appendChild(licensing);
+    if (model.licensing.length) {
+      var licensing = createSection("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
+      licensing.appendChild(createCard("Licensing / Access", createList(model.licensing)));
+      content.appendChild(licensing);
+    }
     content.appendChild(install);
     content.appendChild(problems);
     content.appendChild(fixes);

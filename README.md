@@ -32,10 +32,11 @@ Minimal local tooling is included so future site passes can be verified instead 
 4. Spot-check the public pages in a browser:
    - `/`
    - `/search.html`
-   - `/computer-issues.html`
-   - `/vendor-guides.html`
-   - `/app-licensing.html`
-   - `/contact.html`
+  - `/computer-issues.html`
+  - `/vendor-guides.html`
+  - `/app-licensing.html`
+  - `/tips-and-tricks.html`
+  - `/contact.html`
 
 ## Notes
 

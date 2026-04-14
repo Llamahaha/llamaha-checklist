@@ -4,6 +4,7 @@ const publicLinks = [
   { id: "pc-help", label: "PC Help", href: "computer-issues.html" },
   { id: "app-help", label: "App Help", href: "vendor-guides.html" },
   { id: "licensing-help", label: "Licensing Help", href: "app-licensing.html" },
+  { id: "tips-tricks", label: "Tips & Tricks", href: "tips-and-tricks.html" },
   { id: "contact", label: "Contact", href: "contact.html" }
 ];
 
@@ -34,6 +35,7 @@ function getPublicSection(currentFile, body, pathname) {
   if (currentFile === "computer-issues.html") return "pc-help";
   if (currentFile === "applications.html") return "app-help";
   if (currentFile === "app-licensing.html") return "licensing-help";
+  if (currentFile === "tips-and-tricks.html") return "tips-tricks";
   if (currentFile === "contact.html") return "contact";
   if (body.dataset.pageType || currentFile === "vendor-guides.html" || currentFile === "applications.html" || pathname.includes("/guides/")) return "app-help";
   return "home";
@@ -82,19 +84,22 @@ function initSiteChrome() {
   const brandCopy = document.createElement("div");
   brandCopy.className = "site-brand-copy";
 
-  const brandTag = document.createElement("span");
-  brandTag.className = "site-brand-tag";
-  brandTag.textContent = area === "internal" ? "Internal" : "Help Center";
-
   const brandTitle = document.createElement("strong");
   brandTitle.textContent = area === "internal" ? "Llamaha Internal Library" : "Llamaha Help Center";
 
   const brandMeta = document.createElement("span");
   brandMeta.textContent = area === "internal"
     ? "Internal references, scripts, templates, playbooks, checklists, and licensing resources"
-    : "Search, PC help, app guides, licensing reference, and contact options for everyday support";
+    : "Tech made easier";
 
-  brandCopy.append(brandTag, brandTitle, brandMeta);
+  if (area === "internal") {
+    const brandTag = document.createElement("span");
+    brandTag.className = "site-brand-tag";
+    brandTag.textContent = "Internal";
+    brandCopy.appendChild(brandTag);
+  }
+
+  brandCopy.append(brandTitle, brandMeta);
   brand.append(brandIcon, brandCopy);
 
   const nav = document.createElement("nav");
