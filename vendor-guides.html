@@ -33,13 +33,43 @@
       <section class="results-card toc-shell">
         <p class="section-kicker">Browse Two Ways</p>
         <h2>Start with the problem or go straight to the app list</h2>
-        <p class="hub-section-copy">This page combines topic-first guidance and app-first browsing in one place, so you can choose whichever path matches what you already know.</p>
+        <p class="hub-section-copy">Use topic browsing when you want help with a sign-in, licensing, printing, sync, or file-opening problem. Use the application sections when you already know the product name and want the guide page right away.</p>
         <nav class="toc-links" aria-label="Browse guides two ways">
           <a href="#browse-by-topic">Browse by topic</a>
-          <a href="#browse-by-app">Browse by application</a>
+          <a href="#browse-by-app">Popular applications</a>
+          <a href="#application-directory">Full application directory</a>
           <a href="app-licensing.html">Licensing help</a>
           <a href="search.html">Search the help center</a>
         </nav>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Quick Start</p>
+            <h2>Choose the path that matches what you already know</h2>
+          </div>
+        </div>
+        <div class="hub-quick-grid">
+          <article class="hub-note-card">
+            <p class="section-kicker">Issue First</p>
+            <h3>Start with the topic</h3>
+            <p>Use this when you know the kind of problem you need help with, such as sign-in, activation, printing, file opening, sync, or crashing.</p>
+            <div class="vendor-links">
+              <a href="#browse-by-topic">Browse by topic</a>
+              <a href="search.html">Search by keyword</a>
+            </div>
+          </article>
+          <article class="hub-note-card">
+            <p class="section-kicker">Product First</p>
+            <h3>Start with the application</h3>
+            <p>Use this when you already know the product name and want to open the guide for Outlook, Teams, OneDrive, Acrobat, AutoCAD, Revit, or another supported app.</p>
+            <div class="vendor-links">
+              <a href="#browse-by-app">Popular applications</a>
+              <a href="#application-directory">Full application directory</a>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section id="browse-by-topic" class="results-card hub-section">
@@ -49,19 +79,30 @@
             <h2>Choose the kind of help you need</h2>
           </div>
         </div>
-        <p class="hub-section-copy">These guides are grouped around everyday support needs so you can start with the problem you are trying to solve, even if you are not sure which vendor or product page you need yet.</p>
+        <p class="hub-section-copy">These topics are grouped around common everyday problems so you can start with the issue you are seeing, even if you do not know the vendor or product path yet.</p>
         <div id="guideTopicGrid" class="help-topic-directory"></div>
       </section>
 
       <section id="browse-by-app" class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Browse By Application</p>
-            <h2>Go straight to the product you use</h2>
+            <p class="section-kicker">Popular Applications</p>
+            <h2>Go straight to the guide for the product you use most</h2>
           </div>
         </div>
-        <p class="hub-section-copy">Popular applications below open the guide directly, followed by the full application directory grouped by vendor for easier scanning.</p>
-        <nav id="popularAppLinks" class="toc-links" aria-label="Popular applications"></nav>
+        <p class="hub-section-copy">These are the application guides people reach for most often. Open the guide directly if you already know the app name.</p>
+        <div id="popularAppGrid" class="hub-quick-grid"></div>
+      </section>
+
+      <section id="application-directory" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Application Directory</p>
+            <h2>Browse the full application list</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Use the full directory below if you want to scan every supported application. Products are grouped by vendor to keep the list easier to navigate.</p>
+        <nav id="directoryVendorLinks" class="toc-links" aria-label="Jump to a vendor section"></nav>
         <div id="appBrowseGrid" class="help-app-directory"></div>
       </section>
     </main>

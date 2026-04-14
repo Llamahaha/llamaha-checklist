@@ -1,13 +1,28 @@
 import { buildAppGuideUrl, getVendorApplications } from "./guides/applicationCatalog.js";
 import { vendorGuides, vendorOrder } from "./guides/guideData.js";
+import { getPublicGuideContent } from "./guides/publicGuideContent.js";
 import { appendBlock, createLinks, createPageCard } from "./resourceCommon.js";
 
 const topicGrid = document.getElementById("guideTopicGrid");
-const popularAppLinks = document.getElementById("popularAppLinks");
+const popularAppGrid = document.getElementById("popularAppGrid");
+const directoryVendorLinks = document.getElementById("directoryVendorLinks");
 const appBrowseGrid = document.getElementById("appBrowseGrid");
 
 function appGuide(vendorSlug, appSlug) {
   return buildAppGuideUrl(vendorSlug, appSlug);
+}
+
+function appSummary(vendorSlug, app) {
+  const publicGuide = getPublicGuideContent(vendorSlug, app.slug);
+  if (publicGuide.summary) {
+    return publicGuide.summary;
+  }
+
+  if (app.summary) {
+    return app.summary;
+  }
+
+  return `Open this guide when ${app.name} will not sign in, open the files you expect, update correctly, or behave normally for everyday work.`;
 }
 
 const featuredApps = [
@@ -190,7 +205,7 @@ function summarizeCoverage(vendor, apps) {
     return `${vendor.title} help pages.`;
   }
 
-  return `${vendor.title} application guides for ${names.join(", ")}${apps.length > 4 ? ", and more" : ""}.`;
+  return `${vendor.title} guides for ${names.join(", ")}${apps.length > 4 ? ", and more" : ""}.`;
 }
 
 if (topicGrid) {
@@ -205,22 +220,51 @@ if (topicGrid) {
 
     const stack = document.createElement("div");
     stack.className = "card-stack";
-    appendBlock(stack, "Best For", topic.bestFor);
-    card.append(stack, createLinks(topic.links));
+    appendBlock(stack, "Start Here When", topic.bestFor);
+    appendBlock(stack, "Helpful Guides", createLinks(topic.links));
+    card.appendChild(stack);
     topicGrid.appendChild(card);
   });
 }
 
 featuredApps.forEach(([vendorSlug, appSlug]) => {
   const app = getVendorApplications(vendorSlug).find(item => item.slug === appSlug);
-  if (!app || !popularAppLinks) {
+  const vendor = vendorGuides[vendorSlug];
+
+  if (!app || !popularAppGrid || !vendor) {
     return;
   }
 
-  const link = document.createElement("a");
-  link.href = appGuide(vendorSlug, appSlug);
-  link.textContent = app.name;
-  popularAppLinks.appendChild(link);
+  const card = createPageCard("hub-card");
+  card.id = `popular-app-${vendorSlug}-${appSlug}`;
+  card.append(
+    Object.assign(document.createElement("p"), { className: "section-kicker", textContent: vendor.title }),
+    Object.assign(document.createElement("h2"), { textContent: app.name }),
+    Object.assign(document.createElement("p"), { textContent: appSummary(vendorSlug, app) })
+  );
+
+  const links = document.createElement("div");
+  links.className = "vendor-links";
+
+  const openGuide = document.createElement("a");
+  openGuide.href = appGuide(vendorSlug, appSlug);
+  openGuide.textContent = "Open guide";
+  links.appendChild(openGuide);
+
+  const vendorLink = document.createElement("a");
+  vendorLink.href = `guides/${vendorSlug}.html`;
+  vendorLink.textContent = `${vendor.title} overview`;
+  links.appendChild(vendorLink);
+
+  if (["outlook", "teams", "onedrive", "acrobat-pro", "revu-21", "autocad", "revit", "civil-3d", "arcgis-pro", "projectwise"].includes(appSlug)) {
+    const licensingLink = document.createElement("a");
+    licensingLink.href = "app-licensing.html";
+    licensingLink.textContent = "Licensing help";
+    links.appendChild(licensingLink);
+  }
+
+  card.appendChild(links);
+  popularAppGrid.appendChild(card);
 });
 
 if (appBrowseGrid) {
@@ -232,6 +276,13 @@ if (appBrowseGrid) {
       return;
     }
 
+    if (directoryVendorLinks) {
+      const jump = document.createElement("a");
+      jump.href = `#vendor-${vendorSlug}`;
+      jump.textContent = vendor.title;
+      directoryVendorLinks.appendChild(jump);
+    }
+
     const group = createPageCard("help-app-group");
     group.id = `vendor-${vendorSlug}`;
     group.append(
@@ -241,6 +292,11 @@ if (appBrowseGrid) {
         textContent: vendorStartHere[vendorSlug] ?? vendor.summary
       })
     );
+
+    const stack = document.createElement("div");
+    stack.className = "card-stack";
+    appendBlock(stack, "Good Starting Guides", apps.slice(0, 4).map(item => item.name));
+    group.appendChild(stack);
 
     const links = document.createElement("nav");
     links.className = "vendor-links";
