@@ -23,18 +23,32 @@ const publicRoutes = [
   "contact.html"
 ];
 
+const internalRoutes = [
+  "internal/index.html",
+  "internal/reference-guides.html",
+  "internal/tips-and-tricks.html",
+  "internal/snippets.html",
+  "internal/templates.html",
+  "internal/playbooks.html",
+  "internal/checklist.html",
+  "internal/licensing.html"
+];
+
 const populatedPublicGuides = [
   ["microsoft", "outlook"],
   ["microsoft", "teams"],
   ["microsoft", "onedrive"],
+  ["microsoft", "sharepoint"],
   ["microsoft", "outlook-mobile"],
   ["microsoft", "teams-mobile"],
   ["microsoft", "microsoft-authenticator"],
   ["adobe", "acrobat-pro"],
+  ["adobe", "indesign"],
   ["bluebeam", "revu-21"],
   ["autodesk", "autocad"],
   ["autodesk", "revit"],
   ["autodesk", "civil-3d"],
+  ["autodesk", "infoworks-icm"],
   ["esri", "arcgis-pro"],
   ["bentley", "projectwise"],
   ["browsers", "google-chrome"],
@@ -43,8 +57,25 @@ const populatedPublicGuides = [
   ["browsers", "apple-safari"],
   ["fortinet", "forticlient-vpn"],
   ["citrix", "workspace-app"],
-  ["oracle", "primavera-p6"]
+  ["oracle", "primavera-p6"],
+  ["google", "google-earth-pro"],
+  ["hec", "hec-hms"],
+  ["hec", "hec-ras"],
+  ["hec", "hec-dssvue"],
+  ["hec", "hec-dss"],
+  ["hec", "hec-ssp"],
+  ["hec", "hec-georas"],
+  ["mctrans", "hcs"],
+  ["mctrans", "hss"],
+  ["axiom", "axiom"]
 ];
+
+const dynamicAnchorFiles = new Set([
+  resolve(rootDir, "internal/playbooks.html"),
+  resolve(rootDir, "internal/templates.html"),
+  resolve(rootDir, "internal/snippets.html"),
+  resolve(rootDir, "internal/reference-guides.html")
+]);
 
 function walk(dir) {
   const items = [];
@@ -148,7 +179,7 @@ function verifyHtmlLinks() {
       if (anchor) {
         targetHtml = readFileSync(targetFile, "utf8");
         const targetIds = parseIds(targetHtml);
-        if (!targetIds.has(anchor)) {
+        if (!targetIds.has(anchor) && !dynamicAnchorFiles.has(targetFile)) {
           addError(`Missing anchor "${ref}" referenced by ${htmlFile}`);
         }
       }
@@ -160,6 +191,14 @@ function verifyPublicRoutes() {
   for (const route of publicRoutes) {
     if (!fileExists(route)) {
       addError(`Missing required public route: ${route}`);
+    }
+  }
+}
+
+function verifyInternalRoutes() {
+  for (const route of internalRoutes) {
+    if (!fileExists(route)) {
+      addError(`Missing required internal route: ${route}`);
     }
   }
 }
@@ -245,6 +284,7 @@ verifyHtmlLinks();
 
 if (!linksOnly) {
   verifyPublicRoutes();
+  verifyInternalRoutes();
   verifyGuideFiles();
   verifySearchIndex();
   verifyPublicGuideContent();

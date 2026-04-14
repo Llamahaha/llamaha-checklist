@@ -4,6 +4,19 @@ import { copyTextToClipboard, createPageCard, renderPageToc, slugifyText } from 
 const snippetSections = document.getElementById("snippetSections");
 const pageToc = document.getElementById("pageToc");
 const tocItems = [];
+const rootPath = document.body.dataset.rootPath ?? ".";
+
+function resolveHref(url) {
+  if (!url || /^(https?:|mailto:|tel:|#)/i.test(url)) {
+    return url;
+  }
+
+  if (url.startsWith("../") || url.startsWith("./")) {
+    return url;
+  }
+
+  return rootPath === "." ? url : `${rootPath}/${url}`;
+}
 
 function createMetaBlock(title, text) {
   const block = document.createElement("div");
@@ -83,15 +96,15 @@ snippetLibrary.forEach((group, index) => {
     });
     actions.appendChild(copy);
 
-    if (snippet.relatedGuides?.length) {
-      const related = document.createElement("div");
-      related.className = "vendor-links";
-      snippet.relatedGuides.forEach(item => {
-        const link = document.createElement("a");
-        link.href = item.url;
-        link.textContent = item.label;
-        related.appendChild(link);
-      });
+      if (snippet.relatedGuides?.length) {
+        const related = document.createElement("div");
+        related.className = "vendor-links";
+        snippet.relatedGuides.forEach(item => {
+          const link = document.createElement("a");
+          link.href = resolveHref(item.url);
+          link.textContent = item.label;
+          related.appendChild(link);
+        });
       stack.appendChild(createMetaBlock("Related Guides", "Open the linked guides below for deeper workflow context."));
       stack.appendChild(related);
     }
@@ -113,22 +126,31 @@ renderPageToc(pageToc, tocItems, {
   description: "Use these quick links to move between the grouped MSP-ready snippets on this page."
 });
 
-function openHashSection(hash = window.location.hash) {
+function revealHashTarget(hash = window.location.hash) {
   if (!hash) return;
   const target = document.querySelector(hash);
-  if (target instanceof HTMLDetailsElement) {
-    target.open = true;
+  if (!target) return;
+
+  const section = target.closest("details");
+  if (section instanceof HTMLDetailsElement) {
+    section.open = true;
   }
+
+  window.setTimeout(() => {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 0);
 }
 
 pageToc?.addEventListener("click", event => {
   const link = event.target instanceof Element ? event.target.closest("a[href^='#']") : null;
   if (!link) return;
-  openHashSection(link.getAttribute("href"));
+  revealHashTarget(link.getAttribute("href"));
 });
 
 window.addEventListener("hashchange", () => {
-  openHashSection();
+  revealHashTarget();
 });
 
-openHashSection();
+window.setTimeout(() => {
+  revealHashTarget();
+}, 0);

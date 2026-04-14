@@ -33,6 +33,32 @@ const customerLicensingReference = {
       "If relevant, whether your team uses a cloud-connected, cached, or offline-capable P6 setup"
     ]
   },
+  mctrans: {
+    summary: "MCTRANS access usually depends on the exact HCS or HSS version or edition your organization purchased or standardized on, plus the workstation or user it was assigned to.",
+    howItWorks: [
+      "HCS and HSS workflows are often version-sensitive, so the approved release matters as much as the product name.",
+      "Your organization may track access by the specific product delivery, workstation, or user who received it.",
+      "If a study behaves differently across computers, the version in use is one of the first things to compare."
+    ],
+    whatYouNeed: [
+      "The exact MCTRANS product name, such as HCS or HSS",
+      "The version or release your team expects to use",
+      "If known, the delivery, purchase, or support details your organization used"
+    ]
+  },
+  axiom: {
+    summary: "Axiom access usually depends on the modules your organization purchased and the host application version or year those modules are expected to work with.",
+    howItWorks: [
+      "Axiom is commonly used as an add-in alongside host apps such as Autodesk or Bentley products.",
+      "The module in use and the host application version both matter for expected access and behavior.",
+      "If only one Axiom tool is missing, that can be a module or compatibility issue instead of a whole-app licensing problem."
+    ],
+    whatYouNeed: [
+      "The exact Axiom module or tool name",
+      "The host application name and version or year",
+      "If known, the Axiom license or support details your organization expects"
+    ]
+  },
   autodesk: {
     summary: "Autodesk access is usually tied to the Autodesk account email assigned to you and the exact product plus release year your team uses.",
     howItWorks: [

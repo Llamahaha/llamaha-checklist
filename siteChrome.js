@@ -10,6 +10,8 @@ const publicLinks = [
 
 const internalLinks = [
   { id: "internal-home", label: "Internal Home", href: "internal/index.html" },
+  { id: "reference-guides", label: "Reference Guides", href: "internal/reference-guides.html" },
+  { id: "tips-tricks", label: "Tips & Tricks", href: "internal/tips-and-tricks.html" },
   { id: "snippets", label: "Snippets", href: "internal/snippets.html" },
   { id: "templates", label: "Templates", href: "internal/templates.html" },
   { id: "playbooks", label: "Playbooks", href: "internal/playbooks.html" },
@@ -43,6 +45,8 @@ function getPublicSection(currentFile, body, pathname) {
 
 function getInternalSection(currentFile) {
   if (currentFile === "index.html") return "internal-home";
+  if (currentFile === "reference-guides.html") return "reference-guides";
+  if (currentFile === "tips-and-tricks.html") return "tips-tricks";
   if (currentFile === "snippets.html") return "snippets";
   if (currentFile === "templates.html") return "templates";
   if (currentFile === "playbooks.html") return "playbooks";
@@ -89,7 +93,7 @@ function initSiteChrome() {
 
   const brandMeta = document.createElement("span");
   brandMeta.textContent = area === "internal"
-    ? "Internal references, scripts, templates, playbooks, checklists, and licensing resources"
+    ? "Tech references, snippets, playbooks, checklists, and licensing notes for day-to-day support"
     : "Tech made easier";
 
   if (area === "internal") {

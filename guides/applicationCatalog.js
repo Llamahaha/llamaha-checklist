@@ -1,4 +1,6 @@
-export const applicationCatalog = {
+import { applicationCatalogExtra } from "./applicationCatalogExtra.js";
+
+const baseApplicationCatalog = {
   microsoft: [
     {
       name: "Outlook",
@@ -622,6 +624,13 @@ export const applicationCatalog = {
     }
   ]
 };
+
+export const applicationCatalog = Object.fromEntries(
+  [...new Set([...Object.keys(baseApplicationCatalog), ...Object.keys(applicationCatalogExtra)])].map(key => [
+    key,
+    [...(baseApplicationCatalog[key] ?? []), ...(applicationCatalogExtra[key] ?? [])]
+  ])
+);
 
 
 

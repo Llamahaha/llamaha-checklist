@@ -4,6 +4,19 @@ import { copyTextToClipboard, createPageCard, renderPageToc, slugifyText } from 
 const templateSections = document.getElementById("templateSections");
 const pageToc = document.getElementById("pageToc");
 const tocItems = [];
+const rootPath = document.body.dataset.rootPath ?? ".";
+
+function resolveHref(url) {
+  if (!url || /^(https?:|mailto:|tel:|#)/i.test(url)) {
+    return url;
+  }
+
+  if (url.startsWith("../") || url.startsWith("./")) {
+    return url;
+  }
+
+  return rootPath === "." ? url : `${rootPath}/${url}`;
+}
 
 function createMetaBlock(title, text) {
   const block = document.createElement("div");
@@ -77,7 +90,7 @@ handoffTemplateGroups.forEach((group, index) => {
       related.className = "vendor-links";
       template.relatedGuides.forEach(item => {
         const link = document.createElement("a");
-        link.href = item.url;
+        link.href = resolveHref(item.url);
         link.textContent = item.label;
         related.appendChild(link);
       });
@@ -122,22 +135,31 @@ renderPageToc(pageToc, tocItems, {
   description: "Use these quick links to move between grouped customer-facing and internal MSP templates."
 });
 
-function openHashSection(hash = window.location.hash) {
+function revealHashTarget(hash = window.location.hash) {
   if (!hash) return;
   const target = document.querySelector(hash);
-  if (target instanceof HTMLDetailsElement) {
-    target.open = true;
+  if (!target) return;
+
+  const section = target.closest("details");
+  if (section instanceof HTMLDetailsElement) {
+    section.open = true;
   }
+
+  window.setTimeout(() => {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 0);
 }
 
 pageToc?.addEventListener("click", event => {
   const link = event.target instanceof Element ? event.target.closest("a[href^='#']") : null;
   if (!link) return;
-  openHashSection(link.getAttribute("href"));
+  revealHashTarget(link.getAttribute("href"));
 });
 
 window.addEventListener("hashchange", () => {
-  openHashSection();
+  revealHashTarget();
 });
 
-openHashSection();
+window.setTimeout(() => {
+  revealHashTarget();
+}, 0);

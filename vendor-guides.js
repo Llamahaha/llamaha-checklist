@@ -8,7 +8,7 @@ const mobileHelpGrid = document.getElementById("mobileHelpGrid");
 const browserHelpGrid = document.getElementById("browserHelpGrid");
 const directoryVendorLinks = document.getElementById("directoryVendorLinks");
 const appBrowseGrid = document.getElementById("appBrowseGrid");
-const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte"]);
+const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte", "mctrans", "axiom"]);
 
 function appGuide(vendorSlug, appSlug) {
   return buildAppGuideUrl(vendorSlug, appSlug);
@@ -96,12 +96,16 @@ const browserHelpApps = [
 
 const vendorStartHere = {
   microsoft: "Email, Teams, OneDrive, mobile setup, and Microsoft 365 account questions.",
+  google: "Google Earth Pro help for map viewing, KML or KMZ imports, saved places, and location-based workflows.",
   citrix: "Citrix Workspace App help for published apps, virtual desktops, .ica launches, and workspace sign-in.",
   browsers: "Chrome, Edge, Firefox, and Safari support for sign-in pages, downloads, and everyday web use.",
   fortinet: "FortiClient VPN help for remote access, sign-in, and company VPN connection questions.",
   oracle: "Oracle Primavera P6 help for login, database selection, and project access questions.",
+  hec: "HEC hydrology, hydraulics, DSS, and GIS preprocessing help across the HEC engineering toolset.",
+  mctrans: "MCTRANS HCS and HSS help for transportation-capacity and safety-analysis workflows.",
   autodesk: "AutoCAD, Revit, Civil 3D, and Autodesk sign-in or version questions.",
   bentley: "ProjectWise, CONNECTION Client, and Bentley design app help.",
+  axiom: "Axiom add-in help for module loading, host-app compatibility, and ribbon or tool issues.",
   esri: "ArcGIS Pro access, portal sign-in, and extension questions.",
   ptc: "Mathcad Prime setup, licensing, and worksheet access help.",
   trimble: "SketchUp and Trimble Business Center help for sign-in, setup, and shared content.",

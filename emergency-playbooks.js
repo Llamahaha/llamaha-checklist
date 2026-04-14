@@ -1,9 +1,10 @@
-import { emergencyPlaybooks } from "./operationsData.js";
+import { emergencyPlaybooks, servicePlaybooks } from "./operationsData.js";
 import { appendBlock, createPageCard } from "./resourceCommon.js";
 
 const playbookGrid = document.getElementById("playbookGrid");
+const servicePlaybookGrid = document.getElementById("servicePlaybookGrid");
 
-emergencyPlaybooks.forEach(playbook => {
+function renderEmergencyPlaybook(playbook, container) {
   const card = createPageCard("vendor-card");
   card.id = playbook.id;
 
@@ -21,5 +22,71 @@ emergencyPlaybooks.forEach(playbook => {
   appendBlock(stack, "Verify Before Close", playbook.verify);
 
   card.append(title, summary, stack);
-  playbookGrid.appendChild(card);
+  container.appendChild(card);
+}
+
+function renderServicePlaybook(playbook, container) {
+  const card = createPageCard("vendor-card");
+  card.id = playbook.id;
+
+  const title = document.createElement("h3");
+  title.textContent = playbook.title;
+
+  const summary = document.createElement("p");
+  summary.textContent = playbook.summary;
+
+  const stack = document.createElement("div");
+  stack.className = "card-stack";
+  appendBlock(stack, "When To Use It", playbook.whenToUse);
+  appendBlock(stack, "Assess First", playbook.assess);
+  appendBlock(stack, "Do This", playbook.steps);
+  appendBlock(stack, "Collect", playbook.collect);
+  appendBlock(stack, "Verify Before Close", playbook.verify);
+
+  card.append(title, summary, stack);
+
+  if (playbook.relatedLinks?.length) {
+    const links = document.createElement("div");
+    links.className = "vendor-links";
+    playbook.relatedLinks.forEach(item => {
+      const link = document.createElement("a");
+      link.href = item.url;
+      link.textContent = item.label;
+      if (/^https?:/i.test(item.url)) {
+        link.target = "_blank";
+        link.rel = "noreferrer";
+      }
+      links.appendChild(link);
+    });
+    card.appendChild(links);
+  }
+
+  container.appendChild(card);
+}
+
+emergencyPlaybooks.forEach(playbook => {
+  if (playbookGrid) {
+    renderEmergencyPlaybook(playbook, playbookGrid);
+  }
 });
+
+servicePlaybooks.forEach(playbook => {
+  if (servicePlaybookGrid) {
+    renderServicePlaybook(playbook, servicePlaybookGrid);
+  }
+});
+
+function revealHashTarget(hash = window.location.hash) {
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+window.addEventListener("hashchange", () => {
+  revealHashTarget();
+});
+
+window.setTimeout(() => {
+  revealHashTarget();
+}, 0);

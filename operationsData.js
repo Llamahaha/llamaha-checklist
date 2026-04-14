@@ -448,6 +448,289 @@ export const emergencyPlaybooks = [
   }
 ];
 
+export const servicePlaybooks = [
+  {
+    id: "outlook-app-lag",
+    title: "Outlook app lag",
+    summary: "Use this when Outlook launches slowly, freezes on startup, or becomes sluggish when switching folders, shared mailboxes, or search views.",
+    whenToUse: [
+      "Outlook takes much longer than normal to open or close.",
+      "The user reports repeated freezing, spinning, or very delayed mailbox refresh.",
+      "The slowdown started after a workstation swap, Office update, add-in change, or mailbox growth event."
+    ],
+    assess: [
+      "Compare Outlook on the web to the desktop app before changing the local profile.",
+      "Confirm whether the lag is global or tied to one shared mailbox, search folder, or large archive.",
+      "Check add-ins, cached mode state, OST size, and whether search indexing is part of the complaint."
+    ],
+    steps: [
+      "Capture Outlook version, mailbox count, shared mailbox count, and whether classic or new Outlook is in use.",
+      "Test Outlook safe mode to separate add-ins from mailbox or profile state.",
+      "Review Office update state and whether the lag started after a recent patch or Teams add-in change.",
+      "If OWA is healthy and safe mode improves performance, narrow the add-in or profile path before a full rebuild."
+    ],
+    collect: [
+      "Screenshot of the Outlook version and exact lag behavior",
+      "OWA comparison result",
+      "Add-in list in scope",
+      "Approximate mailbox or OST size if relevant"
+    ],
+    verify: [
+      "Confirm Outlook open time improves and the user can switch folders, search, and use shared mailboxes normally.",
+      "Document the version, add-in findings, and whether the issue was profile, add-in, or mailbox-scope related."
+    ],
+    relatedLinks: [
+      { label: "Outlook reference guide", url: "reference-guides.html#guide-microsoft-outlook" },
+      { label: "Outlook public guide", url: "../guides/microsoft/outlook.html" }
+    ]
+  },
+  {
+    id: "password-reset",
+    title: "Password reset",
+    summary: "Use this when a user needs a routine password reset or the new password is not flowing cleanly through their normal apps.",
+    whenToUse: [
+      "The user forgot their password or the current password is no longer accepted.",
+      "The password was changed but Outlook, Teams, VPN, or Windows keeps using old credentials.",
+      "The reset is operational and not part of a larger compromise workflow."
+    ],
+    assess: [
+      "Confirm identity and approval before changing anything.",
+      "Determine whether the account is cloud-only, on-prem AD, or hybrid.",
+      "Ask which apps are still failing after the reset so stale credentials can be cleared in the right places."
+    ],
+    steps: [
+      "Reset the password in the authoritative source and document whether change-at-next-logon or MFA re-registration is expected.",
+      "Have the user test the new password in the browser first if Microsoft 365 is involved.",
+      "Clear or refresh stale sign-ins only where needed, such as Outlook, Teams, Windows sign-in, VPN, or saved credentials.",
+      "If lockouts return, look for stale mobile, VPN, mapped-drive, or service credentials instead of repeating the reset."
+    ],
+    collect: [
+      "Identity verification note",
+      "Authoritative source used for the reset",
+      "Apps still failing after the reset",
+      "Any recurring lockout timestamps"
+    ],
+    verify: [
+      "Confirm the user can sign in successfully and complete one follow-up test in the app that originally failed.",
+      "Document which stale credentials were cleared so future repeats start from the right place."
+    ],
+    relatedLinks: [
+      { label: "Password reset snippet", url: "snippets.html#ad-password-reset-next-logon" },
+      { label: "MFA reset explanation template", url: "templates.html#mfa-reset-explanation" }
+    ]
+  },
+  {
+    id: "unable-to-scan",
+    title: "Unable to scan",
+    summary: "Use this when a scanner or multifunction device can print but scanning to email, folder, or desktop app fails.",
+    whenToUse: [
+      "The user can print but cannot scan.",
+      "Scan to email or scan to folder fails from the device panel.",
+      "A desktop scanning app opens but never receives or saves the scanned item."
+    ],
+    assess: [
+      "Confirm the scan destination type: email, SMB folder, desktop app, or cloud workflow.",
+      "Check whether the failure is isolated to one workstation or happens directly from the device for everyone.",
+      "Ask whether the device was recently moved, had a password change, or uses a shared mailbox or file-share target."
+    ],
+    steps: [
+      "Test a simple scan to the device's most basic destination and compare it with the failing destination path.",
+      "Review whether the shared folder path, mailbox credentials, or app destination changed recently.",
+      "If a desktop app is involved, test another local save path and confirm the scan software still sees the device.",
+      "If only one user is affected, compare their workstation path, profile, or scanner app settings against another working user."
+    ],
+    collect: [
+      "Scanner model",
+      "Destination type and exact path or mailbox",
+      "Screenshot or photo of the panel or desktop error",
+      "Whether printing still works"
+    ],
+    verify: [
+      "Confirm one successful scan to the intended destination and one repeat test after the first success.",
+      "Document the destination path, credential dependency, and whether the fix was device-side or workstation-side."
+    ],
+    relatedLinks: [
+      { label: "PC Help", url: "../computer-issues.html" },
+      { label: "Printer and Windows snippets", url: "snippets.html#windows-printer-spooler-reset" }
+    ]
+  },
+  {
+    id: "reassigning-a-computer",
+    title: "Reassigning a computer",
+    summary: "Use this when an existing workstation is being cleaned up and prepared for a different user instead of being retired or fully replaced.",
+    whenToUse: [
+      "A laptop or desktop is moving to a new employee.",
+      "The device was returned and is being redeployed internally.",
+      "The client wants a fast reassignment path without leaving stale ownership behind."
+    ],
+    assess: [
+      "Confirm whether the device can be reissued as-is, needs a wipe, or needs a delayed handoff for data review.",
+      "Check for local-only data, checked-out project files, Outlook PSTs, offline sync folders, and engineering add-ins before cleanup.",
+      "Confirm the target user, naming standard, and whether the device stays in the same client site and policy group."
+    ],
+    steps: [
+      "Capture serial number, current owner, current management state, and any blockers such as legal hold or data retention review.",
+      "Complete the data handoff path first, including OneDrive, local project folders, browser data, and any role-specific app content that must be preserved.",
+      "Reset or rebuild the workstation according to client standard, then re-enroll management, security, printers, and baseline software.",
+      "Update asset ownership in Datto RMM, documentation, and ticketing before handoff."
+    ],
+    collect: [
+      "Serial number and hostname",
+      "Current and target user",
+      "Data handoff decision",
+      "Whether the device was wiped, rebuilt, or reassigned in place"
+    ],
+    verify: [
+      "Confirm the new user can sign in and the old user no longer appears as the device owner in management and documentation tools.",
+      "Document any preserved app data, templates, or exceptions carried forward intentionally."
+    ],
+    relatedLinks: [
+      { label: "Checklist generator", url: "checklist.html" },
+      { label: "Datto RMM reference", url: "reference-guides.html#guide-internal-stack-datto-rmm" }
+    ]
+  },
+  {
+    id: "restoring-deleted-files",
+    title: "Restoring deleted files",
+    summary: "Use this when a file was deleted or overwritten and support needs to determine the fastest safe restore path.",
+    whenToUse: [
+      "The user deleted files from OneDrive, SharePoint, a file share, or a local path.",
+      "A restore point or recycle bin may exist, but the source of truth is not yet confirmed.",
+      "The restore target and overwrite impact need to be reviewed before data is put back."
+    ],
+    assess: [
+      "Identify the authoritative source: OneDrive, SharePoint, network share, local disk, ProjectWise, or backup platform.",
+      "Confirm the exact file name, folder path, and approximate deletion or overwrite time.",
+      "Determine whether the restore can be self-service from recycle history or needs admin or backup tooling."
+    ],
+    steps: [
+      "Check the nearest safe self-service restore path first, such as OneDrive or SharePoint recycle history, if applicable.",
+      "If the restore is from backup, confirm the exact restore point and the approved destination before restoring.",
+      "Avoid overwriting active files until the requester confirms the correct version or date.",
+      "If engineering or project data is involved, confirm ownership and whether the deleted file was checked out or cached elsewhere."
+    ],
+    collect: [
+      "Exact file name and path",
+      "Approximate deletion or overwrite time",
+      "Source system used for restore",
+      "Destination path approved for restore"
+    ],
+    verify: [
+      "Confirm the restored file opens correctly and the requester sees the expected version.",
+      "Document the restore source, restore point, destination, and any remaining retention or ownership follow-up."
+    ],
+    relatedLinks: [
+      { label: "Veeam reference", url: "reference-guides.html#guide-internal-stack-veeam-backup-replication" },
+      { label: "OneDrive reference", url: "reference-guides.html#guide-microsoft-onedrive" }
+    ]
+  },
+  {
+    id: "teams-shared-voicemail",
+    title: "Setting up a shared voicemail in Teams",
+    summary: "Use this when a Teams voice workflow needs a shared voicemail path tied to a call queue, resource account, or group mailbox workflow.",
+    whenToUse: [
+      "The client needs a shared voicemail experience for a call queue or shared number.",
+      "A resource account or Teams Phone workflow exists, but voicemail ownership is unclear.",
+      "The technical setup depends on both Teams voice configuration and mailbox access."
+    ],
+    assess: [
+      "Confirm the business owner, target number or call queue, and who needs to receive or manage the voicemail.",
+      "Check whether the workflow uses a resource account, shared mailbox, distribution list, or another approved Microsoft voice pattern.",
+      "Confirm the Teams Phone and mailbox dependencies before you start making changes."
+    ],
+    steps: [
+      "Document the current phone resource, queue, or shared-number workflow before editing anything.",
+      "Confirm the mailbox target, notification owner, and who should be able to hear or manage messages.",
+      "Coordinate the Teams voice configuration with the mailbox or shared-resource access path so the setup lands cleanly.",
+      "Test one inbound call and verify the correct people can see or hear the voicemail result."
+    ],
+    collect: [
+      "Target phone number, queue, or resource account",
+      "Mailbox target or shared-ownership model",
+      "People who need access",
+      "Any current Teams Phone or auto attendant dependencies"
+    ],
+    verify: [
+      "Confirm the voicemail lands in the intended place and the approved owners can access it.",
+      "Document the resource account, mailbox target, and ownership model in the ticket."
+    ],
+    relatedLinks: [
+      { label: "Teams reference", url: "reference-guides.html#guide-microsoft-teams" },
+      { label: "Shared mailbox access template", url: "templates.html#shared-mailbox-access-confirmation" }
+    ]
+  },
+  {
+    id: "share-terminated-user-onedrive",
+    title: "Sharing a terminated user's OneDrive",
+    summary: "Use this when a departed user's OneDrive content needs a controlled owner handoff instead of an ad hoc share link.",
+    whenToUse: [
+      "A manager or successor needs access to a terminated user's OneDrive files.",
+      "The account is already disabled, but content ownership and retention are still under review.",
+      "The client needs a documented handoff instead of a one-off file download."
+    ],
+    assess: [
+      "Confirm approval owner, the target recipient, and whether the request is temporary review or permanent ownership handoff.",
+      "Check whether the account is already disabled and whether the OneDrive is still inside retention expectations.",
+      "Determine whether a manager already has the correct delegated path before adding a new one."
+    ],
+    steps: [
+      "Document the target user, the business reason, and the approved access window or retention expectation.",
+      "Use the appropriate Microsoft administrative path to grant temporary or managed access instead of creating an unmanaged public share.",
+      "Confirm the target user can reach the correct OneDrive content in the browser first.",
+      "Record when access was granted, to whom, and whether a later removal date is required."
+    ],
+    collect: [
+      "Former user name and UPN",
+      "Target reviewer or owner",
+      "Approval owner",
+      "Whether the request is temporary review or longer-term handoff"
+    ],
+    verify: [
+      "Confirm the approved recipient can access the OneDrive content they need.",
+      "Document the access method, retention note, and any follow-up removal date."
+    ],
+    relatedLinks: [
+      { label: "OneDrive reference", url: "reference-guides.html#guide-microsoft-onedrive" },
+      { label: "Termination and offboarding template", url: "templates.html#termination-offboarding-confirmation" }
+    ]
+  },
+  {
+    id: "datto-rmm-software-remote-install-uninstall",
+    title: "Remotely installing / uninstalling software with Datto RMM",
+    summary: "Use this when software work is being executed remotely through Datto RMM and needs a repeatable, low-risk path.",
+    whenToUse: [
+      "A package, component, or software policy needs to be pushed or removed through Datto RMM.",
+      "The endpoint is remote and local hands-on work is not practical.",
+      "The install or uninstall must be documented cleanly for later review."
+    ],
+    assess: [
+      "Confirm the exact device scope and whether the action should hit one endpoint, a filter, or a site-wide target.",
+      "Check recent audit time, online status, pending reboot state, and policy inheritance before pushing a software change.",
+      "Confirm the package revision, silent switches, and rollback path before execution."
+    ],
+    steps: [
+      "Verify the endpoint record, last audit, hostname, current owner, and whether the device was recently rebuilt or reassigned.",
+      "Check whether the target software is already present and whether an uninstall string or cleanup step exists first.",
+      "Use the approved Datto RMM job, component, or software deployment path and monitor the output rather than assuming silent success.",
+      "If the first execution fails, capture the job output and device state before changing the package or widening scope."
+    ],
+    collect: [
+      "Device name and site",
+      "Job or component name",
+      "Package revision or installer used",
+      "Output log or failure code"
+    ],
+    verify: [
+      "Confirm the target software state matches the request and the endpoint reports healthy after the change.",
+      "Document the execution method, package or uninstall string used, and whether a reboot or second pass was required."
+    ],
+    relatedLinks: [
+      { label: "Datto RMM reference", url: "reference-guides.html#guide-internal-stack-datto-rmm" },
+      { label: "Datto RMM snippet", url: "snippets.html#datto-rmm-remote-software-checks" }
+    ]
+  }
+];
+
 export const handoffTemplates = [
   {
     id: "completed-onboarding",

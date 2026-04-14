@@ -1,4 +1,6 @@
-export const vendorOrder = [
+import { vendorGuidesExtra, vendorOrderExtra } from "./guideDataExtra.js";
+
+const baseVendorOrder = [
   "microsoft",
   "browsers",
   "fortinet",
@@ -16,7 +18,7 @@ export const vendorOrder = [
   "egnyte"
 ];
 
-export const vendorGuides = {
+const baseVendorGuides = {
   microsoft: {
     title: "Microsoft 365",
     summary: "Use this for tenant-backed desktop app support, licensing, sign-in, sync, Teams collaboration, and SharePoint or OneDrive workflow issues.",
@@ -383,6 +385,27 @@ export const vendorGuides = {
     ]
   }
 };
+
+function mergeGuide(baseGuide = {}, extraGuide = {}) {
+  const merged = { ...baseGuide, ...extraGuide };
+  ["products", "sharedNotes", "adminSurfaces", "escalationNotes", "supportLinks"].forEach(key => {
+    const baseValue = baseGuide[key] ?? [];
+    const extraValue = extraGuide[key] ?? [];
+    if (baseValue.length || extraValue.length) {
+      merged[key] = [...baseValue, ...extraValue];
+    }
+  });
+  return merged;
+}
+
+export const vendorOrder = [...new Set([...baseVendorOrder, ...vendorOrderExtra])];
+
+export const vendorGuides = Object.fromEntries(
+  [...new Set([...Object.keys(baseVendorGuides), ...Object.keys(vendorGuidesExtra)])].map(key => [
+    key,
+    mergeGuide(baseVendorGuides[key], vendorGuidesExtra[key])
+  ])
+);
 
 export function getVendorGuide(vendorSlug) {
   return vendorGuides[vendorSlug] ?? null;

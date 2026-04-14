@@ -15,7 +15,7 @@
     <nav class="page-nav" aria-label="Page">
       <a href="index.html">Internal Home</a>
       <span>/</span>
-      <strong>Emergency Playbooks</strong>
+      <strong>Playbooks</strong>
     </nav>
 
     <main class="hub-shell resource-page">
@@ -24,22 +24,48 @@
           <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
             <p class="section-kicker">Response Library</p>
-            <h1>Emergency playbooks</h1>
+            <h1>Playbooks and service procedures</h1>
             <p class="builder-copy">
-              Use these when speed matters and you need a structured first-response path for account compromise, emergency offboarding, lost devices, phishing, or wider security events.
+              Use this page for both emergency response playbooks and the structured day-to-day procedures we reuse for common technician work such as password resets, file recovery, scanning, workstation reassignment, Teams voicemail, and Datto RMM software work.
             </p>
           </div>
         </div>
       </section>
 
-      <section class="results-card hub-section">
+      <section class="results-card toc-shell">
+        <p class="section-kicker">On This Page</p>
+        <h2>Jump to a procedure set</h2>
+        <p class="hub-section-copy">Use the quick links below to move between emergency response playbooks and repeat service procedures.</p>
+        <nav class="toc-links" aria-label="Playbook sections">
+          <a href="#emergencySection">Emergency playbooks</a>
+          <a href="#serviceSection">Service procedures</a>
+        </nav>
+      </section>
+
+      <section id="emergencySection" class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Playbooks</p>
+            <p class="section-kicker">Emergency Playbooks</p>
             <h2>First-response guidance by incident type</h2>
           </div>
         </div>
+        <p class="hub-section-copy">
+          Use these when speed matters and you need a structured first-response path for compromise, urgent offboarding, phishing, lost devices, or wider security events.
+        </p>
         <div id="playbookGrid" class="vendor-directory"></div>
+      </section>
+
+      <section id="serviceSection" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Service Procedures</p>
+            <h2>Repeatable technician docs for everyday requests</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">
+          Use these when the work is not an emergency but still needs a clean, repeatable path and better documentation than a one-line ticket note.
+        </p>
+        <div id="servicePlaybookGrid" class="vendor-directory"></div>
       </section>
     </main>
   </div>

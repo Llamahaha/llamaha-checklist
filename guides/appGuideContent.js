@@ -1,4 +1,6 @@
-export const appGuideContent = {
+import { appGuideContentExtra } from "./appGuideContentExtra.js";
+
+const baseAppGuideContent = {
   microsoft: {
     outlook: {
       highlights: [
@@ -578,6 +580,16 @@ export const appGuideContent = {
     }
   }
 };
+
+export const appGuideContent = Object.fromEntries(
+  [...new Set([...Object.keys(baseAppGuideContent), ...Object.keys(appGuideContentExtra)])].map(vendorSlug => [
+    vendorSlug,
+    {
+      ...(baseAppGuideContent[vendorSlug] ?? {}),
+      ...(appGuideContentExtra[vendorSlug] ?? {})
+    }
+  ])
+);
 
 export function getAppGuideContent(vendorSlug, appSlug) {
   return appGuideContent[vendorSlug]?.[appSlug] ?? {};

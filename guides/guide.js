@@ -31,7 +31,7 @@ const homeUrl = `${rootPath}/index.html`;
 const guideHubUrl = `${rootPath}/vendor-guides.html`;
 const vendorUrl = slug => `${rootPath}/guides/${slug}.html`;
 const appUrl = (slug, childSlug) => `${rootPath}/${buildAppGuideUrl(slug, childSlug)}`;
-const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte"]);
+const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte", "mctrans", "axiom"]);
 
 function el(tag, className, text) {
   const node = document.createElement(tag);

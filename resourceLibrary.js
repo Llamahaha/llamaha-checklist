@@ -389,6 +389,17 @@ export const snippetLibrary = [
         expectedResult: "You can confirm admin context and whether a pending reboot state exists before another install attempt.",
         caution: "Do not keep rerunning the same installer if the box is waiting on a reboot or missing a required runtime.",
         relatedGuides: [{ label: "AutoCAD", url: "guides/autodesk/autocad.html" }, { label: "CONNECTION Client", url: "guides/bentley/connection-client.html" }]
+      },
+      {
+        id: "datto-rmm-remote-software-checks",
+        title: "Datto RMM remote software install / uninstall checks",
+        purpose: "Standardize the first-pass checks before pushing a remote install or uninstall through Datto RMM.",
+        whenToUse: "Use when software work is being done through Datto RMM and you need to confirm the device, policy, and execution path first.",
+        prerequisites: ["Datto RMM access to the correct site and device", "Approved software package, component, or uninstall target", "Remote-action scope confirmed"],
+        command: "Confirm in Datto RMM: site, policy, recent audit, online status, pending reboot state, and last logged-on user\nGet-ItemProperty HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*, HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | Where-Object { $_.DisplayName -like '*[Software Name]*' } | Select DisplayName, DisplayVersion, UninstallString",
+        expectedResult: "You can confirm the endpoint is ready for remote software work and whether the target app is already installed, partially installed, or available for clean uninstall.",
+        caution: "Do not push software changes broadly until you confirm the exact device set, package revision, reboot state, and whether the machine was recently reimaged or reassigned.",
+        relatedGuides: [{ label: "Datto RMM playbook", url: "internal/playbooks.html#datto-rmm-software-remote-install-uninstall" }]
       }
     ]
   },
@@ -553,6 +564,37 @@ Thanks,
         relatedGuides: [
           { label: "AutoCAD", url: "guides/autodesk/autocad.html" },
           { label: "Bluebeam Revu 21", url: "guides/bluebeam/revu-21.html" }
+        ]
+      },
+      {
+        id: "org-chart-change-request",
+        title: "Org chart change request",
+        audience: "Customer-facing",
+        useCase: "Use when onboarding, offboarding, role changes, or mailbox and access updates keep drifting because the current reporting structure is unclear or out of date.",
+        placeholders: ["[Department or Team]", "[Requested Effective Date]", "[People Changing Roles]", "[Manager or Approval Owner]", "[Systems Affected]"],
+        template: `Hi [Name],
+
+To keep access, approvals, and shared-resource changes aligned correctly, we need the latest org chart or reporting update for the group below.
+
+Department or team: [Department or Team]
+Requested effective date: [Requested Effective Date]
+People changing roles: [People Changing Roles]
+Manager or approval owner: [Manager or Approval Owner]
+Systems or resources affected: [Systems Affected]
+
+Please reply with one of the following:
+- The updated org chart
+- A short list of who reports to whom
+- Any upcoming manager, department, or approval-routing changes we should know about
+
+This helps us avoid mailbox, Teams, licensing, and workstation changes going to the wrong owner or following an outdated approval path.
+
+Thanks,
+[Tech Name]`,
+        relatedGuides: [
+          { label: "Outlook", url: "guides/microsoft/outlook.html" },
+          { label: "Teams", url: "guides/microsoft/teams.html" },
+          { label: "SharePoint", url: "guides/microsoft/sharepoint.html" }
         ]
       }
     ]

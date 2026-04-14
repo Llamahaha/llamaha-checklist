@@ -568,6 +568,145 @@ export const tipsAndTricksSections = [
     ]
   },
   {
+    title: "Common App Tips That Help Across Many Products",
+    description: "Use these habits across Outlook, Teams, OneDrive, SharePoint, Citrix Workspace, PDF apps, engineering tools, and other work software before you jump to bigger repairs.",
+    items: [
+      {
+        title: "Keep the app name, version, and one affected item ready",
+        text: "Support goes much faster when you can name the exact app, version or year, and the file, project, mailbox, site, or library involved.",
+        fixes: [
+          "Write down the exact app name and version or year shown in the app if you can open it.",
+          "Keep the file name, project name, mailbox, site URL, or library name involved in the problem.",
+          "If the issue began after an update, password change, restart, or new computer, mention that timing when you contact support."
+        ],
+        links: [
+          {
+            label: "Open App Help",
+            url: "vendor-guides.html",
+            external: false
+          }
+        ]
+      },
+      {
+        title: "Compare the problem to a second path before bigger changes",
+        text: "A quick comparison often shows whether the issue belongs to one file, one account, one computer, or the whole app.",
+        fixes: [
+          "If a browser version exists, compare the browser version to the desktop app before reinstalling or clearing local data.",
+          "If one file or project fails, test a second known-good one before assuming the whole app is broken.",
+          "If the same work can be tested on another approved computer, keep that comparison ready for support."
+        ],
+        links: [
+          {
+            label: "Search the help center",
+            url: "search.html",
+            external: false
+          }
+        ]
+      },
+      {
+        title: "Do not clear local data until you know the source of truth",
+        text: "Apps that sync files, use shared projects, or keep local caches can lose important context if you clear data too early.",
+        fixes: [
+          "For OneDrive and SharePoint, use the browser as the source of truth before you reset the sync app.",
+          "For engineering or project apps, note the project folder and version before moving or deleting local files.",
+          "If the app uses shared mailboxes, shared libraries, or shared project data, mention that before you try a reinstall."
+        ],
+        links: [
+          {
+            label: "Licensing Help",
+            url: "app-licensing.html",
+            external: false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Quick Habits by App Family",
+    description: "Use these customer-safe reminders when you already know the app family you are working in and want the best first step without making bigger changes too early.",
+    items: [
+      {
+        title: "Microsoft apps: Outlook, Teams, OneDrive, SharePoint, and Authenticator",
+        text: "Microsoft problems are often easier to narrow down when you compare the browser version, the desktop or mobile app, and the exact work account in use.",
+        fixes: [
+          "If Outlook, Teams, OneDrive, or SharePoint behave differently in the browser than in the desktop app, mention that difference before you reset anything.",
+          "Keep the work account email, the exact mailbox, team, site, or library name, and whether the issue began after a password or phone change.",
+          "For Outlook Mobile, Teams Mobile, and Microsoft Authenticator, make sure the phone has network access, notifications, and the correct work account before you remove the app."
+        ],
+        links: [
+          {
+            label: "Open App Help",
+            url: "vendor-guides.html",
+            external: false
+          }
+        ]
+      },
+      {
+        title: "PDF and publishing apps: Acrobat, Bluebeam, and InDesign",
+        text: "PDF and publishing problems often come from one file, one font set, one linked asset, or one sign-in profile rather than the entire app being broken.",
+        fixes: [
+          "If Acrobat, Bluebeam, or InDesign opens but one file fails, test a second file first so support can tell whether the issue follows the file or the app.",
+          "For InDesign, keep the document name, missing font name, or linked-image warning ready if you see one.",
+          "If the app opens as Reader, Trial, or a lower feature level than expected, note the exact message before signing out or updating."
+        ],
+        links: [
+          {
+            label: "Open Adobe guides",
+            url: "guides/adobe.html",
+            external: false
+          },
+          {
+            label: "Open Bluebeam guide",
+            url: "guides/bluebeam/revu-21.html",
+            external: false
+          }
+        ]
+      },
+      {
+        title: "Engineering and project apps: AutoCAD, Revit, Civil 3D, ArcGIS Pro, ProjectWise, InfoWorks ICM, Primavera P6, Google Earth Pro, HEC, MCTRANS, and Axiom",
+        text: "Engineering tools are often sensitive to version or release year, one specific project or study, and the exact folder, database, or datasource behind the work.",
+        fixes: [
+          "Keep the exact app version or release year, the project or study name, and where the data is stored before you contact support.",
+          "If another approved computer can open the same project, study, or drawing, mention that comparison because it helps separate an app problem from a file or path problem.",
+          "If the issue began after a new computer, update, or moving project data, say that up front instead of only describing the final error."
+        ],
+        links: [
+          {
+            label: "Open App Help",
+            url: "vendor-guides.html#application-directory",
+            external: false
+          },
+          {
+            label: "Open licensing help",
+            url: "app-licensing.html",
+            external: false
+          }
+        ]
+      },
+      {
+        title: "Remote access apps: Citrix Workspace and FortiClient VPN",
+        text: "Remote-access issues are usually about the connection path, the company sign-in, or one published app or internal resource, not the whole computer at once.",
+        fixes: [
+          "If Citrix or FortiClient starts but one published app, desktop, or internal resource still fails, keep that exact resource name ready for support.",
+          "If the remote-access app uses a browser step, complete that step fully and note whether the browser itself showed an error.",
+          "If the issue started after a password reset or MFA change, mention that before you remove the client or the VPN profile."
+        ],
+        links: [
+          {
+            label: "Open PC Help",
+            url: "computer-issues.html",
+            external: false
+          },
+          {
+            label: "Open App Help",
+            url: "vendor-guides.html",
+            external: false
+          }
+        ]
+      }
+    ]
+  },
+  {
     title: "Safe Cleanup and Disk Space",
     description: "Use these cleanup tips when Windows is low on space or a browser or app seems stuck on old temporary data. The safest first choice is still Windows Storage and Cleanup Recommendations.",
     items: [

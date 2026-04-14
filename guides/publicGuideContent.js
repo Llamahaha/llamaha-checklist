@@ -1,4 +1,6 @@
-export const publicGuideContent = {
+import { publicGuideContentExtra } from "./publicGuideContentExtra.js";
+
+const basePublicGuideContent = {
   microsoft: {
     outlook: {
       summary: "Use this guide when Outlook will not open your mailbox, keeps asking you to sign in, stops syncing, or shared mailboxes and calendars are missing.",
@@ -1139,6 +1141,16 @@ export const publicGuideContent = {
     }
   }
 };
+
+export const publicGuideContent = Object.fromEntries(
+  [...new Set([...Object.keys(basePublicGuideContent), ...Object.keys(publicGuideContentExtra)])].map(vendorSlug => [
+    vendorSlug,
+    {
+      ...(basePublicGuideContent[vendorSlug] ?? {}),
+      ...(publicGuideContentExtra[vendorSlug] ?? {})
+    }
+  ])
+);
 
 export function getPublicGuideContent(vendorSlug, appSlug) {
   return publicGuideContent[vendorSlug]?.[appSlug] ?? {};
