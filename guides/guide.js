@@ -7,7 +7,6 @@ import {
 } from "./applicationCatalog.js";
 import { getAppGuideContent } from "./appGuideContent.js";
 import { vendorFaqs, vendorInstallIssues, vendorUsageIssues } from "./guideExtras.js";
-import { handoffTemplates, snippetLibrary } from "../resourceLibrary.js";
 
 const pageType = document.body.dataset.pageType ?? "vendor";
 const vendorSlug = document.body.dataset.vendor;
@@ -105,15 +104,6 @@ function normalizeIssue(item) {
   };
 }
 
-function relatedSnippetEntries(ids = []) {
-  const flat = snippetLibrary.flatMap(group => group.snippets ?? []);
-  return flat.filter(item => ids.includes(item.id));
-}
-
-function relatedTemplateEntries(ids = []) {
-  return handoffTemplates.filter(item => ids.includes(item.id));
-}
-
 function buildAppModel() {
   const extra = getAppGuideContent(vendorSlug, appSlug);
   const overview = extra.overview?.length ? extra.overview : [app.summary ?? app.focus];
@@ -141,8 +131,6 @@ function buildAppModel() {
       : [normalizeIssue({ issue: `${app.name} issue requires version, access, and local-state review`, fix: "Compare the workstation to a known-good build before reinstalling." })],
     usefulInfo: extra.usefulInfo ?? { paths: [], logs: [], services: [], processes: [] },
     relatedApps: extra.relatedApps?.length ? extra.relatedApps : apps.filter(item => item.slug !== appSlug).slice(0, 3).map(item => ({ vendor: vendorSlug, app: item.slug })),
-    relatedSnippets: relatedSnippetEntries(extra.relatedSnippets ?? []),
-    relatedTemplates: relatedTemplateEntries(extra.relatedTemplates ?? []),
     relatedLinks: unique([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? [])])
   };
 }
@@ -289,16 +277,11 @@ function renderAppPage() {
   );
   paths.appendChild(infoGrid);
 
-  const related = section("related-resources", "Related", "Related Links / Apps / Templates", "Use these next-step resources to avoid dead ends.");
+  const related = section("related-resources", "Related", "Related Links / Apps", "Use these links to keep moving without losing context.");
   const relatedGrid = el("div", "guide-card-grid");
   relatedGrid.appendChild(card("Back to Vendor", linkList([{ label: `Back to ${vendor.title}`, url: vendorUrl(vendorSlug) }])));
   relatedGrid.appendChild(card("Related Apps", linkList(model.relatedApps.map(item => ({ label: getApplicationGuide(item.vendor, item.app)?.name ?? item.app, url: appUrl(item.vendor, item.app) })) )));
-  relatedGrid.appendChild(card("Related Snippets", model.relatedSnippets.length
-    ? linkList(model.relatedSnippets.map(item => ({ label: item.title, url: `${rootPath}/snippets.html#${item.id}` })))
-    : linkList([{ label: "Open snippet library", url: `${rootPath}/snippets.html` }])));
-  relatedGrid.appendChild(card("Related Templates", model.relatedTemplates.length
-    ? linkList(model.relatedTemplates.map(item => ({ label: item.title, url: `${rootPath}/templates.html#${item.id}` })))
-    : linkList([{ label: "Open template library", url: `${rootPath}/templates.html` }])));
+  relatedGrid.appendChild(card("Need More Help?", linkList([{ label: "Open contact page", url: `${rootPath}/contact.html` }])));
   if (model.relatedLinks.length) {
     relatedGrid.appendChild(card("Official / Vendor Links", linkList(model.relatedLinks.map(item => ({ label: item.label, url: item.url })) )));
   }

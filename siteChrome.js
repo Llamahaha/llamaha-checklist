@@ -12,8 +12,7 @@ const internalLinks = [
   { id: "templates", label: "Templates", href: "internal/templates.html" },
   { id: "playbooks", label: "Playbooks", href: "internal/playbooks.html" },
   { id: "checklists", label: "Checklists", href: "internal/checklist.html" },
-  { id: "licensing", label: "Licensing", href: "internal/licensing.html" },
-  { id: "references", label: "Internal References", href: "internal/references.html" }
+  { id: "licensing", label: "Licensing", href: "internal/licensing.html" }
 ];
 
 function buildHref(rootPath, fileName) {
@@ -38,12 +37,12 @@ function getPublicSection(currentFile, body, pathname) {
 }
 
 function getInternalSection(currentFile) {
+  if (currentFile === "index.html") return "internal-home";
   if (currentFile === "snippets.html") return "snippets";
   if (currentFile === "templates.html") return "templates";
   if (currentFile === "playbooks.html") return "playbooks";
   if (currentFile === "checklist.html") return "checklists";
   if (currentFile === "licensing.html") return "licensing";
-  if (["references.html", "install-uninstall.html"].includes(currentFile)) return "references";
   return "internal-home";
 }
 
@@ -89,8 +88,8 @@ function initSiteChrome() {
 
   const brandMeta = document.createElement("span");
   brandMeta.textContent = area === "internal"
-    ? "Protected references, scripts, templates, playbooks, and technician tools"
-    : "Guides, applications, search, and contact options";
+    ? "Internal references, scripts, templates, playbooks, checklists, and licensing resources"
+    : "Search, guides, applications, and ways to get help";
 
   brandCopy.append(brandTag, brandTitle, brandMeta);
   brand.append(brandIcon, brandCopy);
