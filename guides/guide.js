@@ -31,6 +31,7 @@ const homeUrl = `${rootPath}/index.html`;
 const guideHubUrl = `${rootPath}/vendor-guides.html`;
 const vendorUrl = slug => `${rootPath}/guides/${slug}.html`;
 const appUrl = (slug, childSlug) => `${rootPath}/${buildAppGuideUrl(slug, childSlug)}`;
+const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte"]);
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -383,10 +384,11 @@ function renderAppPage(model) {
   const relatedGrid = el("div", "guide-card-grid");
   relatedGrid.appendChild(card("Back to Vendor", linkList([{ label: `Back to ${vendor.title}`, url: vendorUrl(vendorSlug) }])));
   relatedGrid.appendChild(card("Related Apps", linkList(model.relatedApps.map(item => ({ label: getApplicationGuide(item.vendor, item.app)?.name ?? item.app, url: appUrl(item.vendor, item.app) })) )));
-  relatedGrid.appendChild(card("Need More Help?", linkList([
-    { label: "Open contact page", url: `${rootPath}/contact.html` },
-    { label: "Licensing help", url: `${rootPath}/app-licensing.html` }
-  ])));
+  const supportLinks = [{ label: "Open contact page", url: `${rootPath}/contact.html` }];
+  if (licensedVendors.has(vendorSlug)) {
+    supportLinks.push({ label: "Licensing help", url: `${rootPath}/app-licensing.html` });
+  }
+  relatedGrid.appendChild(card("Need More Help?", linkList(supportLinks)));
   if (model.relatedLinks.length) {
     relatedGrid.appendChild(card("Official / Vendor Links", linkList(model.relatedLinks.map(item => ({ label: item.label, url: item.url })) )));
   }

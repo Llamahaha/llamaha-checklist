@@ -101,6 +101,16 @@ export const applicationCatalog = {
       uninstall: "Before removing FortiClient, confirm you no longer need the company VPN profile and note any connection names or remote-access instructions you still need."
     }
   ],
+  citrix: [
+    {
+      name: "Citrix Workspace App",
+      slug: "workspace-app",
+      focus: "Remote app and virtual desktop client used to open published applications and desktops from a company Citrix workspace.",
+      licensing: "Citrix Workspace App itself is generally just the client. Access depends on the company workspace URL, the work account you use to sign in, and whether your company has published the app or desktop to you.",
+      install: "Use the company-approved Citrix Workspace App build or workspace sign-in link, restart after install if prompted, and test one published app or desktop from the company workspace.",
+      uninstall: "Before removing Citrix Workspace App, confirm you no longer need that company workspace on the computer and make note of the workspace URL or any company launch instructions you still need."
+    }
+  ],
   oracle: [
     {
       name: "Oracle Primavera P6",
@@ -672,6 +682,9 @@ const slugOverrides = {
   },
   fortinet: {
     "FortiClient VPN": "forticlient-vpn"
+  },
+  citrix: {
+    "Citrix Workspace App": "workspace-app"
   },
   oracle: {
     "Oracle Primavera P6": "primavera-p6"

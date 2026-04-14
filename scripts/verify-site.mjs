@@ -42,6 +42,7 @@ const populatedPublicGuides = [
   ["browsers", "mozilla-firefox"],
   ["browsers", "apple-safari"],
   ["fortinet", "forticlient-vpn"],
+  ["citrix", "workspace-app"],
   ["oracle", "primavera-p6"]
 ];
 
@@ -213,7 +214,8 @@ function verifyPublicGuideContent() {
     "supportArtifacts"
   ];
   const optionalSectionsByGuide = {
-    "fortinet/forticlient-vpn": new Set(["licensing"])
+    "fortinet/forticlient-vpn": new Set(["licensing"]),
+    "citrix/workspace-app": new Set(["licensing"])
   };
 
   for (const [vendorSlug, appSlug] of populatedPublicGuides) {

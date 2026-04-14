@@ -226,6 +226,31 @@ export const computerIssueSections = [
             external: false
           }
         ]
+      },
+      {
+        title: "Citrix Workspace App will not open your remote app or desktop",
+        text: "Citrix Workspace issues are usually caused by the wrong workspace URL, the wrong work account, a browser launch handing off .ica files incorrectly, or a published app or desktop failing after it starts.",
+        fixes: [
+          "Use the exact workspace URL or company launch page your organization provided instead of a saved shortcut you are no longer sure about.",
+          "Make sure Citrix Workspace App is installed if the browser downloads an .ica file and asks what should open it.",
+          "Restart the local computer and then retry one published app or desktop before assuming the whole workspace is unavailable.",
+          "If one Citrix app works but another fails, keep the exact published app or desktop name ready for support."
+        ],
+        links: [
+          {
+            label: "Open Citrix Workspace App guide",
+            url: "guides/citrix/workspace-app.html",
+            external: false
+          },
+          {
+            label: "Getting started with Citrix Workspace",
+            url: "https://docs.citrix.com/en-us/citrix-workspace-app-for-windows/getting-started.html"
+          },
+          {
+            label: "Client detection",
+            url: "https://docs.citrix.com/en-us/citrix-workspace/user-experience/client-detection.html"
+          }
+        ]
       }
     ]
   },

@@ -20,32 +20,6 @@ const customerLicensingReference = {
       "If relevant, whether you need desktop apps, mobile setup, mailbox access, or a specific Microsoft 365 feature"
     ]
   },
-  browsers: {
-    summary: "Browsers usually do not have a separate paid end-user license for everyday work. Access is normally based on your work website sign-in, browser version, browser profile, and company browser settings.",
-    howItWorks: [
-      "Chrome, Edge, Firefox, and Safari are generally available without a separate paid software seat for normal browsing.",
-      "The sites you open inside the browser may still depend on your work account, saved browser profile, or company security settings.",
-      "For browser-based work, the main details are the browser name, browser version, website URL, and whether the same site works in another browser."
-    ],
-    whatYouNeed: [
-      "The browser name, such as Chrome, Edge, Firefox, or Safari",
-      "The exact site or portal URL",
-      "If relevant, the browser profile or work account used in the browser"
-    ]
-  },
-  fortinet: {
-    summary: "FortiClient VPN in this environment normally uses the free client app, so what matters most is the exact VPN profile or tunnel your company gave you and the sign-in method tied to that connection.",
-    howItWorks: [
-      "FortiClient usually uses the free client plus a company-provided VPN profile or tunnel name instead of a separate paid end-user seat.",
-      "Some environments use a browser sign-in, MFA prompt, or certificate step in addition to the FortiClient password or connection flow.",
-      "The exact VPN tunnel or profile matters, especially if your company provides more than one remote-access option."
-    ],
-    whatYouNeed: [
-      "The FortiClient VPN tunnel or profile name your company provided",
-      "The exact work account or username format you should use for VPN sign-in",
-      "If relevant, the MFA method or browser sign-in prompt used during connection"
-    ]
-  },
   oracle: {
     summary: "Oracle Primavera P6 access usually depends on the correct P6 login, the correct database connection, and the environment your team uses for that P6 workspace.",
     howItWorks: [
@@ -203,7 +177,7 @@ if (matrixCard) {
 }
 
 if (licensingGrid) {
-  vendorOrder.forEach(key => {
+  vendorOrder.filter(key => customerLicensingReference[key]).forEach(key => {
     const guide = vendorGuides[key];
     const apps = getVendorApplications(key);
     const reference = customerLicensingReference[key];

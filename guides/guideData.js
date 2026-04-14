@@ -2,6 +2,7 @@ export const vendorOrder = [
   "microsoft",
   "browsers",
   "fortinet",
+  "citrix",
   "oracle",
   "autodesk",
   "bentley",
@@ -91,6 +92,29 @@ export const vendorGuides = {
     supportLinks: [
       { label: "FortiClient VPN documentation", url: "https://docs.fortinet.com/document/forticlient/7.2.10/administration-guide/6364/connecting-to-ssl-or-ipsec-vpn" },
       { label: "Connecting from FortiClient VPN client", url: "https://docs.fortinet.com/document/fortigate/7.6.1/administration-guide/215051/connecting-from-forticlient-vpn-client" }
+    ]
+  },
+  citrix: {
+    title: "Citrix",
+    summary: "Use this for Citrix Workspace App sign-in, workspace detection, .ica launches, and everyday remote app or virtual desktop questions.",
+    overview:
+      "Citrix Workspace App is commonly used to open company-published apps and virtual desktops from a Citrix workspace. Start by confirming the correct workspace URL, the correct work account, and whether the launch problem is happening in the browser, in the Citrix app, or after the app or desktop starts.",
+    products: ["Citrix Workspace App"],
+    sharedNotes: [
+      "Use the exact workspace URL or company-provided Citrix sign-in path your organization gave you.",
+      "If the browser downloads an .ica file, make sure it opens with Citrix Workspace App instead of staying in Downloads.",
+      "If a published app or desktop launches and then disconnects, compare whether the same problem affects every Citrix app or only one specific published resource."
+    ],
+    adminSurfaces: [
+      "Company Citrix workspace URL or launch portal",
+      "Citrix Workspace App install and getting-started guidance",
+      "Client detection and .ica launch guidance for browser-based launches"
+    ],
+    escalationNotes: [],
+    supportLinks: [
+      { label: "Citrix Workspace App for Windows", url: "https://docs.citrix.com/en-us/citrix-workspace-app-for-windows.html" },
+      { label: "Getting started with Citrix Workspace", url: "https://docs.citrix.com/en-us/citrix-workspace-app-for-windows/getting-started.html" },
+      { label: "Client detection", url: "https://docs.citrix.com/en-us/citrix-workspace/user-experience/client-detection.html" }
     ]
   },
   oracle: {

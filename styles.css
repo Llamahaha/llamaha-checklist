@@ -1,20 +1,20 @@
 :root {
-  --bg: #f7f5f8;
-  --surface: #ffffff;
-  --surface-strong: #f3eff6;
-  --surface-glass: rgba(255, 255, 255, 0.78);
-  --card-start: rgba(255, 255, 255, 0.94);
-  --card-end: rgba(243, 239, 246, 0.9);
-  --hero-start: rgba(255, 255, 255, 0.97);
-  --hero-end: rgba(243, 239, 246, 0.94);
-  --panel-start: rgba(255, 255, 255, 0.96);
-  --panel-end: rgba(243, 239, 246, 0.84);
-  --pill-bg: rgba(255, 255, 255, 0.76);
-  --nav-pill-bg: rgba(255, 255, 255, 0.55);
-  --soft-btn-bg: rgba(255, 255, 255, 0.82);
-  --inset-highlight: rgba(255, 255, 255, 0.7);
-  --bg-top: #fbf8fc;
-  --bg-bottom: #f1eff7;
+  --bg: #ddd4e5;
+  --surface: #e8deee;
+  --surface-strong: #ddd2e6;
+  --surface-glass: rgba(232, 223, 238, 0.88);
+  --card-start: rgba(236, 227, 241, 0.97);
+  --card-end: rgba(219, 208, 230, 0.94);
+  --hero-start: rgba(239, 230, 244, 0.98);
+  --hero-end: rgba(219, 208, 229, 0.96);
+  --panel-start: rgba(236, 227, 242, 0.98);
+  --panel-end: rgba(217, 206, 229, 0.94);
+  --pill-bg: rgba(236, 227, 241, 0.94);
+  --nav-pill-bg: rgba(234, 225, 240, 0.86);
+  --soft-btn-bg: rgba(227, 217, 236, 0.94);
+  --inset-highlight: rgba(255, 255, 255, 0.34);
+  --bg-top: #e5dbee;
+  --bg-bottom: #cdbfdc;
   --ink: #17203d;
   --muted: rgba(23, 32, 61, 0.64);
   --accent: #6e2877;
@@ -527,7 +527,7 @@ body {
 }
 
 .support-panel.is-secondary {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 244, 249, 0.94));
+  background: linear-gradient(180deg, var(--card-start), var(--card-end));
 }
 
 .support-panel.is-secondary .qr-link,

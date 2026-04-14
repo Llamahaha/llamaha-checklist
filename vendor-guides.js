@@ -8,6 +8,7 @@ const mobileHelpGrid = document.getElementById("mobileHelpGrid");
 const browserHelpGrid = document.getElementById("browserHelpGrid");
 const directoryVendorLinks = document.getElementById("directoryVendorLinks");
 const appBrowseGrid = document.getElementById("appBrowseGrid");
+const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte"]);
 
 function appGuide(vendorSlug, appSlug) {
   return buildAppGuideUrl(vendorSlug, appSlug);
@@ -68,6 +69,7 @@ const featuredApps = [
   ["microsoft", "outlook"],
   ["microsoft", "teams"],
   ["microsoft", "onedrive"],
+  ["citrix", "workspace-app"],
   ["fortinet", "forticlient-vpn"],
   ["adobe", "acrobat-pro"],
   ["bluebeam", "revu-21"],
@@ -94,6 +96,7 @@ const browserHelpApps = [
 
 const vendorStartHere = {
   microsoft: "Email, Teams, OneDrive, mobile setup, and Microsoft 365 account questions.",
+  citrix: "Citrix Workspace App help for published apps, virtual desktops, .ica launches, and workspace sign-in.",
   browsers: "Chrome, Edge, Firefox, and Safari support for sign-in pages, downloads, and everyday web use.",
   fortinet: "FortiClient VPN help for remote access, sign-in, and company VPN connection questions.",
   oracle: "Oracle Primavera P6 help for login, database selection, and project access questions.",
@@ -134,7 +137,7 @@ featuredApps.forEach(([vendorSlug, appSlug]) => {
     links: [
       { label: "Open guide", url: appGuide(vendorSlug, appSlug) },
       { label: `${vendor.title} overview`, url: `guides/${vendorSlug}.html` },
-      { label: "Licensing help", url: "app-licensing.html" }
+      ...(licensedVendors.has(vendorSlug) ? [{ label: "Licensing help", url: "app-licensing.html" }] : [])
     ]
   });
 });

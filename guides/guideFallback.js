@@ -12,6 +12,7 @@
     microsoft: "Microsoft 365",
     browsers: "Browsers",
     fortinet: "Fortinet",
+    citrix: "Citrix",
     oracle: "Oracle",
     autodesk: "Autodesk",
     bentley: "Bentley",
@@ -31,6 +32,7 @@
     "microsoft/onedrive": "OneDrive",
     "microsoft/sharepoint": "SharePoint",
     "fortinet/forticlient-vpn": "FortiClient VPN",
+    "citrix/workspace-app": "Citrix Workspace App",
     "oracle/primavera-p6": "Oracle Primavera P6",
     "adobe/acrobat-pro": "Adobe Acrobat",
     "adobe/creative-cloud-desktop": "Creative Cloud Desktop",
@@ -220,6 +222,58 @@
       "Whether the same files or libraries look correct in OneDrive on the web.",
       "The account shown in OneDrive settings and the name of the affected folder or library.",
       "Your available disk space if the sync app is stuck or very slow."
+    ]
+  };
+
+  detailOverrides["citrix/workspace-app"] = {
+    summary: "Use this guide when Citrix Workspace App will not sign in, the workspace is missing, an .ica file will not launch, or a published app or desktop disconnects or opens incorrectly.",
+    overview: [
+      "Citrix Workspace App is the client used to open company-published apps and virtual desktops from a Citrix workspace.",
+      "Most Citrix Workspace problems come from the wrong workspace URL, sign-in to the wrong account, the browser not handing .ica files to Citrix Workspace App, or a published app or desktop failing after launch."
+    ],
+    beforeYouStart: [
+      "Confirm the exact Citrix workspace URL or launch page your company expects you to use.",
+      "Check whether the problem is sign-in, opening the workspace, launching an app or desktop, or staying connected after it opens.",
+      "Note whether the issue happens in the browser launch flow, in Citrix Workspace App, or both.",
+      "If the issue started after a password change, browser change, app update, or new computer, include that timing."
+    ],
+    licensing: [],
+    install: [
+      "Use the company-approved Citrix Workspace App installer or launch path instead of an older saved installer.",
+      "Restart the computer after install or update if Windows asks you to.",
+      "Open the correct company workspace, sign in with the expected work account, and test one published app or desktop."
+    ],
+    commonProblems: [
+      {
+        title: "The workspace will not sign in or does not show the right apps",
+        symptom: "Citrix Workspace App opens, but sign-in loops, the workspace does not load correctly, or the apps and desktops you expect are missing.",
+        likelyFix: "Confirm the exact workspace URL and work account, then retry the same workspace after restarting the app or browser once.",
+        collect: "Send the workspace URL, the sign-in message or screenshot, and whether the same workspace behaves differently in the browser."
+      },
+      {
+        title: "An .ica file downloads but nothing launches",
+        symptom: "You click Launch, but the browser only downloads an .ica file and the Citrix app or desktop never opens.",
+        likelyFix: "Open the .ica file with Citrix Workspace App and make sure Citrix Workspace App is installed before retrying the same launch.",
+        collect: "Send a screenshot of the downloaded file, the browser you used, and whether Citrix Workspace App is installed on the computer."
+      },
+      {
+        title: "A published app or desktop opens and then disconnects or freezes",
+        symptom: "The Citrix session starts, but the published app or desktop disconnects, freezes, or feels unstable after launch.",
+        likelyFix: "Restart the local computer, retry the same published resource once, and compare it with a second Citrix app or desktop if one is available.",
+        collect: "Send the published app or desktop name, the exact message if one appears, and whether other Citrix resources launch normally."
+      }
+    ],
+    fixes: [
+      "Confirm the computer has normal internet access before you retry the Citrix workspace.",
+      "Use the exact workspace URL your company provided and make sure the expected work account is being used.",
+      "If the browser downloads an .ica file, open it with Citrix Workspace App instead of leaving it in Downloads.",
+      "If one published app fails but another works, capture that comparison before contacting support."
+    ],
+    support: [
+      "A screenshot of the exact Citrix Workspace App screen, sign-in message, or launch error.",
+      "The Citrix workspace URL or launch page you used.",
+      "The published app or virtual desktop name involved in the problem.",
+      "The Citrix Workspace App version if you can open Advanced Preferences > About."
     ]
   };
 
@@ -924,11 +978,14 @@
     relatedGrid.appendChild(createCard("Back to Vendor", createLinks([
       { label: "Back to " + model.vendorTitle, url: rootPath + "/guides/" + vendorSlug + ".html" }
     ])));
-    relatedGrid.appendChild(createCard("Need More Help?", createLinks([
+    var supportLinks = [
       { label: "Open App Help", url: rootPath + "/vendor-guides.html" },
-      { label: "Licensing help", url: rootPath + "/app-licensing.html" },
       { label: "Open contact page", url: rootPath + "/contact.html" }
-    ])));
+    ];
+    if (["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte"].indexOf(vendorSlug) !== -1) {
+      supportLinks.splice(1, 0, { label: "Licensing help", url: rootPath + "/app-licensing.html" });
+    }
+    relatedGrid.appendChild(createCard("Need More Help?", createLinks(supportLinks)));
     related.appendChild(relatedGrid);
 
     content.appendChild(overview);
