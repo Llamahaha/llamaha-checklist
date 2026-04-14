@@ -418,6 +418,7 @@ if (!vendor || (pageType === "app" && !app)) {
 } else {
   renderBreadcrumbs();
   renderJumpLinks();
+  elements.content.innerHTML = "";
   elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "Guides";
   elements.title.textContent = pageType === "app" ? app.name : vendor.title;
   elements.summary.textContent = pageType === "app" ? publicizeText(app.summary ?? app.focus) : vendor.summary;
