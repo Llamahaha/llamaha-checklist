@@ -1,7 +1,7 @@
 const publicLinks = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "search", label: "Search", href: "search.html" },
-  { id: "help", label: "Help", href: "vendor-guides.html" },
+  { id: "guides", label: "Guides", href: "vendor-guides.html" },
   { id: "licensing", label: "Licensing", href: "app-licensing.html" },
   { id: "contact", label: "Contact", href: "contact.html" }
 ];
@@ -32,7 +32,7 @@ function getPublicSection(currentFile, body, pathname) {
   if (currentFile === "search.html") return "search";
   if (currentFile === "app-licensing.html") return "licensing";
   if (currentFile === "contact.html") return "contact";
-  if (body.dataset.pageType || currentFile === "vendor-guides.html" || currentFile === "applications.html" || pathname.includes("/guides/")) return "help";
+  if (body.dataset.pageType || currentFile === "vendor-guides.html" || currentFile === "applications.html" || pathname.includes("/guides/")) return "guides";
   return "home";
 }
 
@@ -89,7 +89,7 @@ function initSiteChrome() {
   const brandMeta = document.createElement("span");
   brandMeta.textContent = area === "internal"
     ? "Internal references, scripts, templates, playbooks, checklists, and licensing resources"
-    : "Search, help by app or topic, licensing help, and ways to get help";
+    : "Search, guides by app or topic, licensing help, and ways to get help";
 
   brandCopy.append(brandTag, brandTitle, brandMeta);
   brand.append(brandIcon, brandCopy);

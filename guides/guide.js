@@ -6,6 +6,7 @@ import {
   getVendorApplications
 } from "./applicationCatalog.js";
 import { getAppGuideContent } from "./appGuideContent.js";
+import { getPublicGuideContent } from "./publicGuideContent.js";
 import { vendorFaqs, vendorInstallIssues, vendorUsageIssues } from "./guideExtras.js";
 
 const pageType = document.body.dataset.pageType ?? "vendor";
@@ -93,66 +94,171 @@ function unique(items = []) {
   return [...new Set(items.filter(Boolean))];
 }
 
+function publicizeText(value = "") {
+  return value
+    .replace(/\bOWA\b/g, "Outlook on the web")
+    .replace(/\bUPN\b/g, "work account email")
+    .replace(/\bclient-standard\b/gi, "company-approved")
+    .replace(/\btenant\b/gi, "organization")
+    .replace(/\bworkstation\b/gi, "computer")
+    .replace(/\bworkstations\b/gi, "computers")
+    .replace(/\bknown-good peer\b/gi, "another user whose app is working")
+    .replace(/\bknown-good user\b/gi, "another user whose app is working")
+    .replace(/\bknown-good workstation\b/gi, "another computer that works correctly")
+    .replace(/\bhandoff\b/gi, "setup")
+    .replace(/\bAdmin Console\b/g, "Adobe account setup")
+    .replace(/\bBBID\b/g, "Bluebeam ID");
+}
+
+function publicizeItems(items = []) {
+  return unique(items.map(item => publicizeText(item)).filter(Boolean));
+}
+
+function defaultOverview() {
+  return [
+    publicizeText(app.summary ?? app.focus ?? `Use this page for help with ${app.name}.`),
+    `Use the checks below to confirm the right account, app version, and file or project path before contacting support.`
+  ];
+}
+
+function defaultAskFirst() {
+  return [
+    `What exact ${app.name} task is failing: sign-in, opening files, syncing, printing, or startup?`,
+    "Did the issue begin after an update, restart, password change, or new computer?",
+    "Does the same task work in the browser or on another computer if that option is available?",
+    "Is the problem limited to one file, project, library, or mailbox, or does it affect the whole app?"
+  ];
+}
+
+function defaultLicensing() {
+  return [
+    `Make sure you are signed in with the work account your company expects for ${app.name}.`,
+    `If ${app.name} says Trial, Unlicensed, or Subscription Required, capture the exact message before closing it.`,
+    "If a browser version works but the desktop app does not, note that for support."
+  ];
+}
+
+function defaultInstall() {
+  return [
+    `Close ${app.name}, install pending updates, and restart the computer.`,
+    "Sign back in with the correct work account after the restart if the app asks you to.",
+    `Test one simple task in ${app.name} before reopening the exact file, project, or mailbox that failed earlier.`
+  ];
+}
+
+function defaultSupportCheckpoints() {
+  return [
+    "Restart the app and computer before bigger changes.",
+    "If a browser version exists, compare it to the desktop app before reinstalling.",
+    `If only one file, project, or mailbox fails, test a second one before assuming ${app.name} itself is broken.`,
+    "Capture the exact message and when the problem started."
+  ];
+}
+
+function defaultCommonIssues() {
+  return [
+    {
+      title: "Sign-in or access problem",
+      symptom: `${app.name} opens, but the expected account, subscription, or access is missing.`,
+      likelyFix: "Sign out, sign back in with the correct work account, and compare the result to the browser version if one is available.",
+      collect: "Send a screenshot of the sign-in or access message and the work account you expected to use."
+    },
+    {
+      title: "A file, project, or workspace will not open",
+      symptom: `The app launches, but the item you need will not open or does not load correctly.`,
+      likelyFix: "Test a second file or project and confirm the original path or location is still available before reinstalling the app.",
+      collect: "Send the file, project, library, or mailbox name involved plus the exact error shown."
+    },
+    {
+      title: "The app is slow, frozen, or crashing",
+      symptom: `${app.name} opens slowly, stops responding, or closes unexpectedly.`,
+      likelyFix: "Restart the computer, install pending updates, and note whether the issue began after a recent change.",
+      collect: "Send the app version, when the issue started, and a screenshot of any crash message."
+    }
+  ];
+}
+
+function defaultSupportArtifacts() {
+  return [
+    `A screenshot of the exact ${app.name} message or screen where the problem happens.`,
+    "The work account you used to sign in and whether the same task works in the browser or on another computer.",
+    `The ${app.name} version shown in the app.`,
+    "The file, project, library, or workflow name involved in the problem."
+  ];
+}
+
 function normalizeIssue(item) {
   if (!item) return null;
-  if (item.title) return item;
+  if (item.title) {
+    return {
+      title: publicizeText(item.title),
+      symptom: publicizeText(item.symptom ?? item.issue ?? item.title),
+      likelyFix: publicizeText(item.likelyFix ?? item.fix ?? ""),
+      collect: publicizeText(item.collect ?? "Capture the exact error, version, and what changed before the issue started.")
+    };
+  }
   return {
-    title: item.issue,
-    symptom: item.issue,
-    likelyFix: item.fix,
+    title: publicizeText(item.issue),
+    symptom: publicizeText(item.issue),
+    likelyFix: publicizeText(item.fix),
     collect: "Capture the exact error, version, and what changed before the issue started."
   };
 }
 
 function buildAppModel() {
   const extra = getAppGuideContent(vendorSlug, appSlug);
-  const overview = extra.overview?.length ? extra.overview : [app.summary ?? app.focus];
-  const supportCheckpoints = unique([...(app.supportChecks ?? []), ...(extra.supportCheckpoints ?? [])]);
-  const commonIssues = (extra.commonIssues?.length ? extra.commonIssues : app.commonIssues ?? []).map(normalizeIssue);
+  const publicContent = getPublicGuideContent(vendorSlug, appSlug);
+  const hasPublicGuide = Object.keys(publicContent).length > 0;
+  const overview = publicContent.overview?.length
+    ? publicContent.overview
+    : (extra.overview?.length ? publicizeItems(extra.overview) : defaultOverview());
+  const supportCheckpoints = publicContent.supportCheckpoints?.length
+    ? publicContent.supportCheckpoints
+    : publicizeItems([...(extra.supportCheckpoints ?? []), ...(app.supportChecks ?? [])]);
+  const commonIssuesSource = publicContent.commonIssues?.length
+    ? publicContent.commonIssues
+    : (extra.commonIssues?.length ? extra.commonIssues : (app.commonIssues ?? defaultCommonIssues()));
+  const commonIssues = commonIssuesSource.map(normalizeIssue);
 
   return {
     name: app.name,
-    summary: extra.summary ?? app.summary ?? app.focus,
-    overview,
-    highlights: extra.highlights ?? [],
-    askFirst: extra.askFirst?.length
-      ? extra.askFirst
-      : [
-          `What exact ${app.name} workflow is failing: launch, sign-in, access, files, updates, or output?`,
-          "Did the issue begin after a workstation swap, password change, app update, or permission change?",
-          "Can a known-good peer perform the same task successfully?"
-        ],
-    licensing: unique([app.licensing, ...(extra.licensing ?? [])]),
-    install: unique([app.install, ...(extra.install ?? [])]),
-    uninstall: unique([app.uninstall, ...(extra.uninstall ?? [])]),
-    supportCheckpoints: supportCheckpoints.length ? supportCheckpoints : [`Confirm the approved ${app.name} version, identity, and dependency stack before the next handoff.`],
-    commonIssues: commonIssues.length
-      ? commonIssues
-      : [normalizeIssue({ issue: `${app.name} issue requires version, access, and local-state review`, fix: "Compare the workstation to a known-good build before reinstalling." })],
-    usefulInfo: extra.usefulInfo ?? { paths: [], logs: [], services: [], processes: [] },
+    summary: publicizeText(publicContent.summary ?? extra.summary ?? app.summary ?? app.focus ?? `Use this page for help with ${app.name}.`),
+    overview: overview.length ? overview : defaultOverview(),
+    highlights: publicContent.highlights?.length ? publicContent.highlights : (hasPublicGuide ? [] : publicizeItems(extra.highlights ?? [])),
+    askFirst: publicContent.askFirst?.length
+      ? publicContent.askFirst
+      : (publicizeItems(extra.askFirst ?? []).length ? publicizeItems(extra.askFirst ?? []) : defaultAskFirst()),
+    licensing: publicContent.licensing?.length
+      ? publicContent.licensing
+      : (publicizeItems([app.licensing, ...(extra.licensing ?? [])]).length ? publicizeItems([app.licensing, ...(extra.licensing ?? [])]) : defaultLicensing()),
+    install: publicContent.install?.length
+      ? publicContent.install
+      : (publicizeItems([app.install, ...(extra.install ?? [])]).length ? publicizeItems([app.install, ...(extra.install ?? [])]) : defaultInstall()),
+    supportCheckpoints: supportCheckpoints.length ? supportCheckpoints : defaultSupportCheckpoints(),
+    commonIssues: commonIssues.length ? commonIssues : defaultCommonIssues().map(normalizeIssue),
+    supportArtifacts: publicContent.supportArtifacts?.length ? publicContent.supportArtifacts : defaultSupportArtifacts(),
     relatedApps: extra.relatedApps?.length ? extra.relatedApps : apps.filter(item => item.slug !== appSlug).slice(0, 3).map(item => ({ vendor: vendorSlug, app: item.slug })),
-    relatedLinks: unique([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? [])])
+    relatedLinks: unique([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? []), ...(publicContent.relatedLinks ?? [])])
   };
 }
 
 function appSections() {
   return [
     ["overview", "Overview"],
-    ["ask-first", "Before You Start"],
-    ["licensing", "Licensing / Access"],
-    ["install-setup", "Set Up / Update"],
-    ["uninstall-reclaim", "Uninstall / Move"],
-    ["support-checkpoints", "Try These Fixes First"],
-    ["common-issues", "Common Problems"],
-    ["paths-logs", "Helpful Details"],
-    ["related-resources", "Related Help"]
+    ["before-you-start", "Before You Start"],
+    ["licensing-access", "Licensing / Access"],
+    ["install-update-basics", "Install / Update Basics"],
+    ["common-problems", "Common Problems"],
+    ["try-fixes-first", "Try These Fixes First"],
+    ["what-to-send-support", "What to Send Support"],
+    ["related-help", "Related Help"]
   ];
 }
 
 function renderBreadcrumbs() {
   const parts = [
     { label: "Home", url: homeUrl },
-    { label: "Help", url: guideHubUrl },
+    { label: "Guides", url: guideHubUrl },
     { label: vendor.title, url: vendorUrl(vendorSlug) }
   ];
   if (pageType === "app" && app) {
@@ -237,25 +343,19 @@ function renderAppPage() {
   const overview = section("overview", "Application Guide", model.name, model.summary);
   overview.appendChild(card("Overview", paragraphs(model.overview)));
   if (model.highlights.length) {
-    overview.appendChild(card("Common quick wins and watchouts", model.highlights));
+    overview.appendChild(card("Quick Notes", model.highlights));
   }
 
-  const ask = section("ask-first", "Before You Start", "What to check first", "Use these questions to narrow the issue before you change the app or device.");
-  ask.appendChild(card("Ask First", model.askFirst));
+  const ask = section("before-you-start", "Before You Start", "Before You Start", "Use these quick checks to narrow the problem before you change the app or computer.");
+  ask.appendChild(card("Check these first", model.askFirst));
 
-  const licensing = section("licensing", "Access", "Licensing / Access", "Confirm account access and sign-in before changing the local app.");
+  const licensing = section("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
   licensing.appendChild(card("Licensing / Access", model.licensing));
 
-  const install = section("install-setup", "Setup", "Set up, reinstall, or update", "Use the approved build, then confirm the workflow you actually need works the way it should.");
-  install.appendChild(card("Set Up / Update", model.install));
+  const install = section("install-update-basics", "Install / Update Basics", "Install / Update Basics", "These safe steps help with fresh installs, recent updates, and apps that stopped working after a change.");
+  install.appendChild(card("Install / Update Basics", model.install));
 
-  const uninstall = section("uninstall-reclaim", "Device Changes", "Uninstall or move to a new device", "Protect local data and account access before removing the app or changing workstations.");
-  uninstall.appendChild(card("Uninstall / Move", model.uninstall));
-
-  const support = section("support-checkpoints", "Try This First", "Try these fixes first", "These checks usually help before you move into deeper troubleshooting.");
-  support.appendChild(card("Try These Fixes First", model.supportCheckpoints));
-
-  const issues = section("common-issues", "Troubleshooting", "Common problems", "Focus on the repeated failure patterns first.");
+  const issues = section("common-problems", "Common Problems", "Common Problems", "These are the problems people run into most often with this app.");
   const issueGrid = el("div", "guide-card-grid");
   model.commonIssues.forEach(item => {
     const issueCard = el("article", "guide-card issue-card");
@@ -267,17 +367,13 @@ function renderAppPage() {
   });
   issues.appendChild(issueGrid);
 
-  const paths = section("paths-logs", "Helpful Details", "Helpful details to collect", "If the problem continues, these details usually make the next support step faster.");
-  const infoGrid = el("div", "guide-card-grid");
-  infoGrid.append(
-    card("Paths", model.usefulInfo.paths),
-    card("Logs / Screenshots", model.usefulInfo.logs),
-    card("Services", model.usefulInfo.services.length ? model.usefulInfo.services : ["No vendor-specific service list captured yet. Confirm any updater, licensing, or sync services during troubleshooting."]),
-    card("Processes", model.usefulInfo.processes.length ? model.usefulInfo.processes : [`Capture the active ${model.name} process list during the failure.`])
-  );
-  paths.appendChild(infoGrid);
+  const support = section("try-fixes-first", "Try These Fixes First", "Try These Fixes First", "Try these stable, low-risk steps before contacting support.");
+  support.appendChild(card("Try These Fixes First", model.supportCheckpoints));
 
-  const related = section("related-resources", "Related Help", "Related links and next steps", "Use these links to keep moving without losing context.");
+  const sendSupport = section("what-to-send-support", "What to Send Support", "What to Send Support", "If the problem continues, send these details so support can help faster.");
+  sendSupport.appendChild(card("Send these details", model.supportArtifacts));
+
+  const related = section("related-help", "Related Help", "Related Help", "Use these links to keep moving without losing context.");
   const relatedGrid = el("div", "guide-card-grid");
   relatedGrid.appendChild(card("Back to Vendor", linkList([{ label: `Back to ${vendor.title}`, url: vendorUrl(vendorSlug) }])));
   relatedGrid.appendChild(card("Related Apps", linkList(model.relatedApps.map(item => ({ label: getApplicationGuide(item.vendor, item.app)?.name ?? item.app, url: appUrl(item.vendor, item.app) })) )));
@@ -290,7 +386,8 @@ function renderAppPage() {
   }
   related.appendChild(relatedGrid);
 
-  elements.content.append(overview, ask, licensing, install, uninstall, support, issues, paths, related);
+  elements.summary.textContent = model.summary;
+  elements.content.append(overview, ask, licensing, install, issues, support, sendSupport, related);
 }
 
 function scrollToHash(hash, replaceHistory = false) {
@@ -321,11 +418,11 @@ if (!vendor || (pageType === "app" && !app)) {
 } else {
   renderBreadcrumbs();
   renderJumpLinks();
-  elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "Help";
+  elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "Guides";
   elements.title.textContent = pageType === "app" ? app.name : vendor.title;
-  elements.summary.textContent = pageType === "app" ? (app.summary ?? app.focus) : vendor.summary;
+  elements.summary.textContent = pageType === "app" ? publicizeText(app.summary ?? app.focus) : vendor.summary;
   elements.backLink.href = pageType === "app" ? vendorUrl(vendorSlug) : guideHubUrl;
-  elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to Help";
+  elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to Guides";
   document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} Help`;
   if (pageType === "app") {
     renderAppPage();
