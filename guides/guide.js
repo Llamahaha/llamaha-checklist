@@ -423,7 +423,7 @@ if (!vendor || (pageType === "app" && !app)) {
   elements.summary.textContent = pageType === "app" ? publicizeText(app.summary ?? app.focus) : vendor.summary;
   elements.backLink.href = pageType === "app" ? vendorUrl(vendorSlug) : guideHubUrl;
   elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to Guides";
-  document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} Help`;
+  document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} Guides`;
   if (pageType === "app") {
     renderAppPage();
   } else {

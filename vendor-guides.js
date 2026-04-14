@@ -198,7 +198,7 @@ if (topicGrid) {
     const card = createPageCard("help-topic-group");
     card.id = `topic-${topic.id}`;
     card.append(
-      Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "Help Topic" }),
+      Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "Topic" }),
       Object.assign(document.createElement("h3"), { textContent: topic.title }),
       Object.assign(document.createElement("p"), { textContent: topic.description })
     );
@@ -218,7 +218,7 @@ featuredApps.forEach(([vendorSlug, appSlug]) => {
   }
 
   const link = document.createElement("a");
-  link.href = `#app-${vendorSlug}-${appSlug}`;
+  link.href = appGuide(vendorSlug, appSlug);
   link.textContent = app.name;
   popularAppLinks.appendChild(link);
 });
