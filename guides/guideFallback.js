@@ -1,0 +1,947 @@
+(function () {
+  var body = document.body;
+  if (!body || body.getAttribute("data-page-type") !== "app") {
+    return;
+  }
+
+  var vendorSlug = body.getAttribute("data-vendor") || "";
+  var appSlug = body.getAttribute("data-app") || "";
+  var rootPath = body.getAttribute("data-root-path") || "..";
+
+  var vendorTitles = {
+    microsoft: "Microsoft 365",
+    autodesk: "Autodesk",
+    bentley: "Bentley",
+    esri: "Esri",
+    ptc: "PTC",
+    trimble: "Trimble",
+    adobe: "Adobe",
+    bluebeam: "Bluebeam",
+    foxit: "Foxit",
+    quickbooks: "QuickBooks",
+    egnyte: "Egnyte"
+  };
+
+  var appTitleOverrides = {
+    "microsoft/outlook": "Outlook",
+    "microsoft/teams": "Teams",
+    "microsoft/onedrive": "OneDrive",
+    "microsoft/sharepoint": "SharePoint",
+    "adobe/acrobat-pro": "Adobe Acrobat",
+    "adobe/creative-cloud-desktop": "Creative Cloud Desktop",
+    "bluebeam/revu-21": "Bluebeam Revu",
+    "autodesk/autocad": "AutoCAD",
+    "autodesk/revit": "Revit",
+    "autodesk/civil-3d": "Civil 3D",
+    "autodesk/autodesk-desktop-app": "Autodesk Desktop App",
+    "autodesk/recap-pro": "ReCap Pro",
+    "esri/arcgis-pro": "ArcGIS Pro",
+    "esri/arcgis-online": "ArcGIS Online",
+    "bentley/projectwise": "ProjectWise",
+    "bentley/connection-client": "CONNECTION Client",
+    "bentley/microstation": "MicroStation",
+    "quickbooks/quickbooks-enterprise-desktop": "QuickBooks Enterprise Desktop",
+    "quickbooks/quickbooks-online": "QuickBooks Online",
+    "egnyte/egnyte-desktop-app": "Egnyte Desktop App",
+    "egnyte/egnyte-web-admin": "Egnyte Web UI / Admin",
+    "ptc/mathcad-prime": "Mathcad Prime",
+    "trimble/sketchup": "SketchUp",
+    "trimble/trimble-business-center": "Trimble Business Center",
+    "foxit/pdf-editor": "Foxit PDF Editor",
+    "foxit/pdf-reader": "Foxit PDF Reader"
+  };
+
+  var detailOverrides = {};
+
+  detailOverrides["microsoft/outlook"] = {
+    summary: "Use this guide when Outlook will not open your mailbox, keeps asking you to sign in, stops syncing, or shared mailboxes and calendars are missing.",
+    overview: [
+      "Outlook is Microsoft's desktop email and calendar app for your work mailbox, meetings, contacts, and shared mailboxes.",
+      "Most Outlook problems come down to the wrong account being signed in, the local Outlook profile falling out of sync, or an add-in blocking normal startup."
+    ],
+    beforeYouStart: [
+      "Confirm whether the problem is sign-in, mail flow, search, calendar, or a shared mailbox issue.",
+      "Check whether the same mailbox opens correctly in Outlook on the web.",
+      "Note whether the issue began after a password change, update, restart, or new computer."
+    ],
+    licensing: [
+      "Make sure the mailbox is still active and tied to the work account you are using in Microsoft 365.",
+      "If Outlook says it is unlicensed, open another Microsoft 365 app and confirm the same work account is signed in there too.",
+      "If only a shared mailbox is missing, note the mailbox name and whether it still appears in Outlook on the web."
+    ],
+    install: [
+      "Close Outlook fully, install any pending Office updates, and restart the computer.",
+      "Open Word or another Microsoft 365 app first and confirm the correct work account is signed in.",
+      "When Outlook reopens, test send and receive, calendar, and one shared mailbox if you normally use one."
+    ],
+    commonProblems: [
+      {
+        title: "Sign-in prompts keep coming back",
+        symptom: "Outlook repeatedly asks for a password or opens the wrong account even though your password is correct.",
+        likelyFix: "Confirm Outlook on the web works first, then sign out of any wrong Office account and sign back in with the correct work account.",
+        collect: "Send a screenshot of the prompt, the work email account you expected to use, and whether Outlook on the web works."
+      },
+      {
+        title: "Outlook hangs on Loading Profile or crashes",
+        symptom: "Outlook opens slowly, never finishes loading, or closes shortly after launch.",
+        likelyFix: "Restart the computer, try opening Outlook without add-ins, and install pending Office updates before recreating anything.",
+        collect: "Send the Outlook version, when the issue started, and a screenshot if there is a crash message."
+      },
+      {
+        title: "A shared mailbox or calendar is missing",
+        symptom: "Your primary mailbox opens, but a shared mailbox, shared calendar, or delegated send option is gone or out of date.",
+        likelyFix: "Check whether the same shared mailbox appears in Outlook on the web, then restart Outlook and let it refresh before changing profiles.",
+        collect: "Send the shared mailbox or calendar name, what should be visible, and whether the same problem shows in Outlook on the web."
+      }
+    ],
+    fixes: [
+      "Compare Outlook on the web to the desktop app before reinstalling Outlook.",
+      "Remove old or incorrect Office accounts if more than one work or personal account appears.",
+      "If Outlook hangs on startup, test add-ins-disabled startup before deeper repair steps.",
+      "Let Outlook stay open for a few minutes after sign-in so it can finish syncing and indexing."
+    ],
+    support: [
+      "A screenshot of the exact Outlook message or screen where the problem happens.",
+      "The work email account you used to sign in and whether Outlook on the web works with that same account.",
+      "Your Outlook version from File > Office Account or File > About Outlook.",
+      "If shared mailboxes or calendars are involved, the name of the mailbox or calendar that should appear."
+    ]
+  };
+
+  detailOverrides["microsoft/teams"] = {
+    summary: "Use this guide when Teams will not sign in, meetings fail, channels are missing, or chat and file access do not update correctly.",
+    overview: [
+      "Teams is Microsoft's chat, meetings, calling, and collaboration app for your work account.",
+      "Most Teams issues are caused by the wrong organization being active, a local app problem, or device settings affecting meetings."
+    ],
+    beforeYouStart: [
+      "Check whether the same issue happens in Teams desktop, Teams on the web, or both.",
+      "Confirm whether the problem is sign-in, meetings, chat, channels, calling, or file access.",
+      "Note whether the issue started after a password change, update, new headset, dock change, or new computer."
+    ],
+    licensing: [
+      "Make sure you are signed in with the same work account you use for the rest of Microsoft 365.",
+      "If Teams says a feature is unavailable, note whether the problem is only in meetings, calling, or another specific part of the app.",
+      "If you belong to more than one organization, confirm Teams is open in the correct one."
+    ],
+    install: [
+      "Close Teams completely, install pending Windows and Teams updates, and restart the computer.",
+      "Open Teams on the web first and confirm the correct work account and organization are shown.",
+      "After signing back into the desktop app, test chat, one channel, and one meeting if meetings are part of the issue."
+    ],
+    commonProblems: [
+      {
+        title: "Teams desktop does not work but Teams on the web does",
+        symptom: "The web version signs in and loads normally, but the desktop app loops, stalls, or shows the wrong organization.",
+        likelyFix: "Sign out of the desktop app, close it fully, and sign back in with the same work account that works in the browser.",
+        collect: "Send screenshots of the web and desktop results, the organization shown, and the Teams version from Settings > About."
+      },
+      {
+        title: "Meetings have no sound or camera",
+        symptom: "Meetings connect, but your headset, speakers, microphone, or camera do not behave normally.",
+        likelyFix: "Check device selection in Windows and Teams, then test again without the dock or with a different headset if one is available.",
+        collect: "Send the device name, whether the issue affects every meeting, and a screenshot of the Teams device settings page."
+      },
+      {
+        title: "Channels or chats are missing",
+        symptom: "You sign in successfully, but expected teams, channels, chats, or files do not appear.",
+        likelyFix: "Confirm you are in the correct organization and compare the desktop app to Teams on the web before reinstalling.",
+        collect: "Send the team or channel name, whether the web version shows it, and whether the problem started after an account or membership change."
+      }
+    ],
+    fixes: [
+      "If the web version works but the desktop app does not, sign out of Teams desktop and sign back in before reinstalling.",
+      "If meetings are the problem, check the selected microphone, speaker, and camera in both Windows and Teams.",
+      "Disconnect from a dock or USB audio device for one test if sound or camera routing seems wrong.",
+      "If channels or chats are missing, give Teams a few minutes to refresh after sign-in and compare with the web version."
+    ],
+    support: [
+      "A screenshot of the exact Teams error or the part of the app that is missing.",
+      "Whether Teams on the web works with the same work account.",
+      "Your Teams version from Settings > About.",
+      "If meetings are affected, the headset, camera, or dock model you are using."
+    ]
+  };
+
+  detailOverrides["microsoft/onedrive"] = {
+    summary: "Use this guide when OneDrive is not syncing, files are missing, shared libraries stop updating, or folders appear in the wrong place.",
+    overview: [
+      "OneDrive keeps your work files synced between your computer, the web, and Microsoft 365 apps.",
+      "Most OneDrive problems are caused by account mix-ups, sync conflicts, very low disk space, or a library that no longer matches what is in the browser."
+    ],
+    beforeYouStart: [
+      "Check whether the correct files are visible in OneDrive on the web.",
+      "Confirm whether the issue affects your own OneDrive files, a shared library, or both.",
+      "Note whether the problem started after a rename, file move, laptop replacement, or OneDrive reset."
+    ],
+    licensing: [
+      "Make sure you are signed in with the correct work account and not a personal Microsoft account.",
+      "If a shared library is missing, note whether you can still open it in the browser.",
+      "If OneDrive says your account cannot sync, capture the exact message and whether other Microsoft 365 apps work with the same account."
+    ],
+    install: [
+      "Install pending OneDrive and Windows updates, then restart the computer.",
+      "Open OneDrive on the web first and confirm the correct files and folders are there.",
+      "After reopening the desktop app, let it finish signing in before you test one upload and one download."
+    ],
+    commonProblems: [
+      {
+        title: "Sync is stuck or processing forever",
+        symptom: "OneDrive keeps spinning, never finishes syncing, or keeps reprocessing the same files.",
+        likelyFix: "Pause and resume sync, check free disk space, and compare the affected files to what you see in the browser before resetting the app.",
+        collect: "Send a screenshot of the OneDrive status icon, free disk space, and whether the same files look correct in the browser."
+      },
+      {
+        title: "A folder or library will not sync",
+        symptom: "Most of OneDrive works, but one shared library or one folder refuses to appear or update.",
+        likelyFix: "Check that you can open the same library in the browser and confirm the folder name matches what your desktop app expects.",
+        collect: "Send the library URL if you have it, the folder name, and whether the browser version works."
+      },
+      {
+        title: "Files are missing or appear in the wrong location",
+        symptom: "The desktop app opens a different folder, or expected files do not appear where they used to.",
+        likelyFix: "Confirm you are signed into the correct work account and compare the sync root names before unlinking or moving files locally.",
+        collect: "Send the path that looks wrong, the correct location you expected, and a screenshot of the OneDrive account shown in Settings."
+      }
+    ],
+    fixes: [
+      "Use the browser as the source of truth first so you do not overwrite or move the wrong files locally.",
+      "Pause and resume sync once before you unlink or reset anything.",
+      "Check free disk space and look for very long file names or unsupported characters.",
+      "If only one library is failing, compare the library name and URL to what the browser shows."
+    ],
+    support: [
+      "A screenshot of the OneDrive tray icon or sync error message.",
+      "Whether the same files or libraries look correct in OneDrive on the web.",
+      "The account shown in OneDrive settings and the name of the affected folder or library.",
+      "Your available disk space if the sync app is stuck or very slow."
+    ]
+  };
+
+  detailOverrides["adobe/acrobat-pro"] = {
+    summary: "Use this guide when Acrobat will not activate, opens as Reader, cannot edit or sign PDFs, or browser and Office PDF actions stop working.",
+    overview: [
+      "Adobe Acrobat is used to open, edit, combine, sign, and share PDF files.",
+      "Most Acrobat problems come from the wrong Adobe profile being selected, Acrobat Reader opening instead of Pro, or a browser or Office integration that needs to refresh."
+    ],
+    beforeYouStart: [
+      "Confirm whether the issue is activation, editing tools missing, PDF opening, signing, or browser and Office integration.",
+      "Check whether Acrobat opened with a personal Adobe profile instead of your work profile.",
+      "Test whether the same problem happens with every PDF or only one file."
+    ],
+    licensing: [
+      "If Acrobat opens as Reader or Trial, sign out and back in with the work Adobe account that should have Acrobat Pro.",
+      "If Adobe asks you to choose a profile, use the work or company profile rather than a personal one.",
+      "If only one feature is missing, note the exact tool name, such as Edit PDF, Combine Files, or Request Signatures."
+    ],
+    install: [
+      "Close Acrobat and all web browsers, install pending Adobe updates, and restart the computer.",
+      "Open Acrobat again and confirm the account icon shows the correct work Adobe account.",
+      "Test one local PDF, one PDF from email or a browser download, and one action you normally use such as edit, sign, or combine."
+    ],
+    commonProblems: [
+      {
+        title: "Acrobat opens but behaves like Reader",
+        symptom: "The app launches, but editing or signing tools are missing and Acrobat says Reader, Trial, or Sign In.",
+        likelyFix: "Sign out of Acrobat and sign back in with the work Adobe account or work profile that should have Acrobat Pro.",
+        collect: "Send a screenshot of the account icon, the profile choice if one appears, and the message shown in Acrobat."
+      },
+      {
+        title: "PDFs open in the wrong app or only in the browser",
+        symptom: "PDFs no longer open in Acrobat, or browser downloads never hand off to the desktop app.",
+        likelyFix: "Set Acrobat as the default PDF app again and test the same file after saving it locally.",
+        collect: "Send the file source, the app that opens instead, and whether the issue happens with every PDF."
+      },
+      {
+        title: "Signing, editing, or combine tools fail",
+        symptom: "Acrobat opens, but a specific tool fails, is missing, or closes unexpectedly.",
+        likelyFix: "Install pending Acrobat updates, reopen the app, and test a second PDF to confirm whether the problem is file-specific.",
+        collect: "Send the exact tool name, a screenshot of the error, and whether the same tool fails on more than one PDF."
+      }
+    ],
+    fixes: [
+      "Save the PDF locally and test it outside the browser if browser-opened PDFs are the only ones failing.",
+      "Set Acrobat as the default PDF app again if PDFs suddenly open in the wrong program.",
+      "If Acrobat says Reader or Trial, sign out and back in before doing deeper repair steps.",
+      "Compare one working PDF and one failing PDF before assuming the whole app is broken."
+    ],
+    support: [
+      "A screenshot of the Acrobat message or account/profile picker.",
+      "The Adobe account email you used and whether the work profile was selected.",
+      "Your Acrobat version from Help > About Adobe Acrobat.",
+      "A note about whether the problem happens in the desktop app, in the browser, or both."
+    ]
+  };
+
+  detailOverrides["bluebeam/revu-21"] = {
+    summary: "Use this guide when Bluebeam Revu will not sign in, Studio is unavailable, PDF markups are missing, or shared profiles and tool sets do not load.",
+    overview: [
+      "Bluebeam Revu is used to open, mark up, organize, and share PDF files, often with Studio Projects or Sessions.",
+      "Most Revu issues are tied to the Bluebeam ID used to sign in, the subscription attached to that account, or shared profiles and tool sets not loading on the computer."
+    ],
+    beforeYouStart: [
+      "Confirm whether the issue is sign-in, activation, Studio access, missing tools, or opening and marking up PDFs.",
+      "Check whether local PDFs are affected, Studio files are affected, or both.",
+      "Note whether the problem began after a subscription change, update, or new computer."
+    ],
+    licensing: [
+      "Make sure you are signing in with the Bluebeam ID that should have the Revu subscription.",
+      "If Revu says Trial or Subscription Required, capture the message before signing out or reinstalling.",
+      "If Studio is the only failing part, note whether Revu itself still opens local PDFs normally."
+    ],
+    install: [
+      "Close Revu, install pending Revu updates, and restart the computer.",
+      "Sign back in with the correct Bluebeam ID and confirm the subscription message is gone.",
+      "Open one local PDF and one Studio item or shared profile if your team relies on them."
+    ],
+    commonProblems: [
+      {
+        title: "Revu says subscription required or will not sign in",
+        symptom: "Bluebeam opens, but prompts for sign-in, stays in trial mode, or never finishes connecting to your subscription.",
+        likelyFix: "Sign out and back in with the correct Bluebeam ID and confirm the same account is the one your company expects you to use.",
+        collect: "Send the Bluebeam ID email, the exact subscription message, and a screenshot of the sign-in window."
+      },
+      {
+        title: "Studio Sessions or Projects will not open",
+        symptom: "Local PDFs work, but Studio access fails or shared cloud content is unavailable.",
+        likelyFix: "Test a local PDF first, then sign back into Studio and confirm whether the issue affects one Session or all Studio access.",
+        collect: "Send the Studio project or session name, the message shown, and whether other people can open it."
+      },
+      {
+        title: "Profiles, tool sets, or stamps are missing",
+        symptom: "Revu opens, but the tools your team normally uses are gone or do not match another computer.",
+        likelyFix: "Switch to the default profile once, then reload the shared profile or tool set if your team provides one.",
+        collect: "Send the profile or tool set name that is missing and a screenshot of the current profile list."
+      }
+    ],
+    fixes: [
+      "Sign out and back in with the correct Bluebeam ID before reinstalling.",
+      "If local PDFs open but Studio does not, compare that result to another network connection if one is available.",
+      "If shared profiles or tool sets are missing, switch to the default profile once to see whether only the shared content is affected.",
+      "If the issue started right after an update, note the exact version before changing anything else."
+    ],
+    support: [
+      "A screenshot of the exact Bluebeam sign-in or subscription message.",
+      "The Bluebeam ID email account you used.",
+      "Your Revu build number from Help > About.",
+      "If Studio is affected, the Session or Project name and whether local PDFs still work."
+    ]
+  };
+
+  detailOverrides["autodesk/autocad"] = {
+    summary: "Use this guide when AutoCAD will not open drawings, asks for sign-in, has missing fonts or references, or cannot plot the way you expect.",
+    overview: [
+      "AutoCAD is Autodesk's desktop drawing app for opening, editing, and plotting DWG files.",
+      "Most AutoCAD problems come from the wrong product year, sign-in problems, missing shared resources such as fonts or plot styles, or a file path that is no longer available."
+    ],
+    beforeYouStart: [
+      "Confirm the AutoCAD year and edition your team expects you to use.",
+      "Check whether the issue is sign-in, opening drawings, plotting, missing fonts, or missing references.",
+      "Note whether the drawing is stored locally, on a network drive, in a cloud location, or over VPN."
+    ],
+    licensing: [
+      "Sign in with the Autodesk account your company uses for AutoCAD access.",
+      "If AutoCAD says Trial or Sign In, capture the exact message and the product year before closing it.",
+      "If the wrong Autodesk product appears after sign-in, note the product name and year that should be available."
+    ],
+    install: [
+      "Make sure the AutoCAD year installed on your computer matches the year your team expects to use.",
+      "Install pending AutoCAD updates for that same year and restart the computer.",
+      "Open AutoCAD, sign in, test a blank drawing first, and then test one real project drawing."
+    ],
+    commonProblems: [
+      {
+        title: "A drawing will not load correctly",
+        symptom: "The app launches, but a drawing will not open, opens very slowly, or shows missing references.",
+        likelyFix: "Test a second drawing and confirm the file path is available before reinstalling AutoCAD.",
+        collect: "Send the product year, the drawing path, and a screenshot of the exact message or missing reference notice."
+      },
+      {
+        title: "Fonts, plot styles, or plotting are wrong",
+        symptom: "The drawing opens, but text, plot styles, or printer output do not match what your team expects.",
+        likelyFix: "Compare the same drawing with another working computer and confirm the same fonts, plotters, and plot styles are available.",
+        collect: "Send a screenshot of the plot or preview problem and note whether another user can plot the same file correctly."
+      },
+      {
+        title: "AutoCAD says trial, sign in, or subscription required",
+        symptom: "The app opens but does not recognize your Autodesk access.",
+        likelyFix: "Sign out and back in with the correct Autodesk account and confirm the installed product year is the one your company uses.",
+        collect: "Send the Autodesk account email, the exact message, and a screenshot of the About screen showing the product year."
+      }
+    ],
+    fixes: [
+      "Confirm the product year first because drawings and companion tools often depend on the expected release.",
+      "If only one drawing fails, test a second drawing before reinstalling AutoCAD.",
+      "If fonts, plot styles, or references are missing, compare with another user before assuming the app is broken.",
+      "If the file lives on a network or VPN path, make sure that path is available before launching the drawing."
+    ],
+    support: [
+      "A screenshot of the exact AutoCAD message or missing reference warning.",
+      "The AutoCAD year and edition from the About screen.",
+      "The Autodesk account email you used to sign in.",
+      "The path or location of the drawing that fails, plus whether another drawing works."
+    ]
+  };
+
+  detailOverrides["autodesk/revit"] = {
+    summary: "Use this guide when Revit will not open a model, says you need a different version, has missing add-ins or families, or fails to sign in.",
+    overview: [
+      "Revit is Autodesk's building design and modeling app for project models, families, sheets, and collaboration.",
+      "Most Revit problems are caused by the wrong Revit year, a model that depends on add-ins or shared content, or a sign-in problem tied to Autodesk access or cloud models."
+    ],
+    beforeYouStart: [
+      "Confirm the Revit year and update level your project requires.",
+      "Check whether the issue is opening the app, opening a model, signing in, or loading add-ins and families.",
+      "Note whether the model is local, on a file share, or in Autodesk Docs or BIM 360."
+    ],
+    licensing: [
+      "Use the Autodesk account your company assigned for Revit access.",
+      "If Revit says Trial or Sign In, capture the exact message before closing it.",
+      "If the issue is cloud access only, note whether your Autodesk sign-in works elsewhere first."
+    ],
+    install: [
+      "Confirm the Revit year on your computer matches the year your project team uses.",
+      "Install pending updates for that same Revit year and restart the computer.",
+      "Open Revit, sign in, test a blank project, and then test the project model again."
+    ],
+    commonProblems: [
+      {
+        title: "Revit says the model is from a different version",
+        symptom: "The app opens, but the project model requires a different Revit year or update level.",
+        likelyFix: "Install or open the exact Revit year your project team uses instead of trying to work around the version mismatch.",
+        collect: "Send the Revit year installed on your computer, the year the model requires, and a screenshot of the message."
+      },
+      {
+        title: "Add-ins, families, or templates are missing",
+        symptom: "Revit launches, but tools or content your team expects are missing.",
+        likelyFix: "Compare with another working Revit computer before reinstalling, especially if the problem is only missing add-ins or content.",
+        collect: "Send the add-in, family, or template name that is missing and whether another user can see it."
+      },
+      {
+        title: "A cloud or project model will not open",
+        symptom: "Revit opens, but one project model stalls, errors, or never loads fully.",
+        likelyFix: "Test a second model and confirm the same Autodesk account is signed in before making bigger changes.",
+        collect: "Send the project name, whether it is local or cloud-based, and a screenshot of the error."
+      }
+    ],
+    fixes: [
+      "Do not open a project in the wrong Revit year just to test it.",
+      "If one model fails but another opens, the issue may be model-specific rather than a full app failure.",
+      "If add-ins are missing, compare with another user before reinstalling the base app.",
+      "If cloud models are involved, confirm sign-in and whether the same model appears in the browser or companion Autodesk tools."
+    ],
+    support: [
+      "A screenshot of the exact Revit message or failed model-open screen.",
+      "The Revit year and build from the About screen.",
+      "The project or model name and whether it is local, on a file share, or cloud-based.",
+      "Any add-in, family, or template name that seems missing."
+    ]
+  };
+
+  detailOverrides["autodesk/civil-3d"] = {
+    summary: "Use this guide when Civil 3D will not open project drawings correctly, data shortcuts are broken, styles are missing, or the app says you need a different version.",
+    overview: [
+      "Civil 3D is Autodesk's civil engineering drawing app for surfaces, alignments, profiles, pipe networks, and project references.",
+      "Most Civil 3D problems come from version mismatches, missing project standards, broken data shortcuts, or shared project paths that are not available."
+    ],
+    beforeYouStart: [
+      "Confirm the Civil 3D year and update level your project requires.",
+      "Check whether the issue is opening the app, opening a project drawing, missing styles, or broken data shortcuts.",
+      "Note whether the project is stored locally, on a file share, or through VPN."
+    ],
+    licensing: [
+      "Sign in with the Autodesk account your company uses for Civil 3D access.",
+      "If Civil 3D says Trial or Sign In, capture the exact message and the installed year.",
+      "If the app opens but a civil feature is missing, note the exact tool or object type that is unavailable."
+    ],
+    install: [
+      "Make sure the installed Civil 3D year matches the one your project team uses.",
+      "Install pending updates for that same year and restart the computer.",
+      "Open a blank drawing first, then test the affected project drawing and one data shortcut or reference path."
+    ],
+    commonProblems: [
+      {
+        title: "Data shortcuts or references are broken",
+        symptom: "The drawing opens, but references, shortcuts, or related project objects are missing.",
+        likelyFix: "Confirm the project paths are available and compare the same drawing with another working user before reinstalling.",
+        collect: "Send the project path, the name of the missing shortcut or reference, and a screenshot of the error."
+      },
+      {
+        title: "Styles or object content are missing",
+        symptom: "Civil 3D opens, but labels, styles, or expected objects do not match another team member's view.",
+        likelyFix: "Compare the same drawing and template with another working computer before changing the app install.",
+        collect: "Send the style or object type that is missing and whether another user sees it correctly."
+      },
+      {
+        title: "Civil 3D behaves as if the wrong version is installed",
+        symptom: "The app launches, but project files or companion tools do not behave normally.",
+        likelyFix: "Confirm the exact Civil 3D year and update level the project requires before reinstalling or opening files in another version.",
+        collect: "Send the installed year, the expected project year, and a screenshot from the About screen."
+      }
+    ],
+    fixes: [
+      "If a project drawing fails, test a second drawing before reinstalling Civil 3D.",
+      "If only references or shortcuts are broken, check project paths and VPN or network access first.",
+      "If styles are missing, compare with another working computer on the same project.",
+      "Do not upgrade project files just to test them if the project year is still unclear."
+    ],
+    support: [
+      "A screenshot of the exact Civil 3D message or missing reference warning.",
+      "The installed Civil 3D year and build from the About screen.",
+      "The affected project drawing path and whether another drawing works.",
+      "The name of any missing style, shortcut, or reference object."
+    ]
+  };
+
+  detailOverrides["esri/arcgis-pro"] = {
+    summary: "Use this guide when ArcGIS Pro will not sign in, shows the wrong license level, hides projects or layers, or crashes while opening maps.",
+    overview: [
+      "ArcGIS Pro is Esri's desktop mapping and GIS app for projects, layers, layouts, and analysis tools.",
+      "Most ArcGIS Pro problems come from signing into the wrong ArcGIS organization, missing extensions, or a project that depends on content you cannot currently reach."
+    ],
+    beforeYouStart: [
+      "Check whether you can sign in to the correct ArcGIS organization in the browser.",
+      "Confirm whether the issue is licensing, missing layers, missing projects, offline use, or crashing.",
+      "Note whether the problem affects one project only or ArcGIS Pro in general."
+    ],
+    licensing: [
+      "Make sure ArcGIS Pro is signed into the same ArcGIS organization your team expects.",
+      "If the app opens with the wrong license level, note the exact level shown, such as Basic, Standard, or Advanced.",
+      "If a tool is missing, note the extension name you expected to use."
+    ],
+    install: [
+      "Install pending ArcGIS Pro updates if your organization allows them, then restart the computer.",
+      "Sign into the correct ArcGIS organization in the browser first, then reopen ArcGIS Pro.",
+      "Test a blank project or a simple project before reopening the larger project that failed."
+    ],
+    commonProblems: [
+      {
+        title: "ArcGIS Pro shows the wrong license level or missing extensions",
+        symptom: "The app opens, but a required level or extension is unavailable.",
+        likelyFix: "Sign in again with the correct ArcGIS organization account and confirm the license level shown in the app.",
+        collect: "Send the license level shown, the extension name that is missing, and a screenshot of the licensing screen."
+      },
+      {
+        title: "Projects or layers are missing",
+        symptom: "You can sign in, but expected maps, layers, or projects do not appear.",
+        likelyFix: "Check whether the same content is visible in the browser or portal view before changing the desktop install.",
+        collect: "Send the project or layer name, the portal or organization URL, and whether the browser version shows the same content."
+      },
+      {
+        title: "ArcGIS Pro crashes while opening or loading a project",
+        symptom: "The app starts, then closes or freezes when opening the app or a project.",
+        likelyFix: "Restart the computer, test a simple project, and note whether the issue is limited to one project before reinstalling.",
+        collect: "Send the ArcGIS Pro version, the project name, and the wording of the crash message if one appears."
+      }
+    ],
+    fixes: [
+      "Compare browser sign-in to desktop sign-in because the wrong organization is a common cause.",
+      "If one project is the problem, try opening a different project before reinstalling ArcGIS Pro.",
+      "If layers are missing, confirm they still exist in the browser or portal view you normally use.",
+      "If the app crashes at startup, restart the computer and note whether the crash began right after an update."
+    ],
+    support: [
+      "A screenshot of the exact ArcGIS Pro message or licensing screen.",
+      "The ArcGIS organization or portal URL you are signing into.",
+      "The ArcGIS Pro version plus the license level shown in the app.",
+      "The project, layer, or extension name involved in the problem."
+    ]
+  };
+
+  detailOverrides["bentley/projectwise"] = {
+    summary: "Use this guide when ProjectWise will not connect to the right datasource, project files are missing, or check-in and check-out actions stop working.",
+    overview: [
+      "ProjectWise is Bentley's document and project file app for opening, checking out, and checking in shared project content.",
+      "Most ProjectWise problems come from datasource access, Bentley sign-in, or local work areas that no longer match the project you expect to see."
+    ],
+    beforeYouStart: [
+      "Confirm the datasource and project you should be able to open.",
+      "Check whether you can sign into Bentley and reach the datasource list at all.",
+      "Note whether the issue is opening files, checking files out, checking them back in, or seeing the project tree."
+    ],
+    licensing: [
+      "Make sure you are signed into Bentley with the work account your company uses for ProjectWise.",
+      "If ProjectWise opens but shows no datasource or no projects, capture the datasource name you expected to see.",
+      "Do not delete local ProjectWise folders if you may still have files checked out or unsaved local work."
+    ],
+    install: [
+      "Restart the computer, sign back into Bentley if prompted, and reopen ProjectWise.",
+      "Confirm the expected datasource appears before testing a real project file.",
+      "Open one smaller test file first, then test check-out and check-in if your normal work depends on them."
+    ],
+    commonProblems: [
+      {
+        title: "The datasource or project tree is missing",
+        symptom: "ProjectWise opens, but you cannot see the datasource or project you normally use.",
+        likelyFix: "Confirm the datasource name and Bentley sign-in first, then compare with another user if possible.",
+        collect: "Send the datasource name you expected, a screenshot of what you do see, and the Bentley account email you used."
+      },
+      {
+        title: "Check-out or check-in fails",
+        symptom: "You can open ProjectWise, but cannot check files out or return them after editing.",
+        likelyFix: "Test one smaller file and note whether the issue affects every file or only one project before clearing anything locally.",
+        collect: "Send the project and file name, the exact message shown, and whether the file is already marked as checked out."
+      },
+      {
+        title: "Local work area seems wrong or out of date",
+        symptom: "ProjectWise opens old local content or your local copy no longer matches the project tree you expect.",
+        likelyFix: "Do not delete the local work area yet. First confirm whether you have checked-out files or local changes that still need to be kept.",
+        collect: "Send the project name, whether files are checked out, and screenshots of the local-versus-datasource view."
+      }
+    ],
+    fixes: [
+      "If the datasource list is missing, confirm your Bentley sign-in before clearing anything locally.",
+      "If only one project is affected, check another project or folder before assuming the whole app is broken.",
+      "If files are checked out, make note of them before any repair attempt.",
+      "If a local work area looks out of date, do not delete it until support confirms your checked-out work is safe."
+    ],
+    support: [
+      "A screenshot of the exact ProjectWise message or missing datasource view.",
+      "The datasource and project name you expected to see.",
+      "The Bentley account email you used to sign in.",
+      "A note about whether you currently have files checked out or local work you still need."
+    ]
+  };
+
+  function capitalizeWord(word) {
+    var special = {
+      autocad: "AutoCAD",
+      arcgis: "ArcGIS",
+      onedrive: "OneDrive",
+      sharepoint: "SharePoint",
+      projectwise: "ProjectWise",
+      quickbooks: "QuickBooks",
+      sketchup: "SketchUp",
+      microstation: "MicroStation",
+      revit: "Revit",
+      teams: "Teams",
+      outlook: "Outlook",
+      egnyte: "Egnyte",
+      mathcad: "Mathcad",
+      recap: "ReCap",
+      infraworks: "InfraWorks",
+      revu: "Revu",
+      signcad: "SignCAD",
+      connection: "CONNECTION",
+      pdf: "PDF",
+      ui: "UI",
+      admin: "Admin"
+    };
+    var lower = String(word || "").toLowerCase();
+    if (special[lower]) {
+      return special[lower];
+    }
+    return lower ? lower.charAt(0).toUpperCase() + lower.slice(1) : "";
+  }
+
+  function getAppName(vendor, slug) {
+    var key = vendor + "/" + slug;
+    if (appTitleOverrides[key]) {
+      return appTitleOverrides[key];
+    }
+    return String(slug || "")
+      .split("-")
+      .map(capitalizeWord)
+      .join(" ");
+  }
+
+  function createEl(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) {
+      node.className = className;
+    }
+    if (text) {
+      node.textContent = text;
+    }
+    return node;
+  }
+
+  function createList(items) {
+    var list = createEl("ul", "guide-list");
+    for (var i = 0; i < items.length; i += 1) {
+      var li = document.createElement("li");
+      li.textContent = items[i];
+      list.appendChild(li);
+    }
+    return list;
+  }
+
+  function createParagraphs(items) {
+    var shell = createEl("div", "guide-copy-stack");
+    for (var i = 0; i < items.length; i += 1) {
+      shell.appendChild(createEl("p", "guide-card-copy", items[i]));
+    }
+    return shell;
+  }
+
+  function createCard(title, bodyNode) {
+    var card = createEl("article", "guide-card");
+    card.appendChild(createEl("h3", "guide-card-title", title));
+    card.appendChild(bodyNode);
+    return card;
+  }
+
+  function createSection(id, kicker, title, intro) {
+    var section = createEl("section", "guide-section");
+    section.id = id;
+    section.appendChild(createEl("p", "section-kicker", kicker));
+    section.appendChild(createEl("h2", "guide-section-title", title));
+    section.appendChild(createEl("p", "guide-section-copy", intro));
+    return section;
+  }
+
+  function createLinks(items) {
+    var shell = createEl("div", "guide-link-list");
+    for (var i = 0; i < items.length; i += 1) {
+      var link = createEl("a", "guide-chip-link", items[i].label);
+      link.href = items[i].url;
+      if (/^https?:/i.test(items[i].url)) {
+        link.target = "_blank";
+        link.rel = "noreferrer";
+      }
+      shell.appendChild(link);
+    }
+    return shell;
+  }
+
+  function fillHeader(appName, summary, vendorTitle) {
+    var breadcrumbs = document.getElementById("breadcrumbs");
+    var kicker = document.getElementById("guideKicker");
+    var title = document.getElementById("guideTitle");
+    var summaryNode = document.getElementById("guideSummary");
+    var backLink = document.getElementById("guideBackLink");
+
+    if (breadcrumbs) {
+      breadcrumbs.innerHTML = "";
+      var parts = [
+        { label: "Home", url: rootPath + "/index.html" },
+        { label: "Guides", url: rootPath + "/vendor-guides.html" },
+        { label: vendorTitle, url: rootPath + "/guides/" + vendorSlug + ".html" }
+      ];
+
+      for (var i = 0; i < parts.length; i += 1) {
+        if (i) {
+          breadcrumbs.appendChild(createEl("span", "guide-breadcrumb-sep", ">"));
+        }
+        var link = createEl("a", "guide-breadcrumb-link", parts[i].label);
+        link.href = parts[i].url;
+        breadcrumbs.appendChild(link);
+      }
+
+      breadcrumbs.appendChild(createEl("span", "guide-breadcrumb-sep", ">"));
+      breadcrumbs.appendChild(createEl("strong", "guide-breadcrumb-current", appName));
+    }
+
+    if (kicker) {
+      kicker.textContent = vendorTitle + " Application";
+    }
+    if (title) {
+      title.textContent = appName;
+    }
+    if (summaryNode) {
+      summaryNode.textContent = summary;
+    }
+    if (backLink) {
+      backLink.href = rootPath + "/guides/" + vendorSlug + ".html";
+      backLink.textContent = "Back to " + vendorTitle;
+    }
+
+    document.title = appName + " | " + vendorTitle;
+  }
+
+  function fillJumpLinks() {
+    var jumpShell = document.getElementById("guideJumpLinks");
+    if (!jumpShell) {
+      return;
+    }
+
+    jumpShell.innerHTML = "";
+
+    var items = [
+      ["overview", "Overview"],
+      ["before-you-start", "Before You Start"],
+      ["licensing-access", "Licensing / Access"],
+      ["install-update-basics", "Install / Update Basics"],
+      ["common-problems", "Common Problems"],
+      ["try-fixes-first", "Try These Fixes First"],
+      ["what-to-send-support", "What to Send Support"],
+      ["related-help", "Related Help"]
+    ];
+
+    var nav = createEl("nav", "guide-jump-links");
+    nav.setAttribute("aria-label", "Jump to a section");
+    for (var i = 0; i < items.length; i += 1) {
+      var link = createEl("a", "guide-jump-link", items[i][1]);
+      link.href = "#" + items[i][0];
+      nav.appendChild(link);
+    }
+    jumpShell.hidden = false;
+    jumpShell.appendChild(nav);
+  }
+
+  function buildDefaultModel(appName, vendorTitle, key) {
+    var summary = "Use this guide when " + appName + " will not open, sign in, update, or work with the files and features you expect.";
+    if (detailOverrides[key] && detailOverrides[key].summary) {
+      summary = detailOverrides[key].summary;
+    }
+
+    return {
+      appName: appName,
+      vendorTitle: vendorTitle,
+      summary: summary,
+      overview: [
+        appName + " is part of " + vendorTitle + ".",
+        "Use the sections below for safe, customer-friendly first checks before contacting support."
+      ],
+      beforeYouStart: [
+        "Confirm the exact task that is failing, such as sign-in, opening files, syncing, printing, or startup.",
+        "Note whether the problem started after an update, password change, restart, or new computer.",
+        "Check whether the same task fails for every file or project or only one specific item.",
+        "If a browser version exists, compare it to the desktop app before making bigger changes."
+      ],
+      licensing: [
+        "Make sure you are signed in with the work account your company expects for " + appName + ".",
+        "If the app says Trial, Unlicensed, or Subscription Required, capture the exact message before closing it.",
+        "If browser access works but the desktop app does not, include that when you contact support."
+      ],
+      install: [
+        "Close the app, install pending updates, and restart the computer.",
+        "Sign back in with the correct work account after the restart if the app asks you to.",
+        "Test one simple task before reopening the exact file, project, or workspace that failed earlier."
+      ],
+      commonProblems: [
+        {
+          title: "Sign-in or access problem",
+          symptom: appName + " opens, but the expected account, subscription, or access is missing.",
+          likelyFix: "Sign out, sign back in with the correct work account, and compare the result to the browser version if one is available.",
+          collect: "Send a screenshot of the sign-in or access message and the work account you expected to use."
+        },
+        {
+          title: "A file, project, or workspace will not open",
+          symptom: "The app launches, but the item you need will not open or does not load correctly.",
+          likelyFix: "Test a second file or project and confirm the original path or location is still available before reinstalling the app.",
+          collect: "Send the file, project, library, or workspace name involved plus the exact error shown."
+        },
+        {
+          title: "The app is slow, frozen, or crashing",
+          symptom: appName + " opens slowly, stops responding, or closes unexpectedly.",
+          likelyFix: "Restart the computer, install pending updates, and note whether the issue began after a recent change.",
+          collect: "Send the app version, when the issue started, and a screenshot of any crash message."
+        }
+      ],
+      fixes: [
+        "Restart the app and computer before bigger changes.",
+        "If a browser version exists, compare it to the desktop app before reinstalling.",
+        "If only one file, project, or workspace fails, test a second one before assuming the whole app is broken.",
+        "Capture the exact message and when the problem started."
+      ],
+      support: [
+        "A screenshot of the exact app message or screen where the problem happens.",
+        "The work account you used to sign in and whether the same task works in the browser or on another computer.",
+        "The app version or product year shown in the app.",
+        "The file, project, library, or workflow name involved in the problem."
+      ]
+    };
+  }
+
+  function buildModel() {
+    var vendorTitle = vendorTitles[vendorSlug] || capitalizeWord(vendorSlug);
+    var appName = getAppName(vendorSlug, appSlug);
+    var key = vendorSlug + "/" + appSlug;
+    var override = detailOverrides[key] || {};
+    var base = buildDefaultModel(appName, vendorTitle, key);
+
+    return {
+      appName: appName,
+      vendorTitle: vendorTitle,
+      summary: override.summary || base.summary,
+      overview: override.overview || base.overview,
+      beforeYouStart: override.beforeYouStart || base.beforeYouStart,
+      licensing: override.licensing || base.licensing,
+      install: override.install || base.install,
+      commonProblems: override.commonProblems || base.commonProblems,
+      fixes: override.fixes || base.fixes,
+      support: override.support || base.support
+    };
+  }
+
+  function renderFallback() {
+    var content = document.getElementById("guideContent");
+    if (!content) {
+      return;
+    }
+
+    var existingSections = content.querySelectorAll(".guide-section").length;
+    if (existingSections >= 7) {
+      return;
+    }
+
+    content.innerHTML = "";
+
+    var model = buildModel();
+    fillHeader(model.appName, model.summary, model.vendorTitle);
+    fillJumpLinks();
+
+    var overview = createSection("overview", "Application Guide", "Overview", model.summary);
+    overview.appendChild(createCard("Overview", createParagraphs(model.overview)));
+
+    var before = createSection("before-you-start", "Before You Start", "Before You Start", "Use these quick checks to narrow the problem before you change the app or computer.");
+    before.appendChild(createCard("Check these first", createList(model.beforeYouStart)));
+
+    var licensing = createSection("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
+    licensing.appendChild(createCard("Licensing / Access", createList(model.licensing)));
+
+    var install = createSection("install-update-basics", "Install / Update Basics", "Install / Update Basics", "These safe steps help with fresh installs, recent updates, and apps that stopped working after a change.");
+    install.appendChild(createCard("Install / Update Basics", createList(model.install)));
+
+    var problems = createSection("common-problems", "Common Problems", "Common Problems", "These are the problems people run into most often with this app.");
+    var grid = createEl("div", "guide-card-grid");
+    for (var i = 0; i < model.commonProblems.length; i += 1) {
+      var problem = model.commonProblems[i];
+      var issueCard = createEl("article", "guide-card issue-card");
+      issueCard.appendChild(createEl("h3", "guide-card-title", problem.title));
+      issueCard.appendChild(createEl("p", "guide-card-copy", problem.symptom));
+      issueCard.appendChild(createCard("Likely Fix", createParagraphs([problem.likelyFix])));
+      issueCard.appendChild(createCard("What To Collect", createParagraphs([problem.collect])));
+      grid.appendChild(issueCard);
+    }
+    problems.appendChild(grid);
+
+    var fixes = createSection("try-fixes-first", "Try These Fixes First", "Try These Fixes First", "Try these stable, low-risk steps before contacting support.");
+    fixes.appendChild(createCard("Try These Fixes First", createList(model.fixes)));
+
+    var support = createSection("what-to-send-support", "What to Send Support", "What to Send Support", "If the problem continues, send these details so support can help faster.");
+    support.appendChild(createCard("Send these details", createList(model.support)));
+
+    var related = createSection("related-help", "Related Help", "Related Help", "Use these links to keep moving without losing context.");
+    var relatedGrid = createEl("div", "guide-card-grid");
+    relatedGrid.appendChild(createCard("Back to Vendor", createLinks([
+      { label: "Back to " + model.vendorTitle, url: rootPath + "/guides/" + vendorSlug + ".html" }
+    ])));
+    relatedGrid.appendChild(createCard("Need More Help?", createLinks([
+      { label: "Open Guides", url: rootPath + "/vendor-guides.html" },
+      { label: "Licensing help", url: rootPath + "/app-licensing.html" },
+      { label: "Open contact page", url: rootPath + "/contact.html" }
+    ])));
+    related.appendChild(relatedGrid);
+
+    content.appendChild(overview);
+    content.appendChild(before);
+    content.appendChild(licensing);
+    content.appendChild(install);
+    content.appendChild(problems);
+    content.appendChild(fixes);
+    content.appendChild(support);
+    content.appendChild(related);
+  }
+
+  function scheduleFallback() {
+    window.setTimeout(renderFallback, 350);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleFallback);
+  } else {
+    scheduleFallback();
+  }
+})();
