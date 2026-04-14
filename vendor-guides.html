@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guides by App or Topic</title>
+  <title>Guides</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -24,19 +24,20 @@
           <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
             <p class="section-kicker">Guides</p>
-            <h1>Browse guides by app or topic</h1>
-            <p class="builder-copy">Use topic browsing when you know the issue or task, like sign-in, printing, licensing, or shared files. Use app browsing when you already know the product name and want to go straight there.</p>
+            <h1>Browse guides by application</h1>
+            <p class="builder-copy">Start with the application you use every day, then open the guide that matches that product. You can also jump to mobile phone setup help, browser support, or the full application directory.</p>
           </div>
         </div>
       </section>
 
       <section class="results-card toc-shell">
-        <p class="section-kicker">Browse Two Ways</p>
-        <h2>Start with the problem or go straight to the app list</h2>
-        <p class="hub-section-copy">Use topic browsing when you want help with a sign-in, licensing, printing, sync, or file-opening problem. Use the application sections when you already know the product name and want the guide page right away.</p>
-        <nav class="toc-links" aria-label="Browse guides two ways">
-          <a href="#browse-by-topic">Browse by topic</a>
+        <p class="section-kicker">On This Page</p>
+        <h2>Start with the application or setup area you need</h2>
+        <p class="hub-section-copy">Open a popular app guide, jump to mobile phone setup help, browse browser support, or scan the full application directory by vendor.</p>
+        <nav class="toc-links" aria-label="Guides sections">
           <a href="#browse-by-app">Popular applications</a>
+          <a href="#mobile-help">Mobile phone help</a>
+          <a href="#browser-help">Browser support</a>
           <a href="#application-directory">Full application directory</a>
           <a href="app-licensing.html">Licensing help</a>
           <a href="search.html">Search the help center</a>
@@ -47,40 +48,38 @@
         <div class="results-header">
           <div>
             <p class="section-kicker">Quick Start</p>
-            <h2>Choose the path that matches what you already know</h2>
+            <h2>Choose the area you want help with</h2>
           </div>
         </div>
         <div class="hub-quick-grid">
           <article class="hub-note-card">
-            <p class="section-kicker">Issue First</p>
-            <h3>Start with the topic</h3>
-            <p>Use this when you know the kind of problem you need help with, such as sign-in, activation, printing, file opening, sync, or crashing.</p>
-            <div class="vendor-links">
-              <a href="#browse-by-topic">Browse by topic</a>
-              <a href="search.html">Search by keyword</a>
-            </div>
-          </article>
-          <article class="hub-note-card">
-            <p class="section-kicker">Product First</p>
-            <h3>Start with the application</h3>
-            <p>Use this when you already know the product name and want to open the guide for Outlook, Teams, OneDrive, Acrobat, AutoCAD, Revit, or another supported app.</p>
+            <p class="section-kicker">Applications</p>
+            <h3>Start with the app name</h3>
+            <p>Use this when you already know the product you need, such as Outlook, Teams, OneDrive, Acrobat, AutoCAD, Revit, ArcGIS Pro, or ProjectWise.</p>
             <div class="vendor-links">
               <a href="#browse-by-app">Popular applications</a>
               <a href="#application-directory">Full application directory</a>
             </div>
           </article>
+          <article class="hub-note-card">
+            <p class="section-kicker">Mobile</p>
+            <h3>Get phone setup help</h3>
+            <p>Use this when you need help setting up Outlook, Teams, or Microsoft Authenticator on an iPhone or Android phone.</p>
+            <div class="vendor-links">
+              <a href="#mobile-help">Mobile phone help</a>
+              <a href="search.html">Search the help center</a>
+            </div>
+          </article>
+          <article class="hub-note-card">
+            <p class="section-kicker">Browsers</p>
+            <h3>Open browser support</h3>
+            <p>Use this when the issue is tied to Chrome, Edge, Firefox, or Safari, or when a website behaves differently in one browser than another.</p>
+            <div class="vendor-links">
+              <a href="#browser-help">Browser support</a>
+              <a href="#application-directory">Browse all guides</a>
+            </div>
+          </article>
         </div>
-      </section>
-
-      <section id="browse-by-topic" class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Common Topics</p>
-            <h2>Choose the kind of help you need</h2>
-          </div>
-        </div>
-        <p class="hub-section-copy">These topics are grouped around common everyday problems so you can start with the issue you are seeing, even if you do not know the vendor or product path yet.</p>
-        <div id="guideTopicGrid" class="help-topic-directory"></div>
       </section>
 
       <section id="browse-by-app" class="results-card hub-section">
@@ -92,6 +91,28 @@
         </div>
         <p class="hub-section-copy">These are the application guides people reach for most often. Open the guide directly if you already know the app name.</p>
         <div id="popularAppGrid" class="hub-quick-grid"></div>
+      </section>
+
+      <section id="mobile-help" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Mobile Phone Help</p>
+            <h2>Set up work apps on your phone</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Use these guides for work email, Teams, and Microsoft Authenticator setup on mobile devices.</p>
+        <div id="mobileHelpGrid" class="hub-quick-grid"></div>
+      </section>
+
+      <section id="browser-help" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Browser Support</p>
+            <h2>Open help for Chrome, Edge, Firefox, or Safari</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Use these guides when a website, download, sign-in page, or file-opening action behaves differently in your browser.</p>
+        <div id="browserHelpGrid" class="hub-quick-grid"></div>
       </section>
 
       <section id="application-directory" class="results-card hub-section">

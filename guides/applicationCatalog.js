@@ -31,6 +31,64 @@ export const applicationCatalog = {
       licensing: "Depends on SharePoint-enabled licensing, correct site membership, and any IRM, sensitivity, or DLP policy scope in the tenant.",
       install: "There is no standalone app, but validate browser access, Office sign-in, open-in-app, and sync behavior for the target site or library.",
       uninstall: "Offboarding means removing site access, preserving synced content as needed, and documenting any protected-library workflows that remain in scope."
+    },
+    {
+      name: "Outlook Mobile",
+      slug: "outlook-mobile",
+      focus: "Mobile work email and calendar access on iPhone or Android, where account choice, device registration, and app permissions matter most.",
+      licensing: "Requires an active Microsoft 365 mailbox for the signed-in work account, plus any company mobile access policies that apply to the device.",
+      install: "Install Outlook from the iPhone App Store or Google Play, sign in with the expected work account, and allow mail, calendar, contacts, and notification permissions when prompted.",
+      uninstall: "Remove the work account from Outlook Mobile, confirm any company data you need is available elsewhere, then remove the app if you no longer need it."
+    },
+    {
+      name: "Teams Mobile",
+      slug: "teams-mobile",
+      focus: "Mobile Teams access for chat, meetings, calls, and files on iPhone or Android devices.",
+      licensing: "Requires a Microsoft 365 account with Teams access, and company policies may also require device registration or approved mobile app protection settings.",
+      install: "Install Teams from the iPhone App Store or Google Play, sign in with the expected work account, and confirm notifications, camera, microphone, and file access permissions as needed.",
+      uninstall: "Sign out of Teams Mobile, remove the work account if the device is shared, and uninstall the app only after confirming you no longer need mobile meeting or chat access."
+    },
+    {
+      name: "Microsoft Authenticator",
+      slug: "microsoft-authenticator",
+      focus: "Mobile multi-factor authentication app used for Microsoft sign-ins, number matching, approval prompts, and work account setup.",
+      licensing: "Access depends on the same work account used for Microsoft 365 or company sign-in, plus any company multi-factor requirements already assigned to the account.",
+      install: "Install Microsoft Authenticator from the iPhone App Store or Google Play, follow the company or Microsoft setup prompt, and allow notifications plus camera access for QR code setup if needed.",
+      uninstall: "Do not remove Microsoft Authenticator until you confirm you have another approved sign-in method or the new phone is already set up."
+    }
+  ],
+  browsers: [
+    {
+      name: "Google Chrome",
+      slug: "google-chrome",
+      focus: "General browser support for work websites, downloads, passwords, extensions, and default-browser behavior in Chrome.",
+      licensing: "Chrome itself does not require a paid user license for normal work browsing, but access to work sites still depends on your company account and any browser sign-in or sync settings your organization uses.",
+      install: "Install the current supported Chrome version, confirm the browser opens normally, and verify downloads, pop-ups, and default-browser behavior for work sites if needed.",
+      uninstall: "If Chrome is your default browser, note any saved passwords, bookmarks, or work extensions you still need before removing it."
+    },
+    {
+      name: "Microsoft Edge",
+      slug: "microsoft-edge",
+      focus: "General browser support for Microsoft Edge when work sites, downloads, file handoffs, or Microsoft 365 sign-in pages are not behaving normally.",
+      licensing: "Edge itself does not require a paid user license for normal browsing, but access to work sites still depends on the Microsoft or company account used in the browser and any organization policies applied to it.",
+      install: "Use the current supported Edge version, confirm browser sign-in if your company uses it, and test downloads, file opening, and site access with one known-good work site.",
+      uninstall: "If Edge is your default browser, note any saved passwords, favorites, or work profiles you still need before removing or resetting it."
+    },
+    {
+      name: "Mozilla Firefox",
+      slug: "mozilla-firefox",
+      focus: "General browser support for Firefox when web apps, downloads, saved sign-ins, or extensions are behaving differently than expected.",
+      licensing: "Firefox itself does not require a paid user license for normal browsing, but access to work sites still depends on your company accounts, saved site data, and any required extensions.",
+      install: "Install the current supported Firefox version, confirm basic browsing works, and test the work site, download, or sign-in flow you use most often.",
+      uninstall: "Before removing Firefox, note any saved bookmarks, passwords, or work extensions you still need."
+    },
+    {
+      name: "Safari",
+      slug: "apple-safari",
+      focus: "General browser support for Safari on Apple devices when work sites, downloads, Apple file handoffs, or saved sign-ins are not behaving normally.",
+      licensing: "Safari itself does not require a paid user license for normal browsing, but access to work sites still depends on your company account and any Apple device or browser settings involved.",
+      install: "Use the current supported Safari version through normal Apple updates and confirm the work site or sign-in flow opens correctly.",
+      uninstall: "Safari is built into Apple devices, so support usually focuses on settings, updates, saved site data, or defaults rather than removing the browser."
     }
   ],
   autodesk: [    {

@@ -6,93 +6,161 @@ import { appendBlock, createLinks, createPageCard } from "./resourceCommon.js";
 const licensingGrid = document.getElementById("licensingGrid");
 const matrixCard = document.getElementById("matrixCard");
 
-const customerLicensingHelp = {
+const customerLicensingReference = {
   microsoft: {
-    summary: "Microsoft access usually depends on the work account you sign in with, the Microsoft 365 plan assigned to you, and whether the same account works in the browser.",
-    checks: [
-      "Make sure you are signing in with your work account instead of a personal Microsoft account.",
-      "Check whether the same action works in Outlook on the web, Teams on the web, or the Microsoft 365 portal.",
-      "Take note of the exact app and feature that appears missing, such as desktop Outlook, Teams meetings, or OneDrive sync."
+    summary: "Microsoft 365 access is usually tied to your work email account, the Microsoft 365 plan assigned to it, and any company requirements around mobile access, desktop apps, or multi-factor sign-in.",
+    howItWorks: [
+      "Most Microsoft apps use the same work account across Outlook, Teams, OneDrive, SharePoint, and Microsoft Authenticator.",
+      "The exact plan or bundle assigned to your account determines whether you have desktop apps, mailbox access, OneDrive storage, Teams features, and other Microsoft services.",
+      "Some companies also require mobile app protection, device registration, or Microsoft Authenticator setup before access is complete."
+    ],
+    whatYouNeed: [
+      "Your exact work email account",
+      "The Microsoft app you need, such as Outlook, Teams, OneDrive, SharePoint, or Authenticator",
+      "If relevant, whether you need desktop apps, mobile setup, mailbox access, or a specific Microsoft 365 feature"
+    ]
+  },
+  browsers: {
+    summary: "Browsers usually do not have a separate paid end-user license for everyday work. Access is normally based on your work website sign-in, browser version, browser profile, and company browser settings.",
+    howItWorks: [
+      "Chrome, Edge, Firefox, and Safari are generally available without a separate paid software seat for normal browsing.",
+      "The sites you open inside the browser may still depend on your work account, saved browser profile, or company security settings.",
+      "For browser-based work, the main details are the browser name, browser version, website URL, and whether the same site works in another browser."
+    ],
+    whatYouNeed: [
+      "The browser name, such as Chrome, Edge, Firefox, or Safari",
+      "The exact site or portal URL",
+      "If relevant, the browser profile or work account used in the browser"
     ]
   },
   autodesk: {
-    summary: "Autodesk access is usually tied to the Autodesk account email that was assigned the product, plus the exact product year your team uses.",
-    checks: [
-      "Use the Autodesk account that matches the seat assignment for your company.",
-      "Confirm the exact product and year you need, such as AutoCAD 2025 or Revit 2024.",
-      "Capture any trial, subscription, or sign-in message shown at launch."
+    summary: "Autodesk access is usually tied to the Autodesk account email assigned to you and the exact product plus release year your team uses.",
+    howItWorks: [
+      "Autodesk products commonly use named-user access through the Autodesk account assigned by your company.",
+      "The specific product and release year matter. AutoCAD, Revit, Civil 3D, and other Autodesk apps may all be assigned differently.",
+      "Your company may also standardize on a specific year, language, or deployment package that should match what you install."
+    ],
+    whatYouNeed: [
+      "The Autodesk account email your company assigned",
+      "The exact Autodesk product you need",
+      "The specific product year or version your team expects to use"
     ]
   },
   bentley: {
-    summary: "Bentley products often depend on both your Bentley account and the project or datasource your team uses, especially for ProjectWise and CONNECT Edition apps.",
-    checks: [
-      "Confirm which Bentley product you need and whether ProjectWise or CONNECTION Client is part of the workflow.",
-      "Check whether you can sign in with the expected Bentley account.",
-      "If the issue is project-specific, note the datasource or project name before contacting support."
+    summary: "Bentley access is usually tied to your Bentley account and, for ProjectWise or other project-driven tools, the datasource, project, or Bentley service your team uses.",
+    howItWorks: [
+      "Bentley products often depend on CONNECT or Bentley sign-in plus the product your company assigned you to use.",
+      "ProjectWise and similar tools may also depend on the correct datasource, project tree, or project-specific access path.",
+      "Your company may use more than one Bentley product, so the exact application name matters."
+    ],
+    whatYouNeed: [
+      "The Bentley account email you are expected to use",
+      "The exact Bentley product name",
+      "If relevant, the datasource, project, or Bentley service name tied to your work"
     ]
   },
   esri: {
-    summary: "Esri access usually depends on the ArcGIS organization you belong to, the role assigned to your account, and whether the right extensions are included.",
-    checks: [
-      "Confirm you are signing in to the correct ArcGIS organization or portal.",
-      "Check whether the missing feature is part of ArcGIS Pro, ArcGIS Online, or an extension.",
-      "Take a screenshot if the app shows the wrong license level or missing extensions."
+    summary: "Esri access usually depends on the ArcGIS organization you belong to, the role or user type assigned to you, and any extensions tied to that account.",
+    howItWorks: [
+      "ArcGIS access is often connected to the ArcGIS portal or organization your company uses.",
+      "ArcGIS Pro and ArcGIS Online may both depend on the same account, but different roles, user types, and extensions control the features you see.",
+      "If you need a specific ArcGIS extension or license level, that detail matters."
+    ],
+    whatYouNeed: [
+      "The ArcGIS organization or portal you should use",
+      "The ArcGIS product you need, such as ArcGIS Pro or ArcGIS Online",
+      "If relevant, the license level, role, or extension your work requires"
     ]
   },
   ptc: {
-    summary: "Mathcad access may depend on a subscription, a floating license source, or another company-managed licensing method.",
-    checks: [
-      "Confirm which Mathcad version you are expected to use.",
-      "If your company uses a license server, note whether the problem affects only your device or multiple people.",
-      "Capture the exact license or activation message shown in the app."
+    summary: "Mathcad and related PTC products may use a subscription, a named-user account, or a company-managed license source depending on how your organization is set up.",
+    howItWorks: [
+      "Some PTC environments are based on a sign-in account, while others rely on a company-managed licensing method.",
+      "The exact Mathcad version may matter if your team standardizes on a specific release.",
+      "Engineering templates and shared worksheet libraries may also be part of the expected setup."
+    ],
+    whatYouNeed: [
+      "The exact PTC or Mathcad product name",
+      "The version your team expects to use",
+      "If your company provided one, the license source or company setup instructions"
     ]
   },
   trimble: {
-    summary: "Trimble-managed apps usually depend on the right account, subscription, and product edition, especially for SketchUp and Trimble Business Center.",
-    checks: [
-      "Confirm the product name, edition, and version your team expects you to use.",
-      "Make sure you are signing in with the correct Trimble-managed account.",
-      "Note whether the issue is missing access, missing modules, or missing shared files or extensions."
+    summary: "Trimble-managed products usually depend on the correct Trimble account, the subscription or edition assigned to it, and the exact product your team uses.",
+    howItWorks: [
+      "Trimble and SketchUp products often depend on the Trimble-managed account your company assigned to you.",
+      "The exact product edition or module matters for tools like SketchUp and Trimble Business Center.",
+      "Extensions, templates, or company-specific content may also be part of the expected setup."
+    ],
+    whatYouNeed: [
+      "The Trimble-managed work account you should use",
+      "The exact Trimble product and edition",
+      "If relevant, any required extensions, modules, or templates"
     ]
   },
   adobe: {
-    summary: "Adobe access usually depends on the correct managed Adobe profile being assigned to your work account, especially for Acrobat Pro and Creative Cloud apps.",
-    checks: [
-      "Choose the work or company Adobe profile if you see more than one sign-in option.",
-      "Confirm the product you need is Acrobat Pro or another named Adobe app, not just Reader.",
-      "Take a screenshot if the app opens but still says trial, sign in, or subscription required."
+    summary: "Adobe access usually depends on the correct work Adobe account and, for many organizations, the correct company or enterprise profile selected after sign-in.",
+    howItWorks: [
+      "Adobe products such as Acrobat Pro and Creative Cloud often depend on the Adobe account your company assigned to you.",
+      "Some users see more than one Adobe profile and need to choose the work or company profile instead of a personal one.",
+      "The product itself matters too. Acrobat Reader and Acrobat Pro are not the same license or feature level."
+    ],
+    whatYouNeed: [
+      "The Adobe account email your company assigned",
+      "Whether you should use a work or company Adobe profile",
+      "The exact Adobe product you need, such as Acrobat Pro or Creative Cloud"
     ]
   },
   bluebeam: {
-    summary: "Bluebeam access is tied to the Bluebeam ID used for sign-in and the subscription level assigned to that account.",
-    checks: [
-      "Confirm you are signing in with the Bluebeam ID that should have the subscription.",
-      "Check whether the issue is with Revu itself, Studio access, or shared profiles and tool sets.",
-      "Note the exact message shown if activation or sign-in fails."
+    summary: "Bluebeam access is usually tied to the Bluebeam ID used for sign-in and the subscription level assigned to that account.",
+    howItWorks: [
+      "Bluebeam Revu access usually depends on the Bluebeam ID your company expects you to use.",
+      "The subscription or plan assigned to that Bluebeam ID determines what the app can do.",
+      "If your team uses Studio, that same identity often matters there too."
+    ],
+    whatYouNeed: [
+      "The Bluebeam ID email you should use",
+      "The Bluebeam product name, usually Revu",
+      "If relevant, whether you also need Studio Sessions or Projects access"
     ]
   },
   foxit: {
-    summary: "Foxit access varies by product edition and activation method, so it helps to know whether you are using Reader, Editor, or another licensed edition.",
-    checks: [
-      "Confirm the exact Foxit product you are supposed to use.",
-      "Check whether the issue is activation, editing features missing, or the wrong default PDF app opening files.",
-      "Capture the edition and activation message if the product appears locked."
+    summary: "Foxit access depends on the exact Foxit product edition and the activation or sign-in method your company uses for that edition.",
+    howItWorks: [
+      "Foxit Reader and Foxit PDF Editor are different products with different feature levels.",
+      "Some environments use sign-in-based activation while others use a product-specific activation path managed by the company.",
+      "The product edition and version matter when comparing access or expected features."
+    ],
+    whatYouNeed: [
+      "The exact Foxit product name and edition",
+      "The work account or activation method your company expects",
+      "The version or build if your team standardizes on one"
     ]
   },
   quickbooks: {
-    summary: "QuickBooks access often depends on the exact product year, the company file or company membership, and whether you use Desktop or Online.",
-    checks: [
-      "Confirm whether you use QuickBooks Desktop or QuickBooks Online.",
-      "If you use Desktop, note the product year and where the company file is hosted.",
-      "If you use Online, confirm which company you are trying to open and what role you should have."
+    summary: "QuickBooks access depends on whether you use Desktop or Online, the exact product year or company file for Desktop, and the company membership or role for Online.",
+    howItWorks: [
+      "QuickBooks Desktop access often depends on the correct year, edition, and company file path.",
+      "QuickBooks Online access depends on the Intuit account and company or role assigned to it.",
+      "If your team uses a hosted or shared company-file setup, that hosting model matters."
+    ],
+    whatYouNeed: [
+      "Whether you use QuickBooks Desktop or QuickBooks Online",
+      "If Desktop, the exact year and edition plus the company file location",
+      "If Online, the company name and the role you should have"
     ]
   },
   egnyte: {
-    summary: "Egnyte access usually depends on your user type, sign-in method, and the folders your account is allowed to open in the web or desktop app.",
-    checks: [
-      "Confirm whether the problem happens in the Egnyte web app, the desktop app, or both.",
-      "Check that you are signing in to the correct company domain.",
-      "Note whether the issue is missing folders, sign-in trouble, or drive-mapping behavior."
+    summary: "Egnyte access usually depends on the correct company domain, the work account assigned to you, and the folders or user type your organization expects you to use.",
+    howItWorks: [
+      "Egnyte access is usually tied to the company domain and the work account assigned to you.",
+      "Desktop and web access may both depend on the same account, but the folder permissions and user type still matter.",
+      "If your company uses a mapped-drive or desktop-app workflow, that specific setup may matter too."
+    ],
+    whatYouNeed: [
+      "The Egnyte company domain",
+      "The work account you should use",
+      "If relevant, the folder path or shared area you are expected to access"
     ]
   }
 };
@@ -102,7 +170,7 @@ if (matrixCard) {
   matrix.append(
     Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "Microsoft 365 Plans" }),
     Object.assign(document.createElement("h3"), { textContent: matrixResource.title }),
-    Object.assign(document.createElement("p"), { textContent: "Use this live comparison when you need to check whether a Microsoft 365 plan includes desktop apps, mailbox access, identity features, or other Microsoft services." }),
+    Object.assign(document.createElement("p"), { textContent: "Use this comparison when you need to confirm whether a Microsoft 365 plan includes desktop apps, mailbox access, identity features, or other Microsoft services." }),
     createLinks([{ label: "Open M365 Maps Matrix", url: matrixResource.url, external: true }])
   );
   matrixCard.appendChild(matrix);
@@ -112,7 +180,7 @@ if (licensingGrid) {
   vendorOrder.forEach(key => {
     const guide = vendorGuides[key];
     const apps = getVendorApplications(key);
-    const help = customerLicensingHelp[key];
+    const reference = customerLicensingReference[key];
     const card = createPageCard("vendor-card");
     card.id = `${key}-licensing`;
 
@@ -120,25 +188,27 @@ if (licensingGrid) {
     title.textContent = guide.title;
 
     const summary = document.createElement("p");
-    summary.textContent = help?.summary ?? guide.summary;
+    summary.textContent = reference?.summary ?? guide.summary;
 
     const stack = document.createElement("div");
     stack.className = "card-stack";
-    appendBlock(stack, "Common Products", apps.slice(0, 6).map(item => item.name));
-    appendBlock(stack, "Check This First", help?.checks ?? [
-      "Confirm the exact account you are signing in with.",
-      "Check the product name and version or year if the app shows one.",
-      "Capture the exact message before contacting support."
+    appendBlock(stack, "How Access Usually Works", reference?.howItWorks ?? [
+      "Access usually depends on the account, product, and company setup your organization assigned to you."
     ]);
+    appendBlock(stack, "What You May Need", reference?.whatYouNeed ?? [
+      "The exact work account",
+      "The product name",
+      "The version, plan, or edition if your team uses a specific one"
+    ]);
+    appendBlock(stack, "Common Products", apps.slice(0, 6).map(item => item.name));
 
     const links = createLinks([
       { label: "Open vendor guide", url: `guides/${key}.html` },
-      { label: "Browse help by app or topic", url: "vendor-guides.html" },
       ...apps.slice(0, 3).map(app => ({ label: app.name, url: `guides/${key}/${app.slug}.html` })),
       ...(guide.supportLinks?.[0]
         ? [{ label: guide.supportLinks[0].label, url: guide.supportLinks[0].url, external: true }]
         : []),
-      { label: "Still need help?", url: "contact.html" }
+      { label: "Open contact page", url: "contact.html" }
     ]);
 
     card.append(title, summary, stack, links);

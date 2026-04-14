@@ -164,6 +164,168 @@ export const publicGuideContent = {
         "The account shown in OneDrive settings and the name of the affected folder or library.",
         "Your available disk space if the sync app is stuck or very slow."
       ]
+    },
+    "outlook-mobile": {
+      summary: "Use this guide when you need help setting up Outlook on your phone or when work email, calendar, and notifications are not appearing correctly in Outlook Mobile.",
+      overview: [
+        "Outlook Mobile gives you work email and calendar access on an iPhone or Android phone.",
+        "Most setup problems happen when the wrong account is added, the phone blocks notifications or background refresh, or company sign-in steps were not completed during setup."
+      ],
+      askFirst: [
+        "Are you setting up Outlook Mobile for the first time, or did it stop working after a phone change, password change, or app update?",
+        "Is the problem mail setup, calendar access, notifications, or shared mailbox visibility?",
+        "Can you sign in to the same mailbox in Outlook on the web or on your computer?"
+      ],
+      licensing: [
+        "Make sure you are adding the work email account your company expects you to use.",
+        "If your company uses mobile app protection or device approval, finish those prompts before assuming setup failed.",
+        "If the mailbox works in Outlook on the web but not on your phone, include that when you contact support."
+      ],
+      install: [
+        "Install Outlook from the App Store or Google Play, then open it and choose Add Account.",
+        "Use your work email address and complete any Microsoft sign-in, approval, or device-registration prompts that appear.",
+        "Allow notifications, calendar access, and contacts only if your company expects you to use those features on your phone."
+      ],
+      supportCheckpoints: [
+        "Confirm the phone has a working internet connection before you retry setup.",
+        "Check that Outlook Mobile is signed in with the same work account you use on your computer.",
+        "If notifications are missing, check both the phone notification settings and the Outlook in-app notification settings.",
+        "If only one shared mailbox is missing, compare that mailbox to Outlook on the web before removing the mobile app."
+      ],
+      commonIssues: [
+        {
+          title: "The work account will not finish signing in",
+          symptom: "Outlook Mobile keeps looping on sign-in, returns to the account picker, or never reaches the inbox.",
+          likelyFix: "Restart the app, confirm the same account works in the browser, and retry setup with the exact work account email.",
+          collect: "Send a screenshot of the last sign-in screen, the work email account used, and whether browser access works."
+        },
+        {
+          title: "Mail or calendar is missing on the phone",
+          symptom: "The app opens, but mail folders, calendar items, or a shared mailbox do not match what you see elsewhere.",
+          likelyFix: "Check whether the same content appears in Outlook on the web and let the phone stay open for a few minutes to finish syncing.",
+          collect: "Send the mailbox or calendar name, what should be visible, and a screenshot of the missing content."
+        },
+        {
+          title: "Notifications are not showing",
+          symptom: "Outlook Mobile receives mail, but you do not see new-message or calendar alerts on the phone.",
+          likelyFix: "Check phone notification settings, Outlook Mobile notification settings, and whether battery saver or focus modes are blocking alerts.",
+          collect: "Send the phone type, Outlook app version, and a screenshot of the phone notification settings if possible."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Outlook Mobile setup or sign-in screen.",
+        "The work email account you are trying to add.",
+        "The phone type and whether it is iPhone or Android.",
+        "A note about whether the same mailbox works in Outlook on the web or on your computer."
+      ]
+    },
+    "teams-mobile": {
+      summary: "Use this guide when you need help setting up Teams on your phone or when meetings, chat, notifications, or file access are not behaving correctly in Teams Mobile.",
+      overview: [
+        "Teams Mobile gives you work chat, meetings, calls, files, and notifications on an iPhone or Android phone.",
+        "Most mobile Teams problems come from the wrong work account being active, notifications being blocked, or the phone camera and microphone not being allowed during setup."
+      ],
+      askFirst: [
+        "Are you setting up Teams Mobile for the first time, or did it stop working after a phone change, password change, or app update?",
+        "Is the issue sign-in, meetings, chat, calls, notifications, or files?",
+        "Can you sign in to Teams on the web or on your computer with the same work account?"
+      ],
+      licensing: [
+        "Use the same work account you use for desktop Teams and other Microsoft 365 apps.",
+        "If your company uses mobile app protection or approval prompts, complete those during setup.",
+        "If meetings work on your computer but not your phone, include that when you contact support."
+      ],
+      install: [
+        "Install Teams from the App Store or Google Play and sign in with your work email account.",
+        "Allow camera, microphone, notifications, and file access only if you plan to use those features on your phone.",
+        "Open one chat, one team or channel, and one meeting invite after setup so you can confirm the app is ready."
+      ],
+      supportCheckpoints: [
+        "Check whether the phone is connected to Wi-Fi or mobile data before retrying sign-in or a meeting.",
+        "If notifications are missing, compare phone notification settings with the Teams in-app settings.",
+        "If meeting audio or video fails, confirm the phone camera and microphone permissions are allowed.",
+        "If a team or channel is missing, compare Teams Mobile with Teams on the web before removing the app."
+      ],
+      commonIssues: [
+        {
+          title: "Teams Mobile will not sign in",
+          symptom: "The app opens, but sign-in loops, shows the wrong organization, or never reaches your chats.",
+          likelyFix: "Confirm the same work account works in Teams on the web, then sign in again with that exact account on the phone.",
+          collect: "Send the organization shown, the work account used, and a screenshot of the sign-in screen or message."
+        },
+        {
+          title: "Meetings have no microphone, speaker, or camera access",
+          symptom: "Teams Mobile joins the meeting, but audio or video does not work as expected.",
+          likelyFix: "Check the phone permissions for microphone and camera, then rejoin the meeting after confirming those permissions are enabled.",
+          collect: "Send the phone type, the meeting symptom, and a screenshot of the app permissions if possible."
+        },
+        {
+          title: "Chats, channels, or notifications are missing",
+          symptom: "The app signs in, but expected chats, teams, notifications, or files do not appear.",
+          likelyFix: "Compare the phone app to Teams on the web and make sure the correct work account and organization are selected.",
+          collect: "Send the missing chat, team, or channel name, and whether it appears correctly in the web or desktop app."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Teams Mobile message or missing screen.",
+        "The work account you used to sign in.",
+        "The phone type and whether it is iPhone or Android.",
+        "A note about whether the same Teams account works on the web or on your computer."
+      ]
+    },
+    "microsoft-authenticator": {
+      summary: "Use this guide when you need help setting up Microsoft Authenticator on a phone for work sign-in approvals, number matching, and multi-factor prompts.",
+      overview: [
+        "Microsoft Authenticator is the mobile app many organizations use for multi-factor sign-in approvals and number matching.",
+        "Most setup problems come from setting up the wrong account, not finishing the QR-code or code-based enrollment, or moving to a new phone without adding the work account again."
+      ],
+      askFirst: [
+        "Are you setting up Authenticator for the first time, replacing an old phone, or trying to approve a sign-in that is not reaching the app?",
+        "Is the issue adding the account, getting approval prompts, or approving the correct sign-in request?",
+        "Do you still have the old phone, or is the new phone the only device you can use?"
+      ],
+      licensing: [
+        "Use the exact work account your company expects for Microsoft 365 or company sign-in.",
+        "Authenticator itself is a sign-in method, so the key detail is which work account is being added and whether your organization already expects that account to use Authenticator.",
+        "If you use more than one Microsoft account, confirm you are adding the work account and not a personal account."
+      ],
+      install: [
+        "Install Microsoft Authenticator from the App Store or Google Play.",
+        "Choose Add account, then follow the company or Microsoft setup steps to scan a QR code or enter a setup code.",
+        "Allow notifications so approval prompts can appear on the phone during sign-in."
+      ],
+      supportCheckpoints: [
+        "If you are replacing a phone, do not remove the old Authenticator setup until the new phone is working if the old phone is still available.",
+        "Check that the phone has notifications enabled for Microsoft Authenticator.",
+        "If no approval prompt arrives, confirm you are signing into the correct work account and that the phone has internet access.",
+        "If a number-matching screen appears, compare the number on the phone to the one shown on the sign-in page."
+      ],
+      commonIssues: [
+        {
+          title: "The work account will not add to Authenticator",
+          symptom: "Authenticator opens, but the setup code or QR code does not finish adding the account.",
+          likelyFix: "Start the setup again from the company or Microsoft prompt and confirm you are adding the correct work account.",
+          collect: "Send a screenshot of the setup step that fails and the work account you are trying to add."
+        },
+        {
+          title: "Approval prompts are not arriving on the phone",
+          symptom: "You try to sign in, but the phone never shows the approval request.",
+          likelyFix: "Check Authenticator notifications, make sure the phone is online, and open the app to see whether the request is waiting inside the app.",
+          collect: "Send the phone type, whether notifications are enabled, and a screenshot of the Authenticator account screen."
+        },
+        {
+          title: "You changed phones and sign-in no longer works",
+          symptom: "The old phone had Authenticator working, but the new phone does not approve sign-ins yet.",
+          likelyFix: "Add the work account to the new phone and confirm it can receive prompts before removing the old phone from your normal sign-in process.",
+          collect: "Send the phone type, whether you still have the old phone, and a screenshot of the account list in Authenticator."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Authenticator setup or approval screen.",
+        "The work account you are adding or approving.",
+        "The phone type and whether it is iPhone or Android.",
+        "A note about whether you are setting up a first phone or replacing an old phone."
+      ]
     }
   },
   adobe: {
@@ -558,6 +720,224 @@ export const publicGuideContent = {
         "The datasource and project name you expected to see.",
         "The Bentley account email you used to sign in.",
         "A note about whether you currently have files checked out or local work you still need."
+      ]
+    }
+  },
+  browsers: {
+    "google-chrome": {
+      summary: "Use this guide when a work site, download, sign-in page, or file-opening action is not behaving correctly in Google Chrome.",
+      overview: [
+        "Chrome is a common browser for work websites, downloads, cloud apps, and single sign-on pages.",
+        "Most Chrome problems come from saved site data, blocked pop-ups, extensions, download settings, or the site behaving differently in one browser than another."
+      ],
+      askFirst: [
+        "Is the problem with one work website, all sites, downloads, sign-ins, or opening files from the browser?",
+        "Does the same site work in another browser on the same computer?",
+        "Did the issue begin after a Chrome update, a browser extension change, or a password or account change?"
+      ],
+      licensing: [
+        "Chrome itself does not normally use a paid product license for work browsing.",
+        "Access still depends on the work account you sign in with on the site and any company-required browser profile or sync settings.",
+        "If a website works in Edge or another browser but not Chrome, note that before contacting support."
+      ],
+      install: [
+        "Update Chrome to the latest supported version, then close and reopen the browser.",
+        "Test the affected work site in a new tab after the restart.",
+        "If downloads or file opening are involved, test one simple file after confirming Chrome is updated."
+      ],
+      supportCheckpoints: [
+        "Check whether the same site works in another browser before clearing anything in Chrome.",
+        "If pop-ups or sign-in pages are blocked, look for blocked pop-up or site-permission notices near the address bar.",
+        "If downloads fail, check Chrome's download prompt and file location settings.",
+        "If only one site is failing, note the exact URL before removing extensions or clearing site data."
+      ],
+      commonIssues: [
+        {
+          title: "A work site will not sign in correctly",
+          symptom: "The site opens, but sign-in loops, closes, or never finishes loading your work session.",
+          likelyFix: "Try the same site in another browser and, if Chrome is the only one affected, close and reopen Chrome before retrying.",
+          collect: "Send the site URL, the exact sign-in behavior, and whether another browser works."
+        },
+        {
+          title: "Downloads or file-opening actions fail",
+          symptom: "The site opens, but downloads do not start or files do not hand off to the expected desktop app.",
+          likelyFix: "Check Chrome's download prompt and save-location behavior, then test one simple file again.",
+          collect: "Send the file type, the site URL, and a screenshot of the browser message if one appears."
+        },
+        {
+          title: "One site works in another browser but not Chrome",
+          symptom: "The same work site behaves normally in another browser, but not in Chrome.",
+          likelyFix: "Restart Chrome and note whether the problem is tied to one site only before changing extensions or browser settings.",
+          collect: "Send the site URL, the Chrome version, and the name of the other browser that works."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the browser message or the failing page.",
+        "The exact site URL involved.",
+        "The Chrome version from the browser settings.",
+        "A note about whether the same site works in another browser."
+      ]
+    },
+    "microsoft-edge": {
+      summary: "Use this guide when a work site, download, Microsoft 365 page, or file-opening action is not behaving correctly in Microsoft Edge.",
+      overview: [
+        "Microsoft Edge is a common browser for Microsoft 365, company web apps, downloads, and file handoffs.",
+        "Most Edge problems come from saved site data, blocked pop-ups, wrong browser profiles, download settings, or browser updates that need a restart."
+      ],
+      askFirst: [
+        "Is the issue with sign-in, downloads, opening files, or one specific work site?",
+        "Are you using the correct Edge browser profile for work browsing?",
+        "Does the same site work in another browser on the same computer?"
+      ],
+      licensing: [
+        "Edge itself does not normally use a paid product license for browsing.",
+        "Access to Microsoft 365 and other work sites still depends on the work account or browser profile being used.",
+        "If only one Edge profile has the problem, include that when you contact support."
+      ],
+      install: [
+        "Update Edge to the latest supported version and restart the browser fully.",
+        "Make sure the correct work browser profile is open before retrying the site.",
+        "If downloads or file opening are involved, test one simple file after the browser restart."
+      ],
+      supportCheckpoints: [
+        "Confirm you are using the correct Edge profile before changing settings.",
+        "If a work site behaves differently in Chrome or another browser, note that comparison first.",
+        "If file handoff is the issue, test whether the file downloads normally before opening it.",
+        "If the issue is limited to one site, keep the exact URL handy before contacting support."
+      ],
+      commonIssues: [
+        {
+          title: "Edge opens the wrong profile or account",
+          symptom: "The site opens, but the wrong work or personal account appears.",
+          likelyFix: "Switch to the correct Edge profile and reopen the site before signing in again.",
+          collect: "Send the profile name shown, the account you expected to use, and the site URL."
+        },
+        {
+          title: "Microsoft 365 or another work site will not finish loading",
+          symptom: "The site partially loads, refreshes repeatedly, or never reaches the expected page.",
+          likelyFix: "Restart Edge and compare the same site in another browser before changing anything else.",
+          collect: "Send the exact site URL, a screenshot of the page, and whether another browser works."
+        },
+        {
+          title: "Downloads or open-in-app actions fail",
+          symptom: "The site opens, but the download or file-open step does not complete the way it should.",
+          likelyFix: "Test whether the file downloads normally first, then compare that behavior with another browser if needed.",
+          collect: "Send the file type, the site URL, and a screenshot of the browser message if one appears."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Edge message or failing page.",
+        "The site URL and the browser profile you are using.",
+        "The Edge version from the browser settings.",
+        "A note about whether the same site works in another browser."
+      ]
+    },
+    "mozilla-firefox": {
+      summary: "Use this guide when a work site, download, sign-in page, or extension-dependent workflow is not behaving correctly in Firefox.",
+      overview: [
+        "Firefox is a browser some teams use for work sites, downloads, and extension-based workflows.",
+        "Most Firefox problems come from saved site data, add-ons, sign-in sessions, downloads, or a site simply behaving differently in Firefox than it does in another browser."
+      ],
+      askFirst: [
+        "Is the issue tied to one work site, downloads, sign-in, or an add-on you rely on?",
+        "Does the same site work in another browser on the same computer?",
+        "Did the issue begin after a Firefox update or an add-on change?"
+      ],
+      licensing: [
+        "Firefox itself does not normally use a paid product license for browsing.",
+        "Access still depends on the work accounts and websites you use in the browser.",
+        "If a site works in another browser but not Firefox, include that comparison when you contact support."
+      ],
+      install: [
+        "Update Firefox to the latest supported version, then close and reopen the browser.",
+        "Retry the same site or download after the restart.",
+        "If an add-on is involved, note the add-on name before contacting support."
+      ],
+      supportCheckpoints: [
+        "Compare the same site in another browser before you assume the site itself is down.",
+        "If downloads fail, test one simple file and note where Firefox is trying to save it.",
+        "If an add-on is part of the workflow, capture its name and whether the issue began right after it changed.",
+        "Keep the exact site URL before clearing settings or contacting support."
+      ],
+      commonIssues: [
+        {
+          title: "A work site behaves differently only in Firefox",
+          symptom: "The same site works elsewhere, but Firefox shows sign-in loops, display problems, or missing actions.",
+          likelyFix: "Restart Firefox and compare the site with another browser before changing add-ons or browser settings.",
+          collect: "Send the site URL, the Firefox version, and whether another browser works."
+        },
+        {
+          title: "Downloads do not start or finish normally",
+          symptom: "Firefox opens the site, but downloads fail or do not go to the expected location.",
+          likelyFix: "Check where Firefox is set to save downloads and retry one simple file.",
+          collect: "Send the file type, the download behavior, and the site URL."
+        },
+        {
+          title: "An add-on workflow stopped working",
+          symptom: "A work site or process depends on an add-on, but it no longer behaves normally in Firefox.",
+          likelyFix: "Capture the add-on name and compare whether the site itself still works without assuming the entire browser is broken.",
+          collect: "Send the add-on name, the site URL, and when the issue began."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Firefox message or failing page.",
+        "The site URL and the Firefox version.",
+        "The add-on name if one is involved.",
+        "A note about whether the same site works in another browser."
+      ]
+    },
+    "apple-safari": {
+      summary: "Use this guide when a work site, sign-in page, download, or file-opening action is not behaving correctly in Safari on a Mac, iPhone, or iPad.",
+      overview: [
+        "Safari is Apple's built-in browser for Macs, iPhones, and iPads.",
+        "Most Safari problems come from site permissions, pop-up blocking, saved site data, download behavior, or a work site behaving differently in Safari than in another browser."
+      ],
+      askFirst: [
+        "Are you using Safari on a Mac, iPhone, or iPad?",
+        "Is the issue tied to sign-in, downloads, file opening, or one specific work site?",
+        "Does the same site work in another browser or on another device?"
+      ],
+      licensing: [
+        "Safari itself does not normally use a paid product license for browsing.",
+        "Access to work sites still depends on the company account you use on the site and the Apple device you are using.",
+        "If the same site works in Chrome or Edge but not Safari, include that comparison when you contact support."
+      ],
+      install: [
+        "Use the latest supported Safari version through normal Apple updates, then restart Safari.",
+        "Retry the same sign-in, site, or download after the restart.",
+        "If the issue involves file opening, test one simple file after confirming Safari is updated."
+      ],
+      supportCheckpoints: [
+        "If the issue affects one site only, keep the exact site URL handy.",
+        "If pop-ups are blocked, note whether Safari shows a pop-up warning for the site.",
+        "If downloads fail, test one simple file and note whether the file saves locally or not at all.",
+        "If the site works in another browser or on another device, note that before contacting support."
+      ],
+      commonIssues: [
+        {
+          title: "A work sign-in page or site does not finish loading in Safari",
+          symptom: "The site opens, but sign-in loops, buttons do nothing, or the page does not finish loading correctly.",
+          likelyFix: "Restart Safari and compare the same site with another browser or device before changing anything else.",
+          collect: "Send the site URL, the Apple device type, and a screenshot of the page or message."
+        },
+        {
+          title: "Downloads or file opening do not behave correctly",
+          symptom: "Safari opens the site, but downloads fail or files do not open the way you expect.",
+          likelyFix: "Test one simple file and note whether Safari saves it locally before you try to open it.",
+          collect: "Send the file type, the site URL, and the exact browser behavior you see."
+        },
+        {
+          title: "The site works in another browser but not Safari",
+          symptom: "The same work site works in Chrome, Edge, or Firefox but not in Safari.",
+          likelyFix: "Keep that comparison and the exact site URL ready, because that helps support narrow the issue quickly.",
+          collect: "Send the site URL, the Safari version, and the other browser that works."
+        }
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Safari message or failing page.",
+        "The site URL involved.",
+        "Whether you are using Safari on a Mac, iPhone, or iPad.",
+        "A note about whether the same site works in another browser or on another device."
       ]
     }
   }

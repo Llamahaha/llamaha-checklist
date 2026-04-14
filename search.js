@@ -31,7 +31,7 @@ function renderResults(query = "", category = "all") {
 
   if (!normalizedQuery) {
     resultsLabel.textContent = "Start with a search";
-    resultCount.textContent = "Try a product name, vendor, or common help topic.";
+    resultCount.textContent = "Try a product name, mobile app, browser, vendor, or help page.";
     return;
   }
 
@@ -47,7 +47,7 @@ function renderResults(query = "", category = "all") {
   if (!matches.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "No matching help page was found. Try a broader app name, vendor, or help topic.";
+    empty.textContent = "No matching help page was found. Try a broader product name, vendor, mobile app, browser, or help page.";
     searchResults.appendChild(empty);
     return;
   }

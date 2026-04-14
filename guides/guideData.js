@@ -1,5 +1,6 @@
 export const vendorOrder = [
   "microsoft",
+  "browsers",
   "autodesk",
   "bentley",
   "esri",
@@ -18,7 +19,7 @@ export const vendorGuides = {
     summary: "Use this for tenant-backed desktop app support, licensing, sign-in, sync, Teams collaboration, and SharePoint or OneDrive workflow issues.",
     overview:
       "Microsoft tickets are often identity, licensing, tenant, or local profile problems wearing an application mask. Validate the account, license scope, and service health before rebuilding apps.",
-    products: ["Outlook", "Teams", "OneDrive", "SharePoint"],
+    products: ["Outlook", "Teams", "OneDrive", "SharePoint", "Outlook Mobile", "Teams Mobile", "Microsoft Authenticator"],
     sharedNotes: [
       "Confirm the exact tenant, UPN, and Microsoft 365 license bundle before changing local apps.",
       "Separate browser-good versus desktop-bad behavior early. That usually tells you whether you are in tenant access, profile, or app-state territory.",
@@ -39,6 +40,33 @@ export const vendorGuides = {
       { label: "Microsoft 365 Admin Center", url: "https://admin.microsoft.com/" },
       { label: "Microsoft 365 Service Health", url: "https://status.office365.com/" },
       { label: "Microsoft Support", url: "https://support.microsoft.com/" }
+    ]
+  },
+  browsers: {
+    title: "Browsers",
+    summary: "Use this for everyday browser support across Chrome, Edge, Firefox, and Safari when work sites, downloads, sign-in pages, or default-app handoffs are not behaving normally.",
+    overview:
+      "Browser issues usually show up as sign-in loops, blocked pop-ups, failed downloads, wrong file-open behavior, or one site working in one browser but not another. Start by confirming the browser version, whether the same site works elsewhere, and whether extensions or saved site data are involved.",
+    products: ["Google Chrome", "Microsoft Edge", "Mozilla Firefox", "Safari"],
+    sharedNotes: [
+      "Check whether the same website works in another supported browser before clearing settings.",
+      "Saved passwords, pop-up settings, cached site data, and download or default-app settings are common causes of browser problems.",
+      "If the issue only affects one site, capture the site URL and the exact browser version before contacting support."
+    ],
+    adminSurfaces: [
+      "Browser settings for passwords, downloads, pop-ups, site permissions, and default browser behavior",
+      "Extension or add-on management for work-required browser helpers",
+      "Vendor help pages for Chrome, Edge, Firefox, and Safari"
+    ],
+    escalationNotes: [
+      "Escalate after confirming the affected browser version, extension list, and whether the same site works in another browser.",
+      "Collect the exact site URL, the browser version, screenshots of the error, and whether the issue affects one user or multiple people."
+    ],
+    supportLinks: [
+      { label: "Chrome Help", url: "https://support.google.com/chrome/" },
+      { label: "Microsoft Edge Help", url: "https://support.microsoft.com/microsoft-edge" },
+      { label: "Firefox Help", url: "https://support.mozilla.org/products/firefox" },
+      { label: "Safari User Guide", url: "https://support.apple.com/guide/safari/welcome/mac" }
     ]
   },
   autodesk: {
