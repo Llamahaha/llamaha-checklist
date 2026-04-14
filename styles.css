@@ -1018,6 +1018,48 @@ input[type="checkbox"] {
   gap: 18px;
 }
 
+.help-topic-directory,
+.help-app-directory {
+  display: grid;
+  gap: 14px;
+}
+
+.help-topic-directory {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.help-app-directory {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.help-topic-group,
+.help-app-group {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--panel-start), var(--panel-end));
+  box-shadow: var(--shadow-sm);
+}
+
+.help-topic-group h3,
+.help-app-group h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.help-topic-group p:not(.section-kicker),
+.help-app-group p:not(.section-kicker) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.help-app-group .vendor-links {
+  margin-top: 2px;
+}
+
 .hub-section-copy,
 .hub-card p:not(.section-kicker),
 .vendor-card p,

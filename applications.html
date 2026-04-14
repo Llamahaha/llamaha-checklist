@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Applications</title>
+  <meta http-equiv="refresh" content="0; url=vendor-guides.html#browse-by-app">
+  <title>Redirecting</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,62 +16,27 @@
     <nav class="page-nav" aria-label="Page">
       <a href="index.html">Home</a>
       <span>/</span>
-      <strong>Applications</strong>
+      <strong>Redirecting</strong>
     </nav>
 
     <main class="hub-shell resource-page">
-      <section class="hero-card">
-        <div class="builder-header">
-          <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
-          <div class="section-heading">
-            <p class="section-kicker">Application Help</p>
-            <h1>Open the product guide you need</h1>
-            <p class="builder-copy">Use this page when you already know the application name and want the fastest route to the right guide. If you know the kind of problem but not the product yet, start with Guides instead.</p>
-          </div>
-        </div>
-      </section>
-
       <section class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Quick Paths</p>
-            <h2>This is the fastest route when you already know the product name</h2>
+            <p class="section-kicker">Redirect</p>
+            <h1>Application browsing moved into the main Help page</h1>
           </div>
         </div>
+        <p class="hub-section-copy">Use the main Help page to browse by problem or jump straight to the application list in one place.</p>
         <div class="vendor-links">
-          <a href="search.html">Search guides</a>
-          <a href="vendor-guides.html">Browse help topics</a>
-          <a href="app-licensing.html">Licensing help</a>
-          <a href="contact.html">Need help?</a>
+          <a href="vendor-guides.html#browse-by-app">Open application list</a>
+          <a href="vendor-guides.html">Open Help by app or topic</a>
+          <a href="search.html">Search the help center</a>
         </div>
-      </section>
-
-      <section class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Popular Guides</p>
-            <h2>Start with the applications customers ask about most</h2>
-          </div>
-        </div>
-        <p class="hub-section-copy">If you already know the product name, these are usually the fastest guides to open first.</p>
-        <nav id="applicationJumpLinks" class="toc-links" aria-label="Popular applications"></nav>
-        <div id="featuredApplications" class="hub-quick-grid"></div>
-      </section>
-
-      <section class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Application Directory</p>
-            <h2>Browse every application guide</h2>
-          </div>
-        </div>
-        <p class="hub-section-copy">This directory is organized by product name so you can jump straight into the application guide you need.</p>
-        <div id="applicationDirectory" class="vendor-directory"></div>
       </section>
     </main>
   </div>
 
   <script type="module" src="siteChrome.js"></script>
-  <script type="module" src="applications.js"></script>
 </body>
 </html>

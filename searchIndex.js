@@ -8,11 +8,11 @@ function entry(title, text, url, category, typeLabel, keywords = "") {
 
 export function buildSearchIndex() {
   const entries = [
-    entry("Home", "Help center landing page with search, guides, applications, and contact options.", "index.html", "helpPage", "Help Center", "home help center"),
-    entry("Applications", "Browse popular application guides and the full application directory.", "applications.html", "helpPage", "Help Page", "applications app directory"),
+    entry("Home", "Help center landing page with search, help by app or topic, licensing help, and contact options.", "index.html", "helpPage", "Help Center", "home help center"),
+    entry("Help by App or Topic", "Browse help by common problems first or jump straight to the application list in one combined page.", "vendor-guides.html", "helpPage", "Help Page", "help topics sign-in access install update licensing activation printing pdf sync shared files performance email collaboration getting started app list"),
+    entry("Application Directory", "Jump straight to the application list on the Help page when you already know the product name.", "vendor-guides.html#browse-by-app", "helpPage", "Help Page", "applications products app directory outlook teams onedrive autocad revit arcgis projectwise"),
     entry("Licensing Help", "Customer-facing help page for licensing, activation, subscriptions, and access questions by vendor.", "app-licensing.html", "helpPage", "Help Page", "licensing activation subscription access entitlement"),
     entry("Contact", "Contact options for help-center questions, missing content, and guide updates.", "contact.html", "helpPage", "Contact Page", "contact help support email"),
-    entry("Guides", "Browse help by common problems and tasks such as sign-in, updates, licensing, printing, sync, and getting started.", "vendor-guides.html", "helpPage", "Help Page", "guides sign-in access install update printing pdf licensing sync performance getting started"),
     entry("Application Issues and Fixes", "Public help page covering common application problems and general fixes.", "application-issues.html", "helpPage", "Help Page", "troubleshooting faq errors"),
     entry("Microsoft App Issues", "Public help page for common Microsoft 365 app problems.", "microsoft-issues.html", "helpPage", "Help Page", "outlook teams onedrive sharepoint mfa"),
     entry("Computer Issues", "Public help page for common workstation, printer, and network problems.", "computer-issues.html", "helpPage", "Help Page", "computer windows printer vpn network")

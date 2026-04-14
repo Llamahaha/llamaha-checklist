@@ -3,20 +3,35 @@ import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { appendBlock, createLinks, createPageCard } from "./resourceCommon.js";
 
 const topicGrid = document.getElementById("guideTopicGrid");
-const grid = document.getElementById("vendorGuideGrid");
+const popularAppLinks = document.getElementById("popularAppLinks");
+const appBrowseGrid = document.getElementById("appBrowseGrid");
 
 function appGuide(vendorSlug, appSlug) {
   return buildAppGuideUrl(vendorSlug, appSlug);
 }
 
+const featuredApps = [
+  ["microsoft", "outlook"],
+  ["microsoft", "teams"],
+  ["microsoft", "onedrive"],
+  ["adobe", "acrobat-pro"],
+  ["bluebeam", "revu-21"],
+  ["autodesk", "autocad"],
+  ["autodesk", "revit"],
+  ["autodesk", "civil-3d"],
+  ["esri", "arcgis-pro"],
+  ["bentley", "projectwise"]
+];
+
 const guideTopics = [
   {
+    id: "sign-in-access",
     title: "Sign-in and access",
-    description: "Start here when an app keeps asking you to sign in, opens the wrong account, or says you do not have access.",
+    description: "Use this when an app keeps asking you to sign in, opens the wrong account, or says you do not have access.",
     bestFor: [
-      "Wrong account or tenant showing up",
-      "Browser works but the desktop app does not",
-      "Sign-in loops or access denied messages"
+      "Wrong account or company profile showing up",
+      "Browser access works but the desktop app does not",
+      "Sign-in loops, account mismatch, or access denied messages"
     ],
     links: [
       { label: "Microsoft app help", url: "microsoft-issues.html" },
@@ -26,12 +41,13 @@ const guideTopics = [
     ]
   },
   {
+    id: "install-update",
     title: "Install and update",
-    description: "Use this when an app will not install, update, repair, or reopen correctly after an update.",
+    description: "Start here when an app will not install, update, repair, or reopen correctly after an update.",
     bestFor: [
       "Setup did not finish correctly",
-      "An update caused the app to stop working",
-      "You need the approved installer or updater path"
+      "An update caused the app to stop opening or changed the workflow",
+      "You need the right product page for reinstall or repair steps"
     ],
     links: [
       { label: "Application issues and fixes", url: "application-issues.html" },
@@ -41,42 +57,13 @@ const guideTopics = [
     ]
   },
   {
-    title: "Opening files and file associations",
-    description: "Best when files open in the wrong app, will not open at all, or lose the expected workflow after an install or update.",
-    bestFor: [
-      "PDFs or drawings open in the wrong app",
-      "Double-click no longer opens the file you expect",
-      "The app opens but the file workflow is broken"
-    ],
-    links: [
-      { label: "Application issues and fixes", url: "application-issues.html" },
-      { label: "Acrobat Pro", url: appGuide("adobe", "acrobat-pro") },
-      { label: "Revu 21", url: appGuide("bluebeam", "revu-21") },
-      { label: "AutoCAD", url: appGuide("autodesk", "autocad") }
-    ]
-  },
-  {
-    title: "Printing and PDF issues",
-    description: "Use this when printing fails, PDF tools are missing, or documents stop opening, editing, or signing the way you expect.",
-    bestFor: [
-      "Printer queues or drivers acting up",
-      "PDF editing or signing not available",
-      "Print to PDF or export workflows failing"
-    ],
-    links: [
-      { label: "Computer issues", url: "computer-issues.html" },
-      { label: "Acrobat Pro", url: appGuide("adobe", "acrobat-pro") },
-      { label: "Revu 21", url: appGuide("bluebeam", "revu-21") },
-      { label: "QuickBooks Desktop", url: appGuide("quickbooks", "quickbooks-enterprise-desktop") }
-    ]
-  },
-  {
+    id: "licensing-activation",
     title: "Licensing and activation",
-    description: "Start here when an app says trial, unlicensed, subscription required, or features are missing after sign-in.",
+    description: "Choose this when an app says trial, unlicensed, subscription required, or signed in but missing paid features.",
     bestFor: [
       "Activation or subscription warnings",
-      "Missing paid features after sign-in",
-      "Unsure which account should hold the license"
+      "Features missing after sign-in",
+      "Unclear which account should hold the license"
     ],
     links: [
       { label: "Licensing help", url: "app-licensing.html" },
@@ -86,12 +73,45 @@ const guideTopics = [
     ]
   },
   {
+    id: "file-opening",
+    title: "File opening and app defaults",
+    description: "Best when files open in the wrong app, will not open at all, or stop following the workflow you expect.",
+    bestFor: [
+      "PDFs or drawings open in the wrong application",
+      "Double-click no longer opens the right product",
+      "The app opens but the file workflow is still broken"
+    ],
+    links: [
+      { label: "Application issues and fixes", url: "application-issues.html" },
+      { label: "Acrobat Pro", url: appGuide("adobe", "acrobat-pro") },
+      { label: "Revu 21", url: appGuide("bluebeam", "revu-21") },
+      { label: "AutoCAD", url: appGuide("autodesk", "autocad") }
+    ]
+  },
+  {
+    id: "printing-pdf",
+    title: "Printing and PDF issues",
+    description: "Use this when printing fails, PDF tools are missing, or a document will not print, export, sign, or save the way it should.",
+    bestFor: [
+      "Printer queues or printer selection problems",
+      "PDF editing, signing, or print-to-PDF issues",
+      "QuickBooks, Acrobat, or Bluebeam print workflows failing"
+    ],
+    links: [
+      { label: "Computer issues", url: "computer-issues.html" },
+      { label: "Acrobat Pro", url: appGuide("adobe", "acrobat-pro") },
+      { label: "Revu 21", url: appGuide("bluebeam", "revu-21") },
+      { label: "QuickBooks Desktop", url: appGuide("quickbooks", "quickbooks-enterprise-desktop") }
+    ]
+  },
+  {
+    id: "sync-shared-files",
     title: "Sync, storage, and shared files",
-    description: "Use this when files stop syncing, shared folders disappear, or cloud and mapped-drive workflows stop matching what you expect.",
+    description: "Start here when synced folders disappear, shared files stop updating, or cloud and mapped-drive views do not match.",
     bestFor: [
       "OneDrive or SharePoint sync issues",
-      "Egnyte or ProjectWise file access problems",
-      "Shared files missing, stuck, or out of date"
+      "Egnyte or ProjectWise shared-file access problems",
+      "Missing, stuck, or out-of-date shared content"
     ],
     links: [
       { label: "OneDrive", url: appGuide("microsoft", "onedrive") },
@@ -101,27 +121,29 @@ const guideTopics = [
     ]
   },
   {
+    id: "performance-crashing",
     title: "Performance and crashing",
-    description: "Start here when the app is slow, freezes, crashes on launch, or stops responding during normal work.",
+    description: "Use this when an app is slow, freezes, crashes on launch, or stops responding during normal work.",
     bestFor: [
       "App opens slowly or keeps closing",
       "Large files or projects cause instability",
-      "You need the quickest first checks before contacting support"
+      "You want the safest first checks before contacting support"
     ],
     links: [
       { label: "Application issues and fixes", url: "application-issues.html" },
       { label: "ArcGIS Pro", url: appGuide("esri", "arcgis-pro") },
       { label: "AutoCAD", url: appGuide("autodesk", "autocad") },
-      { label: "QuickBooks Desktop", url: appGuide("quickbooks", "quickbooks-enterprise-desktop") }
+      { label: "Revit", url: appGuide("autodesk", "revit") }
     ]
   },
   {
+    id: "email-collaboration",
     title: "Email, calendar, and collaboration",
-    description: "Use this when mail, calendars, Teams, or shared collaboration tools are not syncing or opening the way they should.",
+    description: "Go here when Outlook, Teams, calendars, meetings, or shared collaboration pages are not syncing or opening correctly.",
     bestFor: [
       "Outlook mail or calendar problems",
-      "Teams meetings, chat, or devices not working",
-      "Shared collaboration pages or file links failing"
+      "Teams meetings, chat, or calling issues",
+      "Shared collaboration pages or file links not opening"
     ],
     links: [
       { label: "Microsoft app help", url: "microsoft-issues.html" },
@@ -131,15 +153,16 @@ const guideTopics = [
     ]
   },
   {
-    title: "Getting started and setup",
-    description: "Best when you are setting up a new app, learning where to begin, or trying to choose the right product page for the first time.",
+    id: "getting-started",
+    title: "Getting started and basics",
+    description: "Start here when you are setting up a new app, opening it for the first time, or trying to find the right guide quickly.",
     bestFor: [
       "First-time setup questions",
-      "Choosing the right app guide",
-      "Finding the right vendor page for your product"
+      "Choosing the right product guide",
+      "Finding the best next step if you are not sure where to begin"
     ],
     links: [
-      { label: "Applications", url: "applications.html" },
+      { label: "Search the help center", url: "search.html" },
       { label: "Microsoft 365", url: "guides/microsoft.html" },
       { label: "Autodesk", url: "guides/autodesk.html" },
       { label: "Contact", url: "contact.html" }
@@ -148,78 +171,35 @@ const guideTopics = [
 ];
 
 const vendorStartHere = {
-  microsoft: [
-    "Email, Teams, file-sync, or Microsoft account questions",
-    "Microsoft 365 setup or feature access",
-    "Choosing between Outlook, Teams, OneDrive, or SharePoint help"
-  ],
-  autodesk: [
-    "Autodesk sign-in, product access, or update questions",
-    "Version or release-year mismatches",
-    "Choosing the right CAD or BIM product guide"
-  ],
-  bentley: [
-    "ProjectWise or Bentley sign-in questions",
-    "Datasource, workspace, or project access",
-    "Choosing the right Bentley product guide"
-  ],
-  esri: [
-    "ArcGIS sign-in or portal questions",
-    "Missing extensions or maps",
-    "Choosing between ArcGIS Online and ArcGIS Pro"
-  ],
-  ptc: [
-    "Mathcad licensing or setup questions",
-    "Worksheet or shared file access",
-    "Version questions before reinstalling"
-  ],
-  trimble: [
-    "SketchUp or TBC access questions",
-    "Missing extensions, shared files, or modules",
-    "Choosing the right Trimble product guide"
-  ],
-  adobe: [
-    "Adobe sign-in or profile selection",
-    "Acrobat or Creative Cloud activation",
-    "PDF workflow setup"
-  ],
-  bluebeam: [
-    "Bluebeam sign-in or subscription questions",
-    "Studio access or profile issues",
-    "Revu 21 setup and activation"
-  ],
-  foxit: [
-    "Foxit activation or edition questions",
-    "PDF editing and default-app issues",
-    "Reader versus Editor setup"
-  ],
-  quickbooks: [
-    "QuickBooks Desktop or Online access",
-    "Company-file, update, or print issues",
-    "Choosing the right QuickBooks product guide"
-  ],
-  egnyte: [
-    "Egnyte sign-in or shared-folder access",
-    "Desktop app and drive-mapping issues",
-    "Choosing between web and desktop help"
-  ]
+  microsoft: "Email, Teams, file sync, and Microsoft 365 account questions.",
+  autodesk: "AutoCAD, Revit, Civil 3D, and Autodesk sign-in or version questions.",
+  bentley: "ProjectWise, CONNECTION Client, and Bentley design app help.",
+  esri: "ArcGIS Pro access, portal sign-in, and extension questions.",
+  ptc: "Mathcad Prime setup, licensing, and worksheet access help.",
+  trimble: "SketchUp and Trimble Business Center help for sign-in, setup, and shared content.",
+  adobe: "Acrobat, Creative Cloud sign-in, and PDF workflow help.",
+  bluebeam: "Bluebeam Revu access, Studio, and PDF markup workflow help.",
+  foxit: "Foxit PDF reading, editing, and default-app help.",
+  quickbooks: "QuickBooks Desktop or Online access, printing, and file workflow help.",
+  egnyte: "Egnyte desktop and shared-folder access help."
 };
 
 function summarizeCoverage(vendor, apps) {
   const names = apps.slice(0, 4).map(app => app.name);
   if (!names.length) {
-    return vendor.summary;
+    return `${vendor.title} help pages.`;
   }
 
-  return `${vendor.title} help pages for ${names.join(", ")}${apps.length > 4 ? ", and more" : ""}.`;
+  return `${vendor.title} application guides for ${names.join(", ")}${apps.length > 4 ? ", and more" : ""}.`;
 }
 
 if (topicGrid) {
   guideTopics.forEach(topic => {
-    const card = createPageCard("hub-card");
+    const card = createPageCard("help-topic-group");
+    card.id = `topic-${topic.id}`;
     card.append(
       Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "Help Topic" }),
-      Object.assign(document.createElement("h2"), { textContent: topic.title }),
+      Object.assign(document.createElement("h3"), { textContent: topic.title }),
       Object.assign(document.createElement("p"), { textContent: topic.description })
     );
 
@@ -231,64 +211,54 @@ if (topicGrid) {
   });
 }
 
-vendorOrder.forEach((vendorSlug, index) => {
-  const vendor = vendorGuides[vendorSlug];
-  const apps = getVendorApplications(vendorSlug);
-  const card = document.createElement("details");
-  card.className = "results-card accordion-section";
-  card.id = vendorSlug;
-  card.open = index === 0;
+featuredApps.forEach(([vendorSlug, appSlug]) => {
+  const app = getVendorApplications(vendorSlug).find(item => item.slug === appSlug);
+  if (!app || !popularAppLinks) {
+    return;
+  }
 
-  const summary = document.createElement("summary");
-  summary.className = "accordion-summary";
-
-  const summaryCopy = document.createElement("div");
-  summaryCopy.className = "accordion-summary-copy";
-
-  const kicker = document.createElement("p");
-  kicker.className = "section-kicker";
-  kicker.textContent = "Vendor Help";
-
-  const title = document.createElement("h3");
-  title.textContent = vendor.title;
-
-  const description = document.createElement("p");
-  description.textContent = summarizeCoverage(vendor, apps);
-
-  summaryCopy.append(kicker, title, description);
-
-  const meta = document.createElement("span");
-  meta.className = "accordion-summary-meta";
-  meta.textContent = `${apps.length} apps`;
-
-  summary.append(summaryCopy, meta);
-
-  const content = document.createElement("div");
-  content.className = "accordion-content";
-
-  const overview = document.createElement("p");
-  overview.className = "hub-section-copy";
-  overview.textContent = vendor.overview;
-
-  const stack = document.createElement("div");
-  stack.className = "card-stack";
-  appendBlock(stack, "Good Starting Points", vendorStartHere[vendorSlug] ?? [
-    `${vendor.title} sign-in and access questions`,
-    `${vendor.title} setup and activation issues`,
-    `Choosing the right ${vendor.title} product guide`
-  ]);
-  appendBlock(stack, "Main Applications", apps.slice(0, 6).map(app => app.name));
-
-  const links = createLinks([
-    { label: "Open vendor page", url: `guides/${vendorSlug}.html` },
-    { label: "Licensing help", url: `app-licensing.html#${vendorSlug}-licensing` },
-    ...apps.slice(0, 3).map(app => ({ label: app.name, url: appGuide(vendorSlug, app.slug) })),
-    ...(vendor.supportLinks?.[0]
-      ? [{ label: vendor.supportLinks[0].label, url: vendor.supportLinks[0].url, external: true }]
-      : [])
-  ]);
-
-  content.append(overview, stack, links);
-  card.append(summary, content);
-  grid.appendChild(card);
+  const link = document.createElement("a");
+  link.href = `#app-${vendorSlug}-${appSlug}`;
+  link.textContent = app.name;
+  popularAppLinks.appendChild(link);
 });
+
+if (appBrowseGrid) {
+  vendorOrder.forEach(vendorSlug => {
+    const vendor = vendorGuides[vendorSlug];
+    const apps = getVendorApplications(vendorSlug);
+
+    if (!vendor || !apps.length) {
+      return;
+    }
+
+    const group = createPageCard("help-app-group");
+    group.id = `vendor-${vendorSlug}`;
+    group.append(
+      Object.assign(document.createElement("p"), { className: "section-kicker", textContent: vendor.title }),
+      Object.assign(document.createElement("h3"), { textContent: summarizeCoverage(vendor, apps) }),
+      Object.assign(document.createElement("p"), {
+        textContent: vendorStartHere[vendorSlug] ?? vendor.summary
+      })
+    );
+
+    const links = document.createElement("nav");
+    links.className = "vendor-links";
+
+    const vendorLink = document.createElement("a");
+    vendorLink.href = `guides/${vendorSlug}.html`;
+    vendorLink.textContent = "Vendor overview";
+    links.appendChild(vendorLink);
+
+    apps.forEach(app => {
+      const appLink = document.createElement("a");
+      appLink.href = appGuide(vendorSlug, app.slug);
+      appLink.id = `app-${vendorSlug}-${app.slug}`;
+      appLink.textContent = app.name;
+      links.appendChild(appLink);
+    });
+
+    group.appendChild(links);
+    appBrowseGrid.appendChild(group);
+  });
+}

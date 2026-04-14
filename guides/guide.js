@@ -152,7 +152,7 @@ function appSections() {
 function renderBreadcrumbs() {
   const parts = [
     { label: "Home", url: homeUrl },
-    { label: "Vendor Guides", url: guideHubUrl },
+    { label: "Help", url: guideHubUrl },
     { label: vendor.title, url: vendorUrl(vendorSlug) }
   ];
   if (pageType === "app" && app) {
@@ -193,7 +193,7 @@ function renderJumpLinks() {
 }
 
 function renderVendorPage() {
-  const overview = section("overview", "Vendor Guide", vendor.title, vendor.summary);
+  const overview = section("overview", "Vendor Help", vendor.title, vendor.summary);
   overview.appendChild(card("Overview", paragraphs([vendor.overview])));
   overview.appendChild(card("In Scope", list(vendor.products)));
 
@@ -202,7 +202,7 @@ function renderVendorPage() {
   const faqItems = (vendorFaqs[vendorSlug] ?? []).map(item => `${item.q}: ${item.a}`);
   notes.appendChild(card("FAQ", faqItems.length ? faqItems : ["No vendor-specific FAQ is captured yet. Use the shared notes and application guides as the first-pass reference."]));
 
-  const admin = section("admin-surfaces", "Access", "Accounts, setup, and official tools", "If your team manages vendor access directly, these are the portals and setup areas most often used during support.");
+  const admin = section("admin-surfaces", "Access", "Accounts, setup, and official tools", "Use these official vendor pages when you need account access, downloads, or setup details from the source.");
   admin.appendChild(card("Admin Surfaces", vendor.adminSurfaces));
   const installItems = (vendorInstallIssues[vendorSlug] ?? []).map(item => `${item.issue}: ${item.fix}`);
   admin.appendChild(card("Setup / Update Tips", installItems.length ? installItems : vendor.sharedNotes));
@@ -321,12 +321,12 @@ if (!vendor || (pageType === "app" && !app)) {
 } else {
   renderBreadcrumbs();
   renderJumpLinks();
-  elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "Vendor Guide";
+  elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "Help";
   elements.title.textContent = pageType === "app" ? app.name : vendor.title;
   elements.summary.textContent = pageType === "app" ? (app.summary ?? app.focus) : vendor.summary;
   elements.backLink.href = pageType === "app" ? vendorUrl(vendorSlug) : guideHubUrl;
-  elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to Vendor Guides";
-  document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} Guide`;
+  elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to Help";
+  document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} Help`;
   if (pageType === "app") {
     renderAppPage();
   } else {

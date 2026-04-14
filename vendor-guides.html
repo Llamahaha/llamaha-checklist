@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guides</title>
+  <title>Help by App or Topic</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
     <nav class="page-nav" aria-label="Page">
       <a href="index.html">Home</a>
       <span>/</span>
-      <strong>Guides</strong>
+      <strong>Help by App or Topic</strong>
     </nav>
 
     <main class="hub-shell resource-page">
@@ -23,14 +23,26 @@
         <div class="builder-header">
           <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
-            <p class="section-kicker">Guides</p>
-            <h1>Start with the kind of help you need</h1>
-            <p class="builder-copy">Use this page when you know the issue, task, or workflow you need help with, such as sign-in, updates, licensing, printing, or shared files. If you already know the product name, the Applications page is the faster route.</p>
+            <p class="section-kicker">Help</p>
+            <h1>Browse help by app or topic</h1>
+            <p class="builder-copy">Use topic browsing when you know the issue or task, like sign-in, printing, licensing, or shared files. Use app browsing when you already know the product name and want to go straight there.</p>
           </div>
         </div>
       </section>
 
-      <section class="results-card hub-section">
+      <section class="results-card toc-shell">
+        <p class="section-kicker">Browse Two Ways</p>
+        <h2>Start with the problem or go straight to the app list</h2>
+        <p class="hub-section-copy">This page combines topic-first help and app-first browsing in one place, so you can choose whichever path matches what you already know.</p>
+        <nav class="toc-links" aria-label="Browse help two ways">
+          <a href="#browse-by-topic">Browse by topic</a>
+          <a href="#browse-by-app">Browse by application</a>
+          <a href="app-licensing.html">Licensing help</a>
+          <a href="search.html">Search the help center</a>
+        </nav>
+      </section>
+
+      <section id="browse-by-topic" class="results-card hub-section">
         <div class="results-header">
           <div>
             <p class="section-kicker">Common Help Topics</p>
@@ -38,18 +50,19 @@
           </div>
         </div>
         <p class="hub-section-copy">These guides are grouped around everyday support needs so you can start with the problem you are trying to solve, even if you are not sure which vendor or product page you need yet.</p>
-        <div id="guideTopicGrid" class="hub-quick-grid"></div>
+        <div id="guideTopicGrid" class="help-topic-directory"></div>
       </section>
 
-      <section class="results-card hub-section">
+      <section id="browse-by-app" class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Browse By Vendor</p>
-            <h2>Need the broader vendor view instead?</h2>
+            <p class="section-kicker">Browse By Application</p>
+            <h2>Go straight to the product you use</h2>
           </div>
         </div>
-        <p class="hub-section-copy">If you know the company behind the product, expand a vendor below to open the related application guides, vendor page, and official support links.</p>
-        <div id="vendorGuideGrid" class="accordion-stack"></div>
+        <p class="hub-section-copy">Popular applications are listed first, followed by the full application directory grouped by vendor for easier scanning.</p>
+        <nav id="popularAppLinks" class="toc-links" aria-label="Popular applications"></nav>
+        <div id="appBrowseGrid" class="help-app-directory"></div>
       </section>
     </main>
   </div>

@@ -133,7 +133,7 @@ if (licensingGrid) {
 
     const links = createLinks([
       { label: "Open vendor guide", url: `guides/${key}.html` },
-      { label: "Browse applications", url: "applications.html" },
+      { label: "Browse help by app or topic", url: "vendor-guides.html" },
       ...apps.slice(0, 3).map(app => ({ label: app.name, url: `guides/${key}/${app.slug}.html` })),
       ...(guide.supportLinks?.[0]
         ? [{ label: guide.supportLinks[0].label, url: guide.supportLinks[0].url, external: true }]
