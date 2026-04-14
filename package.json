@@ -1,0 +1,13 @@
+{
+  "name": "llamaha-help-center",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "serve": "node scripts/serve.mjs",
+    "verify": "node scripts/verify-site.mjs",
+    "verify:links": "node scripts/verify-site.mjs --links-only"
+  }
+}
