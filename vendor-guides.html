@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vendor Guides</title>
+  <title>Guides</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
     <nav class="page-nav" aria-label="Page">
       <a href="index.html">Home</a>
       <span>/</span>
-      <strong>Vendor Guides</strong>
+      <strong>Guides</strong>
     </nav>
 
     <main class="hub-shell resource-page">
@@ -23,9 +23,9 @@
         <div class="builder-header">
           <img class="brand-icon" src="assets/llamaha-icon.jpg" alt="Llamaha icon">
           <div class="section-heading">
-            <p class="section-kicker">Vendor Help</p>
-            <h1>Browse help by vendor</h1>
-            <p class="builder-copy">Start here when you know the company behind the product. Each vendor section points you to the right application guides, common help topics, and official support pages.</p>
+            <p class="section-kicker">Guides</p>
+            <h1>Start with the kind of help you need</h1>
+            <p class="builder-copy">Use this page when you know the issue, task, or workflow you need help with, such as sign-in, updates, licensing, printing, or shared files. If you already know the product name, the Applications page is the faster route.</p>
           </div>
         </div>
       </section>
@@ -33,11 +33,22 @@
       <section class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Vendor Guides</p>
-            <h2>Choose a vendor, then open the product guide that matches your question</h2>
+            <p class="section-kicker">Common Help Topics</p>
+            <h2>Choose the kind of help you need</h2>
           </div>
         </div>
-        <p class="hub-section-copy">Use this page when your question starts with a vendor account, subscription, sign-in, or product family. Expand the vendor you use and open the guide that best matches the application or issue you need help with.</p>
+        <p class="hub-section-copy">These guides are grouped around everyday support needs so you can start with the problem you are trying to solve, even if you are not sure which vendor or product page you need yet.</p>
+        <div id="guideTopicGrid" class="hub-quick-grid"></div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Browse By Vendor</p>
+            <h2>Need the broader vendor view instead?</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">If you know the company behind the product, expand a vendor below to open the related application guides, vendor page, and official support links.</p>
         <div id="vendorGuideGrid" class="accordion-stack"></div>
       </section>
     </main>

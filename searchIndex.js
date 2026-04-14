@@ -12,7 +12,7 @@ export function buildSearchIndex() {
     entry("Applications", "Browse popular application guides and the full application directory.", "applications.html", "helpPage", "Help Page", "applications app directory"),
     entry("Licensing Help", "Customer-facing help page for licensing, activation, subscriptions, and access questions by vendor.", "app-licensing.html", "helpPage", "Help Page", "licensing activation subscription access entitlement"),
     entry("Contact", "Contact options for help-center questions, missing content, and guide updates.", "contact.html", "helpPage", "Contact Page", "contact help support email"),
-    entry("Vendor Guides", "Browse vendor help and open the application guide that matches the product you use.", "vendor-guides.html", "vendorGuide", "Guide Hub", "vendor guides applications"),
+    entry("Guides", "Browse help by common problems and tasks such as sign-in, updates, licensing, printing, sync, and getting started.", "vendor-guides.html", "helpPage", "Help Page", "guides sign-in access install update printing pdf licensing sync performance getting started"),
     entry("Application Issues and Fixes", "Public help page covering common application problems and general fixes.", "application-issues.html", "helpPage", "Help Page", "troubleshooting faq errors"),
     entry("Microsoft App Issues", "Public help page for common Microsoft 365 app problems.", "microsoft-issues.html", "helpPage", "Help Page", "outlook teams onedrive sharepoint mfa"),
     entry("Computer Issues", "Public help page for common workstation, printer, and network problems.", "computer-issues.html", "helpPage", "Help Page", "computer windows printer vpn network")

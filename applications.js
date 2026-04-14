@@ -3,6 +3,7 @@ import { getAppGuideContent } from "./guides/appGuideContent.js";
 import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 
 const featuredGrid = document.getElementById("featuredApplications");
+const jumpLinks = document.getElementById("applicationJumpLinks");
 const directory = document.getElementById("applicationDirectory");
 
 const featuredApps = [
@@ -60,12 +61,20 @@ featuredApps.forEach(([vendorSlug, appSlug]) => {
   description.textContent = getSummary(app);
 
   card.append(kicker, title, description, createActionLink("Open application guide", buildAppGuideUrl(vendorSlug, appSlug)));
-  featuredGrid.appendChild(card);
+  featuredGrid?.appendChild(card);
+
+  if (jumpLinks) {
+    const jump = document.createElement("a");
+    jump.href = `#app-${vendorSlug}-${appSlug}`;
+    jump.textContent = app.name;
+    jumpLinks.appendChild(jump);
+  }
 });
 
 allApplications.forEach(app => {
   const card = document.createElement("article");
   card.className = "vendor-card";
+  card.id = `app-${app.vendorSlug}-${app.slug}`;
 
   const meta = document.createElement("span");
   meta.className = "result-meta";

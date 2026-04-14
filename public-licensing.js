@@ -52,7 +52,7 @@ const customerLicensingHelp = {
     checks: [
       "Confirm the product name, edition, and version your team expects you to use.",
       "Make sure you are signing in with the correct Trimble-managed account.",
-      "Note whether the issue is missing access, missing modules, or missing templates or extensions."
+      "Note whether the issue is missing access, missing modules, or missing shared files or extensions."
     ]
   },
   adobe: {
