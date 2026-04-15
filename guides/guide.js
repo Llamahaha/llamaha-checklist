@@ -238,6 +238,9 @@ function buildAppModel() {
       ? publicContent.askFirst
       : (publicizeItems(extra.askFirst ?? []).length ? publicizeItems(extra.askFirst ?? []) : defaultAskFirst()),
     licensing,
+    mobileSetup: publicContent.mobileSetup?.length
+      ? publicContent.mobileSetup
+      : (publicContent.phoneSetup?.length ? publicContent.phoneSetup : []),
     install: publicContent.install?.length
       ? publicContent.install
       : (publicizeItems([app.install, ...(extra.install ?? [])]).length ? publicizeItems([app.install, ...(extra.install ?? [])]) : defaultInstall()),
@@ -262,6 +265,10 @@ function appSections(model) {
 
   if (model.licensing?.length) {
     sections.splice(2, 0, ["licensing-access", "Licensing / Access"]);
+  }
+
+  if (model.mobileSetup?.length) {
+    sections.splice(model.licensing?.length ? 3 : 2, 0, ["phone-tablet-setup", "Phone / Tablet Setup"]);
   }
 
   return sections;
@@ -362,6 +369,12 @@ function renderAppPage(model) {
   const install = section("install-update-basics", "Install / Update Basics", "Install / Update Basics", "These safe steps help with fresh installs, recent updates, and apps that stopped working after a change.");
   install.appendChild(card("Install / Update Basics", model.install));
 
+  let phoneSetup = null;
+  if (model.mobileSetup.length) {
+    phoneSetup = section("phone-tablet-setup", "Phone / Tablet", "Phone / Tablet Setup", "Use these checks when you are setting up the app on an iPhone or Android device, moving to a new phone, or fixing missing mobile prompts.");
+    phoneSetup.appendChild(card("Phone / Tablet Setup", model.mobileSetup));
+  }
+
   const issues = section("common-problems", "Common Problems", "Common Problems", "These are the problems people run into most often with this app.");
   const issueGrid = el("div", "guide-card-grid");
   model.commonIssues.forEach(item => {
@@ -400,6 +413,9 @@ function renderAppPage(model) {
     const licensing = section("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
     licensing.appendChild(card("Licensing / Access", model.licensing));
     sections.push(licensing);
+  }
+  if (phoneSetup) {
+    sections.push(phoneSetup);
   }
   sections.push(install, issues, support, sendSupport, related);
   elements.content.append(...sections);

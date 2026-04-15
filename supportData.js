@@ -673,7 +673,7 @@ export const tipsAndTricksSections = [
         links: [
           {
             label: "Open App Help",
-            url: "vendor-guides.html#application-directory",
+            url: "vendor-guides.html#full-application-directory",
             external: false
           },
           {

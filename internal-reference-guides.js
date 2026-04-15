@@ -100,6 +100,7 @@ function buildPublicAppModel(vendorSlug, app) {
     ? extra.highlights
     : [app.focus, app.install].filter(Boolean);
   const askFirst = (extra.askFirst?.length ? extra.askFirst : publicContent.askFirst ?? []).slice(0, 4);
+  const mobileSetup = (publicContent.mobileSetup?.length ? publicContent.mobileSetup : publicContent.phoneSetup ?? []).slice(0, 4);
   const checkpoints = (extra.supportCheckpoints?.length ? extra.supportCheckpoints : publicContent.supportCheckpoints ?? []).slice(0, 4);
   const commonIssues = (extra.commonIssues?.length ? extra.commonIssues : publicContent.commonIssues ?? [])
     .map(summarizeIssue)
@@ -121,6 +122,7 @@ function buildPublicAppModel(vendorSlug, app) {
     summary,
     highlights: highlightSource.slice(0, 3),
     askFirst,
+    mobileSetup,
     checkpoints,
     commonIssues,
     usefulInfo,
@@ -191,6 +193,7 @@ function renderAppCard(app) {
 
   appendListBlock(stack, "Quick Notes", app.highlights);
   appendListBlock(stack, "Ask First", app.askFirst);
+  appendListBlock(stack, "Phone / Tablet Setup", app.mobileSetup);
   appendListBlock(stack, "Support Checkpoints", app.checkpoints);
   appendListBlock(stack, "Common Problems", app.commonIssues);
   appendListBlock(stack, "Useful Paths", app.usefulInfo.paths ?? []);

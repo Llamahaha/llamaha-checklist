@@ -71,6 +71,9 @@ const populatedPublicGuides = [
 ];
 
 const dynamicAnchorFiles = new Set([
+  resolve(rootDir, "computer-issues.html"),
+  resolve(rootDir, "vendor-guides.html"),
+  resolve(rootDir, "tips-and-tricks.html"),
   resolve(rootDir, "internal/playbooks.html"),
   resolve(rootDir, "internal/templates.html"),
   resolve(rootDir, "internal/snippets.html"),

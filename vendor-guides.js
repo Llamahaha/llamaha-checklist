@@ -1,237 +1,287 @@
-import { buildAppGuideUrl, getVendorApplications } from "./guides/applicationCatalog.js";
-import { vendorGuides, vendorOrder } from "./guides/guideData.js";
-import { getPublicGuideContent } from "./guides/publicGuideContent.js";
-import { appendBlock, createPageCard } from "./resourceCommon.js";
+import { publicAppHelpSections } from "./publicPageData.js";
+import { createLinks, createPageCard, slugifyText } from "./resourceCommon.js";
 
-const popularAppGrid = document.getElementById("popularAppGrid");
-const mobileHelpGrid = document.getElementById("mobileHelpGrid");
-const browserHelpGrid = document.getElementById("browserHelpGrid");
-const directoryVendorLinks = document.getElementById("directoryVendorLinks");
-const appBrowseGrid = document.getElementById("appBrowseGrid");
-const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte", "mctrans", "axiom"]);
+const appHelpSections = document.getElementById("appHelpSections");
+const pageToc = document.getElementById("pageToc");
+const renderedSections = [];
 
-function appGuide(vendorSlug, appSlug) {
-  return buildAppGuideUrl(vendorSlug, appSlug);
+function buildEntrySearchText(sectionTitle, group, entry) {
+  return [
+    sectionTitle,
+    group.title,
+    group.description,
+    entry.vendorTitle,
+    entry.name,
+    entry.summary,
+    entry.keywords ?? ""
+  ].join(" ").toLowerCase();
 }
 
-function appSummary(vendorSlug, app) {
-  const publicGuide = getPublicGuideContent(vendorSlug, app.slug);
-  if (publicGuide.summary) {
-    return publicGuide.summary;
+function revealSection(id) {
+  const wrapper = document.getElementById(id);
+  if (!wrapper) {
+    return;
   }
 
-  if (app.summary) {
-    return app.summary;
+  if (wrapper instanceof HTMLDetailsElement) {
+    wrapper.open = true;
   }
 
-  return `Open this guide when ${app.name} will not sign in, open the files you expect, update correctly, or behave normally for everyday work.`;
+  window.requestAnimationFrame(() => {
+    wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 }
 
-function createActionLinks(items) {
-  const links = document.createElement("div");
-  links.className = "vendor-links";
+function filterSections(query) {
+  const needle = query.trim().toLowerCase();
+
+  renderedSections.forEach(section => {
+    let visibleGroups = 0;
+
+    section.groups.forEach(group => {
+      let visibleEntries = 0;
+
+      group.entries.forEach(entry => {
+        const matches = !needle || entry.dataset.searchText.includes(needle);
+        entry.hidden = !matches;
+        if (matches) {
+          visibleEntries += 1;
+        }
+      });
+
+      const groupMatches = !needle
+        || group.element.dataset.searchText.includes(needle)
+        || visibleEntries > 0;
+
+      group.element.hidden = !groupMatches;
+      if (groupMatches) {
+        visibleGroups += 1;
+      }
+    });
+
+    const sectionMatches = !needle
+      || section.element.dataset.searchText.includes(needle)
+      || visibleGroups > 0;
+
+    section.element.hidden = !sectionMatches;
+    if (needle && sectionMatches) {
+      section.element.open = true;
+    }
+  });
+}
+
+function renderToc(items) {
+  if (!pageToc || !items.length) {
+    return;
+  }
+
+  pageToc.innerHTML = "";
+  pageToc.classList.add("toc-shell", "hub-section", "is-collapsible-toc");
+
+  const details = document.createElement("details");
+  details.className = "accordion-section toc-panel";
+
+  const summary = document.createElement("summary");
+  summary.className = "accordion-summary";
+
+  const summaryCopy = document.createElement("div");
+  summaryCopy.className = "accordion-summary-copy";
+  summaryCopy.append(
+    Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "On This Page" }),
+    Object.assign(document.createElement("h2"), { textContent: "Open the app section you need" }),
+    Object.assign(document.createElement("p"), {
+      textContent: "Use these quick links or search this page to jump to the app family you need, then open the exact product guide."
+    })
+  );
+
+  const meta = document.createElement("span");
+  meta.className = "accordion-summary-meta";
+  meta.textContent = `${items.length} sections`;
+  summary.append(summaryCopy, meta);
+
+  const content = document.createElement("div");
+  content.className = "accordion-content";
+
+  const searchRow = document.createElement("div");
+  searchRow.className = "page-filter-row";
+
+  const searchInput = document.createElement("input");
+  searchInput.type = "search";
+  searchInput.className = "search-input page-search-input";
+  searchInput.placeholder = "Search App Help on this page";
+  searchInput.setAttribute("aria-label", "Search App Help on this page");
+  searchInput.addEventListener("input", event => {
+    filterSections(event.target.value);
+  });
+
+  const clearButton = document.createElement("button");
+  clearButton.type = "button";
+  clearButton.className = "secondary-btn compact-btn";
+  clearButton.textContent = "Clear";
+  clearButton.addEventListener("click", () => {
+    searchInput.value = "";
+    filterSections("");
+  });
+
+  searchRow.append(searchInput, clearButton);
+
+  const nav = document.createElement("nav");
+  nav.className = "toc-links";
+  nav.setAttribute("aria-label", "App Help sections");
 
   items.forEach(item => {
     const link = document.createElement("a");
-    link.href = item.url;
+    link.href = `#${item.id}`;
     link.textContent = item.label;
-    if (item.external) {
-      link.target = "_blank";
-      link.rel = "noreferrer";
-    }
-    links.appendChild(link);
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      details.open = true;
+      revealSection(item.id);
+      window.history.replaceState({}, "", `#${item.id}`);
+    });
+    nav.appendChild(link);
   });
 
-  return links;
+  content.append(searchRow, nav);
+  details.append(summary, content);
+  pageToc.appendChild(details);
 }
 
-function renderFeatureCard(container, config) {
-  if (!container) {
-    return;
-  }
+function renderEntry(entry) {
+  const link = document.createElement("a");
+  link.className = "compact-link-item";
+  link.href = entry.url;
+  link.dataset.searchText = `${entry.vendorTitle} ${entry.name} ${entry.summary} ${entry.keywords ?? ""}`.toLowerCase();
 
-  const card = createPageCard("hub-card");
-  if (config.id) {
-    card.id = config.id;
-  }
+  const title = document.createElement("strong");
+  title.textContent = entry.name;
 
-  card.append(
-    Object.assign(document.createElement("p"), { className: "section-kicker", textContent: config.kicker }),
-    Object.assign(document.createElement("h2"), { textContent: config.title }),
-    Object.assign(document.createElement("p"), { textContent: config.description }),
-    createActionLinks(config.links)
+  const text = document.createElement("span");
+  text.textContent = entry.summary;
+
+  link.append(title, text);
+  return link;
+}
+
+function renderGroup(sectionTitle, group, isDirectory = false) {
+  const wrapper = createPageCard(isDirectory ? "compact-group compact-group-directory" : "compact-group");
+  wrapper.dataset.searchText = `${group.title} ${group.description ?? ""}`.toLowerCase();
+  const kickerText = isDirectory ? "Vendor" : "App Group";
+
+  wrapper.append(
+    Object.assign(document.createElement("p"), {
+      className: "section-kicker",
+      textContent: kickerText
+    }),
+    Object.assign(document.createElement("h3"), { textContent: group.title }),
+    Object.assign(document.createElement("p"), { textContent: group.description })
   );
 
-  container.appendChild(card);
+  const entryList = document.createElement("div");
+  entryList.className = "compact-link-list";
+
+  const entryElements = group.entries.map(entry => {
+    const element = renderEntry(entry);
+    element.dataset.searchText = buildEntrySearchText(sectionTitle, group, entry);
+    entryList.appendChild(element);
+    return element;
+  });
+
+  wrapper.appendChild(entryList);
+
+  if (group.links?.length) {
+    wrapper.appendChild(createLinks(
+      group.links.map(link => ({
+        ...link,
+        external: link.external ?? /^https?:/i.test(link.url)
+      }))
+    ));
+  }
+
+  return { element: wrapper, entries: entryElements };
 }
 
-const featuredApps = [
-  ["microsoft", "outlook"],
-  ["microsoft", "teams"],
-  ["microsoft", "onedrive"],
-  ["citrix", "workspace-app"],
-  ["fortinet", "forticlient-vpn"],
-  ["adobe", "acrobat-pro"],
-  ["bluebeam", "revu-21"],
-  ["autodesk", "autocad"],
-  ["autodesk", "revit"],
-  ["autodesk", "civil-3d"],
-  ["esri", "arcgis-pro"],
-  ["bentley", "projectwise"],
-  ["oracle", "primavera-p6"]
-];
+function renderSection(section) {
+  const wrapper = document.createElement("details");
+  wrapper.className = "results-card accordion-section";
+  wrapper.id = slugifyText(section.title);
+  wrapper.dataset.searchText = `${section.title} ${section.description}`.toLowerCase();
 
-const mobileHelpApps = [
-  ["microsoft", "outlook-mobile"],
-  ["microsoft", "teams-mobile"],
-  ["microsoft", "microsoft-authenticator"]
-];
+  const summary = document.createElement("summary");
+  summary.className = "accordion-summary";
 
-const browserHelpApps = [
-  ["browsers", "google-chrome"],
-  ["browsers", "microsoft-edge"],
-  ["browsers", "mozilla-firefox"],
-  ["browsers", "apple-safari"]
-];
+  const summaryCopy = document.createElement("div");
+  summaryCopy.className = "accordion-summary-copy";
+  summaryCopy.append(
+    Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "App Help" }),
+    Object.assign(document.createElement("h2"), { textContent: section.title }),
+    Object.assign(document.createElement("p"), { textContent: section.description })
+  );
 
-const vendorStartHere = {
-  microsoft: "Email, Teams, OneDrive, mobile setup, and Microsoft 365 account questions.",
-  google: "Google Earth Pro help for map viewing, KML or KMZ imports, saved places, and location-based workflows.",
-  citrix: "Citrix Workspace App help for published apps, virtual desktops, .ica launches, and workspace sign-in.",
-  browsers: "Chrome, Edge, Firefox, and Safari support for sign-in pages, downloads, and everyday web use.",
-  fortinet: "FortiClient VPN help for remote access, sign-in, and company VPN connection questions.",
-  oracle: "Oracle Primavera P6 help for login, database selection, and project access questions.",
-  hec: "HEC hydrology, hydraulics, DSS, and GIS preprocessing help across the HEC engineering toolset.",
-  mctrans: "MCTRANS HCS and HSS help for transportation-capacity and safety-analysis workflows.",
-  autodesk: "AutoCAD, Revit, Civil 3D, and Autodesk sign-in or version questions.",
-  bentley: "ProjectWise, CONNECTION Client, and Bentley design app help.",
-  axiom: "Axiom add-in help for module loading, host-app compatibility, and ribbon or tool issues.",
-  esri: "ArcGIS Pro access, portal sign-in, and extension questions.",
-  ptc: "Mathcad Prime setup, licensing, and worksheet access help.",
-  trimble: "SketchUp and Trimble Business Center help for sign-in, setup, and shared content.",
-  adobe: "Acrobat, Creative Cloud sign-in, and PDF workflow help.",
-  bluebeam: "Bluebeam Revu access, Studio, and PDF markup workflow help.",
-  foxit: "Foxit PDF reading, editing, and default-app help.",
-  quickbooks: "QuickBooks Desktop or Online access, printing, and file workflow help.",
-  egnyte: "Egnyte desktop and shared-folder access help."
-};
+  const groupCount = section.groups.length;
+  const entryCount = section.groups.reduce((total, group) => total + group.entries.length, 0);
 
-function summarizeCoverage(vendor, apps) {
-  const names = apps.slice(0, 4).map(app => app.name);
-  if (!names.length) {
-    return `${vendor.title} help pages.`;
-  }
+  const meta = document.createElement("span");
+  meta.className = "accordion-summary-meta";
+  meta.textContent = `${entryCount} guides`;
+  summary.append(summaryCopy, meta);
 
-  return `${vendor.title} guides for ${names.join(", ")}${apps.length > 4 ? ", and more" : ""}.`;
+  const content = document.createElement("div");
+  content.className = "accordion-content";
+
+  const groupShell = document.createElement("div");
+  groupShell.className = section.title === "Full Application Directory"
+    ? "compact-section-list compact-section-list-directory"
+    : "compact-section-list";
+
+  const groupRefs = section.groups.map(group => {
+    const rendered = renderGroup(section.title, group, section.title === "Full Application Directory");
+    groupShell.appendChild(rendered.element);
+    return rendered;
+  });
+
+  const helper = document.createElement("p");
+  helper.className = "hub-section-copy";
+  helper.textContent = section.title === "Full Application Directory"
+    ? "Use the vendor overview link when you need the broader product family page, or open the exact application guide when you already know the product."
+    : groupCount > 1
+      ? "Pick the app group that matches your product, then open the guide with the exact app name."
+      : "Open the guide that matches the app you already know.";
+
+  content.append(helper, groupShell);
+  wrapper.append(summary, content);
+  renderedSections.push({ element: wrapper, groups: groupRefs });
+  return wrapper;
 }
 
-featuredApps.forEach(([vendorSlug, appSlug]) => {
-  const app = getVendorApplications(vendorSlug).find(item => item.slug === appSlug);
-  const vendor = vendorGuides[vendorSlug];
-
-  if (!app || !vendor) {
+function renderSections() {
+  if (!appHelpSections) {
     return;
   }
 
-  renderFeatureCard(popularAppGrid, {
-    id: `popular-app-${vendorSlug}-${appSlug}`,
-    kicker: vendor.title,
-    title: app.name,
-    description: appSummary(vendorSlug, app),
-    links: [
-      { label: "Open guide", url: appGuide(vendorSlug, appSlug) },
-      { label: `${vendor.title} overview`, url: `guides/${vendorSlug}.html` },
-      ...(licensedVendors.has(vendorSlug) ? [{ label: "Licensing help", url: "app-licensing.html" }] : [])
-    ]
-  });
-});
+  appHelpSections.innerHTML = "";
+  renderedSections.length = 0;
 
-mobileHelpApps.forEach(([vendorSlug, appSlug]) => {
-  const app = getVendorApplications(vendorSlug).find(item => item.slug === appSlug);
-  if (!app) {
-    return;
+  const tocItems = publicAppHelpSections.map(section => ({
+    id: slugifyText(section.title),
+    label: section.title
+  }));
+
+  publicAppHelpSections.forEach(section => {
+    appHelpSections.appendChild(renderSection(section));
+  });
+
+  renderToc(tocItems);
+}
+
+window.addEventListener("hashchange", () => {
+  if (window.location.hash) {
+    revealSection(window.location.hash.slice(1));
   }
-
-  renderFeatureCard(mobileHelpGrid, {
-    id: `mobile-${vendorSlug}-${appSlug}`,
-    kicker: "Mobile Setup",
-    title: app.name,
-    description: appSummary(vendorSlug, app),
-    links: [
-      { label: "Open guide", url: appGuide(vendorSlug, appSlug) },
-      { label: "Microsoft 365 overview", url: "guides/microsoft.html" },
-      { label: "Contact support", url: "contact.html" }
-    ]
-  });
 });
 
-browserHelpApps.forEach(([vendorSlug, appSlug]) => {
-  const app = getVendorApplications(vendorSlug).find(item => item.slug === appSlug);
-  if (!app) {
-    return;
-  }
+renderSections();
 
-  renderFeatureCard(browserHelpGrid, {
-    id: `browser-${vendorSlug}-${appSlug}`,
-    kicker: "Browser Support",
-    title: app.name,
-    description: appSummary(vendorSlug, app),
-    links: [
-      { label: "Open guide", url: appGuide(vendorSlug, appSlug) },
-      { label: "Browser overview", url: "guides/browsers.html" },
-      { label: "Search the help center", url: "search.html" }
-    ]
-  });
-});
-
-if (appBrowseGrid) {
-  vendorOrder.forEach(vendorSlug => {
-    const vendor = vendorGuides[vendorSlug];
-    const apps = getVendorApplications(vendorSlug);
-
-    if (!vendor || !apps.length) {
-      return;
-    }
-
-    if (directoryVendorLinks) {
-      const jump = document.createElement("a");
-      jump.href = `#vendor-${vendorSlug}`;
-      jump.textContent = vendor.title;
-      directoryVendorLinks.appendChild(jump);
-    }
-
-    const group = createPageCard("help-app-group");
-    group.id = `vendor-${vendorSlug}`;
-    group.append(
-      Object.assign(document.createElement("p"), { className: "section-kicker", textContent: vendor.title }),
-      Object.assign(document.createElement("h3"), { textContent: summarizeCoverage(vendor, apps) }),
-      Object.assign(document.createElement("p"), {
-        textContent: vendorStartHere[vendorSlug] ?? vendor.summary
-      })
-    );
-
-    const stack = document.createElement("div");
-    stack.className = "card-stack";
-    appendBlock(stack, "Good Starting Guides", apps.slice(0, 5).map(item => item.name));
-    group.appendChild(stack);
-
-    const links = document.createElement("nav");
-    links.className = "vendor-links";
-
-    const vendorLink = document.createElement("a");
-    vendorLink.href = `guides/${vendorSlug}.html`;
-    vendorLink.textContent = "Vendor overview";
-    links.appendChild(vendorLink);
-
-    apps.forEach(app => {
-      const appLink = document.createElement("a");
-      appLink.href = appGuide(vendorSlug, app.slug);
-      appLink.id = `app-${vendorSlug}-${app.slug}`;
-      appLink.textContent = app.name;
-      links.appendChild(appLink);
-    });
-
-    group.appendChild(links);
-    appBrowseGrid.appendChild(group);
-  });
+if (window.location.hash) {
+  revealSection(window.location.hash.slice(1));
 }

@@ -1,4 +1,5 @@
 import { internalTipsAndTricksSections } from "./internalContent.js";
+import { internalTipsAndTricksExtraSections } from "./internalContentExtra.js";
 import { createLinks, createList, createPageCard, renderPageToc, slugifyText } from "./resourceCommon.js";
 
 const tipsSections = document.getElementById("tipsSections");
@@ -11,7 +12,7 @@ function renderSections() {
 
   const tocItems = [];
 
-  internalTipsAndTricksSections.forEach(section => {
+  [...internalTipsAndTricksSections, ...internalTipsAndTricksExtraSections].forEach(section => {
     const wrapper = document.createElement("section");
     wrapper.className = "results-card hub-section";
     wrapper.id = slugifyText(section.title);

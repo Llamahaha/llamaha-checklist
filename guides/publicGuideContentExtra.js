@@ -56,6 +56,30 @@ function makeHecGuide(name, description, dataTerms, links) {
 
 export const publicGuideContentExtra = {
   microsoft: {
+    outlook: {
+      mobileSetup: [
+        "Install Outlook from the App Store or Google Play and add the same work email account you use on your computer.",
+        "Finish any company sign-in, approval, or device-registration prompts before assuming setup failed.",
+        "Allow notifications and calendar access if you expect Outlook on your phone to show mail alerts or calendar events.",
+        "If you recently changed phones, note whether the old phone still receives mail or prompts before you contact support."
+      ]
+    },
+    teams: {
+      mobileSetup: [
+        "Install Teams from the App Store or Google Play and sign in with the same work account you use on your computer.",
+        "Allow microphone, camera, and notifications if you plan to join meetings or receive chat and call alerts on your phone.",
+        "If Teams on your computer works but the phone app does not, keep that comparison ready for support.",
+        "If you changed phones recently, note whether the old phone still shows Teams notifications or approval prompts."
+      ]
+    },
+    onedrive: {
+      mobileSetup: [
+        "Install OneDrive on the phone and sign in with the same work account you use for Microsoft 365.",
+        "Let OneDrive finish signing in before you try to browse shared files or upload photos or documents from the phone.",
+        "If shared libraries or shortcuts are missing on the phone, compare them with OneDrive in the browser first.",
+        "If the phone app shows the wrong account or tenant, sign out before adding the correct work account again."
+      ]
+    },
     sharepoint: {
       summary: "Use this guide when a SharePoint site or library will not open, sync stops updating, or files will not open in the browser or desktop app the way you expect.",
       overview: [
@@ -102,9 +126,26 @@ export const publicGuideContentExtra = {
         "The work account used to open the site.",
         "A note about whether the same library works in OneDrive sync or in another browser."
       ],
+      mobileSetup: [
+        "Open the SharePoint site or library from the same Microsoft 365 work account you use on your computer.",
+        "If the library is opening through OneDrive on your phone, compare it with the browser version first.",
+        "If a file opens in the browser but not in the mobile app, keep the file type and the phone type ready for support.",
+        "If you are using Outlook, Teams, or OneDrive on the same phone, note whether those apps are signed in correctly too."
+      ],
       relatedLinks: [
         { label: "Fix SharePoint Online sync problems", url: "https://support.microsoft.com/en-au/office/fix-sharepoint-online-sync-problems-aaa2d172-8d45-4e94-9c04-5364d04ca2f4" },
         { label: "Fix OneDrive sync problems", url: "https://support.microsoft.com/en-us/office/fix-onedrive-sync-problems-52a86836-1e7f-46fd-85c7-1e7a5e9b4273" }
+      ]
+    },
+    "microsoft-authenticator": {
+      mobileSetup: [
+        "Install Microsoft Authenticator on the phone you plan to keep using and add your work or school account by scanning the QR code when your company setup page shows it.",
+        "Allow camera access so the app can scan the QR code and allow notifications if your company uses push approvals.",
+        "If you changed phones, keep the old-phone status clear because support may need to know whether approval prompts are still landing there.",
+        "Add a backup sign-in method if your company offers one so you are not locked out if you lose the phone."
+      ],
+      relatedLinks: [
+        { label: "How to add your accounts to Microsoft Authenticator", url: "https://support.microsoft.com/en-us/account-billing/how-to-add-your-accounts-to-microsoft-authenticator-92544b53-7706-4581-a142-30344a2a2a57" }
       ]
     }
   },

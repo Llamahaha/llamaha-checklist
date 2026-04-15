@@ -1,5 +1,6 @@
 import { getVendorApplications } from "./guides/applicationCatalog.js";
 import { getAppGuideContent } from "./guides/appGuideContent.js";
+import { getPublicGuideContent } from "./guides/publicGuideContent.js";
 import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 
 function entry(title, text, url, category, typeLabel, keywords = "") {
@@ -7,19 +8,21 @@ function entry(title, text, url, category, typeLabel, keywords = "") {
 }
 
 export function buildSearchIndex() {
+  const hiddenPublicSearchApps = new Set(["outlook-mobile", "teams-mobile"]);
   const entries = [
-    entry("Home", "Help center landing page with search, PC Help, App Help, licensing help, Tips & Tricks, and contact options.", "index.html", "helpPage", "Help Center", "home help center tips tricks citrix workspace"),
-    entry("App Help", "Browse popular applications, mobile phone setup guides, browser support, VPN help, Citrix Workspace help, vendor overviews, and the full application directory.", "vendor-guides.html", "helpPage", "App Help Page", "app help application directory outlook teams onedrive chrome edge firefox safari autocad revit arcgis projectwise forticlient citrix workspace oracle p6"),
-    entry("Popular Applications", "Open the most-used application guides directly from the App Help page.", "vendor-guides.html#browse-by-app", "helpPage", "App Help Page", "popular applications outlook teams onedrive autocad revit arcgis projectwise adobe bluebeam forticlient citrix workspace oracle p6"),
-    entry("Mobile Phone Help", "Guides for Outlook Mobile, Teams Mobile, and Microsoft Authenticator setup on iPhone and Android devices.", "vendor-guides.html#mobile-help", "helpPage", "App Help Page", "mobile phone setup outlook mobile teams mobile microsoft authenticator iphone android"),
-    entry("Browser Support", "Guides for Chrome, Edge, Firefox, and Safari when work sites, downloads, or sign-in pages behave differently in a browser.", "vendor-guides.html#browser-help", "helpPage", "App Help Page", "browser support chrome edge firefox safari downloads popups work sites"),
-    entry("Application List", "Jump straight to the full application directory inside App Help when you already know the product name.", "vendor-guides.html#application-directory", "helpPage", "App Help Page", "applications products app directory outlook teams onedrive autocad revit arcgis projectwise forticlient citrix workspace oracle p6 authenticator chrome edge firefox safari"),
-    entry("Licensing Help", "Customer-facing reference for how licensing works across Microsoft, Autodesk, Bentley, Adobe, Bluebeam, ArcGIS, Oracle Primavera P6, and other licensed products.", "app-licensing.html", "helpPage", "Help Page", "licensing reference subscription plan edition access account profile oracle primavera p6 autodesk bluebeam adobe arcgis"),
+    entry("Home", "Help center landing page with search, PC Help, App Help, Licensing Help, Tips & Tricks, and contact options.", "index.html", "helpPage", "Help Center", "home help center app help pc help licensing help tips tricks"),
+    entry("App Help", "Browse popular applications, Microsoft 365 apps, remote-access tools, engineering apps, and the full application directory when you already know the product name.", "vendor-guides.html", "helpPage", "App Help Page", "app help application directory outlook teams onedrive sharepoint citrix forticlient autocad revit civil 3d arcgis projectwise oracle p6 indesign google earth hec hcs hss"),
+    entry("Popular Applications", "Open the most-used application guides directly from the App Help page.", "vendor-guides.html#popular-applications", "helpPage", "App Help Page", "popular applications outlook teams onedrive sharepoint citrix forticlient adobe acrobat bluebeam autocad revit civil 3d arcgis projectwise oracle p6"),
+    entry("Collaboration, File Access, and Remote Work", "Open Microsoft 365, Citrix Workspace, VPN, and file-access guides when you need collaboration or remote-work help.", "vendor-guides.html#collaboration-file-access-and-remote-work", "helpPage", "App Help Page", "outlook teams onedrive sharepoint authenticator citrix forticlient egnyte remote work"),
+    entry("Design, Engineering, Mapping, and Projects", "Browse Autodesk, Bentley, ArcGIS, Primavera, Google Earth Pro, HEC, MCTRANS, and related project apps.", "vendor-guides.html#design-engineering-mapping-and-projects", "helpPage", "App Help Page", "autocad revit civil 3d infoworks icm microstation projectwise arcgis pro google earth hec hms hec ras hcs hss primavera p6"),
+    entry("Full Application Directory", "Browse every supported public application by vendor from the App Help page.", "vendor-guides.html#full-application-directory", "helpPage", "App Help Page", "application directory vendors products guides"),
+    entry("Licensing Help", "Customer-facing reference for how licensed products usually work across Microsoft, Autodesk, Bentley, Adobe, Bluebeam, ArcGIS, Oracle Primavera P6, and other licensed products.", "app-licensing.html", "helpPage", "Help Page", "licensing reference subscription plan edition access account profile oracle primavera p6 autodesk bluebeam adobe arcgis"),
     entry("Tips & Tricks", "Windows keyboard shortcuts, browser cache and cookie cleanup, safe temporary-file cleanup, and disk-space basics for everyday support.", "tips-and-tricks.html", "helpPage", "Help Page", "tips tricks windows shortcuts keyboard cache cookies chrome edge firefox safari temp local app data storage sense disk space cleanup"),
     entry("Contact", "Contact options for help-center questions, missing content, and guide updates.", "contact.html", "helpPage", "Contact Page", "contact help support email"),
     entry("Application Issues and Fixes", "Public help page covering common application problems and general fixes.", "application-issues.html", "helpPage", "Help Page", "troubleshooting faq errors"),
     entry("Microsoft App Issues", "Public help page for common Microsoft 365 app problems.", "microsoft-issues.html", "helpPage", "Help Page", "outlook teams onedrive sharepoint mfa"),
-    entry("PC Help", "Public help page for Windows basics, Windows 365 Cloud PCs, Citrix Workspace, FortiClient VPN, printing, audio, updates, sign-in, and network problems.", "computer-issues.html", "helpPage", "Help Page", "pc help windows cloud pc windows 365 citrix workspace printer vpn forticlient network updates audio sign in")
+    entry("PC Help", "Public help page for Windows basics, Windows 365 Cloud PCs, Citrix Workspace, browser issues, FortiClient VPN, printing, scanning, audio, updates, sign-in, and network problems.", "computer-issues.html", "helpPage", "Help Page", "pc help windows cloud pc windows 365 citrix workspace browser chrome edge firefox safari printer scanner vpn forticlient network updates audio sign in"),
+    entry("Browser Support", "Open PC Help browser articles when work sites, downloads, or sign-in pages behave differently in Chrome, Edge, Firefox, or Safari.", "computer-issues.html#browser-support", "helpPage", "Help Page", "browser support chrome edge firefox safari sign in downloads cookies cache")
   ];
 
   vendorOrder.forEach(vendorSlug => {
@@ -36,7 +39,12 @@ export function buildSearchIndex() {
     );
 
     getVendorApplications(vendorSlug).forEach(app => {
+      if (hiddenPublicSearchApps.has(app.slug)) {
+        return;
+      }
+
       const extra = getAppGuideContent(vendorSlug, app.slug);
+      const publicGuide = getPublicGuideContent(vendorSlug, app.slug);
       entries.push(
         entry(
           app.name,
@@ -44,7 +52,7 @@ export function buildSearchIndex() {
           `guides/${vendorSlug}/${app.slug}.html`,
           "appGuide",
           "Application Guide",
-          `${vendorSlug} ${app.name} ${app.focus} ${app.licensing} ${app.install} ${app.uninstall} ${(extra.highlights ?? []).join(" ")} ${(extra.askFirst ?? []).join(" ")} ${(extra.supportCheckpoints ?? []).join(" ")}`
+          `${vendorSlug} ${app.name} ${app.focus} ${app.licensing} ${app.install} ${app.uninstall} ${(publicGuide.summary ?? "")} ${(publicGuide.mobileSetup ?? []).join(" ")} ${(publicGuide.overview ?? []).join(" ")} ${(extra.highlights ?? []).join(" ")} ${(extra.askFirst ?? []).join(" ")} ${(extra.supportCheckpoints ?? []).join(" ")}`
         )
       );
     });

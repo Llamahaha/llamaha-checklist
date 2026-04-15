@@ -360,6 +360,26 @@ body {
   gap: 14px;
 }
 
+.is-collapsible-toc {
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+}
+
+.toc-panel {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.toc-panel > .accordion-summary {
+  padding: 26px 28px;
+}
+
+.toc-panel > .accordion-content {
+  padding: 0 28px 28px;
+}
+
 .toc-shell h2 {
   margin: 0;
 }
@@ -477,6 +497,17 @@ body {
   display: grid;
   gap: 18px;
   padding: 0 24px 24px;
+}
+
+.page-filter-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.page-search-input {
+  min-width: 0;
 }
 
 /* ── Support panels ─────────────────────────── */
@@ -1042,6 +1073,71 @@ input[type="checkbox"] {
   gap: 14px;
 }
 
+.compact-section-list {
+  display: grid;
+  gap: 14px;
+}
+
+.compact-link-list {
+  display: grid;
+  gap: 10px;
+}
+
+.compact-group {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--panel-start), var(--panel-end));
+  box-shadow: var(--shadow-sm);
+}
+
+.compact-group h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.compact-group p:not(.section-kicker) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.compact-link-item {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease, color 120ms ease;
+}
+
+.compact-link-item:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.compact-link-item strong {
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.compact-link-item span {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.compact-group-directory .compact-link-list {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
 .help-topic-directory {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
@@ -1415,6 +1511,11 @@ input[type="checkbox"] {
   .toggle-grid,
   .checkbox-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .page-filter-row,
+  .compact-group-directory .compact-link-list {
+    grid-template-columns: 1fr;
   }
 }
 

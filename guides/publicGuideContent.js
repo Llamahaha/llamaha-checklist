@@ -1145,10 +1145,18 @@ const basePublicGuideContent = {
 export const publicGuideContent = Object.fromEntries(
   [...new Set([...Object.keys(basePublicGuideContent), ...Object.keys(publicGuideContentExtra)])].map(vendorSlug => [
     vendorSlug,
-    {
-      ...(basePublicGuideContent[vendorSlug] ?? {}),
-      ...(publicGuideContentExtra[vendorSlug] ?? {})
-    }
+    Object.fromEntries(
+      [...new Set([
+        ...Object.keys(basePublicGuideContent[vendorSlug] ?? {}),
+        ...Object.keys(publicGuideContentExtra[vendorSlug] ?? {})
+      ])].map(appSlug => [
+        appSlug,
+        {
+          ...(basePublicGuideContent[vendorSlug]?.[appSlug] ?? {}),
+          ...(publicGuideContentExtra[vendorSlug]?.[appSlug] ?? {})
+        }
+      ])
+    )
   ])
 );
 
