@@ -34,6 +34,13 @@
   --radius-xl: 28px;
 }
 
+/* Ensure the hidden attribute always wins over component display rules
+   (many of our cards and sections set display: grid/flex, which would
+   otherwise override the UA [hidden] { display: none } rule). */
+[hidden] {
+  display: none !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0f0a1e;
