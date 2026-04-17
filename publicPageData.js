@@ -105,6 +105,82 @@ function extraPcItems() {
     ],
     "Printing, Audio, and Sign-in": [
       {
+        title: "Install a shared or network printer in Windows 11",
+        text: "If the printer is managed by another computer or print server, Windows 11 can connect to it once you know the share path and have permission to use it.",
+        fixes: [
+          "Open Settings, select Bluetooth and devices, then select Printers and scanners.",
+          "Select Add device. If Windows does not find the printer, select Add manually, then select the option to select a shared printer by name.",
+          "Enter the UNC path provided by your company, such as \\\\servername\\printername or \\\\ipaddress\\printername.",
+          "If Windows prompts for a driver, allow it to download from the print host. Keep the share path and any error wording ready if it fails."
+        ],
+        links: [
+          {
+            label: "Add or install a printer in Windows",
+            url: "https://support.microsoft.com/en-us/windows/add-or-install-a-printer-in-windows-cc0724cf-793e-3542-d1ff-727e4978638b"
+          },
+          {
+            label: "Fix shared printer connection problems in Windows",
+            url: "https://support.microsoft.com/en-us/windows/fix-shared-printer-connection-problems-in-windows-27f7b136-02e6-406a-9a25-fc87838062b8"
+          }
+        ]
+      },
+      {
+        title: "Audio or microphone defaults change after docking or undocking",
+        text: "When you connect or disconnect a dock, Windows often chooses a different default speaker or microphone than the one you want to use for meetings.",
+        fixes: [
+          "Click the volume icon in the taskbar, then select the arrow next to the volume slider to change the active output device.",
+          "For the microphone, open Settings, select System, then Sound, and pick the correct input device under Input.",
+          "If Teams still uses the wrong device, open Teams settings and select the device you want under Audio devices so Teams stops following the Windows default.",
+          "If only one meeting app is wrong, keep that app name ready for support instead of reinstalling drivers or the whole dock."
+        ],
+        links: [
+          {
+            label: "Fix sound or audio problems in Windows",
+            url: "https://support.microsoft.com/en-us/help/4026994/windows-10-fix-sound-problems"
+          },
+          {
+            label: "Manage sound settings",
+            url: "https://support.microsoft.com/en-us/windows/how-to-manage-sound-settings-7ea6ebdd-7c4d-4354-a60b-e54c1fc10bc9"
+          }
+        ]
+      },
+      {
+        title: "Dual-monitor layout or window positions reset after docking",
+        text: "When you dock, undock, or change displays, Windows may move your windows, change which screen is primary, or rearrange the monitor order.",
+        fixes: [
+          "Open Settings, select System, then Display. Drag the numbered display boxes so their order matches how the monitors are physically arranged.",
+          "Select the display you want as the primary monitor, then select Make this my main display under Multiple displays.",
+          "If windows keep moving back to one screen, turn on Remember window locations based on monitor connection in Display > Multiple displays on Windows 11.",
+          "If only one app loses its position, close and reopen that app after the monitors are arranged correctly instead of changing display drivers."
+        ],
+        links: [
+          {
+            label: "How to use multiple monitors in Windows",
+            url: "https://support.microsoft.com/en-us/windows/how-to-use-multiple-monitors-in-windows-329c6962-5a4d-b481-7baa-bec9671f728a"
+          }
+        ]
+      },
+      {
+        title: "Move Microsoft Authenticator to a new or replacement phone",
+        text: "Moving Authenticator is easier when the old phone is still working and you can complete the backup and restore steps in order. If the old phone is lost, your company may need to help reset multi-factor setup.",
+        fixes: [
+          "On the old phone, open Authenticator, select your account, select the menu, and turn on Cloud Backup (Android) or iCloud Backup (iOS). You can only restore to the same platform, so iOS backups cannot move to Android and the reverse.",
+          "On the new phone, install Microsoft Authenticator, then select Restore from backup and sign in with the personal Microsoft account that holds the backup.",
+          "Some work accounts require a re-approval step on the new phone. Complete any prompts your company shows before assuming the move failed.",
+          "Keep the old phone working and signed in until the new phone approves a real sign-in, then your admin or support can remove the old device registration cleanly."
+        ],
+        links: [
+          {
+            label: "Back up your accounts in Microsoft Authenticator",
+            url: "https://support.microsoft.com/en-us/authenticator/back-up-your-accounts-in-microsoft-authenticator"
+          },
+          {
+            label: "Restore account credentials from Microsoft Authenticator",
+            url: "https://support.microsoft.com/en-us/account-billing/restore-account-credentials-from-microsoft-authenticator-ce53096e-1e1c-4840-9e32-1618bc33cd43"
+          }
+        ]
+      },
+      {
         title: "Unable to scan from a scanner or multifunction printer",
         text: "Scanning problems are often caused by the device connection, the Windows Scan app, or the scanner source settings rather than a full printer reinstall.",
         fixes: [
@@ -146,6 +222,116 @@ function extraPcItems() {
             label: "Fix microphone problems in Windows",
             url: "https://support.microsoft.com/en-us/windows/fix-microphone-problems-5f230348-106d-bfa4-1db5-336f35576011"
           }
+        ]
+      }
+    ]
+  };
+}
+
+function createDefaultsAndEmailSection() {
+  return {
+    title: "Default Apps, Email, and Handoffs",
+    description: "Use this section when the wrong app opens a PDF, link, or email, when you need to switch between new Outlook and classic Outlook, or when you need to open a shared or extra mailbox.",
+    items: [
+      {
+        title: "Set the default PDF app in Windows 11",
+        text: "If Windows keeps opening PDFs in the wrong app, the default for the .pdf file type usually needs to be updated in Windows settings.",
+        fixes: [
+          "Open Settings, select Apps, then select Default apps.",
+          "Search for the app you want, such as Adobe Acrobat or Bluebeam Revu, and select it.",
+          "Find .pdf in the file-type list, select the current default, then choose the app you want to use and select Set default.",
+          "If the setting keeps reverting after a Windows update, note the timing for support because feature updates can reset defaults."
+        ],
+        links: [
+          {
+            label: "Change default apps in Windows",
+            url: "https://support.microsoft.com/en-us/windows/change-default-apps-in-windows-e5d82cad-17d1-c53b-3505-f10a32e1894d"
+          },
+          { label: "Acrobat guide", url: buildAppGuideUrl("adobe", "acrobat-pro"), external: false },
+          { label: "Bluebeam guide", url: buildAppGuideUrl("bluebeam", "revu-21"), external: false }
+        ]
+      },
+      {
+        title: "Set the default browser or default email handler",
+        text: "Links that open in the wrong browser, or mailto links that open the wrong email app, are usually controlled by Windows default-app settings rather than the browser or Outlook itself.",
+        fixes: [
+          "Open Settings, select Apps, then select Default apps.",
+          "To change the browser, search for the browser you want and use Set default at the top of that app's defaults page.",
+          "To change which app opens email links, search for Outlook or your preferred mail app, find mailto in the file-type list, and change the default.",
+          "If your company manages defaults through policy, contact support before trying to change them so the policy and the user choice do not fight."
+        ],
+        links: [
+          {
+            label: "Change default apps in Windows",
+            url: "https://support.microsoft.com/en-us/windows/change-default-apps-in-windows-e5d82cad-17d1-c53b-3505-f10a32e1894d"
+          },
+          { label: "Outlook guide", url: buildAppGuideUrl("microsoft", "outlook"), external: false }
+        ]
+      },
+      {
+        title: "Switch between new Outlook and classic Outlook",
+        text: "Windows computers may have both new Outlook and classic Outlook installed. The toggle in the top right of Outlook lets you switch between them, and you can also run both side by side on the same computer.",
+        fixes: [
+          "In new Outlook, locate the New Outlook toggle in the top-right corner of the window and turn it off to return to classic Outlook.",
+          "In classic Outlook, if the Try the new Outlook toggle appears in the top-right, selecting it will install and launch new Outlook.",
+          "Complete any feedback prompt or skip it, and let Outlook restart fully before you judge whether the switch worked.",
+          "If one version is missing features you expect, keep the exact feature name ready for support because new Outlook and classic Outlook still differ on some workflows."
+        ],
+        links: [
+          {
+            label: "Toggle out of the new Outlook for Windows",
+            url: "https://support.microsoft.com/en-us/office/toggle-out-of-the-new-outlook-for-windows-ec102b39-5727-418e-ae1f-a1805434640c"
+          },
+          {
+            label: "Switch to new Outlook for Windows",
+            url: "https://support.microsoft.com/en-us/office/switch-to-new-outlook-for-windows-f5fb9e26-af7c-4976-9274-61c6428344e7"
+          },
+          {
+            label: "Run new Outlook and classic Outlook side-by-side",
+            url: "https://support.microsoft.com/en-us/office/run-new-outlook-and-classic-outlook-side-by-side-a624c36d-c50f-43bc-9c8b-dd17b5690ffb"
+          }
+        ]
+      },
+      {
+        title: "Open a shared mailbox in Outlook",
+        text: "Shared mailboxes usually appear automatically after your admin adds you as a member, but you can also add one by name if it does not appear right away.",
+        fixes: [
+          "Close and reopen Outlook after your admin has added you to the shared mailbox. Most shared mailboxes appear under your account within a few minutes.",
+          "In new Outlook, right-click your account name in the folder list and select Add shared folder or mailbox. Enter the shared mailbox address your company provided.",
+          "In classic Outlook, select File > Account Settings > Account Settings, then open your account on the Email tab and use More Settings > Advanced > Add to add the mailbox.",
+          "If the mailbox still does not appear, keep its address ready and contact support so they can confirm you are a member."
+        ],
+        links: [
+          {
+            label: "Open and use a shared mailbox in Outlook",
+            url: "https://support.microsoft.com/en-us/office/open-and-use-a-shared-mailbox-in-outlook-d94a8e9e-21f1-4240-808b-de9c9c088afd"
+          },
+          {
+            label: "Manage shared mailbox settings in new Outlook",
+            url: "https://support.microsoft.com/en-us/office/manage-shared-mailbox-settings-in-new-outlook-f6929a97-4fc6-4a52-b77d-5e596c6322b4"
+          },
+          { label: "Outlook guide", url: buildAppGuideUrl("microsoft", "outlook"), external: false }
+        ]
+      },
+      {
+        title: "Add a secondary account or an archive mailbox in Outlook",
+        text: "If you need a second work account, a personal account, or an online archive showing in Outlook, the steps depend on which Outlook version you are using and which account type your company allows.",
+        fixes: [
+          "In new Outlook, select Settings, then Accounts, and use Add account to add another mailbox your company permits.",
+          "In classic Outlook, select File > Add Account and sign in with the account you need. Online Archive mailboxes usually appear automatically when assigned and may take time to populate.",
+          "If an online archive is expected but not appearing, confirm with support that your account has the archive feature enabled before changing any Outlook settings.",
+          "If your company restricts which accounts can be added, contact support instead of repeatedly retrying a sign-in that will be blocked by policy."
+        ],
+        links: [
+          {
+            label: "Add an email account to Outlook",
+            url: "https://support.microsoft.com/en-us/office/add-an-email-account-to-outlook-6e27792a-9267-4aa4-8bb6-c84ef146101b"
+          },
+          {
+            label: "Getting started with the new Outlook for Windows",
+            url: "https://support.microsoft.com/en-us/office/getting-started-with-the-new-outlook-for-windows-656bb8d9-5a60-49b2-a98b-ba7822bc7627"
+          },
+          { label: "Outlook guide", url: buildAppGuideUrl("microsoft", "outlook"), external: false }
         ]
       }
     ]
@@ -219,11 +405,175 @@ function createPublicPcHelpSections() {
     items: [...section.items, ...(extras[section.title] ?? [])]
   }));
 
-  return [extended[0], createBrowserSupportSection(), ...extended.slice(1)];
+  return [
+    extended[0],
+    createBrowserSupportSection(),
+    createDefaultsAndEmailSection(),
+    ...extended.slice(1)
+  ];
 }
 
 function createPublicTipsSections() {
   const extraSections = [
+    {
+      title: "Microsoft 365 Shortcuts: Outlook, Excel, Word, and Teams",
+      description: "Use these Microsoft 365 habits and shortcuts when you want to move faster in the apps you use every day. The shortcuts below come from Microsoft's current keyboard shortcut and help guidance.",
+      items: [
+        {
+          title: "Outlook shortcuts that save time on email",
+          text: "These shortcuts work in both classic Outlook and new Outlook for Windows for everyday mail handling.",
+          fixes: [
+            "Press Ctrl + N to start a new email while you are in the Mail view.",
+            "Press Ctrl + R to reply and Ctrl + Shift + R to reply all.",
+            "Press Ctrl + Enter to send the message you are writing.",
+            "Press Ctrl + 1 to switch to Mail, Ctrl + 2 for Calendar, and Ctrl + 3 for People.",
+            "Press Ctrl + E or F3 to jump into the search box to find a message quickly."
+          ],
+          links: [
+            {
+              label: "Keyboard shortcuts for Outlook",
+              url: "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-outlook-3cdeb221-7ae5-4c1d-8c1d-9e063216c1ac"
+            },
+            { label: "Outlook guide", url: "guides/microsoft/outlook.html", external: false }
+          ]
+        },
+        {
+          title: "Outlook habits that reduce mailbox noise",
+          text: "A few small habits cut down on overflowing inboxes and lost messages without needing rules or add-ins.",
+          fixes: [
+            "Use Focused Inbox so Outlook separates everyday mail from newsletters and notifications.",
+            "Right-click a newsletter and use Block or Unsubscribe instead of deleting it over and over.",
+            "Use the @ mention feature in the body of an email to make sure someone sees they are needed.",
+            "Add a scheduled reminder to an email by flagging it, then setting a follow-up date.",
+            "If you use both classic and new Outlook, pick one as your daily driver and keep signatures in sync."
+          ],
+          links: [
+            {
+              label: "Use Focused Inbox for Outlook",
+              url: "https://support.microsoft.com/en-us/office/focused-inbox-for-outlook-f445ad7f-02f4-4294-a82e-71d8964e3978"
+            },
+            {
+              label: "Use @mentions to get someone's attention",
+              url: "https://support.microsoft.com/en-us/office/use-mentions-to-get-someone-s-attention-in-email-and-meeting-invites-in-outlook-on-the-web-ae32ccc5-4b3b-4486-b60b-d5e793ebcd83"
+            }
+          ]
+        },
+        {
+          title: "Excel shortcuts that speed up everyday work",
+          text: "These Excel shortcuts come up often in CAD and engineering spreadsheets for quick editing and review.",
+          fixes: [
+            "Press Ctrl + Arrow key to jump to the edge of a data region quickly.",
+            "Press Ctrl + Shift + Arrow key to select from the current cell to the edge of the data.",
+            "Press Ctrl + T to turn a range into an Excel table that grows with your data.",
+            "Press Alt + = to insert an AutoSum for the selected range.",
+            "Press F4 to repeat the last action, or to toggle between absolute and relative cell references when editing a formula."
+          ],
+          links: [
+            {
+              label: "Keyboard shortcuts in Excel",
+              url: "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f"
+            }
+          ]
+        },
+        {
+          title: "Excel habits that reduce rework",
+          text: "These habits pay off on large sheets and when other people review or reopen the same workbook.",
+          fixes: [
+            "Use Freeze Panes under View when you scroll through big spreadsheets so header rows stay visible.",
+            "Use Tables (Ctrl + T) so formulas, formatting, and named references extend automatically when new rows are added.",
+            "Use Flash Fill (Ctrl + E) to reformat names, phone numbers, or other patterned data without writing formulas.",
+            "Turn on AutoSave when the file is stored in OneDrive or SharePoint so versions are kept without manual saves.",
+            "Use Find and Replace (Ctrl + H) carefully, and test one replacement before using Replace All."
+          ],
+          links: [
+            {
+              label: "Freeze panes to lock rows and columns",
+              url: "https://support.microsoft.com/en-us/office/freeze-panes-to-lock-rows-and-columns-dab2ffc9-020d-4026-8121-67dd25f2508f"
+            },
+            {
+              label: "Use Flash Fill in Excel",
+              url: "https://support.microsoft.com/en-us/office/using-flash-fill-in-excel-3f9bcf1e-db93-4890-94a0-1578341f73f7"
+            }
+          ]
+        },
+        {
+          title: "Word shortcuts for faster editing",
+          text: "These Word shortcuts are useful when you are writing proposals, specs, or reports and want to stay on the keyboard.",
+          fixes: [
+            "Press Ctrl + Shift + C to copy formatting and Ctrl + Shift + V to paste formatting onto other text.",
+            "Press Ctrl + K to insert a hyperlink on the selected text.",
+            "Press Shift + F3 to toggle selected text between lowercase, uppercase, and title case.",
+            "Press Ctrl + Enter to insert a page break without typing extra blank lines.",
+            "Press Ctrl + Z to undo and Ctrl + Y to redo when an auto-correction changes something unexpectedly."
+          ],
+          links: [
+            {
+              label: "Keyboard shortcuts in Word",
+              url: "https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-word-95ef89dd-7142-4b50-afb2-f762f663ceb2"
+            }
+          ]
+        },
+        {
+          title: "Word habits that keep documents consistent",
+          text: "A few habits keep long documents readable and easier for other reviewers to work in.",
+          fixes: [
+            "Use Styles (Heading 1, Heading 2, Body) instead of changing fonts manually so the document structure stays consistent.",
+            "Turn on Show/Hide (¶) when a section will not line up so you can see hidden tabs, spaces, or page breaks.",
+            "Use Insert > Table of Contents when Heading styles are in place so the TOC updates automatically.",
+            "If you need to collaborate, use Track Changes and let Word record edits instead of retyping sections.",
+            "When a document is stored in OneDrive or SharePoint, use AutoSave so you do not lose work after a crash."
+          ],
+          links: [
+            {
+              label: "Customize or create new styles in Word",
+              url: "https://support.microsoft.com/en-us/office/customize-or-create-new-styles-d38d6e47-f6fc-48eb-a607-1eb120dec563"
+            },
+            {
+              label: "Track changes in Word",
+              url: "https://support.microsoft.com/en-us/office/track-changes-in-word-197ba630-0f5f-4a8e-9a77-3712475e806a"
+            }
+          ]
+        },
+        {
+          title: "Teams shortcuts for meetings and chat",
+          text: "Keep these shortcuts handy when Teams is open all day on a busy workstation.",
+          fixes: [
+            "Press Ctrl + E to jump to the Teams search or command bar at the top of the app.",
+            "Press Ctrl + Shift + M to toggle mute on or off during a Teams call.",
+            "Press Ctrl + Shift + O to toggle your camera on or off during a Teams call.",
+            "Press Ctrl + N to start a new chat from anywhere in the app.",
+            "Press Ctrl + . (period) to open the Teams keyboard shortcuts list from inside the app."
+          ],
+          links: [
+            {
+              label: "Keyboard shortcuts for Microsoft Teams",
+              url: "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-microsoft-teams-2e8e2a70-e8d8-4a19-949b-4c36dd5292d2"
+            }
+          ]
+        },
+        {
+          title: "Teams meeting habits that prevent common issues",
+          text: "Most Teams meeting problems come from the wrong audio device, wrong account, or a second Teams window competing for the call.",
+          fixes: [
+            "Before joining, check which microphone, speaker, and camera Teams is set to use under Settings > Devices.",
+            "Use Background effects or blur before the camera turns on if you are joining from home or a shared space.",
+            "Use raise hand, reactions, or chat to interrupt without talking over other people in large meetings.",
+            "If audio breaks up, switch to Windows default audio for one meeting and compare before reinstalling anything.",
+            "Keep only one Teams window active. Multiple Teams installs or tenants open at the same time can cause audio to follow the wrong client."
+          ],
+          links: [
+            {
+              label: "Join a Teams meeting",
+              url: "https://support.microsoft.com/en-us/office/join-a-meeting-in-microsoft-teams-1613bb53-f3fa-431e-85a9-d6a91e3468c9"
+            },
+            {
+              label: "Manage audio settings in Teams",
+              url: "https://support.microsoft.com/en-us/office/manage-audio-settings-in-a-microsoft-teams-meeting-6ea36f9a-827b-47d6-b22e-ec94d5f0f5e4"
+            }
+          ]
+        }
+      ]
+    },
     {
       title: "Web Apps and Browser Handoffs",
       description: "Use these habits when a site, sign-in page, downloaded file, or open-in-app workflow behaves differently in one browser or only on one computer.",

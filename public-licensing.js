@@ -62,14 +62,17 @@ const customerLicensingReference = {
   autodesk: {
     summary: "Autodesk access is usually tied to the Autodesk account email assigned to you and the exact product plus release year your team uses.",
     howItWorks: [
-      "Autodesk products commonly use named-user access through the Autodesk account assigned by your company.",
+      "Most Autodesk products now use Named User subscriptions. Your Autodesk account is assigned to you, and you sign in to the software to activate it on up to three computers, running one at a time.",
       "The specific product and release year matter. AutoCAD, Revit, Civil 3D, and other Autodesk apps may all be assigned differently.",
+      "Autodesk requires an internet connection at least every 30 days to verify the subscription, even after the initial activation.",
+      "Some older environments may still use a network license with a license server. Autodesk has not sold new multi-user subscriptions since 2020, so new assignments are almost always Named User.",
       "Your company may also standardize on a specific year, language, or deployment package that should match what you install."
     ],
     whatYouNeed: [
       "The Autodesk account email your company assigned",
       "The exact Autodesk product you need",
-      "The specific product year or version your team expects to use"
+      "The specific product year or version your team expects to use",
+      "Whether your team uses Named User sign-in (most common) or a legacy network license server"
     ]
   },
   bentley: {
@@ -86,15 +89,17 @@ const customerLicensingReference = {
     ]
   },
   esri: {
-    summary: "Esri access usually depends on the ArcGIS organization you belong to, the role or user type assigned to you, and any extensions tied to that account.",
+    summary: "Esri access usually depends on the ArcGIS organization you belong to, the role or user type assigned to you, any extensions tied to that account, and for some teams a company license server or authorization file.",
     howItWorks: [
-      "ArcGIS access is often connected to the ArcGIS portal or organization your company uses.",
-      "ArcGIS Pro and ArcGIS Online may both depend on the same account, but different roles, user types, and extensions control the features you see.",
-      "If you need a specific ArcGIS extension or license level, that detail matters."
+      "Most ArcGIS Pro users sign in with a Named User account from ArcGIS Online or ArcGIS Enterprise. That account determines your user type, role, and extensions.",
+      "Single Use licenses tie ArcGIS Pro to a specific computer through an authorization file. As of December 1, 2025, new conversions between Named User and Single Use are not available in My Esri, so existing Single Use installs stay as they are until your team changes them.",
+      "Concurrent Use with ArcGIS License Manager was deprecated on July 1, 2025. Concurrent Use licenses are valid for ArcGIS Pro 3.6 but are not valid for versions released after that.",
+      "If you need a specific ArcGIS extension or license level, that detail matters regardless of the license type."
     ],
     whatYouNeed: [
       "The ArcGIS organization or portal you should use",
       "The ArcGIS product you need, such as ArcGIS Pro or ArcGIS Online",
+      "Which license type your team uses (Named User, Single Use, or legacy Concurrent Use on Pro 3.6)",
       "If relevant, the license level, role, or extension your work requires"
     ]
   },
@@ -241,3 +246,35 @@ if (licensingGrid) {
     licensingGrid.appendChild(card);
   });
 }
+
+// Active-section highlight for static TOC links on the licensing page.
+(() => {
+  const tocLinks = document.querySelectorAll(".help-toc-nav a");
+  if (!tocLinks.length) {
+    return;
+  }
+
+  const setActive = id => {
+    tocLinks.forEach(link => {
+      const href = link.getAttribute("href") ?? "";
+      link.classList.toggle("is-active", href === `#${id}`);
+    });
+  };
+
+  tocLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const id = (link.getAttribute("href") ?? "").replace(/^#/, "");
+      if (id) {
+        setActive(id);
+      }
+    });
+  });
+
+  // Pick the first link as active on load (or match current hash).
+  const initialHash = window.location.hash.replace(/^#/, "");
+  if (initialHash) {
+    setActive(initialHash);
+  } else {
+    tocLinks[0].classList.add("is-active");
+  }
+})();

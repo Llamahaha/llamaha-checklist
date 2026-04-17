@@ -28,7 +28,8 @@ const basePublicGuideContent = {
         "Compare Outlook on the web to the desktop app. If the web version works, the problem is usually local to the app or profile.",
         "Remove old or incorrect work or personal accounts from Office if more than one account appears.",
         "Try opening Outlook with add-ins disabled if it hangs on Loading Profile or crashes right away.",
-        "If search is slow or results are missing, leave Outlook open for a few minutes after sign-in so it can finish syncing."
+        "If search is slow or results are missing, leave Outlook open for a few minutes after sign-in so it can finish syncing.",
+        "If you switched between new Outlook and classic Outlook recently, decide which one is your daily driver and confirm sign-ins, signatures, and rules in that version before troubleshooting further."
       ],
       commonIssues: [
         {
@@ -46,8 +47,20 @@ const basePublicGuideContent = {
         {
           title: "A shared mailbox or calendar is missing",
           symptom: "Your primary mailbox opens, but a shared mailbox, shared calendar, or delegated send option is gone or out of date.",
-          likelyFix: "Check whether the same shared mailbox appears in Outlook on the web, then restart Outlook and let it refresh before changing profiles.",
+          likelyFix: "Check whether the same shared mailbox appears in Outlook on the web, then restart Outlook and let it refresh before changing profiles. In new Outlook, right-click your account and use Add shared folder or mailbox if it still does not appear after your admin confirms you are a member.",
           collect: "Send the shared mailbox or calendar name, what should be visible, and whether the same problem shows in Outlook on the web."
+        },
+        {
+          title: "Switching between new Outlook and classic Outlook",
+          symptom: "A feature or rule is missing after the desktop switched between new Outlook and classic Outlook, or Outlook opens in the version you did not expect.",
+          likelyFix: "Use the New Outlook toggle in the top-right of the window to switch back to classic Outlook, or use Try the new Outlook in classic to move to new Outlook. Allow the app to restart fully, then re-check signatures, rules, and shared mailboxes in the version you are keeping.",
+          collect: "Send which version is open now, which version you expected, and the exact feature or rule that is missing."
+        },
+        {
+          title: "A secondary work account or online archive will not appear",
+          symptom: "You expect a second work account, a delegated mailbox, or an online archive to appear and it does not, or it shows the wrong account name.",
+          likelyFix: "In new Outlook, go to Settings > Accounts and add the account there. In classic Outlook, use File > Add Account. Online archives typically appear automatically when assigned and may take time to populate, so confirm with support that the archive is enabled before reconfiguring Outlook.",
+          collect: "Send the account or archive name, which Outlook version you are using, and whether the same account works in Outlook on the web."
         }
       ],
       supportArtifacts: [
@@ -414,7 +427,8 @@ const basePublicGuideContent = {
         "Sign out and back in with the correct Bluebeam ID before reinstalling.",
         "If local PDFs open but Studio does not, compare that result to another network connection if one is available.",
         "If shared profiles or tool sets are missing, switch to the default profile once to see whether only the shared content is affected.",
-        "If the issue started right after an update, note the exact version before changing anything else."
+        "If the issue started right after an update, note the exact version before changing anything else.",
+        "If Studio Projects and Studio Sessions both fail, confirm which Bluebeam ID Studio is using. Revu 21 allows you to activate with one Bluebeam ID and sign in to Studio with a different one."
       ],
       commonIssues: [
         {
@@ -426,8 +440,14 @@ const basePublicGuideContent = {
         {
           title: "Studio Sessions or Projects will not open",
           symptom: "Local PDFs work, but Studio access fails or shared cloud content is unavailable.",
-          likelyFix: "Test a local PDF first, then sign back into Studio and confirm whether the issue affects one Session or all Studio access.",
-          collect: "Send the Studio project or session name, the message shown, and whether other people can open it."
+          likelyFix: "Test a local PDF first, then sign back into Studio and confirm whether the issue affects one Session or all Studio access. Sessions are for real-time markup, while Projects check files out before you can edit them, so the behavior and error wording are different.",
+          collect: "Send the Studio project or session name, the message shown, whether it is a Project or a Session, and whether other people can open it."
+        },
+        {
+          title: "Studio is in the wrong region or signed in with the wrong Bluebeam ID",
+          symptom: "Studio works, but a teammate cannot see the same Projects or Sessions, or Studio is in a different region than the one your team uses.",
+          likelyFix: "In Studio, sign out and sign in with the Bluebeam ID that owns the Projects and Sessions your team expects. In Revu 21 you can use one Bluebeam ID for activation and a different Bluebeam ID for Studio if your organization needs that split.",
+          collect: "Send the Bluebeam ID used for activation, the Bluebeam ID used in Studio, and the Studio region and Project or Session name that should be visible."
         },
         {
           title: "Profiles, tool sets, or stamps are missing",
@@ -627,7 +647,8 @@ const basePublicGuideContent = {
       licensing: [
         "Make sure ArcGIS Pro is signed into the same ArcGIS organization your team expects.",
         "If the app opens with the wrong license level, note the exact level shown, such as Basic, Standard, or Advanced.",
-        "If a tool is missing, note the extension name you expected to use."
+        "If a tool is missing, note the extension name you expected to use.",
+        "Most ArcGIS Pro users sign in with a Named User account from ArcGIS Online or ArcGIS Enterprise. Some organizations still use Single Use, and a few may still use Concurrent Use on ArcGIS Pro 3.6. If you do not know which license type your team uses, ask before changing the Licensing page in ArcGIS Pro."
       ],
       install: [
         "Install pending ArcGIS Pro updates if your organization allows them, then restart the computer.",
@@ -646,6 +667,12 @@ const basePublicGuideContent = {
           symptom: "The app opens, but a required level or extension is unavailable.",
           likelyFix: "Sign in again with the correct ArcGIS organization account and confirm the license level shown in the app.",
           collect: "Send the license level shown, the extension name that is missing, and a screenshot of the licensing screen."
+        },
+        {
+          title: "License Authorization set to the wrong type or license server",
+          symptom: "ArcGIS Pro asks for a different sign-in method than you expected, points at the wrong license server, or refuses to open even though your ArcGIS account is active.",
+          likelyFix: "In ArcGIS Pro, open the Licensing page and confirm License Type matches what your team uses (Named User, Single Use, or, for Pro 3.6, Concurrent Use). For Named User, signing in with the ArcGIS organization account is usually enough. For Single Use or Concurrent Use, confirm the authorization file or license server name with support before changing the setting.",
+          collect: "Send the license type shown, the ArcGIS organization URL or license server name, and the exact sign-in or authorization message you see."
         },
         {
           title: "Projects or layers are missing",

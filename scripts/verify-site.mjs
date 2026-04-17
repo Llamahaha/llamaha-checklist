@@ -241,6 +241,52 @@ function verifySearchIndex() {
     if (!fileExists(targetPart)) {
       addError(`Search index entry "${entry.title}" points to missing file: ${entry.url}`);
     }
+
+    // Public search must never surface internal/tech-only pages.
+    if (/(^|\/)internal\//.test(entry.url)) {
+      addError(`Search index entry "${entry.title}" leaks an internal URL: ${entry.url}`);
+    }
+    const internalCategories = new Set([
+      "internalGuide",
+      "internalTip",
+      "internalSnippet",
+      "internalTemplate",
+      "internalPlaybook",
+      "internalReference"
+    ]);
+    if (entry.category && internalCategories.has(entry.category)) {
+      addError(
+        `Search index entry "${entry.title}" has internal category "${entry.category}" in the customer index`
+      );
+    }
+  }
+}
+
+// Customer-facing pages must not link directly to /internal content. The redirect
+// pages below intentionally bounce to internal counterparts; everything else is a leak.
+const internalRedirectExceptions = new Set([
+  resolve(rootDir, "checklist.html"),
+  resolve(rootDir, "snippets.html"),
+  resolve(rootDir, "templates.html"),
+  resolve(rootDir, "emergency-playbooks.html")
+]);
+
+function verifyNoInternalLeaksInPublicPages() {
+  for (const filePath of walk(rootDir)) {
+    if (extname(filePath) !== ".html") continue;
+    // Skip anything actually inside /internal and the known redirect shims.
+    if (filePath.includes(`${resolve(rootDir, "internal")}/`) || filePath.endsWith("/internal")) continue;
+    if (internalRedirectExceptions.has(filePath)) continue;
+
+    const contents = readFileSync(filePath, "utf8");
+    // Catch href/src targets that point at internal content.
+    const matches = contents.match(/(?:href|src)\s*=\s*["'](?:\.\/)?internal\/[^"'#]+["']/gi);
+    if (matches && matches.length) {
+      const relative = filePath.replace(`${rootDir}/`, "");
+      addError(
+        `Public page "${relative}" links to internal content: ${matches.slice(0, 3).join(", ")}`
+      );
+    }
   }
 }
 
@@ -290,6 +336,7 @@ if (!linksOnly) {
   verifyInternalRoutes();
   verifyGuideFiles();
   verifySearchIndex();
+  verifyNoInternalLeaksInPublicPages();
   verifyPublicGuideContent();
 }
 

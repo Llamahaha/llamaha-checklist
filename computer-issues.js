@@ -29,6 +29,16 @@ function revealSection(id) {
   window.requestAnimationFrame(() => {
     wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
   });
+
+  setActiveTocLink(id);
+}
+
+let tocLinkMap = new Map();
+
+function setActiveTocLink(id) {
+  tocLinkMap.forEach((link, linkId) => {
+    link.classList.toggle("is-active", linkId === id);
+  });
 }
 
 function filterSections(query) {
@@ -62,57 +72,34 @@ function renderToc(items) {
   }
 
   pageToc.innerHTML = "";
-  pageToc.classList.add("toc-shell", "hub-section", "is-collapsible-toc");
+  tocLinkMap = new Map();
 
-  const details = document.createElement("details");
-  details.className = "accordion-section toc-panel";
-
-  const summary = document.createElement("summary");
-  summary.className = "accordion-summary";
-
-  const summaryCopy = document.createElement("div");
-  summaryCopy.className = "accordion-summary-copy";
-  summaryCopy.append(
+  const header = document.createElement("div");
+  header.className = "help-toc-header";
+  header.append(
     Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "On This Page" }),
-    Object.assign(document.createElement("h2"), { textContent: "Open the PC Help section you need" }),
+    Object.assign(document.createElement("h2"), { textContent: "PC Help sections" }),
     Object.assign(document.createElement("p"), {
-      textContent: "Use these quick links or search this page to jump into Cloud PC, browser, VPN, Windows, printing, and device-help sections."
+      textContent: `Jump to any of the ${items.length} sections below, or search within this page.`
     })
   );
 
-  const meta = document.createElement("span");
-  meta.className = "accordion-summary-meta";
-  meta.textContent = `${items.length} sections`;
-  summary.append(summaryCopy, meta);
-
-  const content = document.createElement("div");
-  content.className = "accordion-content";
-
   const searchRow = document.createElement("div");
-  searchRow.className = "page-filter-row";
+  searchRow.className = "help-toc-search";
 
   const searchInput = document.createElement("input");
   searchInput.type = "search";
   searchInput.className = "search-input page-search-input";
-  searchInput.placeholder = "Search PC Help on this page";
+  searchInput.placeholder = "Search PC Help";
   searchInput.setAttribute("aria-label", "Search PC Help on this page");
   searchInput.addEventListener("input", event => {
     filterSections(event.target.value);
   });
 
-  const clearButton = document.createElement("button");
-  clearButton.type = "button";
-  clearButton.className = "secondary-btn compact-btn";
-  clearButton.textContent = "Clear";
-  clearButton.addEventListener("click", () => {
-    searchInput.value = "";
-    filterSections("");
-  });
-
-  searchRow.append(searchInput, clearButton);
+  searchRow.append(searchInput);
 
   const nav = document.createElement("nav");
-  nav.className = "toc-links";
+  nav.className = "help-toc-nav";
   nav.setAttribute("aria-label", "PC Help sections");
 
   items.forEach(item => {
@@ -121,16 +108,14 @@ function renderToc(items) {
     link.textContent = item.label;
     link.addEventListener("click", event => {
       event.preventDefault();
-      details.open = true;
       revealSection(item.id);
       window.history.replaceState({}, "", `#${item.id}`);
     });
+    tocLinkMap.set(item.id, link);
     nav.appendChild(link);
   });
 
-  content.append(searchRow, nav);
-  details.append(summary, content);
-  pageToc.appendChild(details);
+  pageToc.append(header, searchRow, nav);
 }
 
 function createSection(section) {
@@ -208,6 +193,15 @@ function renderSections() {
   });
 
   renderToc(tocItems);
+
+  // Open first section by default so the content pane isn't empty.
+  const firstSection = renderedSections[0];
+  if (firstSection && firstSection.element instanceof HTMLDetailsElement) {
+    firstSection.element.open = true;
+    if (tocItems[0]) {
+      setActiveTocLink(tocItems[0].id);
+    }
+  }
 }
 
 window.addEventListener("hashchange", () => {

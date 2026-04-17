@@ -30,17 +30,22 @@
         </div>
       </section>
 
-      <section class="results-card toc-shell">
-        <p class="section-kicker">On This Page</p>
-        <h2>Jump to a section</h2>
-        <p class="hub-section-copy">Start with the general licensing model, check what usually determines access, then open the vendor-specific reference that matches your product.</p>
-        <nav class="toc-links" aria-label="Licensing Help sections">
-          <a href="#howLicensingWorksSection">How Licensing Works</a>
-          <a href="#whatAccessDependsOnSection">What Access Depends On</a>
-          <a href="#m365MatrixSection">Microsoft Plan Reference</a>
-          <a href="#vendorCoverageSection">Vendor Licensing Help</a>
-        </nav>
-      </section>
+      <div class="help-layout">
+        <aside class="help-toc" aria-label="On this page">
+          <div class="help-toc-header">
+            <p class="section-kicker">On This Page</p>
+            <h2>Jump to a section</h2>
+            <p>Start with the general licensing model, then open the vendor-specific reference that matches your product.</p>
+          </div>
+          <nav class="help-toc-nav" aria-label="Licensing Help sections">
+            <a href="#howLicensingWorksSection">How Licensing Works</a>
+            <a href="#whatAccessDependsOnSection">What Access Depends On</a>
+            <a href="#m365MatrixSection">Microsoft Plan Reference</a>
+            <a href="#vendorCoverageSection">Vendor Licensing Help</a>
+          </nav>
+        </aside>
+
+        <div class="help-content section-stack">
 
       <section id="howLicensingWorksSection" class="results-card hub-section">
         <div class="results-header">
@@ -69,6 +74,11 @@
             <p class="section-kicker">Model</p>
             <h2>Company profile or organization</h2>
             <p>Some apps also depend on the correct company profile, ArcGIS organization, Bentley datasource, or workspace being selected after sign-in.</p>
+          </article>
+          <article class="hub-card">
+            <p class="section-kicker">Model</p>
+            <h2>Company license server or authorization file</h2>
+            <p>Some products still use a license server, an authorization file, or a similar company-managed license source. The app has to be pointed at the right server or file before it opens normally.</p>
           </article>
         </div>
       </section>
@@ -125,6 +135,9 @@
         <p class="hub-section-copy">Each card explains how access usually works for that vendor, what product details usually matter, and where to go next for product-specific help.</p>
         <div id="licensingGrid" class="vendor-directory"></div>
       </section>
+
+        </div>
+      </div>
     </main>
   </div>
   <script type="module" src="siteChrome.js"></script>
