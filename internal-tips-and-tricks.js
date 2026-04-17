@@ -1,6 +1,7 @@
 import { internalTipsAndTricksSections } from "./internalContent.js";
 import { internalTipsAndTricksExtraSections } from "./internalContentExtra.js";
 import { createLinks, createList, createPageCard, renderPageToc, slugifyText } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const tipsSections = document.getElementById("tipsSections");
 const pageToc = document.getElementById("pageToc");
@@ -64,9 +65,10 @@ function renderSections() {
   });
 
   renderPageToc(pageToc, tocItems, {
-    title: "Jump to an internal tips section",
-    description: "Use these quick links to move between daily support patterns, safer reset habits, and evidence-collection reminders."
+    title: "Pick an internal tips section",
+    description: "Only the section you pick is shown on the page. Switch any time."
   });
 }
 
 renderSections();
+activatePageTabs();

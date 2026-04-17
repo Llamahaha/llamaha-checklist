@@ -2,6 +2,7 @@ import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { vendorFaqs, vendorUsageIssues } from "./guides/guideExtras.js";
 import { crossAppIssuePatterns } from "./supportData.js";
 import { appendBlock, createLinks, createList, createPageCard } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const patternGrid = document.getElementById("patternGrid");
 const vendorIssueGrid = document.getElementById("vendorIssueGrid");
@@ -38,3 +39,4 @@ vendorOrder.forEach(key => {
   vendorIssueGrid.appendChild(card);
 });
 
+activatePageTabs();

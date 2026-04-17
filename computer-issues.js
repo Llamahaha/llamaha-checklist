@@ -1,9 +1,11 @@
 import { publicPcHelpSections } from "./publicPageData.js";
 import { createLinks, createList, createPageCard, slugifyText } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const issueSections = document.getElementById("issueSections");
 const pageToc = document.getElementById("pageToc");
 const renderedSections = [];
+let tabsApi = null;
 
 function buildSearchText(section, item) {
   return [
@@ -16,33 +18,14 @@ function buildSearchText(section, item) {
   ].join(" ").toLowerCase();
 }
 
-function revealSection(id) {
-  const wrapper = document.getElementById(id);
-  if (!wrapper) {
-    return;
-  }
-
-  if (wrapper instanceof HTMLDetailsElement) {
-    wrapper.open = true;
-  }
-
-  window.requestAnimationFrame(() => {
-    wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-
-  setActiveTocLink(id);
-}
-
-let tocLinkMap = new Map();
-
-function setActiveTocLink(id) {
-  tocLinkMap.forEach((link, linkId) => {
-    link.classList.toggle("is-active", linkId === id);
-  });
-}
-
 function filterSections(query) {
   const needle = query.trim().toLowerCase();
+
+  // When a search is active, bypass the single-tab rule so every matching
+  // section can appear. Clearing the search returns to the active tab.
+  if (tabsApi) {
+    tabsApi.setSearchOverride(!!needle);
+  }
 
   renderedSections.forEach(section => {
     let visibleCards = 0;
@@ -59,9 +42,11 @@ function filterSections(query) {
       || section.element.dataset.searchText.includes(needle)
       || visibleCards > 0;
 
-    section.element.hidden = !sectionMatches;
-    if (needle && sectionMatches) {
-      section.element.open = true;
+    if (needle) {
+      section.element.hidden = !sectionMatches;
+      if (sectionMatches && section.element instanceof HTMLDetailsElement) {
+        section.element.open = true;
+      }
     }
   });
 }
@@ -72,7 +57,6 @@ function renderToc(items) {
   }
 
   pageToc.innerHTML = "";
-  tocLinkMap = new Map();
 
   const header = document.createElement("div");
   header.className = "help-toc-header";
@@ -80,7 +64,7 @@ function renderToc(items) {
     Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "On This Page" }),
     Object.assign(document.createElement("h2"), { textContent: "PC Help sections" }),
     Object.assign(document.createElement("p"), {
-      textContent: `Jump to any of the ${items.length} sections below, or search within this page.`
+      textContent: `Open a section below. Only the one you pick is shown on the page. You can also search everything.`
     })
   );
 
@@ -106,12 +90,6 @@ function renderToc(items) {
     const link = document.createElement("a");
     link.href = `#${item.id}`;
     link.textContent = item.label;
-    link.addEventListener("click", event => {
-      event.preventDefault();
-      revealSection(item.id);
-      window.history.replaceState({}, "", `#${item.id}`);
-    });
-    tocLinkMap.set(item.id, link);
     nav.appendChild(link);
   });
 
@@ -194,24 +172,7 @@ function renderSections() {
 
   renderToc(tocItems);
 
-  // Open first section by default so the content pane isn't empty.
-  const firstSection = renderedSections[0];
-  if (firstSection && firstSection.element instanceof HTMLDetailsElement) {
-    firstSection.element.open = true;
-    if (tocItems[0]) {
-      setActiveTocLink(tocItems[0].id);
-    }
-  }
+  tabsApi = activatePageTabs();
 }
-
-window.addEventListener("hashchange", () => {
-  if (window.location.hash) {
-    revealSection(window.location.hash.slice(1));
-  }
-});
 
 renderSections();
-
-if (window.location.hash) {
-  revealSection(window.location.hash.slice(1));
-}

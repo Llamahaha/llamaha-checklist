@@ -4,6 +4,7 @@ import { getPublicGuideContent } from "./guides/publicGuideContent.js";
 import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { internalOnlyGuideGroups } from "./internalContent.js";
 import { createLinks, createPageCard, renderPageToc } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const pageToc = document.getElementById("pageToc");
 const featuredGuideGrid = document.getElementById("featuredGuideGrid");
@@ -218,7 +219,7 @@ function renderVendorSection(group) {
   const section = document.createElement("details");
   section.className = "results-card accordion-section";
   section.id = `vendor-${group.slug}`;
-  section.open = group.slug === "internal-stack" || group.slug === "microsoft";
+  section.open = false;
 
   const summary = document.createElement("summary");
   summary.className = "accordion-summary";
@@ -274,25 +275,8 @@ referenceOrder.forEach(slug => {
 });
 
 renderPageToc(pageToc, tocItems, {
-  title: "Jump to a vendor or tool family",
-  description: "Use these quick links to move between internal vendor references, internal-only stack tools, and the public app families we support."
+  title: "Pick a vendor or tool family",
+  description: "Only the vendor or tool family you pick is shown on the page. Switch any time."
 });
 
-function revealHashTarget(hash = window.location.hash) {
-  if (!hash) return;
-  const target = document.querySelector(hash);
-  if (!target) return;
-  const section = target.closest("details");
-  if (section instanceof HTMLDetailsElement) {
-    section.open = true;
-  }
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-window.addEventListener("hashchange", () => {
-  revealHashTarget();
-});
-
-window.setTimeout(() => {
-  revealHashTarget();
-}, 0);
+activatePageTabs({ preferredDefault: "vendor-internal-stack" });

@@ -1,5 +1,6 @@
 import { handoffTemplateGroups } from "./resourceLibrary.js";
 import { copyTextToClipboard, createPageCard, renderPageToc, slugifyText } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const templateSections = document.getElementById("templateSections");
 const pageToc = document.getElementById("pageToc");
@@ -132,34 +133,7 @@ handoffTemplateGroups.forEach((group, index) => {
 
 renderPageToc(pageToc, tocItems, {
   title: "Jump to a template category",
-  description: "Use these quick links to move between grouped customer-facing and internal MSP templates."
+  description: "Open a category below. Only the one you pick is shown on the page."
 });
 
-function revealHashTarget(hash = window.location.hash) {
-  if (!hash) return;
-  const target = document.querySelector(hash);
-  if (!target) return;
-
-  const section = target.closest("details");
-  if (section instanceof HTMLDetailsElement) {
-    section.open = true;
-  }
-
-  window.setTimeout(() => {
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 0);
-}
-
-pageToc?.addEventListener("click", event => {
-  const link = event.target instanceof Element ? event.target.closest("a[href^='#']") : null;
-  if (!link) return;
-  revealHashTarget(link.getAttribute("href"));
-});
-
-window.addEventListener("hashchange", () => {
-  revealHashTarget();
-});
-
-window.setTimeout(() => {
-  revealHashTarget();
-}, 0);
+activatePageTabs({ scrollOnInitial: false });

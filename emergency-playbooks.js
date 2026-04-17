@@ -1,5 +1,6 @@
 import { emergencyPlaybooks, servicePlaybooks } from "./operationsData.js";
 import { appendBlock, createPageCard } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const playbookGrid = document.getElementById("playbookGrid");
 const servicePlaybookGrid = document.getElementById("servicePlaybookGrid");
@@ -76,17 +77,4 @@ servicePlaybooks.forEach(playbook => {
   }
 });
 
-function revealHashTarget(hash = window.location.hash) {
-  if (!hash) return;
-  const target = document.querySelector(hash);
-  if (!target) return;
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-window.addEventListener("hashchange", () => {
-  revealHashTarget();
-});
-
-window.setTimeout(() => {
-  revealHashTarget();
-}, 0);
+activatePageTabs();

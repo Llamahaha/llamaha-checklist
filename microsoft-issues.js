@@ -1,5 +1,6 @@
 import { matrixResource, microsoftIssueSections } from "./supportData.js";
 import { createLinks, createList, createPageCard, renderPageToc, slugifyText } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const issueSections = document.getElementById("issueSections");
 const matrixAction = document.getElementById("matrixAction");
@@ -80,10 +81,11 @@ function renderSections() {
   });
 
   renderPageToc(pageToc, tocItems, {
-    title: "Jump to a section",
-    description: "Use these quick links to move between the Microsoft issue groups on this page."
+    title: "Pick a section",
+    description: "Only the section you pick is shown on the page. Switch any time."
   });
 }
 
 renderMatrixAction();
 renderSections();
+activatePageTabs();

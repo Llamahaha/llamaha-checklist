@@ -2,6 +2,7 @@ import { getVendorApplications } from "./guides/applicationCatalog.js";
 import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { matrixResource } from "./supportData.js";
 import { appendBlock, createLinks, createPageCard } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const licensingGrid = document.getElementById("licensingGrid");
 const matrixCard = document.getElementById("matrixCard");
@@ -247,34 +248,4 @@ if (licensingGrid) {
   });
 }
 
-// Active-section highlight for static TOC links on the licensing page.
-(() => {
-  const tocLinks = document.querySelectorAll(".help-toc-nav a");
-  if (!tocLinks.length) {
-    return;
-  }
-
-  const setActive = id => {
-    tocLinks.forEach(link => {
-      const href = link.getAttribute("href") ?? "";
-      link.classList.toggle("is-active", href === `#${id}`);
-    });
-  };
-
-  tocLinks.forEach(link => {
-    link.addEventListener("click", () => {
-      const id = (link.getAttribute("href") ?? "").replace(/^#/, "");
-      if (id) {
-        setActive(id);
-      }
-    });
-  });
-
-  // Pick the first link as active on load (or match current hash).
-  const initialHash = window.location.hash.replace(/^#/, "");
-  if (initialHash) {
-    setActive(initialHash);
-  } else {
-    tocLinks[0].classList.add("is-active");
-  }
-})();
+activatePageTabs();

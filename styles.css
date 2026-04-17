@@ -414,6 +414,13 @@ body {
   color: var(--accent);
 }
 
+.toc-links a.is-active {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, var(--accent-soft), rgba(37, 99, 235, 0.12));
+  color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.08);
+}
+
 .accordion-stack {
   display: grid;
   gap: 16px;
@@ -462,6 +469,16 @@ body {
   border-color: var(--accent);
   background: var(--accent-soft);
   color: var(--accent);
+}
+
+/* When a section is the currently active tab, it can't actually collapse —
+   so present its summary as a static header, not a toggle control. */
+.accordion-section.is-active-tab > .accordion-summary {
+  cursor: default;
+}
+
+.accordion-section.is-active-tab > .accordion-summary::after {
+  display: none;
 }
 
 .accordion-summary-copy {

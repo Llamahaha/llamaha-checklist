@@ -2,6 +2,7 @@ import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { vendorFaqs, vendorInstallIssues } from "./guides/guideExtras.js";
 import { installUninstallPatterns } from "./supportData.js";
 import { appendBlock, createLinks, createList, createPageCard } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const lifecycleGrid = document.getElementById("lifecycleGrid");
 const vendorLifecycleGrid = document.getElementById("vendorLifecycleGrid");
@@ -38,3 +39,4 @@ vendorOrder.forEach(key => {
   vendorLifecycleGrid.appendChild(card);
 });
 
+activatePageTabs();

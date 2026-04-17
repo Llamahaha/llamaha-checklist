@@ -1,6 +1,7 @@
 import { matrixResource } from "./supportData.js";
 import { internalLicensingReference } from "./internalContent.js";
 import { appendBlock, createLinks, createPageCard } from "./resourceCommon.js";
+import { activatePageTabs } from "./sectionTabs.js";
 
 const licensingGrid = document.getElementById("licensingGrid");
 const matrixCard = document.getElementById("matrixCard");
@@ -45,3 +46,5 @@ if (licensingGrid) {
     licensingGrid.appendChild(card);
   });
 }
+
+activatePageTabs();
