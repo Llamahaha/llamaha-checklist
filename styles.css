@@ -428,6 +428,24 @@ body {
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.08);
 }
 
+.vendor-subnav-shell {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 20px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--pill-bg);
+}
+
+.vendor-subnav-shell .section-kicker {
+  margin: 0;
+}
+
+.vendor-subnav-shell .hub-section-copy {
+  margin: 0;
+}
+
 .accordion-stack {
   display: grid;
   gap: 16px;

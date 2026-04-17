@@ -6,6 +6,20 @@ import { activatePageTabs } from "./sectionTabs.js";
 
 const licensingGrid = document.getElementById("licensingGrid");
 const matrixCard = document.getElementById("matrixCard");
+const vendorSection = document.getElementById("vendorCoverageSection");
+const searchInput = document.getElementById("licensingSearch");
+
+const mainSections = [
+  "howLicensingWorksSection",
+  "whatAccessDependsOnSection",
+  "m365MatrixSection",
+  "vendorCoverageSection"
+].map(id => document.getElementById(id)).filter(Boolean);
+
+const vendorCards = [];
+const vendorNavEntries = [];
+let mainTabsApi = null;
+let vendorTabsApi = null;
 
 const customerLicensingReference = {
   microsoft: {
@@ -208,8 +222,53 @@ if (matrixCard) {
   matrixCard.appendChild(matrix);
 }
 
-if (licensingGrid) {
-  vendorOrder.filter(key => customerLicensingReference[key]).forEach(key => {
+function buildVendorSearchText(guide, reference, apps) {
+  return [
+    guide.title,
+    reference?.summary ?? guide.summary,
+    ...(reference?.howItWorks ?? []),
+    ...(reference?.whatYouNeed ?? []),
+    ...apps.map(app => app.name)
+  ].join(" ").toLowerCase();
+}
+
+function buildSectionSearchText(section) {
+  return (section.textContent ?? "").toLowerCase();
+}
+
+if (licensingGrid && vendorSection) {
+  const filteredVendors = vendorOrder.filter(key => customerLicensingReference[key]);
+
+  // Build the vendor sub-TOC before the card grid so each vendor acts as
+  // a sub-tab. Only the picked vendor card shows at a time.
+  const subNavWrap = document.createElement("div");
+  subNavWrap.className = "vendor-subnav-shell";
+
+  const subKicker = document.createElement("p");
+  subKicker.className = "section-kicker";
+  subKicker.textContent = "Pick a vendor";
+
+  const subCopy = document.createElement("p");
+  subCopy.className = "hub-section-copy";
+  subCopy.textContent = "Open one vendor at a time. Only the vendor you pick is shown below.";
+
+  const subNav = document.createElement("nav");
+  subNav.className = "toc-links vendor-subnav";
+  subNav.setAttribute("aria-label", "Vendor licensing");
+
+  filteredVendors.forEach(key => {
+    const guide = vendorGuides[key];
+    const link = document.createElement("a");
+    link.href = `#${key}-licensing`;
+    link.textContent = guide.title;
+    subNav.appendChild(link);
+    vendorNavEntries.push({ key, link });
+  });
+
+  subNavWrap.append(subKicker, subCopy, subNav);
+  vendorSection.insertBefore(subNavWrap, licensingGrid);
+
+  filteredVendors.forEach(key => {
     const guide = vendorGuides[key];
     const apps = getVendorApplications(key);
     const reference = customerLicensingReference[key];
@@ -244,8 +303,74 @@ if (licensingGrid) {
     ]);
 
     card.append(title, summary, stack, links);
+    card.dataset.searchText = buildVendorSearchText(guide, reference, apps);
     licensingGrid.appendChild(card);
+    vendorCards.push({ key, card });
   });
 }
 
-activatePageTabs();
+// Cache search text on every main section so the input can filter the
+// static "How Licensing Works" / "What Access Depends On" content too.
+mainSections.forEach(section => {
+  section.dataset.searchText = buildSectionSearchText(section);
+});
+
+function filterLicensing(query) {
+  const needle = (query || "").trim().toLowerCase();
+  const hasQuery = !!needle;
+
+  if (mainTabsApi) {
+    mainTabsApi.setSearchOverride(hasQuery);
+  }
+  if (vendorTabsApi) {
+    vendorTabsApi.setSearchOverride(hasQuery);
+  }
+
+  if (!hasQuery) {
+    // Clear any filter-driven hidden state; the tab helpers restore
+    // normal single-section visibility via setSearchOverride(false).
+    vendorCards.forEach(entry => {
+      entry.card.hidden = false;
+    });
+    vendorNavEntries.forEach(entry => {
+      entry.link.hidden = false;
+    });
+    mainSections.forEach(section => {
+      section.hidden = false;
+    });
+    return;
+  }
+
+  // Filter vendor cards and mirror the matching state on the sub-nav pills.
+  const matchedVendorKeys = new Set();
+  vendorCards.forEach(entry => {
+    const matches = entry.card.dataset.searchText.includes(needle);
+    entry.card.hidden = !matches;
+    if (matches) {
+      matchedVendorKeys.add(entry.key);
+    }
+  });
+  vendorNavEntries.forEach(entry => {
+    entry.link.hidden = !matchedVendorKeys.has(entry.key);
+  });
+
+  // Filter main sections. The vendor coverage section stays visible as long
+  // as at least one vendor card matches.
+  mainSections.forEach(section => {
+    if (section.id === "vendorCoverageSection") {
+      section.hidden = matchedVendorKeys.size === 0;
+      return;
+    }
+    const text = section.dataset.searchText || "";
+    section.hidden = !text.includes(needle);
+  });
+}
+
+mainTabsApi = activatePageTabs();
+vendorTabsApi = activatePageTabs({ navSelector: ".vendor-subnav" });
+
+if (searchInput) {
+  searchInput.addEventListener("input", event => {
+    filterLicensing(event.target.value);
+  });
+}
