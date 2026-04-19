@@ -379,14 +379,18 @@ export const emergencyPlaybooks = [
     first15: [
       "Confirm identity, approved recovery path, and whether any backup method still exists before resetting MFA.",
       "Check whether the problem is notification delivery, wrong account tile, or full method loss.",
+      "Ask whether the user moved from iPhone to iPhone, Android to Android, or changed platforms; Microsoft Authenticator backups only restore on the same device type.",
+      "For iPhone, verify iCloud Drive, iCloud Keychain, and iCloud Backup were enabled; for Android, verify Authenticator Cloud Backup and the recovery Microsoft account were used.",
       "Use controlled re-registration rather than repeated trial-and-error resets."
     ],
     containment: [
       "If the user is high risk or privileged, verify there was no recent suspicious sign-in before restoring access.",
-      "Document the exact method removed and the exact method added."
+      "Document the exact method removed and the exact method added.",
+      "Do not remove the old method until the user has confirmed a successful sign-in on the replacement phone when the old phone is still available."
     ],
     communication: [
       "Tell the user what recovery method is being used and what they should expect next.",
+      "Explain any iOS-to-Android or Android-to-iOS platform mismatch clearly so the user understands why backup restore is not available.",
       "Log the reason for reset so later lockouts are easier to diagnose."
     ],
     verify: [

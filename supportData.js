@@ -143,10 +143,13 @@ export const microsoftIssueSections = [
     items: [
       {
         title: "Authenticator or MFA approval problems",
-        text: "Most MFA issues happen during phone replacement, notification failures, time drift, or confusion between old and new sign-in methods.",
+        text: "Most MFA issues happen during phone replacement, notification failures, time drift, or confusion between old and new sign-in methods. Authenticator backup and restore is platform-specific, so iPhone backups restore to iPhone and Android backups restore to Android.",
         fixes: [
           "Check whether the user still has the right device, notification permissions, date and time, and network access before resetting anything.",
           "If push approvals are failing, verify battery optimization, Do Not Disturb, and whether codes still arrive even when pushes do not.",
+          "For iPhone replacements, confirm iCloud Drive, iCloud Keychain, and iCloud Backup are enabled before relying on Authenticator restore.",
+          "For Android replacements, confirm Cloud Backup was enabled in Authenticator and that the same personal Microsoft recovery account is available.",
+          "Do not promise an Authenticator backup can move between iOS and Android; Microsoft documents that backup and restore only works on the same device type.",
           "Use a controlled re-registration only after confirming the issue is not tied to the wrong account tile or stale device registration.",
           "Document the recovery path used so future device cutovers or emergency resets are faster."
         ],
@@ -154,6 +157,14 @@ export const microsoftIssueSections = [
           {
             label: "Troubleshoot Microsoft Authenticator",
             url: "https://support.microsoft.com/en-us/authenticator/troubleshoot-problems-with-microsoft-authenticator"
+          },
+          {
+            label: "Back up your accounts in Microsoft Authenticator",
+            url: "https://support.microsoft.com/en-us/account-billing/back-up-your-accounts-in-microsoft-authenticator-bb939936-7a8d-4e88-bc43-49bc1a700a40"
+          },
+          {
+            label: "Restore account credentials from Microsoft Authenticator",
+            url: "https://support.microsoft.com/en-us/account-billing/restore-account-credentials-from-microsoft-authenticator-ce53096e-1e1c-4840-9e32-1618bc33cd43"
           }
         ]
       }
@@ -439,7 +450,7 @@ export const computerIssueSections = [
         links: [
           {
             label: "Change or reset your Windows password",
-            url: "https://support.microsoft.com/en-us/windows/change-or-reset-your-password-in-windows-532dc8d3-9b9e-7f8c-4d36-32d73cf28dc4"
+            url: "https://support.microsoft.com/en-us/windows/change-or-reset-your-windows-password-8271d17c-9f9e-443f-835a-8318c8f68b9c"
           }
         ]
       }

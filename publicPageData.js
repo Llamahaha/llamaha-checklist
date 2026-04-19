@@ -432,7 +432,7 @@ function createPublicTipsSections() {
           links: [
             {
               label: "Keyboard shortcuts for Outlook",
-              url: "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-outlook-3cdeb221-7ae5-4c1d-8c1d-9e063216c1ac"
+              url: "https://support.microsoft.com/en-us/office/keyboard-shortcuts-for-outlook-3cdeb221-7ae5-4c1d-8c1d-9e63216c1efd"
             },
             { label: "Outlook guide", url: "guides/microsoft/outlook.html", external: false }
           ]
@@ -454,7 +454,7 @@ function createPublicTipsSections() {
             },
             {
               label: "Use @mentions to get someone's attention",
-              url: "https://support.microsoft.com/en-us/office/use-mentions-to-get-someone-s-attention-in-email-and-meeting-invites-in-outlook-on-the-web-ae32ccc5-4b3b-4486-b60b-d5e793ebcd83"
+              url: "https://support.microsoft.com/en-us/office/use-mentions-to-get-someone-s-attention-in-outlook-90701709-5dc1-41c7-aa48-b01d4a46e8c7"
             }
           ]
         },
@@ -633,7 +633,7 @@ function createPublicTipsSections() {
           ],
           links: [
             { label: "Outlook for iOS and Android Help", url: "https://support.microsoft.com/en-us/office/outlook-for-ios-and-android-help-cd84214e-a5ac-4e95-9ea3-e07f78d0cde6" },
-            { label: "How to add your accounts to Microsoft Authenticator", url: "https://support.microsoft.com/en-us/authenticator/how-to-add-your-accounts-to-microsoft-authenticator" },
+            { label: "How to add your accounts to Microsoft Authenticator", url: "https://support.microsoft.com/en-us/account-billing/how-to-add-your-accounts-to-microsoft-authenticator-92544b53-7706-4581-a142-30344a2a2a57" },
             { label: "Sign in and get started with Teams", url: "https://support.microsoft.com/en-us/office/sign-in-and-get-started-with-teams-6723dc43-dbc0-46e6-af49-8a2d1c5cb937" }
           ]
         }
@@ -808,4 +808,3 @@ export const publicAppHelpSections = [
     groups: createDirectoryGroups()
   }
 ];
-
