@@ -1,7 +1,7 @@
 import { internalTipsAndTricksSections } from "./internalContent.js";
 import { internalTipsAndTricksExtraSections } from "./internalContentExtra.js";
 import { createLinks, createList, createPageCard, renderPageToc, slugifyText } from "./resourceCommon.js";
-import { activatePageTabs } from "./sectionTabs.js";
+import { activatePageTabs, activateSectionSearch } from "./sectionTabs.js";
 
 const tipsSections = document.getElementById("tipsSections");
 const pageToc = document.getElementById("pageToc");
@@ -66,9 +66,11 @@ function renderSections() {
 
   renderPageToc(pageToc, tocItems, {
     title: "Pick an internal tips section",
-    description: "Only the section you pick is shown on the page. Switch any time."
+    description: "Only the section you pick is shown on the page. Switch any time.",
+    searchPlaceholder: "Search tips sections"
   });
 }
 
 renderSections();
-activatePageTabs();
+const tabs = activatePageTabs();
+activateSectionSearch(tabs);

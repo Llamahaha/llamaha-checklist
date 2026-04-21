@@ -176,3 +176,80 @@ export function activatePageTabs(options = {}) {
     tabs
   };
 }
+
+export function activateSectionSearch(tabsApi, options = {}) {
+  if (!tabsApi?.tabs?.length) {
+    return null;
+  }
+
+  const {
+    inputSelector = ".page-search-input",
+    emptyText = "No matching sections found."
+  } = options;
+
+  const input = document.querySelector(inputSelector);
+  if (!input) {
+    return null;
+  }
+
+  const navContainer = input
+    .closest(".help-toc")
+    ?.querySelector(".help-toc-nav, .toc-links");
+  const emptyMessage = document.createElement("p");
+  emptyMessage.className = "help-toc-empty search-empty-message";
+  emptyMessage.textContent = emptyText;
+
+  function normalize(value) {
+    return value.toLowerCase().replace(/\s+/g, " ").trim();
+  }
+
+  function resetSearch() {
+    tabsApi.tabs.forEach(tab => {
+      tab.link.hidden = false;
+      tab.section.hidden = false;
+      tab.link.removeAttribute("aria-hidden");
+      tab.section.removeAttribute("aria-hidden");
+    });
+    emptyMessage.remove();
+    tabsApi.setSearchOverride(false);
+  }
+
+  function applySearch() {
+    const terms = normalize(input.value).split(" ").filter(Boolean);
+    if (!terms.length) {
+      resetSearch();
+      return;
+    }
+
+    tabsApi.setSearchOverride(true);
+    let matches = 0;
+
+    tabsApi.tabs.forEach(tab => {
+      const haystack = normalize(`${tab.link.textContent} ${tab.section.textContent}`);
+      const isMatch = terms.every(term => haystack.includes(term));
+      tab.link.hidden = !isMatch;
+      tab.section.hidden = !isMatch;
+      tab.link.setAttribute("aria-hidden", String(!isMatch));
+      tab.section.setAttribute("aria-hidden", String(!isMatch));
+      if (tab.section instanceof HTMLDetailsElement && isMatch) {
+        tab.section.open = true;
+      }
+      if (isMatch) {
+        matches += 1;
+      }
+    });
+
+    if (matches === 0 && navContainer && !emptyMessage.isConnected) {
+      navContainer.after(emptyMessage);
+    } else if (matches > 0) {
+      emptyMessage.remove();
+    }
+  }
+
+  input.addEventListener("input", applySearch);
+  if (input.value) {
+    applySearch();
+  }
+
+  return { applySearch, resetSearch };
+}

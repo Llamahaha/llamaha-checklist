@@ -76,11 +76,16 @@ export function renderPageToc(container, items, options = {}) {
   const {
     kicker = "On This Page",
     title = "Jump to a section",
-    description = "Use these quick links to move around the page faster."
+    description = "Use these quick links to move around the page faster.",
+    searchPlaceholder = "Search sections"
   } = options;
 
+  const useSplitToc = container.classList.contains("help-toc");
+
   container.innerHTML = "";
-  container.classList.add("hub-section", "toc-shell");
+  if (!useSplitToc) {
+    container.classList.add("hub-section", "toc-shell");
+  }
 
   const kickerEl = document.createElement("p");
   kickerEl.className = "section-kicker";
@@ -94,7 +99,7 @@ export function renderPageToc(container, items, options = {}) {
   descriptionEl.textContent = description;
 
   const nav = document.createElement("nav");
-  nav.className = "toc-links";
+  nav.className = useSplitToc ? "help-toc-nav" : "toc-links";
   nav.setAttribute("aria-label", title);
 
   items.forEach(item => {
@@ -103,6 +108,25 @@ export function renderPageToc(container, items, options = {}) {
     link.textContent = item.label;
     nav.appendChild(link);
   });
+
+  if (useSplitToc) {
+    const header = document.createElement("div");
+    header.className = "help-toc-header";
+    header.append(kickerEl, titleEl, descriptionEl);
+
+    const searchWrap = document.createElement("div");
+    searchWrap.className = "help-toc-search";
+
+    const searchInput = document.createElement("input");
+    searchInput.type = "search";
+    searchInput.className = "search-input page-search-input";
+    searchInput.placeholder = searchPlaceholder;
+    searchInput.setAttribute("aria-label", searchPlaceholder);
+    searchWrap.appendChild(searchInput);
+
+    container.append(header, searchWrap, nav);
+    return;
+  }
 
   container.append(kickerEl, titleEl, descriptionEl, nav);
 }

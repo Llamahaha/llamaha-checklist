@@ -86,8 +86,8 @@ export const internalOnlyGuideGroups = [
           processes: []
         },
         relatedLinks: [
-          { label: "After-hours handoff template", url: "templates.html#after-hours-handoff-template" },
-          { label: "Monitoring alert triage template", url: "templates.html#monitoring-alert-triage-template" }
+          { label: "Service procedures", url: "playbooks.html#serviceSection" },
+          { label: "Evidence capture tips", url: "tips-and-tricks.html#evidence-capture-before-rebuilds" }
         ]
       },
       {
@@ -213,7 +213,7 @@ export const internalTipsAndTricksSections = [
         ],
         links: [
           { label: "Reference guides", url: "reference-guides.html" },
-          { label: "Templates", url: "templates.html" }
+          { label: "Playbooks", url: "playbooks.html" }
         ]
       },
       {
@@ -244,7 +244,7 @@ export const internalTipsAndTricksSections = [
           "For add-in heavy workflows, compare the host app year and plug-in set together."
         ],
         links: [
-          { label: "Licensing", url: "licensing.html" },
+          { label: "Licensing notes", url: "reference-guides.html#licensingReferenceSection" },
           { label: "Reference guides", url: "reference-guides.html" }
         ]
       },
@@ -277,7 +277,7 @@ export const internalTipsAndTricksSections = [
         ],
         links: [
           { label: "Microsoft references", url: "reference-guides.html#vendor-microsoft" },
-          { label: "Microsoft licensing", url: "licensing.html#microsoft-licensing" }
+          { label: "Microsoft licensing", url: "reference-guides.html#microsoft-licensing" }
         ]
       },
       {

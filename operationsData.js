@@ -520,7 +520,7 @@ export const servicePlaybooks = [
     ],
     relatedLinks: [
       { label: "Password reset snippet", url: "snippets.html#ad-password-reset-next-logon" },
-      { label: "MFA reset explanation template", url: "templates.html#mfa-reset-explanation" }
+      { label: "Microsoft references", url: "reference-guides.html#vendor-microsoft" }
     ]
   },
   {
@@ -660,7 +660,7 @@ export const servicePlaybooks = [
     ],
     relatedLinks: [
       { label: "Teams reference", url: "reference-guides.html#guide-microsoft-teams" },
-      { label: "Shared mailbox access template", url: "templates.html#shared-mailbox-access-confirmation" }
+      { label: "Outlook reference", url: "reference-guides.html#guide-microsoft-outlook" }
     ]
   },
   {
@@ -695,7 +695,7 @@ export const servicePlaybooks = [
     ],
     relatedLinks: [
       { label: "OneDrive reference", url: "reference-guides.html#guide-microsoft-onedrive" },
-      { label: "Termination and offboarding template", url: "templates.html#termination-offboarding-confirmation" }
+      { label: "Immediate termination playbook", url: "playbooks.html#terminated-user" }
     ]
   },
   {

@@ -1,6 +1,6 @@
 import { snippetLibrary } from "./resourceLibrary.js";
 import { copyTextToClipboard, createPageCard, renderPageToc, slugifyText } from "./resourceCommon.js";
-import { activatePageTabs } from "./sectionTabs.js";
+import { activatePageTabs, activateSectionSearch } from "./sectionTabs.js";
 
 const snippetSections = document.getElementById("snippetSections");
 const pageToc = document.getElementById("pageToc");
@@ -124,7 +124,9 @@ snippetLibrary.forEach((group, index) => {
 
 renderPageToc(pageToc, tocItems, {
   title: "Jump to a snippet category",
-  description: "Open a category below. Only the one you pick is shown on the page."
+  description: "Open a category below. Only the one you pick is shown on the page.",
+  searchPlaceholder: "Search snippet categories"
 });
 
-activatePageTabs({ scrollOnInitial: false });
+const tabs = activatePageTabs({ scrollOnInitial: false });
+activateSectionSearch(tabs);

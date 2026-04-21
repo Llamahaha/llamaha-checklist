@@ -1,0 +1,113 @@
+import { buildInternalSearchIndex } from "./internalSearchIndex.js";
+
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("searchInput");
+const searchCategory = document.getElementById("searchCategory");
+const resultsLabel = document.getElementById("resultsLabel");
+const resultCount = document.getElementById("resultCount");
+const searchResults = document.getElementById("searchResults");
+
+const index = buildInternalSearchIndex();
+
+function scoreResult(item, query) {
+  const haystack = `${item.title} ${item.text} ${item.keywords}`.toLowerCase();
+  const title = item.title.toLowerCase();
+  let score = 0;
+
+  if (title.includes(query)) score += 6;
+  if (haystack.includes(query)) score += 3;
+
+  query.split(/\s+/).filter(Boolean).forEach(term => {
+    if (title.includes(term)) score += 3;
+    if (haystack.includes(term)) score += 1;
+  });
+
+  if (item.scope === "internal") score += 1;
+  return score;
+}
+
+function matchesCategory(item, category) {
+  if (category === "all") return true;
+  if (category === "internal") return item.scope === "internal";
+  if (category === "public") return item.scope === "public";
+  return item.category === category;
+}
+
+function renderResults(query = "", category = "all") {
+  searchResults.innerHTML = "";
+  const normalizedQuery = query.trim().toLowerCase();
+
+  if (!normalizedQuery) {
+    resultsLabel.textContent = "Start with a search";
+    resultCount.textContent = "Try a product, app, workflow, command, printer, VPN, MFA, licensing, scan, mailbox, or public help topic.";
+    return;
+  }
+
+  const matches = index
+    .filter(item => matchesCategory(item, category))
+    .map(item => ({ ...item, score: scoreResult(item, normalizedQuery) }))
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
+
+  resultsLabel.textContent = `Results for \"${query}\"`;
+  resultCount.textContent = `${matches.length} result${matches.length === 1 ? "" : "s"} found`;
+
+  if (!matches.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No matching internal or public document was found. Try a broader product name, workflow, app family, command, or support symptom.";
+    searchResults.appendChild(empty);
+    return;
+  }
+
+  matches.slice(0, 50).forEach(item => {
+    const card = document.createElement("article");
+    card.className = "issue-card";
+
+    const title = document.createElement("h3");
+    title.textContent = item.title;
+
+    const meta = document.createElement("p");
+    meta.className = "result-meta";
+    meta.textContent = item.typeLabel;
+
+    const text = document.createElement("p");
+    text.textContent = item.text;
+
+    const link = document.createElement("a");
+    link.className = "hub-link";
+    link.href = item.url;
+    link.textContent = "Open page";
+    if (item.url.startsWith("http")) {
+      link.target = "_blank";
+      link.rel = "noreferrer";
+    }
+
+    card.append(title, meta, text, link);
+    searchResults.appendChild(card);
+  });
+}
+
+function syncFromQueryString() {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get("q") ?? "";
+  const category = params.get("category") ?? "all";
+  searchInput.value = query;
+  searchCategory.value = Array.from(searchCategory.options).some(option => option.value === category)
+    ? category
+    : "all";
+  renderResults(query, searchCategory.value);
+}
+
+searchForm.addEventListener("submit", event => {
+  event.preventDefault();
+  const query = searchInput.value.trim();
+  const category = searchCategory.value;
+  const params = new URLSearchParams();
+  if (query) params.set("q", query);
+  if (category !== "all") params.set("category", category);
+  window.history.replaceState({}, "", `${window.location.pathname}${params.toString() ? `?${params}` : ""}`);
+  renderResults(query, category);
+});
+
+syncFromQueryString();

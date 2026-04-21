@@ -32,41 +32,64 @@
         </div>
       </section>
 
-      <section class="results-card toc-shell">
-        <p class="section-kicker">On This Page</p>
-        <h2>Jump to a procedure set</h2>
-        <p class="hub-section-copy">Use the quick links below to move between emergency response playbooks and repeat service procedures.</p>
-        <nav class="toc-links" aria-label="Playbook sections">
-          <a href="#emergencySection">Emergency playbooks</a>
-          <a href="#serviceSection">Service procedures</a>
-        </nav>
-      </section>
-
-      <section id="emergencySection" class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Emergency Playbooks</p>
-            <h2>First-response guidance by incident type</h2>
+      <div class="help-layout">
+        <aside class="help-toc" aria-label="Playbook sections">
+          <div class="help-toc-header">
+            <p class="section-kicker">On This Page</p>
+            <h2>Jump to a procedure set</h2>
+            <p>Only the procedure set you pick is shown on the page. Switch any time.</p>
           </div>
-        </div>
-        <p class="hub-section-copy">
-          Use these when speed matters and you need a structured first-response path for compromise, urgent offboarding, phishing, lost devices, or wider security events.
-        </p>
-        <div id="playbookGrid" class="vendor-directory"></div>
-      </section>
-
-      <section id="serviceSection" class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Service Procedures</p>
-            <h2>Repeatable technician docs for everyday requests</h2>
+          <div class="help-toc-search">
+            <input type="search" class="search-input page-search-input" placeholder="Search playbook sections" aria-label="Search playbook sections">
           </div>
+          <nav class="help-toc-nav" aria-label="Playbook sections">
+            <a href="#emergencySection">Emergency playbooks</a>
+            <a href="#guidedTriageSection">Guided triage</a>
+            <a href="#serviceSection">Service procedures</a>
+          </nav>
+        </aside>
+
+        <div class="help-content section-stack">
+          <section id="emergencySection" class="results-card hub-section">
+            <div class="results-header">
+              <div>
+                <p class="section-kicker">Emergency Playbooks</p>
+                <h2>First-response guidance by incident type</h2>
+              </div>
+            </div>
+            <p class="hub-section-copy">
+              Use these when speed matters and you need a structured first-response path for compromise, urgent offboarding, phishing, lost devices, or wider security events.
+            </p>
+            <div id="playbookGrid" class="vendor-directory"></div>
+          </section>
+
+          <section id="guidedTriageSection" class="results-card hub-section">
+            <div class="results-header">
+              <div>
+                <p class="section-kicker">Guided Triage</p>
+                <h2>First-pass decision paths for common calls</h2>
+              </div>
+            </div>
+            <p class="hub-section-copy">
+              Use these when a ticket starts vague and you need a consistent first-pass path for Teams, OneDrive, printers, VPN, and Office activation.
+            </p>
+            <div id="guidedTriageGrid" class="vendor-directory"></div>
+          </section>
+
+          <section id="serviceSection" class="results-card hub-section">
+            <div class="results-header">
+              <div>
+                <p class="section-kicker">Service Procedures</p>
+                <h2>Repeatable technician docs for everyday requests</h2>
+              </div>
+            </div>
+            <p class="hub-section-copy">
+              Use these when the work is not an emergency but still needs a clean, repeatable path and better documentation than a one-line ticket note.
+            </p>
+            <div id="servicePlaybookGrid" class="vendor-directory"></div>
+          </section>
         </div>
-        <p class="hub-section-copy">
-          Use these when the work is not an emergency but still needs a clean, repeatable path and better documentation than a one-line ticket note.
-        </p>
-        <div id="servicePlaybookGrid" class="vendor-directory"></div>
-      </section>
+      </div>
     </main>
   </div>
 

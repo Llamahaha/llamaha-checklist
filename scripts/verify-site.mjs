@@ -3,6 +3,7 @@ import { extname, resolve } from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 
+import { buildInternalSearchIndex } from "../internalSearchIndex.js";
 import { buildSearchIndex } from "../searchIndex.js";
 import { buildAppGuideUrl, getVendorApplications } from "../guides/applicationCatalog.js";
 import { vendorGuides, vendorOrder } from "../guides/guideData.js";
@@ -25,14 +26,12 @@ const publicRoutes = [
 
 const internalRoutes = [
   "internal/index.html",
+  "internal/search.html",
   "internal/reference-guides.html",
-  "internal/decision-trees.html",
   "internal/tips-and-tricks.html",
   "internal/snippets.html",
-  "internal/templates.html",
   "internal/playbooks.html",
-  "internal/checklist.html",
-  "internal/licensing.html"
+  "internal/checklist.html"
 ];
 
 const populatedPublicGuides = [
@@ -87,9 +86,8 @@ const dynamicAnchorFiles = new Set([
   resolve(rootDir, "vendor-guides.html"),
   resolve(rootDir, "tips-and-tricks.html"),
   resolve(rootDir, "microsoft-issues.html"),
-  resolve(rootDir, "internal/decision-trees.html"),
+  resolve(rootDir, "internal/tips-and-tricks.html"),
   resolve(rootDir, "internal/playbooks.html"),
-  resolve(rootDir, "internal/templates.html"),
   resolve(rootDir, "internal/snippets.html"),
   resolve(rootDir, "internal/reference-guides.html")
 ]);
@@ -277,6 +275,30 @@ function verifySearchIndex() {
   }
 }
 
+function verifyInternalSearchIndex() {
+  const internalSearchBase = resolve(rootDir, "internal/search.html");
+
+  for (const entry of buildInternalSearchIndex()) {
+    if (shouldIgnoreLocalRef(entry.url)) {
+      continue;
+    }
+
+    const [targetPart] = entry.url.split("#");
+    if (!targetPart) {
+      continue;
+    }
+
+    const targetFile = resolveRelative(internalSearchBase, targetPart);
+    try {
+      if (!statSync(targetFile).isFile()) {
+        addError(`Internal search entry "${entry.title}" points to missing file: ${entry.url}`);
+      }
+    } catch {
+      addError(`Internal search entry "${entry.title}" points to missing file: ${entry.url}`);
+    }
+  }
+}
+
 // Customer-facing pages must not link directly to /internal content. The redirect
 // pages below intentionally bounce to internal counterparts; everything else is a leak.
 const internalRedirectExceptions = new Set([
@@ -352,6 +374,7 @@ if (!linksOnly) {
   verifyInternalRoutes();
   verifyGuideFiles();
   verifySearchIndex();
+  verifyInternalSearchIndex();
   verifyNoInternalLeaksInPublicPages();
   verifyPublicGuideContent();
 }

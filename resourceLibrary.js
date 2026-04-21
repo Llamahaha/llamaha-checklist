@@ -235,13 +235,13 @@ export const snippetLibrary = [
         command: "Test-NetConnection fileserver.contoso.local -Port 445\nTest-Path \\\\fileserver.contoso.local\\Shared",
         expectedResult: "You can prove whether the path resolves, the SMB port answers, and the share is reachable with the current user context.",
         caution: "A passing port check does not prove permissions. Test the real UNC path too.",
-        relatedGuides: [{ label: "Civil 3D", url: "guides/autodesk/civil-3d.html" }, { label: "QuickBooks Enterprise Desktop", url: "guides/quickbooks/quickbooks-enterprise-desktop.html" }]
+        relatedGuides: [{ label: "Civil 3D", url: "guides/autodesk/civil-3d.html" }, { label: "ProjectWise", url: "guides/bentley/projectwise.html" }]
       },
       {
         id: "port-connectivity-test",
         title: "Port connectivity test",
         purpose: "Quickly check whether a service port is reachable from the affected machine.",
-        whenToUse: "Use for license servers, QuickBooks hosts, VPN portals, or vendor services that may be filtered.",
+        whenToUse: "Use for license servers, hosted file services, VPN portals, or vendor services that may be filtered.",
         prerequisites: ["Target hostname and port"],
         command: "Test-NetConnection licensehost.contoso.local -Port 7788",
         expectedResult: "You can see whether TCP handshake succeeds to the target service.",

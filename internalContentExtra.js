@@ -22,10 +22,10 @@ export const internalTipsAndTricksExtraSections = [
         fixes: [
           "Capture whether text message, alternate email, temporary access, or admin-assisted verification is available before you remove working methods.",
           "When the ticket involves phone replacement, record exactly which app was re-added and which QR or approval step succeeded or failed.",
-          "Use the MFA reset and closure templates so the next technician or after-hours touch does not have to rediscover the recovery state."
+          "Use the password-reset playbook and clear closure notes so the next technician or after-hours touch does not have to rediscover the recovery state."
         ],
         links: [
-          { label: "MFA reset explanation template", url: "templates.html#mfa-reset-explanation" },
+          { label: "Microsoft references", url: "reference-guides.html#vendor-microsoft" },
           { label: "Password reset playbook", url: "playbooks.html#password-reset" }
         ]
       }

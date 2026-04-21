@@ -10,14 +10,12 @@ const publicLinks = [
 
 const internalLinks = [
   { id: "internal-home", label: "Internal Home", href: "internal/index.html" },
+  { id: "internal-search", label: "Search", href: "internal/search.html" },
   { id: "reference-guides", label: "Reference Guides", href: "internal/reference-guides.html" },
-  { id: "triage", label: "Guided Triage", href: "internal/decision-trees.html" },
   { id: "tips-tricks", label: "Tips & Tricks", href: "internal/tips-and-tricks.html" },
   { id: "snippets", label: "Snippets", href: "internal/snippets.html" },
-  { id: "templates", label: "Templates", href: "internal/templates.html" },
   { id: "playbooks", label: "Playbooks", href: "internal/playbooks.html" },
-  { id: "checklists", label: "Checklists", href: "internal/checklist.html" },
-  { id: "licensing", label: "Licensing", href: "internal/licensing.html" }
+  { id: "checklists", label: "Checklists", href: "internal/checklist.html" }
 ];
 
 function buildHref(rootPath, fileName) {
@@ -46,14 +44,15 @@ function getPublicSection(currentFile, body, pathname) {
 
 function getInternalSection(currentFile) {
   if (currentFile === "index.html") return "internal-home";
+  if (currentFile === "search.html") return "internal-search";
   if (currentFile === "reference-guides.html") return "reference-guides";
-  if (currentFile === "decision-trees.html") return "triage";
+  if (currentFile === "decision-trees.html") return "playbooks";
   if (currentFile === "tips-and-tricks.html") return "tips-tricks";
   if (currentFile === "snippets.html") return "snippets";
-  if (currentFile === "templates.html") return "templates";
+  if (currentFile === "templates.html") return "internal-home";
   if (currentFile === "playbooks.html") return "playbooks";
   if (currentFile === "checklist.html") return "checklists";
-  if (currentFile === "licensing.html") return "licensing";
+  if (currentFile === "licensing.html") return "reference-guides";
   return "internal-home";
 }
 
@@ -95,7 +94,7 @@ function initSiteChrome() {
 
   const brandMeta = document.createElement("span");
   brandMeta.textContent = area === "internal"
-    ? "Tech references, snippets, playbooks, checklists, and licensing notes for day-to-day support"
+    ? "Tech references, snippets, playbooks, and checklists for day-to-day support"
     : "Tech made easier";
 
   if (area === "internal") {

@@ -2,9 +2,9 @@ import { buildAppGuideUrl, getVendorApplications } from "./guides/applicationCat
 import { getAppGuideContent } from "./guides/appGuideContent.js";
 import { getPublicGuideContent } from "./guides/publicGuideContent.js";
 import { vendorGuides, vendorOrder } from "./guides/guideData.js";
-import { internalOnlyGuideGroups } from "./internalContent.js";
+import { internalLicensingReference, internalOnlyGuideGroups } from "./internalContent.js";
 import { createLinks, createPageCard, renderPageToc } from "./resourceCommon.js";
-import { activatePageTabs } from "./sectionTabs.js";
+import { activatePageTabs, activateSectionSearch } from "./sectionTabs.js";
 
 const pageToc = document.getElementById("pageToc");
 const featuredGuideGrid = document.getElementById("featuredGuideGrid");
@@ -25,13 +25,14 @@ const referenceOrder = [
   "mctrans",
   "axiom",
   "google",
-  "quickbooks",
   "egnyte",
   "trimble",
   "ptc",
   "foxit",
   "browsers"
 ];
+
+const hiddenInternalReferenceVendors = new Set(["quickbooks"]);
 
 const featuredGuides = [
   ["internal-stack", "datto-rmm"],
@@ -155,6 +156,10 @@ function buildGroupMap() {
   });
 
   vendorOrder.forEach(vendorSlug => {
+    if (hiddenInternalReferenceVendors.has(vendorSlug)) {
+      return;
+    }
+
     const vendor = vendorGuides[vendorSlug];
     const apps = getVendorApplications(vendorSlug).map(app => buildPublicAppModel(vendorSlug, app));
     groups.set(vendorSlug, {
@@ -245,8 +250,68 @@ function renderVendorSection(group) {
   return section;
 }
 
+function renderLicensingSection(entries) {
+  const section = document.createElement("details");
+  section.className = "results-card accordion-section";
+  section.id = "licensingReferenceSection";
+  section.open = false;
+
+  const summary = document.createElement("summary");
+  summary.className = "accordion-summary";
+
+  const body = el("div", "accordion-summary-copy");
+  body.append(
+    Object.assign(document.createElement("p"), { className: "section-kicker", textContent: "Internal Reference" }),
+    Object.assign(document.createElement("h2"), { textContent: "Licensing Notes" }),
+    Object.assign(document.createElement("p"), { textContent: "Internal notes for entitlement checks, seat cleanup, and portal evidence before making license changes." })
+  );
+
+  const meta = el("span", "accordion-summary-meta", `${entries.length} notes`);
+  summary.append(body, meta);
+
+  const content = el("div", "accordion-content");
+  const grid = el("div", "vendor-directory");
+
+  entries.forEach(entry => {
+    const card = createPageCard("vendor-card");
+    card.id = `${entry.slug}-licensing`;
+    card.append(
+      Object.assign(document.createElement("h3"), { textContent: entry.title }),
+      Object.assign(document.createElement("p"), { textContent: entry.summary })
+    );
+
+    const stack = el("div", "card-stack");
+    appendListBlock(stack, "In Scope", entry.inScope);
+    appendListBlock(stack, "Admin Surfaces", entry.adminSurfaces);
+    appendListBlock(stack, "Seat Recovery Notes", entry.seatRecovery ?? entry.recoveryNotes);
+    appendListBlock(stack, "Capture Before Changes", entry.captureBeforeChanges ?? entry.collect);
+    card.appendChild(stack);
+
+    const links = entry.relatedLinks ?? entry.links ?? [];
+    if (links.length) {
+      card.appendChild(createLinks(links.map(item => ({
+        ...item,
+        external: item.external ?? /^https?:/i.test(item.url)
+      }))));
+    }
+
+    grid.appendChild(card);
+  });
+
+  content.appendChild(grid);
+  section.append(summary, content);
+  return section;
+}
+
 const groups = buildGroupMap();
-const tocItems = [];
+const tocItems = featuredGuideGrid ? [{ id: "quickStartSection", label: "Quick Start" }] : [];
+
+const visibleLicensingReference = internalLicensingReference.filter(entry => !hiddenInternalReferenceVendors.has(entry.slug));
+
+if (visibleLicensingReference.length && referenceSections) {
+  tocItems.push({ id: "licensingReferenceSection", label: "Licensing Notes" });
+  referenceSections.appendChild(renderLicensingSection(visibleLicensingReference));
+}
 
 featuredGuides.forEach(([vendorSlug, appSlug]) => {
   if (!featuredGuideGrid) return;
@@ -276,7 +341,9 @@ referenceOrder.forEach(slug => {
 
 renderPageToc(pageToc, tocItems, {
   title: "Pick a vendor or tool family",
-  description: "Only the vendor or tool family you pick is shown on the page. Switch any time."
+  description: "Only the vendor or tool family you pick is shown on the page. Switch any time.",
+  searchPlaceholder: "Search reference sections"
 });
 
-activatePageTabs({ preferredDefault: "vendor-internal-stack" });
+const tabs = activatePageTabs({ preferredDefault: "quickStartSection" });
+activateSectionSearch(tabs);

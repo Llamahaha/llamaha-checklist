@@ -1,8 +1,9 @@
-import { emergencyPlaybooks, servicePlaybooks } from "./operationsData.js";
+import { decisionTrees, emergencyPlaybooks, servicePlaybooks } from "./operationsData.js";
 import { appendBlock, createPageCard } from "./resourceCommon.js";
-import { activatePageTabs } from "./sectionTabs.js";
+import { activatePageTabs, activateSectionSearch } from "./sectionTabs.js";
 
 const playbookGrid = document.getElementById("playbookGrid");
+const guidedTriageGrid = document.getElementById("guidedTriageGrid");
 const servicePlaybookGrid = document.getElementById("servicePlaybookGrid");
 
 function renderEmergencyPlaybook(playbook, container) {
@@ -21,6 +22,43 @@ function renderEmergencyPlaybook(playbook, container) {
   appendBlock(stack, "Containment", playbook.containment);
   appendBlock(stack, "Communication", playbook.communication);
   appendBlock(stack, "Verify Before Close", playbook.verify);
+
+  card.append(title, summary, stack);
+  container.appendChild(card);
+}
+
+function renderGuidedTriage(tree, container) {
+  const card = createPageCard("vendor-card");
+  card.id = `triage-${tree.id}`;
+
+  const title = document.createElement("h3");
+  title.textContent = tree.title;
+
+  const summary = document.createElement("p");
+  summary.textContent = tree.summary;
+
+  const stack = document.createElement("div");
+  stack.className = "card-stack";
+
+  const startNode = tree.nodes[tree.start];
+  const questionNodes = Object.values(tree.nodes).filter(node => node.type === "question");
+  const resolutionNodes = Object.values(tree.nodes).filter(node => node.type === "resolution");
+
+  if (startNode?.prompt) {
+    appendBlock(stack, "Start With", [
+      startNode.prompt,
+      ...(startNode.answers ?? []).map(answer => `If ${answer.label.toLowerCase()}: follow the ${answer.next.replace(/_/g, " ")} path.`)
+    ]);
+  }
+
+  appendBlock(stack, "Ask Next", questionNodes
+    .filter(node => node !== startNode)
+    .map(node => node.prompt)
+    .slice(0, 4));
+
+  appendBlock(stack, "Likely Outcomes", resolutionNodes
+    .map(node => `${node.title}: ${node.body[0]}`)
+    .slice(0, 5));
 
   card.append(title, summary, stack);
   container.appendChild(card);
@@ -77,4 +115,11 @@ servicePlaybooks.forEach(playbook => {
   }
 });
 
-activatePageTabs();
+decisionTrees.forEach(tree => {
+  if (guidedTriageGrid) {
+    renderGuidedTriage(tree, guidedTriageGrid);
+  }
+});
+
+const tabs = activatePageTabs();
+activateSectionSearch(tabs);
