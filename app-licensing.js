@@ -5,6 +5,7 @@ import { appendBlock, createLinks, createPageCard } from "./resourceCommon.js";
 
 const licensingGrid = document.getElementById("licensingGrid");
 const matrixCard = document.getElementById("matrixCard");
+const hiddenPublicLicensingVendors = new Set(["quickbooks"]);
 
 const matrix = createPageCard("hub-note-card");
 matrix.append(
@@ -15,7 +16,7 @@ matrix.append(
 );
 matrixCard.appendChild(matrix);
 
-vendorOrder.forEach(key => {
+vendorOrder.filter(key => !hiddenPublicLicensingVendors.has(key)).forEach(key => {
   const guide = vendorGuides[key];
   const apps = getVendorApplications(key);
   const card = createPageCard("vendor-card");

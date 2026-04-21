@@ -3,7 +3,7 @@ import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { getPublicGuideContent } from "./guides/publicGuideContent.js";
 import { computerIssueSections, tipsAndTricksSections } from "./supportData.js";
 
-const hiddenAppHelpVendors = new Set(["browsers"]);
+const hiddenAppHelpVendors = new Set(["browsers", "quickbooks"]);
 const hiddenAppHelpApps = new Set(["outlook-mobile", "teams-mobile"]);
 
 function getApp(vendorSlug, appSlug) {
@@ -185,9 +185,12 @@ function extraPcItems() {
         text: "Scanning problems are often caused by the device connection, the Windows Scan app, or the scanner source settings rather than a full printer reinstall.",
         fixes: [
           "Make sure the scanner or multifunction device is powered on and reachable from the computer first.",
+          "Confirm whether the scan target is email, a network folder, a desktop scan app, or a cloud workflow.",
           "Use the Windows Scan app or the normal company scanning method instead of guessing which app should receive the scan.",
           "If the scanner has both flatbed and feeder options, confirm the correct source is selected before retrying.",
-          "If printing still works but scanning does not, tell support that difference because it narrows the issue quickly."
+          "Try one simple scan to the most basic destination before retrying the full workflow.",
+          "If printing still works but scanning does not, tell support that difference because it narrows the issue quickly.",
+          "Keep the scanner model, destination type, and any panel or desktop error ready."
         ],
         links: [
           {
@@ -293,13 +296,14 @@ function createDefaultsAndEmailSection() {
         ]
       },
       {
-        title: "Open a shared mailbox in Outlook",
+        title: "Shared mailbox access in Outlook",
         text: "Shared mailboxes usually appear automatically after your admin adds you as a member, but you can also add one by name if it does not appear right away.",
         fixes: [
           "Close and reopen Outlook after your admin has added you to the shared mailbox. Most shared mailboxes appear under your account within a few minutes.",
+          "Check Outlook on the web to see whether the mailbox appears there before rebuilding the desktop app.",
           "In new Outlook, right-click your account name in the folder list and select Add shared folder or mailbox. Enter the shared mailbox address your company provided.",
           "In classic Outlook, select File > Account Settings > Account Settings, then open your account on the Email tab and use More Settings > Advanced > Add to add the mailbox.",
-          "If the mailbox still does not appear, keep its address ready and contact support so they can confirm you are a member."
+          "If the mailbox still does not appear, keep its address ready and contact support so they can confirm whether you need read access, Send As, Send on Behalf, calendar access, or all of those."
         ],
         links: [
           {
@@ -332,6 +336,91 @@ function createDefaultsAndEmailSection() {
             url: "https://support.microsoft.com/en-us/office/getting-started-with-the-new-outlook-for-windows-656bb8d9-5a60-49b2-a98b-ba7822bc7627"
           },
           { label: "Outlook guide", url: buildAppGuideUrl("microsoft", "outlook"), external: false }
+        ]
+      }
+    ]
+  };
+}
+
+function createMobileAndMfaSection() {
+  return {
+    title: "Mobile, MFA, and Phone Replacement",
+    description: "Use this section when work apps, Microsoft Authenticator, MFA prompts, or mobile notifications need to move to a new phone or start working again.",
+    items: [
+      {
+        title: "Phone replacement for work apps and MFA",
+        text: "Phone replacements go smoother when you keep the old phone status, work account, Authenticator setup, Outlook Mobile, Teams Mobile, and notification permissions clear from the start.",
+        fixes: [
+          "Keep the old phone available until the new phone completes a real work sign-in, if you still have the old phone.",
+          "Install Microsoft Authenticator first if your company uses MFA prompts, number matching, or QR-code setup.",
+          "Install Outlook Mobile and Teams Mobile only after the sign-in approval path is working.",
+          "Use the same work account you use on your computer and in the browser.",
+          "Allow notifications for Authenticator, Outlook, and Teams if you expect approval prompts, mail alerts, meeting alerts, or chat notifications.",
+          "Remember that some Authenticator backups restore only to the same phone platform, so iPhone-to-Android or Android-to-iPhone moves may need admin-assisted setup.",
+          "Keep the phone type, old-phone status, failing setup step, and whether browser sign-in still works ready for support."
+        ],
+        links: [
+          { label: "Microsoft Authenticator guide", url: buildAppGuideUrl("microsoft", "microsoft-authenticator"), external: false },
+          { label: "Outlook guide", url: buildAppGuideUrl("microsoft", "outlook"), external: false },
+          { label: "Teams guide", url: buildAppGuideUrl("microsoft", "teams"), external: false }
+        ]
+      }
+    ]
+  };
+}
+
+function createFilesAndHandoffsSection() {
+  return {
+    title: "Files, Shared Access, and Device Handoffs",
+    description: "Use this section when shared access, deleted files, Teams voicemail ownership, or a reassigned computer needs a clean handoff.",
+    items: [
+      {
+        title: "Restoring deleted or overwritten files",
+        text: "File recovery goes faster when you know where the file lived, when it changed, and whether you need the latest copy or a previous version.",
+        fixes: [
+          "Identify where the file lived: OneDrive, SharePoint, a network share, local disk, ProjectWise, Egnyte, or another app.",
+          "Capture the exact file name and folder path before searching different places.",
+          "Estimate when the file was deleted, overwritten, or last known good.",
+          "Check the closest recycle bin or version history first if you can safely do so.",
+          "Do not save new files over the same location if you are trying to recover a previous version.",
+          "If project or finance data is involved, confirm who owns the restore decision before replacing anything."
+        ],
+        links: [
+          { label: "OneDrive guide", url: buildAppGuideUrl("microsoft", "onedrive"), external: false },
+          { label: "SharePoint guide", url: buildAppGuideUrl("microsoft", "sharepoint"), external: false },
+          { label: "ProjectWise guide", url: buildAppGuideUrl("bentley", "projectwise"), external: false }
+        ]
+      },
+      {
+        title: "Teams shared voicemail setup or access",
+        text: "Shared voicemail in Teams works best when the number, queue, mailbox target, and people who need access are agreed on before changes begin.",
+        fixes: [
+          "Confirm the phone number, call queue, auto attendant, or shared workflow that should receive voicemail.",
+          "Identify who owns the voicemail and who should be able to listen or receive notifications.",
+          "Confirm whether the voicemail should land in a shared mailbox, group mailbox, Teams Phone workflow, or another approved company path.",
+          "Test one inbound call after setup and confirm the message lands in the expected place.",
+          "Avoid creating a one-off workaround until ownership and access are clear.",
+          "Keep the target number or queue, people who need access, mailbox destination, and one example call time ready if voicemail is not arriving."
+        ],
+        links: [
+          { label: "Teams guide", url: buildAppGuideUrl("microsoft", "teams"), external: false },
+          { label: "Microsoft app issues", url: "microsoft-issues.html#teams-onedrive-and-sharepoint", external: false }
+        ]
+      },
+      {
+        title: "Reassigning a computer to another user",
+        text: "A reassigned computer should not carry old ownership, local-only data, stale app state, or missing day-one access into the next user's setup.",
+        fixes: [
+          "Confirm whether the computer should be wiped, rebuilt, or reassigned in place.",
+          "Check for local-only files, browser data, Outlook archives, offline OneDrive files, checked-out project files, or app templates before cleanup.",
+          "Confirm the old owner, new owner, computer name, and whether the device stays in the same company or location.",
+          "Make sure required apps, printers, VPN, and shared resources are tested with the new user.",
+          "Confirm the old user no longer appears as the active owner in the places your company tracks devices.",
+          "Document any preserved data, templates, or exceptions that intentionally carried forward."
+        ],
+        links: [
+          { label: "PC Help", url: "computer-issues.html", external: false },
+          { label: "App Help", url: "vendor-guides.html", external: false }
         ]
       }
     ]
@@ -409,6 +498,8 @@ function createPublicPcHelpSections() {
     extended[0],
     createBrowserSupportSection(),
     createDefaultsAndEmailSection(),
+    createMobileAndMfaSection(),
+    createFilesAndHandoffsSection(),
     ...extended.slice(1)
   ];
 }
@@ -725,8 +816,7 @@ export const publicAppHelpSections = [
         entries: groupEntries([
           ["citrix", "workspace-app"],
           ["fortinet", "forticlient-vpn"],
-          ["egnyte", "egnyte-desktop-app"],
-          ["quickbooks", "quickbooks-online"]
+          ["egnyte", "egnyte-desktop-app"]
         ])
       }
     ]
@@ -791,11 +881,10 @@ export const publicAppHelpSections = [
       },
       {
         title: "Planning, math, and business applications",
-        description: "Scheduling, worksheets, and finance tools that still need product-specific support steps.",
+        description: "Scheduling, worksheets, and field tools that still need product-specific support steps.",
         entries: groupEntries([
           ["oracle", "primavera-p6"],
           ["ptc", "mathcad-prime"],
-          ["quickbooks", "quickbooks-enterprise-desktop"],
           ["trimble", "sketchup"],
           ["trimble", "trimble-business-center"]
         ])

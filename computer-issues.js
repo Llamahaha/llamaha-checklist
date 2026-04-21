@@ -126,6 +126,7 @@ function createSection(section) {
 
   const cards = section.items.map(item => {
     const card = createPageCard();
+    card.id = slugifyText(item.title);
     card.dataset.searchText = buildSearchText(section, item);
 
     const itemTitle = document.createElement("h3");

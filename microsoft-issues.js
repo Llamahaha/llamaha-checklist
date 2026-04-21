@@ -58,6 +58,7 @@ function renderSections() {
 
     section.items.forEach(item => {
       const card = createPageCard();
+      card.id = slugifyText(item.title);
       const itemTitle = document.createElement("h3");
       itemTitle.textContent = item.title;
 

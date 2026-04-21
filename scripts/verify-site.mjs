@@ -26,6 +26,7 @@ const publicRoutes = [
 const internalRoutes = [
   "internal/index.html",
   "internal/reference-guides.html",
+  "internal/decision-trees.html",
   "internal/tips-and-tricks.html",
   "internal/snippets.html",
   "internal/templates.html",
@@ -50,7 +51,11 @@ const populatedPublicGuides = [
   ["autodesk", "civil-3d"],
   ["autodesk", "infoworks-icm"],
   ["esri", "arcgis-pro"],
+  ["esri", "arcgis-online"],
   ["bentley", "projectwise"],
+  ["bentley", "microstation"],
+  ["bentley", "connection-client"],
+  ["bentley", "openroads-designer"],
   ["browsers", "google-chrome"],
   ["browsers", "microsoft-edge"],
   ["browsers", "mozilla-firefox"],
@@ -58,6 +63,13 @@ const populatedPublicGuides = [
   ["fortinet", "forticlient-vpn"],
   ["citrix", "workspace-app"],
   ["oracle", "primavera-p6"],
+  ["ptc", "mathcad-prime"],
+  ["trimble", "trimble-business-center"],
+  ["adobe", "creative-cloud-desktop"],
+  ["adobe", "photoshop"],
+  ["adobe", "illustrator"],
+  ["foxit", "pdf-editor"],
+  ["foxit", "pdf-reader"],
   ["google", "google-earth-pro"],
   ["hec", "hec-hms"],
   ["hec", "hec-ras"],
@@ -74,6 +86,8 @@ const dynamicAnchorFiles = new Set([
   resolve(rootDir, "computer-issues.html"),
   resolve(rootDir, "vendor-guides.html"),
   resolve(rootDir, "tips-and-tricks.html"),
+  resolve(rootDir, "microsoft-issues.html"),
+  resolve(rootDir, "internal/decision-trees.html"),
   resolve(rootDir, "internal/playbooks.html"),
   resolve(rootDir, "internal/templates.html"),
   resolve(rootDir, "internal/snippets.html"),
@@ -158,15 +172,16 @@ function verifyHtmlLinks() {
       }
 
       const [targetPart, anchor] = ref.split("#");
+      const targetPath = targetPart.split("?")[0];
 
-      if (!targetPart) {
+      if (!targetPath) {
         if (anchor && !ids.has(anchor)) {
           addError(`Missing anchor "#${anchor}" in ${htmlFile}`);
         }
         continue;
       }
 
-      const targetFile = resolveRelative(htmlFile, targetPart);
+      const targetFile = resolveRelative(htmlFile, targetPath);
       let targetHtml;
 
       try {
@@ -268,7 +283,8 @@ const internalRedirectExceptions = new Set([
   resolve(rootDir, "checklist.html"),
   resolve(rootDir, "snippets.html"),
   resolve(rootDir, "templates.html"),
-  resolve(rootDir, "emergency-playbooks.html")
+  resolve(rootDir, "emergency-playbooks.html"),
+  resolve(rootDir, "decision-trees.html")
 ]);
 
 function verifyNoInternalLeaksInPublicPages() {

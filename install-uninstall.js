@@ -6,6 +6,7 @@ import { activatePageTabs } from "./sectionTabs.js";
 
 const lifecycleGrid = document.getElementById("lifecycleGrid");
 const vendorLifecycleGrid = document.getElementById("vendorLifecycleGrid");
+const hiddenPublicLifecycleVendors = new Set(["quickbooks"]);
 
 installUninstallPatterns.forEach(item => {
   const card = createPageCard();
@@ -17,7 +18,7 @@ installUninstallPatterns.forEach(item => {
   lifecycleGrid.appendChild(card);
 });
 
-vendorOrder.forEach(key => {
+vendorOrder.filter(key => !hiddenPublicLifecycleVendors.has(key)).forEach(key => {
   const guide = vendorGuides[key];
   const card = createPageCard("vendor-card");
   const title = document.createElement("h3");

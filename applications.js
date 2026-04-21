@@ -5,6 +5,7 @@ import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 const featuredGrid = document.getElementById("featuredApplications");
 const jumpLinks = document.getElementById("applicationJumpLinks");
 const directory = document.getElementById("applicationDirectory");
+const hiddenPublicApplicationVendors = new Set(["quickbooks"]);
 
 const featuredApps = [
   ["microsoft", "outlook"],
@@ -15,11 +16,10 @@ const featuredApps = [
   ["bentley", "projectwise"],
   ["esri", "arcgis-pro"],
   ["adobe", "acrobat-pro"],
-  ["bluebeam", "revu-21"],
-  ["quickbooks", "quickbooks-enterprise-desktop"]
+  ["bluebeam", "revu-21"]
 ];
 
-const allApplications = vendorOrder.flatMap(vendorSlug => {
+const allApplications = vendorOrder.filter(vendorSlug => !hiddenPublicApplicationVendors.has(vendorSlug)).flatMap(vendorSlug => {
   const vendor = vendorGuides[vendorSlug];
   return getVendorApplications(vendorSlug).map(app => ({
     vendor,

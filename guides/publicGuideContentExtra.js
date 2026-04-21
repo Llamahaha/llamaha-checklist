@@ -54,6 +54,262 @@ function makeHecGuide(name, description, dataTerms, links) {
   };
 }
 
+function makeBentleyGuide(name, description, projectTerms = "project, datasource, workspace, or model") {
+  return {
+    summary: `Use this guide when ${name} will not sign in, cannot open the ${projectTerms} you expect, or behaves differently after a workstation, version, or workspace change.`,
+    overview: [
+      `${name} is part of the Bentley application family used for design, review, modeling, or project work.`,
+      `Most ${name} issues come from Bentley sign-in, CONNECTION Client state, product-version mismatch, missing workspace standards, or project data that is not reachable from the computer.`
+    ],
+    askFirst: [
+      "Can you sign in with the Bentley account your company expects?",
+      `Is the problem opening ${name}, opening one ${projectTerms}, or seeing the correct tools and standards?`,
+      "Did the issue start after a new computer, update, password change, or project move?",
+      "Can another approved computer open the same project or datasource?"
+    ],
+    licensing: [
+      `${name} usually depends on the correct Bentley account, product entitlement, and any project or datasource permissions your company assigns.`,
+      "If the app opens but says trial, unlicensed, or shows missing products, capture the account shown and the exact message before reinstalling.",
+      "If the project or datasource is missing after sign-in, the access path or workspace may matter more than the local install."
+    ],
+    install: [
+      `Use the company-approved ${name} version for your project team.`,
+      "Restart the computer after install or update if Windows or the installer asks you to.",
+      "Open CONNECTION Client or the Bentley sign-in prompt and confirm the expected work account is active.",
+      "Test one known-good project, datasource, or file before opening the exact item that failed earlier."
+    ],
+    supportCheckpoints: [
+      "Compare the affected project or file with a second known-good one before reinstalling the app.",
+      "Keep the exact Bentley account, app version, project name, datasource, and workspace name ready for support.",
+      "If workspaces, standards, fonts, or templates are missing, compare with another approved computer before clearing local data."
+    ],
+    commonIssues: [
+      makeIssue(
+        "Bentley sign-in or entitlement does not look right",
+        `${name} opens, but the expected account, entitlement, or product access is missing.`,
+        "Sign out and back in with the correct Bentley account, then compare the product entitlement and message before reinstalling.",
+        "Send the Bentley account shown, the exact message, and whether other Bentley apps sign in correctly."
+      ),
+      makeIssue(
+        "Project, datasource, or workspace content is missing",
+        `${name} launches, but the expected ${projectTerms} is missing or does not load correctly.`,
+        "Confirm the project path, datasource, and workspace standard against another approved computer before changing local files.",
+        `Send the ${projectTerms} name, the path or datasource shown, and a screenshot of what is missing.`
+      )
+    ],
+    supportArtifacts: [
+      `A screenshot of the exact ${name} message or missing screen.`,
+      "The Bentley account shown in the app or CONNECTION Client.",
+      `The ${name} version shown in the app.`,
+      `The affected ${projectTerms} name and where it should be available.`,
+      "Whether another approved computer can open the same item."
+    ]
+  };
+}
+
+function makeAdobeCreativeGuide(name, workType, assetTerms) {
+  return {
+    summary: `Use this guide when ${name} will not activate, opens under the wrong Adobe profile, or cannot find the ${assetTerms} you need for ${workType}.`,
+    overview: [
+      `${name} is an Adobe Creative Cloud app used for ${workType}.`,
+      `Most ${name} issues come from the wrong Adobe profile, missing fonts or assets, plug-ins or presets that were not restored, or a file that depends on shared content.`
+    ],
+    askFirst: [
+      "Are you signed in with the correct work Adobe account and company profile?",
+      `Is the problem activation, opening a file, missing ${assetTerms}, exporting, or a tool behaving differently?`,
+      "Did the issue begin after a new computer, Adobe update, profile change, or moving a project folder?",
+      "Does the same file work on another approved computer?"
+    ],
+    licensing: [
+      `${name} access usually depends on the correct Adobe work account and the right company profile or product assignment.`,
+      "If the app opens as Trial or asks you to buy a subscription, sign out and back in with the work Adobe account before reinstalling.",
+      `If one file fails but ${name} opens normally, keep the file path and any missing ${assetTerms} names ready.`
+    ],
+    install: [
+      "Open Creative Cloud Desktop and confirm the correct work profile is active.",
+      `Install or update ${name} through the company-approved Adobe path, then restart if prompted.`,
+      `Open one simple file first, then test a file that uses the ${assetTerms} your workflow depends on.`
+    ],
+    supportCheckpoints: [
+      `If ${assetTerms} are missing, compare the same file on another approved computer before reinstalling.`,
+      "If export or open fails, confirm the destination path still exists and you can write to it.",
+      "Capture the Adobe account and profile before contacting support about activation."
+    ],
+    commonIssues: [
+      makeIssue(
+        `Fonts, plug-ins, presets, or ${assetTerms} are missing`,
+        `The app opens, but expected ${assetTerms}, fonts, plug-ins, presets, or shared content are unavailable.`,
+        "Compare the same workflow on another approved computer and confirm the shared content path before changing the app install.",
+        `Send the file name, missing ${assetTerms} names, and a screenshot of the warning or missing tool.`
+      ),
+      makeIssue(
+        `${name} opens as Trial or cannot activate`,
+        "The app launches, but Adobe sign-in or activation does not match the work entitlement you expected.",
+        "Sign out and back in with the correct work Adobe account and company profile before reinstalling.",
+        "Send the Adobe account shown, the company profile selected, and the exact activation message."
+      )
+    ],
+    supportArtifacts: [
+      `A screenshot of the exact ${name} message or warning.`,
+      "The Adobe account and company profile shown in Creative Cloud Desktop.",
+      `The ${name} version shown in the app.`,
+      `The file name and any missing ${assetTerms}, font, plug-in, or preset names.`
+    ]
+  };
+}
+
+function makeFoxitGuide(name, purpose, featureTerms) {
+  return {
+    summary: `Use this guide when ${name} will not open PDFs, shows the wrong license state, or does not handle ${featureTerms} the way you expect.`,
+    overview: [
+      `${name} is used for ${purpose}.`,
+      `Most ${name} issues come from default PDF settings, account or activation state, browser handoff behavior, or one PDF file behaving differently than the rest.`
+    ],
+    askFirst: [
+      "Is the problem opening PDFs, editing PDFs, signing in, printing, or browser handoff?",
+      "Does the same PDF open in another approved PDF app or browser?",
+      "Did the issue begin after a Windows update, new computer, license change, or default-app change?"
+    ],
+    licensing: [
+      `${name} access depends on the product your company assigned and the activation method your environment uses.`,
+      "If the app opens but editing features are unavailable, capture whether it says Reader, Trial, Sign In, or Activation.",
+      "If only one PDF fails, the file itself or its location may matter more than the product license."
+    ],
+    install: [
+      `Install or update the company-approved ${name} build.`,
+      "Open one simple PDF first, then test the PDF or browser workflow that was failing.",
+      "Confirm Windows default PDF settings if files keep opening in a different app."
+    ],
+    supportCheckpoints: [
+      "Test a second PDF before changing the app installation.",
+      "Check the Windows default PDF app if double-clicking opens the wrong product.",
+      "Keep the file type, browser, and exact message ready if the issue starts from a website download."
+    ],
+    commonIssues: [
+      makeIssue(
+        "PDFs open in the wrong app",
+        "Double-clicking a PDF or opening one from a browser launches a different PDF program than expected.",
+        "Change the Windows default app for PDF files or note if your company manages defaults by policy.",
+        "Send the PDF file type, current default app, expected default app, and whether the setting changes back."
+      ),
+      makeIssue(
+        "Editing, signing, or plugin features are missing",
+        `${name} opens the file, but expected ${featureTerms} are missing or disabled.`,
+        "Confirm the product edition and sign-in or activation state before reinstalling.",
+        "Send the Foxit product name, version, activation message, and screenshot of the missing feature."
+      )
+    ],
+    supportArtifacts: [
+      `A screenshot of the exact ${name} message or missing feature.`,
+      `The ${name} version shown in the app.`,
+      "The PDF file name and where it is stored.",
+      "Whether a second PDF or another browser behaves the same way."
+    ]
+  };
+}
+
+function makeQuickBooksGuide(name, workflowType) {
+  return {
+    summary: `Use this guide when ${name} will not sign in, cannot reach the expected company file or company, or has printing, PDF, browser, or role-access problems.`,
+    overview: [
+      `${name} is used for ${workflowType}.`,
+      `Most ${name} issues come from the wrong company, role, company-file path, hosting state, browser profile, or finance approval rather than the app alone.`
+    ],
+    askFirst: [
+      "Which company or company file are you trying to open?",
+      "Is the problem sign-in, company selection, multi-user access, printing, PDFs, banking, or a missing role?",
+      "Did the issue begin after a password change, new computer, update, role change, or company-file move?",
+      "Can another approved user open the same company or company file?"
+    ],
+    licensing: [
+      `${name} access depends on the product, company membership, and role your finance or admin owner assigned.`,
+      "If the app opens but the company or features are missing, capture the company name and role expectation before changing the install.",
+      "For desktop company files, the file path, hosting state, and network access can be just as important as licensing."
+    ],
+    install: [
+      `Use the company-approved ${name} access path or installer.`,
+      "Confirm the correct company or company-file path before opening live finance data.",
+      "Test sign-in, one company open, one report or list view, and one print or PDF task if those are part of the issue."
+    ],
+    supportCheckpoints: [
+      "Keep the company name, company-file path, user role, and exact year or version ready.",
+      "If printing or PDF export fails, test a simple report before rebuilding the app.",
+      "If browser access works but the desktop app does not, include that comparison for support."
+    ],
+    commonIssues: [
+      makeIssue(
+        "The expected company or company file is missing",
+        `${name} opens, but the company, file, or role you expected is not available.`,
+        "Confirm the exact company name, file path, hosting model, and user role before changing the app installation.",
+        "Send the company name, file path if desktop, user role expected, and whether another user can open it."
+      ),
+      makeIssue(
+        "Printing, PDF, or export fails",
+        `${name} opens, but printing, saving as PDF, or exporting a report does not work correctly.`,
+        "Test one simple report and confirm the printer or PDF default before treating the whole app as broken.",
+        "Send the report name, printer or PDF behavior, exact message, and whether other apps can print."
+      )
+    ],
+    supportArtifacts: [
+      `A screenshot of the exact ${name} message or missing company view.`,
+      "The company or company-file name involved.",
+      `The ${name} version or year if shown.`,
+      "The user role or access level expected.",
+      "Whether another approved user can open the same company."
+    ]
+  };
+}
+
+function makeMathcadGuide() {
+  return {
+    summary: "Use this guide when Mathcad Prime will not open worksheets, cannot find the expected license, or is missing templates and shared calculation content.",
+    overview: [
+      "Mathcad Prime is an engineering calculation environment used for worksheets, templates, and technical calculations.",
+      "Most Mathcad Prime issues come from license-source configuration, version mismatch, missing templates, or one worksheet behaving differently than the rest."
+    ],
+    askFirst: [
+      "Is the problem launching Mathcad Prime, acquiring a license, opening one worksheet, or finding templates?",
+      "Did the issue begin after a new computer, version change, VPN change, or license change?",
+      "Can another approved computer open the same worksheet or template?"
+    ],
+    licensing: [
+      "Mathcad Prime may use named-user, floating, or company-managed license behavior depending on your environment.",
+      "If Mathcad cannot acquire a license, capture the exact message before reinstalling.",
+      "If worksheets open but templates are missing, the shared template path may matter more than the license."
+    ],
+    install: [
+      "Use the company-approved Mathcad Prime version.",
+      "Restart after install if Windows asks you to.",
+      "Open one simple worksheet first, then test the worksheet or template that failed earlier."
+    ],
+    supportCheckpoints: [
+      "Compare one known-good worksheet before reinstalling.",
+      "Keep the exact Prime version and license message ready.",
+      "If your license depends on VPN or a network path, confirm that connection before changing Mathcad."
+    ],
+    commonIssues: [
+      makeIssue(
+        "Mathcad Prime cannot acquire a license",
+        "The app opens or starts to open, but the license source is unavailable or the expected entitlement is missing.",
+        "Confirm the license message, network or VPN state, and expected license source before reinstalling.",
+        "Send the license message, current network or VPN state, and Mathcad Prime version."
+      ),
+      makeIssue(
+        "Worksheets or templates are missing",
+        "Mathcad opens, but shared templates, examples, or expected worksheet paths are missing.",
+        "Confirm the shared template path and compare with another approved computer before changing the install.",
+        "Send the worksheet or template name, the expected path, and whether another computer can open it."
+      )
+    ],
+    supportArtifacts: [
+      "A screenshot of the exact Mathcad Prime message.",
+      "The Mathcad Prime version shown in the app.",
+      "The worksheet or template name involved.",
+      "Whether another approved computer can open the same worksheet."
+    ]
+  };
+}
+
 export const publicGuideContentExtra = {
   microsoft: {
     outlook: {
@@ -150,6 +406,56 @@ export const publicGuideContentExtra = {
     }
   },
   adobe: {
+    "creative-cloud-desktop": {
+      summary: "Use this guide when Creative Cloud Desktop will not sign in, shows the wrong company profile, or cannot install or update the Adobe apps assigned to your work account.",
+      overview: [
+        "Creative Cloud Desktop is the Adobe sign-in, update, and app-management layer for Acrobat, Photoshop, Illustrator, InDesign, and other Adobe apps.",
+        "Most Creative Cloud Desktop issues come from the wrong Adobe account, the wrong company profile, network blocks, or an app assignment that has not reached the desktop yet."
+      ],
+      askFirst: [
+        "Are you signed in with your work Adobe account rather than a personal Adobe ID?",
+        "If Adobe asks you to choose a profile, did you select the company or business profile?",
+        "Is the issue sign-in, app install, app update, Trial wording, or missing app tiles?",
+        "Do other Adobe apps open with the same account?"
+      ],
+      licensing: [
+        "Adobe app access usually depends on the product profile or license assigned to your work Adobe account.",
+        "If app tiles are missing or a product opens as Trial, capture the Adobe account and profile shown before reinstalling.",
+        "If your company manages Adobe packages, use the company-approved install path rather than a personal Adobe download."
+      ],
+      install: [
+        "Install or update Creative Cloud Desktop through the company-approved Adobe path.",
+        "Sign in with the work Adobe account and select the company profile if prompted.",
+        "Open one assigned Adobe app after sign-in so you can confirm activation reaches the desktop."
+      ],
+      supportCheckpoints: [
+        "Sign out and back in only after you know which Adobe account and profile should be used.",
+        "If only one Adobe app is missing, note that app name instead of reinstalling the whole Adobe stack.",
+        "If downloads or updates fail, keep the exact install or update message ready."
+      ],
+      commonIssues: [
+        makeIssue(
+          "The wrong Adobe profile or account is active",
+          "Creative Cloud Desktop opens, but app access or Trial wording does not match the work subscription you expected.",
+          "Sign out and sign back in with the work Adobe account, then choose the company profile if Adobe prompts for one.",
+          "Send the Adobe account shown, the profile selected, and a screenshot of the Trial or access message."
+        ),
+        makeIssue(
+          "Assigned Adobe apps are missing or will not install",
+          "Creative Cloud Desktop opens, but the app you need is missing, disabled, or fails during install.",
+          "Confirm the exact app name and whether any other Adobe apps install before changing the computer.",
+          "Send the app name, install message, and whether other assigned Adobe apps appear."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the Creative Cloud Desktop account or profile view.",
+        "The Adobe app name that is missing, trialing, or failing to install.",
+        "The exact install, update, or activation message.",
+        "Whether other Adobe apps open correctly."
+      ]
+    },
+    photoshop: makeAdobeCreativeGuide("Photoshop", "image editing, design cleanup, and creative production", "presets, plug-ins, fonts, actions, brushes, or linked assets"),
+    illustrator: makeAdobeCreativeGuide("Illustrator", "vector artwork, logos, diagrams, and print-ready graphics", "fonts, swatches, templates, plug-ins, or linked assets"),
     indesign: {
       summary: "Use this guide when Adobe InDesign will not activate, linked assets or fonts are missing, or documents will not open, package, or export correctly.",
       overview: [
@@ -253,6 +559,181 @@ export const publicGuideContentExtra = {
         { label: "Autodesk Support", url: "https://www.autodesk.com/support" }
       ]
     }
+  },
+  bentley: {
+    microstation: makeBentleyGuide("MicroStation", "core CAD and design drafting", "design file, workspace, or standards path"),
+    "openroads-designer": makeBentleyGuide("OpenRoads Designer", "civil roadway design", "civil project, design file, workspace, or standards path"),
+    "connection-client": {
+      summary: "Use this guide when Bentley CONNECTION Client will not sign in, will not refresh entitlement, or keeps the rest of the Bentley stack from opening correctly.",
+      overview: [
+        "CONNECTION Client is the Bentley sign-in and entitlement helper used by many Bentley applications.",
+        "Most CONNECTION Client issues come from stale sign-in state, wrong Bentley identity, update state, or network access to Bentley services."
+      ],
+      askFirst: [
+        "Can you sign in with the Bentley account your company expects?",
+        "Are other Bentley apps saying unlicensed, trial, or sign-in required?",
+        "Did the issue begin after a password change, new computer, update, or network change?"
+      ],
+      licensing: [
+        "CONNECTION Client is not usually the product license by itself, but it often controls whether Bentley apps can confirm the entitlement you already have.",
+        "If a Bentley app says trial or unlicensed, capture both the app message and the CONNECTION Client account shown.",
+        "If you use more than one Bentley account, confirm which one your company expects before clearing sign-in state."
+      ],
+      install: [
+        "Install or update CONNECTION Client using the company-approved Bentley setup path.",
+        "Restart the computer if prompted, then sign in with the expected Bentley account.",
+        "Open one Bentley app after sign-in so you can confirm entitlement refresh works."
+      ],
+      supportCheckpoints: [
+        "Compare the CONNECTION Client account with the account shown in the affected Bentley app.",
+        "If only one Bentley app fails, keep that app name and version ready.",
+        "Avoid removing CONNECTION Client while other Bentley products still rely on it."
+      ],
+      commonIssues: [
+        makeIssue(
+          "Bentley sign-in loops or does not refresh",
+          "CONNECTION Client keeps prompting for sign-in or does not appear to refresh entitlement.",
+          "Sign out and back in with the correct Bentley account, then test one Bentley app before reinstalling.",
+          "Send the Bentley account shown, the CONNECTION Client version if available, and the exact message."
+        ),
+        makeIssue(
+          "Bentley apps still show trial or unlicensed",
+          "A Bentley app opens, but licensing still looks wrong after CONNECTION Client sign-in.",
+          "Capture the app name, version, and message so support can compare entitlement and product access.",
+          "Send the affected app name, the Bentley account shown, and a screenshot of the licensing message."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the CONNECTION Client sign-in or status screen.",
+        "The Bentley account shown.",
+        "The affected Bentley app name and version.",
+        "The exact trial, license, or entitlement message."
+      ]
+    },
+    "bentley-view": makeBentleyGuide("Bentley View", "viewing Bentley and CAD files without full authoring tools", "file association, design file, or viewer workflow"),
+    staad: makeBentleyGuide("STAAD", "structural analysis and design review", "model, template, or analysis file"),
+    synchro: makeBentleyGuide("SYNCHRO", "construction planning and 4D sequencing", "project, schedule, or model"),
+    "openflows-storm": makeBentleyGuide("OpenFlows Storm", "stormwater modeling", "model, library, or project folder"),
+    "openflows-sewer": makeBentleyGuide("OpenFlows Sewer", "sewer and wastewater modeling", "model, library, or project folder"),
+    "openflows-water": makeBentleyGuide("OpenFlows Water", "water-distribution modeling", "model, library, or project folder"),
+    "openflows-hydraulic-toolset": makeBentleyGuide("OpenFlows Hydraulic Toolset", "hydraulic modeling", "model, module, or project folder"),
+    "civil-applications": makeBentleyGuide("Bentley Civil Applications", "Bentley civil project workflows", "civil product, workspace, or standards path"),
+    "openbridge-designer": makeBentleyGuide("OpenBridge Designer", "bridge design", "bridge project, model, workspace, or standards path"),
+    "openbridge-modeler": makeBentleyGuide("OpenBridge Modeler", "bridge modeling", "bridge model, template, workspace, or standards path"),
+    "openroads-signcad": makeBentleyGuide("OpenRoads SignCAD", "sign design", "sign library, template, or project file"),
+    "ram-elements": makeBentleyGuide("RAM Elements", "structural modeling and analysis", "model, template, or analysis file"),
+    geopak: makeBentleyGuide("GEOPAK", "legacy civil workflows", "legacy project, workspace, macro, or standards path")
+  },
+  esri: {
+    "arcgis-online": {
+      summary: "Use this guide when ArcGIS Online will not sign in, shows the wrong organization, or does not show the maps, layers, groups, or roles you expect.",
+      overview: [
+        "ArcGIS Online is Esri's browser-based mapping, portal, group, and hosted-content platform.",
+        "Most ArcGIS Online issues come from signing into the wrong organization, missing group membership, role or user-type limits, or content ownership."
+      ],
+      askFirst: [
+        "Which ArcGIS organization or portal should you be using?",
+        "Is the problem sign-in, missing maps, missing layers, group access, role permissions, or ownership?",
+        "Can another approved user see the same map, layer, or group?",
+        "Did the issue begin after a role change, offboarding handoff, group change, or password change?"
+      ],
+      licensing: [
+        "ArcGIS Online access depends on your organization, user type, role, add-on licenses, and group membership.",
+        "If a tool or layer is missing, capture the organization and role shown in your profile before changing browser settings.",
+        "If content ownership changed recently, the item may need to be transferred or shared again."
+      ],
+      install: [
+        "No local install is required for ArcGIS Online, but your browser profile and sign-in account matter.",
+        "Open the expected organization URL and sign in with the work account your company assigned.",
+        "Test one known map, layer, and group before assuming the whole service is unavailable."
+      ],
+      supportCheckpoints: [
+        "Confirm the organization URL and account before clearing browser data.",
+        "Compare one known map or layer with another user if possible.",
+        "Keep the map, layer, group, or item URL ready for support."
+      ],
+      commonIssues: [
+        makeIssue(
+          "Maps, layers, or groups are missing",
+          "You can sign in, but the content you expected is not visible.",
+          "Confirm the organization, group membership, item sharing, and role before changing local browser data.",
+          "Send the item name or URL, organization name, and whether another user can see it."
+        ),
+        makeIssue(
+          "The wrong organization or role appears",
+          "ArcGIS Online opens, but the organization, role, or available tools do not match what you expected.",
+          "Sign out and sign in from the correct organization URL, then capture the profile role shown.",
+          "Send the organization URL, account used, role shown, and feature or tool missing."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact ArcGIS Online message or missing content view.",
+        "The organization URL and account used.",
+        "The map, layer, group, or item name involved.",
+        "The role or user type shown in your profile if you can see it."
+      ]
+    }
+  },
+  ptc: {
+    "mathcad-prime": makeMathcadGuide()
+  },
+  trimble: {
+    "trimble-business-center": {
+      summary: "Use this guide when Trimble Business Center will not sign in, does not show the expected modules, or cannot open the survey or construction project data you need.",
+      overview: [
+        "Trimble Business Center is a survey and construction office workflow tool used with project files, modules, reports, coordinate systems, and hardware-related data.",
+        "Most Trimble Business Center issues come from the wrong edition or module, missing project data paths, version mismatch, or local configuration that did not move with a new computer."
+      ],
+      askFirst: [
+        "Is the problem sign-in, licensing, missing modules, opening project data, reports, or controller data?",
+        "Did the issue begin after a new computer, version change, license change, or project move?",
+        "Can another approved computer open the same project data?",
+        "Which edition or modules do you expect to use?"
+      ],
+      licensing: [
+        "Trimble Business Center access depends on the edition, enabled modules, and entitlement method your organization uses.",
+        "If a command or module is missing, capture the module name and current license view before reinstalling.",
+        "If project data is missing but the app opens, the file path or project folder may matter more than the license."
+      ],
+      install: [
+        "Use the company-approved Trimble Business Center version.",
+        "Restart the computer after install or update if prompted.",
+        "Open one known-good project first, then test the project or import workflow that failed earlier."
+      ],
+      supportCheckpoints: [
+        "Keep the exact version, edition, and module name ready.",
+        "Compare the affected project on another approved computer before changing local files.",
+        "Confirm any shared coordinate systems, reports, or templates are available after setup."
+      ],
+      commonIssues: [
+        makeIssue(
+          "A module or command is missing",
+          "The app opens, but a survey, construction, report, or project command you expect is unavailable.",
+          "Compare the licensed modules and edition against what your role requires before reinstalling.",
+          "Send the missing module or command name, version, and license or entitlement message."
+        ),
+        makeIssue(
+          "Project data will not open",
+          "Trimble Business Center launches, but one project, import, or data path does not open correctly.",
+          "Test a second known-good project and confirm the file path before changing the app install.",
+          "Send the project name, data path, import type, and exact message."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Trimble Business Center message.",
+        "The version and edition or module you expect.",
+        "The project or data file involved.",
+        "Whether another approved computer can open the same data."
+      ]
+    }
+  },
+  foxit: {
+    "pdf-editor": makeFoxitGuide("Foxit PDF Editor", "PDF editing, signing, commenting, document review, and Office or browser PDF handoff", "editing, signing, commenting, OCR, or Office integration"),
+    "pdf-reader": makeFoxitGuide("Foxit PDF Reader", "reading, printing, and basic PDF review", "viewing, printing, browser handoff, or basic commenting")
+  },
+  quickbooks: {
+    "quickbooks-enterprise-desktop": makeQuickBooksGuide("QuickBooks Enterprise Desktop", "Windows desktop accounting with company files, multi-user access, reports, printing, and PDF workflows"),
+    "quickbooks-online": makeQuickBooksGuide("QuickBooks Online", "browser-based accounting, company access, roles, approvals, and finance workflows")
   },
   google: {
     "google-earth-pro": {

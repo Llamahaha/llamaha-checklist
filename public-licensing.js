@@ -18,6 +18,7 @@ const mainSections = [
 
 const vendorCards = [];
 const vendorNavEntries = [];
+const hiddenPublicLicensingVendors = new Set(["quickbooks"]);
 let mainTabsApi = null;
 let vendorTabsApi = null;
 
@@ -183,19 +184,6 @@ const customerLicensingReference = {
       "The version or build if your team standardizes on one"
     ]
   },
-  quickbooks: {
-    summary: "QuickBooks access depends on whether you use Desktop or Online, the exact product year or company file for Desktop, and the company membership or role for Online.",
-    howItWorks: [
-      "QuickBooks Desktop access often depends on the correct year, edition, and company file path.",
-      "QuickBooks Online access depends on the Intuit account and company or role assigned to it.",
-      "If your team uses a hosted or shared company-file setup, that hosting model matters."
-    ],
-    whatYouNeed: [
-      "Whether you use QuickBooks Desktop or QuickBooks Online",
-      "If Desktop, the exact year and edition plus the company file location",
-      "If Online, the company name and the role you should have"
-    ]
-  },
   egnyte: {
     summary: "Egnyte access usually depends on the correct company domain, the work account assigned to you, and the folders or user type your organization expects you to use.",
     howItWorks: [
@@ -237,7 +225,7 @@ function buildSectionSearchText(section) {
 }
 
 if (licensingGrid && vendorSection) {
-  const filteredVendors = vendorOrder.filter(key => customerLicensingReference[key]);
+  const filteredVendors = vendorOrder.filter(key => customerLicensingReference[key] && !hiddenPublicLicensingVendors.has(key));
 
   // Build the vendor sub-TOC before the card grid so each vendor acts as
   // a sub-tab. Only the picked vendor card shows at a time.

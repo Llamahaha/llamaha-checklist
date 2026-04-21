@@ -1,4 +1,5 @@
 import "../siteChrome.js";
+import { copyTextToClipboard } from "../resourceCommon.js";
 import { vendorGuides } from "./guideData.js";
 import {
   buildAppGuideUrl,
@@ -32,6 +33,7 @@ const guideHubUrl = `${rootPath}/vendor-guides.html`;
 const vendorUrl = slug => `${rootPath}/guides/${slug}.html`;
 const appUrl = (slug, childSlug) => `${rootPath}/${buildAppGuideUrl(slug, childSlug)}`;
 const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte", "mctrans", "axiom"]);
+const defaultReviewLabel = "Reviewed April 2026";
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -93,6 +95,28 @@ function paragraphs(items = []) {
 
 function unique(items = []) {
   return [...new Set(items.filter(Boolean))];
+}
+
+function formatReviewLabel(label = defaultReviewLabel) {
+  if (/^(reviewed|updated)\b/i.test(label)) {
+    return label;
+  }
+  return `Reviewed ${label}`;
+}
+
+function renderReviewLabel(label = defaultReviewLabel) {
+  if (!elements.summary?.parentElement) {
+    return;
+  }
+
+  let review = document.getElementById("guideReviewLabel");
+  if (!review) {
+    review = el("p", "guide-review-label");
+    review.id = "guideReviewLabel";
+    elements.summary.insertAdjacentElement("afterend", review);
+  }
+
+  review.textContent = formatReviewLabel(label);
 }
 
 function publicizeText(value = "") {
@@ -248,8 +272,50 @@ function buildAppModel() {
     commonIssues: commonIssues.length ? commonIssues : defaultCommonIssues().map(normalizeIssue),
     supportArtifacts: publicContent.supportArtifacts?.length ? publicContent.supportArtifacts : defaultSupportArtifacts(),
     relatedApps: extra.relatedApps?.length ? extra.relatedApps : apps.filter(item => item.slug !== appSlug).slice(0, 3).map(item => ({ vendor: vendorSlug, app: item.slug })),
-    relatedLinks: unique([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? []), ...(publicContent.relatedLinks ?? [])])
+    relatedLinks: unique([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? []), ...(publicContent.relatedLinks ?? [])]),
+    lastReviewed: publicContent.lastReviewed ?? defaultReviewLabel
   };
+}
+
+function buildSupportChecklist(model) {
+  return [
+    `${model.name} support details checklist`,
+    "",
+    "Fill in what you can before sending support:",
+    "- Work account used:",
+    `- ${model.name} version:`,
+    "- Screenshot or exact error wording:",
+    "- Does the browser version work, if one exists?",
+    "- Does the same task work on another computer, phone, Cloud PC, VPN path, or Citrix session?",
+    "- Exact file, project, site URL, mailbox, printer, datasource, company file, or path involved:",
+    "",
+    "Guide-specific details to include:",
+    ...model.supportArtifacts.map(item => `- ${item}`)
+  ].join("\n");
+}
+
+function createCopySupportAction(model) {
+  const wrapper = el("div", "inline-actions guide-copy-actions");
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "secondary-btn";
+  button.textContent = "Copy support details checklist";
+
+  const status = el("span", "guide-copy-status");
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+
+  button.addEventListener("click", async () => {
+    try {
+      await copyTextToClipboard(buildSupportChecklist(model));
+      status.textContent = "Copied.";
+    } catch {
+      status.textContent = "Copy failed. Select the list above and copy it manually.";
+    }
+  });
+
+  wrapper.append(button, status);
+  return wrapper;
 }
 
 function appSections(model) {
@@ -392,6 +458,7 @@ function renderAppPage(model) {
 
   const sendSupport = section("what-to-send-support", "What to Send Support", "What to Send Support", "If the problem continues, send these details so support can help faster.");
   sendSupport.appendChild(card("Send these details", model.supportArtifacts));
+  sendSupport.appendChild(createCopySupportAction(model));
 
   const related = section("related-help", "Related Help", "Related Help", "Use these links to keep moving without losing context.");
   const relatedGrid = el("div", "guide-card-grid");
@@ -408,6 +475,7 @@ function renderAppPage(model) {
   related.appendChild(relatedGrid);
 
   elements.summary.textContent = model.summary;
+  renderReviewLabel(model.lastReviewed);
   const sections = [overview, ask];
   if (model.licensing.length) {
     const licensing = section("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
@@ -460,6 +528,7 @@ if (!vendor || (pageType === "app" && !app)) {
     renderJumpLinks(model);
     renderAppPage(model);
   } else {
+    renderReviewLabel(defaultReviewLabel);
     renderJumpLinks();
     renderVendorPage();
   }

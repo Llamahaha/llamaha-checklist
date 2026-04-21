@@ -6,6 +6,7 @@ import { activatePageTabs } from "./sectionTabs.js";
 
 const patternGrid = document.getElementById("patternGrid");
 const vendorIssueGrid = document.getElementById("vendorIssueGrid");
+const hiddenPublicIssueVendors = new Set(["quickbooks"]);
 
 crossAppIssuePatterns.forEach(item => {
   const card = createPageCard();
@@ -17,7 +18,7 @@ crossAppIssuePatterns.forEach(item => {
   patternGrid.appendChild(card);
 });
 
-vendorOrder.forEach(key => {
+vendorOrder.filter(key => !hiddenPublicIssueVendors.has(key)).forEach(key => {
   const guide = vendorGuides[key];
   const card = createPageCard("vendor-card");
   const title = document.createElement("h3");

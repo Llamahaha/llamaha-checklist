@@ -11,6 +11,7 @@ const publicLinks = [
 const internalLinks = [
   { id: "internal-home", label: "Internal Home", href: "internal/index.html" },
   { id: "reference-guides", label: "Reference Guides", href: "internal/reference-guides.html" },
+  { id: "triage", label: "Guided Triage", href: "internal/decision-trees.html" },
   { id: "tips-tricks", label: "Tips & Tricks", href: "internal/tips-and-tricks.html" },
   { id: "snippets", label: "Snippets", href: "internal/snippets.html" },
   { id: "templates", label: "Templates", href: "internal/templates.html" },
@@ -46,6 +47,7 @@ function getPublicSection(currentFile, body, pathname) {
 function getInternalSection(currentFile) {
   if (currentFile === "index.html") return "internal-home";
   if (currentFile === "reference-guides.html") return "reference-guides";
+  if (currentFile === "decision-trees.html") return "triage";
   if (currentFile === "tips-and-tricks.html") return "tips-tricks";
   if (currentFile === "snippets.html") return "snippets";
   if (currentFile === "templates.html") return "templates";
