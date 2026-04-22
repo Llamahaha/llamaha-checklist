@@ -109,7 +109,24 @@ function initSiteChrome() {
 
   const nav = document.createElement("nav");
   nav.className = "site-links";
+  nav.id = `${area}-site-links`;
   nav.setAttribute("aria-label", area === "internal" ? "Internal sections" : "Site sections");
+
+  const menuButton = document.createElement("button");
+  menuButton.type = "button";
+  menuButton.className = "site-menu-toggle";
+  menuButton.setAttribute("aria-controls", nav.id);
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.textContent = "Menu";
+
+  function setMenuOpen(open) {
+    chrome.classList.toggle("is-menu-open", open);
+    menuButton.setAttribute("aria-expanded", String(open));
+  }
+
+  menuButton.addEventListener("click", () => {
+    setMenuOpen(!chrome.classList.contains("is-menu-open"));
+  });
 
   navLinks.forEach(item => {
     const link = document.createElement("a");
@@ -119,10 +136,19 @@ function initSiteChrome() {
     }
     link.href = buildHref(rootPath, item.href);
     link.textContent = item.label;
+    link.addEventListener("click", () => {
+      setMenuOpen(false);
+    });
     nav.appendChild(link);
   });
 
-  chrome.append(brand, nav);
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      setMenuOpen(false);
+    }
+  });
+
+  chrome.append(brand, menuButton, nav);
   shell.prepend(chrome);
 }
 

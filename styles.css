@@ -164,6 +164,29 @@ body {
   gap: 8px;
 }
 
+.site-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--nav-pill-bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease, color 120ms ease, box-shadow 120ms ease;
+}
+
+.site-menu-toggle:hover,
+.site-menu-toggle[aria-expanded="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
 .site-link {
   display: inline-flex;
   align-items: center;
@@ -1689,13 +1712,36 @@ input[type="checkbox"] {
 
 @media (max-width: 980px) {
   .site-chrome {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) auto;
     border-radius: var(--radius-xl);
-    padding: 16px;
+    padding: 12px;
+  }
+
+  .site-menu-toggle {
+    display: inline-flex;
   }
 
   .site-links {
+    display: none;
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    justify-content: stretch;
+  }
+
+  .site-chrome.is-menu-open .site-links {
+    display: grid;
+  }
+
+  .site-link {
+    min-width: 0;
     justify-content: flex-start;
+    text-align: left;
+    white-space: normal;
+    border-radius: var(--radius);
   }
 
   .workspace,
@@ -1780,18 +1826,28 @@ input[type="checkbox"] {
     grid-template-columns: 1fr;
   }
 
+  .site-chrome {
+    gap: 10px;
+    align-items: center;
+    padding: 10px 12px;
+  }
+
+  .site-brand-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+  }
+
+  .site-brand-copy strong {
+    font-size: 0.86rem;
+  }
+
   .site-links {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
     overflow: visible;
-    padding-bottom: 0;
   }
 
   .site-link {
-    min-width: 0;
-    white-space: normal;
-    text-align: center;
+    font-size: 0.84rem;
   }
 
   .accordion-summary {
@@ -1828,12 +1884,6 @@ input[type="checkbox"] {
 
   .guide-sidebar {
     position: static;
-  }
-}
-
-@media (max-width: 420px) {
-  .site-links {
-    grid-template-columns: 1fr;
   }
 }
 
