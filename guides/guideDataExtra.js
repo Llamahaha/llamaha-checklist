@@ -59,7 +59,7 @@ export const vendorGuidesExtra = {
     title: "MCTRANS",
     summary: "Use this for MCTRANS transportation-analysis tools, especially Highway Capacity Software and Highway Safety Software.",
     overview:
-      "MCTRANS tickets usually come down to version alignment, licensing or delivery details, and whether the same study file behaves correctly on another approved installation.",
+      "MCTRANS problems usually come down to version alignment, licensing or delivery details, and whether the same study file behaves correctly on another approved installation.",
     products: ["HCS", "HSS"],
     sharedNotes: [
       "Capture the exact HCS or HSS version and study file before changing the installation.",

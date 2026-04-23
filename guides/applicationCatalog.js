@@ -132,7 +132,7 @@ const baseApplicationCatalog = {
       supportChecks: [
         "Validate the exact release year, profile import, plotter setup, and any Autodesk vertical dependencies before day-one handoff.",
         "Confirm DWG file associations, Autodesk sign-in, and network paths for templates, CTB or STB files, tool palettes, and fonts.",
-        "Capture custom workspace, ribbon, or support-path changes in the ticket so rebuilds do not start from scratch."
+        "Note any custom workspace, ribbon, or support-path changes so rebuilds do not start from scratch."
       ],
       commonIssues: [
         {
@@ -158,7 +158,7 @@ const baseApplicationCatalog = {
       install: "Deploy the approved year build plus country kits, content packs, and client-specific templates before handoff.",
       uninstall: "Preserve custom templates, pipe networks, shortcuts, and workspace data before removing the local install.",
       supportChecks: [
-        "Verify the exact release year, object enablers, country kit, and any add-ins used by the civil team before closing the ticket.",
+        "Verify the exact release year, object enablers, country kit, and any add-ins used by the civil team before considering the issue resolved.",
         "Confirm data shortcuts, shared template paths, and profile or style libraries resolve from the workstation.",
         "Capture any client-specific standards folders and support-path changes because they are usually the real differentiator between a good and bad Civil 3D build."
       ],
@@ -401,7 +401,7 @@ const baseApplicationCatalog = {
       supportChecks: [
         "Verify the exact Prime version and license-source path expected by the client before handing the workstation over.",
         "Test worksheet open, save, and any template library or integration path the engineers use most often.",
-        "Capture environment variables, license-server references, and template locations in the ticket for future troubleshooting."
+        "Note environment variables, license-server references, and template locations for future troubleshooting."
       ],
       commonIssues: [
         {
@@ -608,7 +608,7 @@ const baseApplicationCatalog = {
       uninstall: "Remove offline folders and cached data carefully, then uninstall using the supported MSI or managed-deployment path.",
       supportChecks: [
         "Confirm the user's Egnyte role supports Desktop App use and that the correct tenant, drive-letter, or label settings are being deployed.",
-        "Test sign-in, mapped-drive behavior, offline access, and visibility to the expected folders before the ticket is closed.",
+        "Test sign-in, mapped-drive behavior, offline access, and visibility to the expected folders before considering the issue resolved.",
         "Document offline folders, special drive mappings, and any mass-deployment parameters used for that client."
       ],
       commonIssues: [

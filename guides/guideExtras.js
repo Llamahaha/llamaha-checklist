@@ -66,7 +66,7 @@ export const vendorFaqs = {
     },
     {
       q: "Does uninstalling the app fully reclaim access?",
-      a: "Usually not. Reclaim the entitlement or license-server assignment and keep any environment or workspace settings in the ticket notes."
+      a: "Usually not. Reclaim the entitlement or license-server assignment and keep any environment or workspace settings documented."
     }
   ],
   sketchup: [

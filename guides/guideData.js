@@ -23,7 +23,7 @@ const baseVendorGuides = {
     title: "Microsoft 365",
     summary: "Use this for tenant-backed desktop app support, licensing, sign-in, sync, Teams collaboration, and SharePoint or OneDrive workflow issues.",
     overview:
-      "Microsoft tickets are often identity, licensing, tenant, or local profile problems wearing an application mask. Validate the account, license scope, and service health before rebuilding apps.",
+      "Microsoft problems are often identity, licensing, tenant, or local profile issues wearing an application mask. Validate the account, license scope, and service health before rebuilding apps.",
     products: ["Outlook", "Teams", "OneDrive", "SharePoint", "Outlook Mobile", "Teams Mobile", "Microsoft Authenticator"],
     sharedNotes: [
       "Confirm the exact tenant, UPN, and Microsoft 365 license bundle before changing local apps.",
@@ -202,7 +202,7 @@ const baseVendorGuides = {
     products: ["ArcGIS Pro", "ArcGIS Online", "Esri extensions and portal roles"],
     sharedNotes: [
       "Named User licensing and portal choice are separate checks. The user can be signed in and still pointed at the wrong org.",
-      "Group membership and content ownership are often the real problem behind 'missing maps' tickets.",
+      "Group membership and content ownership are often the real reason behind 'missing maps' reports.",
       "Capture offline-license use before replacing or reclaiming a workstation."
     ],
     adminSurfaces: [
@@ -224,11 +224,11 @@ const baseVendorGuides = {
     title: "PTC",
     summary: "Use this for Mathcad Prime entitlement, install, uninstall, and workstation license-source guidance.",
     overview:
-      "PTC tickets usually fail on license-source settings, environment configuration, or shared engineering content rather than raw installer success. Document the exact license path before making changes.",
+      "PTC problems usually come down to license-source settings, environment configuration, or shared engineering content rather than raw installer success. Document the exact license path before making changes.",
     products: ["Mathcad Prime"],
     sharedNotes: [
       "Identify whether the client uses named-user, floating, or file-based licensing before you troubleshoot the app itself.",
-      "Capture license-server or config-file references in the ticket. They are often tribal knowledge.",
+      "Note the license-server or config-file details your team uses. They are easy to lose and hard to rediscover.",
       "Protect local worksheets, templates, and engineering content before cleanup or rebuild."
     ],
     adminSurfaces: [
@@ -245,7 +245,7 @@ const baseVendorGuides = {
     title: "Trimble",
     summary: "Use this for Trimble-managed app access, especially SketchUp administration overlap and Trimble Business Center deployment guidance.",
     overview:
-      "Trimble product support depends on the exact product family. Start by confirming whether the ticket belongs to SketchUp, TBC, or another Trimble-managed workflow before you assume a shared install pattern.",
+      "Trimble product support depends on the exact product family. Start by confirming whether the issue belongs to SketchUp, TBC, or another Trimble-managed workflow before you assume a shared install pattern.",
     products: ["SketchUp", "Trimble Business Center"],
     sharedNotes: [
       "Use the same Trimble identity path the client already standardized on.",
@@ -295,7 +295,7 @@ const baseVendorGuides = {
       "Bluebeam cases usually live at the intersection of BBID sign-in, Studio access, and shared profile content. Confirm the subscription tier and BBID state before you chase local installer problems.",
     products: ["Bluebeam Revu 21"],
     sharedNotes: [
-      "Revu 21 is subscription and BBID-driven; older serial-and-key instincts can send the ticket sideways.",
+      "Revu 21 is subscription and BBID-driven; older serial-and-key instincts can send troubleshooting sideways.",
       "Shared tool chests, profiles, and stamps are part of the build, not optional extras.",
       "Version alignment matters when project teams share Studio Sessions or PDFs with advanced markups."
     ],
@@ -342,7 +342,7 @@ const baseVendorGuides = {
     products: ["QuickBooks Enterprise Desktop", "QuickBooks Online"],
     sharedNotes: [
       "Separate hosted Desktop, local Desktop, and QBO immediately. They have different support paths and risks.",
-      "Company-file path, backups, print drivers, and hosting mode should be captured in every serious ticket.",
+      "Company-file path, backups, print drivers, and hosting mode should be noted before any serious troubleshooting.",
       "Finance workflows deserve explicit approval evidence before access changes or cleanup."
     ],
     adminSurfaces: [

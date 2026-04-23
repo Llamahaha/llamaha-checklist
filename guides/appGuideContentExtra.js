@@ -224,7 +224,7 @@ export const appGuideContentExtra = {
     axiom: {
       highlights: [
         "Fastest likely fix: identify the host app and year first, then compare the failing Axiom module against another approved workstation.",
-        "Axiom tickets are usually host-app compatibility or missing-module issues."
+        "Axiom problems are usually host-app compatibility or missing-module issues."
       ],
       askFirst: [
         "Which host application and version or year is in scope?",

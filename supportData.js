@@ -7,7 +7,7 @@ export const matrixResource = {
 export const microsoftIssueSections = [
   {
     title: "Office Apps and Activation",
-    description: "These are the Microsoft 365 desktop patterns that usually show up first in tickets: activation drift, sign-in mismatch, add-ins, and Outlook profile trouble.",
+    description: "These are the Microsoft 365 desktop patterns people run into first: activation drift, sign-in mismatch, add-ins, and Outlook profile trouble.",
     items: [
       {
         title: "Office activation, sign-in, or wrong account",
@@ -69,7 +69,7 @@ export const microsoftIssueSections = [
   },
   {
     title: "Teams, OneDrive, and SharePoint",
-    description: "These tickets usually come down to identity, permissions, sync state, or device settings rather than a single broken app install.",
+    description: "These issues usually come down to identity, permissions, sync state, or device settings rather than a single broken app install.",
     items: [
       {
         title: "Teams sign-in, meeting, or device problems",
@@ -93,7 +93,7 @@ export const microsoftIssueSections = [
       },
       {
         title: "OneDrive sync, lock, or file-name issues",
-        text: "Most OneDrive tickets come from account mismatch, low disk space, path or naming conflicts, or a sync engine that needs to be reset or relinked.",
+        text: "Most OneDrive problems come from account mismatch, low disk space, path or naming conflicts, or a sync engine that needs to be reset or relinked.",
         fixes: [
           "Confirm the user is signed into the expected work tenant and not a second OneDrive profile.",
           "Review file names, path length, invalid characters, and whether files are locked by another application.",

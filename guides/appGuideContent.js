@@ -268,7 +268,7 @@ const baseAppGuideContent = {
     revit: {
       highlights: [
         "Fastest likely fix: confirm the exact project-approved Revit year and point release, then compare add-ins, families, and collaboration cache paths with a known-good teammate.",
-        "Many 'broken Revit' tickets are really missing add-ins or a workstation that opened the wrong project year."
+        "Many 'broken Revit' reports are really missing add-ins or a computer that opened the wrong project year."
       ],
       askFirst: [
         "What Revit year and update level does the active project require?",
@@ -446,7 +446,7 @@ const baseAppGuideContent = {
       supportCheckpoints: [
         "Verify the exact Prime version and license-source path expected by the client before handoff.",
         "Test worksheet open and save and any template library or integration path the engineers use most.",
-        "Capture environment variables, license-server references, and template locations in the ticket."
+        "Note environment variables, license-server references, and template locations for reference."
       ],
       usefulInfo: {
         paths: ["Mathcad Prime config location", "Shared worksheet and template paths"],
@@ -554,7 +554,7 @@ const baseAppGuideContent = {
     "egnyte-desktop-app": {
       highlights: [
         "Fastest likely fix: confirm the user type, tenant, SSO path, and deployment parameters before rebuilding the mapped-drive client.",
-        "Wrong role or wrong deployment flags create more Desktop App tickets than bad installs do."
+        "Wrong role or wrong deployment flags cause more Desktop App problems than bad installs do."
       ],
       askFirst: [
         "Is the problem sign-in, mapped drive mount, offline files, tenant selection, or missing folder visibility?",
@@ -563,7 +563,7 @@ const baseAppGuideContent = {
       ],
       supportCheckpoints: [
         "Confirm the user's Egnyte role supports Desktop App use and that the correct tenant, drive-letter, or label settings are being deployed.",
-        "Test sign-in, mapped-drive behavior, offline access, and visibility to the expected folders before the ticket is closed.",
+        "Test sign-in, mapped-drive behavior, offline access, and visibility to the expected folders before considering the issue resolved.",
         "Document offline folders, special drive mappings, and any mass-deployment parameters used for that client."
       ],
       usefulInfo: {

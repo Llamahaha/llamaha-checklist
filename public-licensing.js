@@ -108,8 +108,8 @@ const customerLicensingReference = {
     summary: "Esri access usually depends on the ArcGIS organization you belong to, the role or user type assigned to you, any extensions tied to that account, and for some teams a company license server or authorization file.",
     howItWorks: [
       "Most ArcGIS Pro users sign in with a Named User account from ArcGIS Online or ArcGIS Enterprise. That account determines your user type, role, and extensions.",
-      "Single Use licenses tie ArcGIS Pro to a specific computer through an authorization file. As of December 1, 2025, new conversions between Named User and Single Use are not available in My Esri, so existing Single Use installs stay as they are until your team changes them.",
-      "Concurrent Use with ArcGIS License Manager was deprecated on July 1, 2025. Concurrent Use licenses are valid for ArcGIS Pro 3.6 but are not valid for versions released after that.",
+      "Single Use licenses tie ArcGIS Pro to a specific computer through an authorization file. Esri no longer offers new conversions between Named User and Single Use in My Esri, so existing Single Use installs stay as they are until your team changes them.",
+      "Concurrent Use with ArcGIS License Manager is deprecated. Existing Concurrent Use licenses are valid for ArcGIS Pro 3.6 only and are not valid for any newer release.",
       "If you need a specific ArcGIS extension or license level, that detail matters regardless of the license type."
     ],
     whatYouNeed: [

@@ -648,7 +648,7 @@ const basePublicGuideContent = {
         "Make sure ArcGIS Pro is signed into the same ArcGIS organization your team expects.",
         "If the app opens with the wrong license level, note the exact level shown, such as Basic, Standard, or Advanced.",
         "If a tool is missing, note the extension name you expected to use.",
-        "Most ArcGIS Pro users sign in with a Named User account from ArcGIS Online or ArcGIS Enterprise. Some organizations still use Single Use, and a few may still use Concurrent Use on ArcGIS Pro 3.6. If you do not know which license type your team uses, ask before changing the Licensing page in ArcGIS Pro."
+        "Most ArcGIS Pro users sign in with a Named User account from ArcGIS Online or ArcGIS Enterprise. Some organizations still use Single Use. A small number of legacy setups may still use Concurrent Use on ArcGIS Pro 3.6 only; Esri has deprecated Concurrent Use for any newer release. If you do not know which license type your team uses, ask before changing the Licensing page in ArcGIS Pro."
       ],
       install: [
         "Install pending ArcGIS Pro updates if your organization allows them, then restart the computer.",
@@ -671,7 +671,7 @@ const basePublicGuideContent = {
         {
           title: "License Authorization set to the wrong type or license server",
           symptom: "ArcGIS Pro asks for a different sign-in method than you expected, points at the wrong license server, or refuses to open even though your ArcGIS account is active.",
-          likelyFix: "In ArcGIS Pro, open the Licensing page and confirm License Type matches what your team uses (Named User, Single Use, or, for Pro 3.6, Concurrent Use). For Named User, signing in with the ArcGIS organization account is usually enough. For Single Use or Concurrent Use, confirm the authorization file or license server name with support before changing the setting.",
+          likelyFix: "In ArcGIS Pro, open the Licensing page and confirm License Type matches what your team uses: Named User, Single Use, or (on legacy Pro 3.6 installs only) Concurrent Use. For Named User, signing in with the ArcGIS organization account is usually enough. For Single Use or legacy Concurrent Use, confirm the authorization file or license server name with support before changing the setting.",
           collect: "Send the license type shown, the ArcGIS organization URL or license server name, and the exact sign-in or authorization message you see."
         },
         {
