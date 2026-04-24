@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warranty lookup cheatsheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../reference-guides.html">Reference Guides</a>
+      <span>/</span>
+      <strong>Warranty lookup cheatsheet</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Cheatsheet</p>
+            <h1>Warranty lookup cheatsheet</h1>
+            <p class="builder-copy">Where to paste a serial / service tag for each major OEM, what those identifiers look like, and how to find them on the device. Use when scoping a hardware repair or quoting a replacement.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Dell</p>
+            <h2>Service Tag &amp; Express Service Code</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Lookup URL</h4>
+            <p><a href="https://www.dell.com/support/home/en-us/product-support/servicetag/" target="_blank" rel="noopener">dell.com/support/home/en-us/product-support/servicetag/</a> &mdash; paste the Service Tag, get warranty + ship date + entitlements.</p>
+          </div>
+          <div class="card-block">
+            <h4>Service Tag format</h4>
+            <p>7-character alphanumeric (letters + digits, no I/O/L). Example: <code>BX3K7Z2</code>. The Express Service Code is the same tag converted to digits (10&ndash;11 numeric).</p>
+          </div>
+          <div class="card-block">
+            <h4>Where to find it</h4>
+            <p>Sticker on the bottom of laptops or back of desktops/towers. Also visible from CMD: <code>wmic bios get serialnumber</code> or PowerShell: <code>Get-CimInstance Win32_BIOS | Select SerialNumber</code>.</p>
+          </div>
+          <div class="card-block">
+            <h4>Bulk &amp; API</h4>
+            <p>Dell's TechDirect portal supports CSV upload of multiple Service Tags. API access available via Dell TechDirect for partners.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Lenovo</p>
+            <h2>Serial Number &amp; Machine Type</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Lookup URL</h4>
+            <p><a href="https://pcsupport.lenovo.com/" target="_blank" rel="noopener">pcsupport.lenovo.com</a> &mdash; "Detect Product" or paste the Serial Number.</p>
+          </div>
+          <div class="card-block">
+            <h4>Serial Number format</h4>
+            <p>Typically 7&ndash;8 character alphanumeric. Example: <code>PF3ABCDE</code> (ThinkPad) or <code>MP1ABCDE</code> (ThinkCentre). Often paired with a Machine Type Model (MTM) like <code>20XW</code> for the model line.</p>
+          </div>
+          <div class="card-block">
+            <h4>Where to find it</h4>
+            <p>Sticker on the bottom of laptops; back of towers. From CMD: <code>wmic bios get serialnumber</code>. Lenovo Vantage or System Update tools also display it.</p>
+          </div>
+          <div class="card-block">
+            <h4>Bulk &amp; API</h4>
+            <p>Lenovo Support has a multi-serial lookup. Lenovo also offers a Warranty Lookup API to partners; ask your Lenovo rep.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">HP</p>
+            <h2>Serial Number &amp; Product Number</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Lookup URL</h4>
+            <p><a href="https://support.hp.com/us-en/checkwarranty" target="_blank" rel="noopener">support.hp.com/us-en/checkwarranty</a> &mdash; needs Serial Number; sometimes asks for Country/Region.</p>
+          </div>
+          <div class="card-block">
+            <h4>Serial Number format</h4>
+            <p>10-character alphanumeric. Example: <code>5CD1234ABC</code>. Product Number (P/N) is separate (e.g., <code>2K8X5UA#ABA</code>) and identifies the SKU.</p>
+          </div>
+          <div class="card-block">
+            <h4>Where to find it</h4>
+            <p>Bottom sticker on laptops, back of desktops. From CMD: <code>wmic bios get serialnumber</code>. HP Support Assistant displays both Serial and Product Number.</p>
+          </div>
+          <div class="card-block">
+            <h4>Bulk &amp; API</h4>
+            <p>HP offers a Warranty Status API for partners; HP Smart Friend Pro / HP Manageability Integration Kit can pull warranty status at scale.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Apple</p>
+            <h2>Serial Number &amp; Coverage</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Lookup URL</h4>
+            <p><a href="https://checkcoverage.apple.com/" target="_blank" rel="noopener">checkcoverage.apple.com</a> &mdash; paste the Serial Number, get hardware + AppleCare status.</p>
+          </div>
+          <div class="card-block">
+            <h4>Serial Number format</h4>
+            <p>For Macs/iPads/iPhones manufactured 2021 and later, Apple shifted to a randomized 10-character alphanumeric serial. Older devices used a 12-character format that encoded factory and week-of-manufacture.</p>
+          </div>
+          <div class="card-block">
+            <h4>Where to find it</h4>
+            <p>macOS:  &gt; About This Mac. iOS: Settings &gt; General &gt; About. Physical: bottom case (laptop), back (desktop), engraved on iPhone SIM tray (older models). From terminal: <code>system_profiler SPHardwareDataType | grep Serial</code>.</p>
+          </div>
+          <div class="card-block">
+            <h4>For business / GSX access</h4>
+            <p>Apple Authorized Service Providers (AASP) and Apple Business Manager admins have access to GSX for fuller coverage and repair history.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Microsoft Surface</p>
+            <h2>Serial Number &amp; Coverage</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Lookup URL</h4>
+            <p><a href="https://support.microsoft.com/en-us/devices" target="_blank" rel="noopener">support.microsoft.com/en-us/devices</a> &mdash; sign in with the Microsoft account the device is registered to and view registered devices + warranty. For unregistered devices, use the <a href="https://surface.managementportal.microsoft.com/" target="_blank" rel="noopener">Surface Management Portal</a> (commercial) or contact Surface support with the serial.</p>
+          </div>
+          <div class="card-block">
+            <h4>Serial Number format</h4>
+            <p>12-character alphanumeric. Example: <code>123456789012</code>. Surface devices also have a separate IMEI on LTE models.</p>
+          </div>
+          <div class="card-block">
+            <h4>Where to find it</h4>
+            <p>Surface app (preinstalled) &gt; Your Surface tab &mdash; shows the serial. Or Settings &gt; System &gt; About. Physical: under the kickstand (Surface Pro), or in the SIM tray on LTE models. From CMD: <code>wmic bios get serialnumber</code>.</p>
+          </div>
+          <div class="card-block">
+            <h4>Commercial / bulk</h4>
+            <p>Surface Management Portal (free, requires Azure AD tenant) shows warranty across the fleet. Surface Enterprise Management Mode (SEMM) for firmware controls.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">When You Don't Have The Device</p>
+            <h2>Pulling the serial remotely</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Windows (any OEM)</h4>
+            <p>CMD: <code>wmic bios get serialnumber</code><br>PowerShell: <code>Get-CimInstance Win32_BIOS | Select-Object SerialNumber, Manufacturer, Model</code></p>
+          </div>
+          <div class="card-block">
+            <h4>macOS</h4>
+            <p>Terminal: <code>system_profiler SPHardwareDataType | grep "Serial Number"</code></p>
+          </div>
+          <div class="card-block">
+            <h4>From Intune / SCCM / Jamf</h4>
+            <p>All major MDMs report serial numbers per device. Export the device inventory and lookup in bulk.</p>
+          </div>
+          <div class="card-block">
+            <h4>From RMM</h4>
+            <p>Datto, NinjaOne, ConnectWise Automate, N-able all expose Serial Number and Manufacturer fields per agent.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Quick Reference</p>
+            <h2>One-line summary per vendor</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Dell</h4>
+            <p>7-char Service Tag (no I/O/L) &rarr; <a href="https://www.dell.com/support/home/en-us/product-support/servicetag/" target="_blank" rel="noopener">dell.com/support</a></p>
+          </div>
+          <div class="card-block">
+            <h4>Lenovo</h4>
+            <p>7&ndash;8 char Serial + 4-char MTM &rarr; <a href="https://pcsupport.lenovo.com/" target="_blank" rel="noopener">pcsupport.lenovo.com</a></p>
+          </div>
+          <div class="card-block">
+            <h4>HP</h4>
+            <p>10-char Serial + Product Number &rarr; <a href="https://support.hp.com/us-en/checkwarranty" target="_blank" rel="noopener">support.hp.com/us-en/checkwarranty</a></p>
+          </div>
+          <div class="card-block">
+            <h4>Apple</h4>
+            <p>10-char (post-2021) or 12-char Serial &rarr; <a href="https://checkcoverage.apple.com/" target="_blank" rel="noopener">checkcoverage.apple.com</a></p>
+          </div>
+          <div class="card-block">
+            <h4>Microsoft Surface</h4>
+            <p>12-digit Serial &rarr; <a href="https://support.microsoft.com/en-us/devices" target="_blank" rel="noopener">support.microsoft.com/en-us/devices</a> or Surface Management Portal</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

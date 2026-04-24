@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Printer troubleshooting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>Printer troubleshooting</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>Printer troubleshooting</h1>
+            <p class="builder-copy">Printer problems usually have one of three causes: the printer is offline or low on something, the wrong printer is selected, or the print queue is jammed. Here is the order to check.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step One</p>
+            <h2>Look at the printer itself</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Check the display panel for errors</h4>
+            <p>Toner low, paper out, paper jam, lid open, waste tray full. Most office printers will not print until the message is cleared. Walk over to the printer before doing anything else.</p>
+          </div>
+          <div class="card-block">
+            <h4>Check the network status if it is a shared printer</h4>
+            <p>If the printer's display says offline or shows no network connection, the printer is the problem, not your computer. Restart the printer (power off, wait 30 seconds, power on).</p>
+          </div>
+          <div class="card-block">
+            <h4>Try printing from another computer or phone</h4>
+            <p>If no one in the office can print, it is the printer. If you are the only one who can't, it is your computer or your printer install.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step Two</p>
+            <h2>Check what your computer is doing</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Make sure the right printer is selected</h4>
+            <p>The print dialog often defaults to "Microsoft Print to PDF" or the last printer you used. Look at the printer dropdown and pick the one you want.</p>
+          </div>
+          <div class="card-block">
+            <h4>Clear the print queue if jobs are stuck</h4>
+            <p>On Windows, open Settings &gt; Bluetooth &amp; devices &gt; Printers &amp; scanners, click your printer, then Open print queue. Right-click any stuck job and Cancel. If the queue is huge, restart your computer to clear it.</p>
+          </div>
+          <div class="card-block">
+            <h4>Check that the printer shows as Ready, not Offline</h4>
+            <p>If Windows shows the printer as Offline, right-click the printer and choose "Use Printer Online" or remove and re-add the printer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step Three</p>
+            <h2>Common patterns and fixes</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Wrong tray, wrong paper size, or duplex when you wanted simplex</h4>
+            <p>These come from the print dialog's Properties or Preferences button, not the printer. Open Properties before clicking Print and check tray, paper size, and one-sided vs two-sided.</p>
+          </div>
+          <div class="card-block">
+            <h4>Prints come out tiny or huge</h4>
+            <p>Check Scale or "Fit to page" in the print dialog. PDFs especially default to "Fit" which can shrink large drawings.</p>
+          </div>
+          <div class="card-block">
+            <h4>PDF prints are blank or missing graphics</h4>
+            <p>Try "Print as image" in the PDF print dialog (Adobe Acrobat: Advanced &gt; Print as Image; Bluebeam: Advanced &gt; Print as Image). This bypasses font and rendering issues.</p>
+          </div>
+          <div class="card-block">
+            <h4>Color prints come out black and white</h4>
+            <p>Check the print dialog's color setting (Properties &gt; Color). The driver may default to grayscale.</p>
+          </div>
+          <div class="card-block">
+            <h4>Large drawings print with a thin missing border</h4>
+            <p>Check the print dialog's "Fit to page" or scale setting. Many printers have a non-printable margin at the edges.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">If You Need IT</p>
+            <h2>What to send</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>The printer name as it appears in Windows</h4>
+            <p>Open Settings &gt; Bluetooth &amp; devices &gt; Printers &amp; scanners and copy the exact printer name.</p>
+          </div>
+          <div class="card-block">
+            <h4>Whether the issue is one printer or all printers</h4>
+            <p>If only one printer fails and others work, the problem is that printer. If every printer fails, the problem is your computer's print spooler.</p>
+          </div>
+          <div class="card-block">
+            <h4>The exact error or behavior</h4>
+            <p>"Nothing prints" is hard to diagnose. "The job goes to the queue then disappears with error 0x00000709" is something IT can act on.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>

@@ -403,6 +403,64 @@ export const publicGuideContentExtra = {
       relatedLinks: [
         { label: "How to add your accounts to Microsoft Authenticator", url: "https://support.microsoft.com/en-us/account-billing/how-to-add-your-accounts-to-microsoft-authenticator-92544b53-7706-4581-a142-30344a2a2a57" }
       ]
+    },
+    project: {
+      summary: "Use this guide when you cannot open a Microsoft Project (.mpp) file, Project for the web is empty, or you are not sure which Project license you actually have.",
+      overview: [
+        "There are three different Microsoft Project products: Project Professional (desktop, opens .mpp files), Project for the web (browser at https://project.microsoft.com), and Project Online (the older PWA-based product).",
+        "Most Project tickets are confusion about which product is licensed and installed — Project is not part of standard Microsoft 365 Apps and must be assigned separately."
+      ],
+      askFirst: [
+        "Are you trying to open an .mpp file, create a plan in https://project.microsoft.com, or reach a Project Online (PWA) site?",
+        "Has your IT or admin assigned you Project Plan 1, Project Plan 3, or Project Plan 5?",
+        "Did the issue start after a license change, role change, or new computer?",
+        "Does another Project user with the same license see the same problem?"
+      ],
+      licensing: [
+        "Project Plan 1 unlocks Project for the web only. Plan 3 unlocks Project for the web plus Project Professional desktop and Project Online. Plan 5 adds portfolio features.",
+        "If you double-click an .mpp and nothing happens, you likely do not have Project Professional installed — it does not come with Office or Microsoft 365 Apps.",
+        "Project for the web access requires a Project license assigned in Microsoft 365 Admin Center, even if the rest of Microsoft 365 works."
+      ],
+      install: [
+        "If you have Project Plan 3 or 5, install Project Professional from your Office 365 portal at https://portal.office.com under Apps & devices.",
+        "For Project for the web, simply browse to https://project.microsoft.com and sign in with your work account.",
+        "For Project Online (PWA), open the PWA site URL your team gave you and sign in with your work account."
+      ],
+      supportCheckpoints: [
+        "Confirm with your IT admin which Project license is assigned to you before assuming the install is broken.",
+        "Test https://project.microsoft.com in a fresh browser window to isolate Project for the web from desktop Project issues.",
+        "If you only have Plan 1, you cannot open .mpp files — the file needs to be re-created in Project for the web or opened by someone with Plan 3."
+      ],
+      commonIssues: [
+        makeIssue(
+          "Cannot open an .mpp file",
+          "You double-click an .mpp file but nothing happens or Windows asks which app should open it.",
+          "Confirm you have Project Plan 3 or 5 assigned and that Project Professional is installed from your Office 365 portal — Project Professional is not part of Microsoft 365 Apps.",
+          "Send the .mpp file path, your Project license if you know it, and whether Project Professional appears in your Start menu."
+        ),
+        makeIssue(
+          "Project for the web is empty or won't open",
+          "You open https://project.microsoft.com but cannot create plans or see your work.",
+          "Confirm a Project license is assigned to your account in Microsoft 365 Admin Center, then try a fresh browser profile.",
+          "Send your work account, the Project license assigned, and a screenshot of the project.microsoft.com page."
+        ),
+        makeIssue(
+          "Project Online (PWA) site won't load",
+          "You cannot reach the Project Online site for your team.",
+          "Confirm the PWA URL your team uses, that you are a member of that PWA site, and that Project Plan 3 or 5 is assigned.",
+          "Send the PWA URL, your account, the exact error, and your Project license."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the issue (the missing Project app, the empty project.microsoft.com page, or the PWA error).",
+        "Your work account email.",
+        "The Project license you believe is assigned (Plan 1, 3, or 5), if you know it.",
+        "The exact .mpp filename and path, if applicable."
+      ],
+      relatedLinks: [
+        { label: "Microsoft Project help", url: "https://support.microsoft.com/en-us/project" },
+        { label: "Project plans comparison", url: "https://www.microsoft.com/en-us/microsoft-365/project/compare-microsoft-project-management-software" }
+      ]
     }
   },
   adobe: {
@@ -505,6 +563,57 @@ export const publicGuideContentExtra = {
       relatedLinks: [
         { label: "Adobe InDesign Help", url: "https://helpx.adobe.com/indesign/user-guide.html" }
       ]
+    },
+    "acrobat-sign": {
+      summary: "Use this guide when Adobe Acrobat Sign will not send agreements, the signer says they did not get the email, or the Send for Signature tools are missing in Acrobat.",
+      overview: [
+        "Acrobat Sign is the Adobe electronic-signature service used to send documents for signature, route them between signers, and store the signed copy.",
+        "Most Acrobat Sign issues come from a missing product profile on your Adobe work account, the wrong signer email on the agreement, or the signer's email being filtered."
+      ],
+      askFirst: [
+        "Are you the sender, a signer, or trying to manage a template?",
+        "What is the exact agreement name and what does the Manage page say it is doing right now?",
+        "Which email address is Acrobat Sign delivering to, and is that mailbox actually monitored?",
+        "Did the issue start after a profile change in Adobe, an email alias change, or a template update?"
+      ],
+      licensing: [
+        "Acrobat Sign access is assigned through an Adobe Acrobat Sign product profile in Adobe Admin Console; it is separate from Acrobat itself.",
+        "If Acrobat opens but Send for Signature is missing or grayed, capture the Adobe account, the company profile shown, and a screenshot of the missing tool.",
+        "Personal Adobe accounts cannot send work agreements; you must be signed in with the work Adobe account in the company profile."
+      ],
+      install: [
+        "There is no required desktop install for the core service — Acrobat Sign runs in the browser at https://secure.adobesign.com or through the Send for Signature tool inside Acrobat.",
+        "Sign into Creative Cloud Desktop with the work Adobe account and confirm you are in the company profile, not a personal one.",
+        "Open Acrobat and confirm Send for Signature appears in the right-hand pane or under Tools."
+      ],
+      supportCheckpoints: [
+        "Open the agreement on the Manage page and capture the recipient status before resending or recreating it.",
+        "Confirm the signer email on the agreement matches a real, monitored mailbox before assuming Acrobat Sign failed to deliver.",
+        "If Send for Signature is missing in Acrobat, capture the Adobe account and company profile shown in Creative Cloud Desktop."
+      ],
+      commonIssues: [
+        makeIssue(
+          "The signer says they didn't get the email",
+          "You sent an agreement, but the signer reports no Acrobat Sign email arrived.",
+          "Open the agreement on the Manage page, confirm the signer email is correct, then either resend or share the signing link directly instead of recreating the agreement.",
+          "Send the agreement name, the signer email, and a screenshot of the Manage page activity log."
+        ),
+        makeIssue(
+          "Send for Signature is missing in Acrobat",
+          "Acrobat opens, but the Send for Signature tool is missing or grayed out.",
+          "Confirm you are signed into Acrobat with your work Adobe account in the company profile; an Acrobat Sign product profile must be assigned in Adobe Admin Console.",
+          "Send the Adobe account shown, the company profile shown, the Acrobat version, and a screenshot of the Tools pane."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the agreement Manage page or the missing Send for Signature tool.",
+        "The Adobe account and company profile shown in Creative Cloud Desktop.",
+        "The agreement name and signer email involved.",
+        "The Acrobat version shown in Help > About."
+      ],
+      relatedLinks: [
+        { label: "Adobe Acrobat Sign Help", url: "https://helpx.adobe.com/sign/user-guide.html" }
+      ]
     }
   },
   autodesk: {
@@ -557,6 +666,121 @@ export const publicGuideContentExtra = {
       relatedLinks: [
         { label: "InfoWorks ICM product page", url: "https://www.autodesk.com/products/infoworks-icm/overview" },
         { label: "Autodesk Support", url: "https://www.autodesk.com/support" }
+      ]
+    },
+    "construction-cloud": {
+      summary: "Use this guide when Autodesk Construction Cloud (Docs, Build, Takeoff, or BIM 360) will not sign in, the project you expect is missing, or Desktop Connector or Revit cannot reach the cloud model.",
+      overview: [
+        "Autodesk Construction Cloud (ACC) is the Autodesk project hub used for Docs, Build, Takeoff, and the legacy BIM 360 workflows.",
+        "Most ACC issues come from being signed in with the wrong Autodesk account, not being added as a project member, or Desktop Connector running with a different account than the browser."
+      ],
+      askFirst: [
+        "Which Autodesk account email are you signed in with at https://acc.autodesk.com?",
+        "Is the project missing entirely, or do you see the hub but not the project?",
+        "Did the project admin invite the exact email you use to sign in?",
+        "Is the failure in the browser, Desktop Connector, the Revit or Civil 3D add-in, or the mobile app?"
+      ],
+      licensing: [
+        "ACC access depends on the Autodesk account assigned to your work email and being added as a project member by an admin (not just an account member).",
+        "If you can sign in but the project is missing, the issue is almost always project membership, not licensing.",
+        "Desktop Connector, Revit, Civil 3D, and the browser must all be signed in with the same Autodesk account to see the same projects."
+      ],
+      install: [
+        "Use the company-approved Autodesk Desktop Connector installer if you need files synced locally.",
+        "Sign into Creative Cloud or the Autodesk desktop app with your work Autodesk account first.",
+        "Confirm the same account at https://acc.autodesk.com in the browser before opening the model in Revit or Civil 3D."
+      ],
+      supportCheckpoints: [
+        "Always confirm what you can see at https://acc.autodesk.com in the browser before troubleshooting Desktop Connector.",
+        "If a project is missing, ask the project admin to confirm the invite went to the exact email you sign in with.",
+        "If Desktop Connector is out of sync, capture the account it shows and compare it with the browser."
+      ],
+      commonIssues: [
+        makeIssue(
+          "I can't see this project",
+          "You sign into ACC but the project you expected is not in the list.",
+          "Confirm the email you are signed in with matches the email the project admin invited, and ask the admin to verify project membership (not just account membership).",
+          "Send the Autodesk account email you used, the project name, and a screenshot of the ACC hub view."
+        ),
+        makeIssue(
+          "Desktop Connector is not syncing",
+          "Files are visible in the browser but Desktop Connector shows stale data or sync errors.",
+          "Sign out of Desktop Connector, sign back in with the same account the browser uses, and let it complete a full sync before assuming files are missing.",
+          "Send the Desktop Connector account, the project and folder, the sync error, and the Desktop Connector version."
+        ),
+        makeIssue(
+          "Revit or Civil 3D cannot open the cloud model",
+          "Revit or Civil 3D opens but the ACC model fails to open or check out.",
+          "Confirm you are a project member, the model is not already checked out by someone else, and your host app version is supported by ACC.",
+          "Send the host app and version, the model name, the Autodesk account, and the exact error."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the ACC hub or project list at https://acc.autodesk.com.",
+        "The Autodesk account email you signed in with.",
+        "The project name and the model or file involved.",
+        "The host app (Revit, Civil 3D) and version, if applicable."
+      ],
+      relatedLinks: [
+        { label: "Autodesk Construction Cloud help", url: "https://help.autodesk.com/view/BUILD/ENU/" },
+        { label: "Autodesk Desktop Connector", url: "https://help.autodesk.com/view/CONNECT/ENU/" }
+      ]
+    },
+    vault: {
+      summary: "Use this guide when Autodesk Vault will not sign in, says a file is locked by another user, or the Vault tools are missing in Inventor, AutoCAD, or Revit.",
+      overview: [
+        "Autodesk Vault is the Autodesk product-data-management system used to check files in and out of a controlled vault server.",
+        "Most Vault tickets are real check-out conflicts, host-app integration version mismatches, or the wrong Vault server selected at sign-in."
+      ],
+      askFirst: [
+        "Which Vault server are you signing into and is it the right one for the project?",
+        "Is the failure sign-in, check-out, check-in, browsing, or a host-app add-in for Inventor, AutoCAD, or Revit?",
+        "If a file is locked, do you know who has it checked out and whether they are still active at the company?",
+        "Did the issue start after a Vault upgrade, host-app upgrade, new computer, or password change?"
+      ],
+      licensing: [
+        "Vault access depends on your Autodesk account being added as a Vault user by your Vault admin.",
+        "Vault client and server versions must match within Autodesk's supported compatibility window — a too-old or too-new client can fail to connect.",
+        "If a Vault tool is missing in Inventor, AutoCAD, or Revit, the integration was likely not installed or the host-app year does not match."
+      ],
+      install: [
+        "Use the company-approved Vault client matching your Vault server year.",
+        "After install, sign in with your work Autodesk account and confirm the correct Vault server is selected.",
+        "Open Inventor, AutoCAD, or Revit and confirm the Vault ribbon appears."
+      ],
+      supportCheckpoints: [
+        "Check the file's status in Vault Explorer or the Vault web client before assuming the lock is wrong.",
+        "Confirm the Vault client version matches the server release before reinstalling.",
+        "If a file is checked out by an inactive user, IT can have a Vault admin release the check-out."
+      ],
+      commonIssues: [
+        makeIssue(
+          "File is locked by another user",
+          "You try to check out a file but Vault says it is already checked out.",
+          "Open Vault Explorer to see who has the file, ask that person to check it back in, or contact IT to release it if that person is offboarded or unreachable.",
+          "Send the file name and path, the user shown as having it checked out, and whether that user is still active."
+        ),
+        makeIssue(
+          "Vault tools are missing in Inventor, AutoCAD, or Revit",
+          "Your host app opens but the Vault ribbon or commands are not there.",
+          "Confirm with IT that the matching Vault integration was installed for your host-app year and that you are signed into Vault from inside the host app.",
+          "Send the host app and year, the Vault client version, and a screenshot of the missing ribbon."
+        ),
+        makeIssue(
+          "Vault client cannot connect to the server",
+          "You enter your credentials but Vault says the server is unreachable or sign-in fails.",
+          "Confirm you are on the right network or VPN, the server name is correct, and your Vault client version matches the server.",
+          "Send the server name, the Vault client version, the exact error, and whether other Vault users are working."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Vault message.",
+        "The Vault server name shown in the client.",
+        "The file name and path involved, if a file lock or check-out is the issue.",
+        "The Vault client version (Help > About) and the host app and year if relevant."
+      ],
+      relatedLinks: [
+        { label: "Autodesk Vault help", url: "https://help.autodesk.com/view/VAULT/ENU/" }
       ]
     }
   },
@@ -622,7 +846,65 @@ export const publicGuideContentExtra = {
     "openbridge-modeler": makeBentleyGuide("OpenBridge Modeler", "bridge modeling", "bridge model, template, workspace, or standards path"),
     "openroads-signcad": makeBentleyGuide("OpenRoads SignCAD", "sign design", "sign library, template, or project file"),
     "ram-elements": makeBentleyGuide("RAM Elements", "structural modeling and analysis", "model, template, or analysis file"),
-    geopak: makeBentleyGuide("GEOPAK", "legacy civil workflows", "legacy project, workspace, macro, or standards path")
+    geopak: makeBentleyGuide("GEOPAK", "legacy civil workflows", "legacy project, workspace, macro, or standards path"),
+    projectwise: {
+      summary: "Use this guide when Bentley ProjectWise will not sign in, says a file is locked by another user, or the ProjectWise integration is missing in MicroStation, AutoCAD, or Office.",
+      overview: [
+        "ProjectWise is the Bentley document-management system used to check files in and out of a controlled datasource.",
+        "Most ProjectWise tickets are real check-out conflicts, CONNECTION Client sign-in issues, or host-app integration version mismatches."
+      ],
+      askFirst: [
+        "Which ProjectWise datasource are you signing into?",
+        "Is the failure sign-in, opening the datasource, check-out, check-in, or a host-app integration?",
+        "If a file is locked, do you know who has it checked out and whether they are still active at the company?",
+        "Did the issue start after a ProjectWise upgrade, host-app upgrade, new computer, or password change?"
+      ],
+      licensing: [
+        "ProjectWise access depends on your Bentley account being added to the datasource by a ProjectWise admin.",
+        "CONNECTION Client must be signed in with the correct Bentley account before ProjectWise Explorer will work properly.",
+        "If a host-app integration is missing, the matching ProjectWise integration was likely not installed for that host-app year."
+      ],
+      install: [
+        "Use the company-approved ProjectWise Explorer client matching your ProjectWise server year.",
+        "Sign into CONNECTION Client first with your work Bentley account.",
+        "Open ProjectWise Explorer and confirm you can connect to the expected datasource."
+      ],
+      supportCheckpoints: [
+        "Check the file's status in ProjectWise Explorer before assuming the lock is wrong.",
+        "Confirm CONNECTION Client is signed in with the correct Bentley account.",
+        "If a file is checked out by an inactive user, IT can have a ProjectWise admin release the check-out."
+      ],
+      commonIssues: [
+        makeIssue(
+          "File is locked by another user",
+          "You try to check out a document but ProjectWise says it is already checked out.",
+          "Open ProjectWise Explorer to see who has the file, ask them to check it back in, or contact IT to release it if that user is offboarded or unreachable.",
+          "Send the document path, document name, the user shown as holding the lock, and whether that user is still active."
+        ),
+        makeIssue(
+          "ProjectWise integration is missing in MicroStation, AutoCAD, or Office",
+          "Your host app opens but the ProjectWise menu or open-from-ProjectWise option is not there.",
+          "Confirm with IT that the matching ProjectWise integration was installed for your host-app year.",
+          "Send the host app and version, the ProjectWise client version, and a screenshot of the missing integration."
+        ),
+        makeIssue(
+          "Cannot reach the datasource",
+          "You sign into CONNECTION Client but ProjectWise Explorer cannot open the expected datasource.",
+          "Confirm you are on the correct network or VPN, the datasource server name is right, and your client version is compatible with the server.",
+          "Send the datasource name, the server, the client version, the exact error, and whether other users can connect."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact ProjectWise message.",
+        "The Bentley account shown in CONNECTION Client.",
+        "The datasource name and the document or path involved.",
+        "The ProjectWise client version and the host app and year if relevant."
+      ],
+      relatedLinks: [
+        { label: "Bentley ProjectWise documentation", url: "https://docs.bentley.com/" },
+        { label: "Bentley support", url: "https://www.bentley.com/support/" }
+      ]
+    }
   },
   esri: {
     "arcgis-online": {
@@ -724,6 +1006,63 @@ export const publicGuideContentExtra = {
         "The version and edition or module you expect.",
         "The project or data file involved.",
         "Whether another approved computer can open the same data."
+      ]
+    },
+    "trimble-connect": {
+      summary: "Use this guide when Trimble Connect will not show the project you were invited to, the SketchUp or Tekla integration cannot reach the project, or file uploads fail.",
+      overview: [
+        "Trimble Connect is a cloud collaboration platform for sharing project models, drawings, and documents between office and field teams.",
+        "Most Connect tickets are missing project invitations, signing in with the wrong Trimble ID, or being on the wrong region's Connect URL."
+      ],
+      askFirst: [
+        "Which Trimble ID (email) are you signing in with at https://web.connect.trimble.com?",
+        "Which project name and which region (US, EU, APAC) was the invitation for?",
+        "Is the failure in the web client, the Windows desktop client, the SketchUp extension, or the Tekla integration?",
+        "Did the issue start after a Trimble ID email change, role change, or new computer?"
+      ],
+      licensing: [
+        "Connect access is invitation-based — your Trimble ID email must match exactly the email the project admin invited.",
+        "If your project lives in a specific region (US, EU, APAC), you may need to use that region's Connect URL.",
+        "There is no separate paid seat for basic Connect access in most projects — the project admin controls who joins."
+      ],
+      install: [
+        "There is no required install — Connect runs in the browser at https://web.connect.trimble.com.",
+        "If you need a desktop folder of project files, install Trimble Connect Desktop (Sync) from the Trimble download page.",
+        "For SketchUp or Tekla, the integration extension is installed from inside the host app or the Extension Warehouse."
+      ],
+      supportCheckpoints: [
+        "Confirm what you can see at https://web.connect.trimble.com in the browser before troubleshooting any client.",
+        "Make sure your Trimble ID email exactly matches the email the project admin used in the invitation.",
+        "If you switched phones or laptops, you may need to re-approve sign-in or MFA on the new device."
+      ],
+      commonIssues: [
+        makeIssue(
+          "I was invited but the project is not in my list",
+          "You sign into Trimble Connect but the expected project is missing.",
+          "Confirm the email you sign in with exactly matches the email the project admin invited, and ask the admin to resend the invitation if needed.",
+          "Send your Trimble ID email, the project name, and a screenshot of your Connect project list."
+        ),
+        makeIssue(
+          "SketchUp or Tekla integration cannot see the project",
+          "The integration in SketchUp or Tekla will not sign in or the project does not appear there.",
+          "Confirm the extension is up to date, the Trimble ID in the extension is the same one that works in the browser, and you have permission on that project.",
+          "Send the host app and version, the extension version, your Trimble ID, and the project name."
+        ),
+        makeIssue(
+          "Uploads fail or stall",
+          "You try to upload a file or model but the upload does not finish.",
+          "Try a small test file first, confirm you have Edit or Admin role on the destination folder, and try a different network if your office network is restrictive.",
+          "Send the file size, the project, the folder, and a screenshot of the upload error."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of your Trimble Connect project list at https://web.connect.trimble.com.",
+        "Your Trimble ID email.",
+        "The project name and folder involved.",
+        "The host app and version if you are using a SketchUp or Tekla integration."
+      ],
+      relatedLinks: [
+        { label: "Trimble Connect help", url: "https://help.connect.trimble.com/" }
       ]
     }
   },
@@ -959,6 +1298,482 @@ export const publicGuideContentExtra = {
       ],
       relatedLinks: [
         { label: "Axiom official site", url: "https://www.axiomint.com/" }
+      ]
+    }
+  },
+  deltek: {
+    vantagepoint: {
+      summary: "Use this guide when Deltek Vantagepoint will not let you sign in, your projects or charge codes are missing in time entry, or an approval did not reach the next person.",
+      overview: [
+        "Vantagepoint is the Deltek ERP used at AEC firms for project management, time and expense entry, billing, and approvals.",
+        "Most Vantagepoint tickets are role and security setup, project team membership, or approval-workflow questions, not the app itself."
+      ],
+      askFirst: [
+        "Are you on Vantagepoint cloud, your firm's on-prem web Vantagepoint, or the Vantagepoint Mobile Time app?",
+        "Is the issue sign-in, missing projects or charge codes, an approval that didn't route, an expense report, or reports?",
+        "What is your Vantagepoint role, and what role does this task need?",
+        "Did the issue start after a role change, period close, or workflow change?"
+      ],
+      licensing: [
+        "Vantagepoint access depends on a Vantagepoint user record assigned a security role by your firm's Deltek admin.",
+        "Most missing-data issues are role-based: even with a working sign-in, you may not see a project unless you are on its team.",
+        "If period close has happened, certain entries (time, expense, billing) may be locked until the period reopens."
+      ],
+      install: [
+        "Vantagepoint cloud and on-prem web run in your browser — bookmark the URL your firm provides.",
+        "For mobile time entry, install the Vantagepoint Mobile Time app from the App Store or Google Play and sign in with your work Vantagepoint account.",
+        "For SSO, sign in through your firm's Vantagepoint URL rather than a direct Deltek URL."
+      ],
+      supportCheckpoints: [
+        "Confirm the Vantagepoint URL you are using matches what your firm provides.",
+        "If a project or charge code is missing, ask your project manager or Deltek admin to confirm you are on the project team.",
+        "If an approval is stuck, check the workflow status before asking IT — the next approver may simply not have acted yet."
+      ],
+      commonIssues: [
+        makeIssue(
+          "My project or charge code is missing in time entry",
+          "You open Vantagepoint time entry but the project or charge code you expect is not in the list.",
+          "Ask your project manager or Deltek admin to confirm you are added to the project team and that the charge code is active for the current period.",
+          "Send your Vantagepoint user, the project number, the period, and a screenshot of your time entry grid."
+        ),
+        makeIssue(
+          "Approval didn't reach the approver",
+          "You submitted a timesheet, expense, or AP item but the approver did not get it.",
+          "Confirm in Vantagepoint who the current approver is, whether they are out of office, and whether the workflow assigned the right person.",
+          "Send the transaction number, the submitter, the current approver, and the time you submitted."
+        ),
+        makeIssue(
+          "Cannot sign into Vantagepoint",
+          "You cannot complete sign-in on cloud or on-prem Vantagepoint.",
+          "Confirm the Vantagepoint URL, that your account is still active, and that any MFA or SSO step is completing.",
+          "Send the URL you are using, the exact error message, and whether other Vantagepoint users can sign in."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Vantagepoint message or missing screen.",
+        "Your Vantagepoint user name.",
+        "The project number, charge code, or transaction number involved.",
+        "The exact URL you are using to reach Vantagepoint."
+      ],
+      relatedLinks: [
+        { label: "Deltek Customer Care", url: "https://deltek.custhelp.com/" },
+        { label: "Deltek Vantagepoint overview", url: "https://www.deltek.com/en/products/project-erp/vantagepoint" }
+      ]
+    }
+  },
+  docusign: {
+    "docusign-web": {
+      summary: "Use this guide when DocuSign will not deliver an envelope, the signer says they did not get the email, or your sender account is in the wrong tenant.",
+      overview: [
+        "DocuSign is the electronic-signature service used to send agreements for signature, route them between signers, and store the signed copy.",
+        "Most DocuSign tickets are wrong signer email addresses, mail-flow filtering, or being signed into a personal DocuSign account instead of the company tenant."
+      ],
+      askFirst: [
+        "Are you the sender, a signer, or an admin or template owner?",
+        "What is the exact envelope name and what does the Manage page say about its status?",
+        "Which email address is DocuSign delivering to, and is that mailbox actually monitored?",
+        "Did the issue start after an SSO change, an email alias change, or a template update?"
+      ],
+      licensing: [
+        "DocuSign sender access depends on being added to your company's DocuSign account by an admin.",
+        "Personal DocuSign accounts cannot send work envelopes — you must be signed into the company tenant via your firm's SSO link or vanity URL.",
+        "Distribution lists, shared mailboxes, and Outlook aliases often break delivery — the signer email should be a real, monitored mailbox."
+      ],
+      install: [
+        "DocuSign runs in the browser; there is no required desktop install.",
+        "Sign in via your firm's DocuSign SSO link rather than a generic DocuSign URL so you land in the right account.",
+        "If you also use the DocuSign for Outlook add-in, install it from your Office 365 portal or the Microsoft AppSource."
+      ],
+      supportCheckpoints: [
+        "Always check the envelope status on the Manage page before resending or recreating an envelope.",
+        "Confirm the signer's email address is a real mailbox the signer actually monitors.",
+        "If you are sending from the wrong account, sign out completely before signing back in via your firm's SSO link."
+      ],
+      commonIssues: [
+        makeIssue(
+          "The signer says they didn't get the email",
+          "You sent an envelope but the signer reports nothing arrived.",
+          "Open the envelope on the Manage page, confirm the signer email is correct, then either resend or share the signing URL directly instead of recreating the envelope.",
+          "Send the envelope ID, the signer email, and a screenshot of the recipient status on the Manage page."
+        ),
+        makeIssue(
+          "The template is sending wrong fields or wrong signer order",
+          "Envelopes go out, but the fields or routing do not match what the template should do.",
+          "Open the template, confirm signer order and field assignments, and send a fresh test before changing in-flight envelopes.",
+          "Send the template name, the envelope ID, and screenshots of both the template and the sent envelope."
+        ),
+        makeIssue(
+          "I'm signed into the wrong DocuSign account",
+          "DocuSign opens but lands in a personal account or the wrong company tenant.",
+          "Sign out completely, then sign in again using your firm's DocuSign SSO link or vanity URL.",
+          "Send the account email shown, the company DocuSign URL you should use, and the SSO method."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the envelope Manage page or recipient status.",
+        "The DocuSign account email shown when you are signed in.",
+        "The envelope ID and the signer email involved.",
+        "Your firm's DocuSign SSO link or vanity URL, if you have it."
+      ],
+      relatedLinks: [
+        { label: "DocuSign support", url: "https://support.docusign.com/" }
+      ]
+    }
+  },
+  zoom: {
+    "zoom-meetings": {
+      summary: "Use this guide when Zoom audio or video will not work, you cannot share your screen, or you cannot sign in to your work Zoom account.",
+      overview: [
+        "Zoom Meetings is the video meeting client used for one-to-one and team meetings, with optional features for screen sharing, recording, and chat.",
+        "Most Zoom tickets are Windows or macOS microphone and camera permissions, not the Zoom client itself."
+      ],
+      askFirst: [
+        "Did you sign into Zoom with your work SSO from your firm's portal, or with an email and password?",
+        "Is the problem audio, camera, screen share, joining, sign-in, or recording?",
+        "Are you on the Zoom desktop client, browser client, or a Zoom Rooms device?",
+        "Did the issue start after a Zoom update, Windows or macOS update, new computer, or peripheral change?"
+      ],
+      licensing: [
+        "Most Zoom features require signing into your work Zoom account, not a personal Zoom account.",
+        "Use Sign In with SSO and your firm's Zoom vanity URL to land in the right Zoom tenant.",
+        "If your role does not allow recording, large meetings, or webinars, those features may be hidden until the admin enables them."
+      ],
+      install: [
+        "Install Zoom from the official Zoom download page (https://zoom.us/download) or your firm's deployment.",
+        "Sign in using SSO with your firm's Zoom vanity URL so you land in the work Zoom tenant.",
+        "Approve any prompts for microphone, camera, and (on macOS) screen recording the first time you join a meeting."
+      ],
+      supportCheckpoints: [
+        "Test https://zoom.us/test before assuming a meeting is broken — it isolates device problems from meeting problems.",
+        "Check Windows or macOS privacy settings for microphone, camera, and screen recording before reinstalling Zoom.",
+        "Confirm the Zoom account shown in the client matches your work Zoom email."
+      ],
+      commonIssues: [
+        makeIssue(
+          "My microphone or camera doesn't work",
+          "You join a meeting but no one can hear or see you, or Zoom says no device is found.",
+          "Check Windows or macOS privacy settings for microphone and camera, confirm the right device is selected in Zoom settings, and run a Zoom Test Meeting at https://zoom.us/test.",
+          "Send your OS and version, your Zoom version, the device you expect to use, and a screenshot of the OS privacy settings panel."
+        ),
+        makeIssue(
+          "I'm signed into the wrong Zoom account",
+          "You join from a personal Zoom and cannot reach your work meetings or features.",
+          "Sign out, then choose Sign In with SSO and enter your firm's Zoom vanity URL to sign in to the work Zoom tenant.",
+          "Send the account email shown in Zoom and the firm Zoom vanity URL if you have it."
+        ),
+        makeIssue(
+          "Cannot share my screen",
+          "You press Share but nothing happens or Share is missing.",
+          "On macOS, check System Settings > Privacy > Screen Recording for Zoom; check whether the meeting host is allowing participant sharing.",
+          "Send your OS, your Zoom version, the meeting host, and a screenshot of the Share dialog or missing button."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Zoom message, or the missing Share or device dialog.",
+        "The Zoom version (Help > About Zoom).",
+        "Your OS and version.",
+        "The result of a Zoom Test Meeting at https://zoom.us/test."
+      ],
+      relatedLinks: [
+        { label: "Zoom Support", url: "https://support.zoom.us/" },
+        { label: "Zoom Test Meeting", url: "https://zoom.us/test" }
+      ]
+    }
+  },
+  cisco: {
+    webex: {
+      summary: "Use this guide when Cisco Webex will not let you join with audio or video, you cannot sign into the Webex App, or the Outlook scheduling integration is missing.",
+      overview: [
+        "Webex is Cisco's meetings, messaging, and calling platform — Webex App is the unified client and Webex Meetings is the classic meetings client.",
+        "Most Webex tickets are Windows or macOS device permissions, signing into the wrong organization, or the Outlook add-in not being enabled."
+      ],
+      askFirst: [
+        "Are you on the Webex App (the unified client), classic Webex Meetings, or a Webex Room device?",
+        "Is the problem joining a meeting, audio, video, sign-in, messaging, or calling?",
+        "Did you sign in via SSO from your firm's Webex site (https://<company>.webex.com) or an email directly?",
+        "Did the issue start after a Webex update, OS update, new computer, or peripheral change?"
+      ],
+      licensing: [
+        "Webex access depends on your firm's Webex site and the user provisioning your firm has set up.",
+        "If your firm uses Webex Calling, calling features only appear once the calling license is assigned.",
+        "Sign-in usually goes through your firm's Webex site URL — using a generic Webex URL may land you in a personal account."
+      ],
+      install: [
+        "Install Webex App from your firm's deployment or https://www.webex.com/downloads.html.",
+        "Sign in with your work email; Webex will discover SSO and send you through your firm's identity provider.",
+        "Approve microphone, camera, and (on macOS) screen-recording prompts the first time you join a meeting."
+      ],
+      supportCheckpoints: [
+        "Check Windows or macOS privacy settings for microphone and camera before assuming Webex is broken.",
+        "Confirm the organization shown in Webex App under Help > About is your firm's organization.",
+        "If the Outlook add-in is missing, confirm with IT whether the modern Webex Scheduler add-in is enabled."
+      ],
+      commonIssues: [
+        makeIssue(
+          "Microphone or camera not working in Webex",
+          "You join a meeting but no audio or video.",
+          "Check Windows or macOS privacy settings for Webex App, confirm the right device is selected in Audio and Video settings.",
+          "Send your OS and version, your Webex App version, the device you expect to use, and a screenshot of OS privacy settings."
+        ),
+        makeIssue(
+          "Cannot sign into Webex App",
+          "You cannot complete sign-in or you land in the wrong organization.",
+          "Sign out, then sign in with your work email so SSO discovery sends you to your firm's identity provider, and confirm the organization in Help > About.",
+          "Send your email, the organization shown, and the SSO error if any."
+        ),
+        makeIssue(
+          "Outlook integration or scheduling isn't working",
+          "The Webex add-in is missing in Outlook or scheduling fails.",
+          "Confirm the Webex add-in is enabled in Outlook (File > Options > Add-ins) and that you are signed into Outlook with the same account.",
+          "Send your Outlook version, whether the Webex add-in is enabled or disabled, and a screenshot of the Outlook ribbon."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Webex message or missing dialog.",
+        "Your Webex App version (Help > About).",
+        "Your OS and version.",
+        "The organization shown in Webex App."
+      ],
+      relatedLinks: [
+        { label: "Webex Help Center", url: "https://help.webex.com/" }
+      ]
+    }
+  },
+  box: {
+    "box-drive": {
+      summary: "Use this guide when Box Drive will not show a folder you can see in the browser, will not sign in to the work Box account, or an external share link will not open.",
+      overview: [
+        "Box Drive is the desktop app that mounts Box content as a drive on Windows or macOS so you can open Box files like normal files.",
+        "Most Box Drive tickets are signing into the wrong Box account, sync still in progress, or external link permissions."
+      ],
+      askFirst: [
+        "Are you signed into Box Drive with the work Box account or a personal Box?",
+        "Is the failure sign-in, a missing folder, an external share link, or a file that won't open?",
+        "Does the same folder appear correctly at https://app.box.com in the browser?",
+        "Did the issue start after a tenant SSO change, role change, or new computer?"
+      ],
+      licensing: [
+        "Box Drive access depends on your work Box account being provisioned by IT — personal Box accounts will not see company content.",
+        "External share links can be set so only people in your company can open them, or only specific people, or anyone with the link.",
+        "If a folder is shared but you cannot see it, you may not have been added to the folder by the owner."
+      ],
+      install: [
+        "Install Box Drive from the company-approved Box deployment or https://www.box.com/resources/downloads.",
+        "Sign in with your work Box account, typically via SSO from your firm's identity provider.",
+        "Wait for the initial sync to finish before assuming files are missing."
+      ],
+      supportCheckpoints: [
+        "Compare what you see in Box Drive with what you see in the browser at https://app.box.com.",
+        "Confirm the Box account shown in Box Drive matches the browser.",
+        "For external share issues, check the link's permission setting before assuming the link is broken."
+      ],
+      commonIssues: [
+        makeIssue(
+          "A folder is missing in Box Drive",
+          "You can see a folder at app.box.com in the browser, but it does not appear in Box Drive.",
+          "Wait for Box Drive's sync to finish, confirm the same account is signed into both, and pin the folder in Box Drive if you need it offline.",
+          "Send the folder name, the Box account in Box Drive, and a screenshot of the same folder in the browser."
+        ),
+        makeIssue(
+          "An external share link won't open",
+          "You sent or received a Box shared link that will not open for the recipient.",
+          "Check the link's permission setting (people in your company, people with the link, specific people) and any expiration date.",
+          "Send the share link URL, the link permission, the expiration date, and the recipient's account."
+        ),
+        makeIssue(
+          "Box Drive is signed into the wrong account",
+          "Box Drive shows a personal Box or the wrong company.",
+          "Sign out of Box Drive, quit it fully, and sign back in with your work Box account through SSO.",
+          "Send the account email shown and the SSO method your firm uses."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of Box Drive showing the missing folder or sign-in screen.",
+        "The Box account email shown in Box Drive.",
+        "The folder name and where it should appear.",
+        "For external share issues, the share link URL and its permission setting."
+      ],
+      relatedLinks: [
+        { label: "Box Drive help", url: "https://support.box.com/hc/en-us/categories/360002812714-Box-Drive" }
+      ]
+    }
+  },
+  dropbox: {
+    "dropbox-desktop": {
+      summary: "Use this guide when Dropbox desktop will not show a team folder, sync gets stuck, or you are signed into a personal Dropbox instead of the work team.",
+      overview: [
+        "Dropbox Desktop is the app that syncs Dropbox content to a folder on your Windows or macOS computer.",
+        "Most Dropbox tickets are selective-sync settings, team-folder membership, or signing into a personal Dropbox by mistake."
+      ],
+      askFirst: [
+        "Is this Dropbox Business (a work team) or a personal Dropbox?",
+        "Is the issue sign-in, a missing team folder, sync stalled, or an external share link?",
+        "Does the same folder appear correctly at https://www.dropbox.com in the browser?",
+        "Did the issue start after a team role change, team-folder rename, or new computer?"
+      ],
+      licensing: [
+        "Dropbox Business access depends on your firm adding you to the team and to the team folders you need.",
+        "Selective sync lets you choose which folders sync to your computer — a folder you 'unselected' will not appear locally.",
+        "If your team uses SSO, signing in with email and password may put you in a personal Dropbox by mistake."
+      ],
+      install: [
+        "Install Dropbox from your firm's deployment or https://www.dropbox.com/install.",
+        "Sign in with your work Dropbox account via SSO if your team uses SSO.",
+        "Confirm the team name appears in Dropbox preferences under Account."
+      ],
+      supportCheckpoints: [
+        "Compare what you see on disk with what you see in the browser at https://www.dropbox.com.",
+        "Check Selective Sync settings under Preferences before assuming a folder was deleted.",
+        "Confirm the team name in Dropbox preferences matches your work team."
+      ],
+      commonIssues: [
+        makeIssue(
+          "A team folder is missing on my computer",
+          "You expect a team folder but it does not appear in the Dropbox folder on disk.",
+          "Check Selective Sync settings, confirm with the folder owner that you have access, and open the folder in the browser to validate access.",
+          "Send the folder name, the team name, your account email, and your Selective Sync setting for that folder."
+        ),
+        makeIssue(
+          "Sync is stuck or showing errors",
+          "The Dropbox icon shows a sync error or stays pending.",
+          "Check the affected file name for unsupported characters or very long paths, confirm you have free disk space, and pause and resume sync.",
+          "Send the file name, your free disk space, and the exact sync error."
+        ),
+        makeIssue(
+          "I'm in personal Dropbox instead of the work team",
+          "Dropbox shows a personal account instead of the work team.",
+          "Sign out, then sign in again using your work email and SSO if your team uses SSO.",
+          "Send the account email shown, the team name expected, and whether SSO is required at your firm."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the Dropbox preferences Account tab showing the signed-in account and team.",
+        "A screenshot of Selective Sync settings, if the issue is a missing folder.",
+        "The folder name and the team name expected.",
+        "The exact sync error if sync is stuck."
+      ],
+      relatedLinks: [
+        { label: "Dropbox Business help", url: "https://help.dropbox.com/teams-admins" },
+        { label: "Dropbox help center", url: "https://help.dropbox.com/" }
+      ]
+    }
+  },
+  duo: {
+    "duo-mobile": {
+      summary: "Use this guide when Duo Mobile is not approving sign-ins after a new phone, you are not getting Duo pushes, or you need to reactivate Duo Mobile after reinstalling it.",
+      overview: [
+        "Duo Mobile is the second-factor app many companies use to approve sign-ins, with push approvals, passcodes, and (in some setups) hardware-style codes.",
+        "Most Duo tickets are 'I got a new phone' and the fix is a Duo admin reset plus a fresh enrollment link, not reinstalling the app."
+      ],
+      askFirst: [
+        "Is this a new enrollment, a phone replacement, or a reactivation on the same phone after reinstalling?",
+        "Do you still have your old phone, and does it still receive Duo pushes?",
+        "Does your company use a self-service Duo portal where you can re-enroll yourself?",
+        "Which work apps are you trying to sign into when Duo blocks you?"
+      ],
+      licensing: [
+        "Duo Mobile is free to install — your access depends on your company's Duo subscription and your enrollment.",
+        "If you are switching phones, IT must verify your identity before resetting Duo to prevent account takeover.",
+        "A bypass code from IT can let you sign in once while you finish setting up the new phone."
+      ],
+      install: [
+        "Install Duo Mobile from the App Store or Google Play.",
+        "When IT sends you a Duo enrollment link, open it on the new phone, then scan the QR code Duo shows or follow the on-screen prompts.",
+        "Allow notifications so push approvals can reach you."
+      ],
+      supportCheckpoints: [
+        "If you still have the old phone, keep it nearby — IT may be able to use it to verify you.",
+        "Check that notifications are enabled for Duo Mobile in your phone settings — pushes will not arrive otherwise.",
+        "If your company has a self-service Duo portal, try that before contacting IT."
+      ],
+      commonIssues: [
+        makeIssue(
+          "I got a new phone and Duo isn't working",
+          "You have a new phone and pushes from Duo Mobile do not let you sign in.",
+          "Contact IT to verify your identity and either send you a fresh Duo enrollment link or have you use the self-service Duo portal if your firm has one.",
+          "Send your name, your new phone model, and the apps you are blocked from signing into."
+        ),
+        makeIssue(
+          "I'm not getting Duo pushes",
+          "Duo Mobile is installed and enrolled, but no approval push arrives.",
+          "Check notification permissions for Duo Mobile in your phone settings, confirm internet connectivity, and use the refresh option in Duo Mobile.",
+          "Send the phone OS and version, the Duo Mobile version, and whether notifications are enabled for Duo Mobile."
+        ),
+        makeIssue(
+          "Reinstalled Duo Mobile and lost my accounts",
+          "You reinstalled Duo Mobile on the same phone and your accounts are gone.",
+          "If your firm enabled Duo Restore before, restore from Duo backup; otherwise IT can send a new enrollment link.",
+          "Send your phone model and whether you had Duo Restore enabled."
+        )
+      ],
+      supportArtifacts: [
+        "A note about whether you still have the old phone.",
+        "Your phone model and OS version.",
+        "Whether notifications for Duo Mobile are enabled in phone settings.",
+        "A screenshot of the work app's Duo prompt, if you can take one."
+      ],
+      relatedLinks: [
+        { label: "Duo Mobile guide", url: "https://guide.duo.com/" }
+      ]
+    }
+  },
+  okta: {
+    "okta-verify": {
+      summary: "Use this guide when Okta Verify is not approving sign-ins after a new phone, you are not getting Okta pushes, or your FastPass device is not trusted.",
+      overview: [
+        "Okta Verify is the second-factor app many companies pair with Okta for push approvals, TOTP codes, and (with FastPass) device-based sign-in.",
+        "Most Okta Verify tickets are 'I got a new phone' and the fix is an Okta admin factor reset plus a fresh setup link."
+      ],
+      askFirst: [
+        "Is this a new enrollment, a phone replacement, a reactivation after reinstalling, or a failing push?",
+        "Does your company use Okta FastPass, or just push and TOTP?",
+        "Do you still have your old phone, and does it still receive Okta pushes?",
+        "Which apps are you trying to reach when Okta blocks you?"
+      ],
+      licensing: [
+        "Okta Verify is free to install — your access depends on your company's Okta tenant and your enrollment.",
+        "If you are switching phones, IT must verify your identity before resetting Okta factors.",
+        "FastPass requires the Okta Verify app plus any device registration steps your firm requires (sometimes through MDM)."
+      ],
+      install: [
+        "Install Okta Verify from the App Store or Google Play.",
+        "When IT sends you an Okta setup link, open it on the new phone and follow the prompts to add your work account.",
+        "Allow notifications so push approvals can reach you."
+      ],
+      supportCheckpoints: [
+        "If you still have the old phone, keep it nearby — IT may be able to verify you with a push to it.",
+        "Check that notifications are enabled for Okta Verify in your phone settings.",
+        "If your firm offers a self-service Okta dashboard, try the factor reset there before contacting IT."
+      ],
+      commonIssues: [
+        makeIssue(
+          "Got a new phone and Okta Verify isn't working",
+          "You have a new phone and Okta will not let you sign in.",
+          "Contact IT to verify your identity, then either use your firm's self-service factor reset or have IT factor-reset Okta Verify and send a fresh setup link.",
+          "Send your name, the new phone model, and the apps you are blocked from."
+        ),
+        makeIssue(
+          "Okta pushes are not arriving",
+          "Okta Verify is enrolled but no push arrives.",
+          "Check notification permissions for Okta Verify in phone settings, confirm internet connectivity, and refresh the app.",
+          "Send your phone OS, the Okta Verify version, and whether notifications are enabled."
+        ),
+        makeIssue(
+          "FastPass enrollment is failing",
+          "Your firm uses FastPass but enrollment will not complete or your device is not trusted.",
+          "Confirm Okta Verify is current and that any MDM or device-registration step your firm requires is completed.",
+          "Send your phone OS, Okta Verify version, and whether your phone is enrolled in your firm's MDM."
+        )
+      ],
+      supportArtifacts: [
+        "A note about whether you still have the old phone.",
+        "Your phone model and OS version.",
+        "Whether notifications for Okta Verify are enabled in phone settings.",
+        "A screenshot of the Okta prompt or error, if you can take one."
+      ],
+      relatedLinks: [
+        { label: "Okta Verify documentation", url: "https://help.okta.com/en-us/Content/Topics/end-user/ov-overview.htm" },
+        { label: "Okta Help Center", url: "https://support.okta.com/" }
       ]
     }
   }

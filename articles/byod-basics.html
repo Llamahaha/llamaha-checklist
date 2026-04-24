@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BYOD basics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>BYOD basics</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>BYOD basics</h1>
+            <p class="builder-copy">Bring Your Own Device — using a personal phone or laptop for work — is common but not always well explained. Here is what to expect, what your employer can and cannot do, and how to keep work and personal cleanly separated.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What Is Usually Required</p>
+            <h2>Conditions to access work resources from a personal device</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>A passcode or biometric on the device</h4>
+            <p>Almost every BYOD policy requires that the personal device be locked with a passcode, fingerprint, or face unlock. This is enforced by your firm's mobile device management (MDM) like Intune or Jamf.</p>
+          </div>
+          <div class="card-block">
+            <h4>An MFA app for sign-ins</h4>
+            <p>Microsoft Authenticator, Duo Mobile, or Okta Verify will usually be required to sign into work accounts.</p>
+          </div>
+          <div class="card-block">
+            <h4>A work app container or profile</h4>
+            <p>On phones, apps like Outlook, Teams, and OneDrive often install in a "work" mode that keeps work data separate. On a personal Mac or PC, you may be asked to install Company Portal or a similar agent.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What Your Employer Can See</p>
+            <h2>The realistic boundaries</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Usually: device model, OS version, encryption status, work app data</h4>
+            <p>For compliance, IT can see whether the device meets policy (encrypted, up to date, has passcode) and they can manage work apps and work data on it.</p>
+          </div>
+          <div class="card-block">
+            <h4>Usually not: personal photos, texts, browser history, location</h4>
+            <p>Most BYOD setups separate personal data from work data. IT does not see your photos or browsing on a properly configured BYOD setup.</p>
+          </div>
+          <div class="card-block">
+            <h4>Read your employer's BYOD policy</h4>
+            <p>Specifics vary. Your firm should have a written BYOD policy explaining what is and isn't visible. If you cannot find it, ask HR or IT.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Selective Wipe</p>
+            <h2>What happens if you leave the company</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Most BYOD systems use "selective wipe"</h4>
+            <p>When you leave or your access is revoked, IT removes only the work apps, work data, work email, and work documents from the device. Your personal photos, contacts, and apps stay.</p>
+          </div>
+          <div class="card-block">
+            <h4>Avoid storing work files in personal apps</h4>
+            <p>If you save a work spreadsheet to your personal Google Drive, that file is not in the work container and won't be wiped — but it also shouldn't be there. Keep work files in OneDrive, SharePoint, or your firm's storage.</p>
+          </div>
+          <div class="card-block">
+            <h4>Sign out of work accounts before disposing of an old phone</h4>
+            <p>If you sell or give away the phone, sign out of all work accounts and remove the work container first. If in doubt, factory-reset the phone.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Practical Tips</p>
+            <h2>Make BYOD work for you</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Use the work versions of apps, not personal email forwarding</h4>
+            <p>Forwarding work email to your personal Gmail puts work content in a personal account, which is usually a policy violation and removes work search and security features.</p>
+          </div>
+          <div class="card-block">
+            <h4>On laptops, use a separate browser profile for work</h4>
+            <p>In Edge or Chrome, create a Work profile signed into your work account. Your personal bookmarks, passwords, and history stay separate.</p>
+          </div>
+          <div class="card-block">
+            <h4>Turn on Focus modes for work hours</h4>
+            <p>iPhone Focus and Android Work Profile can pause work app notifications outside work hours so you actually unplug.</p>
+          </div>
+          <div class="card-block">
+            <h4>Know your right to disconnect</h4>
+            <p>Just because work apps are on your personal phone does not mean you have to be reachable 24/7. Set expectations with your team about response time.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>

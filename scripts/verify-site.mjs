@@ -78,7 +78,20 @@ const populatedPublicGuides = [
   ["hec", "hec-georas"],
   ["mctrans", "hcs"],
   ["mctrans", "hss"],
-  ["axiom", "axiom"]
+  ["axiom", "axiom"],
+  ["adobe", "acrobat-sign"],
+  ["autodesk", "construction-cloud"],
+  ["autodesk", "vault"],
+  ["microsoft", "project"],
+  ["trimble", "trimble-connect"],
+  ["deltek", "vantagepoint"],
+  ["docusign", "docusign-web"],
+  ["zoom", "zoom-meetings"],
+  ["cisco", "webex"],
+  ["box", "box-drive"],
+  ["dropbox", "dropbox-desktop"],
+  ["duo", "duo-mobile"],
+  ["okta", "okta-verify"]
 ];
 
 const dynamicAnchorFiles = new Set([

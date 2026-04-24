@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-monitor &amp; docking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>Multi-monitor &amp; docking</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>Multi-monitor &amp; docking</h1>
+            <p class="builder-copy">Most "monitors not working" tickets are actually about cables, ports, or the docking station. A few minutes of checking before opening a ticket usually resolves it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">The Dock</p>
+            <h2>Start with the docking station itself</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Docks need their own power</h4>
+            <p>If your dock has a power brick, confirm it is plugged in and that the dock has a steady light. A dock running off the laptop alone will brown-out under load.</p>
+          </div>
+          <div class="card-block">
+            <h4>Use the cable that came with the dock</h4>
+            <p>USB-C and Thunderbolt cables look identical but aren't. The cable that ships with the dock is rated for full speed and full power. A random USB-C cable from a phone charger may carry data poorly or not at all.</p>
+          </div>
+          <div class="card-block">
+            <h4>Reseat the cable on both ends</h4>
+            <p>Unplug from the laptop and the dock, wait five seconds, plug back in. Half of intermittent dock issues clear up here.</p>
+          </div>
+          <div class="card-block">
+            <h4>Power-cycle the dock</h4>
+            <p>Unplug the dock from power, unplug from the laptop, wait 15 seconds, plug both back in. The dock has its own firmware that occasionally needs a restart.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Monitors</p>
+            <h2>When one (or more) display is missing</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Confirm the monitor is on the right input</h4>
+            <p>Most monitors have a button to cycle inputs (HDMI 1, HDMI 2, DisplayPort, USB-C). If the cable is in HDMI 2 but the monitor is set to HDMI 1, the screen says "no signal" even though everything is plugged in.</p>
+          </div>
+          <div class="card-block">
+            <h4>Try a different port on the dock</h4>
+            <p>If only one monitor is dead, swap that monitor's cable to a different port on the dock. If it works on the new port, the original port may be the problem.</p>
+          </div>
+          <div class="card-block">
+            <h4>Detect displays in OS settings</h4>
+            <p>Windows: Settings &gt; System &gt; Display &gt; Detect. macOS: System Settings &gt; Displays &gt; click "Detect Displays" while holding Option. Forces the OS to re-scan for monitors.</p>
+          </div>
+          <div class="card-block">
+            <h4>Check the cable in isolation</h4>
+            <p>If you can, try the same monitor + cable on a different laptop, or a different cable on the same setup. That isolates whether the cable is the problem.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Layout</p>
+            <h2>Arranging displays so the mouse moves correctly</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Match the layout to the physical setup</h4>
+            <p>In Display settings, drag the monitor rectangles to match where they actually sit on your desk. Otherwise the cursor jumps to a monitor that isn't where you expect.</p>
+          </div>
+          <div class="card-block">
+            <h4>Pick which monitor is "main"</h4>
+            <p>Your taskbar / menu bar and most new windows open on the main display. In Windows, the "Make this my main display" checkbox; on Mac, drag the small white bar in Displays.</p>
+          </div>
+          <div class="card-block">
+            <h4>Set scaling per monitor</h4>
+            <p>If a 4K monitor has tiny text, raise scaling to 150% or 200% in display settings for that one monitor. Windows and macOS scale each monitor independently.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Common Issues</p>
+            <h2>Specific problems and quick fixes</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Monitors flicker every few seconds</h4>
+            <p>Usually a marginal cable or a damaged port. Swap the cable first; if it persists, try a different port on the dock or monitor.</p>
+          </div>
+          <div class="card-block">
+            <h4>Laptop won't charge from the dock</h4>
+            <p>The dock's power output may be too low for the laptop, or the upstream cable isn't a power-delivery cable. If charging is critical, plug the laptop's own charger in directly until the dock issue is resolved.</p>
+          </div>
+          <div class="card-block">
+            <h4>External monitor stuck at low resolution</h4>
+            <p>Check the cable type. HDMI 1.4 and old DisplayPort cables can't carry 4K at 60 Hz. Use the cable that came with the monitor, or upgrade to HDMI 2.0 / DisplayPort 1.4.</p>
+          </div>
+          <div class="card-block">
+            <h4>Windows open on a monitor I can't see</h4>
+            <p>Windows: Win + Shift + Left/Right arrow moves the active window between monitors. Or right-click the taskbar &gt; Cascade windows to pull them onto the visible screen.</p>
+          </div>
+          <div class="card-block">
+            <h4>Webcam audio is wrong after docking</h4>
+            <p>The dock changes the default speaker / mic. Re-pick your headset in your meeting app's audio settings before joining a call.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">When To Open A Ticket</p>
+            <h2>What to send IT</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>The exact dock model and your laptop model</h4>
+            <p>Dell WD22TB4, Lenovo ThinkPad Universal Thunderbolt 4, HP USB-C G5 &mdash; the model tells IT what driver and firmware it needs.</p>
+          </div>
+          <div class="card-block">
+            <h4>Which monitors and how they're connected</h4>
+            <p>"Two Dell 27&Prime; on HDMI from the dock, one Dell 24&Prime; on DisplayPort from the dock." Saves IT a back-and-forth about the setup.</p>
+          </div>
+          <div class="card-block">
+            <h4>What you've already tried</h4>
+            <p>Reseated cables, swapped ports, restarted laptop, power-cycled dock. IT will skip those steps if you tell them.</p>
+          </div>
+          <div class="card-block">
+            <h4>Photos help</h4>
+            <p>A quick photo of the back of the dock and how it's cabled often resolves issues faster than describing it in words.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related</p>
+            <h2>Useful next reads</h2>
+          </div>
+        </div>
+        <div class="hub-quick-grid">
+          <a class="hub-card" href="when-to-restart-what.html">
+            <h3>When to restart what</h3>
+            <p>The right thing to power-cycle, in the right order.</p>
+          </a>
+          <a class="hub-card" href="meeting-av-issues.html">
+            <h3>Meeting AV issues</h3>
+            <p>When camera or microphone won't work in Teams or Zoom.</p>
+          </a>
+          <a class="hub-card" href="taking-screenshots-for-it.html">
+            <h3>Taking screenshots for IT</h3>
+            <p>The fastest way to capture and share what's on your screen.</p>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>

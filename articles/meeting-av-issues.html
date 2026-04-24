@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting AV issues</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>Meeting AV issues</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>Meeting AV issues</h1>
+            <p class="builder-copy">"You're on mute," "I can't hear you," "Your camera is off" &mdash; almost every meeting wastes a minute on these. The fixes are nearly always the same three things: pick the right device, give the app permission, and restart the app.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Before The Meeting</p>
+            <h2>Two minutes that prevent most problems</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Open the meeting app's audio settings and pick your devices</h4>
+            <p>Teams: Settings &gt; Devices. Zoom: Settings &gt; Audio and Video. Webex: Settings &gt; Audio and Video. Pick the headset / webcam you intend to use, not "Default."</p>
+          </div>
+          <div class="card-block">
+            <h4>Run the test call or speaker / mic test</h4>
+            <p>Teams "Make a test call," Zoom "Test Speaker / Test Mic," Webex "Test." If the test fails, it'll fail in the real meeting too.</p>
+          </div>
+          <div class="card-block">
+            <h4>Plug headset and webcam in before launching the app</h4>
+            <p>Some apps only scan for devices at startup. If you plug the headset in after Teams is open, restart Teams.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">No Audio</p>
+            <h2>"I can't hear anyone" or "no one can hear me"</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>The app may be sending sound to the wrong device</h4>
+            <p>Open Settings &gt; Devices (Teams) or Settings &gt; Audio (Zoom / Webex) and check that Speaker and Microphone both point to your headset, not "Internal Display" or "Realtek HD Audio."</p>
+          </div>
+          <div class="card-block">
+            <h4>Check the OS volume and the app volume separately</h4>
+            <p>Windows: click the speaker in the system tray and confirm the right output device, plus volume. macOS: Sound in System Settings, plus the volume slider. Some headsets also have their own volume wheel.</p>
+          </div>
+          <div class="card-block">
+            <h4>Confirm you're not muted in two places</h4>
+            <p>Bluetooth headsets, USB headsets, and the meeting app all have their own mute. The meeting app shows your mute state in the meeting toolbar; check the headset's hardware mute too.</p>
+          </div>
+          <div class="card-block">
+            <h4>Restart the meeting app</h4>
+            <p>Leave the meeting, fully quit the app (Task Manager on Windows, or Cmd+Q on Mac), reopen, rejoin. Fastest fix when audio is genuinely stuck.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">No Video</p>
+            <h2>"Your camera is off" or "Camera is in use"</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>OS permission is the most common cause</h4>
+            <p>Windows: Settings &gt; Privacy &amp; security &gt; Camera. macOS: System Settings &gt; Privacy &amp; Security &gt; Camera. Make sure Teams / Zoom / Webex is allowed.</p>
+          </div>
+          <div class="card-block">
+            <h4>Another app may be holding the camera</h4>
+            <p>If Teams says "Camera in use," another app (often a browser tab from a previous meeting, or the Camera app) has the webcam. Close those, then try again.</p>
+          </div>
+          <div class="card-block">
+            <h4>Check the physical camera shutter</h4>
+            <p>Many laptops have a small slider over the webcam. If everything else is right but you see black, the shutter may be closed.</p>
+          </div>
+          <div class="card-block">
+            <h4>Pick the right camera in the app</h4>
+            <p>If you have a built-in laptop camera and an external webcam, pick the one you want explicitly. The app default might be the wrong one.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Echo &amp; Feedback</p>
+            <h2>"There's an echo" or "I hear myself"</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Two devices in the same room with the same meeting open</h4>
+            <p>The most common cause. If two laptops or a laptop + a phone are in the same room and both joined the meeting unmuted, audio loops. Mute one device fully or leave the meeting on the second device.</p>
+          </div>
+          <div class="card-block">
+            <h4>Speakers + open microphone</h4>
+            <p>If you're using laptop speakers (not a headset), the mic picks up the speaker output. Use a headset instead. Echo cancellation is built into Teams / Zoom / Webex but it's not perfect.</p>
+          </div>
+          <div class="card-block">
+            <h4>Conference-room speakers and a personal laptop joined</h4>
+            <p>Same problem in an office. If the room speaker is on, mute your laptop or join "without audio."</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Choppy Audio Or Video</p>
+            <h2>"You're breaking up" or freezing video</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Most often: your network</h4>
+            <p>Wi-Fi at the edge of range, a busy household network, or VPN routing meeting traffic over a slow link. See <a href="work-from-home-essentials.html">work-from-home essentials</a>.</p>
+          </div>
+          <div class="card-block">
+            <h4>Turn off video to save bandwidth in a pinch</h4>
+            <p>Video uses far more bandwidth than audio. If you're breaking up, turn off your camera and the call usually stabilizes.</p>
+          </div>
+          <div class="card-block">
+            <h4>Disconnect from VPN if the meeting app doesn't need it</h4>
+            <p>Teams, Zoom, and Webex don't typically need VPN. If everything routes through VPN to a far data center, audio quality suffers.</p>
+          </div>
+          <div class="card-block">
+            <h4>Wired ethernet beats Wi-Fi</h4>
+            <p>If meetings consistently drop on Wi-Fi, try a USB-to-ethernet adapter and a cable. Most reliability fix you can make.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Bluetooth Specifically</p>
+            <h2>Headsets that connect but sound bad</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Bluetooth has two modes: high-quality stereo (no mic) and low-quality two-way (with mic)</h4>
+            <p>When the meeting app uses your mic, the headset switches to the lower-quality two-way mode and music sounds tinny. Normal &mdash; not broken.</p>
+          </div>
+          <div class="card-block">
+            <h4>Pick the "Hands-Free" or "Headset" version in the app</h4>
+            <p>Windows often shows two entries for one Bluetooth headset: a Stereo one and a Hands-Free one. Pick Hands-Free for meetings (otherwise the mic won't work).</p>
+          </div>
+          <div class="card-block">
+            <h4>Plug in instead, when reliability matters</h4>
+            <p>For an important meeting, a USB or wired headset is more reliable than Bluetooth. Bluetooth is convenient; cables are predictable.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">If You're Still Stuck</p>
+            <h2>Backup plans</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Dial in by phone</h4>
+            <p>Teams, Zoom, and Webex meeting invites usually include a phone number. If the laptop won't cooperate, dial in with audio while you screen-share or take notes from the laptop.</p>
+          </div>
+          <div class="card-block">
+            <h4>Join from your phone instead</h4>
+            <p>Have the meeting app on your phone, signed in. Join from cellular if your home internet is the problem.</p>
+          </div>
+          <div class="card-block">
+            <h4>What to send IT</h4>
+            <p>Which meeting app, which physical headset / camera, screenshots of your audio settings, what you've already tried. See <a href="taking-screenshots-for-it.html">taking screenshots for IT</a>.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT glossary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>IT glossary</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>IT glossary</h1>
+            <p class="builder-copy">Plain-language definitions for the acronyms and terms you'll hear from IT, HR, and software vendors. Skim once, search by browser find (Ctrl+F / Cmd+F) when you need it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Accounts &amp; Access</p>
+            <h2>Sign-in and identity</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>SSO (Single Sign-On)</h4>
+            <p>One sign-in (usually your work email and password) that unlocks several apps. If you sign into Microsoft or Okta and then click into another app without being asked again, that's SSO.</p>
+          </div>
+          <div class="card-block">
+            <h4>MFA (Multi-Factor Authentication)</h4>
+            <p>The second step after your password &mdash; a phone prompt, a six-digit code, a security key. Stops most account takeovers even if your password leaks.</p>
+          </div>
+          <div class="card-block">
+            <h4>Tenant</h4>
+            <p>Your firm's "instance" of a cloud service like Microsoft 365 or Adobe. When IT says "wrong tenant," they mean you signed in with an account from another organization.</p>
+          </div>
+          <div class="card-block">
+            <h4>Conditional Access</h4>
+            <p>Rules that decide whether you can sign in: from this device, from this country, with MFA, etc. If sign-in fails for no obvious reason, conditional access is often why.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Devices &amp; Management</p>
+            <h2>Your computer and phone</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>MDM (Mobile Device Management)</h4>
+            <p>Software that lets IT manage settings, push apps, and (sometimes) wipe a device. Intune (Microsoft) and Jamf (Apple) are the common ones.</p>
+          </div>
+          <div class="card-block">
+            <h4>BYOD (Bring Your Own Device)</h4>
+            <p>Using your personal phone or laptop for work. See <a href="byod-basics.html">BYOD basics</a> for what this usually means in practice.</p>
+          </div>
+          <div class="card-block">
+            <h4>Endpoint</h4>
+            <p>IT-speak for any device that connects to the network &mdash; laptop, desktop, phone, tablet. "Endpoint protection" is antivirus and security software running on those devices.</p>
+          </div>
+          <div class="card-block">
+            <h4>Image / Imaging</h4>
+            <p>The standard configuration of a new computer at your firm &mdash; the apps, settings, and policies pre-installed before you receive it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Network</p>
+            <h2>Connections and infrastructure</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>VPN (Virtual Private Network)</h4>
+            <p>A secure tunnel that makes your laptop appear to be on the office network even when you're at home. Required for some internal apps and shared drives.</p>
+          </div>
+          <div class="card-block">
+            <h4>Cloud PC / Virtual Desktop / Citrix / AVD / Windows 365</h4>
+            <p>A Windows desktop that runs on a server in a data center. You see it through a window on your real computer. Useful for accessing internal apps without VPN.</p>
+          </div>
+          <div class="card-block">
+            <h4>DNS (Domain Name System)</h4>
+            <p>The phone book of the internet. Translates "outlook.office.com" into a numeric address. When DNS breaks, websites stop loading even though your internet is "up."</p>
+          </div>
+          <div class="card-block">
+            <h4>Firewall / Proxy</h4>
+            <p>Network gear that filters traffic in and out of the company. Often the reason a vendor app "can't reach the activation server."</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Files &amp; Collaboration</p>
+            <h2>Where things are stored</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>OneDrive vs. SharePoint</h4>
+            <p>OneDrive is your personal cloud folder for work files. SharePoint is the team / department version. Both are Microsoft and both sync to your computer through the OneDrive app.</p>
+          </div>
+          <div class="card-block">
+            <h4>Box, Dropbox Business, Google Drive</h4>
+            <p>Other cloud-file services. Same idea as OneDrive / SharePoint but a different vendor. Some firms use one of these instead of (or alongside) Microsoft.</p>
+          </div>
+          <div class="card-block">
+            <h4>Mapped drive (Z:\, P:\, F:\)</h4>
+            <p>A letter on your computer that points to a folder on a server somewhere on the company network. Often requires VPN if you're remote.</p>
+          </div>
+          <div class="card-block">
+            <h4>Permissions / ACLs</h4>
+            <p>Who can read or write a file or folder. "I don't have permissions" usually means a folder owner needs to add you, not that anything is broken.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Email &amp; Meetings</p>
+            <h2>Outlook, Teams, Zoom terms</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Distribution list (DL) vs. Microsoft 365 group vs. Teams team</h4>
+            <p>DL = old-style email-only group. M365 group = email + shared mailbox + shared files. Teams team = M365 group + chat + channels. They overlap but aren't the same.</p>
+          </div>
+          <div class="card-block">
+            <h4>Shared mailbox</h4>
+            <p>A second mailbox (like info@firm.com) that several people can read and reply from. You add it in Outlook, you don't sign in as it.</p>
+          </div>
+          <div class="card-block">
+            <h4>Calendar delegate</h4>
+            <p>Someone you allow to read or edit your calendar on your behalf. Common for executives' assistants.</p>
+          </div>
+          <div class="card-block">
+            <h4>Out-of-office (OOO) / Automatic replies</h4>
+            <p>The away message Outlook or Teams sends while you're out. Set both internal and external versions if your firm exposes it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Security</p>
+            <h2>Threats and protections</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Phishing</h4>
+            <p>Email or text trying to trick you into giving up a password or clicking a malicious link. See <a href="recognizing-phishing.html">recognizing phishing</a>.</p>
+          </div>
+          <div class="card-block">
+            <h4>Ransomware</h4>
+            <p>Malware that encrypts your files and demands payment to unlock them. The reason backups exist.</p>
+          </div>
+          <div class="card-block">
+            <h4>Zero-day</h4>
+            <p>A security flaw that vendors and defenders learn about at the same time as attackers &mdash; no patch available yet.</p>
+          </div>
+          <div class="card-block">
+            <h4>EDR (Endpoint Detection &amp; Response)</h4>
+            <p>The grown-up version of antivirus. Watches for suspicious behavior on each computer and alerts security if something starts acting like malware.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Vendors</p>
+            <h2>Common product brand names</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Microsoft 365 / Office 365</h4>
+            <p>Word, Excel, PowerPoint, Outlook, Teams, OneDrive &mdash; sold as a subscription. "M365" and "O365" are the same thing; M365 is the newer name.</p>
+          </div>
+          <div class="card-block">
+            <h4>Adobe Creative Cloud</h4>
+            <p>Photoshop, Illustrator, InDesign, Acrobat &mdash; subscription bundle. Different from Adobe Acrobat Sign (e-signatures) and Adobe Acrobat Pro (PDF editor).</p>
+          </div>
+          <div class="card-block">
+            <h4>Autodesk / Bentley / Trimble</h4>
+            <p>The big three engineering / construction software vendors. AutoCAD, Revit, Civil 3D = Autodesk. MicroStation, OpenRoads = Bentley. SketchUp, Trimble Connect = Trimble.</p>
+          </div>
+          <div class="card-block">
+            <h4>Esri ArcGIS</h4>
+            <p>Mapping and GIS software. ArcGIS Pro is the desktop app; ArcGIS Online is the web/cloud version.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Tickets &amp; Support</p>
+            <h2>Words you'll see in IT replies</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Ticket / case</h4>
+            <p>A tracked record of your IT request. Reference it by number when following up.</p>
+          </div>
+          <div class="card-block">
+            <h4>Escalation</h4>
+            <p>Moving a ticket to a higher tier of support &mdash; usually because the first responder couldn't resolve it.</p>
+          </div>
+          <div class="card-block">
+            <h4>SLA (Service Level Agreement)</h4>
+            <p>The target time IT commits to respond to or resolve your request. "P1 / Sev 1" tickets have the shortest SLAs.</p>
+          </div>
+          <div class="card-block">
+            <h4>RCA (Root Cause Analysis)</h4>
+            <p>The post-incident write-up explaining what actually broke and how it'll be prevented next time.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>

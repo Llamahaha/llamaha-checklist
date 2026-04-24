@@ -276,6 +276,19 @@ function buildChecklistEntries() {
   ];
 }
 
+function buildCheatsheetEntries() {
+  return [
+    entry(
+      "Warranty lookup cheatsheet",
+      "Where to paste a serial / service tag for each major OEM (Dell, Lenovo, HP, Apple, Microsoft Surface), what those identifiers look like, how to find them on the device, and bulk lookup notes.",
+      "reference/warranty-lookup.html",
+      "internalReference",
+      "Cheatsheet",
+      "warranty serial service tag dell lenovo hp apple surface oem hardware lookup"
+    )
+  ];
+}
+
 export function buildInternalSearchIndex() {
   return [
     ...buildPublicEntries(),
@@ -291,6 +304,7 @@ export function buildInternalSearchIndex() {
     ...buildPlaybookEntries(),
     ...buildTipEntries(),
     ...buildSnippetEntries(),
-    ...buildChecklistEntries()
+    ...buildChecklistEntries(),
+    ...buildCheatsheetEntries()
   ];
 }

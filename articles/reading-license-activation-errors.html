@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading license &amp; activation errors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>Reading license &amp; activation errors</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>Reading license &amp; activation errors</h1>
+            <p class="builder-copy">"Trial," "Unlicensed," "Sign in required," and "We can't activate" are all different problems with different fixes. Reinstalling first wastes a lot of time. Here is how to read what the app is actually telling you.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Trial Mode</p>
+            <h2>"Adobe Acrobat is in trial mode" or "Microsoft 365 unlicensed product"</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Almost always means: signed in with the wrong account</h4>
+            <p>Trial wording usually appears when the app cannot find a valid license attached to the signed-in account. Look at which account the app shows in the top-right corner.</p>
+          </div>
+          <div class="card-block">
+            <h4>Fix: sign out, sign back in with the work account</h4>
+            <p>For Adobe, do this in Creative Cloud Desktop (top-right account icon &gt; Sign Out). For Microsoft 365, sign out under File &gt; Account &gt; Sign Out, then sign back in.</p>
+          </div>
+          <div class="card-block">
+            <h4>If sign-in puts you back into the wrong account, check the company profile</h4>
+            <p>Adobe especially asks "Personal account or Company / Business account?" the first time. Pick the company profile.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Sign In Required</p>
+            <h2>"Sign in to activate" or "Your sign-in expired"</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Means: the app needs to refresh your account, not that something is broken</h4>
+            <p>This usually appears after a password change, MFA reset, or after the app has not been opened for a long time.</p>
+          </div>
+          <div class="card-block">
+            <h4>Fix: complete the sign-in prompt</h4>
+            <p>Just sign in. If the prompt fails or loops, restart the app and try again. If MFA is required, have your phone ready.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Unlicensed</p>
+            <h2>"You don't have permission to use this app" or "Unlicensed"</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Means: a license isn't assigned to your account in the admin console</h4>
+            <p>This is real — IT or your license admin needs to assign a license to your work account in Microsoft 365 Admin Center, Adobe Admin Console, Autodesk Account, or wherever the license lives.</p>
+          </div>
+          <div class="card-block">
+            <h4>What to send IT</h4>
+            <p>The exact app name, the exact error wording, the work account you signed in with, and a screenshot. IT can confirm in the admin console whether the license is assigned.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Activation Failed</p>
+            <h2>"We couldn't activate" or "Activation server unreachable"</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Often means: a network or VPN issue is blocking the activation server</h4>
+            <p>Some firms route traffic through a proxy or VPN that blocks the vendor's activation servers. If activation fails on VPN but works off VPN (or vice versa), that is your clue.</p>
+          </div>
+          <div class="card-block">
+            <h4>Try: another network</h4>
+            <p>If you are on the office network and activation fails, try off VPN or on a phone hotspot to see if the issue follows the network or the computer.</p>
+          </div>
+          <div class="card-block">
+            <h4>What to send IT</h4>
+            <p>The full error wording, the network state (on VPN, off VPN, on hotspot), and whether other vendor apps activate normally.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">License Server Unreachable</p>
+            <h2>"Cannot acquire license" (Mathcad, AutoCAD network license, ArcGIS Pro)</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Means: a network license server is not reachable from your computer</h4>
+            <p>Common with engineering apps that pull a "floating" license from a server on the company network. Often requires VPN.</p>
+          </div>
+          <div class="card-block">
+            <h4>Fix: confirm VPN is connected, then retry</h4>
+            <p>If you need VPN to reach the license server and you are off VPN, the license cannot be acquired. Connect VPN, then sign back in or restart the app.</p>
+          </div>
+          <div class="card-block">
+            <h4>What to send IT</h4>
+            <p>The app, the version, your VPN state, the exact license-server message, and whether the app worked previously from this computer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">The Pattern</p>
+            <h2>What every license error has in common</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>The exact wording matters</h4>
+            <p>"Trial," "Unlicensed," "Sign in," and "Cannot activate" all have different fixes. Read the message before reinstalling.</p>
+          </div>
+          <div class="card-block">
+            <h4>The signed-in account matters more than the install</h4>
+            <p>Most license problems are account problems. Confirm what account the app shows before assuming the install is broken.</p>
+          </div>
+          <div class="card-block">
+            <h4>Take a screenshot</h4>
+            <p>Screenshot the message and the account name. That is what IT needs.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>

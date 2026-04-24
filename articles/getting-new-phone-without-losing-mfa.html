@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting a new phone without losing MFA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>Getting a new phone without losing MFA</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>Getting a new phone without losing MFA</h1>
+            <p class="builder-copy">If your work uses Microsoft Authenticator, Duo Mobile, Okta Verify, or another push app on your phone, switching phones is the most common reason people get locked out of work. Five minutes of prep on the old phone saves a frantic afternoon on the new one.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Before You Get the New Phone</p>
+            <h2>Set yourself up to switch cleanly</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Make sure you have a second sign-in method</h4>
+            <p>Open your work account's security page (for Microsoft, https://mysignins.microsoft.com/security-info) and confirm you have at least one method besides the authenticator app — typically a phone number, a backup email, or a hardware security key.</p>
+          </div>
+          <div class="card-block">
+            <h4>Find out which apps your company uses for MFA</h4>
+            <p>The most common are Microsoft Authenticator, Duo Mobile, Okta Verify, and Google Authenticator. Make a list of which ones are on your phone now so you know what to set up on the new one.</p>
+          </div>
+          <div class="card-block">
+            <h4>Turn on cloud backup if your authenticator app supports it</h4>
+            <p>Microsoft Authenticator can back up to your personal Microsoft account, Duo Mobile has Duo Restore, and Google Authenticator can sync to a Google account. Backup is not a guaranteed restore for work accounts in every case, but it usually saves at least the personal accounts.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">The Day You Switch</p>
+            <h2>Keep the old phone working until the new one is set</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Do not erase or factory-reset the old phone yet</h4>
+            <p>Keep it on, charged, and connected to Wi-Fi if you no longer have a SIM in it. As long as it can receive pushes, you can use it to approve sign-ins while you re-add your accounts on the new phone.</p>
+          </div>
+          <div class="card-block">
+            <h4>Install the same authenticator apps on the new phone</h4>
+            <p>Install Microsoft Authenticator, Duo Mobile, Okta Verify, or whichever you use from the App Store or Google Play. Do not remove anything from the old phone yet.</p>
+          </div>
+          <div class="card-block">
+            <h4>Re-add accounts one at a time</h4>
+            <p>For each work account, sign into the security settings page from a computer (using the old phone to approve), then add the new phone as the active method. For Microsoft Authenticator this is Add sign-in method > Authenticator app on https://mysignins.microsoft.com/security-info. For Duo, your IT can send you a fresh enrollment link. For Okta, sign into your end-user dashboard and add a new device.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">If You Already Lost Access</p>
+            <h2>You upgraded the phone before doing any of this — now what?</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Check your other sign-in methods first</h4>
+            <p>Try signing in and look at the "More information required" or "Try another way" prompt. A backup phone number or email may let you in without IT.</p>
+          </div>
+          <div class="card-block">
+            <h4>Contact IT and be ready to verify your identity</h4>
+            <p>IT will need to confirm you are really you before resetting MFA, because MFA reset is a common attacker target. Be ready with your manager's name, employee ID, or whatever your firm uses.</p>
+          </div>
+          <div class="card-block">
+            <h4>Ask for a temporary access pass or bypass code</h4>
+            <p>Microsoft has Temporary Access Pass, Duo has bypass codes, and Okta has temporary tokens. These let you sign in once so you can re-enroll the new phone yourself.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related</p>
+            <h2>Specific app guides</h2>
+          </div>
+        </div>
+        <div class="hub-quick-grid">
+          <article class="hub-card">
+            <h2>Microsoft Authenticator</h2>
+            <p>Mobile setup, push approvals, and recovery for Microsoft 365 accounts.</p>
+            <a class="hub-link" href="../guides/microsoft/microsoft-authenticator.html">Open guide</a>
+          </article>
+          <article class="hub-card">
+            <h2>Duo Mobile</h2>
+            <p>What to do when a new phone breaks Duo pushes.</p>
+            <a class="hub-link" href="../guides/duo/duo-mobile.html">Open guide</a>
+          </article>
+          <article class="hub-card">
+            <h2>Okta Verify</h2>
+            <p>Re-enrolling Okta on a new phone and using FastPass.</p>
+            <a class="hub-link" href="../guides/okta/okta-verify.html">Open guide</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>
