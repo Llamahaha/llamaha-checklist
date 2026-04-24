@@ -77,8 +77,8 @@ function extraPcItems() {
             url: "https://learn.microsoft.com/en-us/windows-app/get-started-connect-devices-desktops-apps"
           },
           {
-            label: "Microsoft Remote Desktop clients",
-            url: "https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients"
+            label: "What is Windows App?",
+            url: "https://learn.microsoft.com/en-us/windows-app/overview"
           }
         ]
       },
@@ -95,8 +95,8 @@ function extraPcItems() {
         ],
         links: [
           {
-            label: "Troubleshoot Remote Desktop connection problems",
-            url: "https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/troubleshoot/remote-desktop-connection-general"
+            label: "General Remote Desktop connection troubleshooting",
+            url: "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/rdp-error-general-troubleshooting"
           }
         ]
       },
