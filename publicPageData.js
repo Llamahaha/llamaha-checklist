@@ -60,6 +60,62 @@ function extraPcItems() {
             url: "https://learn.microsoft.com/en-us/windows-365/end-user-access-cloud-pc"
           }
         ]
+      },
+      {
+        title: "Connect to your office computer from home using the Remote Desktop app",
+        text: "If your company lets you remote into your in-office Windows computer, you use the Remote Desktop (RDP) app on your home device to take over the office machine. Most setups need you to be on the company VPN first, and the office computer has to be powered on and awake to accept the connection.",
+        fixes: [
+          "Connect to the company VPN first if one is required. Remote Desktop to an office computer almost always rides over the VPN unless your company set up a Remote Desktop Gateway for you.",
+          "Open the Windows App (on a company-managed computer) or the Remote Desktop app (search the Microsoft Store, Mac App Store, or iOS / Android app store for \"Microsoft Remote Desktop\" / \"Windows App\"). Do not use random third-party RDP clients.",
+          "Enter the office computer's name exactly as IT gave it to you. It usually looks like a short hostname (DESKTOP-ABC123) or a full name with your company domain (DESKTOP-ABC123.company.local). An IP address also works if IT provided one.",
+          "When prompted, sign in with your full work email (or DOMAIN\\username if IT uses that format) and your normal work password. If MFA is part of your sign-in, approve the prompt the same way you would for Outlook or Teams.",
+          "Make sure your office computer is left powered on and not set to sleep or hibernate before you leave for the day. A shut-down or sleeping computer cannot accept the remote connection."
+        ],
+        links: [
+          {
+            label: "Get started with the Windows App",
+            url: "https://learn.microsoft.com/en-us/windows-app/get-started-connect-devices-desktops-apps"
+          },
+          {
+            label: "Microsoft Remote Desktop clients",
+            url: "https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients"
+          }
+        ]
+      },
+      {
+        title: "Remote Desktop to your office computer will not connect",
+        text: "Remote Desktop connection failures usually come down to the VPN not being up, the office computer being asleep or off, a hostname the app cannot find, or your account not being allowed to sign in remotely. Work through the easy checks before assuming the office computer is down.",
+        fixes: [
+          "Confirm the VPN shows connected on your home computer before you launch Remote Desktop. Opening a company-only internal website in your browser is a quick way to prove the VPN path is working.",
+          "If the error is \"Remote Desktop can't find the computer\" or \"the computer you are trying to reach is not available,\" the office computer is most likely asleep, powered off, or on a different network than the VPN reaches. Ask a coworker at the office to nudge the mouse, or contact IT to wake or power it on.",
+          "If the error mentions that your account is not allowed to sign in through Remote Desktop, that is a permissions issue on the office side. IT has to add your account to the group that is allowed to connect remotely.",
+          "If you repeatedly get a credentials error even though the password is correct, try signing in with your full work email address, then try DOMAIN\\username, and match the format IT gave you when they set it up.",
+          "If Remote Desktop opens and then drops a few seconds later, restart your local Wi-Fi or switch to a wired network before blaming the office computer. Shaky home internet is the most common cause of a session that connects and then dies.",
+          "Keep the exact error wording, the office computer name you typed, and whether the VPN was connected at the time when you contact support."
+        ],
+        links: [
+          {
+            label: "Troubleshoot Remote Desktop connection problems",
+            url: "https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/troubleshoot/remote-desktop-connection-general"
+          }
+        ]
+      },
+      {
+        title: "The office computer kicks you out, sleeps, or forgets your settings",
+        text: "Once the Remote Desktop session is working, the most common follow-up problems are the office computer going to sleep, the session dropping when someone logs in at the desk, or the window opening on the wrong size / monitor. These are expected behaviors you can plan around.",
+        fixes: [
+          "Only one person can be signed into a standard Windows computer at a time. If someone sits down at the office computer while you are remoted in, you get signed out. Coordinate with whoever shares the desk before you rely on it.",
+          "Ask IT to set the office computer's power plan so the display can sleep but the computer itself does not sleep or hibernate. A computer that hibernates will not accept your next Remote Desktop connection until someone wakes it.",
+          "If the remote window opens too small or on the wrong monitor, open the Remote Desktop app connection settings and adjust the display size, or check Use all my monitors for the session if your company allows multi-monitor redirection.",
+          "If the clipboard, your home printer, or your local drives do not show up inside the session, open the connection settings and confirm the redirection options are turned on before reconnecting.",
+          "If performance feels sluggish, close heavy local apps on your home computer first, then test a wired network connection. Slow Remote Desktop is almost always a home network problem, not an office computer problem."
+        ],
+        links: [
+          {
+            label: "Change your Windows power plan",
+            url: "https://support.microsoft.com/en-us/windows/change-the-power-mode-for-your-windows-pc-c2aff038-22f9-f46a-8b0e-9a32b981b46a"
+          }
+        ]
       }
     ],
     "Network, VPN, and Shared Access": [
