@@ -112,8 +112,8 @@ function extraPcItems() {
         ],
         links: [
           {
-            label: "Change your Windows power plan",
-            url: "https://support.microsoft.com/en-us/windows/change-the-power-mode-for-your-windows-pc-c2aff038-22f9-f46a-8b0e-9a32b981b46a"
+            label: "Shut down, sleep, or hibernate your PC",
+            url: "https://support.microsoft.com/en-us/windows/shut-down-sleep-or-hibernate-your-pc-2941d165-7d0a-a5e8-c5ad-8c972e8e6eff"
           }
         ]
       }
@@ -952,4 +952,5 @@ export const publicAppHelpSections = [
     description: "Use the full directory when you want to browse every supported public application by vendor.",
     groups: createDirectoryGroups()
   }
+];
 ];
