@@ -50,7 +50,7 @@
           </div>
           <div class="card-block">
             <h4>Turn on cloud backup if your authenticator app supports it</h4>
-            <p>Microsoft Authenticator can back up to your personal Microsoft account, Duo Mobile has Duo Restore, and Google Authenticator can sync to a Google account. Backup is not a guaranteed restore for work accounts in every case, but it usually saves at least the personal accounts.</p>
+            <p>Microsoft Authenticator backup depends on the phone platform: iPhone uses iCloud, while Android uses a personal Microsoft account. Duo Mobile has Duo Restore, and Google Authenticator can sync to a Google account. Backup is still not a guaranteed full restore for every work account, so keep another sign-in method available.</p>
           </div>
         </div>
       </section>
@@ -73,7 +73,7 @@
           </div>
           <div class="card-block">
             <h4>Re-add accounts one at a time</h4>
-            <p>For each work account, sign into the security settings page from a computer (using the old phone to approve), then add the new phone as the active method. For Microsoft Authenticator this is Add sign-in method > Authenticator app on https://mysignins.microsoft.com/security-info. For Duo, your IT can send you a fresh enrollment link. For Okta, sign into your end-user dashboard and add a new device.</p>
+            <p>For each work account, sign into the security settings page from a computer (using the old phone to approve), then add the new phone as the active method. For Microsoft Authenticator this is Add sign-in method > Authenticator app on https://mysignins.microsoft.com/security-info. For Duo, your IT can send you a fresh enrollment link. For Okta, sign into your end-user dashboard and add a new device if your company allows self-service enrollment; otherwise IT may need to reset or re-enroll Okta Verify for you.</p>
           </div>
         </div>
       </section>
@@ -96,7 +96,7 @@
           </div>
           <div class="card-block">
             <h4>Ask for a temporary access pass or bypass code</h4>
-            <p>Microsoft has Temporary Access Pass, Duo has bypass codes, and Okta has temporary tokens. These let you sign in once so you can re-enroll the new phone yourself.</p>
+            <p>Microsoft has Temporary Access Pass, Duo has bypass codes, and some Okta setups use Temporary Access Code. These temporary methods can let you sign in long enough to re-enroll the new phone.</p>
           </div>
         </div>
       </section>
