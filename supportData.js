@@ -455,6 +455,108 @@ export const computerIssueSections = [
         ]
       }
     ]
+  },
+  {
+    title: "Walkthroughs for Bigger Moments",
+    description: "Short, practical walkthroughs for life events and situations that come up less often than day-to-day PC issues but still matter when they do.",
+    items: [
+      {
+        title: "Moving to a new computer",
+        text: "Most of what you need is already in the cloud with your work account, but a few things only live locally and need attention before the swap.",
+        fixes: [
+          "Confirm what is saved in OneDrive, SharePoint, or your company's cloud storage versus what only lives on the current machine.",
+          "Check for local-only files in Documents, Desktop, and Downloads before handing the old computer back.",
+          "Export browser bookmarks and any app settings that are not tied to your work account."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/moving-to-new-computer.html", external: false }
+        ]
+      },
+      {
+        title: "Returning a company computer",
+        text: "A short checklist of what to back up, what to sign out of, and what to leave alone before handover.",
+        fixes: [
+          "Back up personal files if your company's policy permits it, then remove them from the device.",
+          "Sign out of browsers, Outlook, and Teams so your session does not travel with the hardware.",
+          "Leave company-managed software, settings, and encryption in place \u2014 IT needs to wipe the device cleanly."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/returning-company-computer.html", external: false }
+        ]
+      },
+      {
+        title: "Getting a new phone without losing MFA",
+        text: "Plan ahead so push approvals do not break the day you switch phones. The key move is setting up MFA on the new phone before retiring the old one.",
+        fixes: [
+          "Keep the old phone reachable until the new one is fully set up \u2014 you may need it to approve the transfer.",
+          "Set up Microsoft Authenticator (or Duo / Okta Verify) on the new phone before wiping the old one.",
+          "After the switch, test a sign-in that requires MFA to confirm push approvals land on the new phone."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/getting-new-phone-without-losing-mfa.html", external: false }
+        ]
+      },
+      {
+        title: "Multi-monitor and docking setup",
+        text: "Why a dock or second monitor sometimes misbehaves, and the safest order to plug things in.",
+        fixes: [
+          "Plug the dock into power first, then the laptop, then turn the monitors on \u2014 sequence matters for some docks.",
+          "If only one of two monitors works, reseat the video cable on the back of the dock before blaming the monitor.",
+          "Check Windows Display Settings \u2192 Identify to confirm which screen Windows sees as which."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/multi-monitor-docking.html", external: false }
+        ]
+      },
+      {
+        title: "When to restart what",
+        text: "Which restart actually fixes what: the app, the computer, the dock, the router, or the Cloud PC.",
+        fixes: [
+          "Start with the smallest restart \u2014 close and reopen the app \u2014 before rebooting the whole machine.",
+          "If only one remote or online service is affected, the local computer restart will not help.",
+          "For network-wide slowness, the router or modem restart comes before the PC restart."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/when-to-restart-what.html", external: false }
+        ]
+      },
+      {
+        title: "Work-from-home essentials",
+        text: "The baseline network, power, and desk setup that keeps remote work reliable.",
+        fixes: [
+          "Wired Ethernet beats Wi-Fi for meeting and VPN reliability whenever the cable is an option.",
+          "A UPS on the router and PC prevents a brief power blip from dropping a meeting.",
+          "Keep a cheap backup webcam, headset, or phone tether nearby so a single device failure does not kill the day."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/work-from-home-essentials.html", external: false }
+        ]
+      },
+      {
+        title: "Meeting audio and video issues",
+        text: "First-pass checks when Teams, Zoom, or Webex sounds wrong, looks wrong, or refuses to connect the camera.",
+        fixes: [
+          "Confirm the correct microphone and speaker are selected inside the meeting app, not just in Windows.",
+          "Unplug and replug the headset before assuming the meeting app is broken.",
+          "If the camera is missing, check whether another app has claimed it \u2014 only one app can use a camera at a time."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/meeting-av-issues.html", external: false }
+        ]
+      },
+      {
+        title: "Printer troubleshooting",
+        text: "The fastest path from 'nothing is printing' to 'printing again' without reinstalling drivers you do not need.",
+        fixes: [
+          "Confirm the printer is powered on, has paper, and has no error lights before touching Windows settings.",
+          "Open the print queue in Windows \u2014 a stuck job at the top will block everything behind it.",
+          "If only you cannot print, but a coworker can to the same printer, the issue is local to your computer."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/printer-troubleshooting.html", external: false }
+        ]
+      }
+    ]
   }
 ];
 
@@ -771,6 +873,95 @@ export const tipsAndTricksSections = [
             label: "Manage drive space with Storage Sense",
             url: "https://support.microsoft.com/en-au/windows/manage-drive-space-with-storage-sense-654f6ada-7bfc-45e5-966b-e24aded96ad5"
           }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Habits, Awareness, and Deeper Reads",
+    description: "Short walkthroughs on the habits that keep work safe and smooth — recognizing phishing, password hygiene, working on personal devices, and talking to IT clearly.",
+    items: [
+      {
+        title: "Recognizing phishing",
+        text: "What real phishing looks like in 2026 — it is rarely the obvious broken-English scam anymore. Urgency, unexpected attachments, and off-brand sender domains are the tells.",
+        fixes: [
+          "Hover over links before clicking — the display text and the actual URL often disagree.",
+          "An urgent request from a familiar name at a slightly wrong domain is the most common pattern.",
+          "When in doubt, open the company portal or contact page directly instead of using the link in the email."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/recognizing-phishing.html", external: false }
+        ]
+      },
+      {
+        title: "Password manager basics",
+        text: "Why using a password manager is table stakes and how to get started without losing access on day one.",
+        fixes: [
+          "A password manager lets you have a unique, long password for every site without memorizing any of them.",
+          "Set up the recovery method the day you create the account, not the day you are locked out.",
+          "Use the password manager's browser extension and mobile app so autofill works everywhere."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/password-manager-basics.html", external: false }
+        ]
+      },
+      {
+        title: "BYOD basics",
+        text: "What to expect when you use a personal phone or computer for work — what your company can and cannot see, and how to keep work and personal separate.",
+        fixes: [
+          "Use separate browser profiles for work and personal browsing.",
+          "Work apps on a personal phone typically only see work data inside those apps, not your photos or texts.",
+          "If you leave the company, expect work data to be removed from the device — personal data usually stays put."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/byod-basics.html", external: false }
+        ]
+      },
+      {
+        title: "New hire day one",
+        text: "The accounts, apps, MFA setup, and basic checks to walk through on your first morning so day two is not wasted on setup.",
+        fixes: [
+          "Sign in to the work account on the company laptop and set up MFA before closing the welcome emails.",
+          "Install the baseline apps (Teams, Outlook, OneDrive, browser, password manager) in the first hour.",
+          "Confirm you can join a test meeting with camera and mic before your first real meeting."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/new-hire-day-one.html", external: false }
+        ]
+      },
+      {
+        title: "IT glossary",
+        text: "A plain-English glossary of the IT terms you hear most in tickets and meetings: MFA, SSO, VPN, tenant, hold, licensing, and the rest.",
+        fixes: [
+          "Use the glossary when an IT reply uses a term you do not recognize instead of nodding along.",
+          "Most acronyms map to one or two plain-English sentences — the glossary keeps it short."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/it-glossary.html", external: false }
+        ]
+      },
+      {
+        title: "Safely sharing externally",
+        text: "How to share files with someone outside the company without accidentally giving them more than you meant to — expiring links, view-only, and the difference between anyone-with-the-link and specific-people.",
+        fixes: [
+          "Prefer 'specific people' sharing over 'anyone with the link' whenever possible.",
+          "Use expiring links for one-off external sharing so the access does not linger forever.",
+          "Double-check the link type before sending — 'view' and 'edit' look similar in the dialog."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/safely-sharing-externally.html", external: false }
+        ]
+      },
+      {
+        title: "Taking screenshots for IT",
+        text: "What a useful screenshot looks like — full error text, the surrounding context, and timestamps — and how to capture one on Windows, Mac, and mobile.",
+        fixes: [
+          "Capture the whole window, not just the error dialog — the surrounding context usually matters.",
+          "Include the system clock if timing matters.",
+          "Windows: Windows + Shift + S for the snipping tool. Mac: Cmd + Shift + 4. iPhone: power + volume up."
+        ],
+        links: [
+          { label: "Open full article", url: "articles/taking-screenshots-for-it.html", external: false }
         ]
       }
     ]

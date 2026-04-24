@@ -29,9 +29,12 @@ const internalRoutes = [
   "internal/search.html",
   "internal/reference-guides.html",
   "internal/tips-and-tricks.html",
+  "internal/tools.html",
   "internal/snippets.html",
   "internal/playbooks.html",
-  "internal/checklist.html"
+  "internal/checklist.html",
+  "internal/reference/mailbox-decommission.html",
+  "internal/reference/warranty-lookup.html"
 ];
 
 const populatedPublicGuides = [

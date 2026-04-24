@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mailbox decommission procedure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon.jpg">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../reference-guides.html">Reference Guides</a>
+      <span>/</span>
+      <strong>Mailbox decommission procedure</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Procedure</p>
+            <h1>Mailbox decommission procedure</h1>
+            <p class="builder-copy">Step-by-step for properly offboarding a user's Exchange Online mailbox: sign-in block, forwarding, retention / hold, shared mailbox conversion, license handling, and the specific scenarios where Defender for Office 365 Plan 1 (Defender P1) still needs to ride along on the ex-user's mail. Use this for every termination ticket and flag license changes in the client CRM when done.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Intake</p>
+            <h2>Confirm the request before you touch anything</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Confirm with HR / requester</h4>
+            <p>Termination effective date and time, whether this is amicable or hostile (changes your timeline), forwarding target (manager, delegate, or none), whether there is a legal hold request, and whether the user had any shared / delegated / admin access that needs transfer.</p>
+          </div>
+          <div class="card-block">
+            <h4>Check for a hold flag</h4>
+            <p>If HR or Legal has flagged a hold, <strong>do not remove the license or delete the account</strong> until a Litigation Hold or Microsoft Purview eDiscovery hold is in place. Deleting a licensed mailbox without a hold starts the soft-delete clock (30 days) and you lose recoverability after that.</p>
+          </div>
+          <div class="card-block">
+            <h4>Confirm the Defender question up front</h4>
+            <p>Before you remove anything, ask: will mail still flow through this mailbox after termination (forwarding, shared mailbox, delegated access)? If yes, Defender P1 coverage probably needs to stay attached to the resulting recipient. See the Defender P1 section below.</p>
+          </div>
+          <div class="card-block">
+            <h4>Ticket fields to capture</h4>
+            <p>User display name, UPN, primary SMTP, sAMAccountName, termination date, forwarding target UPN, hold status, device serial(s) in their name, Teams / SharePoint / OneDrive ownership flags, and any shared mailboxes they own rather than just access.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Day 0</p>
+            <h2>Block sign-in and stop the clock</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Block sign-in (don't delete)</h4>
+            <p>Entra admin center &gt; Users &gt; the user &gt; <strong>Block sign-in</strong>. Or PowerShell: <code>Update-MgUser -UserId user@tenant.com -AccountEnabled:$false</code>. Never delete the Entra account on Day 0 unless there is no mail, files, or identity tied to it — deletion starts the 30-day recovery window and cascades to the mailbox.</p>
+          </div>
+          <div class="card-block">
+            <h4>Revoke active sessions</h4>
+            <p>Entra &gt; Users &gt; user &gt; <strong>Revoke sessions</strong>. Or PowerShell: <code>Revoke-MgUserSignInSession -UserId user@tenant.com</code>. This forces reauthentication across all Microsoft-connected apps, including Outlook, Teams, mobile, and browser sessions. Critical for hostile terminations.</p>
+          </div>
+          <div class="card-block">
+            <h4>Reset password</h4>
+            <p>Reset to a long random string and do not store it. This is belt-and-suspenders behind the sign-in block — covers you if the block propagation lags or if a cached token is still valid somewhere.</p>
+          </div>
+          <div class="card-block">
+            <h4>Wipe MFA methods</h4>
+            <p>Entra &gt; the user &gt; Authentication methods &gt; delete each registered method (Authenticator, phone, FIDO key). Prevents a bad actor from completing MFA if they somehow still have the password.</p>
+          </div>
+          <div class="card-block">
+            <h4>Retire / wipe mobile devices</h4>
+            <p>Intune &gt; Devices &gt; find devices owned by the user &gt; <strong>Retire</strong> for company data removal (BYOD) or <strong>Wipe</strong> for full reset (corporate). Confirm with HR whether the company laptop is coming back or being reimaged in place.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Mail Flow</p>
+            <h2>Out of office, forwarding, and delegation</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Set the Out of Office</h4>
+            <p>Exchange admin center &gt; recipients &gt; mailboxes &gt; user &gt; Others &gt; Automatic replies. Internal and external versions, typically pointing new senders to the manager or a shared resource mailbox. Keep the tone neutral — the OOO is the last customer-visible thing the departed user "says."</p>
+          </div>
+          <div class="card-block">
+            <h4>Set forwarding (if requested)</h4>
+            <p>Exchange admin center &gt; the mailbox &gt; Mailbox &gt; <strong>Manage email forwarding</strong>. Prefer mailbox-level forwarding (survives profile changes) over an inbox rule (often lost when mailbox is converted). PowerShell: <code>Set-Mailbox user@tenant.com -ForwardingSmtpAddress manager@tenant.com -DeliverToMailboxAndForward $true</code>.</p>
+          </div>
+          <div class="card-block">
+            <h4>External forwarding caveat</h4>
+            <p>If the forwarding target is outside the tenant, verify the org's outbound anti-spam policy allows automatic external forwarding. Defender's default is to block it. If it's blocked and the client still needs it, document the exception request before toggling it — auto-forward to external is a common data-exfiltration path and you want an audit trail.</p>
+          </div>
+          <div class="card-block">
+            <h4>Transfer delegated access</h4>
+            <p>If the user had Full Access or Send As on other mailboxes, those permissions don't auto-cleanup. Run <code>Get-Mailbox | Get-MailboxPermission -User user@tenant.com</code> and <code>Get-RecipientPermission -Trustee user@tenant.com</code> to find them. Remove or reassign.</p>
+          </div>
+          <div class="card-block">
+            <h4>Shared mailboxes they owned</h4>
+            <p>If the departed user was the sole Full Access user on a shared mailbox, the shared mailbox is now orphaned. Add the manager or a continuity account before Day 30 or nobody can open it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Retention &amp; Hold</p>
+            <h2>Decide how long the mailbox lives</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>No hold, standard offboarding</h4>
+            <p>Tenant retention policies apply to the mailbox content. After the retention window, the content ages out. Safe to convert to shared mailbox once forwarding is stable (typically 30–90 days post-termination per the client's SOP).</p>
+          </div>
+          <div class="card-block">
+            <h4>Litigation Hold</h4>
+            <p>Exchange admin center &gt; mailbox &gt; Others &gt; Manage litigation hold. Or PowerShell: <code>Set-Mailbox user@tenant.com -LitigationHoldEnabled $true -LitigationHoldDuration Unlimited</code>. Litigation Hold requires <strong>Exchange Online Plan 2</strong> (included in E3, E5, and Business Premium; standalone or in Business Basic/Standard it is not included).</p>
+          </div>
+          <div class="card-block">
+            <h4>Purview eDiscovery hold</h4>
+            <p>For matter-specific retention with legal oversight, use Microsoft Purview &gt; eDiscovery (Standard or Premium) &gt; create case &gt; add custodian &gt; apply hold. Premium eDiscovery adds custodian management and workflow and requires E5 / E5 Compliance add-on.</p>
+          </div>
+          <div class="card-block">
+            <h4>Inactive mailbox</h4>
+            <p>The clean path for long-term retention without a license: place the mailbox on hold (Litigation or eDiscovery), <strong>then</strong> remove the license or delete the user. The mailbox becomes "inactive" — it is preserved indefinitely at no license cost and is searchable via Purview content search. Removing the license <em>before</em> applying the hold deletes the mailbox at the 30-day soft-delete mark.</p>
+          </div>
+          <div class="card-block">
+            <h4>Order matters</h4>
+            <p>Hold FIRST, then license change. Repeat: hold FIRST, then license change. The most common offboarding mistake is removing the license immediately after termination "to save money" on an account that turns out to need legal preservation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">License Handling</p>
+            <h2>Convert to shared, or keep licensed, or go inactive</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Convert to shared mailbox</h4>
+            <p>Exchange admin center &gt; the mailbox &gt; <strong>Convert to shared mailbox</strong>. Or PowerShell: <code>Set-Mailbox user@tenant.com -Type Shared</code>. Requirements: the mailbox must be under 50 GB (else keep Plan 2 license), and the source user account must still exist (even if blocked) until conversion completes.</p>
+          </div>
+          <div class="card-block">
+            <h4>Shared mailbox license rules</h4>
+            <p>A shared mailbox under 50 GB with no archive, no hold, and no Defender-scoped policies does NOT need a license. License is required when: mailbox &gt; 50 GB, online archive enabled (EOL Plan 2 or EOL Archiving add-on), Litigation Hold enabled (EOL Plan 2), or <strong>Defender for Office 365 P1 policies apply to that recipient</strong> (see Defender section).</p>
+          </div>
+          <div class="card-block">
+            <h4>Remove the license — after hold, after conversion</h4>
+            <p>Microsoft 365 admin center &gt; user &gt; Licenses and apps &gt; uncheck the plan. Or PowerShell with <code>Set-MgUserLicense</code>. Do this only after: (1) any required hold is applied, (2) mailbox converted to shared (if going the shared route), and (3) the Defender P1 decision is made.</p>
+          </div>
+          <div class="card-block">
+            <h4>Inactive mailbox path</h4>
+            <p>If no one needs ongoing access and you just need to preserve: apply hold, remove license, delete the Entra user. Mailbox becomes inactive and is preserved indefinitely with no seat cost. Recoverable later if needed.</p>
+          </div>
+          <div class="card-block">
+            <h4>Keep licensed (avoid when possible)</h4>
+            <p>Valid when the mailbox is &gt;50 GB and can't be trimmed quickly, or when the client explicitly wants business continuity with full mailbox features. Flag the ongoing cost to the client and set a calendar reminder to revisit in 90 days.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Defender P1</p>
+            <h2>When Defender for Office 365 Plan 1 is still needed</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>What Defender P1 covers</h4>
+            <p>Safe Attachments, Safe Links, anti-phishing with impersonation protection, and real-time detection signals for email and Teams. It is per-recipient licensed — policies evaluate against licensed recipients in the tenant. Included in M365 Business Premium, A5 / E5 Security, and sold standalone around $2/user/month.</p>
+          </div>
+          <div class="card-block">
+            <h4>Scenario A — Shared mailbox still receiving external mail</h4>
+            <p>Most common case. You converted the ex-user to a shared mailbox for continuity, external mail still flows in, and the tenant has Defender policies. Whether the shared mailbox needs its own Defender P1 depends on how the policies are scoped: tenant-wide Preset Security Policies require the recipient to be licensed to enforce; custom policies scoped to specific recipients follow the scope. <strong>Keep Defender P1 on the shared mailbox</strong> if anyone is reading from it and the client relies on Safe Attachments / Safe Links coverage.</p>
+          </div>
+          <div class="card-block">
+            <h4>Scenario B — Auto-forwarding to an internal user</h4>
+            <p>If mail forwards to the manager inside the tenant and the manager has Defender P1, coverage is already in place at the destination. The decommissioned mailbox itself usually doesn't need P1 if it's acting purely as a transport hop. But — if the client wants evaluation to happen at the original recipient (for reporting / threat explorer attribution under the ex-user), keep P1 until forwarding stops.</p>
+          </div>
+          <div class="card-block">
+            <h4>Scenario C — Auto-forwarding to an external address</h4>
+            <p>Defender's external-forwarding block usually fires first, so you've likely already exempted this flow. Keep P1 on the forwarding recipient while external forwarding is active — Safe Attachments / Safe Links still evaluate the content before it leaves the tenant, and you want that protection on mail routing to an external inbox.</p>
+          </div>
+          <div class="card-block">
+            <h4>Scenario D — Inactive mailbox with eDiscovery hold</h4>
+            <p>Defender P1 is not strictly required to maintain an inactive mailbox — that's an Exchange Online Plan 2 / hold license question, not a Defender one. However, if the client's compliance program requires Defender audit and threat signals to persist for the user's mailbox history, keep P1 licensed until the mailbox is placed inactive. Once inactive, no new mail arrives, so ongoing P1 coverage is moot.</p>
+          </div>
+          <div class="card-block">
+            <h4>Scenario E — Delegated / transferred to a still-active user</h4>
+            <p>Permissions handed to a live licensed user whose own license already includes Defender P1 (Business Premium, E5 Security). No additional P1 needed on the source mailbox. Document the delegate so the next tech sees the handoff.</p>
+          </div>
+          <div class="card-block">
+            <h4>Cost framing for the client</h4>
+            <p>Defender P1 standalone is roughly $2/user/month. Compared to the cost of one phishing incident reaching a shared mailbox that the manager reads daily, that's nothing. When in doubt and mail is still flowing, keep P1 on and note it in the ticket close.</p>
+          </div>
+          <div class="card-block">
+            <h4>How to verify coverage is active</h4>
+            <p>Microsoft 365 Defender portal &gt; Email &amp; collaboration &gt; Policies &amp; rules &gt; Threat policies. Check that the relevant policy (Preset or custom) has the shared mailbox / forwarding recipient in scope. Run a Safe Links test URL through the mailbox and confirm detonation in Threat Explorer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Associated Data</p>
+            <h2>OneDrive, Teams, SharePoint, and groups</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>OneDrive handoff</h4>
+            <p>SharePoint admin center &gt; More features &gt; User profiles &gt; Manage user profiles &gt; find the user &gt; Manage site collection owners &gt; add the manager as Primary Admin. Or set a secondary owner via PowerShell (<code>Set-SPOUser</code>). OneDrive retention is driven by the account deletion timeline (default 30 days, extendable to 10 years via tenant setting).</p>
+          </div>
+          <div class="card-block">
+            <h4>Teams cleanup</h4>
+            <p>If the user owned any Teams, transfer ownership to another member before the account is disabled or deleted (a Team with no owner goes orphaned). Remove the user from Teams they were a member of last, after chat handoff is complete.</p>
+          </div>
+          <div class="card-block">
+            <h4>SharePoint site ownership</h4>
+            <p>Check whether they were listed as a site owner on any SharePoint site. Reassign via SharePoint admin center &gt; Active sites &gt; select site &gt; Permissions.</p>
+          </div>
+          <div class="card-block">
+            <h4>Distribution lists and security groups</h4>
+            <p>Remove from mail-enabled DLs. Security groups last — sometimes you need the user's group membership context to investigate odd access later. Document what you removed in the ticket.</p>
+          </div>
+          <div class="card-block">
+            <h4>Third-party M365 backup</h4>
+            <p>SkyKick, Dropsuite, Veeam M365, Afi — confirm the final backup ran after the last mailbox change (OOO, forwarding, conversion) and retention is set per client SLA. Deleting the user in M365 often removes them from the backup tool's billing the following cycle, but not always — check.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Timeline</p>
+            <h2>Standard decommission schedule</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Day 0 — Termination effective</h4>
+            <p>Block sign-in, revoke sessions, reset password, wipe MFA, retire devices, set OOO, configure forwarding, apply hold if requested, inventory delegated access.</p>
+          </div>
+          <div class="card-block">
+            <h4>Days 1–30 — Stabilization window</h4>
+            <p>Monitor forwarding for issues, respond to delegate handoff questions, confirm manager can access what they need, confirm Defender policies still apply where expected.</p>
+          </div>
+          <div class="card-block">
+            <h4>Day 30 — License review</h4>
+            <p>If no hold and OOO has been running a month, convert to shared mailbox and remove the user license. If hold is in place, remove license and go inactive. Keep Defender P1 if mail still flows per scenarios A/C above.</p>
+          </div>
+          <div class="card-block">
+            <h4>Day 90 — Forwarding sunset</h4>
+            <p>Turn off forwarding and OOO unless the client explicitly asked for longer. After 90 days, senders have either learned the new contact or the mail wasn't urgent.</p>
+          </div>
+          <div class="card-block">
+            <h4>Day 180+ — Final cleanup</h4>
+            <p>If nobody has accessed the shared mailbox in 60 days and there is no hold, delete per client policy. If held, leave as inactive mailbox indefinitely. Remove from remaining groups and any stale permission assignments.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Ticket Close</p>
+            <h2>Before you close the ticket</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Confirm with HR</h4>
+            <p>Short email summarizing what was done: sign-in blocked, sessions revoked, forwarding to X, hold status, license changes, devices retired. Saves a follow-up ticket two weeks later.</p>
+          </div>
+          <div class="card-block">
+            <h4>Update the client CRM</h4>
+            <p>Record license changes so monthly billing reflects reality. Note Defender P1 kept / removed so the next reviewer doesn't second-guess the decision. Flag the calendar reminder for Day 90 sunset.</p>
+          </div>
+          <div class="card-block">
+            <h4>Document the Defender decision</h4>
+            <p>In the ticket notes: which scenario (A–E above) applied and why P1 was kept or removed. This is the detail that comes up in the next offboarding audit.</p>
+          </div>
+          <div class="card-block">
+            <h4>Escalation checkpoints</h4>
+            <p>If anything in this procedure was skipped (usually: the hold step), flag it to the lead. If the client requested something outside the standard flow (e.g., export to PST for the user personally), confirm authorization in writing before acting.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Quick Reference</p>
+            <h2>Decision matrix</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Legal hold requested</h4>
+            <p>Apply Litigation Hold (needs EOL Plan 2) or Purview eDiscovery hold FIRST &rarr; remove license &rarr; mailbox goes inactive &rarr; indefinite preservation at no seat cost.</p>
+          </div>
+          <div class="card-block">
+            <h4>No hold, mail still flowing</h4>
+            <p>Set OOO + forwarding &rarr; after 30 days convert to shared &rarr; remove user license &rarr; keep Defender P1 on the shared mailbox if mail still arrives and the client uses Defender.</p>
+          </div>
+          <div class="card-block">
+            <h4>No hold, clean break</h4>
+            <p>Block sign-in &rarr; short OOO window &rarr; after 30–60 days delete the user &rarr; mailbox deleted at 30-day soft-delete mark &rarr; no ongoing license cost.</p>
+          </div>
+          <div class="card-block">
+            <h4>Large mailbox (&gt;50 GB)</h4>
+            <p>Cannot convert to shared as-is. Either archive / trim first, or keep licensed until retention ages content below 50 GB, or place on hold and go inactive.</p>
+          </div>
+          <div class="card-block">
+            <h4>Defender P1 quick rule</h4>
+            <p>Mail still flowing to a recipient a human reads? Keep P1. Mailbox inactive or deleted? Drop P1. In doubt? Keep P1 — $2/month beats one phishing incident.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

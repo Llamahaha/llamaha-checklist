@@ -5,7 +5,6 @@ const publicLinks = [
   { id: "app-help", label: "App Help", href: "vendor-guides.html" },
   { id: "licensing-help", label: "Licensing Help", href: "app-licensing.html" },
   { id: "tips-tricks", label: "Tips & Tricks", href: "tips-and-tricks.html" },
-  { id: "articles", label: "Articles", href: "articles/index.html" },
   { id: "contact", label: "Contact", href: "contact.html" }
 ];
 
@@ -14,9 +13,7 @@ const internalLinks = [
   { id: "internal-search", label: "Search", href: "internal/search.html" },
   { id: "reference-guides", label: "Reference Guides", href: "internal/reference-guides.html" },
   { id: "tips-tricks", label: "Tips & Tricks", href: "internal/tips-and-tricks.html" },
-  { id: "snippets", label: "Snippets", href: "internal/snippets.html" },
-  { id: "playbooks", label: "Playbooks", href: "internal/playbooks.html" },
-  { id: "checklists", label: "Checklists", href: "internal/checklist.html" }
+  { id: "tools", label: "Tools", href: "internal/tools.html" }
 ];
 
 function buildHref(rootPath, fileName) {
@@ -39,22 +36,23 @@ function getPublicSection(currentFile, body, pathname) {
   if (currentFile === "app-licensing.html") return "licensing-help";
   if (currentFile === "tips-and-tricks.html") return "tips-tricks";
   if (currentFile === "contact.html") return "contact";
-  if (pathname.includes("/articles/")) return "articles";
   if (body.dataset.pageType || currentFile === "vendor-guides.html" || currentFile === "applications.html" || pathname.includes("/guides/")) return "app-help";
   return "home";
 }
 
-function getInternalSection(currentFile) {
+function getInternalSection(currentFile, pathname) {
   if (currentFile === "index.html") return "internal-home";
   if (currentFile === "search.html") return "internal-search";
   if (currentFile === "reference-guides.html") return "reference-guides";
-  if (currentFile === "decision-trees.html") return "playbooks";
   if (currentFile === "tips-and-tricks.html") return "tips-tricks";
-  if (currentFile === "snippets.html") return "snippets";
-  if (currentFile === "templates.html") return "internal-home";
-  if (currentFile === "playbooks.html") return "playbooks";
-  if (currentFile === "checklist.html") return "checklists";
+  if (currentFile === "tools.html") return "tools";
+  if (currentFile === "snippets.html") return "tools";
+  if (currentFile === "playbooks.html") return "tools";
+  if (currentFile === "decision-trees.html") return "tools";
+  if (currentFile === "checklist.html") return "tools";
+  if (currentFile === "templates.html") return "tools";
   if (currentFile === "licensing.html") return "reference-guides";
+  if (pathname.includes("/internal/reference/")) return "reference-guides";
   return "internal-home";
 }
 
@@ -70,7 +68,7 @@ function initSiteChrome() {
   const area = getArea(body);
   const navLinks = area === "internal" ? internalLinks : publicLinks;
   const activeSection = area === "internal"
-    ? getInternalSection(currentFile)
+    ? getInternalSection(currentFile, window.location.pathname)
     : getPublicSection(currentFile, body, window.location.pathname);
 
   const chrome = document.createElement("header");
