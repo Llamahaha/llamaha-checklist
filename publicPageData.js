@@ -195,8 +195,8 @@ function extraPcItems() {
             url: "https://support.microsoft.com/en-us/help/4026994/windows-10-fix-sound-problems"
           },
           {
-            label: "Manage sound settings",
-            url: "https://support.microsoft.com/en-us/windows/how-to-manage-sound-settings-7ea6ebdd-7c4d-4354-a60b-e54c1fc10bc9"
+            label: "Fix sound or audio problems",
+            url: "https://support.microsoft.com/en-us/windows/fix-sound-or-audio-problems-in-windows-73025246-b61c-40fb-671a-2535c7cd56c8"
           }
         ]
       },
@@ -475,8 +475,8 @@ function createFilesAndHandoffsSection() {
           "Document any preserved data, templates, or exceptions that intentionally carried forward."
         ],
         links: [
-          { label: "PC Help", url: "computer-issues.html", external: false },
-          { label: "App Help", url: "vendor-guides.html", external: false }
+          { label: "Support issue help", url: "support.html#cad-aec-issues", external: false },
+          { label: "Support app guides", url: "support.html#app-guides", external: false }
         ]
       }
     ]
@@ -515,8 +515,8 @@ function createBrowserSupportSection() {
         ],
         links: [
           {
-            label: "Open Tips & Tricks browser cleanup",
-            url: "tips-and-tricks.html#browser-cache-and-cookie-cleanup",
+            label: "Open Support Pages browser cleanup",
+            url: "support.html#browser-cache-and-cookie-cleanup",
             external: false
           },
           { label: "Chrome cookie and site data help", url: "https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en" },
@@ -734,7 +734,7 @@ function createPublicTipsSections() {
             "If the site also fails inside a Cloud PC or Citrix session, mention that because it changes the support path."
           ],
           links: [
-            { label: "Open PC Help browser support", url: "computer-issues.html#browser-support", external: false }
+            { label: "Open Support Pages browser support", url: "support.html#browser-support", external: false }
           ]
         },
         {
@@ -746,8 +746,8 @@ function createPublicTipsSections() {
             "If a site wants to open the file in an app, compare that with downloading the file first and opening it manually."
           ],
           links: [
-            { label: "App Help", url: "vendor-guides.html", external: false },
-            { label: "Licensing Help", url: "app-licensing.html", external: false }
+            { label: "App guides", url: "support.html#app-guides", external: false },
+            { label: "Licensing help", url: "support.html#licensing-access", external: false }
           ]
         }
       ]
@@ -806,6 +806,7 @@ function createDirectoryGroups() {
         .filter(Boolean);
 
       return {
+        id: vendorSlug,
         title: vendor.title,
         description: vendor.summary,
         links: [
@@ -952,5 +953,4 @@ export const publicAppHelpSections = [
     description: "Use the full directory when you want to browse every supported public application by vendor.",
     groups: createDirectoryGroups()
   }
-];
 ];

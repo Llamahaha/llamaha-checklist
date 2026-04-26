@@ -1,19 +1,15 @@
 const publicLinks = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "search", label: "Search", href: "search.html" },
-  { id: "pc-help", label: "PC Help", href: "computer-issues.html" },
-  { id: "app-help", label: "App Help", href: "vendor-guides.html" },
-  { id: "licensing-help", label: "Licensing Help", href: "app-licensing.html" },
-  { id: "tips-tricks", label: "Tips & Tricks", href: "tips-and-tricks.html" },
+  { id: "support", label: "Support Pages", href: "support.html" },
   { id: "contact", label: "Contact", href: "contact.html" }
 ];
 
 const internalLinks = [
   { id: "internal-home", label: "Internal Home", href: "internal/index.html" },
   { id: "internal-search", label: "Search", href: "internal/search.html" },
-  { id: "reference-guides", label: "Reference Guides", href: "internal/reference-guides.html" },
-  { id: "tips-tricks", label: "Tips & Tricks", href: "internal/tips-and-tricks.html" },
-  { id: "tools", label: "Tools", href: "internal/tools.html" }
+  { id: "internal-support", label: "Support Pages", href: "internal/support.html" },
+  { id: "public-home", label: "Public Home", href: "index.html" }
 ];
 
 function buildHref(rootPath, fileName) {
@@ -31,28 +27,30 @@ function getArea(body) {
 function getPublicSection(currentFile, body, pathname) {
   if (currentFile === "index.html") return "home";
   if (currentFile === "search.html") return "search";
-  if (currentFile === "computer-issues.html") return "pc-help";
-  if (currentFile === "applications.html") return "app-help";
-  if (currentFile === "app-licensing.html") return "licensing-help";
-  if (currentFile === "tips-and-tricks.html") return "tips-tricks";
+  if (currentFile === "support.html") return "support";
+  if (currentFile === "computer-issues.html") return "support";
+  if (currentFile === "applications.html") return "support";
+  if (currentFile === "app-licensing.html") return "support";
+  if (currentFile === "tips-and-tricks.html") return "support";
   if (currentFile === "contact.html") return "contact";
-  if (body.dataset.pageType || currentFile === "vendor-guides.html" || currentFile === "applications.html" || pathname.includes("/guides/")) return "app-help";
+  if (body.dataset.pageType || currentFile === "vendor-guides.html" || pathname.includes("/guides/")) return "support";
   return "home";
 }
 
 function getInternalSection(currentFile, pathname) {
   if (currentFile === "index.html") return "internal-home";
   if (currentFile === "search.html") return "internal-search";
-  if (currentFile === "reference-guides.html") return "reference-guides";
-  if (currentFile === "tips-and-tricks.html") return "tips-tricks";
-  if (currentFile === "tools.html") return "tools";
-  if (currentFile === "snippets.html") return "tools";
-  if (currentFile === "playbooks.html") return "tools";
-  if (currentFile === "decision-trees.html") return "tools";
-  if (currentFile === "checklist.html") return "tools";
-  if (currentFile === "templates.html") return "tools";
-  if (currentFile === "licensing.html") return "reference-guides";
-  if (pathname.includes("/internal/reference/")) return "reference-guides";
+  if (currentFile === "support.html") return "internal-support";
+  if (currentFile === "reference-guides.html") return "internal-support";
+  if (currentFile === "tips-and-tricks.html") return "internal-support";
+  if (currentFile === "tools.html") return "internal-support";
+  if (currentFile === "snippets.html") return "internal-support";
+  if (currentFile === "playbooks.html") return "internal-support";
+  if (currentFile === "decision-trees.html") return "internal-support";
+  if (currentFile === "checklist.html") return "internal-support";
+  if (currentFile === "templates.html") return "internal-support";
+  if (currentFile === "licensing.html") return "internal-support";
+  if (pathname.includes("/internal/reference/")) return "internal-support";
   return "internal-home";
 }
 
@@ -83,19 +81,19 @@ function initSiteChrome() {
 
   const brandIcon = document.createElement("img");
   brandIcon.className = "site-brand-icon";
-  brandIcon.src = buildHref(rootPath, "assets/llamaha-icon.jpg");
+  brandIcon.src = buildHref(rootPath, "assets/llamaha-icon-purple-navy.png");
   brandIcon.alt = "Llamaha icon";
 
   const brandCopy = document.createElement("div");
   brandCopy.className = "site-brand-copy";
 
   const brandTitle = document.createElement("strong");
-  brandTitle.textContent = area === "internal" ? "Llamaha Internal Library" : "Llamaha Help Center";
+  brandTitle.textContent = area === "internal" ? "Llamaha Plan Room — Internal" : "Llamaha Plan Room";
 
   const brandMeta = document.createElement("span");
   brandMeta.textContent = area === "internal"
-    ? "Tech references, snippets, playbooks, and checklists for day-to-day support"
-    : "Tech made easier";
+    ? "Technician references, playbooks, and procedures for AEC/CAD support"
+    : "AEC / CAD Support";
 
   if (area === "internal") {
     const brandTag = document.createElement("span");
@@ -112,22 +110,6 @@ function initSiteChrome() {
   nav.id = `${area}-site-links`;
   nav.setAttribute("aria-label", area === "internal" ? "Internal sections" : "Site sections");
 
-  const menuButton = document.createElement("button");
-  menuButton.type = "button";
-  menuButton.className = "site-menu-toggle";
-  menuButton.setAttribute("aria-controls", nav.id);
-  menuButton.setAttribute("aria-expanded", "false");
-  menuButton.textContent = "Menu";
-
-  function setMenuOpen(open) {
-    chrome.classList.toggle("is-menu-open", open);
-    menuButton.setAttribute("aria-expanded", String(open));
-  }
-
-  menuButton.addEventListener("click", () => {
-    setMenuOpen(!chrome.classList.contains("is-menu-open"));
-  });
-
   navLinks.forEach(item => {
     const link = document.createElement("a");
     link.className = "site-link";
@@ -136,20 +118,15 @@ function initSiteChrome() {
     }
     link.href = buildHref(rootPath, item.href);
     link.textContent = item.label;
-    link.addEventListener("click", () => {
-      setMenuOpen(false);
-    });
     nav.appendChild(link);
   });
 
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      setMenuOpen(false);
-    }
-  });
-
-  chrome.append(brand, menuButton, nav);
+  chrome.append(brand, nav);
   shell.prepend(chrome);
 }
 
-initSiteChrome();
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initSiteChrome, { once: true });
+} else {
+  initSiteChrome();
+}

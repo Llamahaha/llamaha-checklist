@@ -122,7 +122,12 @@ export function buildSearchIndex() {
     }
   ];
   const entries = [
-    entry("Home", "Help center landing page with search, PC Help, App Help, Licensing Help, Tips & Tricks, Articles, and contact options.", "index.html", "helpPage", "Help Center", "home help center app help pc help licensing help tips tricks articles"),
+    entry("Home", "Help center landing page with search, Support Pages, Articles, and contact options.", "index.html", "helpPage", "Help Center", "home help center support pages app help pc help licensing help tips tricks articles"),
+    entry("Support Pages", "One CAD / AEC support page for issue help, app guides, licensing help, and tips and tricks across design-team software, workstations, remote access, plotting, syncing, and files.", "support.html", "helpPage", "Support Pages", "support pages cad aec app guides pc help licensing help tips tricks revit autocad civil 3d microstation bluebeam arcgis projectwise acc bim 360"),
+    entry("Issue Help", "Support paths for Windows, Cloud PC, Citrix, VPN, printing, scanning, browser, project-file, device, MFA, and setup issues.", "support.html#cad-aec-issues", "helpPage", "Support Pages", "issue help windows cloud pc citrix vpn printing scanning browser project files mfa setup"),
+    entry("App Guides", "Browse application guides by software family and vendor from Support Pages.", "support.html#app-guides", "helpPage", "Support Pages", "app guides autodesk bentley bluebeam esri microsoft adobe trimble citrix projectwise"),
+    entry("Licensing Help", "Support page section for app access, activation, assigned seats, vendor accounts, roles, editions, profiles, and subscriptions.", "support.html#licensing-access", "helpPage", "Support Pages", "licensing access activation seats subscriptions named user vendor account role edition profile"),
+    entry("Tips & Tricks", "Support page section for everyday Windows, browser, file, meeting, phone, cleanup, and safer troubleshooting habits.", "support.html#tips-tricks", "helpPage", "Support Pages", "tips tricks windows browser files meeting phone cleanup troubleshooting"),
     entry(
       "Articles",
       "Topical articles for everyday work-tech situations: new phone & MFA, moving to a new computer, recognizing phishing, work-from-home essentials, password manager basics, IT glossary, and more.",
@@ -131,18 +136,18 @@ export function buildSearchIndex() {
       "Articles Page",
       "articles topics how to phishing mfa new phone byod password manager glossary work from home"
     ),
-    entry("App Help", "Browse popular applications, Microsoft 365 apps, remote-access tools, engineering apps, and the full application directory when you already know the product name.", "vendor-guides.html", "helpPage", "App Help Page", "app help application directory outlook teams onedrive sharepoint citrix forticlient autocad revit civil 3d arcgis projectwise oracle p6 indesign google earth hec hcs hss"),
-    entry("Popular Applications", "Open the most-used application guides directly from the App Help page.", "vendor-guides.html#popular-applications", "helpPage", "App Help Page", "popular applications outlook teams onedrive sharepoint citrix forticlient adobe acrobat bluebeam autocad revit civil 3d arcgis projectwise oracle p6"),
-    entry("Collaboration, File Access, and Remote Work", "Open Microsoft 365, Citrix Workspace, VPN, and file-access guides when you need collaboration or remote-work help.", "vendor-guides.html#collaboration-file-access-and-remote-work", "helpPage", "App Help Page", "outlook teams onedrive sharepoint authenticator citrix forticlient egnyte remote work"),
-    entry("Design, Engineering, Mapping, and Projects", "Browse Autodesk, Bentley, ArcGIS, Primavera, Google Earth Pro, HEC, MCTRANS, and related project apps.", "vendor-guides.html#design-engineering-mapping-and-projects", "helpPage", "App Help Page", "autocad revit civil 3d infoworks icm microstation projectwise arcgis pro google earth hec hms hec ras hcs hss primavera p6"),
-    entry("Full Application Directory", "Browse every supported public application by vendor from the App Help page.", "vendor-guides.html#full-application-directory", "helpPage", "App Help Page", "application directory vendors products guides"),
-    entry("Licensing Help", "Customer-facing reference for how licensed products usually work across Microsoft, Autodesk, Bentley, Adobe, Bluebeam, ArcGIS, Oracle Primavera P6, and other licensed products.", "app-licensing.html", "helpPage", "Help Page", "licensing reference subscription plan edition access account profile oracle primavera p6 autodesk bluebeam adobe arcgis"),
-    entry("Tips & Tricks", "Windows keyboard shortcuts, browser cache and cookie cleanup, safe temporary-file cleanup, and disk-space basics for everyday support.", "tips-and-tricks.html", "helpPage", "Help Page", "tips tricks windows shortcuts keyboard cache cookies chrome edge firefox safari temp local app data storage sense disk space cleanup"),
+    entry("App Help", "Browse popular applications, Microsoft 365 apps, remote-access tools, engineering apps, and the full application directory when you already know the product name.", "support.html#app-guides", "helpPage", "Support Pages", "app help application directory outlook teams onedrive sharepoint citrix forticlient autocad revit civil 3d arcgis projectwise oracle p6 indesign google earth hec hcs hss"),
+    entry("Popular Applications", "Open the most-used application guides directly from the Support Pages app guide section.", "support.html#popular-applications", "helpPage", "Support Pages", "popular applications outlook teams onedrive sharepoint citrix forticlient adobe acrobat bluebeam autocad revit civil 3d arcgis projectwise oracle p6"),
+    entry("Collaboration, File Access, and Remote Work", "Open Microsoft 365, Citrix Workspace, VPN, and file-access guides when you need collaboration or remote-work help.", "support.html#collaboration-file-access-and-remote-work", "helpPage", "Support Pages", "outlook teams onedrive sharepoint authenticator citrix forticlient egnyte remote work"),
+    entry("Design, Engineering, Mapping, and Projects", "Browse Autodesk, Bentley, ArcGIS, Primavera, Google Earth Pro, HEC, MCTRANS, and related project apps.", "support.html#design-engineering-mapping-and-projects", "helpPage", "Support Pages", "autocad revit civil 3d infoworks icm microstation projectwise arcgis pro google earth hec hms hec ras hcs hss primavera p6"),
+    entry("Full Application Directory", "Browse every supported public application by vendor from Support Pages.", "support.html#full-application-directory", "helpPage", "Support Pages", "application directory vendors products guides"),
+    entry("Licensing Help", "Customer-facing reference for how licensed products usually work across Microsoft, Autodesk, Bentley, Adobe, Bluebeam, ArcGIS, Oracle Primavera P6, and other licensed products.", "support.html#licensing-access", "helpPage", "Support Pages", "licensing reference subscription plan edition access account profile oracle primavera p6 autodesk bluebeam adobe arcgis"),
+    entry("Tips & Tricks", "Windows keyboard shortcuts, browser cache and cookie cleanup, safe temporary-file cleanup, and disk-space basics for everyday support.", "support.html#tips-tricks", "helpPage", "Support Pages", "tips tricks windows shortcuts keyboard cache cookies chrome edge firefox safari temp local app data storage sense disk space cleanup"),
     entry("Contact", "Contact options for help-center questions, missing content, guide updates, and the details to send before asking for help.", "contact.html", "helpPage", "Contact Page", "contact help support email before contacting support account app version screenshot browser another device exact file project site path"),
     entry("Application Issues and Fixes", "Public help page covering common application problems and general fixes.", "application-issues.html", "helpPage", "Help Page", "troubleshooting faq errors"),
     entry("Microsoft App Issues", "Public help page for common Microsoft 365 app problems.", "microsoft-issues.html", "helpPage", "Help Page", "outlook teams onedrive sharepoint mfa"),
-    entry("PC Help", "Public help page for Windows basics, Windows 365 Cloud PCs, Citrix Workspace, browser issues, FortiClient VPN, printing, scanning, audio, updates, sign-in, and network problems.", "computer-issues.html", "helpPage", "Help Page", "pc help windows cloud pc windows 365 citrix workspace browser chrome edge firefox safari printer scanner vpn forticlient network updates audio sign in"),
-    entry("Browser Support", "Open PC Help browser articles when work sites, downloads, or sign-in pages behave differently in Chrome, Edge, Firefox, or Safari.", "computer-issues.html#browser-support", "helpPage", "Help Page", "browser support chrome edge firefox safari sign in downloads cookies cache")
+    entry("PC Help", "Support paths for Windows basics, Windows 365 Cloud PCs, Citrix Workspace, browser issues, FortiClient VPN, printing, scanning, audio, updates, sign-in, and network problems.", "support.html#cad-aec-issues", "helpPage", "Support Pages", "pc help windows cloud pc windows 365 citrix workspace browser chrome edge firefox safari printer scanner vpn forticlient network updates audio sign in"),
+    entry("Browser Support", "Open support articles when work sites, downloads, or sign-in pages behave differently in Chrome, Edge, Firefox, or Safari.", "support.html#browser-support", "helpPage", "Support Pages", "browser support chrome edge firefox safari sign in downloads cookies cache")
   ];
 
   publicPcHelpSections.forEach(section => {
@@ -151,7 +156,7 @@ export function buildSearchIndex() {
         entry(
           item.title,
           articleText(item),
-          `computer-issues.html#${slugifyText(item.title)}`,
+          `support.html#${slugifyText(item.title)}`,
           "pcArticle",
           "PC Help Article",
           `${section.title} ${section.description} ${(item.links ?? []).map(link => link.label).join(" ")}`
@@ -166,7 +171,7 @@ export function buildSearchIndex() {
         entry(
           item.title,
           articleText(item),
-          `tips-and-tricks.html#${slugifyText(item.title)}`,
+          `support.html#${slugifyText(item.title)}`,
           "tipArticle",
           "Tips & Tricks Article",
           `${section.title} ${section.description} ${(item.links ?? []).map(link => link.label).join(" ")}`

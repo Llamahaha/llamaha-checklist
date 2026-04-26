@@ -232,8 +232,8 @@ export const computerIssueSections = [
             url: "https://learn.microsoft.com/en-us/windows-365/end-user-access-cloud-pc"
           },
           {
-            label: "Open App Help",
-            url: "vendor-guides.html",
+            label: "Open Support Pages app guides",
+            url: "support.html#app-guides",
             external: false
           }
         ]
@@ -694,8 +694,8 @@ export const tipsAndTricksSections = [
         ],
         links: [
           {
-            label: "Open App Help",
-            url: "vendor-guides.html",
+            label: "Open Support Pages app guides",
+            url: "support.html#app-guides",
             external: false
           }
         ]
@@ -726,8 +726,8 @@ export const tipsAndTricksSections = [
         ],
         links: [
           {
-            label: "Licensing Help",
-            url: "app-licensing.html",
+            label: "Licensing help",
+            url: "support.html#licensing-access",
             external: false
           }
         ]
@@ -748,8 +748,8 @@ export const tipsAndTricksSections = [
         ],
         links: [
           {
-            label: "Open App Help",
-            url: "vendor-guides.html",
+            label: "Open Support Pages app guides",
+            url: "support.html#app-guides",
             external: false
           }
         ]
@@ -785,13 +785,13 @@ export const tipsAndTricksSections = [
         ],
         links: [
           {
-            label: "Open App Help",
-            url: "vendor-guides.html#full-application-directory",
+            label: "Open Support Pages app directory",
+            url: "support.html#full-application-directory",
             external: false
           },
           {
             label: "Open licensing help",
-            url: "app-licensing.html",
+            url: "support.html#licensing-access",
             external: false
           }
         ]
@@ -806,13 +806,13 @@ export const tipsAndTricksSections = [
         ],
         links: [
           {
-            label: "Open PC Help",
-            url: "computer-issues.html",
+            label: "Open Support Pages issue help",
+            url: "support.html#cad-aec-issues",
             external: false
           },
           {
-            label: "Open App Help",
-            url: "vendor-guides.html",
+            label: "Open Support Pages app guides",
+            url: "support.html#app-guides",
             external: false
           }
         ]

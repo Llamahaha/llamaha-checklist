@@ -459,7 +459,7 @@ export const publicGuideContentExtra = {
       ],
       relatedLinks: [
         { label: "Microsoft Project help", url: "https://support.microsoft.com/en-us/project" },
-        { label: "Project plans comparison", url: "https://www.microsoft.com/en-us/microsoft-365/project/compare-microsoft-project-management-software" }
+        { label: "Project plans and pricing", url: "https://www.microsoft.com/en-us/microsoft-365/project/project-management-software" }
       ]
     }
   },
@@ -780,7 +780,7 @@ export const publicGuideContentExtra = {
         "The Vault client version (Help > About) and the host app and year if relevant."
       ],
       relatedLinks: [
-        { label: "Autodesk Vault help", url: "https://help.autodesk.com/view/VAULT/ENU/" }
+        { label: "Autodesk Vault help", url: "https://help.autodesk.com/view/VAULT/2026/ENU/" }
       ]
     }
   },
@@ -1062,7 +1062,7 @@ export const publicGuideContentExtra = {
         "The host app and version if you are using a SketchUp or Tekla integration."
       ],
       relatedLinks: [
-        { label: "Trimble Connect help", url: "https://help.connect.trimble.com/" }
+        { label: "Trimble Connect help", url: "https://help.trimble.com/en/trimble-connect/trimble-connect" }
       ]
     }
   },
@@ -1357,7 +1357,7 @@ export const publicGuideContentExtra = {
       ],
       relatedLinks: [
         { label: "Deltek Customer Care", url: "https://deltek.custhelp.com/" },
-        { label: "Deltek Vantagepoint overview", url: "https://www.deltek.com/en/products/project-erp/vantagepoint" }
+        { label: "Deltek Vantagepoint overview", url: "https://www.deltek.com/en/erp/vantagepoint" }
       ]
     }
   },
@@ -1594,7 +1594,7 @@ export const publicGuideContentExtra = {
         "For external share issues, the share link URL and its permission setting."
       ],
       relatedLinks: [
-        { label: "Box Drive help", url: "https://support.box.com/hc/en-us/categories/360002812714-Box-Drive" }
+        { label: "Box Drive help", url: "https://support.box.com/hc/en-us/sections/21356707082387-Box-Drive" }
       ]
     }
   },
@@ -1772,7 +1772,7 @@ export const publicGuideContentExtra = {
         "A screenshot of the Okta prompt or error, if you can take one."
       ],
       relatedLinks: [
-        { label: "Okta Verify documentation", url: "https://help.okta.com/en-us/Content/Topics/end-user/ov-overview.htm" },
+        { label: "Okta Verify documentation", url: "https://help.okta.com/en-us/Content/Topics/Mobile/okta-verify-overview.htm" },
         { label: "Okta Help Center", url: "https://support.okta.com/" }
       ]
     }

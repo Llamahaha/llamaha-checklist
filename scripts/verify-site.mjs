@@ -1,10 +1,13 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { extname, resolve } from "node:path";
+import { extname, relative, resolve } from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 import { buildInternalSearchIndex } from "../internalSearchIndex.js";
+import { publicAppHelpSections } from "../publicPageData.js";
+import { slugifyText } from "../resourceCommon.js";
 import { buildSearchIndex } from "../searchIndex.js";
+import { getSitemapEntries, SITEMAP_BASE_URL } from "./generate-sitemap.mjs";
 import { buildAppGuideUrl, getVendorApplications } from "../guides/applicationCatalog.js";
 import { vendorGuides, vendorOrder } from "../guides/guideData.js";
 import { getPublicGuideContent } from "../guides/publicGuideContent.js";
@@ -16,6 +19,7 @@ const errors = [];
 const publicRoutes = [
   "index.html",
   "search.html",
+  "support.html",
   "computer-issues.html",
   "vendor-guides.html",
   "applications.html",
@@ -27,6 +31,7 @@ const publicRoutes = [
 const internalRoutes = [
   "internal/index.html",
   "internal/search.html",
+  "internal/support.html",
   "internal/reference-guides.html",
   "internal/tips-and-tricks.html",
   "internal/tools.html",
@@ -98,6 +103,7 @@ const populatedPublicGuides = [
 ];
 
 const dynamicAnchorFiles = new Set([
+  resolve(rootDir, "support.html"),
   resolve(rootDir, "computer-issues.html"),
   resolve(rootDir, "vendor-guides.html"),
   resolve(rootDir, "tips-and-tricks.html"),
@@ -139,6 +145,10 @@ function read(relativePath) {
 
 function addError(message) {
   errors.push(message);
+}
+
+function displayPath(filePath) {
+  return relative(rootDir, filePath).replaceAll("\\", "/");
 }
 
 function parseIds(html) {
@@ -189,7 +199,7 @@ function verifyHtmlLinks() {
       const targetPath = targetPart.split("?")[0];
 
       if (!targetPath) {
-        if (anchor && !ids.has(anchor)) {
+        if (anchor && !ids.has(anchor) && !dynamicAnchorFiles.has(htmlFile)) {
           addError(`Missing anchor "#${anchor}" in ${htmlFile}`);
         }
         continue;
@@ -215,6 +225,51 @@ function verifyHtmlLinks() {
           addError(`Missing anchor "${ref}" referenced by ${htmlFile}`);
         }
       }
+    }
+  }
+}
+
+function getAppHelpAnchorIds() {
+  const ids = new Set();
+
+  for (const section of publicAppHelpSections) {
+    const sectionId = slugifyText(section.title);
+    ids.add(sectionId);
+
+    if (sectionId === "full-application-directory") {
+      for (const group of section.groups) {
+        ids.add(group.id ?? slugifyText(group.title));
+      }
+    }
+  }
+
+  return ids;
+}
+
+function verifyDynamicAppHelpAnchors() {
+  const validAnchors = getAppHelpAnchorIds();
+  const htmlFiles = walk(rootDir).filter(file => extname(file).toLowerCase() === ".html");
+  const appHelpRefs = [];
+
+  for (const htmlFile of htmlFiles) {
+    const html = readFileSync(htmlFile, "utf8");
+    appHelpRefs.push(
+      ...parseAttribute(html, "href")
+        .filter(ref => ref.startsWith("vendor-guides.html#"))
+        .map(ref => ({ ref, source: htmlFile }))
+    );
+  }
+
+  for (const entry of buildSearchIndex()) {
+    if (entry.url.startsWith("vendor-guides.html#")) {
+      appHelpRefs.push({ ref: entry.url, source: "search index" });
+    }
+  }
+
+  for (const { ref, source } of appHelpRefs) {
+    const anchor = decodeURIComponent(ref.split("#")[1] ?? "");
+    if (!validAnchors.has(anchor)) {
+      addError(`Missing dynamic App Help anchor "${ref}" referenced by ${source}`);
     }
   }
 }
@@ -315,6 +370,79 @@ function verifyInternalSearchIndex() {
   }
 }
 
+function parseSitemapUrls(xml) {
+  const urls = [];
+  const pattern = /<loc>([^<]+)<\/loc>/gi;
+  let match;
+
+  while ((match = pattern.exec(xml))) {
+    urls.push(match[1]);
+  }
+
+  return urls;
+}
+
+function verifySitemap() {
+  if (!fileExists("sitemap.xml")) {
+    addError("Missing sitemap.xml");
+    return;
+  }
+
+  if (!fileExists("robots.txt")) {
+    addError("Missing robots.txt");
+  } else {
+    const robots = read("robots.txt");
+    if (!robots.includes(`Sitemap: ${SITEMAP_BASE_URL}sitemap.xml`)) {
+      addError("robots.txt does not reference sitemap.xml");
+    }
+  }
+
+  const actualUrls = parseSitemapUrls(read("sitemap.xml"));
+  const expectedUrls = getSitemapEntries().map(entry => entry.url);
+  const actualSet = new Set(actualUrls);
+  const expectedSet = new Set(expectedUrls);
+
+  for (const url of actualUrls) {
+    if (!url.startsWith(SITEMAP_BASE_URL)) {
+      addError(`Sitemap URL is outside ${SITEMAP_BASE_URL}: ${url}`);
+    }
+
+    if (url.includes("/internal/")) {
+      addError(`Sitemap URL exposes internal content: ${url}`);
+    }
+
+    if (!expectedSet.has(url)) {
+      addError(`Sitemap contains unexpected URL: ${url}`);
+    }
+  }
+
+  for (const url of expectedUrls) {
+    if (!actualSet.has(url)) {
+      addError(`Sitemap is missing public URL: ${url}`);
+    }
+  }
+}
+
+function verifyBrandingAssets() {
+  const htmlFiles = walk(rootDir).filter(file => extname(file).toLowerCase() === ".html");
+  const sharedFaviconPattern =
+    /<link\b(?=[^>]*\brel=(["'])icon\1)(?=[^>]*\bhref=(["'])[^"']*llamaha-icon-purple-navy\.png\2)[^>]*>/i;
+  const retiredIconPattern = /llamaha-icon(?:\.jpg|-blue-[^"']*\.png)/i;
+
+  for (const htmlFile of htmlFiles) {
+    const html = readFileSync(htmlFile, "utf8");
+    const relativePath = displayPath(htmlFile);
+
+    if (retiredIconPattern.test(html)) {
+      addError(`HTML page "${relativePath}" references a retired Llamaha icon asset`);
+    }
+
+    if (!sharedFaviconPattern.test(html)) {
+      addError(`HTML page "${relativePath}" is missing the shared purple favicon`);
+    }
+  }
+}
+
 // Customer-facing pages must not link directly to /internal content. The redirect
 // pages below intentionally bounce to internal counterparts; everything else is a leak.
 const internalRedirectExceptions = new Set([
@@ -384,6 +512,7 @@ function verifyPublicGuideContent() {
 }
 
 verifyHtmlLinks();
+verifyDynamicAppHelpAnchors();
 
 if (!linksOnly) {
   verifyPublicRoutes();
@@ -391,6 +520,8 @@ if (!linksOnly) {
   verifyGuideFiles();
   verifySearchIndex();
   verifyInternalSearchIndex();
+  verifySitemap();
+  verifyBrandingAssets();
   verifyNoInternalLeaksInPublicPages();
   verifyPublicGuideContent();
 }

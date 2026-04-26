@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Pages | Llamaha Plan Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Support Pages</strong>
+    </nav>
+
+    <main class="hub-shell resource-page support-page">
+
+      <!-- HERO -->
+      <section class="hero-card support-hero">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">CAD / AEC Support</p>
+            <h1>Find help by issue, app, license, or workflow</h1>
+            <p class="builder-copy">One support page for Revit, AutoCAD, Civil 3D, MicroStation, Bluebeam, ArcGIS, ProjectWise, ACC / BIM 360, Microsoft 365, workstations, plotting, syncing, and everyday design-team tips.</p>
+            <p class="review-label">Reviewed April 2026</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEARCH + SCOPE FILTER PILLS -->
+      <section class="results-card support-finder" aria-labelledby="supportFinderTitle">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Support Finder</p>
+            <h2 id="supportFinderTitle">Search this support page</h2>
+          </div>
+          <a class="section-link" href="search.html">Open full search</a>
+        </div>
+
+        <div class="support-search-row">
+          <input type="search" id="supportSearch" class="search-input page-search-input" placeholder="Search: Revit license, ProjectWise sync, plotter offline, new phone MFA..." aria-label="Search Support Pages">
+          <span id="supportSearchCount" class="support-search-count">Showing all support topics</span>
+        </div>
+
+        <!-- Scope filter pills: filter visible sections by category -->
+        <div class="support-scope-pills" role="tablist" aria-label="Filter support categories" id="supportScopePills">
+          <button type="button" class="support-scope-pill is-active" data-scope="all" role="tab" aria-selected="true">
+            All <span class="scope-count" data-count-for="all">0</span>
+          </button>
+          <button type="button" class="support-scope-pill" data-scope="issues" role="tab" aria-selected="false" aria-controls="cad-aec-issues">
+            Issues <span class="scope-count" data-count-for="issues">0</span>
+          </button>
+          <button type="button" class="support-scope-pill" data-scope="apps" role="tab" aria-selected="false" aria-controls="app-guides">
+            Apps <span class="scope-count" data-count-for="apps">0</span>
+          </button>
+          <button type="button" class="support-scope-pill" data-scope="licensing" role="tab" aria-selected="false" aria-controls="licensing-access">
+            Licensing <span class="scope-count" data-count-for="licensing">0</span>
+          </button>
+          <button type="button" class="support-scope-pill" data-scope="tips" role="tab" aria-selected="false" aria-controls="tips-tricks">
+            Tips <span class="scope-count" data-count-for="tips">0</span>
+          </button>
+        </div>
+
+        <!-- Common search shortcuts — populated by support.js based on the active scope -->
+        <div class="support-chip-row" id="supportChipRow" aria-label="Common support searches"></div>
+      </section>
+
+      <!-- MOST ASKED ABOUT — quick wins above the browse layout -->
+      <section class="support-popular" aria-labelledby="popularTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Most asked about</p>
+            <h2 id="popularTitle">Quick fixes for the things we hear weekly</h2>
+            <p class="section-sub">Each one drops you straight into the matching support topic.</p>
+          </div>
+        </div>
+        <div class="support-popular-grid">
+          <a class="popular-card" data-scope="licensing" href="#license-or-sign-in-error">
+            <span class="popular-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            <span class="popular-label">License or sign-in error</span>
+            <span class="popular-meta">Autodesk · Bentley · Bluebeam · Esri · Adobe</span>
+          </a>
+          <a class="popular-card" data-scope="issues" href="#phone-replacement-for-work-apps-and-mfa">
+            <span class="popular-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            </span>
+            <span class="popular-label">New phone or device</span>
+            <span class="popular-meta">Authenticator, Outlook Mobile, MFA reset</span>
+          </a>
+          <a class="popular-card" data-scope="issues" href="#restoring-deleted-or-overwritten-files">
+            <span class="popular-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+            </span>
+            <span class="popular-label">Restore a deleted file</span>
+            <span class="popular-meta">OneDrive · SharePoint · ProjectWise</span>
+          </a>
+          <a class="popular-card" data-scope="issues" href="#unable-to-scan-from-a-scanner-or-multifunction-printer">
+            <span class="popular-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            </span>
+            <span class="popular-label">Scanner or printer offline</span>
+            <span class="popular-meta">Plotter, MFP, Windows Scan, drivers</span>
+          </a>
+          <a class="popular-card" data-scope="issues" href="#shared-mailbox-access-in-outlook">
+            <span class="popular-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            </span>
+            <span class="popular-label">Shared mailbox in Outlook</span>
+            <span class="popular-meta">Web, classic, new Outlook</span>
+          </a>
+          <a class="popular-card" data-scope="apps" href="#app-guides">
+            <span class="popular-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </span>
+            <span class="popular-label">Browse all app guides</span>
+            <span class="popular-meta">By vendor and product family</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- VENDOR STRIP -->
+      <section class="support-vendor-strip" aria-label="Browse by vendor">
+        <span class="vendor-strip-label">Jump to a vendor</span>
+        <div class="vendor-strip-list">
+          <a href="guides/autodesk.html">Autodesk</a>
+          <a href="guides/bentley.html">Bentley</a>
+          <a href="guides/bluebeam.html">Bluebeam</a>
+          <a href="guides/esri.html">Esri</a>
+          <a href="guides/trimble.html">Trimble</a>
+          <a href="guides/adobe.html">Adobe</a>
+          <a href="guides/microsoft.html">Microsoft</a>
+          <a href="guides/citrix.html">Citrix &amp; Cloud PC</a>
+          <a href="guides/deltek.html">Deltek</a>
+          <a href="guides/dropbox.html">Dropbox</a>
+          <a href="guides/box.html">Box</a>
+        </div>
+      </section>
+
+      <!-- BROWSE LAYOUT: hierarchical sticky TOC + content -->
+      <div class="help-layout support-hub-layout">
+        <aside class="help-toc support-toc" aria-label="Support page sections">
+          <div class="help-toc-header">
+            <p class="section-kicker">On This Page</p>
+            <h2>Browse by section</h2>
+            <p>Use the search above for an exact symptom, or browse by category.</p>
+          </div>
+          <nav class="help-toc-nav support-toc-nav" id="supportToc" aria-label="Support page sections">
+            <!-- Hierarchical TOC populated by support.js -->
+          </nav>
+          <div class="support-toc-footer">
+            <a class="cta-btn-primary support-toc-cta" href="contact.html">Contact support</a>
+          </div>
+        </aside>
+
+        <div class="help-content section-stack">
+
+          <section id="cad-aec-issues" class="results-card hub-section support-page-section" data-scope="issues" role="tabpanel" aria-label="Issue Help">
+            <div class="results-header">
+              <div>
+                <p class="section-kicker">Issue Help</p>
+                <h2>CAD / AEC issue paths</h2>
+              </div>
+            </div>
+            <p class="hub-section-copy">Start here when the symptom is about the computer, the connection path, a project file, a printer, a scanner, MFA, or a workflow that touches more than one app.</p>
+            <div id="issueSupportSections" class="section-stack"></div>
+          </section>
+
+          <section id="app-guides" class="results-card hub-section support-page-section" data-scope="apps" role="tabpanel" aria-label="App Guides">
+            <div class="results-header">
+              <div>
+                <p class="section-kicker">App Guides</p>
+                <h2>Browse by software family</h2>
+              </div>
+            </div>
+            <p class="hub-section-copy">Use these when you already know the product name or vendor. Each app guide includes access notes, setup, common issues, and what to send support.</p>
+            <div id="appSupportSections" class="section-stack"></div>
+          </section>
+
+          <section id="licensing-access" class="results-card hub-section support-page-section" data-scope="licensing" role="tabpanel" aria-label="Licensing Help">
+            <div class="results-header">
+              <div>
+                <p class="section-kicker">Licensing Help</p>
+                <h2>Access, activation, and assigned seats</h2>
+              </div>
+            </div>
+            <p class="hub-section-copy">Use this when an app says unlicensed, trial, activation failed, subscription expired, wrong profile, no seat assigned, or you are missing a module or extension.</p>
+            <div class="support-license-grid">
+              <article class="hub-card support-search-card" id="license-or-sign-in-error" data-support-search="activation unlicensed sign-in identity wrong account profile work account personal account locked out failed">
+                <p class="section-kicker">Step 1</p>
+                <h3>Confirm the exact account</h3>
+                <p>Most CAD, PDF, GIS, and Microsoft tools depend on the work account your company assigned, not a personal or alternate profile.</p>
+                <a class="hub-link" href="app-licensing.html#howLicensingWorksSection">How licensing works</a>
+              </article>
+              <article class="hub-card support-search-card" data-support-search="subscription expired seat assigned named user role module extension toolset suite plan tier edition trial activation">
+                <p class="section-kicker">Step 2</p>
+                <h3>Confirm product, version, and role</h3>
+                <p>Autodesk year, Bentley datasource, ArcGIS role, Adobe profile, Bluebeam plan, or Microsoft 365 plan can all change what appears after sign-in.</p>
+                <a class="hub-link" href="app-licensing.html#whatAccessDependsOnSection">What access depends on</a>
+              </article>
+              <article class="hub-card support-search-card" data-support-search="vendor licensing autodesk bentley bluebeam esri adobe microsoft oracle primavera trimble ptc foxit egnyte subscription seat activation">
+                <p class="section-kicker">Need detail?</p>
+                <h3>Open vendor licensing notes</h3>
+                <p>Vendor-specific notes cover Autodesk, Bentley, Bluebeam, Esri, Adobe, Microsoft 365, Oracle Primavera P6, Trimble, PTC, Foxit, Egnyte, and more.</p>
+                <a class="hub-link" href="app-licensing.html#vendorCoverageSection">Vendor licensing help</a>
+              </article>
+            </div>
+            <div id="licensingVendorGrid" class="support-license-vendors"></div>
+          </section>
+
+          <section id="tips-tricks" class="results-card hub-section support-page-section" data-scope="tips" role="tabpanel" aria-label="Tips and Tricks">
+            <div class="results-header">
+              <div>
+                <p class="section-kicker">Tips &amp; Tricks</p>
+                <h2>Fast habits that prevent repeat issues</h2>
+              </div>
+            </div>
+            <p class="hub-section-copy">Use these when the issue is not tied to one vendor yet, or when a quick Windows, browser, file, phone, or meeting habit may solve it before a ticket.</p>
+            <div id="tipsSupportSections" class="section-stack"></div>
+          </section>
+
+          <section id="support-contact" class="cta-panel" data-scope="contact">
+            <div>
+              <h3>Still need help?</h3>
+              <p>Send the app name, project or file path, error wording, screenshot, and what changed before the issue started.</p>
+            </div>
+            <div class="cta-actions">
+              <a class="cta-btn-primary" href="contact.html">Contact support</a>
+              <a class="cta-btn-secondary" href="search.html">Search again</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="support.js"></script>
+</body>
+</html>
+   

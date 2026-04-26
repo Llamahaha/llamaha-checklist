@@ -127,7 +127,7 @@ export const vendorGuidesExtra = {
     ],
     escalationNotes: [],
     supportLinks: [
-      { label: "Deltek Vantagepoint product page", url: "https://www.deltek.com/en/products/project-erp/vantagepoint" },
+      { label: "Deltek Vantagepoint product page", url: "https://www.deltek.com/en/erp/vantagepoint" },
       { label: "Deltek Support Center", url: "https://deltek.custhelp.com/" }
     ]
   },
@@ -214,7 +214,7 @@ export const vendorGuidesExtra = {
     escalationNotes: [],
     supportLinks: [
       { label: "Box Support", url: "https://support.box.com/hc/en-us" },
-      { label: "Box Drive Help", url: "https://support.box.com/hc/en-us/categories/360002720034-Box-Drive" }
+      { label: "Box Drive Help", url: "https://support.box.com/hc/en-us/sections/21356707082387-Box-Drive" }
     ]
   },
   dropbox: {
@@ -279,7 +279,7 @@ export const vendorGuidesExtra = {
     escalationNotes: [],
     supportLinks: [
       { label: "Okta Help Center", url: "https://help.okta.com/" },
-      { label: "Okta Verify overview", url: "https://help.okta.com/oie/en-us/content/topics/identity-engine/authenticators/about-okta-verify.htm" }
+      { label: "Okta Verify overview", url: "https://help.okta.com/oie/en-us/content/topics/identity-engine/authenticators/configure-okta-verify.htm" }
     ]
   }
 };

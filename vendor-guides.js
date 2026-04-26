@@ -126,6 +126,9 @@ function renderEntry(entry) {
 
 function renderGroup(sectionTitle, group, isDirectory = false) {
   const wrapper = createPageCard(isDirectory ? "compact-group compact-group-directory" : "compact-group");
+  if (isDirectory) {
+    wrapper.id = group.id ?? slugifyText(group.title);
+  }
   wrapper.dataset.searchText = `${group.title} ${group.description ?? ""}`.toLowerCase();
   const kickerText = isDirectory ? "Vendor" : "App Group";
 

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="icon" href="../assets/llamaha-icon.jpg">
+  <link rel="icon" href="../assets/llamaha-icon-purple-navy.png">
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body data-root-path="..">
@@ -23,11 +23,11 @@
     <main class="hub-shell resource-page">
       <section class="hero-card">
         <div class="builder-header">
-          <img class="brand-icon" src="../assets/llamaha-icon.jpg" alt="Llamaha icon">
+          <img class="brand-icon" src="../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
           <div class="section-heading">
             <p class="section-kicker">Article</p>
             <h1>Safely sharing files externally</h1>
-            <p class="builder-copy">The most common over-share mistake is choosing "anyone with the link" by default. The second is leaving an old share link active for years. Both are easy to fix once you know which knobs to turn in OneDrive, SharePoint, Box, Dropbox, and Egnyte.</p>
+            <p class="builder-copy">Click-by-click steps for OneDrive, SharePoint, Box, Dropbox, and Egnyte — plus how to revoke or audit shares you've already sent. The two most common mistakes are leaving "Anyone with the link" turned on and forgetting to set an expiration. Both are 30-second fixes once you know where to click.</p>
           </div>
         </div>
       </section>
@@ -35,8 +35,248 @@
       <section class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Pick the Right Permission</p>
-            <h2>Three options, very different outcomes</h2>
+            <p class="section-kicker">Pick your platform</p>
+            <h2>Show steps for one platform at a time</h2>
+          </div>
+        </div>
+        <div class="hub-quick-grid platform-tabs" role="tablist" aria-label="Pick a platform">
+          <button type="button" class="hub-card platform-tab is-active" data-platform-trigger="onedrive-sharepoint" role="tab" aria-selected="true">
+            <p class="section-kicker">Microsoft</p>
+            <h2>OneDrive &amp; SharePoint</h2>
+            <p>Same share dialog whether the file is in OneDrive, SharePoint, or a Teams channel.</p>
+          </button>
+          <button type="button" class="hub-card platform-tab" data-platform-trigger="box" role="tab" aria-selected="false">
+            <p class="section-kicker">Box</p>
+            <h2>Box</h2>
+            <p>box.com web client. Shared links and invited people work side by side.</p>
+          </button>
+          <button type="button" class="hub-card platform-tab" data-platform-trigger="dropbox" role="tab" aria-selected="false">
+            <p class="section-kicker">Dropbox</p>
+            <h2>Dropbox</h2>
+            <p>dropbox.com web client. Per-link settings for password, expiration, and download.</p>
+          </button>
+          <button type="button" class="hub-card platform-tab" data-platform-trigger="egnyte" role="tab" aria-selected="false">
+            <p class="section-kicker">Egnyte</p>
+            <h2>Egnyte</h2>
+            <p>Your firm's Egnyte web client. Strong defaults — required expiration on external links.</p>
+          </button>
+        </div>
+      </section>
+
+      <section id="onedrive-sharepoint" class="results-card hub-section platform-panel" data-platform-panel="onedrive-sharepoint" role="tabpanel" aria-label="OneDrive and SharePoint steps">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step-by-Step</p>
+            <h2>OneDrive &amp; SharePoint</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">The share dialog is identical in OneDrive, SharePoint document libraries, and files inside a Microsoft Teams channel. These steps work in the web app and from File Explorer when the OneDrive sync client is installed.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Share a file with specific people outside your company</h4>
+            <ol>
+              <li>Open the file or folder. In the web client, click it once. In File Explorer, right-click the synced item.</li>
+              <li>Click <strong>Share</strong> (paper-airplane icon in the web client).</li>
+              <li>At the top of the dialog, click the line that currently says "Anyone with the link…" or "People in your company…".</li>
+              <li>Choose <strong>Specific people</strong>.</li>
+              <li>Set permission to <strong>Can edit</strong> or <strong>Can view</strong>. View is the safer default for external recipients.</li>
+              <li>Turn on <strong>Set expiration date</strong> and pick a date 30–60 days out (or whenever the project actually ends).</li>
+              <li>Optional: turn on <strong>Set password</strong>. Send that password through a different channel — phone, Teams chat, or text — never the same email as the link.</li>
+              <li>Click <strong>Apply</strong>.</li>
+              <li>Type the recipient email addresses, add a short message, and click <strong>Send</strong>. Or click <strong>Copy link</strong> if you want to paste it into your own email.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Revoke a share you already created</h4>
+            <ol>
+              <li>Sign in at <a href="https://www.onedrive.com/" target="_blank" rel="noreferrer">onedrive.com</a> (use SharePoint if the file lives there).</li>
+              <li>In the left rail, click <strong>Shared</strong> → <strong>Shared by you</strong>.</li>
+              <li>Click the file or folder you want to manage.</li>
+              <li>In the details pane on the right, click <strong>Manage access</strong>.</li>
+              <li>To kill the entire link, click the <strong>×</strong> next to it under "Links giving access."</li>
+              <li>To remove a single person, click the dropdown next to their name and choose <strong>Stop sharing</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Find every link you've ever shared (audit)</h4>
+            <ol>
+              <li>Sign in at <a href="https://www.onedrive.com/" target="_blank" rel="noreferrer">onedrive.com</a>.</li>
+              <li>Click <strong>Shared</strong> → <strong>Shared by you</strong>. This lists everything you've shared, sorted by recency.</li>
+              <li>For SharePoint sites you own, open the site → gear icon → <strong>Site usage</strong> → <strong>Most popular shared content</strong> for a sharing report.</li>
+              <li>Walk down the list — anything older than the project should be revoked using the steps above.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="box" class="results-card hub-section platform-panel" data-platform-panel="box" role="tabpanel" aria-label="Box steps" hidden>
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step-by-Step</p>
+            <h2>Box</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Box separates "shared links" (anyone with the URL) from "invited collaborators" (specific people). For external sharing, prefer invited collaborators when you can; use a shared link only when the recipient can't or won't authenticate.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Share a file by inviting specific people (recommended)</h4>
+            <ol>
+              <li>Sign in at <a href="https://app.box.com/" target="_blank" rel="noreferrer">app.box.com</a>.</li>
+              <li>Hover over the file or folder and click <strong>Share</strong>.</li>
+              <li>In the <strong>Invite People</strong> field, type the recipient's email addresses.</li>
+              <li>Set their access to <strong>Viewer</strong>, <strong>Previewer</strong>, or <strong>Editor</strong>. Viewer is the safest default for external.</li>
+              <li>Optional: add a message.</li>
+              <li>Click <strong>Send</strong>. The recipient gets an email and must sign in (or create a free Box account) to access the file.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Share a file with a link (when the recipient won't sign in)</h4>
+            <ol>
+              <li>Hover over the file and click <strong>Share</strong>.</li>
+              <li>Toggle <strong>Shared Link</strong> on.</li>
+              <li>Click <strong>Link Settings</strong>.</li>
+              <li>Under "Link Access," choose <strong>People with the link</strong> (or <strong>People in your company</strong> for internal-only). Avoid "Open" unless the content is genuinely public.</li>
+              <li>Set <strong>Allowed Actions</strong> to <strong>View Only</strong> if the recipient should not download.</li>
+              <li>Toggle <strong>Require Password</strong> on and create a password. Send the password by a separate channel.</li>
+              <li>Set <strong>Link Expiration</strong> to a real date.</li>
+              <li>Click <strong>Save</strong>.</li>
+              <li>Copy the link from the share dialog and send it.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Revoke a share or remove a collaborator</h4>
+            <ol>
+              <li>Open the file or folder.</li>
+              <li>Click <strong>Share</strong>.</li>
+              <li>To kill the public link: toggle <strong>Shared Link</strong> off.</li>
+              <li>To remove a specific person: find them in the collaborator list and click <strong>Remove</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Audit your existing Box shares</h4>
+            <ol>
+              <li>Sign in at <a href="https://app.box.com/" target="_blank" rel="noreferrer">app.box.com</a>.</li>
+              <li>Click your profile icon (top right) → <strong>Account Settings</strong>.</li>
+              <li>If you have admin permissions, the Box Admin Console has full reports. If not, ask IT to run a sharing report.</li>
+              <li>Otherwise, walk through your folders. Any folder with a chain-link icon next to its name has an active shared link.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropbox" class="results-card hub-section platform-panel" data-platform-panel="dropbox" role="tabpanel" aria-label="Dropbox steps" hidden>
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step-by-Step</p>
+            <h2>Dropbox</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Dropbox shares can be either "people-only" invites or general links. Per-link settings for password, expiration, and disabling downloads are on Professional/Business plans.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Share a file with specific people</h4>
+            <ol>
+              <li>Sign in at <a href="https://www.dropbox.com/" target="_blank" rel="noreferrer">dropbox.com</a>.</li>
+              <li>Hover over the file and click <strong>Share</strong>.</li>
+              <li>In the <strong>To:</strong> field, type recipient email addresses.</li>
+              <li>Use the dropdown to choose <strong>Can view</strong> or <strong>Can edit</strong>.</li>
+              <li>Optional: add a message.</li>
+              <li>Click <strong>Share file</strong>. Recipients get an email and must sign in to view.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Create and lock down a shared link</h4>
+            <ol>
+              <li>Hover over the file and click <strong>Share</strong>.</li>
+              <li>Click <strong>Settings</strong> (gear icon) at the bottom of the share dialog.</li>
+              <li>Under <strong>Who has access</strong>, choose <strong>People you invite</strong> (most restrictive) or <strong>Anyone with the link</strong> (open).</li>
+              <li>Set <strong>Link expiration</strong> to a date.</li>
+              <li>Set <strong>Link password</strong> and create one. Send it through a separate channel.</li>
+              <li>Toggle <strong>Disable downloads</strong> on if the recipient should preview only.</li>
+              <li>Click <strong>Save</strong>.</li>
+              <li>Click <strong>Copy link</strong> and paste it into your email.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Revoke a Dropbox share</h4>
+            <ol>
+              <li>Hover over the file and click <strong>Share</strong>.</li>
+              <li>Click <strong>Settings</strong>.</li>
+              <li>Click <strong>Remove link</strong> at the bottom of the dialog to kill the shared link entirely.</li>
+              <li>To remove a specific person: in the share dialog, click the dropdown next to their name and choose <strong>Remove</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Audit your Dropbox shares</h4>
+            <ol>
+              <li>Sign in at <a href="https://www.dropbox.com/" target="_blank" rel="noreferrer">dropbox.com</a>.</li>
+              <li>Click <strong>Shared</strong> in the left rail.</li>
+              <li>Switch between <strong>Files</strong> and <strong>Links</strong> tabs to see every share you've created.</li>
+              <li>Click any item to open share settings and revoke as needed.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="egnyte" class="results-card hub-section platform-panel" data-platform-panel="egnyte" role="tabpanel" aria-label="Egnyte steps" hidden>
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step-by-Step</p>
+            <h2>Egnyte</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Egnyte is common at AEC firms because admin policies often require an expiration on every external link. The web client is the easiest place to create and manage shares.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Share a file via Egnyte link</h4>
+            <ol>
+              <li>Sign in to your firm's Egnyte web client (typically <code>yourcompany.egnyte.com</code>).</li>
+              <li>Browse to the file or folder.</li>
+              <li>Click the share icon (paper plane) next to the item, or right-click → <strong>Share</strong>.</li>
+              <li>Under <strong>Link Type</strong>, choose <strong>File</strong> (single file) or <strong>Folder</strong>.</li>
+              <li>Set <strong>Recipients</strong> — leave open, restrict to "specified email addresses," or restrict to "Egnyte users only" (sign-in required).</li>
+              <li>Set <strong>Permissions</strong> — Preview Only is the safest external default. Choose Download or Upload only when needed.</li>
+              <li>Set <strong>Link expires</strong> to a date. Many firms require this for external shares.</li>
+              <li>Optional: enable <strong>Notify me on access</strong> so you get an email when the link is opened.</li>
+              <li>Add the recipient emails or click <strong>Get Link</strong> to copy it.</li>
+              <li>Click <strong>Send</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Revoke or change an Egnyte link</h4>
+            <ol>
+              <li>Sign in to the Egnyte web client.</li>
+              <li>In the left rail, click <strong>Links</strong> (or <strong>My Links</strong>).</li>
+              <li>Find the link in the list.</li>
+              <li>Click the <strong>three-dot menu</strong> → <strong>Delete</strong> to kill it, or <strong>Edit</strong> to change permissions/expiration.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Audit your Egnyte shares</h4>
+            <ol>
+              <li>The <strong>Links</strong> page in the left rail shows every active share you've created, sorted by date.</li>
+              <li>Anything past the project end date should be deleted using the steps above.</li>
+              <li>If you have admin access, <strong>Reports</strong> → <strong>Link Usage</strong> shows shares across the firm.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Background</p>
+            <h2>Three permission options, very different outcomes</h2>
           </div>
         </div>
         <div class="card-stack">
@@ -46,11 +286,11 @@
           </div>
           <div class="card-block">
             <h4>People in your company</h4>
-            <p>Anyone signed into your firm's account can open the link. Good for internal sharing where you do not need to specify each person. Not good for sharing with clients or vendors.</p>
+            <p>Anyone signed in to your firm's account can open the link. Good for internal sharing where you don't need to specify each person. Not appropriate for clients or vendors.</p>
           </div>
           <div class="card-block">
             <h4>Anyone with the link</h4>
-            <p>The link works for everyone, anywhere, without sign-in. If the link gets forwarded, the new recipient can open it. Use this only when the content is genuinely public, and prefer to set an expiration date.</p>
+            <p>The link works for everyone, anywhere, without sign-in. If the link gets forwarded, the new recipient can open it. Use only when content is genuinely public, and always pair with an expiration date.</p>
           </div>
         </div>
       </section>
@@ -58,18 +298,18 @@
       <section class="results-card hub-section">
         <div class="results-header">
           <div>
-            <p class="section-kicker">Set an Expiration</p>
+            <p class="section-kicker">Background</p>
             <h2>Old share links are quietly the biggest leak source</h2>
           </div>
         </div>
         <div class="card-stack">
           <div class="card-block">
             <h4>Set a real date when sharing externally</h4>
-            <p>OneDrive, SharePoint, Box, and Dropbox all support expiration dates. Pick one that matches the actual project timeline — 30 or 60 days is reasonable for most external shares.</p>
+            <p>OneDrive, SharePoint, Box, Dropbox, and Egnyte all support expiration dates. Pick one that matches the actual project timeline — 30 or 60 days is reasonable for most external shares.</p>
           </div>
           <div class="card-block">
             <h4>Audit your old shares once a year</h4>
-            <p>In OneDrive, look at "Shared by you." In SharePoint, the site owner can run a sharing report. In Box, the admin can pull a report. Remove anything that does not need to stay live.</p>
+            <p>Use the audit steps in each platform section above. Any share older than its project should be revoked.</p>
           </div>
           <div class="card-block">
             <h4>If a recipient leaves their company, revoke the link</h4>
@@ -92,11 +332,11 @@
           </div>
           <div class="card-block">
             <h4>Use a password on the link if available</h4>
-            <p>OneDrive and Box both support a password on the share link. Send the password through a different channel (a phone call, not email).</p>
+            <p>OneDrive, Box, and Dropbox all support a password on the share link. Send the password through a different channel — phone call or Teams chat — not the same email.</p>
           </div>
           <div class="card-block">
             <h4>Consider a request file or upload-only link</h4>
-            <p>If a vendor needs to send you a file, give them an upload-only link instead of a shared editable folder. OneDrive Request Files and Box Request work this way.</p>
+            <p>If a vendor needs to send you a file, give them an upload-only link instead of a shared editable folder. OneDrive Request Files, Box Request, and Egnyte upload-only links all work this way.</p>
           </div>
           <div class="card-block">
             <h4>For client work, use the channel your client expects</h4>
@@ -114,22 +354,60 @@
         </div>
         <div class="card-stack">
           <div class="card-block">
-            <h4>Do not email the file as an attachment to "make it simple"</h4>
+            <h4>Don't email the file as an attachment to "make it simple"</h4>
             <p>Attachments cannot be revoked, get forwarded freely, and create version chaos. A share link can be revoked and updated.</p>
           </div>
           <div class="card-block">
-            <h4>Do not paste a "people in your company" link in an external email</h4>
+            <h4>Don't paste a "people in your company" link in an external email</h4>
             <p>The recipient sees a sign-in error and assumes the link is broken. Generate a new share targeted to their email.</p>
           </div>
           <div class="card-block">
-            <h4>Do not rely on "I sent it to a personal Gmail by mistake, can IT pull it back?"</h4>
+            <h4>Don't rely on "I sent it to a personal Gmail by mistake, can IT pull it back?"</h4>
             <p>Once a file is in someone else's mailbox or downloaded, IT cannot get it back. Slow down before sending.</p>
           </div>
         </div>
       </section>
+
     </main>
   </div>
 
   <script type="module" src="../siteChrome.js"></script>
+  <script>
+    // Tab behavior for the four platform sections — only the selected one shows.
+    (function () {
+      const tabs = Array.from(document.querySelectorAll("[data-platform-trigger]"));
+      const panels = Array.from(document.querySelectorAll("[data-platform-panel]"));
+      if (!tabs.length || !panels.length) return;
+
+      function setActive(platform, { scroll = false } = {}) {
+        tabs.forEach(tab => {
+          const isActive = tab.dataset.platformTrigger === platform;
+          tab.classList.toggle("is-active", isActive);
+          tab.setAttribute("aria-selected", String(isActive));
+        });
+        panels.forEach(panel => {
+          panel.hidden = panel.dataset.platformPanel !== platform;
+        });
+        if (scroll) {
+          const target = document.querySelector(`[data-platform-panel="${platform}"]`);
+          target?.scrollIntoView({ block: "start", behavior: "smooth" });
+        }
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          setActive(tab.dataset.platformTrigger, { scroll: true });
+          history.replaceState(null, "", `#${tab.dataset.platformTrigger}`);
+        });
+      });
+
+      // If the URL lands with a platform hash, open that one on load.
+      const initial = window.location.hash.slice(1);
+      const initialPanel = panels.find(p => p.dataset.platformPanel === initial);
+      if (initialPanel) {
+        setActive(initial);
+      }
+    })();
+  </script>
 </body>
 </html>

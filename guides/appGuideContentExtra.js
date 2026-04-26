@@ -254,7 +254,7 @@ export const appGuideContentExtra = {
         processes: ["Connectivity.VaultPro.exe", "Inventor.exe", "acad.exe"]
       },
       relatedLinks: [
-        { label: "Autodesk Vault help", url: "https://help.autodesk.com/view/VAULT/ENU/" },
+        { label: "Autodesk Vault help", url: "https://help.autodesk.com/view/VAULT/2026/ENU/" },
         { label: "Vault client-server compatibility", url: "https://knowledge.autodesk.com/support/vault-products/learn-explore/caas/sfdcarticles/sfdcarticles/Autodesk-Vault-and-AutoCAD-Compatibility.html" }
       ]
     }
@@ -409,7 +409,7 @@ export const appGuideContentExtra = {
       },
       relatedLinks: [
         { label: "Microsoft Project help", url: "https://support.microsoft.com/en-us/project" },
-        { label: "Project plans comparison", url: "https://www.microsoft.com/en-us/microsoft-365/project/compare-microsoft-project-management-software" }
+        { label: "Project plans and pricing", url: "https://www.microsoft.com/en-us/microsoft-365/project/project-management-software" }
       ]
     }
   },
@@ -460,7 +460,7 @@ export const appGuideContentExtra = {
         processes: ["TrimbleConnect.exe"]
       },
       relatedLinks: [
-        { label: "Trimble Connect help", url: "https://help.connect.trimble.com/" },
+        { label: "Trimble Connect help", url: "https://help.trimble.com/en/trimble-connect/trimble-connect" },
         { label: "Trimble Identity", url: "https://id.trimble.com/" }
       ]
     }
@@ -513,7 +513,7 @@ export const appGuideContentExtra = {
       },
       relatedLinks: [
         { label: "Deltek Customer Care", url: "https://deltek.custhelp.com/" },
-        { label: "Deltek Vantagepoint overview", url: "https://www.deltek.com/en/products/project-erp/vantagepoint" }
+        { label: "Deltek Vantagepoint overview", url: "https://www.deltek.com/en/erp/vantagepoint" }
       ]
     }
   },
@@ -565,7 +565,7 @@ export const appGuideContentExtra = {
       },
       relatedLinks: [
         { label: "DocuSign support", url: "https://support.docusign.com/" },
-        { label: "DocuSign admin guide", url: "https://support.docusign.com/s/articles/eSignature-Admin-Guide" }
+        { label: "DocuSign Admin overview", url: "https://www.docusign.com/products/admin" }
       ]
     }
   },
@@ -720,7 +720,7 @@ export const appGuideContentExtra = {
         processes: ["Box.exe"]
       },
       relatedLinks: [
-        { label: "Box Drive help", url: "https://support.box.com/hc/en-us/categories/360002812714-Box-Drive" },
+        { label: "Box Drive help", url: "https://support.box.com/hc/en-us/sections/21356707082387-Box-Drive" },
         { label: "Box support", url: "https://support.box.com/" }
       ]
     }
@@ -876,7 +876,7 @@ export const appGuideContentExtra = {
         processes: []
       },
       relatedLinks: [
-        { label: "Okta Verify documentation", url: "https://help.okta.com/en-us/Content/Topics/end-user/ov-overview.htm" },
+        { label: "Okta Verify documentation", url: "https://help.okta.com/en-us/Content/Topics/Mobile/okta-verify-overview.htm" },
         { label: "Okta Help Center", url: "https://support.okta.com/" }
       ]
     }

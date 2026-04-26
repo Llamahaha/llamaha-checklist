@@ -294,11 +294,19 @@ export function buildInternalSearchIndex() {
     ...buildPublicEntries(),
     entry(
       "Internal Home",
-      "Internal landing page with search, reference guides, tips, snippets, playbooks, and checklists.",
+      "Internal landing page with search, Support Pages, and public-home access.",
       "index.html",
       "internalPage",
       "Internal Page",
       "home internal library"
+    ),
+    entry(
+      "Support Pages",
+      "Internal support hub for reference guides, tips and tricks, playbooks, snippets, checklists, templates, mailbox decommission, warranty lookup, and live-ticket paths.",
+      "support.html",
+      "internalPage",
+      "Internal Support Page",
+      "support pages reference guides tips tricks tools playbooks snippets checklists templates mailbox warranty"
     ),
     ...buildInternalReferenceEntries(),
     ...buildPlaybookEntries(),
