@@ -2,6 +2,7 @@ import { getVendorApplications } from "./guides/applicationCatalog.js";
 import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { matrixResource } from "./supportData.js";
 import { appendBlock, createLinks, createPageCard } from "./resourceCommon.js";
+import { renderSingleTopicPage } from "./single-topic-page.js";
 import { activatePageTabs } from "./sectionTabs.js";
 
 const licensingGrid = document.getElementById("licensingGrid");
@@ -362,3 +363,188 @@ if (searchInput) {
     filterLicensing(event.target.value);
   });
 }
+
+const licensingTopics = document.getElementById("licensingTopics");
+const pageToc = document.getElementById("pageToc");
+
+function createTopicStack() {
+  const stack = document.createElement("div");
+  stack.className = "single-topic-stack";
+  return stack;
+}
+
+function createInfoCard(title, body) {
+  const card = createPageCard("issue-card single-topic-card");
+  appendBlock(card, title, body);
+  return card;
+}
+
+function createLinkCard(title, body, links) {
+  const card = createPageCard("issue-card single-topic-card");
+  appendBlock(card, title, body);
+  if (links.length) {
+    card.appendChild(createLinks(links));
+  }
+  return card;
+}
+
+function vendorLinksFor(key, apps, guide) {
+  return [
+    { label: "Open vendor guide", url: `guides/${key}.html` },
+    ...apps.slice(0, 3).map(app => ({ label: app.name, url: `guides/${key}/${app.slug}.html` })),
+    ...(guide.supportLinks?.[0]
+      ? [{ label: guide.supportLinks[0].label, url: guide.supportLinks[0].url, external: true }]
+      : []),
+    { label: "Open contact page", url: "contact.html" }
+  ];
+}
+
+function renderVendorLicensingTopic(key) {
+  const guide = vendorGuides[key];
+  const apps = getVendorApplications(key);
+  const reference = customerLicensingReference[key];
+  const stack = createTopicStack();
+
+  stack.append(
+    createInfoCard("How Access Usually Works", reference?.howItWorks ?? [
+      "Access usually depends on the account, product, and company setup your organization assigned to you."
+    ]),
+    createInfoCard("What You May Need", reference?.whatYouNeed ?? [
+      "The exact work account",
+      "The product name",
+      "The version, plan, or edition if your team uses a specific one"
+    ]),
+    createLinkCard("Common Products", apps.slice(0, 6).map(item => item.name), vendorLinksFor(key, apps, guide))
+  );
+
+  return stack;
+}
+
+function buildLicensingTopics() {
+  const vendorKeys = vendorOrder.filter(key =>
+    customerLicensingReference[key] && !hiddenPublicLicensingVendors.has(key)
+  );
+
+  const vendorTopicLinks = vendorKeys.map(key => ({
+    label: vendorGuides[key].title,
+    url: `#${key}-licensing`
+  }));
+
+  return [
+    {
+      id: "howLicensingWorksSection",
+      title: "How product access usually works",
+      meta: "Licensing Basics",
+      kicker: "Licensing Basics",
+      summary: "Start here when the app says trial, unlicensed, expired, missing subscription, or the wrong features appear after sign-in.",
+      searchText: "work account subscription seat assignment product year edition plan company profile organization license server authorization file",
+      renderContent: () => {
+        const stack = createTopicStack();
+        stack.append(
+          createInfoCard("Common Licensing Models", [
+            "Work account access tied to the email address you use for the product.",
+            "Subscription, seat, role, extension, or add-on assignment.",
+            "Product year, edition, release, or plan differences.",
+            "Company profile, ArcGIS organization, Bentley datasource, or workspace selection.",
+            "Company license server, authorization file, or other managed license source."
+          ])
+        );
+        return stack;
+      }
+    },
+    {
+      id: "whatAccessDependsOnSection",
+      title: "Details that usually determine access",
+      meta: "What You May Need",
+      kicker: "What You May Need",
+      summary: "Use these details to narrow down whether the problem is account, product, plan, profile, or environment related.",
+      searchText: "work email account app name version year plan role add-on organization company profile portal datasource workspace",
+      renderContent: () => {
+        const stack = createTopicStack();
+        stack.append(
+          createInfoCard("Gather These Details", [
+            "The exact work email account used to sign in.",
+            "The app name and version or product year.",
+            "The plan, role, extension, or add-on you expected.",
+            "The company profile, portal, datasource, workspace, or project environment selected in the app."
+          ])
+        );
+        return stack;
+      }
+    },
+    {
+      id: "m365MatrixSection",
+      title: "Microsoft 365 plan reference",
+      meta: "Microsoft Licensing",
+      kicker: "Microsoft Licensing",
+      summary: "Use this when you need to confirm whether a Microsoft 365 plan includes desktop apps, mailbox access, identity features, or other Microsoft services.",
+      searchText: `${matrixResource.title} microsoft 365 plans desktop apps mailbox exchange teams onedrive sharepoint identity`,
+      renderContent: () => {
+        const stack = createTopicStack();
+        stack.append(createLinkCard("Open Plan Matrix", [
+          "Compare Microsoft 365 plans when the issue looks tied to mailbox access, desktop apps, Teams, OneDrive, SharePoint, or identity features."
+        ], [
+          { label: "Open M365 Maps Matrix", url: matrixResource.url, external: true }
+        ]));
+        return stack;
+      }
+    },
+    {
+      id: "vendorCoverageSection",
+      title: "Vendor licensing directory",
+      meta: "Vendor Licensing",
+      kicker: "Vendor Licensing",
+      summary: "Choose the vendor-specific licensing note that matches the product in front of you.",
+      searchText: vendorKeys.map(key => `${vendorGuides[key].title} ${customerLicensingReference[key].summary}`).join(" "),
+      renderContent: () => {
+        const stack = createTopicStack();
+        stack.append(createLinkCard("Pick a Vendor", [
+          "Each vendor topic explains how access usually works, what details matter, and where to go next."
+        ], vendorTopicLinks));
+        return stack;
+      }
+    },
+    ...vendorKeys.map(key => {
+      const guide = vendorGuides[key];
+      const apps = getVendorApplications(key);
+      const reference = customerLicensingReference[key];
+      return {
+        id: `${key}-licensing`,
+        title: `${guide.title} licensing`,
+        meta: "Vendor Licensing",
+        kicker: "Vendor Licensing",
+        summary: reference?.summary ?? guide.summary,
+        searchText: buildVendorSearchText(guide, reference, apps),
+        renderContent: () => renderVendorLicensingTopic(key)
+      };
+    }),
+    {
+      id: "walkthroughsSection",
+      title: "Reading license and activation errors",
+      meta: "Walkthrough",
+      kicker: "Walkthrough",
+      summary: "Use this when the wording is vague and you need to tell whether the issue is trial, unlicensed, sign-in, activation, subscription, or vendor-assignment related.",
+      searchText: "license activation errors trial unlicensed sign-in activation subscription assigned seat vendor profile",
+      renderContent: () => {
+        const stack = createTopicStack();
+        stack.append(createLinkCard("Open Article", [
+          "This short article explains common license error patterns and what to capture before contacting IT."
+        ], [
+          { label: "Open article", url: "articles/reading-license-activation-errors.html" }
+        ]));
+        return stack;
+      }
+    }
+  ];
+}
+
+renderSingleTopicPage({
+  tocContainer: pageToc,
+  contentContainer: licensingTopics,
+  title: "Licensing Help topics",
+  description: "Search or choose one licensing reference. The page shows one licensing topic or vendor note at a time.",
+  searchPlaceholder: "Search Licensing Help",
+  searchLabel: "Search Licensing Help topics on this page",
+  emptyText: "No Licensing Help topics matched that search.",
+  topics: buildLicensingTopics()
+});

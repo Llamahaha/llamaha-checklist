@@ -786,7 +786,7 @@ export const tipsAndTricksSections = [
         links: [
           {
             label: "Open Support Pages app directory",
-            url: "applications.html#full-application-directory",
+            url: "applications.html",
             external: false
           },
           {

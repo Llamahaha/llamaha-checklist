@@ -1766,6 +1766,35 @@ input[type="checkbox"] {
   color: var(--accent);
 }
 
+.single-topic-toc .single-topic-link {
+  display: grid;
+  gap: 3px;
+}
+
+.single-topic-label {
+  overflow-wrap: anywhere;
+}
+
+.single-topic-meta {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.single-topic-panel {
+  scroll-margin-top: 96px;
+}
+
+.single-topic-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.single-topic-card {
+  margin: 0;
+}
+
 .help-toc-empty {
   padding: 12px;
   border-radius: var(--radius);

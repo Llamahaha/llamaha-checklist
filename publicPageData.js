@@ -734,7 +734,7 @@ function createPublicTipsSections() {
             "If the site also fails inside a Cloud PC or Citrix session, mention that because it changes the support path."
           ],
           links: [
-            { label: "Open Support Pages browser support", url: "computer-issues.html#browser-support", external: false }
+            { label: "Open Support Pages browser support", url: "computer-issues.html#a-work-site-works-in-one-browser-but-not-another", external: false }
           ]
         },
         {

@@ -105,6 +105,8 @@ const populatedPublicGuides = [
 const dynamicAnchorFiles = new Set([
   resolve(rootDir, "support.html"),
   resolve(rootDir, "computer-issues.html"),
+  resolve(rootDir, "applications.html"),
+  resolve(rootDir, "app-licensing.html"),
   resolve(rootDir, "vendor-guides.html"),
   resolve(rootDir, "tips-and-tricks.html"),
   resolve(rootDir, "microsoft-issues.html"),
