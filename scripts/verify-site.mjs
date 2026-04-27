@@ -20,6 +20,7 @@ const publicRoutes = [
   "index.html",
   "search.html",
   "support.html",
+  "guides/index.html",
   "computer-issues.html",
   "vendor-guides.html",
   "applications.html",
@@ -293,6 +294,20 @@ function verifyInternalRoutes() {
 }
 
 function verifyGuideFiles() {
+  if (!fileExists("guides/index.html")) {
+    addError("Missing public guide directory route: guides/index.html");
+  }
+
+  const guideDirectories = readdirSync(resolve(rootDir, "guides"), { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .map(entry => entry.name);
+
+  for (const directory of guideDirectories) {
+    if (!fileExists(`guides/${directory}/index.html`)) {
+      addError(`Missing guide folder index fallback: guides/${directory}/index.html`);
+    }
+  }
+
   for (const vendorSlug of vendorOrder) {
     if (!vendorGuides[vendorSlug]) {
       addError(`Vendor "${vendorSlug}" is in vendorOrder but missing from vendorGuides`);

@@ -97,6 +97,37 @@ function unique(items = []) {
   return [...new Set(items.filter(Boolean))];
 }
 
+function getVendorAppSearchText(item) {
+  const extra = getAppGuideContent(vendorSlug, item.slug);
+  const publicContent = getPublicGuideContent(vendorSlug, item.slug);
+  return [
+    item.name,
+    item.summary,
+    item.focus,
+    item.licensing,
+    item.install,
+    item.uninstall,
+    extra.summary,
+    ...(extra.highlights ?? []),
+    ...(extra.askFirst ?? []),
+    publicContent.summary,
+    ...(publicContent.overview ?? []),
+    ...(publicContent.highlights ?? [])
+  ].filter(Boolean).join(" ").toLowerCase();
+}
+
+function hasPriorityGuideContent(item) {
+  const extra = getAppGuideContent(vendorSlug, item.slug);
+  const publicContent = getPublicGuideContent(vendorSlug, item.slug);
+  return Boolean(
+    extra.summary
+    || extra.highlights?.length
+    || publicContent.summary
+    || publicContent.highlights?.length
+    || publicContent.commonIssues?.length
+  );
+}
+
 function formatReviewLabel(label = defaultReviewLabel) {
   if (/^(reviewed|updated)\b/i.test(label)) {
     return label;
@@ -367,7 +398,7 @@ function renderJumpLinks(model = null) {
   elements.jumpLinks.innerHTML = "";
 
   if (pageType !== "app") {
-    elements.jumpLinks.hidden = true;
+    renderVendorAppFinder();
     return;
   }
 
@@ -381,6 +412,71 @@ function renderJumpLinks(model = null) {
 
   elements.jumpLinks.hidden = false;
   elements.jumpLinks.appendChild(nav);
+}
+
+function renderVendorAppFinder() {
+  if (!elements.jumpLinks || !apps.length) {
+    return;
+  }
+
+  const shell = el("section", "guide-vendor-finder");
+  shell.setAttribute("aria-label", `${vendor.title} app guide finder`);
+
+  const header = el("div", "guide-vendor-finder-header");
+  const copy = el("div");
+  copy.append(
+    el("p", "section-kicker", "Application Guides"),
+    el("h2", "guide-section-title", "Find the app your team uses"),
+    el("p", "guide-section-copy", "Search or open the exact product guide before working through vendor-wide notes.")
+  );
+
+  const count = el("span", "guide-app-count", `${apps.length} app guides`);
+  header.append(copy, count);
+
+  const search = document.createElement("input");
+  search.type = "search";
+  search.className = "guide-app-search";
+  search.placeholder = `Search ${vendor.title} apps`;
+  search.setAttribute("aria-label", `Search ${vendor.title} app guides`);
+
+  const nav = el("nav", "guide-app-chip-grid");
+  nav.setAttribute("aria-label", `${vendor.title} app guides`);
+
+  const empty = el("p", "guide-empty-message", "No app guides matched that search.");
+  empty.hidden = true;
+
+  const links = apps.map(item => {
+    const link = el("a", "guide-app-chip");
+    link.href = appUrl(vendorSlug, item.slug);
+    link.dataset.searchText = getVendorAppSearchText(item);
+    link.append(
+      el("strong", "", item.name),
+      el("span", "guide-app-chip-copy", item.summary ?? item.focus ?? "Open the product guide.")
+    );
+    nav.appendChild(link);
+    return link;
+  });
+
+  function applyFilter() {
+    const tokens = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    let visible = 0;
+    links.forEach(link => {
+      const matches = tokens.every(token => link.dataset.searchText.includes(token));
+      link.hidden = !matches;
+      link.setAttribute("aria-hidden", String(!matches));
+      if (matches) {
+        visible += 1;
+      }
+    });
+    count.textContent = `${visible} of ${apps.length} app guides`;
+    empty.hidden = visible !== 0;
+  }
+
+  search.addEventListener("input", applyFilter);
+
+  shell.append(header, search, nav, empty);
+  elements.jumpLinks.hidden = false;
+  elements.jumpLinks.appendChild(shell);
 }
 
 function renderVendorPage() {
@@ -398,16 +494,16 @@ function renderVendorPage() {
   const installItems = (vendorInstallIssues[vendorSlug] ?? []).map(item => `${item.issue}: ${item.fix}`);
   admin.appendChild(card("Setup / Update Tips", installItems.length ? installItems : vendor.sharedNotes));
 
-  const directory = section("app-directory", "Applications", "Application Directory", "Each application has its own guide page with helpful steps, common problems, and related links.");
+  const directory = section("app-directory", "Applications", "Application Directory", "Open the exact app guide first when you already know which product is involved.");
   const grid = el("div", "guide-card-grid guide-app-grid");
   apps.forEach(item => {
-    const appCard = el("article", "guide-card guide-app-card");
-    appCard.append(el("p", "guide-app-kicker", getAppGuideContent(vendorSlug, item.slug).highlights ? "Priority Guide" : "Application"));
+    const appCard = el("a", "guide-card guide-app-card guide-app-card-link");
+    appCard.href = appUrl(vendorSlug, item.slug);
+    appCard.dataset.searchText = getVendorAppSearchText(item);
+    appCard.append(el("p", "guide-app-kicker", hasPriorityGuideContent(item) ? "Priority Guide" : "Application"));
     appCard.append(el("h3", "guide-card-title", item.name));
     appCard.append(el("p", "guide-card-copy", item.summary ?? item.focus));
-    const link = el("a", "guide-primary-link", "Open app guide");
-    link.href = appUrl(vendorSlug, item.slug);
-    appCard.appendChild(link);
+    appCard.appendChild(el("span", "guide-primary-link", "Open app guide"));
     grid.appendChild(appCard);
   });
   directory.appendChild(grid);
@@ -419,7 +515,7 @@ function renderVendorPage() {
   const links = section("official-links", "Links", "Official Links", "Use these vendor resources when you need the official source of record.");
   links.appendChild(card("Vendor Links", linkList(vendor.supportLinks.map(item => ({ label: item.label, url: item.url })) )));
 
-  elements.content.append(overview, notes, admin, directory, patterns, links);
+  elements.content.append(directory, overview, notes, patterns, admin, links);
 }
 
 function renderAppPage(model) {

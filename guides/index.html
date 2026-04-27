@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Guide Directory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="./guide.css">
+</head>
+<body>
+  <div class="guide-shell">
+    <header class="guide-header">
+      <nav class="guide-breadcrumbs" aria-label="Breadcrumb">
+        <a class="guide-breadcrumb-link" href="../index.html">Home</a>
+        <span class="guide-breadcrumb-sep">&gt;</span>
+        <a class="guide-breadcrumb-link" href="../applications.html">App Help</a>
+        <span class="guide-breadcrumb-sep">&gt;</span>
+        <strong class="guide-breadcrumb-current">Guide Directory</strong>
+      </nav>
+      <a class="back-link" href="../applications.html">Back to App Help</a>
+      <div class="guide-brand">
+        <img class="brand-icon" src="../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+        <div>
+          <p class="section-kicker">App Help</p>
+          <h1 id="guideTitle">Application Guide Directory</h1>
+          <p id="guideSummary">Browse vendor pages and individual app guides from one place.</p>
+          <p class="guide-review-label">Reviewed April 2026</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="guide-layout">
+      <div class="guide-main">
+        <div id="guideDirectoryFinder" class="guide-jump-shell"></div>
+        <div class="guide-main-scroll">
+          <div id="guideDirectoryContent" class="guide-content"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./guide-index.js"></script>
+</body>
+</html>

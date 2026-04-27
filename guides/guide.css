@@ -438,6 +438,108 @@ a {
   color: var(--accent);
 }
 
+.guide-vendor-finder {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--panel-start), var(--panel-end));
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-vendor-finder-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.guide-vendor-finder-header .section-kicker,
+.guide-vendor-finder-header .guide-section-copy {
+  margin: 0;
+}
+
+.guide-app-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--pill-bg);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.guide-app-search {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(10, 14, 26, 0.48);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  outline: none;
+}
+
+.guide-app-search::placeholder {
+  color: var(--muted);
+}
+
+.guide-app-search:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.guide-app-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.guide-app-chip {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--pill-bg);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease, color 120ms ease;
+}
+
+.guide-app-chip:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.guide-app-chip strong,
+.guide-app-chip-copy {
+  min-width: 0;
+}
+
+.guide-app-chip-copy {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.guide-empty-message {
+  margin: 0;
+  padding: 12px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+
 .guide-section,
 .guide-card {
   border: 1px solid var(--line-strong);
@@ -480,6 +582,18 @@ a {
   gap: 12px;
   align-content: start;
   background: var(--surface);
+}
+
+.guide-app-card-link {
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.guide-app-card-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: var(--surface-strong);
 }
 
 .guide-list {

@@ -42,6 +42,7 @@ function toPosixPath(filePath) {
 function isPublicHtml(relativePath) {
   return extname(relativePath).toLowerCase() === ".html"
     && !relativePath.startsWith("internal/")
+    && !(relativePath.startsWith("guides/") && relativePath.endsWith("/index.html") && relativePath !== "guides/index.html")
     && !excludedHtmlFiles.has(relativePath);
 }
 
