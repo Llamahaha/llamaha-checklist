@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=support.html#full-application-directory">
   <title>App Help</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,27 +15,32 @@
     <nav class="page-nav" aria-label="Page">
       <a href="index.html">Home</a>
       <span>/</span>
-      <strong>Support Pages</strong>
+      <a href="support.html">Support</a>
+      <span>/</span>
+      <strong>App Help</strong>
     </nav>
 
     <main class="hub-shell resource-page">
-      <section class="results-card hub-section">
-        <div class="results-header">
-          <div>
-            <p class="section-kicker">Support Pages</p>
-            <h1>Application browsing lives inside Support Pages</h1>
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">App Help</p>
+            <h1>Browse application guides by vendor and family</h1>
+            <p class="builder-copy">Open the guide for the product you already know — Revit, AutoCAD, Bluebeam, ArcGIS, Outlook, Teams, ProjectWise, and the rest. Each guide includes access notes, common issues, and what support needs from you.</p>
+            <p class="review-label">Reviewed April 2026</p>
           </div>
         </div>
-        <p class="hub-section-copy">Use Support Pages to browse popular applications, app families, and the full public application directory in one place.</p>
-        <div class="vendor-links">
-          <a href="support.html#full-application-directory">Open application list</a>
-          <a href="support.html#app-guides">Open Support Pages</a>
-          <a href="search.html">Search the help center</a>
-        </div>
       </section>
+
+      <div class="help-layout">
+        <aside id="pageToc" class="help-toc" aria-label="On this page"></aside>
+        <div id="appSections" class="help-content section-stack"></div>
+      </div>
     </main>
   </div>
 
   <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="applications.js"></script>
 </body>
 </html>

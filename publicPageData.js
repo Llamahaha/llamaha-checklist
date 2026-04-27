@@ -475,8 +475,8 @@ function createFilesAndHandoffsSection() {
           "Document any preserved data, templates, or exceptions that intentionally carried forward."
         ],
         links: [
-          { label: "Support issue help", url: "support.html#cad-aec-issues", external: false },
-          { label: "Support app guides", url: "support.html#app-guides", external: false }
+          { label: "Support issue help", url: "computer-issues.html", external: false },
+          { label: "Support app guides", url: "applications.html", external: false }
         ]
       }
     ]
@@ -516,7 +516,7 @@ function createBrowserSupportSection() {
         links: [
           {
             label: "Open Support Pages browser cleanup",
-            url: "support.html#browser-cache-and-cookie-cleanup",
+            url: "tips-and-tricks.html#browser-cache-and-cookie-cleanup",
             external: false
           },
           { label: "Chrome cookie and site data help", url: "https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en" },
@@ -734,7 +734,7 @@ function createPublicTipsSections() {
             "If the site also fails inside a Cloud PC or Citrix session, mention that because it changes the support path."
           ],
           links: [
-            { label: "Open Support Pages browser support", url: "support.html#browser-support", external: false }
+            { label: "Open Support Pages browser support", url: "computer-issues.html#browser-support", external: false }
           ]
         },
         {
@@ -746,8 +746,8 @@ function createPublicTipsSections() {
             "If a site wants to open the file in an app, compare that with downloading the file first and opening it manually."
           ],
           links: [
-            { label: "App guides", url: "support.html#app-guides", external: false },
-            { label: "Licensing help", url: "support.html#licensing-access", external: false }
+            { label: "App guides", url: "applications.html", external: false },
+            { label: "Licensing help", url: "app-licensing.html", external: false }
           ]
         }
       ]

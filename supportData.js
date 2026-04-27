@@ -233,7 +233,7 @@ export const computerIssueSections = [
           },
           {
             label: "Open Support Pages app guides",
-            url: "support.html#app-guides",
+            url: "applications.html",
             external: false
           }
         ]
@@ -695,7 +695,7 @@ export const tipsAndTricksSections = [
         links: [
           {
             label: "Open Support Pages app guides",
-            url: "support.html#app-guides",
+            url: "applications.html",
             external: false
           }
         ]
@@ -727,7 +727,7 @@ export const tipsAndTricksSections = [
         links: [
           {
             label: "Licensing help",
-            url: "support.html#licensing-access",
+            url: "app-licensing.html",
             external: false
           }
         ]
@@ -749,7 +749,7 @@ export const tipsAndTricksSections = [
         links: [
           {
             label: "Open Support Pages app guides",
-            url: "support.html#app-guides",
+            url: "applications.html",
             external: false
           }
         ]
@@ -786,12 +786,12 @@ export const tipsAndTricksSections = [
         links: [
           {
             label: "Open Support Pages app directory",
-            url: "support.html#full-application-directory",
+            url: "applications.html#full-application-directory",
             external: false
           },
           {
             label: "Open licensing help",
-            url: "support.html#licensing-access",
+            url: "app-licensing.html",
             external: false
           }
         ]
@@ -807,12 +807,12 @@ export const tipsAndTricksSections = [
         links: [
           {
             label: "Open Support Pages issue help",
-            url: "support.html#cad-aec-issues",
+            url: "computer-issues.html",
             external: false
           },
           {
             label: "Open Support Pages app guides",
-            url: "support.html#app-guides",
+            url: "applications.html",
             external: false
           }
         ]

@@ -11,56 +11,12 @@ const supportSearch = document.getElementById("supportSearch");
 const supportSearchCount = document.getElementById("supportSearchCount");
 const supportToc = document.getElementById("supportToc");
 const supportScopePills = document.getElementById("supportScopePills");
-const supportChipRow = document.getElementById("supportChipRow");
-
-// Shortcut chip sets per scope. Clicking a chip drops the query into the search
-// input, which triggers the standard filter pipeline. Chips are rebuilt every
-// time the scope changes so each view shows the right quick-search options.
-// Each query is intentionally a short, tokenized set of common words. The
-// search engine matches each token independently (AND logic), so a 1–2 word
-// query reliably matches more cards than a long keyword-stuffed string.
-const scopeChipSets = {
-  all: [
-    { label: "License / sign-in", query: "license" },
-    { label: "Project files / sync", query: "project file" },
-    { label: "Plot / PDF / print", query: "plot" },
-    { label: "Crash / slow app", query: "crash" },
-    { label: "Remote access", query: "remote" },
-    { label: "New device / MFA", query: "mfa" }
-  ],
-  issues: [
-    { label: "Project files / sync", query: "project file" },
-    { label: "Plot / PDF / print", query: "plot" },
-    { label: "Scanner / MFP", query: "scan" },
-    { label: "Remote access", query: "remote" },
-    { label: "New device / MFA", query: "mfa" },
-    { label: "Shared mailbox", query: "shared mailbox" }
-  ],
-  apps: [
-    { label: "Autodesk", query: "autodesk" },
-    { label: "Bentley", query: "bentley" },
-    { label: "Bluebeam", query: "bluebeam" },
-    { label: "Esri / ArcGIS", query: "arcgis" },
-    { label: "Microsoft 365", query: "microsoft" },
-    { label: "Adobe", query: "adobe" }
-  ],
-  licensing: [
-    { label: "Activation error", query: "activation" },
-    { label: "Wrong account / profile", query: "account" },
-    { label: "Expired subscription", query: "subscription" },
-    { label: "Named user / seat", query: "seat" },
-    { label: "Module or extension", query: "module" },
-    { label: "Vendor licensing", query: "vendor" }
-  ],
-  tips: [
-    { label: "Outlook habits", query: "outlook" },
-    { label: "Excel shortcuts", query: "excel" },
-    { label: "Word habits", query: "word" },
-    { label: "Teams meetings", query: "teams" },
-    { label: "Browser cleanup", query: "browser" },
-    { label: "Phone setup", query: "phone" }
-  ]
-};
+const supportLauncher = document.querySelector(".support-launcher");
+// Per-section quick-jump chip rails (populated after each render pass so users
+// can leap past closed accordions without scrolling through the section).
+const issueSectionJump = document.getElementById("issueSectionJump");
+const appSectionJump = document.getElementById("appSectionJump");
+const tipsSectionJump = document.getElementById("tipsSectionJump");
 
 // Filter groups track every searchable element on the page along with its scope so
 // search and scope pills can hide/show independently and we can keep accurate counts.
@@ -106,11 +62,12 @@ function openDetailsAround(element) {
   }
 }
 
-function createSupportAccordion({ id, kicker, title, description, meta, open = true }) {
+function createSupportAccordion({ id, kicker, title, description, meta, open = false }) {
   const wrapper = document.createElement("details");
   wrapper.className = "results-card accordion-section support-accordion";
   wrapper.id = id;
-  // Open everything by default — visitors should see what's inside without clicking.
+  // Closed by default so the page is scannable. Users open the section they
+  // need; search and TOC navigation auto-open the relevant accordion.
   wrapper.open = open;
 
   const summary = document.createElement("summary");
@@ -161,7 +118,7 @@ function renderArticleCollection(container, sections, options) {
       title: section.title,
       description: section.description,
       meta: `${section.items.length} topics`,
-      open: true
+      open: false
     });
 
     const grid = document.createElement("div");
@@ -278,13 +235,16 @@ function renderAppSupportSections() {
     const isDirectorySection = section.title === "Full Application Directory";
     const entryCount = section.groups.reduce((total, group) => total + group.entries.length, 0);
     const accordionId = slugifyText(section.title);
+    // Surface the "Popular Applications" group (the first section, index 0)
+    // by default — that's the fast-path visitors usually want. Everything
+    // else stays collapsed for a cleaner first scroll.
     const { wrapper, content } = createSupportAccordion({
       id: accordionId,
       kicker: "App Guides",
       title: section.title,
       description: section.description,
       meta: `${entryCount} guides`,
-      open: true
+      open: index === 0
     });
 
     const groupShell = document.createElement("div");
@@ -376,6 +336,43 @@ function registerStaticSearchCards() {
     const keywords = card.dataset.supportSearch || "";
     const text = `${textFromElement(card)} ${keywords}`.toLowerCase();
     registerGroup(card, [card], { text, scope: "licensing" });
+  });
+}
+
+// ── In-section quick-jump rails ─────────────────────────────────────────────
+// Each top-level section (Issues, Apps, Tips) gets a chip row at its top so
+// users can hop directly to a specific accordion without scrolling past every
+// closed section heading. Built off the same children we feed to the TOC.
+function renderSectionJump(container, children) {
+  if (!container || !children?.length) return;
+  container.innerHTML = "";
+  children.forEach(child => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "support-section-jump-chip";
+    button.dataset.jumpTarget = child.id;
+    const label = document.createElement("span");
+    label.className = "support-section-jump-label";
+    label.textContent = child.label;
+    const count = document.createElement("span");
+    count.className = "support-section-jump-count";
+    count.textContent = child.count;
+    button.append(label, count);
+    container.appendChild(button);
+  });
+}
+
+function jumpToAccordion(targetId) {
+  if (!targetId) return;
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  if (target instanceof HTMLDetailsElement) {
+    target.open = true;
+  }
+  // Slight delay lets the open animation begin before scrolling, so the
+  // browser doesn't pick a position based on a still-collapsed element.
+  requestAnimationFrame(() => {
+    target.scrollIntoView({ block: "start", behavior: "smooth" });
   });
 }
 
@@ -483,6 +480,15 @@ function applyScopeVisibility(visibleScopes = null, hasQuery = false) {
     vendorStrip.setAttribute("aria-hidden", String(!showVendorStrip));
   }
 
+  // The big "Start here" launcher is the entry-point for the all-view. Once a
+  // user has drilled into a specific scope it's just visual noise, so collapse
+  // it. A search query also implies the user has narrowed and doesn't need it.
+  if (supportLauncher) {
+    const showLauncher = activeScope === "all" && !hasQuery;
+    supportLauncher.hidden = !showLauncher;
+    supportLauncher.setAttribute("aria-hidden", String(!showLauncher));
+  }
+
   if (supportToc) {
     supportToc.querySelectorAll(".support-toc-group").forEach(group => {
       const groupScope = group.dataset.scope;
@@ -491,19 +497,6 @@ function applyScopeVisibility(visibleScopes = null, hasQuery = false) {
       group.hidden = !allowed || !hasMatch;
     });
   }
-}
-
-function renderChipsForScope(scope) {
-  if (!supportChipRow) return;
-  const chips = scopeChipSets[scope] || scopeChipSets.all;
-  supportChipRow.innerHTML = "";
-  chips.forEach(({ label, query }) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.dataset.supportQuery = query;
-    button.textContent = label;
-    supportChipRow.appendChild(button);
-  });
 }
 
 function setActiveScope(scope) {
@@ -519,8 +512,6 @@ function setActiveScope(scope) {
     });
   }
 
-  // Swap the chip row to show shortcuts relevant to the active scope
-  renderChipsForScope(scope);
   filterSupportPage(supportSearch?.value ?? "");
 }
 
@@ -688,8 +679,33 @@ tocSections.push({
 });
 
 buildToc();
+
+// In-section quick-jump rails. Same source-of-truth as the TOC, so labels and
+// counts always agree.
+renderSectionJump(issueSectionJump, issueChildren);
+renderSectionJump(appSectionJump, appChildren);
+renderSectionJump(tipsSectionJump, tipsChildren);
+
+// Populate the big "Start here" launcher card counts using the totals we just
+// computed for the TOC — keeps everything in sync without re-walking data.
+function populateLauncherCounts() {
+  const launcherCounts = {
+    issues: { total: issueChildren.reduce((n, s) => n + s.count, 0), label: "topics" },
+    apps: { total: appChildren.reduce((n, s) => n + s.count, 0), label: "guides" },
+    licensing: { total: licensingVendorCount, label: "vendors" },
+    tips: { total: tipsChildren.reduce((n, s) => n + s.count, 0), label: "tips" }
+  };
+  document.querySelectorAll("[data-launcher-count]").forEach(el => {
+    const scope = el.dataset.launcherCount;
+    const meta = launcherCounts[scope];
+    if (meta) {
+      el.textContent = `${meta.total} ${meta.label}`;
+    }
+  });
+}
+populateLauncherCounts();
+
 updateScopeCounts();
-renderChipsForScope("all");
 
 // ── Wire up controls ─────────────────────────────────────────────────────────
 
@@ -699,23 +715,60 @@ if (supportSearch) {
   });
 }
 
-// Event delegation — chips are re-rendered when the scope changes, so we can't
-// rely on per-element click handlers attached at boot.
-if (supportChipRow) {
-  supportChipRow.addEventListener("click", event => {
-    const button = event.target.closest("button[data-support-query]");
-    if (!button) return;
-    setSearchValue(button.dataset.supportQuery || "");
-  });
+// Map each scope to the section it controls so a pill click can both filter
+// the page AND smoothly bring the relevant section to the top — this makes
+// the pills behave like jump cards instead of an invisible filter.
+const scopeToSectionId = {
+  all: null,
+  issues: "cad-aec-issues",
+  apps: "app-guides",
+  licensing: "licensing-access",
+  tips: "tips-tricks"
+};
+
+function scrollScopeIntoView(scope) {
+  const sectionId = scopeToSectionId[scope];
+  if (!sectionId) return;
+  const target = document.getElementById(sectionId);
+  if (target) {
+    target.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
 }
 
 if (supportScopePills) {
   supportScopePills.addEventListener("click", event => {
     const pill = event.target.closest(".support-scope-pill");
     if (!pill) return;
-    setActiveScope(pill.dataset.scope || "all");
+    const scope = pill.dataset.scope || "all";
+    setActiveScope(scope);
+    scrollScopeIntoView(scope);
   });
 }
+
+// "Start here" launcher cards behave as combined scope-switch + scroll. We
+// intercept the click so the scope pill state, popular-card filter, and
+// vendor strip all update before we land on the section. (Letting the link
+// follow naturally would skip the scope sync.)
+if (supportLauncher) {
+  supportLauncher.addEventListener("click", event => {
+    const card = event.target.closest("[data-scope-jump]");
+    if (!card) return;
+    event.preventDefault();
+    const scope = card.dataset.scopeJump;
+    setActiveScope(scope);
+    scrollScopeIntoView(scope);
+  });
+}
+
+// In-section quick-jump chips: open the target accordion + scroll to it.
+// Event delegation on document means we only register one listener for all
+// three rails (issues, apps, tips).
+document.addEventListener("click", event => {
+  const chip = event.target.closest(".support-section-jump-chip");
+  if (!chip) return;
+  event.preventDefault();
+  jumpToAccordion(chip.dataset.jumpTarget);
+});
 
 window.addEventListener("hashchange", scrollToCurrentHash);
 requestAnimationFrame(scrollToCurrentHash);
