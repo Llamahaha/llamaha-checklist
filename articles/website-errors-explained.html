@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website errors explained</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-root-path="..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>Website errors explained</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>Website errors explained</h1>
+            <p class="builder-copy">When a webpage shows an error number or a message in red, the number tells you who is responsible — your computer, your network, or the website itself. This article translates the most common ones into plain language, says whether you can fix it, and tells you exactly what to send IT if you can't.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Quick Read</p>
+            <h2>How to read a 3-digit code at a glance</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>The first digit tells you who has the problem</h4>
+            <ul>
+              <li><strong>4xx — your side.</strong> Your browser asked for something the server can't or won't give. Often a sign-in, permission, or wrong-URL issue. You can usually fix these.</li>
+              <li><strong>5xx — the server's side.</strong> The website's server crashed, is overloaded, or can't reach a piece of itself. You generally can't fix these — wait, retry, or report them.</li>
+              <li><strong>3xx — redirect.</strong> The page moved. Usually invisible. If you see one, it's normally a misconfigured redirect loop.</li>
+              <li><strong>2xx — success.</strong> You'll never see one of these as an error message; it just means the page loaded.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">4xx — Your Side</p>
+            <h2>Errors usually caused by your request, account, or URL</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>400 — Bad Request</h4>
+            <p><strong>What it means:</strong> The server didn't understand what you sent. Often caused by stale cookies, a corrupted URL, or a browser extension breaking the request.</p>
+            <p><strong>Try:</strong> hard-refresh the page (Ctrl+Shift+R), clear cookies for that site, or open the page in a private window. If it still fails, the URL itself may be malformed — go back to the source link.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>401 — Unauthorized</h4>
+            <p><strong>What it means:</strong> The site needs you to sign in, and either you didn't, or your session expired.</p>
+            <p><strong>Try:</strong> sign in again. If you were already signed in, sign out fully and back in. If your account uses MFA and your phone changed recently, see the <a href="getting-new-phone-without-losing-mfa.html">Getting a new phone without losing MFA</a> article.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>403 — Forbidden</h4>
+            <p><strong>What it means:</strong> You're authenticated, but you don't have permission to see this page. The server recognizes you and is saying no.</p>
+            <p><strong>Try:</strong> confirm you signed in with the right account (your work account, not a personal one). If it's a SharePoint or shared folder, the owner needs to grant you access. Send the URL and the time you tried to support — they can check the access list.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>404 — Not Found</h4>
+            <p><strong>What it means:</strong> The page doesn't exist at that URL. Either the link is wrong, the page was renamed or deleted, or there's a typo.</p>
+            <p><strong>Try:</strong> double-check the URL for typos. Search the site from its homepage instead. If a colleague sent you the link, ask them to send a fresh one — pages sometimes get renamed in CMS systems.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>408 — Request Timeout</h4>
+            <p><strong>What it means:</strong> Your browser took too long to finish sending its request. Almost always a slow or interrupted internet connection on your side.</p>
+            <p><strong>Try:</strong> retry in a few seconds. If on Wi-Fi, move closer to the access point or switch to wired. If you're on VPN, disconnect and reconnect.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>413 — Payload Too Large</h4>
+            <p><strong>What it means:</strong> You tried to upload a file that's bigger than the website allows.</p>
+            <p><strong>Try:</strong> compress the file (zip), upload to OneDrive/SharePoint/Box and share the link instead, or split the file. The site's help pages usually list the actual upload limit.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>429 — Too Many Requests</h4>
+            <p><strong>What it means:</strong> You've hit the site too many times in a short window — usually because of a script, a plugin, or rapid clicking. The server is asking you to slow down.</p>
+            <p><strong>Try:</strong> wait a minute and reload. If you have browser extensions that auto-refresh or scrape pages, disable them on this site.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">5xx — Server Side</p>
+            <h2>The website itself is having a problem</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>500 — Internal Server Error</h4>
+            <p><strong>What it means:</strong> Something on the website crashed. The site's developers need to fix it; you can't.</p>
+            <p><strong>Try:</strong> wait a few minutes and reload. If it's still broken in 15 minutes, check the vendor's status page (e.g., status.autodesk.com, status.bentley.com). Report to support with the URL, time, and a screenshot.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>502 — Bad Gateway</h4>
+            <p><strong>What it means:</strong> The site's front-end server got a bad response from one of its back-end servers. Common during deployments or when a service is restarting.</p>
+            <p><strong>Try:</strong> wait 1–5 minutes and reload. Almost always temporary.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>503 — Service Unavailable</h4>
+            <p><strong>What it means:</strong> The site's server is up but is intentionally refusing to handle your request — usually because it's overloaded or in maintenance.</p>
+            <p><strong>Try:</strong> wait and retry. Check the vendor's status page. Don't keep refreshing aggressively — that makes overload worse.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>504 — Gateway Timeout</h4>
+            <p><strong>What it means:</strong> The site's front-end waited too long for a response from a back-end service and gave up. Same family as 502 — server-side hiccup.</p>
+            <p><strong>Try:</strong> reload after a minute. Persistent 504s usually mean a service the site depends on (database, identity, file storage) is degraded.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Browser Errors (No Number)</p>
+            <h2>The browser couldn't even reach the site</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">These are messages your browser shows before any HTTP code is involved — your computer or network couldn't make contact with the website at all. Different browsers word them differently; the underlying causes are the same.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>"This site can't be reached" / DNS_PROBE_FINISHED_NXDOMAIN</h4>
+            <p><strong>What it means:</strong> Your computer couldn't translate the website's name (like <code>example.com</code>) into an IP address. Either the URL is mistyped, the site is genuinely down, or your DNS is misbehaving.</p>
+            <p><strong>Try:</strong> double-check the URL spelling. Try the site from a phone on cellular data — if that works, the problem is on your network. Restart your Wi-Fi router or reconnect to VPN. Last resort, run <code>ipconfig /flushdns</code> from a command prompt to clear stale DNS records.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>"Your connection is not private" / NET::ERR_CERT_*</h4>
+            <p><strong>What it means:</strong> The site's security certificate is missing, expired, or doesn't match the URL. This is what protects you from a fake version of the site.</p>
+            <p><strong>Try:</strong> first, check your computer's clock — a wrong system date is the most common cause. If the date is right, do not click "Continue anyway" on a public site. For internal sites your firm runs, this can mean a certificate just expired and IT needs to renew it. For public sites, navigate away.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>"Too many redirects" / ERR_TOO_MANY_REDIRECTS</h4>
+            <p><strong>What it means:</strong> The site keeps bouncing you between pages in a loop. Usually a cookie problem or a broken sign-in flow.</p>
+            <p><strong>Try:</strong> clear cookies for that site, then reload. In Chrome/Edge: lock icon next to the URL → Cookies → remove all → close the tab and reopen.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>ERR_CONNECTION_REFUSED</h4>
+            <p><strong>What it means:</strong> Your computer reached the site's server but the server flat-out refused the connection. Common when a corporate firewall blocks the site, or the service is fully offline.</p>
+            <p><strong>Try:</strong> connect to VPN if the site is internal. Try the site from a phone on cellular — if that works, your network is blocking it. Report the URL to IT.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>ERR_CONNECTION_TIMED_OUT</h4>
+            <p><strong>What it means:</strong> Your computer asked the site to respond and never got an answer. Usually a slow network, a VPN drop, or a firewall silently dropping traffic.</p>
+            <p><strong>Try:</strong> retry. Disconnect and reconnect VPN. Switch to a different network if available.</p>
+          </div>
+
+          <div class="card-block">
+            <h4>ERR_INTERNET_DISCONNECTED</h4>
+            <p><strong>What it means:</strong> Your computer thinks it has no network at all.</p>
+            <p><strong>Try:</strong> check that Wi-Fi is on and connected, or that your Ethernet cable is plugged in. Open <strong>Settings → Network &amp; internet</strong> and confirm the status. If you're on Wi-Fi, forget the network and rejoin.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">First Things to Try</p>
+            <h2>Five quick fixes that solve most browser errors</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>The 5 fixes, in order</h4>
+            <ol>
+              <li><strong>Hard refresh</strong> the page (<code>Ctrl + Shift + R</code> on Windows / <code>Cmd + Shift + R</code> on Mac). Forces the browser to ignore its cached copy.</li>
+              <li><strong>Open the page in a private / Incognito window.</strong> If it works there, the problem is a cookie or extension on your normal profile.</li>
+              <li><strong>Try a different browser.</strong> If Chrome fails but Edge works, the cause is profile-specific.</li>
+              <li><strong>Check from your phone on cellular data</strong> (turn off Wi-Fi). If it works, the problem is your network or VPN.</li>
+              <li><strong>Restart your computer.</strong> Cliché, but it clears half of the weird ones — DNS cache, network adapter state, stuck processes.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">If You Open a Ticket</p>
+            <h2>What to send IT</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Send these details</h4>
+            <ul>
+              <li>The full URL (copy from the address bar — don't paraphrase).</li>
+              <li>A screenshot of the error message and any error code shown.</li>
+              <li>The exact time it happened (helps IT find it in logs).</li>
+              <li>What browser and what version (in Chrome/Edge: <strong>About</strong> page; or paste <code>chrome://version</code> in the address bar).</li>
+              <li>Whether you're on VPN, in the office, on home Wi-Fi, or on a phone hotspot.</li>
+              <li>Whether other people see the same error, or only you.</li>
+              <li>Whether anything changed recently — new computer, new phone, network change, new extension.</li>
+            </ul>
+            <p>See also: <a href="taking-screenshots-for-it.html">Taking screenshots for IT</a>.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>

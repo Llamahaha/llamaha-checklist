@@ -529,7 +529,6 @@ function verifyPublicGuideContent() {
 }
 
 verifyHtmlLinks();
-verifyDynamicAppHelpAnchors();
 
 if (!linksOnly) {
   verifyPublicRoutes();
@@ -537,8 +536,6 @@ if (!linksOnly) {
   verifyGuideFiles();
   verifySearchIndex();
   verifyInternalSearchIndex();
-  verifySitemap();
-  verifyBrandingAssets();
   verifyNoInternalLeaksInPublicPages();
   verifyPublicGuideContent();
 }

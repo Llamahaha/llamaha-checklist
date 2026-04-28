@@ -10,6 +10,6 @@
     "guide-indexes": "node scripts/generate-guide-directory-indexes.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "verify": "node scripts/verify-site.mjs",
-    "verify:links": "node scripts/verify-site.mjs --links-only"
+    "verify-links": "node scripts/verify-site.mjs --links-only"
   }
 }

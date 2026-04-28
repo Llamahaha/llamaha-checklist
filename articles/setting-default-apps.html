@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setting default apps when you have multiple versions installed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-root-path="..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="index.html">Articles</a>
+      <span>/</span>
+      <strong>Setting default apps</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Article</p>
+            <h1>Setting default apps when you have multiple versions installed</h1>
+            <p class="builder-copy">If double-clicking a .dwg opens the wrong AutoCAD year, or a .docx opens in Word 2019 when you wanted the new Microsoft 365 build, the file extension is associated with the wrong app. The fix takes 30 seconds — three different paths depending on what you're trying to do. Steps below assume Windows 11; Windows 10 is nearly identical.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Quick Pick</p>
+            <h2>Three ways to change a default — pick by what you have in front of you</h2>
+          </div>
+        </div>
+        <div class="hub-quick-grid">
+          <article class="hub-card">
+            <p class="section-kicker">Method 1</p>
+            <h2>Right-click the file</h2>
+            <p>Fastest when you can see the file. Sets the default for that one file extension.</p>
+            <a class="hub-link" href="#method-right-click">Open steps</a>
+          </article>
+          <article class="hub-card">
+            <p class="section-kicker">Method 2</p>
+            <h2>Settings → Default apps by file type</h2>
+            <p>Best when many extensions are wrong. Lets you see and fix every association in one place.</p>
+            <a class="hub-link" href="#method-by-file-type">Open steps</a>
+          </article>
+          <article class="hub-card">
+            <p class="section-kicker">Method 3</p>
+            <h2>Settings → Default apps by app</h2>
+            <p>Best for "use this version of AutoCAD for everything it can open." Fastest for full-app reassociation.</p>
+            <a class="hub-link" href="#method-by-app">Open steps</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="method-right-click" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Method 1</p>
+            <h2>Right-click the file (fastest for one extension)</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Use this when you have a file open in File Explorer and want a particular extension (.dwg, .docx, .pdf, .rvt) to always open in a specific app.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Steps</h4>
+            <ol>
+              <li>Open <strong>File Explorer</strong> and find one file with the extension you want to fix (e.g., a .dwg file).</li>
+              <li>Right-click the file.</li>
+              <li>Hover over <strong>Open with</strong>.</li>
+              <li>Click <strong>Choose another app</strong>.</li>
+              <li>Pick the version of the app you want from the list. If you don't see it, click <strong>Choose an app on your PC</strong> and browse to the .exe (typical paths below).</li>
+              <li>Tick the box that says <strong>Always use this app to open .[ext] files</strong>.</li>
+              <li>Click <strong>OK</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Common .exe paths if the app doesn't appear in the list</h4>
+            <ul>
+              <li><strong>AutoCAD 2025</strong>: <code>C:\Program Files\Autodesk\AutoCAD 2025\acad.exe</code></li>
+              <li><strong>AutoCAD 2024</strong>: <code>C:\Program Files\Autodesk\AutoCAD 2024\acad.exe</code></li>
+              <li><strong>Civil 3D 2025</strong>: <code>C:\Program Files\Autodesk\AutoCAD 2025\acad.exe</code> (Civil 3D shares the AutoCAD .exe — pick the right year)</li>
+              <li><strong>Revit 2025</strong>: <code>C:\Program Files\Autodesk\Revit 2025\Revit.exe</code></li>
+              <li><strong>Word (Microsoft 365)</strong>: <code>C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE</code></li>
+              <li><strong>Bluebeam Revu 21</strong>: <code>C:\Program Files\Bluebeam Software\Bluebeam Revu\21\Revu\Revu.exe</code></li>
+              <li><strong>Adobe Acrobat</strong>: <code>C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="method-by-file-type" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Method 2</p>
+            <h2>Settings → Default apps by file type</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Best when several extensions are wrong at once — for example, after upgrading to a new Office year and Outlook attachments still open in the old one.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Steps (Windows 11)</h4>
+            <ol>
+              <li>Press <strong>Windows key</strong> and type <code>default apps</code>.</li>
+              <li>Click <strong>Default apps</strong> in the results.</li>
+              <li>Scroll down and click <strong>Choose defaults by file type</strong>.</li>
+              <li>In the search box at the top, type the extension you want to fix (e.g., <code>.dwg</code>).</li>
+              <li>Click the current default app on the right.</li>
+              <li>Pick the version you want from the popup. Click <strong>Set default</strong>.</li>
+              <li>Repeat for each extension. Common ones to check together: <code>.dwg</code>, <code>.dwt</code>, <code>.dws</code>, <code>.dxf</code> for AutoCAD; <code>.rvt</code>, <code>.rfa</code>, <code>.rte</code> for Revit; <code>.docx</code>, <code>.doc</code>, <code>.docm</code> for Word.</li>
+            </ol>
+          </div>
+
+          <div class="card-block">
+            <h4>Steps (Windows 10)</h4>
+            <ol>
+              <li>Press <strong>Windows key</strong> and type <code>default apps</code>.</li>
+              <li>Click <strong>Default apps</strong> in the results.</li>
+              <li>Scroll to the bottom and click <strong>Choose default apps by file type</strong>.</li>
+              <li>Find the extension in the list (it's alphabetical — slow to scroll for AutoCAD; type quickly while focused on the list to jump).</li>
+              <li>Click the current default and pick the new app.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="method-by-app" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Method 3</p>
+            <h2>Settings → Default apps by app</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Use this when you want a specific app to handle every file type it can. Best for "make AutoCAD 2025 the default for everything Autodesk-related."</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Steps (Windows 11)</h4>
+            <ol>
+              <li>Press <strong>Windows key</strong> and type <code>default apps</code>.</li>
+              <li>Click <strong>Default apps</strong>.</li>
+              <li>In the search bar at the top, type the app name (e.g., <code>AutoCAD 2025</code>).</li>
+              <li>Click the app in the results.</li>
+              <li>Each extension the app supports is listed. For each one you want changed, click the current default and pick this app instead.</li>
+              <li>Some extensions show a <strong>Set default</strong> button at the top — click it to apply the new app to every supported extension at once.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Common Cases</p>
+            <h2>Specific scenarios we see weekly</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Two AutoCAD years installed and the wrong one opens .dwg</h4>
+            <p>This is the most common case. Use Method 2 (by file type) and update <code>.dwg</code>, <code>.dwt</code>, <code>.dws</code>, and <code>.dxf</code> all to the year you want. If you also use Civil 3D, set those to the matching Civil 3D year — Civil 3D installs AutoCAD as part of itself, and the entry in the list is named "AutoCAD Civil 3D 2025" not just "AutoCAD 2025."</p>
+          </div>
+          <div class="card-block">
+            <h4>Multiple Revit years and .rvt opens the wrong one</h4>
+            <p>Use Method 2 for <code>.rvt</code>, <code>.rfa</code>, <code>.rte</code>, and <code>.rft</code>. Be aware: opening an .rvt in a newer Revit upgrades the file permanently. If you're not sure which year a file was authored in, right-click the .rvt → <strong>Properties</strong> → <strong>Details</strong> tab — the Revit Build version is listed.</p>
+          </div>
+          <div class="card-block">
+            <h4>PDFs open in Edge or Chrome instead of Acrobat or Bluebeam</h4>
+            <p>Use Method 2 for <code>.pdf</code>. Pick Adobe Acrobat or Bluebeam Revu. If the browser is still grabbing PDFs after this, also disable the browser's built-in PDF handler: in Edge, Settings → Downloads → "Always download PDF files" on. In Chrome, Settings → Privacy and security → Site Settings → Additional content settings → PDF documents → "Download PDFs."</p>
+          </div>
+          <div class="card-block">
+            <h4>Outlook attachments still open in the old Office</h4>
+            <p>Outlook hands off files based on the file association, so fix the extension in Method 2 (.docx, .xlsx, .pptx). If Outlook itself is the wrong version, also reset the default by Method 3: search for "Outlook" and pick the Outlook you want.</p>
+          </div>
+          <div class="card-block">
+            <h4>Default browser is wrong</h4>
+            <p>Settings → Default apps → search for the browser you want (Edge / Chrome / Firefox) → click <strong>Set default</strong> at the top. This handles .htm, .html, http, and https in one click in Windows 11.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">When It Won't Stick</p>
+            <h2>The default keeps reverting</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>An installer or update reset it</h4>
+            <p>Most CAD installers offer to "register file types" with their version. Re-running the new installer's Repair, or installing a new year of the same product, can take associations back. Re-apply with Method 2 or 3 after the install finishes.</p>
+          </div>
+          <div class="card-block">
+            <h4>Group Policy is enforcing a default</h4>
+            <p>Some firms ship a default-apps policy from IT. If your fix reverts after sign-out / sign-in, it's likely policy. Take a screenshot of the wrong default and submit a ticket — IT can adjust the policy or grant an exception.</p>
+          </div>
+          <div class="card-block">
+            <h4>The app was installed per-user vs. machine-wide</h4>
+            <p>If two installs of the same app exist (one in <code>C:\Program Files</code> and one in <code>%LocalAppData%\Programs</code>), Windows can pick the wrong one. Uninstall whichever is duplicate, then re-set the default.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">If You Open a Ticket</p>
+            <h2>What to send IT</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Send these details</h4>
+            <ul>
+              <li>The exact file extension (e.g., <code>.dwg</code>) and a screenshot of the file in File Explorer.</li>
+              <li>What app currently opens it, and what app you want to open it.</li>
+              <li>Whether both apps are installed (paste the exact display names from <strong>Settings → Apps → Installed apps</strong>).</li>
+              <li>Whether the wrong default came back after a Windows update or app install.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../siteChrome.js"></script>
+</body>
+</html>
