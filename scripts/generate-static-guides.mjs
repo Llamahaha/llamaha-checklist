@@ -207,6 +207,10 @@ function truncate(text, max = 160) {
   return flat.slice(0, max - 3).replace(/\s+\S*$/, "") + "...";
 }
 
+function canonicalUrl(canonicalPath) {
+  return new URL(canonicalPath.replace(/\.html$/, ""), "https://llamaha.com/").href;
+}
+
 // ---------------------------------------------------------------------------
 // Default content (mirrors guide.js defaults)
 // ---------------------------------------------------------------------------
@@ -439,7 +443,7 @@ function pageHead({ title, description, canonicalPath, cssPath, iconPath }) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeAttr(description)}">
-  <link rel="canonical" href="https://llamaha.com/${escapeAttr(canonicalPath)}">
+  <link rel="canonical" href="${escapeAttr(canonicalUrl(canonicalPath))}">
   <meta property="og:title" content="${escapeAttr(title)}">
   <meta property="og:description" content="${escapeAttr(description)}">
   <meta property="og:type" content="article">

@@ -69,7 +69,7 @@ function toUrl(relativePath) {
     return new URL(relativePath.replace(/index\.html$/, ""), SITEMAP_BASE_URL).href;
   }
 
-  return new URL(relativePath, SITEMAP_BASE_URL).href;
+  return new URL(relativePath.replace(/\.html$/, ""), SITEMAP_BASE_URL).href;
 }
 
 export function getSitemapEntries() {
