@@ -1,4 +1,4 @@
-import { readdirSync, writeFileSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { extname, relative, resolve, sep } from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
@@ -39,11 +39,25 @@ function toPosixPath(filePath) {
   return filePath.split(sep).join("/");
 }
 
-function isPublicHtml(relativePath) {
-  return extname(relativePath).toLowerCase() === ".html"
-    && !relativePath.startsWith("internal/")
-    && !(relativePath.startsWith("guides/") && relativePath.endsWith("/index.html") && relativePath !== "guides/index.html")
-    && !excludedHtmlFiles.has(relativePath);
+function isNoIndex(filePath) {
+  try {
+    const fd = readdirSync; // referenced just to keep node-fs import; not used directly
+  } catch {}
+  try {
+    const text = readFileSync(filePath, "utf8").slice(0, 2048);
+    return /<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(text);
+  } catch {
+    return false;
+  }
+}
+
+function isPublicHtml(relativePath, fullPath) {
+  if (extname(relativePath).toLowerCase() !== ".html") return false;
+  if (relativePath.startsWith("internal/")) return false;
+  if (relativePath.startsWith("guides/") && relativePath.endsWith("/index.html") && relativePath !== "guides/index.html") return false;
+  if (excludedHtmlFiles.has(relativePath)) return false;
+  if (fullPath && isNoIndex(fullPath)) return false;
+  return true;
 }
 
 function toUrl(relativePath) {
@@ -60,8 +74,9 @@ function toUrl(relativePath) {
 
 export function getSitemapEntries() {
   return walk(rootDir)
-    .map(filePath => toPosixPath(relative(rootDir, filePath)))
-    .filter(isPublicHtml)
+    .map(filePath => ({ relativePath: toPosixPath(relative(rootDir, filePath)), fullPath: filePath }))
+    .filter(item => isPublicHtml(item.relativePath, item.fullPath))
+    .map(item => item.relativePath)
     .sort((a, b) => toUrl(a).localeCompare(toUrl(b)))
     .map(relativePath => ({
       path: relativePath,

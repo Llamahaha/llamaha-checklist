@@ -16,6 +16,12 @@
     <loc>https://llamaha.com/articles/</loc>
   </url>
   <url>
+    <loc>https://llamaha.com/articles/app-will-not-open.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/articles/before-contacting-it-what-to-collect.html</loc>
+  </url>
+  <url>
     <loc>https://llamaha.com/articles/byod-basics.html</loc>
   </url>
   <url>
@@ -23,6 +29,9 @@
   </url>
   <url>
     <loc>https://llamaha.com/articles/it-glossary.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/articles/license-or-signin-error.html</loc>
   </url>
   <url>
     <loc>https://llamaha.com/articles/meeting-av-issues.html</loc>
@@ -34,13 +43,22 @@
     <loc>https://llamaha.com/articles/multi-monitor-docking.html</loc>
   </url>
   <url>
+    <loc>https://llamaha.com/articles/new-computer-new-user-new-phone-setup.html</loc>
+  </url>
+  <url>
     <loc>https://llamaha.com/articles/new-hire-day-one.html</loc>
   </url>
   <url>
     <loc>https://llamaha.com/articles/password-manager-basics.html</loc>
   </url>
   <url>
+    <loc>https://llamaha.com/articles/plotting-pdf-printer-issue.html</loc>
+  </url>
+  <url>
     <loc>https://llamaha.com/articles/printer-troubleshooting.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/articles/project-files-will-not-sync.html</loc>
   </url>
   <url>
     <loc>https://llamaha.com/articles/reading-license-activation-errors.html</loc>
@@ -49,16 +67,34 @@
     <loc>https://llamaha.com/articles/recognizing-phishing.html</loc>
   </url>
   <url>
+    <loc>https://llamaha.com/articles/remote-access-issue.html</loc>
+  </url>
+  <url>
     <loc>https://llamaha.com/articles/returning-company-computer.html</loc>
   </url>
   <url>
     <loc>https://llamaha.com/articles/safely-sharing-externally.html</loc>
   </url>
   <url>
+    <loc>https://llamaha.com/articles/setting-default-apps.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/articles/slow-or-freezing-on-a-model.html</loc>
+  </url>
+  <url>
     <loc>https://llamaha.com/articles/taking-screenshots-for-it.html</loc>
   </url>
   <url>
+    <loc>https://llamaha.com/articles/using-autoelevate-to-install-apps.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/articles/website-errors-explained.html</loc>
+  </url>
+  <url>
     <loc>https://llamaha.com/articles/when-to-restart-what.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/articles/windows-hello-setup-and-troubleshooting.html</loc>
   </url>
   <url>
     <loc>https://llamaha.com/articles/work-from-home-essentials.html</loc>
@@ -68,9 +104,6 @@
   </url>
   <url>
     <loc>https://llamaha.com/contact.html</loc>
-  </url>
-  <url>
-    <loc>https://llamaha.com/guides/</loc>
   </url>
   <url>
     <loc>https://llamaha.com/guides/adobe.html</loc>
@@ -97,7 +130,13 @@
     <loc>https://llamaha.com/guides/autodesk.html</loc>
   </url>
   <url>
+    <loc>https://llamaha.com/guides/autodesk/autocad-lt.html</loc>
+  </url>
+  <url>
     <loc>https://llamaha.com/guides/autodesk/autocad.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/guides/autodesk/autodesk-access.html</loc>
   </url>
   <url>
     <loc>https://llamaha.com/guides/autodesk/autodesk-desktop-app.html</loc>
@@ -107,6 +146,9 @@
   </url>
   <url>
     <loc>https://llamaha.com/guides/autodesk/construction-cloud.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/guides/autodesk/desktop-connector.html</loc>
   </url>
   <url>
     <loc>https://llamaha.com/guides/autodesk/infoworks-icm.html</loc>
@@ -343,6 +385,9 @@
     <loc>https://llamaha.com/guides/microsoft/teams.html</loc>
   </url>
   <url>
+    <loc>https://llamaha.com/guides/microsoft/windows-365-cloud-pc.html</loc>
+  </url>
+  <url>
     <loc>https://llamaha.com/guides/okta.html</loc>
   </url>
   <url>
@@ -371,6 +416,15 @@
   </url>
   <url>
     <loc>https://llamaha.com/guides/sketchup.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/guides/spotfire.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/guides/spotfire/spotfire-analyst.html</loc>
+  </url>
+  <url>
+    <loc>https://llamaha.com/guides/spotfire/spotfire-web.html</loc>
   </url>
   <url>
     <loc>https://llamaha.com/guides/trimble.html</loc>

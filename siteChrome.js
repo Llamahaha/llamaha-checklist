@@ -1,3 +1,5 @@
+import { publicizeText } from "./resourceCommon.js";
+
 const publicLinks = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "search", label: "Search", href: "search.html" },
@@ -125,8 +127,61 @@ function initSiteChrome() {
   shell.prepend(chrome);
 }
 
+const skipPublicizeTags = new Set([
+  "SCRIPT",
+  "STYLE",
+  "CODE",
+  "PRE",
+  "KBD",
+  "SAMP",
+  "TEXTAREA",
+  "INPUT",
+  "OPTION"
+]);
+
+function publicizeVisibleText() {
+  if (getArea(document.body) !== "public") {
+    return;
+  }
+
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!node.nodeValue?.trim()) {
+        return NodeFilter.FILTER_REJECT;
+      }
+
+      let parent = node.parentElement;
+      while (parent) {
+        if (skipPublicizeTags.has(parent.tagName)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        parent = parent.parentElement;
+      }
+
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  const textNodes = [];
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode);
+  }
+
+  textNodes.forEach(node => {
+    node.nodeValue = publicizeText(node.nodeValue);
+  });
+}
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initSiteChrome, { once: true });
 } else {
   initSiteChrome();
+}
+
+if (document.readyState === "complete") {
+  requestAnimationFrame(publicizeVisibleText);
+} else {
+  document.addEventListener("DOMContentLoaded", () => {
+    requestAnimationFrame(publicizeVisibleText);
+  }, { once: true });
 }

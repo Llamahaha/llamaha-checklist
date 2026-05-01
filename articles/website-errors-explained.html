@@ -62,14 +62,14 @@
         <div class="card-stack">
           <div class="card-block">
             <h4>400 — Bad Request</h4>
-            <p><strong>What it means:</strong> The server didn't understand what you sent. Often caused by stale cookies, a corrupted URL, or a browser extension breaking the request.</p>
+            <p><strong>What it means:</strong> The server didn't understand what you sent. Often caused by old saved website data, a corrupted URL, or a browser extension breaking the request.</p>
             <p><strong>Try:</strong> hard-refresh the page (Ctrl+Shift+R), clear cookies for that site, or open the page in a private window. If it still fails, the URL itself may be malformed — go back to the source link.</p>
           </div>
 
           <div class="card-block">
             <h4>401 — Unauthorized</h4>
             <p><strong>What it means:</strong> The site needs you to sign in, and either you didn't, or your session expired.</p>
-            <p><strong>Try:</strong> sign in again. If you were already signed in, sign out fully and back in. If your account uses MFA and your phone changed recently, see the <a href="getting-new-phone-without-losing-mfa.html">Getting a new phone without losing MFA</a> article.</p>
+            <p><strong>Try:</strong> sign in again. If you were already signed in, sign out fully and back in. If your account uses multi-factor sign-in and your phone changed recently, see the <a href="getting-new-phone-without-losing-mfa.html">Getting a new phone without losing multi-factor sign-in</a> article.</p>
           </div>
 
           <div class="card-block">
@@ -120,7 +120,7 @@
 
           <div class="card-block">
             <h4>502 — Bad Gateway</h4>
-            <p><strong>What it means:</strong> The site's front-end server got a bad response from one of its back-end servers. Common during deployments or when a service is restarting.</p>
+            <p><strong>What it means:</strong> The website got an unexpected response from part of its own service. Common during updates or when a service is restarting.</p>
             <p><strong>Try:</strong> wait 1–5 minutes and reload. Almost always temporary.</p>
           </div>
 
@@ -150,7 +150,7 @@
           <div class="card-block">
             <h4>"This site can't be reached" / DNS_PROBE_FINISHED_NXDOMAIN</h4>
             <p><strong>What it means:</strong> Your computer couldn't translate the website's name (like <code>example.com</code>) into an IP address. Either the URL is mistyped, the site is genuinely down, or your DNS is misbehaving.</p>
-            <p><strong>Try:</strong> double-check the URL spelling. Try the site from a phone on cellular data — if that works, the problem is on your network. Restart your Wi-Fi router or reconnect to VPN. Last resort, run <code>ipconfig /flushdns</code> from a command prompt to clear stale DNS records.</p>
+            <p><strong>Try:</strong> double-check the URL spelling. Try the site from a phone on cellular data — if that works, the problem is on your network. Restart your Wi-Fi router or reconnect to VPN. Last resort, run <code>ipconfig /flushdns</code> from a command prompt to clear old DNS records.</p>
           </div>
 
           <div class="card-block">
@@ -200,7 +200,7 @@
               <li><strong>Open the page in a private / Incognito window.</strong> If it works there, the problem is a cookie or extension on your normal profile.</li>
               <li><strong>Try a different browser.</strong> If Chrome fails but Edge works, the cause is profile-specific.</li>
               <li><strong>Check from your phone on cellular data</strong> (turn off Wi-Fi). If it works, the problem is your network or VPN.</li>
-              <li><strong>Restart your computer.</strong> Cliché, but it clears half of the weird ones — DNS cache, network adapter state, stuck processes.</li>
+              <li><strong>Restart your computer.</strong> Cliché, but it clears half of the weird ones — saved DNS data, network adapter state, stuck processes.</li>
             </ol>
           </div>
         </div>

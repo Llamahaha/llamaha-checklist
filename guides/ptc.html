@@ -3,40 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ptc Guide</title>
+  <title>PTC App Help | Llamaha</title>
+  <meta name="description" content="Use this for Mathcad Prime entitlement, install, uninstall, and computer license-source guidance.">
+  <link rel="canonical" href="https://llamaha.com/guides/ptc.html">
+  <meta property="og:title" content="PTC App Help | Llamaha">
+  <meta property="og:description" content="Use this for Mathcad Prime entitlement, install, uninstall, and computer license-source guidance.">
+  <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="../assets/llamaha-icon-purple-navy.png">
   <link rel="stylesheet" href="./guide.css">
+  <style>html{scroll-behavior:smooth}</style>
 </head>
-<body data-page-type="vendor" data-vendor="ptc" data-root-path="..">
+<body data-page-type="vendor" data-vendor="ptc" data-root-path=".." data-render-mode="static">
   <div class="guide-shell">
     <header class="guide-header">
-      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"></nav>
-      <a id="guideBackLink" class="back-link" href="../vendor-guides.html">Back to Vendor Guides</a>
+      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"><a class="guide-breadcrumb-link" href="../index.html">Home</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../vendor-guides.html">App Help</a><span class="guide-breadcrumb-sep">&gt;</span><strong class="guide-breadcrumb-current">PTC</strong></nav>
+      <a id="guideBackLink" class="back-link" href="../vendor-guides.html">Back to App Help</a>
       <div class="guide-brand">
         <img class="brand-icon" src="../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
         <div>
-          <p id="guideKicker" class="section-kicker"></p>
-          <h1 id="guideTitle"></h1>
-          <p id="guideSummary"></p>
+          <p id="guideKicker" class="section-kicker">App Help</p>
+          <h1 id="guideTitle">PTC</h1>
+          <p id="guideSummary">Use this for Mathcad Prime entitlement, install, uninstall, and computer license-source guidance.</p>
+          <p class="guide-review-label" id="guideReviewLabel">Reviewed April 2026</p>
         </div>
       </div>
     </header>
 
     <main class="guide-layout">
       <div class="guide-main">
-        <div id="guideJumpLinks" class="guide-jump-shell" hidden></div>
+        <div id="guideJumpLinks" class="guide-jump-shell">
+  <nav class="guide-jump-links" aria-label="Jump to a section"><a class="guide-jump-link" href="#app-directory">Application directory</a><a class="guide-jump-link" href="#overview">Overview</a><a class="guide-jump-link" href="#shared-notes">Helpful starting points</a><a class="guide-jump-link" href="#common-patterns">Common problems</a><a class="guide-jump-link" href="#account-setup">Account and setup pages</a><a class="guide-jump-link" href="#official-links">Official links</a></nav>
+</div>
         <div class="guide-main-scroll">
-          <div id="guideContent" class="guide-content"></div>
+          <div id="guideContent" class="guide-content">
+            <section id="app-directory" class="guide-section">
+  <p class="section-kicker">Applications</p>
+  <h2 class="guide-section-title">Application directory</h2>
+  <p class="guide-section-copy">Open the exact app guide first when you already know which product is involved.</p>
+  <div class="guide-card-grid guide-app-grid"><a class="guide-card guide-app-card guide-app-card-link" href="../guides/ptc/mathcad-prime.html">
+  <p class="guide-app-kicker">Application</p>
+  <h3 class="guide-card-title">Mathcad Prime</h3>
+  <p class="guide-card-copy">Engineering calculation environment that can depend on local templates and license-source configuration.</p>
+  <span class="guide-primary-link">Open app guide</span>
+</a></div>
+</section>
+<section id="overview" class="guide-section">
+  <p class="section-kicker">Vendor help</p>
+  <h2 class="guide-section-title">PTC</h2>
+  <p class="guide-section-copy">Use this for Mathcad Prime entitlement, install, uninstall, and computer license-source guidance.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Overview</h3><div class="guide-copy-stack"><p class="guide-card-copy">PTC problems usually come down to license-source settings, environment configuration, or shared engineering content rather than raw installer success. Document the exact license path before making changes.</p></div></article><article class="guide-card"><h3 class="guide-card-title">In scope</h3><ul class="guide-list"><li>Mathcad Prime</li></ul></article>
+</section>
+<section id="shared-notes" class="guide-section">
+  <p class="section-kicker">Start here</p>
+  <h2 class="guide-section-title">Helpful starting points</h2>
+  <p class="guide-section-copy">Use these vendor-wide tips before you dive into a single application.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Shared notes</h3><ul class="guide-list"><li>Identify whether the client uses named-user, floating, or file-based licensing before you troubleshoot the app itself.</li><li>Note the license-server or config-file details your team uses. They are easy to lose and hard to rediscover.</li><li>Protect local worksheets, templates, and engineering content before cleanup or rebuild.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">FAQ</h3><ul class="guide-list"><li>Does PTC always use the same license model? - No. PTC products can use named-user access, floating licenses, or local file-based licensing, so the license path needs to be documented per client.</li><li>Where should we troubleshoot license server problems first? - Start with the PTC license server logs and LMTOOLS or equivalent status checks. PTC guidance points there first for daemon, host, and port issues.</li><li>Does uninstalling the app fully reclaim access? - Usually not. Reclaim the entitlement or license-server assignment and keep any environment or workspace settings documented.</li></ul></article>
+</section>
+<section id="common-patterns" class="guide-section">
+  <p class="section-kicker">Common problems</p>
+  <h2 class="guide-section-title">Recurring vendor-wide problems</h2>
+  <p class="guide-section-copy">Keep these vendor-wide patterns in mind as you narrow down the issue.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Usage issues</h3><ul class="guide-list"><li>User launches the app but it cannot find a license: Verify the computer points at the right license source, check environment variables or config files, and confirm the server port is fixed and reachable.</li><li>PLM or repository connection errors appear: Review DNS, hostname resolution, and service connectivity first. PTC troubleshooting frequently points to infrastructure and directory settings rather than the client install alone.</li><li>Workspaces or local engineering files do not match expectations: Confirm the user&#39;s local workspace, vault path, and check-in state before making changes, especially during offboarding or rebuilds.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Setup / update tips</h3><ul class="guide-list"><li>Installer fails on prerequisites or the wrong runtime: Use the supported installer launcher, confirm the target platform is supported, and verify the required Java or bundled runtime path instead of launching inner installer files directly.</li><li>Application opens but reports an error while fetching the license: Check the PTC license server logs, validate host name, host ID, daemon path, and confirm the license server and vendor daemon both show as up in LMTOOLS.</li><li>Install from network media behaves unpredictably: PTC troubleshooting guidance points to rerunning from local media and reviewing installer log paths if the media set is incomplete or the network response is too slow.</li></ul></article>
+</section>
+<section id="account-setup" class="guide-section">
+  <p class="section-kicker">Access</p>
+  <h2 class="guide-section-title">Accounts, setup, and official tools</h2>
+  <p class="guide-section-copy">Use these official vendor pages when you need account access, downloads, or setup details from the source.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Account and setup pages</h3><ul class="guide-list"><li>PTC license management or FlexNet license server tooling</li><li>Client engineering shares for worksheets and templates</li></ul></article>
+</section>
+<section id="official-links" class="guide-section">
+  <p class="section-kicker">Links</p>
+  <h2 class="guide-section-title">Official links</h2>
+  <p class="guide-section-copy">Use these vendor resources when you need the official website.</p>
+  <div class="guide-card-grid">
+  <article class="guide-card"><h3 class="guide-card-title">Vendor links</h3><div class="guide-link-list"><a class="guide-chip-link" href="https://www.ptc.com/en/support/help/mathcad" target="_blank" rel="noreferrer">PTC Mathcad Help Centers</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Need more help?</h3><div class="guide-link-list"><a class="guide-chip-link" href="../contact.html">Open contact page</a><a class="guide-chip-link" href="../app-licensing.html">Licensing help</a><a class="guide-chip-link" href="../support.html">Support pages</a></div></article>
+</div>
+</section>
+          </div>
         </div>
       </div>
     </main>
   </div>
 
-  <script type="module" src="./guide.js"></script>
+  <script type="module" src="../siteChrome.js"></script>
 </body>
 </html>
-
-

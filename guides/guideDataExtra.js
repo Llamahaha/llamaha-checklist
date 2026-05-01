@@ -1,5 +1,6 @@
 export const vendorOrderExtra = [
   "google",
+  "spotfire",
   "hec",
   "mctrans",
   "axiom",
@@ -280,6 +281,28 @@ export const vendorGuidesExtra = {
     supportLinks: [
       { label: "Okta Help Center", url: "https://help.okta.com/" },
       { label: "Okta Verify overview", url: "https://help.okta.com/oie/en-us/content/topics/identity-engine/authenticators/configure-okta-verify.htm" }
+    ]
+  },
+  spotfire: {
+    title: "Spotfire",
+    summary: "Use this for Spotfire desktop and web sign-in, library access, and everyday analytics dashboard or visualization questions.",
+    overview:
+      "Spotfire is the analytics and dashboard platform from Cloud Software Group, with a desktop client (Spotfire Analyst) and a web client used to open shared analyses, dashboards, and data libraries.",
+    products: ["Spotfire Analyst", "Spotfire Web"],
+    sharedNotes: [
+      "Confirm the Spotfire server URL and the work account your team uses before changing local settings.",
+      "If a dashboard or library item is missing, separate web-good versus desktop-bad behavior early.",
+      "Capture the analysis or library file name when only one item is failing instead of treating Spotfire itself as broken."
+    ],
+    adminSurfaces: [
+      "Spotfire server URL or company-provided sign-in path",
+      "Spotfire library and folder permissions for shared analyses",
+      "Spotfire documentation and release notes"
+    ],
+    escalationNotes: [],
+    supportLinks: [
+      { label: "Spotfire product documentation", url: "https://docs.tibco.com/products/tibco-spotfire" },
+      { label: "Spotfire support", url: "https://support.tibco.com/" }
     ]
   }
 };

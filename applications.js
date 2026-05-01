@@ -73,20 +73,23 @@ function renderAppContent(topic) {
     ]))
   );
 
-  const context = createPageCard("issue-card single-topic-card");
-  context.append(
-    Object.assign(document.createElement("h3"), { textContent: "Where It Fits" }),
-    Object.assign(document.createElement("p"), {
-      textContent: foundIn.join("; ")
-    })
-  );
-
   const vendorLinks = normalizeLinks(topic.group.links ?? []);
+  let context = null;
   if (vendorLinks.length) {
+    context = createPageCard("issue-card single-topic-card");
+    context.append(
+      Object.assign(document.createElement("h3"), { textContent: "Vendor links" }),
+      Object.assign(document.createElement("p"), {
+        textContent: `Official ${entry.vendorTitle} resources you may need while working through this guide.`
+      })
+    );
     context.appendChild(createLinks(vendorLinks));
   }
 
-  stack.append(nextStep, context);
+  stack.append(nextStep);
+  if (context) {
+    stack.append(context);
+  }
   return stack;
 }
 

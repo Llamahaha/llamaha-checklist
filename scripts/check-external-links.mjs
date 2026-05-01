@@ -1,15 +1,16 @@
 #!/usr/bin/env node
-// Crawl every text file in the repo, collect each unique https:// URL, and
-// report broken or redirected links. Intended to be run locally (not inside
+// Crawl customer-facing text files in the repo, collect each unique https:// URL,
+// and report broken or redirected links. Intended to be run locally (not inside
 // a sandbox proxy) so outbound HTTPS actually works.
 //
 // Usage:
 //   node scripts/check-external-links.mjs          # check every URL
 //   node scripts/check-external-links.mjs --limit 20  # only check the first 20 URLs (smoke test)
 //   node scripts/check-external-links.mjs --concurrency 12
+//   node scripts/check-external-links.mjs --include-internal
 //   node scripts/check-external-links.mjs --json    # machine-readable output
 //
-// Exit code: 1 if any URLs returned 400+, 0 otherwise.
+// Exit code: 1 if any URLs fail or return 400+ other than login/bot-protected 401/403.
 
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, relative, resolve } from "node:path";
@@ -37,6 +38,12 @@ const LIMIT = args.has("limit") ? Number(args.get("limit")) : Infinity;
 const CONCURRENCY = Math.max(1, Number(args.get("concurrency") ?? 8));
 const TIMEOUT_MS = Math.max(2000, Number(args.get("timeout") ?? 10000));
 const AS_JSON = args.has("json");
+const INCLUDE_INTERNAL = args.has("include-internal");
+const IGNORE_URLS = new Set([
+  "https://fonts.googleapis.com",
+  "https://fonts.gstatic.com"
+]);
+const RESTRICTED_STATUSES = new Set([401, 403]);
 
 // File extensions we bother to scan. Everything else (images, binaries) is
 // ignored.
@@ -53,6 +60,9 @@ const SCAN_EXTENSIONS = new Set([
 
 // Paths we skip entirely.
 const SKIP_SEGMENTS = new Set([".git", "node_modules", "dist", "build"]);
+if (!INCLUDE_INTERNAL) {
+  SKIP_SEGMENTS.add("internal");
+}
 
 // Regex stops at whitespace, quotes, brackets, braces, backticks, and the
 // characters that delimit markdown links. Trailing punctuation is trimmed
@@ -98,6 +108,7 @@ function collectUrls() {
     for (const raw of matches) {
       const url = cleanUrl(raw);
       if (!/^https?:\/\//i.test(url)) continue;
+      if (IGNORE_URLS.has(url)) continue;
       // Skip anything that still contains a template interpolation or a
       // URL with no hostname after the protocol.
       if (/\$\{|\s/.test(url)) continue;
@@ -117,7 +128,7 @@ function collectUrls() {
 }
 
 async function checkUrl(url) {
-  // Try HEAD first (cheapest); fall back to GET if HEAD is blocked or 405.
+  // Try HEAD first (cheapest); fall back to GET when servers block or lie on HEAD.
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   const tryFetch = async method => {
@@ -135,7 +146,7 @@ async function checkUrl(url) {
     let response;
     try {
       response = await tryFetch("HEAD");
-      if (response.status === 405 || response.status === 501) {
+      if (!response.ok || response.status === 405 || response.status === 501) {
         response = await tryFetch("GET");
       }
     } catch {
@@ -180,6 +191,7 @@ async function runPool(items, worker, concurrency) {
 
 function classify(result) {
   if (result.status === 0) return "error";
+  if (RESTRICTED_STATUSES.has(result.status)) return "restricted";
   if (result.status >= 500) return "server-error";
   if (result.status >= 400) return "client-error";
   if (result.redirected) return "redirect";
@@ -191,6 +203,7 @@ function render(results, urlToFiles) {
     "error": [],
     "server-error": [],
     "client-error": [],
+    "restricted": [],
     "redirect": [],
     "ok": []
   };
@@ -205,11 +218,13 @@ function render(results, urlToFiles) {
       redirect: buckets.redirect.length,
       client_error: buckets["client-error"].length,
       server_error: buckets["server-error"].length,
+      restricted: buckets.restricted.length,
       error: buckets.error.length,
       issues: [
         ...buckets.error,
         ...buckets["server-error"],
         ...buckets["client-error"],
+        ...buckets.restricted,
         ...buckets.redirect
       ].map(result => ({
         ...result,
@@ -237,6 +252,7 @@ function render(results, urlToFiles) {
       `OK: ${buckets.ok.length}, ` +
       `Redirect: ${buckets.redirect.length}, ` +
       `4xx: ${buckets["client-error"].length}, ` +
+      `Restricted: ${buckets.restricted.length}, ` +
       `5xx: ${buckets["server-error"].length}, ` +
       `Errors: ${buckets.error.length}.`
   );
@@ -244,6 +260,7 @@ function render(results, urlToFiles) {
   section("Network errors", buckets.error);
   section("Server errors (5xx)", buckets["server-error"]);
   section("Broken (4xx)", buckets["client-error"]);
+  section("Restricted or bot-protected (manual check)", buckets.restricted);
   section("Redirects", buckets.redirect);
 }
 
@@ -267,7 +284,7 @@ async function main() {
   render(results, urlToFiles);
 
   const hasFailures = results.some(result =>
-    result.status === 0 || result.status >= 400
+    result.status === 0 || (result.status >= 400 && !RESTRICTED_STATUSES.has(result.status))
   );
   process.exit(hasFailures ? 1 : 0);
 }

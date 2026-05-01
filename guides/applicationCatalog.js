@@ -594,7 +594,7 @@ const baseApplicationCatalog = {
   ],
   egnyte: [
     {
-      name: "Egnyte Web UI / Admin",
+      name: "Egnyte Web Portal",
       focus: "Primary admin and browser-based content-management surface where user type, groups, and folder permissions are controlled.",
       licensing: "Choose the right user type, usually Power User for employees and Standard User for external collaborators, before granting access.",
       install: "No desktop install is required, but validate SSO, folder permissions, shared links, and admin visibility in the web UI.",
@@ -686,7 +686,7 @@ const slugOverrides = {
     "QuickBooks Online": "quickbooks-online"
   },
   egnyte: {
-    "Egnyte Web UI / Admin": "egnyte-web-admin",
+    "Egnyte Web Portal": "egnyte-web-admin",
     "Egnyte Desktop App": "egnyte-desktop-app"
   },
   fortinet: {

@@ -255,7 +255,7 @@ export const appGuideContentExtra = {
       },
       relatedLinks: [
         { label: "Autodesk Vault help", url: "https://help.autodesk.com/view/VAULT/2026/ENU/" },
-        { label: "Vault client-server compatibility", url: "https://knowledge.autodesk.com/support/vault-products/learn-explore/caas/sfdcarticles/sfdcarticles/Autodesk-Vault-and-AutoCAD-Compatibility.html" }
+        { label: "Vault client-server compatibility", url: "https://help.autodesk.com/view/CONNECT/ENU/?caas=caas%2Fsfdcarticles%2Fsfdcarticles%2FVault-compatibility-from-Vault-Server-and-Vault-client-across-different-editions.html" }
       ]
     }
   },
@@ -472,7 +472,7 @@ export const appGuideContentExtra = {
         "Most Vantagepoint tickets are role, approval-workflow, or time-entry configuration issues, not product bugs."
       ],
       askFirst: [
-        "Is the user on Vantagepoint cloud (https://cloud.deltek.com), on-prem web, or the mobile time app?",
+        "Is the user on the company Vantagepoint website, an on-prem web page, or the mobile time app?",
         "Is the issue sign-in, missing projects or charge codes, approval routing, time or expense entry, reports, or billing?",
         "What Vantagepoint role is assigned to the user, and what role do they need?",
         "Did the issue begin after a role change, period close, workflow change, or period reset?"
@@ -688,7 +688,7 @@ export const appGuideContentExtra = {
       supportCheckpoints: [
         "Confirm the Box account shown in Box Drive matches what https://app.box.com shows for the user.",
         "Check that Box Drive's drive letter or mount is present before assuming files are missing.",
-        "If network is blocking Box, confirm https://*.box.com and https://*.boxcdn.net are reachable from the workstation."
+        "If the network is blocking Box, confirm the company's Box service is reachable from the computer."
       ],
       commonIssues: [
         issue(

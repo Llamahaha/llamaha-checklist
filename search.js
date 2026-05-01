@@ -1,4 +1,5 @@
 import { buildSearchIndex } from "./searchIndex.js";
+import { publicizeText } from "./resourceCommon.js";
 
 const searchForm = document.getElementById("searchForm");
 const searchInput = document.getElementById("searchInput");
@@ -31,7 +32,7 @@ function renderResults(query = "", category = "all") {
 
   if (!normalizedQuery) {
     resultsLabel.textContent = "Start with a search";
-    resultCount.textContent = "Try a product name, Cloud PC, mobile app, browser, vendor, shortcut, cache, or help page.";
+    resultCount.textContent = "Try a product name, Cloud PC, mobile app, browser, vendor, shortcut, saved website data, or help page.";
     return;
   }
 
@@ -57,14 +58,14 @@ function renderResults(query = "", category = "all") {
     card.className = "issue-card";
 
     const title = document.createElement("h3");
-    title.textContent = item.title;
+    title.textContent = publicizeText(item.title);
 
     const meta = document.createElement("p");
     meta.className = "result-meta";
-    meta.textContent = item.typeLabel;
+    meta.textContent = publicizeText(item.typeLabel);
 
     const text = document.createElement("p");
-    text.textContent = item.text;
+    text.textContent = publicizeText(item.text);
 
     const link = document.createElement("a");
     link.className = "hub-link";

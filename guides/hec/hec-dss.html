@@ -1,42 +1,120 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hec-dss Guide</title>
+  <title>HEC-DSS | HEC App Help | Llamaha</title>
+  <meta name="description" content="Use this guide when HEC-DSS will not open the study data you expect, acts differently after a version change, or fails when you try to run or review a model.">
+  <link rel="canonical" href="https://llamaha.com/guides/hec/hec-dss.html">
+  <meta property="og:title" content="HEC-DSS | HEC App Help | Llamaha">
+  <meta property="og:description" content="Use this guide when HEC-DSS will not open the study data you expect, acts differently after a version change, or fails when you try to run or review a model.">
+  <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
   <link rel="stylesheet" href="../guide.css">
+  <style>html{scroll-behavior:smooth}</style>
 </head>
-<body data-page-type="app" data-vendor="hec" data-app="hec-dss" data-root-path="../..">
+<body data-page-type="app" data-vendor="hec" data-app="hec-dss" data-root-path="../.." data-render-mode="static">
   <div class="guide-shell">
     <header class="guide-header">
-      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"></nav>
-      <a id="guideBackLink" class="back-link" href="../hec.html">Back to Vendor</a>
+      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"><a class="guide-breadcrumb-link" href="../../index.html">Home</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../vendor-guides.html">App Help</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../guides/hec.html">HEC</a><span class="guide-breadcrumb-sep">&gt;</span><strong class="guide-breadcrumb-current">HEC-DSS</strong></nav>
+      <a id="guideBackLink" class="back-link" href="../hec.html">Back to HEC</a>
       <div class="guide-brand">
         <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
         <div>
-          <p id="guideKicker" class="section-kicker"></p>
-          <h1 id="guideTitle"></h1>
-          <p id="guideSummary"></p>
+          <p id="guideKicker" class="section-kicker">HEC Application</p>
+          <h1 id="guideTitle">HEC-DSS</h1>
+          <p id="guideSummary">Use this guide when HEC-DSS will not open the study data you expect, acts differently after a version change, or fails when you try to run or review a model.</p>
+          <p class="guide-review-label" id="guideReviewLabel">Reviewed April 2026</p>
         </div>
       </div>
     </header>
 
     <main class="guide-layout">
       <div class="guide-main">
-        <div id="guideJumpLinks" class="guide-jump-shell" hidden></div>
+        <div id="guideJumpLinks" class="guide-jump-shell">
+  <nav class="guide-jump-links" aria-label="Jump to a section"><a class="guide-jump-link" href="#overview">Overview</a><a class="guide-jump-link" href="#used-for">What this app is usually used for</a><a class="guide-jump-link" href="#common-problems">Common problems</a><a class="guide-jump-link" href="#first-things-to-try">First things to try</a><a class="guide-jump-link" href="#do-not-yet">Do not do this yet / warnings</a><a class="guide-jump-link" href="#what-support-needs">What details support needs</a><a class="guide-jump-link" href="#licensing-access">Licensing / access notes</a><a class="guide-jump-link" href="#more-setup-checks">More setup checks</a><a class="guide-jump-link" href="#related-guides">Related guides</a></nav>
+</div>
         <div class="guide-main-scroll">
-          <div id="guideContent" class="guide-content"></div>
+          <div id="guideContent" class="guide-content">
+            <section id="overview" class="guide-section">
+  <p class="section-kicker">Application Guide</p>
+  <h2 class="guide-section-title">Overview</h2>
+  <p class="guide-section-copy">Use this guide when HEC-DSS will not open the study data you expect, acts differently after a version change, or fails when you try to run or review a model.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Overview</h3><div class="guide-copy-stack"><p class="guide-card-copy">HEC-DSS is used for HEC data-storage workflows and DSS-backed project content used by related HEC tools.</p><p class="guide-card-copy">Most HEC-DSS issues come from version differences, missing project data paths, or one study or data file behaving differently than the rest.</p></div></article>
+</section>
+<section id="used-for" class="guide-section">
+  <p class="section-kicker">Plain English</p>
+  <h2 class="guide-section-title">What this app is usually used for</h2>
+  <p class="guide-section-copy">A short, jargon-light description so users know they are on the right page.</p>
+  <article class="guide-card"><h3 class="guide-card-title">What this app is usually used for</h3><div class="guide-copy-stack"><p class="guide-card-copy">Hydrologic Engineering Center data-storage format and tooling used by several HEC workflows to store time-series and paired data.</p><p class="guide-card-copy">It is part of the HEC family covered in our app help.</p></div></article>
+</section>
+<section id="common-problems" class="guide-section">
+  <p class="section-kicker">Common problems</p>
+  <h2 class="guide-section-title">Common problems</h2>
+  <p class="guide-section-copy">These are the problems people run into most often with this app.</p>
+  <div class="guide-card-grid"><article class="guide-card issue-card">
+  <h3 class="guide-card-title">One study or project opens incorrectly</h3>
+  <p class="guide-card-copy">The app launches, but one DSS or project file, study, or project will not open or does not behave the way you expect.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Test a second known-good file and compare the file path first so you can separate a data problem from an app problem.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the exact study or data file name, where it is stored, and the message or screenshot you see.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">The app feels wrong after a version or computer change</h3>
+  <p class="guide-card-copy">The same HEC-DSS workflow used to work, but now looks different or fails after a reinstall, update, or computer move.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Confirm the approved version and compare the same project on another working computer before changing project data.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the current version, the previous version if you know it, and whether another approved computer still works.</p></article>
+</article></div>
+</section>
+<section id="first-things-to-try" class="guide-section">
+  <p class="section-kicker">First things to try</p>
+  <h2 class="guide-section-title">First things to try</h2>
+  <p class="guide-section-copy">Try these stable, low-risk steps before changing the app or computer.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Quick checks before you change anything</h3><ul class="guide-list"><li>Did the problem start after moving to a new computer, changing versions, or opening a different HEC-DSS project?</li><li>Does the issue affect one DSS or project file or every HEC-DSS workflow on the computer?</li><li>Are the project files stored locally, on a network path, or in a shared engineering folder?</li><li>Can another approved computer open the same study or data set?</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Try these fixes first</h3><ul class="guide-list"><li>Compare the failing study or data file to a second known-good one before reinstalling the app.</li><li>Keep the exact version and one affected project name ready before contacting support.</li><li>If files are on a network path, confirm the path is still reachable from the computer first.</li></ul></article>
+</section>
+<section id="do-not-yet" class="guide-section">
+  <p class="section-kicker">Slow down</p>
+  <h2 class="guide-section-title">Do not do this yet / warnings</h2>
+  <p class="guide-section-copy">Skip these steps until you have collected the information below or until support asks you to. They can lose data or hide the real problem.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Avoid these until support says it is safe</h3><ul class="guide-list"><li>Preserve DSS data files and any linked project references before removing related local tooling.</li></ul></article>
+</section>
+<section id="what-support-needs" class="guide-section">
+  <p class="section-kicker">What support needs</p>
+  <h2 class="guide-section-title">What details support needs</h2>
+  <p class="guide-section-copy">Collect these details before you contact support. The more you send up front, the less back-and-forth you will need.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Send these details</h3><ul class="guide-list"><li>A screenshot of the exact HEC-DSS message or screen where the problem happens.</li><li>The exact project, study, or data file name involved in the problem.</li><li>The HEC-DSS version shown in the app.</li><li>A note about whether another approved computer can open the same data.</li></ul></article>
+</section>
+<section id="licensing-access" class="guide-section">
+  <p class="section-kicker">Licensing &amp; access</p>
+  <h2 class="guide-section-title">Licensing / access notes</h2>
+  <p class="guide-section-copy">Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Licensing / access checks</h3><ul class="guide-list"><li>HEC-DSS is generally used without a separate paid end-user seat, so support usually depends on the approved version and the project data you are opening.</li><li>If the app opens but the study does not, note the exact project or data file name before changing the installation.</li><li>If your team standardizes on a specific version, include that version when you contact support.</li></ul></article>
+</section>
+<section id="more-setup-checks" class="guide-section">
+  <p class="section-kicker">More checks</p>
+  <h2 class="guide-section-title">More setup checks</h2>
+  <p class="guide-section-copy">These are install, update, and follow-up checks that are usually safe after the first checks above.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Install / update basics</h3><ul class="guide-list"><li>Use the approved HEC-DSS version for your team and restart the computer after install or update if Windows asks you to.</li><li>Open HEC-DSS first, then test one smaller known-good study or data file before you open the project that is failing.</li><li>If the workflow depends on shared GIS, terrain, or DSS content, confirm those paths are still available after setup.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">More things to check</h3><ul class="guide-list"><li>Test a second known-good study or data set before rebuilding the app.</li><li>Capture the exact file path, version, and whether another approved computer opens the same data.</li><li>Preserve project folders and exported results before repair or uninstall work.</li></ul></article>
+</section>
+<section id="related-guides" class="guide-section">
+  <p class="section-kicker">Related guides</p>
+  <h2 class="guide-section-title">Related guides</h2>
+  <p class="guide-section-copy">Use these links to keep moving without losing context.</p>
+  <div class="guide-card-grid">
+  <article class="guide-card"><h3 class="guide-card-title">Back to vendor</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/hec.html">Back to HEC</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Related apps</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/hec/hec-hms.html">HEC-HMS</a><a class="guide-chip-link" href="../../guides/hec/hec-ras.html">HEC-RAS</a><a class="guide-chip-link" href="../../guides/hec/hec-dssvue.html">HEC-DSSVue</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Need more help?</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../contact.html">Open contact page</a><a class="guide-chip-link" href="../../support.html">Support pages</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Support articles</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../articles/app-will-not-open.html">App crashed or will not open</a><a class="guide-chip-link" href="../../articles/license-or-signin-error.html">License or sign-in error</a><a class="guide-chip-link" href="../../articles/project-files-will-not-sync.html">Project files will not sync</a><a class="guide-chip-link" href="../../articles/plotting-pdf-printer-issue.html">Plotting, PDF, or printer issue</a><a class="guide-chip-link" href="../../articles/slow-or-freezing-on-a-model.html">Slow or freezing on a model</a><a class="guide-chip-link" href="../../articles/remote-access-issue.html">Remote access issue</a><a class="guide-chip-link" href="../../articles/new-computer-new-user-new-phone-setup.html">New computer, new user, or new phone setup</a><a class="guide-chip-link" href="../../articles/before-contacting-it-what-to-collect.html">Before contacting IT: what to collect</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Official / vendor links</h3><div class="guide-link-list"><a class="guide-chip-link" href="https://www.hec.usace.army.mil/software/hec-dss/" target="_blank" rel="noreferrer">HEC-DSS</a></div></article>
+</div>
+</section>
+          </div>
         </div>
       </div>
     </main>
   </div>
 
-  <script src="../guideFallback.js"></script>
-  <script type="module" src="../guide.js"></script>
+  <script type="module" src="../../siteChrome.js"></script>
 </body>
 </html>
-

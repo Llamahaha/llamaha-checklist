@@ -1,3 +1,5 @@
+import { publicizeText } from "./resourceCommon.js";
+
 export function createElement(tagName, options = {}) {
   const element = document.createElement(tagName);
 
@@ -5,7 +7,7 @@ export function createElement(tagName, options = {}) {
     element.className = options.className;
   }
   if (options.textContent !== undefined) {
-    element.textContent = options.textContent;
+    element.textContent = publicizeText(options.textContent);
   }
   if (options.id) {
     element.id = options.id;

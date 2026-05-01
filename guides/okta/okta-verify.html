@@ -3,39 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>okta-verify Guide</title>
+  <title>Okta Verify | Okta App Help | Llamaha</title>
+  <meta name="description" content="Use this guide when Okta Verify is not approving sign-ins after a new phone, you are not getting Okta pushes, or your FastPass device is not trusted.">
+  <link rel="canonical" href="https://llamaha.com/guides/okta/okta-verify.html">
+  <meta property="og:title" content="Okta Verify | Okta App Help | Llamaha">
+  <meta property="og:description" content="Use this guide when Okta Verify is not approving sign-ins after a new phone, you are not getting Okta pushes, or your FastPass device is not trusted.">
+  <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
   <link rel="stylesheet" href="../guide.css">
+  <style>html{scroll-behavior:smooth}</style>
 </head>
-<body data-page-type="app" data-vendor="okta" data-app="okta-verify" data-root-path="../..">
+<body data-page-type="app" data-vendor="okta" data-app="okta-verify" data-root-path="../.." data-render-mode="static">
   <div class="guide-shell">
     <header class="guide-header">
-      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"></nav>
-      <a id="guideBackLink" class="back-link" href="../okta.html">Back to Vendor</a>
+      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"><a class="guide-breadcrumb-link" href="../../index.html">Home</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../vendor-guides.html">App Help</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../guides/okta.html">Okta</a><span class="guide-breadcrumb-sep">&gt;</span><strong class="guide-breadcrumb-current">Okta Verify</strong></nav>
+      <a id="guideBackLink" class="back-link" href="../okta.html">Back to Okta</a>
       <div class="guide-brand">
         <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
         <div>
-          <p id="guideKicker" class="section-kicker"></p>
-          <h1 id="guideTitle"></h1>
-          <p id="guideSummary"></p>
+          <p id="guideKicker" class="section-kicker">Okta Application</p>
+          <h1 id="guideTitle">Okta Verify</h1>
+          <p id="guideSummary">Use this guide when Okta Verify is not approving sign-ins after a new phone, you are not getting Okta pushes, or your FastPass device is not trusted.</p>
+          <p class="guide-review-label" id="guideReviewLabel">Reviewed April 2026</p>
         </div>
       </div>
     </header>
 
     <main class="guide-layout">
       <div class="guide-main">
-        <div id="guideJumpLinks" class="guide-jump-shell" hidden></div>
+        <div id="guideJumpLinks" class="guide-jump-shell">
+  <nav class="guide-jump-links" aria-label="Jump to a section"><a class="guide-jump-link" href="#overview">Overview</a><a class="guide-jump-link" href="#used-for">What this app is usually used for</a><a class="guide-jump-link" href="#common-problems">Common problems</a><a class="guide-jump-link" href="#first-things-to-try">First things to try</a><a class="guide-jump-link" href="#do-not-yet">Do not do this yet / warnings</a><a class="guide-jump-link" href="#what-support-needs">What details support needs</a><a class="guide-jump-link" href="#licensing-access">Licensing / access notes</a><a class="guide-jump-link" href="#more-setup-checks">More setup checks</a><a class="guide-jump-link" href="#related-guides">Related guides</a></nav>
+</div>
         <div class="guide-main-scroll">
-          <div id="guideContent" class="guide-content"></div>
+          <div id="guideContent" class="guide-content">
+            <section id="overview" class="guide-section">
+  <p class="section-kicker">Application Guide</p>
+  <h2 class="guide-section-title">Overview</h2>
+  <p class="guide-section-copy">Use this guide when Okta Verify is not approving sign-ins after a new phone, you are not getting Okta pushes, or your FastPass device is not trusted.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Overview</h3><div class="guide-copy-stack"><p class="guide-card-copy">Okta Verify is the second-factor app many companies pair with Okta for push approvals, one-time passcode codes, and (with FastPass) device-based sign-in.</p><p class="guide-card-copy">Most Okta Verify tickets are &#39;I got a new phone&#39; and the fix is an Okta support team factor reset plus a fresh setup link.</p></div></article>
+</section>
+<section id="used-for" class="guide-section">
+  <p class="section-kicker">Plain English</p>
+  <h2 class="guide-section-title">What this app is usually used for</h2>
+  <p class="guide-section-copy">A short, jargon-light description so users know they are on the right page.</p>
+  <article class="guide-card"><h3 class="guide-card-title">What this app is usually used for</h3><div class="guide-copy-stack"><p class="guide-card-copy">Mobile multi-factor authentication app used for Okta-protected sign-ins including push notifications, number matching, and verified push.</p><p class="guide-card-copy">It is part of the Okta family covered in our app help.</p></div></article>
+</section>
+<section id="common-problems" class="guide-section">
+  <p class="section-kicker">Common problems</p>
+  <h2 class="guide-section-title">Common problems</h2>
+  <p class="guide-section-copy">These are the problems people run into most often with this app.</p>
+  <div class="guide-card-grid"><article class="guide-card issue-card">
+  <h3 class="guide-card-title">Got a new phone and Okta Verify isn&#39;t working</h3>
+  <p class="guide-card-copy">You have a new phone and Okta will not let you sign in.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Contact IT to verify your identity, then either use your firm&#39;s self-service factor reset or have IT factor-reset Okta Verify and send a fresh setup link.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send your name, the new phone model, and the apps you are blocked from.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">Okta pushes are not arriving</h3>
+  <p class="guide-card-copy">Okta Verify is enrolled but no push arrives.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Check notification permissions for Okta Verify in phone settings, confirm internet connectivity, and refresh the app.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send your phone OS, the Okta Verify version, and whether notifications are enabled.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">FastPass enrollment is failing</h3>
+  <p class="guide-card-copy">Your firm uses FastPass but enrollment will not complete or your device is not trusted.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Confirm Okta Verify is current and that any company device management or device-registration step your firm requires is completed.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send your phone OS, Okta Verify version, and whether your phone is enrolled in your firm&#39;s company device management.</p></article>
+</article></div>
+</section>
+<section id="first-things-to-try" class="guide-section">
+  <p class="section-kicker">First things to try</p>
+  <h2 class="guide-section-title">First things to try</h2>
+  <p class="guide-section-copy">Try these stable, low-risk steps before changing the app or computer.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Quick checks before you change anything</h3><ul class="guide-list"><li>Is this a new enrollment, a phone replacement, a reactivation after reinstalling, or a failing push?</li><li>Does your company use Okta FastPass, or just push and one-time passcode?</li><li>Do you still have your old phone, and does it still receive Okta pushes?</li><li>Which apps are you trying to reach when Okta blocks you?</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Try these fixes first</h3><ul class="guide-list"><li>If you still have the old phone, keep it nearby — IT may be able to verify you with a push to it.</li><li>Check that notifications are enabled for Okta Verify in your phone settings.</li><li>If your firm offers a self-service Okta dashboard, try the factor reset there before contacting IT.</li></ul></article>
+</section>
+<section id="do-not-yet" class="guide-section">
+  <p class="section-kicker">Slow down</p>
+  <h2 class="guide-section-title">Do not do this yet / warnings</h2>
+  <p class="guide-section-copy">Skip these steps until you have collected the information below or until support asks you to. They can lose data or hide the real problem.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Avoid these until support says it is safe</h3><ul class="guide-list"><li>Before removing Okta Verify, confirm another approved factor exists, and have support reset the factor in Okta if the phone is being replaced.</li></ul></article>
+</section>
+<section id="what-support-needs" class="guide-section">
+  <p class="section-kicker">What support needs</p>
+  <h2 class="guide-section-title">What details support needs</h2>
+  <p class="guide-section-copy">Collect these details before you contact support. The more you send up front, the less back-and-forth you will need.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Send these details</h3><ul class="guide-list"><li>A note about whether you still have the old phone.</li><li>Your phone model and OS version.</li><li>Whether notifications for Okta Verify are enabled in phone settings.</li><li>A screenshot of the Okta prompt or error, if you can take one.</li></ul></article>
+</section>
+<section id="licensing-access" class="guide-section">
+  <p class="section-kicker">Licensing &amp; access</p>
+  <h2 class="guide-section-title">Licensing / access notes</h2>
+  <p class="guide-section-copy">Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Licensing / access checks</h3><ul class="guide-list"><li>Okta Verify is free to install — your access depends on your company&#39;s Okta organization and your enrollment.</li><li>If you are switching phones, IT must verify your identity before resetting Okta factors.</li><li>FastPass requires the Okta Verify app plus any device registration steps your firm requires (sometimes through company device management).</li></ul></article>
+</section>
+<section id="more-setup-checks" class="guide-section">
+  <p class="section-kicker">More checks</p>
+  <h2 class="guide-section-title">More setup checks</h2>
+  <p class="guide-section-copy">These are install, update, and follow-up checks that are usually safe after the first checks above.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Install / update basics</h3><ul class="guide-list"><li>Install Okta Verify from the App Store or Google Play.</li><li>When IT sends you an Okta setup link, open it on the new phone and follow the prompts to add your work account.</li><li>Allow notifications so push approvals can reach you.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">More things to check</h3><ul class="guide-list"><li>Verify identity independently (HR, manager) before resetting Okta factors.</li><li>Prefer factor reset over user reset — a user reset breaks other Okta apps unnecessarily.</li><li>If FastPass is used, confirm whether device registration also needs re-enrollment, not just the factor.</li></ul></article>
+</section>
+<section id="related-guides" class="guide-section">
+  <p class="section-kicker">Related guides</p>
+  <h2 class="guide-section-title">Related guides</h2>
+  <p class="guide-section-copy">Use these links to keep moving without losing context.</p>
+  <div class="guide-card-grid">
+  <article class="guide-card"><h3 class="guide-card-title">Back to vendor</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/okta.html">Back to Okta</a></div></article>
+  
+  <article class="guide-card"><h3 class="guide-card-title">Need more help?</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../contact.html">Open contact page</a><a class="guide-chip-link" href="../../support.html">Support pages</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Support articles</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../articles/app-will-not-open.html">App crashed or will not open</a><a class="guide-chip-link" href="../../articles/license-or-signin-error.html">License or sign-in error</a><a class="guide-chip-link" href="../../articles/project-files-will-not-sync.html">Project files will not sync</a><a class="guide-chip-link" href="../../articles/plotting-pdf-printer-issue.html">Plotting, PDF, or printer issue</a><a class="guide-chip-link" href="../../articles/slow-or-freezing-on-a-model.html">Slow or freezing on a model</a><a class="guide-chip-link" href="../../articles/remote-access-issue.html">Remote access issue</a><a class="guide-chip-link" href="../../articles/new-computer-new-user-new-phone-setup.html">New computer, new user, or new phone setup</a><a class="guide-chip-link" href="../../articles/before-contacting-it-what-to-collect.html">Before contacting IT: what to collect</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Official / vendor links</h3><div class="guide-link-list"><a class="guide-chip-link" href="https://help.okta.com/en-us/Content/Topics/Mobile/okta-verify-overview.htm" target="_blank" rel="noreferrer">Okta Verify documentation</a><a class="guide-chip-link" href="https://support.okta.com/" target="_blank" rel="noreferrer">Okta Help Center</a></div></article>
+</div>
+</section>
+          </div>
         </div>
       </div>
     </main>
   </div>
 
-  <script src="../guideFallback.js"></script>
-  <script type="module" src="../guide.js"></script>
+  <script type="module" src="../../siteChrome.js"></script>
 </body>
 </html>

@@ -151,23 +151,90 @@ function renderReviewLabel(label = defaultReviewLabel) {
 }
 
 function publicizeText(value = "") {
-  return value
+  return String(value)
+    .replace(/https:\/\/&lt;company&gt;\.webex\.com/gi, "your company's Webex site")
+    .replace(/https:\/\/<company>\.webex\.com/gi, "your company's Webex site")
+    .replace(/https:\/\/\*\.box\.com(?:\s+and\s+https:\/\/\*\.boxcdn\.net)?/gi, "your company's Box service")
+    .replace(/https:\/\/cloud\.deltek\.com/gi, "your company's Deltek Vantagepoint address")
     .replace(/\bOWA\b/g, "Outlook on the web")
     .replace(/\bUPN\b/g, "work account email")
     .replace(/\bclient-standard\b/gi, "company-approved")
+    .replace(/\bdesktop client\b/gi, "desktop app")
+    .replace(/\bweb client\b/gi, "web app")
+    .replace(/\bclient app\b/gi, "app")
+    .replace(/\bclient apps\b/gi, "apps")
     .replace(/\btenant\b/gi, "organization")
-    .replace(/\bworkstation\b/gi, "computer")
-    .replace(/\bworkstations\b/gi, "computers")
     .replace(/\bknown-good peer\b/gi, "another user whose app is working")
     .replace(/\bknown-good user\b/gi, "another user whose app is working")
     .replace(/\bknown-good workstation\b/gi, "another computer that works correctly")
+    .replace(/\bworkstations\b/gi, "computers")
+    .replace(/\bworkstation\b/gi, "computer")
     .replace(/\bhandoff\b/gi, "setup")
     .replace(/\bAdmin Console\b/g, "Adobe account setup")
-    .replace(/\bBBID\b/g, "Bluebeam ID");
+    .replace(/\badmin console\b/gi, "account setup page")
+    .replace(/\badmin center\b/gi, "account center")
+    .replace(/\bAdmin Center\b/g, "Account Center")
+    .replace(/\bproject admin\b/gi, "project owner")
+    .replace(/\bIT admin\b/gi, "IT")
+    .replace(/\badmins\b/gi, "support team")
+    .replace(/\badmin\b/gi, "support team")
+    .replace(/\bBBID\b/g, "Bluebeam ID")
+    .replace(/\bSSO\b/g, "company sign-in")
+    .replace(/\bMFA\b/g, "multi-factor sign-in")
+    .replace(/\bMDM\b/g, "company device management")
+    .replace(/\bTOTP\b/g, "one-time passcode")
+    .replace(/\bvCPU\b/g, "processor")
+    .replace(/\bIRM\b/g, "protected-library policy")
+    .replace(/\bDLP\b/g, "data-protection policy")
+    .replace(/\bConditional Access\b/g, "company sign-in policy")
+    .replace(/\bEntra\b/g, "Microsoft work sign-in")
+    .replace(/\bAzure AD\b/g, "Microsoft work sign-in")
+    .replace(/\bAAD\b/g, "Microsoft work sign-in")
+    .replace(/\bMSI\b/g, "installer")
+    .replace(/\bidentity provider\b/gi, "company sign-in page")
+    .replace(/\bdeployments\b/gi, "setup options")
+    .replace(/\bdeployed\b/gi, "installed")
+    .replace(/\bdeploying\b/gi, "setting up")
+    .replace(/\bdeployment\b/gi, "setup")
+    .replace(/\bdeploy\b/gi, "install")
+    .replace(/\bprovisioned\b/gi, "set up")
+    .replace(/\bprovisioning\b/gi, "setup")
+    .replace(/\bdatasources\b/gi, "data sources")
+    .replace(/\bdatasource\b/gi, "data source")
+    .replace(/\bstale\b/gi, "out of date")
+    .replace(/\bcaches\b/gi, "saved local data")
+    .replace(/\bcache\b/gi, "saved local data")
+    .replace(/\bregistry edits\b/gi, "advanced system changes")
+    .replace(/\bregistry\b/gi, "system settings")
+    .replace(/\bOST\b/g, "local Outlook data file")
+    .replace(/\bPSTs\b/g, "PST files")
+    .replace(/\bUNC paths\b/gi, "shared network paths")
+    .replace(/\bUNC path\b/gi, "shared network path")
+    .replace(/\ban multi-factor sign-in\b/gi, "a multi-factor sign-in")
+    .replace(/\bcompany sign-in sign-in\b/gi, "company sign-in")
+    .replace(/\bmulti-factor sign-in sign-in\b/gi, "multi-factor sign-in");
 }
 
 function publicizeItems(items = []) {
   return unique(items.map(item => publicizeText(item)).filter(Boolean));
+}
+
+function uniqueLinks(items = []) {
+  const seen = new Set();
+  return (items || [])
+    .filter(Boolean)
+    .map(item => ({
+      ...item,
+      label: publicizeText(item.label ?? ""),
+      url: item.url
+    }))
+    .filter(item => {
+      if (!item.label || !item.url) return false;
+      const key = `${item.label}\u0000${item.url}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
 }
 
 function defaultOverview() {
@@ -266,10 +333,10 @@ function buildAppModel() {
   const publicContent = getPublicGuideContent(vendorSlug, appSlug);
   const hasPublicGuide = Object.keys(publicContent).length > 0;
   const overview = publicContent.overview?.length
-    ? publicContent.overview
+    ? publicizeItems(publicContent.overview)
     : (extra.overview?.length ? publicizeItems(extra.overview) : defaultOverview());
   const supportCheckpoints = publicContent.supportCheckpoints?.length
-    ? publicContent.supportCheckpoints
+    ? publicizeItems(publicContent.supportCheckpoints)
     : publicizeItems([...(extra.supportCheckpoints ?? []), ...(app.supportChecks ?? [])]);
   const commonIssuesSource = publicContent.commonIssues?.length
     ? publicContent.commonIssues
@@ -278,7 +345,7 @@ function buildAppModel() {
 
   let licensing;
   if (Array.isArray(publicContent.licensing)) {
-    licensing = publicContent.licensing;
+    licensing = publicizeItems(publicContent.licensing);
   } else {
     const licensingItems = publicizeItems([app.licensing, ...(extra.licensing ?? [])]);
     licensing = licensingItems.length ? licensingItems : defaultLicensing();
@@ -288,22 +355,22 @@ function buildAppModel() {
     name: app.name,
     summary: publicizeText(publicContent.summary ?? extra.summary ?? app.summary ?? app.focus ?? `Use this page for help with ${app.name}.`),
     overview: overview.length ? overview : defaultOverview(),
-    highlights: publicContent.highlights?.length ? publicContent.highlights : (hasPublicGuide ? [] : publicizeItems(extra.highlights ?? [])),
+    highlights: publicContent.highlights?.length ? publicizeItems(publicContent.highlights) : (hasPublicGuide ? [] : publicizeItems(extra.highlights ?? [])),
     askFirst: publicContent.askFirst?.length
-      ? publicContent.askFirst
+      ? publicizeItems(publicContent.askFirst)
       : (publicizeItems(extra.askFirst ?? []).length ? publicizeItems(extra.askFirst ?? []) : defaultAskFirst()),
     licensing,
     mobileSetup: publicContent.mobileSetup?.length
-      ? publicContent.mobileSetup
-      : (publicContent.phoneSetup?.length ? publicContent.phoneSetup : []),
+      ? publicizeItems(publicContent.mobileSetup)
+      : (publicContent.phoneSetup?.length ? publicizeItems(publicContent.phoneSetup) : []),
     install: publicContent.install?.length
-      ? publicContent.install
+      ? publicizeItems(publicContent.install)
       : (publicizeItems([app.install, ...(extra.install ?? [])]).length ? publicizeItems([app.install, ...(extra.install ?? [])]) : defaultInstall()),
     supportCheckpoints: supportCheckpoints.length ? supportCheckpoints : defaultSupportCheckpoints(),
     commonIssues: commonIssues.length ? commonIssues : defaultCommonIssues().map(normalizeIssue),
-    supportArtifacts: publicContent.supportArtifacts?.length ? publicContent.supportArtifacts : defaultSupportArtifacts(),
+    supportArtifacts: publicContent.supportArtifacts?.length ? publicizeItems(publicContent.supportArtifacts) : defaultSupportArtifacts(),
     relatedApps: extra.relatedApps?.length ? extra.relatedApps : apps.filter(item => item.slug !== appSlug).slice(0, 3).map(item => ({ vendor: vendorSlug, app: item.slug })),
-    relatedLinks: unique([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? []), ...(publicContent.relatedLinks ?? [])]),
+    relatedLinks: uniqueLinks([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? []), ...(publicContent.relatedLinks ?? [])]),
     lastReviewed: publicContent.lastReviewed ?? defaultReviewLabel
   };
 }
@@ -318,7 +385,7 @@ function buildSupportChecklist(model) {
     "- Screenshot or exact error wording:",
     "- Does the browser version work, if one exists?",
     "- Does the same task work on another computer, phone, Cloud PC, VPN path, or Citrix session?",
-    "- Exact file, project, site URL, mailbox, printer, datasource, company file, or path involved:",
+    "- Exact file, project, site URL, mailbox, printer, data source, company file, or path involved:",
     "",
     "Guide-specific details to include:",
     ...model.supportArtifacts.map(item => `- ${item}`)
@@ -451,7 +518,7 @@ function renderVendorAppFinder() {
     link.dataset.searchText = getVendorAppSearchText(item);
     link.append(
       el("strong", "", item.name),
-      el("span", "guide-app-chip-copy", item.summary ?? item.focus ?? "Open the product guide.")
+      el("span", "guide-app-chip-copy", publicizeText(item.summary ?? item.focus ?? "Open the product guide."))
     );
     nav.appendChild(link);
     return link;
@@ -480,19 +547,24 @@ function renderVendorAppFinder() {
 }
 
 function renderVendorPage() {
-  const overview = section("overview", "Vendor Help", vendor.title, vendor.summary);
-  overview.appendChild(card("Overview", paragraphs([vendor.overview])));
+  const vendorSummary = publicizeText(vendor.summary);
+  const vendorOverview = publicizeText(vendor.overview);
+  const vendorSharedNotes = publicizeItems(vendor.sharedNotes);
+  const vendorAdminSurfaces = publicizeItems(vendor.adminSurfaces);
+
+  const overview = section("overview", "Vendor Help", vendor.title, vendorSummary);
+  overview.appendChild(card("Overview", paragraphs([vendorOverview])));
   overview.appendChild(card("In Scope", list(vendor.products)));
 
   const notes = section("shared-notes", "Start Here", "Helpful starting points", "Use these vendor-wide tips before you dive into a single application.");
-  notes.appendChild(card("Shared Notes", vendor.sharedNotes));
-  const faqItems = (vendorFaqs[vendorSlug] ?? []).map(item => `${item.q}: ${item.a}`);
+  notes.appendChild(card("Shared Notes", vendorSharedNotes));
+  const faqItems = (vendorFaqs[vendorSlug] ?? []).map(item => publicizeText(`${item.q}: ${item.a}`));
   notes.appendChild(card("FAQ", faqItems.length ? faqItems : ["No vendor-specific FAQ is captured yet. Use the shared notes and application guides as the first-pass reference."]));
 
-  const admin = section("admin-surfaces", "Access", "Accounts, setup, and official tools", "Use these official vendor pages when you need account access, downloads, or setup details from the source.");
-  admin.appendChild(card("Admin Surfaces", vendor.adminSurfaces));
-  const installItems = (vendorInstallIssues[vendorSlug] ?? []).map(item => `${item.issue}: ${item.fix}`);
-  admin.appendChild(card("Setup / Update Tips", installItems.length ? installItems : vendor.sharedNotes));
+  const accountSetup = section("account-setup", "Access", "Accounts, setup, and official tools", "Use these official vendor pages when you need account access, downloads, or setup details from the source.");
+  accountSetup.appendChild(card("Account and setup pages", vendorAdminSurfaces));
+  const installItems = (vendorInstallIssues[vendorSlug] ?? []).map(item => publicizeText(`${item.issue}: ${item.fix}`));
+  accountSetup.appendChild(card("Setup / Update Tips", installItems.length ? installItems : vendorSharedNotes));
 
   const directory = section("app-directory", "Applications", "Application Directory", "Open the exact app guide first when you already know which product is involved.");
   const grid = el("div", "guide-card-grid guide-app-grid");
@@ -502,20 +574,20 @@ function renderVendorPage() {
     appCard.dataset.searchText = getVendorAppSearchText(item);
     appCard.append(el("p", "guide-app-kicker", hasPriorityGuideContent(item) ? "Priority Guide" : "Application"));
     appCard.append(el("h3", "guide-card-title", item.name));
-    appCard.append(el("p", "guide-card-copy", item.summary ?? item.focus));
+    appCard.append(el("p", "guide-card-copy", publicizeText(item.summary ?? item.focus)));
     appCard.appendChild(el("span", "guide-primary-link", "Open app guide"));
     grid.appendChild(appCard);
   });
   directory.appendChild(grid);
 
   const patterns = section("common-patterns", "Common Problems", "Recurring vendor-wide issues", "Keep these vendor-wide patterns in mind as you narrow down the issue.");
-  const usageItems = (vendorUsageIssues[vendorSlug] ?? []).map(item => `${item.issue}: ${item.fix}`);
-  patterns.appendChild(card("Usage Issues", usageItems.length ? usageItems : vendor.sharedNotes));
+  const usageItems = (vendorUsageIssues[vendorSlug] ?? []).map(item => publicizeText(`${item.issue}: ${item.fix}`));
+  patterns.appendChild(card("Usage Issues", usageItems.length ? usageItems : vendorSharedNotes));
 
-  const links = section("official-links", "Links", "Official Links", "Use these vendor resources when you need the official source of record.");
-  links.appendChild(card("Vendor Links", linkList(vendor.supportLinks.map(item => ({ label: item.label, url: item.url })) )));
+  const links = section("official-links", "Links", "Official Links", "Use these vendor resources when you need the official website.");
+  links.appendChild(card("Vendor Links", linkList(uniqueLinks(vendor.supportLinks ?? []))));
 
-  elements.content.append(directory, overview, notes, patterns, admin, links);
+  elements.content.append(directory, overview, notes, patterns, accountSetup, links);
 }
 
 function renderAppPage(model) {
@@ -615,7 +687,7 @@ if (!vendor || (pageType === "app" && !app)) {
   elements.content.innerHTML = "";
   elements.kicker.textContent = pageType === "app" ? `${vendor.title} Application` : "App Help";
   elements.title.textContent = pageType === "app" ? app.name : vendor.title;
-  elements.summary.textContent = pageType === "app" ? publicizeText(app.summary ?? app.focus) : vendor.summary;
+  elements.summary.textContent = pageType === "app" ? publicizeText(app.summary ?? app.focus) : publicizeText(vendor.summary);
   elements.backLink.href = pageType === "app" ? vendorUrl(vendorSlug) : guideHubUrl;
   elements.backLink.textContent = pageType === "app" ? `Back to ${vendor.title}` : "Back to App Help";
   document.title = pageType === "app" ? `${app.name} | ${vendor.title}` : `${vendor.title} App Help`;

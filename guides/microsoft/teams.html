@@ -1,41 +1,131 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>teams Guide</title>
+  <title>Teams | Microsoft 365 App Help | Llamaha</title>
+  <meta name="description" content="Use this guide when Teams will not sign in, meetings fail, channels are missing, or chat and file access do not update correctly.">
+  <link rel="canonical" href="https://llamaha.com/guides/microsoft/teams.html">
+  <meta property="og:title" content="Teams | Microsoft 365 App Help | Llamaha">
+  <meta property="og:description" content="Use this guide when Teams will not sign in, meetings fail, channels are missing, or chat and file access do not update correctly.">
+  <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
   <link rel="stylesheet" href="../guide.css">
+  <style>html{scroll-behavior:smooth}</style>
 </head>
-<body data-page-type="app" data-vendor="microsoft" data-app="teams" data-root-path="../..">
+<body data-page-type="app" data-vendor="microsoft" data-app="teams" data-root-path="../.." data-render-mode="static">
   <div class="guide-shell">
     <header class="guide-header">
-      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"></nav>
-      <a id="guideBackLink" class="back-link" href="../microsoft.html">Back to Vendor</a>
+      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"><a class="guide-breadcrumb-link" href="../../index.html">Home</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../vendor-guides.html">App Help</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../guides/microsoft.html">Microsoft 365</a><span class="guide-breadcrumb-sep">&gt;</span><strong class="guide-breadcrumb-current">Teams</strong></nav>
+      <a id="guideBackLink" class="back-link" href="../microsoft.html">Back to Microsoft 365</a>
       <div class="guide-brand">
         <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
         <div>
-          <p id="guideKicker" class="section-kicker"></p>
-          <h1 id="guideTitle"></h1>
-          <p id="guideSummary"></p>
+          <p id="guideKicker" class="section-kicker">Microsoft 365 Application</p>
+          <h1 id="guideTitle">Teams</h1>
+          <p id="guideSummary">Use this guide when Teams will not sign in, meetings fail, channels are missing, or chat and file access do not update correctly.</p>
+          <p class="guide-review-label" id="guideReviewLabel">Reviewed April 2026</p>
         </div>
       </div>
     </header>
 
     <main class="guide-layout">
       <div class="guide-main">
-        <div id="guideJumpLinks" class="guide-jump-shell" hidden></div>
+        <div id="guideJumpLinks" class="guide-jump-shell">
+  <nav class="guide-jump-links" aria-label="Jump to a section"><a class="guide-jump-link" href="#overview">Overview</a><a class="guide-jump-link" href="#used-for">What this app is usually used for</a><a class="guide-jump-link" href="#common-problems">Common problems</a><a class="guide-jump-link" href="#first-things-to-try">First things to try</a><a class="guide-jump-link" href="#do-not-yet">Do not do this yet / warnings</a><a class="guide-jump-link" href="#what-support-needs">What details support needs</a><a class="guide-jump-link" href="#licensing-access">Licensing / access notes</a><a class="guide-jump-link" href="#phone-setup">Phone / tablet setup</a><a class="guide-jump-link" href="#more-setup-checks">More setup checks</a><a class="guide-jump-link" href="#related-guides">Related guides</a></nav>
+</div>
         <div class="guide-main-scroll">
-          <div id="guideContent" class="guide-content"></div>
+          <div id="guideContent" class="guide-content">
+            <section id="overview" class="guide-section">
+  <p class="section-kicker">Application Guide</p>
+  <h2 class="guide-section-title">Overview</h2>
+  <p class="guide-section-copy">Use this guide when Teams will not sign in, meetings fail, channels are missing, or chat and file access do not update correctly.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Overview</h3><div class="guide-copy-stack"><p class="guide-card-copy">Teams is Microsoft&#39;s chat, meetings, calling, and collaboration app for your work account.</p><p class="guide-card-copy">Teams issues are usually caused by the wrong account or organization being active, a local app problem, or device settings affecting meetings.</p></div></article>
+</section>
+<section id="used-for" class="guide-section">
+  <p class="section-kicker">Plain English</p>
+  <h2 class="guide-section-title">What this app is usually used for</h2>
+  <p class="guide-section-copy">A short, jargon-light description so users know they are on the right page.</p>
+  <article class="guide-card"><h3 class="guide-card-title">What this app is usually used for</h3><div class="guide-copy-stack"><p class="guide-card-copy">Microsoft collaboration, meetings, and calling workflow where organization context, policy refresh, and local client state matter more than a simple reinstall.</p><p class="guide-card-copy">It is part of the Microsoft 365 family covered in our app help.</p></div></article>
+</section>
+<section id="common-problems" class="guide-section">
+  <p class="section-kicker">Common problems</p>
+  <h2 class="guide-section-title">Common problems</h2>
+  <p class="guide-section-copy">These are the problems people run into most often with this app.</p>
+  <div class="guide-card-grid"><article class="guide-card issue-card">
+  <h3 class="guide-card-title">Teams desktop does not work but Teams on the web does</h3>
+  <p class="guide-card-copy">The web version signs in and loads normally, but the desktop app loops, stalls, or shows the wrong organization.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Sign out of the desktop app, close it fully, and sign back in with the same work account that works in the browser.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send screenshots of the web and desktop results, the organization shown, and the Teams version from Settings &gt; About.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">Meetings have no sound or camera</h3>
+  <p class="guide-card-copy">Meetings connect, but your headset, speakers, microphone, or camera do not behave normally.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Check device selection in Windows and Teams, then test again without the dock or with a different headset if one is available.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the device name, whether the issue affects every meeting, and a screenshot of the Teams device settings page.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">Channels or chats are missing</h3>
+  <p class="guide-card-copy">You sign in successfully, but expected teams, channels, chats, or files do not appear.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Confirm you are in the correct organization and compare the desktop app to Teams on the web before reinstalling.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the team or channel name, whether the web version shows it, and whether the problem started after an account or membership change.</p></article>
+</article></div>
+</section>
+<section id="first-things-to-try" class="guide-section">
+  <p class="section-kicker">First things to try</p>
+  <h2 class="guide-section-title">First things to try</h2>
+  <p class="guide-section-copy">Try these stable, low-risk steps before changing the app or computer.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Quick checks before you change anything</h3><ul class="guide-list"><li>Does the problem happen in desktop Teams, Teams on the web, or both?</li><li>Is the issue sign-in, meetings, chat, channels, calling, or files?</li><li>Did the problem begin after a password change, update, new headset, dock change, or new computer?</li><li>Are other people in your organization seeing the same thing?</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Try these fixes first</h3><ul class="guide-list"><li>If the web version works but the desktop app does not, sign out of Teams desktop and sign back in before reinstalling.</li><li>If meetings are the problem, check the selected microphone, speaker, and camera in both Windows and Teams.</li><li>Disconnect from a dock or USB audio device for one test if sound or camera routing seems wrong.</li><li>If channels or chats are missing, give Teams a few minutes to refresh after sign-in and compare with the web version.</li></ul></article>
+</section>
+<section id="do-not-yet" class="guide-section">
+  <p class="section-kicker">Slow down</p>
+  <h2 class="guide-section-title">Do not do this yet / warnings</h2>
+  <p class="guide-section-copy">Skip these steps until you have collected the information below or until support asks you to. They can lose data or hide the real problem.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Avoid these until support says it is safe</h3><ul class="guide-list"><li>Collect organization context, license details, version, web result, and exact workload affected before escalation.</li><li>Collect exact error wording, organization, affected apps, web-versus-desktop behavior, and recent password, multi-factor sign-in, or device changes before Tier 2 takes over.</li><li>Do not reset OneDrive or recreate Outlook profiles until permissions, licensing, and organization selection are confirmed.</li></ul></article>
+</section>
+<section id="what-support-needs" class="guide-section">
+  <p class="section-kicker">What support needs</p>
+  <h2 class="guide-section-title">What details support needs</h2>
+  <p class="guide-section-copy">Collect these details before you contact support. The more you send up front, the less back-and-forth you will need.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Send these details</h3><ul class="guide-list"><li>A screenshot of the exact Teams error or the part of the app that is missing.</li><li>Whether Teams on the web works with the same work account.</li><li>Your Teams version from Settings &gt; About.</li><li>If meetings are affected, the headset, camera, or dock model you are using.</li></ul></article>
+</section>
+<section id="licensing-access" class="guide-section">
+  <p class="section-kicker">Licensing &amp; access</p>
+  <h2 class="guide-section-title">Licensing / access notes</h2>
+  <p class="guide-section-copy">Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Licensing / access checks</h3><ul class="guide-list"><li>Make sure you are signed in with the same work account you use for the rest of Microsoft 365.</li><li>If Teams says a feature is unavailable, note whether the problem is only in meetings, calling, or another specific part of the app.</li><li>If you belong to more than one organization, confirm Teams is open in the correct one.</li></ul></article>
+</section>
+<section id="phone-setup" class="guide-section">
+  <p class="section-kicker">Phone / Tablet</p>
+  <h2 class="guide-section-title">Phone / tablet setup</h2>
+  <p class="guide-section-copy">Use these checks when you are setting up the app on an iPhone or Android device, moving to a new phone, or fixing missing mobile prompts.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Phone / tablet setup</h3><ul class="guide-list"><li>Install Teams from the App Store or Google Play and sign in with the same work account you use on your computer.</li><li>Allow microphone, camera, and notifications if you plan to join meetings or receive chat and call alerts on your phone.</li><li>If Teams on your computer works but the phone app does not, keep that comparison ready for support.</li><li>If you changed phones recently, note whether the old phone still shows Teams notifications or approval prompts.</li></ul></article>
+</section>
+<section id="more-setup-checks" class="guide-section">
+  <p class="section-kicker">More checks</p>
+  <h2 class="guide-section-title">More setup checks</h2>
+  <p class="guide-section-copy">These are install, update, and follow-up checks that are usually safe after the first checks above.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Install / update basics</h3><ul class="guide-list"><li>Close Teams completely, install pending Windows and Teams updates, and restart the computer.</li><li>Open Teams on the web first and confirm the correct work account and organization are shown.</li><li>After signing back into the desktop app, test chat, one channel, and one meeting if meetings are part of the issue.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">More things to check</h3><ul class="guide-list"><li>Check service health, license state, and organization context before saved local data resets.</li><li>If meetings are affected, validate selected microphone, speaker, camera, dock firmware, and Windows privacy permissions.</li><li>If channels are missing, capture when membership changed and whether web Teams shows the same gap.</li><li>Collect organization context, license details, version, web result, and exact workload affected before escalation.</li><li>Escalate immediately when many users lose the same channels, voice workflows, or meeting features at once.</li></ul></article>
+</section>
+<section id="related-guides" class="guide-section">
+  <p class="section-kicker">Related guides</p>
+  <h2 class="guide-section-title">Related guides</h2>
+  <p class="guide-section-copy">Use these links to keep moving without losing context.</p>
+  <div class="guide-card-grid">
+  <article class="guide-card"><h3 class="guide-card-title">Back to vendor</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/microsoft.html">Back to Microsoft 365</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Related apps</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/microsoft/outlook.html">Outlook</a><a class="guide-chip-link" href="../../guides/microsoft/onedrive.html">OneDrive</a><a class="guide-chip-link" href="../../guides/microsoft/sharepoint.html">SharePoint</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Need more help?</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../contact.html">Open contact page</a><a class="guide-chip-link" href="../../app-licensing.html">Licensing help</a><a class="guide-chip-link" href="../../support.html">Support pages</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Support articles</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../articles/app-will-not-open.html">App crashed or will not open</a><a class="guide-chip-link" href="../../articles/license-or-signin-error.html">License or sign-in error</a><a class="guide-chip-link" href="../../articles/project-files-will-not-sync.html">Project files will not sync</a><a class="guide-chip-link" href="../../articles/plotting-pdf-printer-issue.html">Plotting, PDF, or printer issue</a><a class="guide-chip-link" href="../../articles/slow-or-freezing-on-a-model.html">Slow or freezing on a model</a><a class="guide-chip-link" href="../../articles/remote-access-issue.html">Remote access issue</a><a class="guide-chip-link" href="../../articles/new-computer-new-user-new-phone-setup.html">New computer, new user, or new phone setup</a><a class="guide-chip-link" href="../../articles/before-contacting-it-what-to-collect.html">Before contacting IT: what to collect</a></div></article>
+  
+</div>
+</section>
+          </div>
         </div>
       </div>
     </main>
   </div>
 
-  <script src="../guideFallback.js"></script>
-  <script type="module" src="../guide.js"></script>
+  <script type="module" src="../../siteChrome.js"></script>
 </body>
 </html>

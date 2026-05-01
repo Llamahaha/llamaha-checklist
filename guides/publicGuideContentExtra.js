@@ -1558,7 +1558,7 @@ export const publicGuideContentExtra = {
         "If a folder is shared but you cannot see it, you may not have been added to the folder by the owner."
       ],
       install: [
-        "Install Box Drive from the company-approved Box deployment or https://www.box.com/resources/downloads.",
+        "Install Box Drive from the company-approved Box install path or the Box downloads page.",
         "Sign in with your work Box account, typically via SSO from your firm's identity provider.",
         "Wait for the initial sync to finish before assuming files are missing."
       ],

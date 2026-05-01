@@ -239,7 +239,7 @@ const baseVendorGuides = {
       "Escalate after checking the configured license source, DNS reachability to the license server, and the exact Prime version in use.",
       "Collect the license model, error text, config file path, and whether the issue affects one workstation or the whole engineering group."
     ],
-    supportLinks: [{ label: "PTC Support", url: "https://support.ptc.com/" }]
+    supportLinks: [{ label: "PTC Mathcad Help Centers", url: "https://www.ptc.com/en/support/help/mathcad" }]
   },
   trimble: {
     title: "Trimble",
@@ -364,7 +364,7 @@ const baseVendorGuides = {
     summary: "Use this for Egnyte user provisioning, folder-permission handoff, Desktop App rollout, and sync or deprovision cleanup.",
     overview:
       "Egnyte work is usually role, folder, and local-cache management more than generic file-sync troubleshooting. Validate whether the user should be a Power User and whether the workflow belongs in web, desktop, or both.",
-    products: ["Egnyte Web UI / Admin", "Egnyte Desktop App"],
+    products: ["Egnyte Web Portal", "Egnyte Desktop App"],
     sharedNotes: [
       "User type affects desktop access and daily behavior, so do not skip the role check.",
       "Offline folders and drive mappings should be documented before workstation swaps or wipe-and-load work.",
@@ -381,7 +381,7 @@ const baseVendorGuides = {
     ],
     supportLinks: [
       { label: "Egnyte Help Center", url: "https://helpdesk.egnyte.com/hc/en-us" },
-      { label: "Desktop App Mass Deployment", url: "https://helpdesk.egnyte.com/hc/en-us/articles/216688268-Egnyte-Desktop-App-for-Windows-Mass-Deployment" }
+      { label: "Desktop App setup help", url: "https://helpdesk.egnyte.com/hc/en-us/articles/216688268-Egnyte-Desktop-App-for-Windows-Mass-Deployment" }
     ]
   }
 };

@@ -41,6 +41,30 @@ export const applicationCatalogExtra = {
       licensing: "Requires the appropriate Vault product (Basic, Workgroup, or Professional) plus a user account on the Vault Server and permission to the right vault.",
       install: "Install the Vault client that matches the Vault Server version, configure the server URL and vault name, confirm sign-in, and test a check-out and check-in with a small known file.",
       uninstall: "Document any files the user has checked out, have those reconciled or undo-checked-out by a Vault admin, then remove client access and uninstall the desktop app."
+    },
+    {
+      name: "Autodesk Access",
+      slug: "autodesk-access",
+      focus: "Autodesk's current updater and notification helper app, used to install and update Autodesk products, surface security updates, and refresh entitlement information for the signed-in Autodesk account.",
+      licensing: "Autodesk Access uses the same Autodesk account that licenses the user's Autodesk products; the app itself is generally a free helper, so the key check is which Autodesk identity is signed in.",
+      install: "Use the company-approved Autodesk Access deployment, sign in with the assigned Autodesk account, and confirm the user sees their assigned products and pending updates after restart.",
+      uninstall: "Confirm the workstation is no longer relying on Autodesk Access for updates and that other Autodesk products are not depending on it for entitlement refresh before removing it."
+    },
+    {
+      name: "Desktop Connector",
+      slug: "desktop-connector",
+      focus: "Autodesk's sync client that exposes Autodesk Construction Cloud, Autodesk Docs, and BIM 360 project files as a folder on the computer, supporting open-in-app for AutoCAD, Civil 3D, and Revit workflows.",
+      licensing: "Desktop Connector itself is a free helper, but access to ACC, Autodesk Docs, or BIM 360 projects depends on the user's Autodesk account and the specific project membership and roles assigned by a project admin.",
+      install: "Install the company-approved Desktop Connector build, sign in with the assigned Autodesk account, confirm the user sees the expected ACC, Docs, or BIM 360 projects, and test opening one known-good file from a project.",
+      uninstall: "Confirm pending uploads have completed, document offline or pinned project folders the user still needs, and uninstall through the supported Desktop Connector uninstaller."
+    },
+    {
+      name: "AutoCAD LT",
+      slug: "autocad-lt",
+      focus: "Lighter, 2D-only version of AutoCAD used for drafting, viewing, and editing DWG files where full 3D and Autodesk vertical workflows are not needed.",
+      licensing: "Usually covered by a named-user Autodesk entitlement assigned in Autodesk Account; AutoCAD LT is a separate product from full AutoCAD, so the assignment must specifically include LT.",
+      install: "Use the company-approved AutoCAD LT installer or Autodesk Access, sign in with the assigned Autodesk account, confirm support paths and plot styles, and test one known-good DWG and one plot before handoff.",
+      uninstall: "Document custom workspace, plot styles, support paths, and tool palettes before removing the local app, and confirm any shared standards content is preserved elsewhere."
     }
   ],
   google: [
@@ -139,6 +163,14 @@ export const applicationCatalogExtra = {
       licensing: "Requires a Project plan such as Project Plan 1, Project Plan 3, or Project Plan 5 assigned to the work account. Desktop Project is included only with Plan 3 or Plan 5.",
       install: "For the desktop app, deploy the Project client that matches the user's Project Plan and Office channel, confirm sign-in with the work account, and test opening one MPP. For Project for the web, validate browser access at project.microsoft.com with the correct work account.",
       uninstall: "Preserve any MPP files and published project plans before removing the desktop app, and reassign ownership in Project for the web before deactivating the user."
+    },
+    {
+      name: "Windows 365 Cloud PC",
+      slug: "windows-365-cloud-pc",
+      focus: "Cloud-hosted Windows desktop streamed to the user's device through the Windows App, the Windows 365 web portal, or Remote Desktop, where files, apps, and settings live on the Cloud PC instead of the local computer.",
+      licensing: "Requires a Windows 365 Cloud PC license assigned to the user's work account; the Cloud PC tier and size (such as 4 vCPU / 16 GB) are set by IT and decide what the user can do inside the Cloud PC.",
+      install: "Install the Windows App from windows365.microsoft.com or the company-approved deployment, sign in with the work account, confirm the assigned Cloud PC appears, and test connecting plus signing in to the Cloud PC desktop before going live.",
+      uninstall: "Sign out of any active Cloud PC session and confirm work in progress has been saved on the Cloud PC before removing the Windows App from the local device. Do not delete or reset the Cloud PC itself unless an admin asks you to, because that wipes the user's Cloud PC data."
     }
   ],
   trimble: [
@@ -229,6 +261,24 @@ export const applicationCatalogExtra = {
       licensing: "Access depends on the user being provisioned in Okta; the app itself is free and does not require a separate user purchase.",
       install: "Install Okta Verify from the App Store or Google Play, enroll through the Okta end-user dashboard or a QR code, allow notifications, and test one push approval before closing the ticket.",
       uninstall: "Before removing Okta Verify, confirm another approved factor exists, and have support reset the factor in Okta if the phone is being replaced."
+    }
+  ],
+  spotfire: [
+    {
+      name: "Spotfire Analyst",
+      slug: "spotfire-analyst",
+      focus: "Spotfire desktop client used to open shared analyses, build dashboards, and connect to data sources.",
+      licensing: "Access depends on a Spotfire user account on the company's Spotfire server, plus the license type or role assigned by an admin.",
+      install: "Use the company-approved Spotfire Analyst installer that matches the Spotfire server version, sign in to the company Spotfire URL, and confirm one known-good analysis or library item opens after setup.",
+      uninstall: "Preserve any local analyses, scripts, or data connections that still matter before removing the desktop client."
+    },
+    {
+      name: "Spotfire Web",
+      slug: "spotfire-web",
+      focus: "Browser-based Spotfire client used to view dashboards, run analyses, and access library content without a local install.",
+      licensing: "Requires a Spotfire user account on the company's Spotfire server, plus the appropriate license type for the dashboards or analyses you need to open.",
+      install: "There is usually no local install for the web client. Validate sign-in to the company Spotfire URL with the correct work account, confirm the expected dashboards appear, and test opening one known-good analysis.",
+      uninstall: "Offboarding means removing the user account in Spotfire admin and reassigning ownership of any analyses or dashboards the user authored."
     }
   ]
 };

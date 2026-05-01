@@ -1,41 +1,130 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>arcgis-pro Guide</title>
+  <title>ArcGIS Pro | Esri App Help | Llamaha</title>
+  <meta name="description" content="Use this guide when ArcGIS Pro will not sign in, shows the wrong license level, hides projects or layers, or crashes while opening maps.">
+  <link rel="canonical" href="https://llamaha.com/guides/esri/arcgis-pro.html">
+  <meta property="og:title" content="ArcGIS Pro | Esri App Help | Llamaha">
+  <meta property="og:description" content="Use this guide when ArcGIS Pro will not sign in, shows the wrong license level, hides projects or layers, or crashes while opening maps.">
+  <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
   <link rel="stylesheet" href="../guide.css">
+  <style>html{scroll-behavior:smooth}</style>
 </head>
-<body data-page-type="app" data-vendor="esri" data-app="arcgis-pro" data-root-path="../..">
+<body data-page-type="app" data-vendor="esri" data-app="arcgis-pro" data-root-path="../.." data-render-mode="static">
   <div class="guide-shell">
     <header class="guide-header">
-      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"></nav>
-      <a id="guideBackLink" class="back-link" href="../esri.html">Back to Vendor</a>
+      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"><a class="guide-breadcrumb-link" href="../../index.html">Home</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../vendor-guides.html">App Help</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../guides/esri.html">Esri</a><span class="guide-breadcrumb-sep">&gt;</span><strong class="guide-breadcrumb-current">ArcGIS Pro</strong></nav>
+      <a id="guideBackLink" class="back-link" href="../esri.html">Back to Esri</a>
       <div class="guide-brand">
         <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
         <div>
-          <p id="guideKicker" class="section-kicker"></p>
-          <h1 id="guideTitle"></h1>
-          <p id="guideSummary"></p>
+          <p id="guideKicker" class="section-kicker">Esri Application</p>
+          <h1 id="guideTitle">ArcGIS Pro</h1>
+          <p id="guideSummary">Use this guide when ArcGIS Pro will not sign in, shows the wrong license level, hides projects or layers, or crashes while opening maps.</p>
+          <p class="guide-review-label" id="guideReviewLabel">Reviewed April 2026</p>
         </div>
       </div>
     </header>
 
     <main class="guide-layout">
       <div class="guide-main">
-        <div id="guideJumpLinks" class="guide-jump-shell" hidden></div>
+        <div id="guideJumpLinks" class="guide-jump-shell">
+  <nav class="guide-jump-links" aria-label="Jump to a section"><a class="guide-jump-link" href="#overview">Overview</a><a class="guide-jump-link" href="#used-for">What this app is usually used for</a><a class="guide-jump-link" href="#common-problems">Common problems</a><a class="guide-jump-link" href="#first-things-to-try">First things to try</a><a class="guide-jump-link" href="#do-not-yet">Do not do this yet / warnings</a><a class="guide-jump-link" href="#what-support-needs">What details support needs</a><a class="guide-jump-link" href="#licensing-access">Licensing / access notes</a><a class="guide-jump-link" href="#more-setup-checks">More setup checks</a><a class="guide-jump-link" href="#related-guides">Related guides</a></nav>
+</div>
         <div class="guide-main-scroll">
-          <div id="guideContent" class="guide-content"></div>
+          <div id="guideContent" class="guide-content">
+            <section id="overview" class="guide-section">
+  <p class="section-kicker">Application Guide</p>
+  <h2 class="guide-section-title">Overview</h2>
+  <p class="guide-section-copy">Use this guide when ArcGIS Pro will not sign in, shows the wrong license level, hides projects or layers, or crashes while opening maps.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Overview</h3><div class="guide-copy-stack"><p class="guide-card-copy">ArcGIS Pro is Esri&#39;s desktop mapping and GIS app for projects, layers, layouts, and analysis tools.</p><p class="guide-card-copy">Most ArcGIS Pro problems come from signing into the wrong ArcGIS organization, missing extensions, or a project that depends on content you cannot currently reach.</p></div></article>
+</section>
+<section id="used-for" class="guide-section">
+  <p class="section-kicker">Plain English</p>
+  <h2 class="guide-section-title">What this app is usually used for</h2>
+  <p class="guide-section-copy">A short, jargon-light description so users know they are on the right page.</p>
+  <article class="guide-card"><h3 class="guide-card-title">What this app is usually used for</h3><div class="guide-copy-stack"><p class="guide-card-copy">Desktop GIS authoring platform tied closely to Named User licensing and extension assignment.</p><p class="guide-card-copy">It is part of the Esri family covered in our app help.</p></div></article>
+</section>
+<section id="common-problems" class="guide-section">
+  <p class="section-kicker">Common problems</p>
+  <h2 class="guide-section-title">Common problems</h2>
+  <p class="guide-section-copy">These are the problems people run into most often with this app.</p>
+  <div class="guide-card-grid"><article class="guide-card issue-card">
+  <h3 class="guide-card-title">ArcGIS Pro shows the wrong license level or missing extensions</h3>
+  <p class="guide-card-copy">The app opens, but a required level or extension is unavailable.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Sign in again with the correct ArcGIS organization account and confirm the license level shown in the app.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the license level shown, the extension name that is missing, and a screenshot of the licensing screen.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">License Authorization set to the wrong type or license server</h3>
+  <p class="guide-card-copy">ArcGIS Pro asks for a different sign-in method than you expected, points at the wrong license server, or refuses to open even though your ArcGIS account is active.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">In ArcGIS Pro, open the Licensing page and confirm License Type matches what your team uses: Named User, Single Use, or (on legacy Pro 3.6 installs only) Concurrent Use. For Named User, signing in with the ArcGIS organization account is usually enough. For Single Use or legacy Concurrent Use, confirm the authorization file or license server name with support before changing the setting.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the license type shown, the ArcGIS organization URL or license server name, and the exact sign-in or authorization message you see.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">Projects or layers are missing</h3>
+  <p class="guide-card-copy">You can sign in, but expected maps, layers, or projects do not appear.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Check whether the same content is visible in the browser or portal view before changing the desktop install.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the project or layer name, the portal or organization URL, and whether the browser version shows the same content.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">ArcGIS Pro crashes while opening or loading a project</h3>
+  <p class="guide-card-copy">The app starts, then closes or freezes when opening the app or a project.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Restart the computer, test a simple project, and note whether the issue is limited to one project before reinstalling.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the ArcGIS Pro version, the project name, and a screenshot or wording of the crash message if one appears.</p></article>
+</article></div>
+</section>
+<section id="first-things-to-try" class="guide-section">
+  <p class="section-kicker">First things to try</p>
+  <h2 class="guide-section-title">First things to try</h2>
+  <p class="guide-section-copy">Try these stable, low-risk steps before changing the app or computer.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Quick checks before you change anything</h3><ul class="guide-list"><li>Can you sign in to the correct ArcGIS organization in the browser?</li><li>Is the issue licensing, missing layers, missing projects, offline use, or crashing?</li><li>Do you know which ArcGIS Pro version, license level, or extension your work requires?</li><li>Is the problem with one project only, or with ArcGIS Pro in general?</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Try these fixes first</h3><ul class="guide-list"><li>Compare browser sign-in to desktop sign-in. If the browser account is wrong, fix that first.</li><li>If one project is the problem, try opening a different project before reinstalling ArcGIS Pro.</li><li>If layers are missing, confirm they still exist in the browser or portal view you normally use.</li><li>If the app crashes at startup, restart the computer and note whether the crash began right after an update.</li></ul></article>
+</section>
+<section id="do-not-yet" class="guide-section">
+  <p class="section-kicker">Slow down</p>
+  <h2 class="guide-section-title">Do not do this yet / warnings</h2>
+  <p class="guide-section-copy">Skip these steps until you have collected the information below or until support asks you to. They can lose data or hide the real problem.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Avoid these until support says it is safe</h3><ul class="guide-list"><li>Transfer content ownership before removing support team or publisher access from a departing user.</li></ul></article>
+</section>
+<section id="what-support-needs" class="guide-section">
+  <p class="section-kicker">What support needs</p>
+  <h2 class="guide-section-title">What details support needs</h2>
+  <p class="guide-section-copy">Collect these details before you contact support. The more you send up front, the less back-and-forth you will need.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Send these details</h3><ul class="guide-list"><li>A screenshot of the exact ArcGIS Pro message or licensing screen.</li><li>The ArcGIS organization or portal URL you are signing into.</li><li>The ArcGIS Pro version plus the license level shown in the app.</li><li>The project, layer, or extension name involved in the problem.</li></ul></article>
+</section>
+<section id="licensing-access" class="guide-section">
+  <p class="section-kicker">Licensing &amp; access</p>
+  <h2 class="guide-section-title">Licensing / access notes</h2>
+  <p class="guide-section-copy">Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Licensing / access checks</h3><ul class="guide-list"><li>Make sure ArcGIS Pro is signed into the same ArcGIS organization your team expects.</li><li>If the app opens with the wrong license level, note the exact level shown, such as Basic, Standard, or Advanced.</li><li>If a tool is missing, note the extension name you expected to use.</li><li>Most ArcGIS Pro users sign in with a Named User account from ArcGIS Online or ArcGIS Enterprise. Some organizations still use Single Use. A small number of legacy setups may still use Concurrent Use on ArcGIS Pro 3.6 only; Esri has deprecated Concurrent Use for any newer release. If you do not know which license type your team uses, ask before changing the Licensing page in ArcGIS Pro.</li></ul></article>
+</section>
+<section id="more-setup-checks" class="guide-section">
+  <p class="section-kicker">More checks</p>
+  <h2 class="guide-section-title">More setup checks</h2>
+  <p class="guide-section-copy">These are install, update, and follow-up checks that are usually safe after the first checks above.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Install / update basics</h3><ul class="guide-list"><li>Install pending ArcGIS Pro updates if your organization allows them, then restart the computer.</li><li>Sign into the correct ArcGIS organization in the browser first, then reopen ArcGIS Pro.</li><li>Test a blank project or a simple project before reopening the larger project that failed.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">More things to check</h3><ul class="guide-list"><li>Verify the ArcGIS Pro license level, portal URL, and extension assignments before opening the desktop app.</li><li>Test sign-in to the intended licensing portal and confirm the user can reach expected layers, projects, and shared content.</li><li>Document any offline licensing, custom toolboxes, or project-folder mappings used by the team.</li><li>Collect portal URL, licensing portal, extension list, version, and whether another user can open the same content.</li><li>Escalate when multiple users lose the same layers or license tier at once.</li></ul></article>
+</section>
+<section id="related-guides" class="guide-section">
+  <p class="section-kicker">Related guides</p>
+  <h2 class="guide-section-title">Related guides</h2>
+  <p class="guide-section-copy">Use these links to keep moving without losing context.</p>
+  <div class="guide-card-grid">
+  <article class="guide-card"><h3 class="guide-card-title">Back to vendor</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/esri.html">Back to Esri</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Related apps</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/esri/arcgis-online.html">ArcGIS Online</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Need more help?</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../contact.html">Open contact page</a><a class="guide-chip-link" href="../../app-licensing.html">Licensing help</a><a class="guide-chip-link" href="../../support.html">Support pages</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Support articles</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../articles/app-will-not-open.html">App crashed or will not open</a><a class="guide-chip-link" href="../../articles/license-or-signin-error.html">License or sign-in error</a><a class="guide-chip-link" href="../../articles/project-files-will-not-sync.html">Project files will not sync</a><a class="guide-chip-link" href="../../articles/plotting-pdf-printer-issue.html">Plotting, PDF, or printer issue</a><a class="guide-chip-link" href="../../articles/slow-or-freezing-on-a-model.html">Slow or freezing on a model</a><a class="guide-chip-link" href="../../articles/remote-access-issue.html">Remote access issue</a><a class="guide-chip-link" href="../../articles/new-computer-new-user-new-phone-setup.html">New computer, new user, or new phone setup</a><a class="guide-chip-link" href="../../articles/before-contacting-it-what-to-collect.html">Before contacting IT: what to collect</a></div></article>
+  
+</div>
+</section>
+          </div>
         </div>
       </div>
     </main>
   </div>
 
-  <script src="../guideFallback.js"></script>
-  <script type="module" src="../guide.js"></script>
+  <script type="module" src="../../siteChrome.js"></script>
 </body>
 </html>

@@ -13,6 +13,8 @@ function pageTemplate({ title, summary, targetUrl, directoryUrl = "../index.html
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
+  <meta name="description" content="${summary}">
+  <meta name="robots" content="noindex,follow">
   <meta http-equiv="refresh" content="0; url=${targetUrl}">
   <link rel="canonical" href="${targetUrl}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
