@@ -425,19 +425,21 @@ function buildLicensingTopics() {
     customerLicensingReference[key] && !hiddenPublicLicensingVendors.has(key)
   );
 
-  const vendorTopicLinks = vendorKeys.map(key => ({
-    label: vendorGuides[key].title,
-    url: `#${key}-licensing`
-  }));
+  const vendorTopicLinks = vendorKeys
+    .filter(key => key !== "microsoft")
+    .map(key => ({
+      label: vendorGuides[key].title,
+      url: `#${key}-licensing`
+    }));
 
   return [
     {
       id: "howLicensingWorksSection",
-      title: "How product access usually works",
+      title: "Licensing basics",
       meta: "Licensing Basics",
       kicker: "Licensing Basics",
-      summary: "Start here when the app says trial, unlicensed, expired, missing subscription, or the wrong features appear after sign-in.",
-      searchText: "work account subscription seat assignment product year edition plan company profile organization license server authorization file",
+      summary: "Start here when the app says trial, unlicensed, expired, missing subscription, or the wrong features appear after sign-in. Covers how access works, what details to gather, and how to read common license and activation errors.",
+      searchText: "work account subscription seat assignment product year edition plan company profile organization license server authorization file work email account app name version year plan role add-on organization company profile portal datasource workspace license activation errors trial unlicensed sign-in activation subscription assigned seat vendor profile",
       renderContent: () => {
         const stack = createTopicStack();
         stack.append(
@@ -447,26 +449,17 @@ function buildLicensingTopics() {
             "Product year, edition, release, or plan differences.",
             "Company profile, ArcGIS organization, Bentley datasource, or workspace selection.",
             "Company license server, authorization file, or other managed license source."
-          ])
-        );
-        return stack;
-      }
-    },
-    {
-      id: "whatAccessDependsOnSection",
-      title: "Details that usually determine access",
-      meta: "What You May Need",
-      kicker: "What You May Need",
-      summary: "Use these details to narrow down whether the problem is account, product, plan, profile, or environment related.",
-      searchText: "work email account app name version year plan role add-on organization company profile portal datasource workspace",
-      renderContent: () => {
-        const stack = createTopicStack();
-        stack.append(
+          ]),
           createInfoCard("Gather These Details", [
             "The exact work email account used to sign in.",
             "The app name and version or product year.",
             "The plan, role, extension, or add-on you expected.",
             "The company profile, portal, datasource, workspace, or project environment selected in the app."
+          ]),
+          createLinkCard("Reading License And Activation Errors", [
+            "When the wording is vague, this short article helps you tell whether the issue is trial, unlicensed, sign-in, activation, subscription, or vendor-assignment related, and what to capture before contacting IT."
+          ], [
+            { label: "Open article", url: "articles/reading-license-activation-errors.html" }
           ])
         );
         return stack;
@@ -474,18 +467,27 @@ function buildLicensingTopics() {
     },
     {
       id: "m365MatrixSection",
-      title: "Microsoft 365 plan reference",
+      title: "Microsoft 365 licensing",
       meta: "Microsoft Licensing",
       kicker: "Microsoft Licensing",
-      summary: "Use this when you need to confirm whether a Microsoft 365 plan includes desktop apps, mailbox access, identity features, or other Microsoft services.",
-      searchText: `${matrixResource.title} microsoft 365 plans desktop apps mailbox exchange teams onedrive sharepoint identity`,
+      summary: customerLicensingReference.microsoft.summary,
+      searchText: `${matrixResource.title} microsoft 365 plans desktop apps mailbox exchange teams onedrive sharepoint identity ${buildVendorSearchText(vendorGuides.microsoft, customerLicensingReference.microsoft, getVendorApplications("microsoft"))}`,
       renderContent: () => {
+        const microsoftApps = getVendorApplications("microsoft");
+        const microsoftReference = customerLicensingReference.microsoft;
         const stack = createTopicStack();
-        stack.append(createLinkCard("Open Plan Matrix", [
-          "Compare Microsoft 365 plans when the issue looks tied to mailbox access, desktop apps, Teams, OneDrive, SharePoint, or identity features."
-        ], [
-          { label: "Open M365 Maps Matrix", url: matrixResource.url, external: true }
-        ]));
+        stack.append(
+          createInfoCard("How Access Usually Works", microsoftReference.howItWorks),
+          createInfoCard("What You May Need", microsoftReference.whatYouNeed),
+          createLinkCard("Common Products", microsoftApps.slice(0, 6).map(item => item.name),
+            vendorLinksFor("microsoft", microsoftApps, vendorGuides.microsoft)
+          ),
+          createLinkCard("Microsoft 365 Plan Matrix", [
+            "Compare Microsoft 365 plans when the issue looks tied to mailbox access, desktop apps, Teams, OneDrive, SharePoint, or identity features."
+          ], [
+            { label: "Open M365 Maps Matrix", url: matrixResource.url, external: true }
+          ])
+        );
         return stack;
       }
     },
@@ -495,7 +497,10 @@ function buildLicensingTopics() {
       meta: "Vendor Licensing",
       kicker: "Vendor Licensing",
       summary: "Choose the vendor-specific licensing note that matches the product in front of you.",
-      searchText: vendorKeys.map(key => `${vendorGuides[key].title} ${customerLicensingReference[key].summary}`).join(" "),
+      searchText: vendorKeys
+        .filter(key => key !== "microsoft")
+        .map(key => `${vendorGuides[key].title} ${customerLicensingReference[key].summary}`)
+        .join(" "),
       renderContent: () => {
         const stack = createTopicStack();
         stack.append(createLinkCard("Pick a Vendor", [
@@ -504,37 +509,22 @@ function buildLicensingTopics() {
         return stack;
       }
     },
-    ...vendorKeys.map(key => {
-      const guide = vendorGuides[key];
-      const apps = getVendorApplications(key);
-      const reference = customerLicensingReference[key];
-      return {
-        id: `${key}-licensing`,
-        title: `${guide.title} licensing`,
-        meta: "Vendor Licensing",
-        kicker: "Vendor Licensing",
-        summary: reference?.summary ?? guide.summary,
-        searchText: buildVendorSearchText(guide, reference, apps),
-        renderContent: () => renderVendorLicensingTopic(key)
-      };
-    }),
-    {
-      id: "walkthroughsSection",
-      title: "Reading license and activation errors",
-      meta: "Walkthrough",
-      kicker: "Walkthrough",
-      summary: "Use this when the wording is vague and you need to tell whether the issue is trial, unlicensed, sign-in, activation, subscription, or vendor-assignment related.",
-      searchText: "license activation errors trial unlicensed sign-in activation subscription assigned seat vendor profile",
-      renderContent: () => {
-        const stack = createTopicStack();
-        stack.append(createLinkCard("Open Article", [
-          "This short article explains common license error patterns and what to capture before contacting IT."
-        ], [
-          { label: "Open article", url: "articles/reading-license-activation-errors.html" }
-        ]));
-        return stack;
-      }
-    }
+    ...vendorKeys
+      .filter(key => key !== "microsoft")
+      .map(key => {
+        const guide = vendorGuides[key];
+        const apps = getVendorApplications(key);
+        const reference = customerLicensingReference[key];
+        return {
+          id: `${key}-licensing`,
+          title: `${guide.title} licensing`,
+          meta: "Vendor Licensing",
+          kicker: "Vendor Licensing",
+          summary: reference?.summary ?? guide.summary,
+          searchText: buildVendorSearchText(guide, reference, apps),
+          renderContent: () => renderVendorLicensingTopic(key)
+        };
+      })
   ];
 }
 
