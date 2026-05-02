@@ -960,16 +960,16 @@
     fillHeader(model.appName, model.summary, model.vendorTitle);
     fillJumpLinks();
 
-    var overview = createSection("overview", "Application Guide", "Overview", model.summary);
-    overview.appendChild(createCard("Overview", createParagraphs(model.overview)));
+    var overview = createSection("overview", "Application Guide", "Overview");
+    overview.appendChild(createParagraphs(model.overview));
 
-    var before = createSection("before-you-start", "Before You Start", "Before You Start", "Use these quick checks to narrow the problem before you change the app or computer.");
+    var before = createSection("before-you-start", "Before You Start", "Before You Start");
     before.appendChild(createCard("Check these first", createList(model.beforeYouStart)));
 
-    var install = createSection("install-update-basics", "Install / Update Basics", "Install / Update Basics", "These safe steps help with fresh installs, recent updates, and apps that stopped working after a change.");
-    install.appendChild(createCard("Install / Update Basics", createList(model.install)));
+    var install = createSection("install-update-basics", "Install / Update Basics", "Install / Update Basics");
+    install.appendChild(createList(model.install));
 
-    var problems = createSection("common-problems", "Common Problems", "Common Problems", "These are the problems people run into most often with this app.");
+    var problems = createSection("common-problems", "Common Problems", "Common Problems");
     var grid = createEl("div", "guide-card-grid");
     for (var i = 0; i < model.commonProblems.length; i += 1) {
       var problem = model.commonProblems[i];
@@ -982,13 +982,13 @@
     }
     problems.appendChild(grid);
 
-    var fixes = createSection("try-fixes-first", "Try These Fixes First", "Try These Fixes First", "Try these stable, low-risk steps before contacting support.");
-    fixes.appendChild(createCard("Try These Fixes First", createList(model.fixes)));
+    var fixes = createSection("try-fixes-first", "Try These Fixes First", "Try These Fixes First");
+    fixes.appendChild(createList(model.fixes));
 
-    var support = createSection("what-to-send-support", "What to Send Support", "What to Send Support", "If the problem continues, send these details so support can help faster.");
+    var support = createSection("what-to-send-support", "What to Send Support", "What to Send Support");
     support.appendChild(createCard("Send these details", createList(model.support)));
 
-    var related = createSection("related-help", "Related Help", "Related Help", "Use these links to keep moving without losing context.");
+    var related = createSection("related-help", "Related Help", "Related Help");
     var relatedGrid = createEl("div", "guide-card-grid");
     relatedGrid.appendChild(createCard("Back to Vendor", createLinks([
       { label: "Back to " + model.vendorTitle, url: rootPath + "/guides/" + vendorSlug + ".html" }
@@ -1006,8 +1006,8 @@
     content.appendChild(overview);
     content.appendChild(before);
     if (model.licensing.length) {
-      var licensing = createSection("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
-      licensing.appendChild(createCard("Licensing / Access", createList(model.licensing)));
+      var licensing = createSection("licensing-access", "Licensing / Access", "Licensing / Access");
+      licensing.appendChild(createList(model.licensing));
       content.appendChild(licensing);
     }
     content.appendChild(install);

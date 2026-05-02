@@ -590,25 +590,25 @@ function renderVendorPage() {
 }
 
 function renderAppPage(model) {
-  const overview = section("overview", "Application Guide", model.name, model.summary);
-  overview.appendChild(card("Overview", paragraphs(model.overview)));
+  const overview = section("overview", "Application Guide", model.name);
+  overview.appendChild(paragraphs(model.overview));
   if (model.highlights.length) {
     overview.appendChild(card("Quick Notes", model.highlights));
   }
 
-  const ask = section("before-you-start", "Before You Start", "Before You Start", "Use these quick checks to narrow the problem before you change the app or computer.");
+  const ask = section("before-you-start", "Before You Start", "Before You Start");
   ask.appendChild(card("Check these first", model.askFirst));
 
-  const install = section("install-update-basics", "Install / Update Basics", "Install / Update Basics", "These safe steps help with fresh installs, recent updates, and apps that stopped working after a change.");
-  install.appendChild(card("Install / Update Basics", model.install));
+  const install = section("install-update-basics", "Install / Update Basics", "Install / Update Basics");
+  install.appendChild(list(model.install));
 
   let phoneSetup = null;
   if (model.mobileSetup.length) {
-    phoneSetup = section("phone-tablet-setup", "Phone / Tablet", "Phone / Tablet Setup", "Use these checks when you are setting up the app on an iPhone or Android device, moving to a new phone, or fixing missing mobile prompts.");
-    phoneSetup.appendChild(card("Phone / Tablet Setup", model.mobileSetup));
+    phoneSetup = section("phone-tablet-setup", "Phone / Tablet", "Phone / Tablet Setup");
+    phoneSetup.appendChild(list(model.mobileSetup));
   }
 
-  const issues = section("common-problems", "Common Problems", "Common Problems", "These are the problems people run into most often with this app.");
+  const issues = section("common-problems", "Common Problems", "Common Problems");
   const issueGrid = el("div", "guide-card-grid");
   model.commonIssues.forEach(item => {
     const issueCard = el("article", "guide-card issue-card");
@@ -620,14 +620,14 @@ function renderAppPage(model) {
   });
   issues.appendChild(issueGrid);
 
-  const support = section("try-fixes-first", "Try These Fixes First", "Try These Fixes First", "Try these stable, low-risk steps before contacting support.");
-  support.appendChild(card("Try These Fixes First", model.supportCheckpoints));
+  const support = section("try-fixes-first", "Try These Fixes First", "Try These Fixes First");
+  support.appendChild(list(model.supportCheckpoints));
 
-  const sendSupport = section("what-to-send-support", "What to Send Support", "What to Send Support", "If the problem continues, send these details so support can help faster.");
+  const sendSupport = section("what-to-send-support", "What to Send Support", "What to Send Support");
   sendSupport.appendChild(card("Send these details", model.supportArtifacts));
   sendSupport.appendChild(createCopySupportAction(model));
 
-  const related = section("related-help", "Related Help", "Related Help", "Use these links to keep moving without losing context.");
+  const related = section("related-help", "Related Help", "Related Help");
   const relatedGrid = el("div", "guide-card-grid");
   relatedGrid.appendChild(card("Back to Vendor", linkList([{ label: `Back to ${vendor.title}`, url: vendorUrl(vendorSlug) }])));
   relatedGrid.appendChild(card("Related Apps", linkList(model.relatedApps.map(item => ({ label: getApplicationGuide(item.vendor, item.app)?.name ?? item.app, url: appUrl(item.vendor, item.app) })) )));
@@ -645,8 +645,8 @@ function renderAppPage(model) {
   renderReviewLabel(model.lastReviewed);
   const sections = [overview, ask];
   if (model.licensing.length) {
-    const licensing = section("licensing-access", "Licensing / Access", "Licensing / Access", "Use these checks when the app says Trial, Unlicensed, Subscription Required, or opens with the wrong account.");
-    licensing.appendChild(card("Licensing / Access", model.licensing));
+    const licensing = section("licensing-access", "Licensing / Access", "Licensing / Access");
+    licensing.appendChild(list(model.licensing));
     sections.push(licensing);
   }
   if (phoneSetup) {

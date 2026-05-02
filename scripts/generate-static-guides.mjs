@@ -552,17 +552,14 @@ function buildAppHtml(vendorSlug, vendor, app, apps) {
   ]);
 
   const overviewBody = [
-    renderCard("Overview", renderParagraphs(model.overview)),
+    renderParagraphs(model.overview),
     model.highlights.length ? renderCard("Quick notes", renderList(model.highlights)) : ""
   ].filter(Boolean).join("");
 
-  const usedForBody = renderCard(
-    "What this app is usually used for",
-    renderParagraphs([
-      model.usuallyUsedFor || `${app.name} is part of the ${vendor.title} family.`,
-      `It is part of the ${vendor.title} family covered in our app help.`
-    ])
-  );
+  const usedForBody = renderParagraphs([
+    model.usuallyUsedFor || `${app.name} is part of the ${vendor.title} family.`,
+    `It is part of the ${vendor.title} family covered in our app help.`
+  ]);
 
   const sectionsHtml = [
     renderSection({
@@ -622,8 +619,7 @@ function buildAppHtml(vendorSlug, vendor, app, apps) {
           id: "phone-setup",
           kicker: "Phone / Tablet",
           title: "Phone / tablet setup",
-          intro: "Use these checks when you are setting up the app on an iPhone or Android device, moving to a new phone, or fixing missing mobile prompts.",
-          body: renderCardList("Phone / tablet setup", model.mobileSetup)
+          body: renderList(model.mobileSetup)
         })
       : "",
     renderSection({
