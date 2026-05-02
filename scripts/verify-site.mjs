@@ -26,7 +26,8 @@ const publicRoutes = [
   "applications.html",
   "app-licensing.html",
   "tips-and-tricks.html",
-  "contact.html"
+  "contact.html",
+  "ticket.html"
 ];
 
 const internalRoutes = [

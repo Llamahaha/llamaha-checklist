@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit a Ticket | Llamaha</title>
+  <meta name="description" content="Submit a Llamaha support ticket with the app, page, account, exact issue, screenshot details, and checks needed for review.">
+  <link rel="canonical" href="https://llamaha.com/ticket">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="contact.html">Contact</a>
+      <span>/</span>
+      <strong>Submit a Ticket</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Ticket</p>
+            <h1>Submit a support ticket</h1>
+            <p class="builder-copy">Use this form when you need help reviewed or want to report a missing, unclear, or incorrect page. The form gathers the details that make the request easier to understand and sends them to admin@llamaha.com.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Details</p>
+            <h2>What helps the review go faster</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Describe the request</h4>
+            <p>Include the app or page, what you were trying to do, what changed recently, and the exact message or symptom you saw.</p>
+          </div>
+          <div class="card-block">
+            <h4>Add what narrows it down</h4>
+            <p>Share the work account used, the app version when you can see it, screenshot details, whether the browser version works, and whether the same task works from another device, Cloud PC, Citrix session, or VPN path.</p>
+          </div>
+          <div class="card-block">
+            <h4>Point to the exact item</h4>
+            <p>Include the exact file, project, mailbox, printer, site URL, shared path, data source, company file, phone prompt, guide URL, or guide section involved.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Form</p>
+            <h2>Ticket details</h2>
+          </div>
+        </div>
+
+        <form id="ticketForm" class="ticket-form generator-form" action="mailto:admin@llamaha.com" method="post" enctype="text/plain">
+          <fieldset class="ticket-fieldset">
+            <legend>Your contact information</legend>
+            <div class="ticket-field-grid">
+              <label class="field" for="requestType">
+                <span>Request type</span>
+                <select id="requestType" name="Request type" required>
+                  <option value="">Choose one</option>
+                  <option>Help with an app or account</option>
+                  <option>Page is missing, unclear, or incorrect</option>
+                  <option>Licensing or sign-in question</option>
+                  <option>File, project, printer, or device issue</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label class="field" for="impact">
+                <span>Impact</span>
+                <select id="impact" name="Impact" required>
+                  <option value="">Choose one</option>
+                  <option>Question or suggestion</option>
+                  <option>Can work around it</option>
+                  <option>Blocking my work</option>
+                  <option>Multiple people are affected</option>
+                </select>
+              </label>
+              <label class="field" for="name">
+                <span>Your name</span>
+                <input id="name" name="Name" type="text" autocomplete="name" required>
+              </label>
+              <label class="field" for="replyEmail">
+                <span>Reply email</span>
+                <input id="replyEmail" name="Reply email" type="email" autocomplete="email" required>
+              </label>
+              <label class="field" for="team">
+                <span>Company or team</span>
+                <input id="team" name="Company or team" type="text" autocomplete="organization">
+              </label>
+              <label class="field" for="workAccount">
+                <span>Work account used</span>
+                <input id="workAccount" name="Work account used" type="text" autocomplete="username" placeholder="name@company.com">
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="ticket-fieldset">
+            <legend>What this is about</legend>
+            <div class="ticket-field-grid">
+              <label class="field" for="appOrPage">
+                <span>App, page, or product involved</span>
+                <input id="appOrPage" name="App, page, or product involved" type="text" required>
+              </label>
+              <label class="field" for="appVersion">
+                <span>App version, release, or edition</span>
+                <input id="appVersion" name="App version, release, or edition" type="text" placeholder="Only if you can see it">
+              </label>
+              <label class="field is-wide" for="guideUrl">
+                <span>Guide URL and section, if this is about site content</span>
+                <input id="guideUrl" name="Guide URL and section" type="text" inputmode="url" placeholder="https://llamaha.com/... and the section name">
+              </label>
+              <label class="field is-wide" for="exactItem">
+                <span>Exact file, project, mailbox, printer, site URL, shared path, data source, company file, or phone prompt</span>
+                <input id="exactItem" name="Exact item involved" type="text">
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="ticket-fieldset">
+            <legend>What happened</legend>
+            <div class="ticket-field-grid">
+              <label class="field is-wide" for="tryingToDo">
+                <span>What were you trying to do?</span>
+                <textarea id="tryingToDo" name="What were you trying to do" required></textarea>
+              </label>
+              <label class="field is-wide" for="whatHappened">
+                <span>What happened instead? Include the exact message or symptom.</span>
+                <textarea id="whatHappened" name="What happened instead" required></textarea>
+              </label>
+              <label class="field is-wide" for="recentChange">
+                <span>What changed recently?</span>
+                <textarea id="recentChange" name="What changed recently" placeholder="New computer, new phone, password change, update, license change, new project, moved file, new printer, or anything else that changed."></textarea>
+              </label>
+              <label class="field is-wide" for="screenshotDetails">
+                <span>Screenshot, recording link, or exact text shown on screen</span>
+                <textarea id="screenshotDetails" name="Screenshot or exact text" placeholder="Paste the exact message, describe the screenshot, or include a shared link. You can also attach a screenshot after the email opens."></textarea>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="ticket-fieldset">
+            <legend>Checks already tried</legend>
+            <div class="ticket-field-grid">
+              <label class="field" for="browserCheck">
+                <span>If there is a browser version, does it work there?</span>
+                <select id="browserCheck" name="Browser version check">
+                  <option>Not applicable</option>
+                  <option>Yes, it works in the browser</option>
+                  <option>No, it also fails in the browser</option>
+                  <option>I have not tried the browser version</option>
+                </select>
+              </label>
+              <label class="field" for="otherDeviceCheck">
+                <span>Does it work from another device or remote session?</span>
+                <select id="otherDeviceCheck" name="Other device or remote session check">
+                  <option>Not applicable</option>
+                  <option>Yes, it works somewhere else</option>
+                  <option>No, it fails everywhere tested</option>
+                  <option>I have not tried another device or remote session</option>
+                </select>
+              </label>
+              <label class="field is-wide" for="stepsTried">
+                <span>What have you already tried?</span>
+                <textarea id="stepsTried" name="Steps already tried" placeholder="Restarted the app, tried another browser, signed out and back in, checked another device, or anything else you already tried."></textarea>
+              </label>
+              <label class="field is-wide" for="extraNotes">
+                <span>Anything else that may help?</span>
+                <textarea id="extraNotes" name="Additional notes"></textarea>
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="ticket-check">
+            <input id="confirmDetails" name="Details confirmed" type="checkbox" required>
+            <span>I included the details I have and can reply with screenshots or attachments if needed.</span>
+          </label>
+
+          <div class="action-row ticket-action-row">
+            <button class="primary-btn" type="submit">Send ticket</button>
+            <button class="secondary-btn" id="copyTicket" type="button">Copy ticket summary</button>
+            <a class="secondary-btn ticket-secondary-link" href="contact.html">Back to contact</a>
+          </div>
+          <p id="ticketStatus" class="ticket-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="ticket.js"></script>
+</body>
+</html>

@@ -657,6 +657,19 @@ body::after {
   color: var(--accent);
 }
 
+.contact-btn-primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-purple) 100%);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(129, 62, 137, 0.36);
+}
+
+.contact-btn-primary:hover {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand-blue-hover) 0%, var(--brand-purple-hover) 100%);
+  color: #fff;
+}
+
 .contact-panel {
   display: grid;
   gap: 14px;
@@ -686,6 +699,10 @@ body::after {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 4px;
+}
+
+.hero-action-row {
+  margin-top: 16px;
 }
 
 .contact-action-row .contact-btn {
@@ -802,7 +819,9 @@ body::after {
 
 select,
 input[type="text"],
+input[type="email"],
 input[type="search"],
+input[type="url"],
 textarea,
 .primary-btn,
 .secondary-btn {
@@ -814,7 +833,9 @@ textarea,
 
 select,
 input[type="text"],
+input[type="email"],
 input[type="search"],
+input[type="url"],
 textarea {
   appearance: none;
   background: var(--surface-strong);
@@ -824,7 +845,9 @@ textarea {
 
 select:focus,
 input[type="text"]:focus,
+input[type="email"]:focus,
 input[type="search"]:focus,
+input[type="url"]:focus,
 textarea:focus {
   outline: 2px solid var(--accent);
   outline-offset: 1px;
@@ -933,6 +956,64 @@ input[type="checkbox"] {
 .secondary-btn:hover {
   border-color: var(--line-strong);
   background: var(--surface);
+}
+
+.ticket-form {
+  gap: 20px;
+}
+
+.ticket-fieldset {
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(10, 14, 26, 0.28);
+}
+
+.ticket-fieldset legend {
+  padding: 0 8px;
+  color: var(--ink);
+  font-size: 0.94rem;
+  font-weight: 800;
+}
+
+.ticket-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ticket-field-grid .field.is-wide {
+  grid-column: 1 / -1;
+}
+
+.ticket-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.ticket-check input {
+  margin-top: 3px;
+  accent-color: var(--brand-purple);
+}
+
+.ticket-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.ticket-status {
+  min-height: 1.4em;
+  margin: -6px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 /* ── Progress / meta ────────────────────────── */
@@ -2049,6 +2130,8 @@ input[type="checkbox"] {
 
   .workspace,
   .field-grid,
+  .ticket-field-grid,
+  .ticket-action-row,
   .action-row,
   .results-layout,
   .overview-grid,

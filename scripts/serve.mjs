@@ -36,6 +36,13 @@ function resolvePath(urlPath) {
     return fullPath;
   }
 
+  if (!extname(fullPath)) {
+    const htmlPath = `${fullPath}.html`;
+    if (existsSync(htmlPath) && statSync(htmlPath).isFile()) {
+      return htmlPath;
+    }
+  }
+
   if (existsSync(fullPath) && statSync(fullPath).isDirectory()) {
     const indexPath = join(fullPath, "index.html");
     if (existsSync(indexPath)) {

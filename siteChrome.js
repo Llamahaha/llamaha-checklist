@@ -34,7 +34,7 @@ function getPublicSection(currentFile, body, pathname) {
   if (currentFile === "applications.html") return "support";
   if (currentFile === "app-licensing.html") return "support";
   if (currentFile === "tips-and-tricks.html") return "support";
-  if (currentFile === "contact.html") return "contact";
+  if (currentFile === "contact.html" || currentFile === "ticket.html" || currentFile === "ticket") return "contact";
   if (body.dataset.pageType || currentFile === "vendor-guides.html" || pathname.includes("/guides/")) return "support";
   return "home";
 }

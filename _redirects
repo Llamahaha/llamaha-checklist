@@ -1,3 +1,4 @@
 https://www.llamaha.com/* https://llamaha.com/:splat 301!
 http://www.llamaha.com/* https://llamaha.com/:splat 301!
 http://llamaha.com/* https://llamaha.com/:splat 301!
+/ticket /ticket.html 200
