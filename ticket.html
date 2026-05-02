@@ -65,7 +65,10 @@
           </div>
         </div>
 
-        <form id="ticketForm" class="ticket-form generator-form" action="mailto:admin@llamaha.com" method="post" enctype="text/plain">
+        <noscript>
+          <p class="ticket-status">JavaScript is required to send this form. You can email <a href="mailto:admin@llamaha.com">admin@llamaha.com</a> directly with the same details.</p>
+        </noscript>
+        <form id="ticketForm" class="ticket-form generator-form" novalidate>
           <fieldset class="ticket-fieldset">
             <legend>Your contact information</legend>
             <div class="ticket-field-grid">
@@ -104,7 +107,7 @@
               </label>
               <label class="field" for="workAccount">
                 <span>Work account used</span>
-                <input id="workAccount" name="Work account used" type="text" autocomplete="username" placeholder="name@company.com">
+                <input id="workAccount" name="Work account used" type="email" autocomplete="email" placeholder="name@company.com">
               </label>
             </div>
           </fieldset>
