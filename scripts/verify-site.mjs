@@ -461,6 +461,28 @@ function verifyBrandingAssets() {
   }
 }
 
+function verifyGoogleTag() {
+  const htmlFiles = walk(rootDir).filter(file => extname(file).toLowerCase() === ".html");
+  const loader = "https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM";
+  const configPattern = /gtag\(['"]config['"],\s*['"]G-PMCQW995ZM['"]\);/g;
+
+  for (const htmlFile of htmlFiles) {
+    const html = readFileSync(htmlFile, "utf8");
+    const relativePath = displayPath(htmlFile);
+    const loaderCount = html.split(loader).length - 1;
+    const configCount = [...html.matchAll(configPattern)].length;
+
+    if (loaderCount !== 1 || configCount !== 1) {
+      addError(`HTML page "${relativePath}" must include exactly one Google tag for G-PMCQW995ZM`);
+      continue;
+    }
+
+    if (!/<head>\s*<!-- Google tag \(gtag\.js\) -->/i.test(html)) {
+      addError(`HTML page "${relativePath}" must place the Google tag immediately after <head>`);
+    }
+  }
+}
+
 // Customer-facing pages must not link directly to /internal content. The redirect
 // pages below intentionally bounce to internal counterparts; everything else is a leak.
 const internalRedirectExceptions = new Set([
@@ -539,6 +561,7 @@ if (!linksOnly) {
   verifyInternalSearchIndex();
   verifyNoInternalLeaksInPublicPages();
   verifyPublicGuideContent();
+  verifyGoogleTag();
 }
 
 if (errors.length) {
