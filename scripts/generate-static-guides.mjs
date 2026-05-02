@@ -96,12 +96,10 @@ function renderCardList(title, items, listClass = "guide-list") {
   return renderCard(title, list);
 }
 
-function renderSection({ id, kicker, title, intro, body }) {
-  const introHtml = intro ? `<p class="guide-section-copy">${escapeHtml(intro)}</p>` : "";
+function renderSection({ id, kicker, title, body }) {
   return `<section id="${escapeAttr(id)}" class="guide-section">
   <p class="section-kicker">${escapeHtml(kicker)}</p>
   <h2 class="guide-section-title">${escapeHtml(title)}</h2>
-  ${introHtml}
   ${body || ""}
 </section>`;
 }

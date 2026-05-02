@@ -66,11 +66,10 @@ function linkList(items = [], className = "guide-link-list") {
   return node;
 }
 
-function section(id, kicker, title, intro) {
+function section(id, kicker, title) {
   const wrapper = el("section", "guide-section");
   wrapper.id = id;
   wrapper.append(el("p", "section-kicker", kicker), el("h2", "guide-section-title", title));
-  if (intro) wrapper.appendChild(el("p", "guide-section-copy", intro));
   return wrapper;
 }
 

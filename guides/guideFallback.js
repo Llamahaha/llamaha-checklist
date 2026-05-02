@@ -756,12 +756,11 @@
     return card;
   }
 
-  function createSection(id, kicker, title, intro) {
+  function createSection(id, kicker, title) {
     var section = createEl("section", "guide-section");
     section.id = id;
     section.appendChild(createEl("p", "section-kicker", kicker));
     section.appendChild(createEl("h2", "guide-section-title", title));
-    section.appendChild(createEl("p", "guide-section-copy", intro));
     return section;
   }
 
