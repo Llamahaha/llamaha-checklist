@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>SMTP2GO Setup Runbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../support.html">Support Pages</a>
+      <span>/</span>
+      <strong>SMTP2GO Setup</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Email / SMTP / Internal Runbook</p>
+            <h1>SMTP2GO Setup</h1>
+            <p class="builder-copy">Checklist for setting up SMTP relay through SMTP2GO, verifying DNS, testing delivery, and escalating cleanly without exposing credentials.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Overview</p>
+            <h2>When to use SMTP2GO</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Good fit</h4>
+            <ul>
+              <li>Scanners, line-of-business apps, monitoring tools, websites, or devices need authenticated outbound SMTP.</li>
+              <li>Microsoft 365 SMTP AUTH is blocked, unreliable for the device, or not desired for application mail.</li>
+              <li>The sender needs better deliverability visibility than a basic ISP relay provides.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Not a shortcut for</h4>
+            <p>Do not use SMTP2GO to bypass security policy, hide a compromised sender, relay bulk mail without approval, or send from domains that have not been authorized for that customer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Setup Checklist</p>
+            <h2>Configuration path</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Account and sender</h4>
+            <ol>
+              <li>Confirm approved customer/domain and approved sending use case.</li>
+              <li>Create or identify the SMTP2GO account or subaccount using approved MSP process.</li>
+              <li>Verify the sending domain instead of relying on a single sender when possible.</li>
+              <li>Create SMTP credentials for the app or device. Store the username/password only in approved secret storage.</li>
+              <li>Record non-secret setup notes in the ticket, including sender address, device/app name, and test recipient.</li>
+            </ol>
+          </div>
+          <div class="card-block">
+            <h4>Typical SMTP settings</h4>
+            <p>Use SMTP2GO's published server settings and the current supported ports from their documentation. Keep placeholders in notes: server <code>&lt;SMTP_SERVER&gt;</code>, port <code>&lt;PORT&gt;</code>, username <code>&lt;SMTP_USERNAME&gt;</code>, sender <code>&lt;FROM_ADDRESS&gt;</code>.</p>
+          </div>
+          <div class="card-block">
+            <h4>Warning before DNS changes</h4>
+            <p>Check the existing SPF, DKIM, and DMARC posture before editing DNS. Do not replace a working SPF record without reviewing all current senders, and do not lower DMARC protection without approval.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">DNS</p>
+            <h2>Records to verify</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>SPF</h4>
+            <ul>
+              <li>Confirm the domain has one SPF TXT record, not multiple competing SPF records.</li>
+              <li>Review whether SMTP2GO domain verification uses CNAME records for return-path alignment instead of requiring a direct SPF include.</li>
+              <li>Validate that all approved sending services are still represented after any change.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>DKIM</h4>
+            <ul>
+              <li>Verify the DKIM CNAME/TXT records requested by SMTP2GO have propagated.</li>
+              <li>Confirm the domain shows verified inside SMTP2GO before production testing.</li>
+              <li>If messages show "via" another domain in mail clients, check whether the sender domain is fully verified or only a single address was verified.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>DMARC</h4>
+            <ul>
+              <li>Confirm a DMARC record exists or document why it does not.</li>
+              <li>Check alignment expectations before changing a policy to <code>quarantine</code> or <code>reject</code>.</li>
+              <li>If failures appear, compare the visible From domain, return-path, DKIM domain, and SMTP2GO verification status.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Testing</p>
+            <h2>Validation steps</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Test send</h4>
+            <ol>
+              <li>Send to an internal recipient and an external test mailbox.</li>
+              <li>Confirm the message arrives, does not land in junk, and has the expected From and Reply-To.</li>
+              <li>Review SMTP2GO activity/logs for accepted, rejected, bounced, or deferred messages.</li>
+              <li>Open message headers and check SPF/DKIM/DMARC results where possible.</li>
+              <li>Document the exact device/app settings without including the password.</li>
+            </ol>
+          </div>
+          <div class="card-block">
+            <h4>Common failure points</h4>
+            <ul>
+              <li>Wrong SMTP username or password, copied with a trailing space.</li>
+              <li>Device cannot negotiate the selected TLS mode or port.</li>
+              <li>Firewall blocks outbound SMTP ports.</li>
+              <li>Sender domain not verified, From address does not match the authorized domain, or DNS has not propagated.</li>
+              <li>Application sends a malformed From address, missing authentication, or a recipient blocked by policy.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What To Gather Before Escalation</p>
+            <h2>Evidence package</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Collect</h4>
+            <ul>
+              <li>Device/app name, sender address, recipient address, timestamp, and timezone.</li>
+              <li>SMTP server, port, encryption mode, and authentication username only. Do not include passwords.</li>
+              <li>Screenshots of SMTP2GO activity, verification status, and the application error.</li>
+              <li>DNS screenshots or output showing SPF/DKIM/DMARC records.</li>
+              <li>Full bounce or SMTP error text, with sensitive addresses redacted if needed.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Official documentation</h4>
+            <p><a href="https://www.smtp2go.com/setupguide/" target="_blank" rel="noopener">SMTP2GO setup guide</a> and <a href="https://support.smtp2go.com/hc/en-gb/articles/28543815517209-SPF-DKIM-and-DMARC-Overview" target="_blank" rel="noopener">SMTP2GO SPF, DKIM, and DMARC overview</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related Guides</p>
+            <h2>Internal references</h2>
+          </div>
+        </div>
+        <div class="support-link-board">
+          <a href="../snippets.html">Snippets</a>
+          <a href="../templates.html">Templates</a>
+          <a href="../support.html">Support hub</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

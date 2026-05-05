@@ -1018,6 +1018,7 @@ export const publicAppHelpSections = [
           ["hec", "hec-dssvue"],
           ["mctrans", "hcs"],
           ["mctrans", "hss"],
+          ["transoft", "autoturn"],
           ["axiom", "axiom"]
         ])
       },

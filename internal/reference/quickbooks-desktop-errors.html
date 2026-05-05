@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>QuickBooks Desktop Error Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../support.html">Support Pages</a>
+      <span>/</span>
+      <strong>QuickBooks Desktop Errors</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">QuickBooks / Desktop / Internal Troubleshooting</p>
+            <h1>QuickBooks Desktop Error Reference</h1>
+            <p class="builder-copy">Runbook for two common QuickBooks Desktop company-file errors: <code>(-6000, -77)</code> and the "company file already open" message.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Safety</p>
+            <h2>Before changing company files</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Warning</h4>
+            <p>QuickBooks company files are business-critical accounting data. Before renaming support files, changing hosting, moving files, repairing data, or running utilities, confirm a recent backup exists and get approval from the responsible business contact or accounting owner.</p>
+          </div>
+          <div class="card-block">
+            <h4>Baseline evidence</h4>
+            <ul>
+              <li>QuickBooks edition/year/release, Windows computer/server name, and user/session context.</li>
+              <li>Company file name and whether it is local, UNC, mapped drive, RDS/hosted desktop, or server share.</li>
+              <li>Exact error text and screenshot.</li>
+              <li>Whether other users can open the same file and whether multi-user mode is expected.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Error (-6000, -77)</p>
+            <h2>Problem opening the company file</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English meaning</h4>
+            <p>QuickBooks cannot open the company file from its current location. The failure usually points to file path, permissions, network access, hosting, or QuickBooks support-file issues rather than a simple username/password problem.</p>
+          </div>
+          <div class="card-block">
+            <h4>Likely causes</h4>
+            <ul>
+              <li>Company file path is too long, unavailable, blocked, or referenced by a mapped drive that does not exist in the current session.</li>
+              <li>Windows share or NTFS permissions prevent the user or QuickBooks Database Server Manager from accessing the file.</li>
+              <li><code>.ND</code> or <code>.TLG</code> support files are damaged or stale.</li>
+              <li>Hosting/multi-user mode is enabled on the wrong workstation or disabled on the server that should host the file.</li>
+              <li>Firewall, security software, file lock, server issue, or disconnected VPN blocks the company file.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fast checks</h4>
+            <ul>
+              <li>Open QuickBooks without opening a company file by holding Ctrl while launching, then browse to the file.</li>
+              <li>Try the UNC path instead of a mapped drive, for example <code>\\&lt;SERVER&gt;\&lt;SHARE&gt;\&lt;FILE&gt;.qbw</code>.</li>
+              <li>Confirm the same Windows user can browse to the folder, create a temporary test file if approved, and read the company file path.</li>
+              <li>Ask whether any server reboot, migration, QuickBooks update, backup restore, or file move happened recently.</li>
+              <li>Check whether the QuickBooks Database Server Manager sees and scans the company file folder on the host.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fix steps</h4>
+            <ol>
+              <li>Confirm there is a current backup or business approval before changing files.</li>
+              <li>Update QuickBooks Desktop to the approved release if the issue started after an update mismatch.</li>
+              <li>Open the company file from a UNC path instead of a mapped drive.</li>
+              <li>If approved, rename matching <code>.ND</code> and <code>.TLG</code> files by adding <code>.OLD</code> to the end so QuickBooks can recreate them.</li>
+              <li>Check hosting: only the server or correct host should host multi-user access unless the environment is designed otherwise.</li>
+              <li>Run QuickBooks File Doctor or repair tools only after recording the current state and confirming backup posture.</li>
+            </ol>
+          </div>
+          <div class="card-block">
+            <h4>Escalation notes</h4>
+            <p>Escalate if multiple users are blocked, the server share is unstable, the company file may be damaged, File Doctor reports data problems, backups are missing, or accounting staff cannot approve file changes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Already Open Message</p>
+            <h2>QuickBooks already has a company file open</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English meaning</h4>
+            <p>The user is trying to open another company file while a company file is already open in a QuickBooks edition or context that does not allow that workflow.</p>
+          </div>
+          <div class="card-block">
+            <h4>Why this happens</h4>
+            <ul>
+              <li>QuickBooks Pro or Premier generally expects one company file open at a time.</li>
+              <li>QuickBooks Accountant and QuickBooks Desktop Enterprise support a secondary company file workflow, but with restrictions.</li>
+              <li>A hidden QuickBooks window, stuck process, RDS session, or hosted desktop session already has a file open.</li>
+              <li>The user launched a second QuickBooks shortcut instead of closing the current file or using the supported secondary-file path.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>How to confirm</h4>
+            <ul>
+              <li>Check the QuickBooks title bar for the current company file name.</li>
+              <li>Use Window menu options inside QuickBooks to find open windows or switch company context.</li>
+              <li>On RDS/hosted desktops, check whether the same user has another disconnected session with QuickBooks open.</li>
+              <li>Check Task Manager for stuck <code>QBW32.exe</code> processes only after confirming QuickBooks is not actively being used.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fix steps</h4>
+            <ol>
+              <li>Save work and close open QuickBooks windows.</li>
+              <li>Use File &gt; Close Company or Logoff, then open the intended company file.</li>
+              <li>If the edition supports it and the workflow is approved, use the documented "Open Second Company" path instead of File &gt; Open or Restore Company.</li>
+              <li>For RDS/hosted environments, sign out disconnected duplicate sessions or ask hosting support to clear the stale user session.</li>
+              <li>If QuickBooks is hung, end the process only after confirming no unsaved user work is at risk.</li>
+            </ol>
+          </div>
+          <div class="card-block">
+            <h4>Escalation notes</h4>
+            <p>Escalate if the user needs a multi-company workflow not supported by their edition, hosted sessions keep leaving orphaned QuickBooks processes, multiple users report file lock issues, or there is risk of unsaved accounting work.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What To Gather Before Escalation</p>
+            <h2>Evidence package</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Collect</h4>
+            <ul>
+              <li>Exact error screenshot and timestamp.</li>
+              <li>QuickBooks product edition/year/release and whether Accountant or Enterprise is involved.</li>
+              <li>Company file path type and whether it is local, UNC, mapped drive, hosted desktop, or RDS.</li>
+              <li>Backup status before any file repair, rename, move, or hosting change.</li>
+              <li>List of affected users, whether one user can open the file, and whether multi-user mode is expected.</li>
+              <li>Any recent server, share, VPN, QuickBooks, or file migration change.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Official documentation</h4>
+            <p><a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/multi-user-mode/error-6000-77-opening-company-file/L8t17ECeQ_US_en_US" target="_blank" rel="noopener">QuickBooks error -6000, -77</a>, <a href="https://quickbooks.intuit.com/learn-support/en-us/help-articles/resolve-error-6000-when-opening-a-company-file/00/262332" target="_blank" rel="noopener">QuickBooks -6000 series errors</a>, and <a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/set-files/open-use-secondary-company-file-quickbooks-desktop/L1HZADqD7_US_en_US" target="_blank" rel="noopener">open a secondary company file</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related Guides</p>
+            <h2>Internal references</h2>
+          </div>
+        </div>
+        <div class="support-link-board">
+          <a href="quickbooks-web-connector-errors.html">QuickBooks Web Connector errors</a>
+          <a href="../../guides/quickbooks/quickbooks-enterprise-desktop.html">Public QuickBooks Enterprise Desktop guide</a>
+          <a href="../support.html">Support hub</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

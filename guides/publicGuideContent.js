@@ -809,8 +809,8 @@ const basePublicGuideContent = {
           url: "https://docs.fortinet.com/document/forticlient/7.2.10/administration-guide/6364/connecting-to-ssl-or-ipsec-vpn"
         },
         {
-          label: "Connecting from FortiClient VPN client",
-          url: "https://docs.fortinet.com/document/fortigate/7.6.1/administration-guide/215051/connecting-from-forticlient-vpn-client"
+          label: "FortiClient product documentation",
+          url: "https://docs.fortinet.com/product/forticlient"
         }
       ]
     }

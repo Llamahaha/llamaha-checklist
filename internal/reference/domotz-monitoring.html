@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Domotz Monitoring Runbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../support.html">Support Pages</a>
+      <span>/</span>
+      <strong>Domotz Monitoring</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Monitoring / Network / Internal Runbook</p>
+            <h1>Domotz Monitoring</h1>
+            <p class="builder-copy">Operational checklist for using Domotz to monitor networks, devices, alerts, and site health without exposing client-specific settings.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Overview</p>
+            <h2>Purpose and common use cases</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Purpose</h4>
+            <p>Domotz is used to discover monitored network devices, track availability, review alert history, and give technicians a fast view of what changed at a site before deeper troubleshooting starts.</p>
+          </div>
+          <div class="card-block">
+            <h4>Common use cases</h4>
+            <ul>
+              <li>Confirm whether an outage is isolated to one endpoint, one switch, one ISP circuit, or a whole site.</li>
+              <li>Review device uptime, response, packet loss, and alert history before calling a site contact.</li>
+              <li>Validate newly onboarded network equipment is visible and labeled correctly.</li>
+              <li>Spot unknown devices, changed IPs, offline infrastructure, or recurring alerts that need cleanup.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Onboarding</p>
+            <h2>Checklist for a new site or device group</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Site setup</h4>
+            <ul>
+              <li>Confirm the site name, location label, primary contact, timezone, and maintenance window placeholders.</li>
+              <li>Verify the Domotz agent location and document whether it is appliance-based, software-based, or hosted on network equipment.</li>
+              <li>Record non-secret settings such as monitored subnet ranges, VLAN labels, critical device names, and expected ISP handoff notes.</li>
+              <li>Do not store passwords, license keys, private tunnel URLs, or tenant identifiers in the guide or ticket notes.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Device tagging</h4>
+            <ul>
+              <li>Label firewalls, switches, wireless controllers, access points, servers, NAS devices, UPS units, printers, and carrier equipment.</li>
+              <li>Mark devices that should alert when offline. Avoid alerting on transient phones, guest devices, or personal endpoints unless there is a specific reason.</li>
+              <li>Use placeholders for MSP-specific alert policy names such as <code>&lt;CRITICAL_DEVICE_POLICY&gt;</code> and <code>&lt;SITE_MAINTENANCE_POLICY&gt;</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Fast Checks</p>
+            <h2>Device and site health triage</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Before assuming outage</h4>
+            <ul>
+              <li>Check whether the Domotz agent itself is online. If the agent is offline, device-level alert data may be stale.</li>
+              <li>Compare current alerts with the alert timeline. Look for a single first-down device that explains downstream alerts.</li>
+              <li>Confirm whether the site is inside a documented maintenance window or power event.</li>
+              <li>Review whether the affected device changed IP, MAC address, switch port, or hostname recently.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Device checks</h4>
+            <ul>
+              <li>Open the device record and capture status, last seen time, IP, MAC, vendor, and linked alerts.</li>
+              <li>Check response time and packet loss trends for intermittent issues.</li>
+              <li>For network gear, compare uplink/downlink neighbors and whether multiple devices behind it dropped together.</li>
+              <li>If supported, review SNMP or TCP sensor status, but confirm sensor credentials and community strings are stored only in approved secret storage.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Alert Review</p>
+            <h2>How to work an alert</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Alert process</h4>
+            <ol>
+              <li>Identify whether the alert is device, network, sensor, or agent related.</li>
+              <li>Check the first alert time and any related devices that alerted within the same window.</li>
+              <li>Confirm whether there is a known change, outage, power issue, maintenance window, or ISP ticket.</li>
+              <li>Capture status evidence before clearing, suppressing, or changing alert rules.</li>
+              <li>Update the ticket with impact, scope, next action, and whether monitoring has recovered.</li>
+            </ol>
+          </div>
+          <div class="card-block">
+            <h4>Escalation notes</h4>
+            <p>Escalate when the site agent is unreachable, multiple infrastructure devices dropped at once, recurring packet loss affects production traffic, a firewall or switch is unreachable, or alert policy changes are needed beyond normal support scope.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What To Gather Before Escalation</p>
+            <h2>Ticket evidence</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Collect</h4>
+            <ul>
+              <li>Site name placeholder, device name, device type, IP, MAC, and last seen time.</li>
+              <li>Alert title, first alert time, recovery time if any, and screenshot of the alert timeline.</li>
+              <li>Whether the Domotz agent is online and whether other critical devices are affected.</li>
+              <li>Any known power, ISP, firewall, switch, or maintenance event.</li>
+              <li>What user impact has been confirmed and who confirmed it.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Official documentation</h4>
+            <p><a href="https://help.domotz.com/monitoring-management/device-alerts/" target="_blank" rel="noopener">Domotz device alerts</a> and <a href="https://help.domotz.com/monitoring-management/network-alerts/" target="_blank" rel="noopener">Domotz network alerts</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related Guides</p>
+            <h2>Internal references</h2>
+          </div>
+        </div>
+        <div class="support-link-board">
+          <a href="../playbooks.html">Playbooks</a>
+          <a href="../snippets.html">Snippets</a>
+          <a href="../support.html">Support hub</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

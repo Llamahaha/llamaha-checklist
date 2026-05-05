@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>SharePoint Permissions Runbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../support.html">Support Pages</a>
+      <span>/</span>
+      <strong>SharePoint Permissions</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Microsoft 365 / SharePoint / Permissions</p>
+            <h1>SharePoint Permissions</h1>
+            <p class="builder-copy">Practical troubleshooting flow for SharePoint access tickets, sharing links, group membership, external access, and OneDrive confusion.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Overview</p>
+            <h2>What usually breaks</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English model</h4>
+            <p>SharePoint access may come from site permissions, Microsoft 365 group membership, SharePoint groups, direct item permissions, sharing links, or inherited permissions. Most tickets are really a mismatch between where the user thinks access comes from and where it actually comes from.</p>
+          </div>
+          <div class="card-block">
+            <h4>Common symptoms</h4>
+            <ul>
+              <li>User can open the site but not a folder or file.</li>
+              <li>User has a link, but the link says access is denied or requests approval.</li>
+              <li>Owner added a user to a Microsoft 365 group, but access has not appeared yet.</li>
+              <li>External guest can authenticate but still cannot open the item.</li>
+              <li>User says "SharePoint" but the item is actually in someone's OneDrive.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Fast Checks</p>
+            <h2>Find the access path</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Confirm location</h4>
+            <ul>
+              <li>Collect the exact URL. Identify whether it is a SharePoint site/library path or a OneDrive path.</li>
+              <li>Confirm site name, library, folder, file, and whether the user needs read, edit, sync, or owner access.</li>
+              <li>Check whether the item inherits permissions or has unique permissions.</li>
+              <li>Ask whether access should be temporary, permanent, internal-only, or external.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Verify effective access</h4>
+            <ul>
+              <li>Use site permissions, advanced permissions, or "Manage access" on the item to see direct users, groups, and links.</li>
+              <li>Check Microsoft 365 group membership for team-connected sites.</li>
+              <li>Check SharePoint Owners, Members, and Visitors groups for classic or permission-managed sites.</li>
+              <li>Inspect sharing links. A link can grant access even when site membership looks wrong.</li>
+              <li>Give Entra ID and SharePoint time to reflect membership changes before declaring the change failed.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Warning before changing permissions</h4>
+            <p>Do not break inheritance, delete sharing links, or add broad groups such as Everyone except external users unless the site owner approves the access model and business impact.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Fix Steps</p>
+            <h2>Common permission paths</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Site permissions</h4>
+            <ol>
+              <li>Confirm the user should have access to the whole site.</li>
+              <li>Add the user to the correct site group or Microsoft 365 group instead of granting one-off item permissions when possible.</li>
+              <li>Ask the user to test in a private browser window if stale sign-in state is suspected.</li>
+              <li>Document the group added and the approved permission level.</li>
+            </ol>
+          </div>
+          <div class="card-block">
+            <h4>Direct item permissions</h4>
+            <ol>
+              <li>Open Manage access on the file or folder and review direct access.</li>
+              <li>Check whether inheritance is broken and whether another group already has the needed access.</li>
+              <li>If approved, add the user or group at the narrowest scope that matches the business request.</li>
+              <li>Record whether permissions are inherited, unique, or granted by link.</li>
+            </ol>
+          </div>
+          <div class="card-block">
+            <h4>Sharing links</h4>
+            <ol>
+              <li>Identify link type: specific people, people in organization, existing access, or anonymous/anyone if allowed.</li>
+              <li>Confirm the recipient is using the same email address that received the link.</li>
+              <li>Remove or recreate only the problem link when approved; avoid changing all links as a first move.</li>
+              <li>If "existing access" fails, the user still needs actual permission somewhere else.</li>
+            </ol>
+          </div>
+          <div class="card-block">
+            <h4>External sharing</h4>
+            <ol>
+              <li>Check tenant-level sharing settings, site-level sharing settings, and whether guest access is allowed for the domain.</li>
+              <li>Confirm whether a guest object exists in Entra ID and whether the external user has accepted the invite or one-time passcode flow.</li>
+              <li>Have the guest test with the exact invited email address, not an alias or personal Microsoft account unless that is the invited identity.</li>
+              <li>Escalate policy conflicts instead of weakening tenant sharing settings in a live ticket.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Ticket Notes</p>
+            <h2>Common notes to capture</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Use this format</h4>
+            <ul>
+              <li>Requested access: <code>&lt;read/edit/owner/sync&gt;</code> for <code>&lt;site/library/folder/file&gt;</code>.</li>
+              <li>Approved by: <code>&lt;SITE_OWNER_OR_MANAGER&gt;</code>.</li>
+              <li>Access source checked: site group, Microsoft 365 group, direct permission, sharing link, or guest access.</li>
+              <li>Change made: <code>&lt;GROUP_OR_LINK_CHANGED&gt;</code>. No broad permission change made without approval.</li>
+              <li>User test result: successful, still pending propagation, or escalation required.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Escalation criteria</h4>
+            <ul>
+              <li>External sharing policy needs tenant or site-level change.</li>
+              <li>Permission inheritance is heavily broken and needs design cleanup.</li>
+              <li>Legal, HR, finance, or sensitive project data is involved.</li>
+              <li>Access differs between web, Teams, OneDrive sync, and Office apps after sign-out/sign-in testing.</li>
+              <li>Owner approval is unclear or conflicting.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What To Gather Before Escalation</p>
+            <h2>Evidence package</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Collect</h4>
+            <ul>
+              <li>Exact URL, affected user email, required permission level, and business approver.</li>
+              <li>Screenshot of the access denied message or sharing prompt.</li>
+              <li>Screenshot or notes showing current site/group/direct/link access.</li>
+              <li>Whether the item is SharePoint or OneDrive and whether it is accessed through Teams, browser, sync client, or Office app.</li>
+              <li>For external users: invited address, guest object status if visible, and tenant/site sharing setting summary.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Official documentation</h4>
+            <p><a href="https://learn.microsoft.com/en-us/sharepoint/find-settings" target="_blank" rel="noopener">Microsoft SharePoint and OneDrive sharing settings</a>, <a href="https://support.microsoft.com/en-us/office/share-sharepoint-files-or-folders-1fe37332-0f9a-4719-970e-d2578da4941c" target="_blank" rel="noopener">Share SharePoint files or folders</a>, and <a href="https://support.microsoft.com/en-us/office/external-or-guest-sharing-in-onedrive-sharepoint-and-lists-7aa070b8-d094-4921-9dd9-86392f2a79e7" target="_blank" rel="noopener">external or guest sharing</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related Guides</p>
+            <h2>Internal references</h2>
+          </div>
+        </div>
+        <div class="support-link-board">
+          <a href="../reference-guides.html#guide-microsoft-sharepoint">Microsoft SharePoint notes</a>
+          <a href="../templates.html">Templates</a>
+          <a href="../support.html">Support hub</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

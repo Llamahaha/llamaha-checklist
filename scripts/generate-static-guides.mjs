@@ -124,6 +124,8 @@ function publicizeText(value = "") {
     .replace(/\bknown-good peer\b/gi, "another user whose app is working")
     .replace(/\bknown-good user\b/gi, "another user whose app is working")
     .replace(/\bknown-good workstation\b/gi, "another computer that works correctly")
+    .replace(/\ba another\b/gi, "another")
+    .replace(/\bone another\b/gi, "another")
     .replace(/\bworkstations\b/gi, "computers")
     .replace(/\bworkstation\b/gi, "computer")
     .replace(/\bhandoff\b/gi, "setup")

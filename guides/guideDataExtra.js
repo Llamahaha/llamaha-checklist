@@ -6,6 +6,7 @@ export const vendorOrderExtra = [
   "rock",
   "hec",
   "mctrans",
+  "transoft",
   "axiom",
   "deltek",
   "docusign",
@@ -44,7 +45,7 @@ export const vendorGuidesExtra = {
       "Escalate after confirming the Autodesk account, exact app version, and a second-model comparison rule out app-only problems."
     ],
     supportLinks: [
-      { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+      { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
       { label: "Innovyze (Autodesk) support", url: "https://www.autodesk.com/support" }
     ]
   },
@@ -163,6 +164,30 @@ export const vendorGuidesExtra = {
     supportLinks: [
       { label: "MCTRANS HCS reference guide", url: "https://mctrans.ce.ufl.edu/highway-capacity-software-hcs/referenceguide/" },
       { label: "MCTRANS Center", url: "https://mctrans.ce.ufl.edu/" }
+    ]
+  },
+  transoft: {
+    title: "Transoft Solutions",
+    summary: "Use this for AutoTURN swept-path and vehicle turning simulation support in CAD, civil, site, and transportation design workflows.",
+    overview:
+      "Transoft Solutions publishes AutoTURN for vehicle swept-path analysis, turning simulation, and design review. Support usually starts with the host CAD platform, the exact AutoTURN edition or delivery method, the signed-in/licensed user, and whether the issue follows one drawing or all drawings.",
+    products: ["AutoTURN"],
+    sharedNotes: [
+      "AutoTURN is used to test whether vehicles can safely move through roads, intersections, loading areas, parking lots, driveways, and site layouts.",
+      "Separate a CAD-host problem from an AutoTURN problem early by checking whether the host app opens normally and whether AutoTURN loads in a simple known-good drawing.",
+      "Avoid changing production drawings until you know whether the issue is licensing, add-in loading, vehicle library selection, drawing units, or a specific file."
+    ],
+    adminSurfaces: [
+      "Transoft account or license portal used by the organization",
+      "Host CAD platform such as AutoCAD, Civil 3D, BricsCAD, MicroStation, or another supported environment",
+      "Project drawings, templates, and vehicle library or standards expectations"
+    ],
+    escalationNotes: [
+      "Escalate after capturing the host CAD version, AutoTURN version or product tier, licensing message, affected drawing, and one known-good drawing comparison."
+    ],
+    supportLinks: [
+      { label: "AutoTURN product page", url: "https://www.transoftsolutions.com/uk/civil-and-transportation/software/swept-path-analysis/autoturn/" },
+      { label: "Transoft support", url: "https://www.transoftsolutions.com/support/" }
     ]
   },
   axiom: {

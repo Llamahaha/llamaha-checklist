@@ -42,7 +42,13 @@ const internalRoutes = [
   "internal/checklist.html",
   "internal/reference/mailbox-decommission.html",
   "internal/reference/warranty-lookup.html",
-  "internal/reference/immybot-new-pc-deployment.html"
+  "internal/reference/immybot-new-pc-deployment.html",
+  "internal/reference/domotz-monitoring.html",
+  "internal/reference/smtp2go-setup.html",
+  "internal/reference/sharepoint-permissions.html",
+  "internal/reference/bits-file-downloads.html",
+  "internal/reference/quickbooks-web-connector-errors.html",
+  "internal/reference/quickbooks-desktop-errors.html"
 ];
 
 const populatedPublicGuides = [
@@ -89,6 +95,7 @@ const populatedPublicGuides = [
   ["hec", "hec-georas"],
   ["mctrans", "hcs"],
   ["mctrans", "hss"],
+  ["transoft", "autoturn"],
   ["axiom", "axiom"],
   ["adobe", "acrobat-sign"],
   ["autodesk", "construction-cloud"],

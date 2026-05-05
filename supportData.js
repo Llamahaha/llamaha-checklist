@@ -301,8 +301,8 @@ export const computerIssueSections = [
             external: false
           },
           {
-            label: "Connect from FortiClient VPN client",
-            url: "https://docs.fortinet.com/document/fortigate/7.6.1/administration-guide/215051/connecting-from-forticlient-vpn-client"
+            label: "FortiClient product documentation",
+            url: "https://docs.fortinet.com/product/forticlient"
           },
           {
             label: "Connect to SSL or IPsec VPN",

@@ -293,6 +293,54 @@ function buildCheatsheetEntries() {
       "internalPlaybook",
       "Playbook",
       "immybot new pc deployment provisioning oobe autopilot rmm autoelevate role template handoff onboarding bitlocker"
+    ),
+    entry(
+      "Domotz Monitoring",
+      "Internal runbook for Domotz monitoring, onboarding checklist, device and site checks, alert review, network outage triage, and escalation evidence.",
+      "reference/domotz-monitoring.html",
+      "internalReference",
+      "Internal Runbook",
+      "domotz monitoring network alerts device alerts agent site onboarding escalation"
+    ),
+    entry(
+      "SMTP2GO Setup",
+      "Internal SMTP2GO setup checklist covering SMTP relay, sender verification, DNS, SPF, DKIM, DMARC, SMTP authentication, test sends, and escalation details.",
+      "reference/smtp2go-setup.html",
+      "internalReference",
+      "Internal Runbook",
+      "smtp2go smtp relay email dns spf dkim dmarc authentication testing"
+    ),
+    entry(
+      "SharePoint Permissions",
+      "Internal SharePoint permissions troubleshooting for site access, Microsoft 365 groups, direct permissions, sharing links, external sharing, OneDrive confusion, and effective access checks.",
+      "reference/sharepoint-permissions.html",
+      "internalReference",
+      "Internal Runbook",
+      "sharepoint permissions microsoft 365 groups direct access sharing links external guest onedrive effective access"
+    ),
+    entry(
+      "Fast File Downloads with Start-BitsTransfer / BITS",
+      "Internal PowerShell and Datto RMM guide for reliable file downloads with Start-BitsTransfer, SYSTEM context, TLS 1.2, logging, CMD launch examples, and cleanup.",
+      "reference/bits-file-downloads.html",
+      "internalReference",
+      "Internal Runbook",
+      "start-bitstransfer bits powershell datto rmm agent browser cmd download tls logging cleanup"
+    ),
+    entry(
+      "QuickBooks Web Connector Error Reference",
+      "Internal reference for QBWC1013, QBWC1088, QBWC1003, QBWC1039, QBWC1085, QWC file re-adds, app authorization, company file context, passwords, and QBWebConnector logs.",
+      "reference/quickbooks-web-connector-errors.html",
+      "internalReference",
+      "Internal Error Reference",
+      "quickbooks web connector qbwc1013 qbwc1088 qbwc1003 qbwc1039 qbwc1085 qwc qbwebconnector log"
+    ),
+    entry(
+      "QuickBooks Desktop Error Reference",
+      "Internal reference for QuickBooks Desktop company file errors including -6000 -77 and the company file already open message, backups, ND TLG files, UNC paths, hosting, RDS, and escalation.",
+      "reference/quickbooks-desktop-errors.html",
+      "internalReference",
+      "Internal Error Reference",
+      "quickbooks desktop error -6000 -77 company file already open nd tlg unc mapped drive hosting multi-user rds"
     )
   ];
 }

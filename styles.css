@@ -244,6 +244,23 @@ body::after {
   box-shadow: 0 6px 16px rgba(129, 62, 137, 0.28);
 }
 
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 18px;
+  margin-top: 32px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
 .page-nav {
   display: inline-flex;
   align-items: center;
@@ -1743,6 +1760,20 @@ input[type="checkbox"] {
 .card-block ul,
 .card-block ol {
   padding-left: 18px;
+}
+
+.card-block pre {
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(7, 11, 18, 0.82);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre;
 }
 
 .issue-card ul {

@@ -137,6 +137,16 @@ export const applicationCatalogExtra = {
       uninstall: "Preserve project files, templates, and version notes before removing the app."
     }
   ],
+  transoft: [
+    {
+      name: "AutoTURN",
+      slug: "autoturn",
+      focus: "Vehicle swept-path and turning simulation software used by civil, transportation, site, and parking design teams to test vehicle movements against a drawing or design.",
+      licensing: "Access depends on the organization's Transoft licensing model, assigned user or seat availability, and the AutoTURN edition or web/desktop delivery path in use.",
+      install: "Install the approved AutoTURN build for the supported host CAD platform, confirm the add-in loads, validate licensing, and test one simple turning path in a known-good drawing before handing off.",
+      uninstall: "Before removing or repairing AutoTURN, preserve project drawings, custom vehicle libraries, templates, and any saved standards or configuration notes."
+    }
+  ],
   axiom: [
     {
       name: "Axiom",

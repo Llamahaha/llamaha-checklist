@@ -56,6 +56,24 @@ function getInternalSection(currentFile, pathname) {
   return "internal-home";
 }
 
+function appendSiteFooter(shell) {
+  if (shell.querySelector(".site-footer")) {
+    return;
+  }
+
+  const footer = document.createElement("footer");
+  footer.className = "site-footer";
+
+  const copyright = document.createElement("p");
+  copyright.textContent = "\u00a9 2026 Llamaha. All rights reserved.";
+
+  const disclaimer = document.createElement("p");
+  disclaimer.textContent = "Guides are for informational use; verify against official vendor documentation before making production changes.";
+
+  footer.append(copyright, disclaimer);
+  shell.appendChild(footer);
+}
+
 function initSiteChrome() {
   const shell = document.querySelector(".guide-shell, .page-shell");
   if (!shell || shell.querySelector(".site-chrome")) {
@@ -125,6 +143,7 @@ function initSiteChrome() {
 
   chrome.append(brand, nav);
   shell.prepend(chrome);
+  appendSiteFooter(shell);
 }
 
 const skipPublicizeTags = new Set([

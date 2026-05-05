@@ -723,7 +723,7 @@ export const publicGuideContentExtra = {
         "The model or geodatabase name involved in the issue."
       ],
       relatedLinks: [
-        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
         { label: "InfoWater Pro support", url: "https://www.autodesk.com/support" }
       ]
     },
@@ -780,7 +780,7 @@ export const publicGuideContentExtra = {
         "The project, scenario, and simulation names involved."
       ],
       relatedLinks: [
-        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
         { label: "XPSWMM support", url: "https://www.autodesk.com/support" }
       ]
     },
@@ -839,7 +839,7 @@ export const publicGuideContentExtra = {
         "The model or geodatabase name involved in the issue."
       ],
       relatedLinks: [
-        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
         { label: "InfoSewer Pro support", url: "https://www.autodesk.com/support" }
       ]
     },
@@ -896,7 +896,7 @@ export const publicGuideContentExtra = {
         "The project, scenario, and simulation names involved."
       ],
       relatedLinks: [
-        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
         { label: "XPSTORM support", url: "https://www.autodesk.com/support" }
       ]
     }
@@ -1485,7 +1485,7 @@ export const publicGuideContentExtra = {
       ],
       relatedLinks: [
         { label: "QuickBooks Web Connector overview", url: "https://quickbooks.intuit.com/learn-support/" },
-        { label: "QuickBooks Tool Hub", url: "https://quickbooks.intuit.com/learn-support/en-us/help-article/install-products/quickbooks-tool-hub-fix-common-errors/L8j8jjLBy_US_en_US" }
+        { label: "QuickBooks Tool Hub", url: "https://quickbooks.intuit.com/learn-support/en-us/help-article/login-password/fix-common-problems-errors-quickbooks-desktop-tool/L3Yab5gNN_US_en_US" }
       ]
     },
     "quickbooks-time": {
@@ -1544,7 +1544,7 @@ export const publicGuideContentExtra = {
         "The QuickBooks edition (Online or Desktop) on the receiving side, if payroll sync is involved."
       ],
       relatedLinks: [
-        { label: "QuickBooks Time help", url: "https://quickbooks.intuit.com/learn-support/en-us/quickbooks-time/" }
+        { label: "QuickBooks Time getting started", url: "https://quickbooks.intuit.com/learn-support/en-us/help-articles/administrator-s-getting-started-guide/00/380811" }
       ]
     }
   },
@@ -1720,6 +1720,68 @@ export const publicGuideContentExtra = {
       ],
       relatedLinks: [
         { label: "MCTRANS Center", url: "https://mctrans.ce.ufl.edu/" }
+      ]
+    }
+  },
+  transoft: {
+    autoturn: {
+      summary: "Use this guide when AutoTURN will not open in CAD, cannot find a license, does not show its commands, or behaves differently in one drawing.",
+      overview: [
+        "AutoTURN is Transoft Solutions software for vehicle swept-path analysis and turning simulation.",
+        "Design teams use it to check whether cars, trucks, buses, emergency vehicles, delivery vehicles, or specialty vehicles can move safely through a site or roadway layout."
+      ],
+      askFirst: [
+        "Which CAD app are you using with AutoTURN?",
+        "Is AutoTURN missing, asking for a license, crashing, or producing an unexpected path?",
+        "Does the problem happen in every drawing or just one project file?",
+        "Did anything change recently, such as a CAD update, new computer, project template, or license change?"
+      ],
+      licensing: [
+        "AutoTURN access depends on how your organization licenses Transoft software, so the exact message matters.",
+        "If AutoTURN says no license or cannot activate, capture the message before reinstalling.",
+        "If other users can open AutoTURN, note whether they are using the same CAD app, same AutoTURN edition, and same drawing."
+      ],
+      install: [
+        "Use the AutoTURN version approved for your CAD platform and project team.",
+        "After installation or repair, open the CAD app first and confirm the AutoTURN commands appear.",
+        "Test a simple vehicle turn in a blank or known-good drawing before testing the project drawing that failed."
+      ],
+      supportCheckpoints: [
+        "Make sure the CAD app itself opens and can open the drawing without AutoTURN.",
+        "Try a small known-good drawing to see whether the issue follows the drawing or the AutoTURN setup.",
+        "Check that the drawing units and scale are what the project expects before trusting a path result.",
+        "Keep the selected vehicle name ready when reporting a path or clearance problem."
+      ],
+      commonIssues: [
+        makeIssue(
+          "AutoTURN commands are missing",
+          "The CAD app opens, but the expected AutoTURN ribbon, menu, or command set is not visible.",
+          "Confirm the CAD platform is supported by the installed AutoTURN build, restart the CAD app, and compare with a known-good workstation before reinstalling.",
+          "Send the CAD app name and version, AutoTURN version if visible, and a screenshot of the missing command area."
+        ),
+        makeIssue(
+          "AutoTURN says it cannot license or activate",
+          "AutoTURN opens an authorization or licensing prompt, or it reports that the license cannot be found.",
+          "Capture the exact license message, confirm network access if licensing requires it, and avoid reusing keys or account details in the ticket.",
+          "Send the exact message, affected user, workstation name, and whether another user or workstation can open AutoTURN."
+        ),
+        makeIssue(
+          "One turning path or vehicle result looks wrong",
+          "AutoTURN runs, but the path, clearance, or vehicle behavior looks unexpected in one drawing.",
+          "Test a known-good drawing and confirm units, scale, selected vehicle, and project geometry before changing templates or reinstalling.",
+          "Send the drawing context, selected vehicle name, expected result, screenshot, and whether the same issue appears in a blank drawing."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact AutoTURN message or unexpected result.",
+        "The CAD app and version being used.",
+        "The AutoTURN version or edition if you can see it.",
+        "Whether the problem happens in every drawing or only one project drawing.",
+        "The selected vehicle name if the issue is path, clearance, or turning behavior."
+      ],
+      relatedLinks: [
+        { label: "AutoTURN product page", url: "https://www.transoftsolutions.com/uk/civil-and-transportation/software/swept-path-analysis/autoturn/" },
+        { label: "Transoft support", url: "https://www.transoftsolutions.com/support/" }
       ]
     }
   },

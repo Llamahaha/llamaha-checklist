@@ -205,7 +205,7 @@ export const appGuideContentExtra = {
         processes: ["ArcGISPro.exe"]
       },
       relatedLinks: [
-        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
         { label: "InfoWater Pro support", url: "https://www.autodesk.com/support" }
       ]
     },
@@ -256,7 +256,7 @@ export const appGuideContentExtra = {
         processes: ["XPX.exe", "XPSWMM.exe"]
       },
       relatedLinks: [
-        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
         { label: "XPSWMM support", url: "https://www.autodesk.com/support" }
       ]
     },
@@ -307,7 +307,7 @@ export const appGuideContentExtra = {
         processes: ["ArcGISPro.exe"]
       },
       relatedLinks: [
-        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
         { label: "InfoSewer Pro support", url: "https://www.autodesk.com/support" }
       ]
     },
@@ -358,7 +358,7 @@ export const appGuideContentExtra = {
         processes: ["XPSTORM.exe"]
       },
       relatedLinks: [
-        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/industry/water" },
         { label: "XPSTORM support", url: "https://www.autodesk.com/support" }
       ]
     }
@@ -517,7 +517,7 @@ export const appGuideContentExtra = {
       },
       relatedLinks: [
         { label: "QuickBooks Web Connector overview", url: "https://quickbooks.intuit.com/learn-support/" },
-        { label: "QuickBooks Tool Hub", url: "https://quickbooks.intuit.com/learn-support/en-us/help-article/install-products/quickbooks-tool-hub-fix-common-errors/L8j8jjLBy_US_en_US" }
+        { label: "QuickBooks Tool Hub", url: "https://quickbooks.intuit.com/learn-support/en-us/help-article/login-password/fix-common-problems-errors-quickbooks-desktop-tool/L3Yab5gNN_US_en_US" }
       ]
     },
     "quickbooks-time": {
@@ -567,7 +567,7 @@ export const appGuideContentExtra = {
         processes: []
       },
       relatedLinks: [
-        { label: "QuickBooks Time help", url: "https://quickbooks.intuit.com/learn-support/en-us/quickbooks-time/" }
+        { label: "QuickBooks Time getting started", url: "https://quickbooks.intuit.com/learn-support/en-us/help-articles/administrator-s-getting-started-guide/00/380811" }
       ]
     }
   },
@@ -875,7 +875,7 @@ export const appGuideContentExtra = {
       },
       relatedLinks: [
         { label: "Trimble Connect help", url: "https://help.trimble.com/en/trimble-connect/trimble-connect" },
-        { label: "Trimble Identity", url: "https://id.trimble.com/" }
+        { label: "Trimble account profile", url: "https://myprofile.trimble.com/" }
       ]
     }
   },
@@ -1404,6 +1404,63 @@ export const appGuideContentExtra = {
         processes: ["HSS.exe"]
       },
       relatedLinks: [{ label: "MCTRANS Center", url: "https://mctrans.ce.ufl.edu/" }]
+    }
+  },
+  transoft: {
+    autoturn: {
+      highlights: [
+        "Fastest likely fix: prove the host CAD app opens normally, then check AutoTURN licensing and add-in loading in a simple known-good drawing.",
+        "AutoTURN tickets often look like CAD corruption when the actual issue is an unavailable license, wrong host version, disabled add-in, drawing units, or a file-specific problem."
+      ],
+      askFirst: [
+        "Which host app and version is AutoTURN running in, such as AutoCAD, Civil 3D, BricsCAD, or MicroStation?",
+        "Is the problem launch, licensing, missing ribbon or toolbar, vehicle library selection, path generation, plotting, or one drawing only?",
+        "Does AutoTURN work in a new blank drawing or a known-good sample drawing?",
+        "Did the issue begin after a CAD update, workstation change, license change, or project template change?"
+      ],
+      supportCheckpoints: [
+        "Confirm the CAD host is healthy before troubleshooting AutoTURN.",
+        "Check the exact AutoTURN version or edition and whether the licensing prompt says no seat, wrong account, expired license, or cannot reach the license service.",
+        "Test with a small known-good drawing to separate app/add-in issues from project drawing, units, xref, or template problems.",
+        "Compare the same drawing and vehicle maneuver on another approved workstation when possible."
+      ],
+      commonIssues: [
+        issue(
+          "AutoTURN ribbon, toolbar, or commands are missing",
+          "The CAD host opens, but AutoTURN commands are absent or do not respond.",
+          "Confirm AutoTURN is installed for that host app/version, check disabled add-ins or workspaces, then repair the approved AutoTURN build if the host app is otherwise healthy.",
+          "Collect the host app/version, AutoTURN version, screenshot of the missing UI area, and whether another CAD profile shows the tools.",
+          "Escalate when the approved host version and installed AutoTURN build match but the add-in still will not load."
+        ),
+        issue(
+          "License or activation prompt blocks use",
+          "AutoTURN opens or starts to load but reports no license, expired access, or cannot activate.",
+          "Verify the assigned user or seat availability in the organization's Transoft licensing path before reinstalling.",
+          "Collect the exact licensing message, signed-in email if shown, AutoTURN edition, host app, and whether other users can launch.",
+          "Escalate when the assignment looks correct but licensing still fails for one or more users."
+        ),
+        issue(
+          "Vehicle path looks wrong in one drawing",
+          "AutoTURN launches, but the turning path, clearance, or vehicle behavior is wrong in a specific drawing.",
+          "Check drawing units, scale, xrefs, UCS/view state, template standards, and vehicle selection before changing the install.",
+          "Collect the drawing name, units/scale expectation, selected vehicle, screenshot of the path, and known-good drawing comparison.",
+          "Escalate when the same vehicle and units fail consistently across multiple drawings or workstations."
+        )
+      ],
+      usefulInfo: {
+        paths: ["Host CAD profile/workspace", "Project drawing path", "Vehicle library or standards path if customized"],
+        logs: ["AutoTURN version/about screenshot", "License or activation message", "Host CAD version/about screenshot"],
+        services: [],
+        processes: ["acad.exe", "AutoTURN-related host CAD process"]
+      },
+      escalationNotes: [
+        "Preserve drawings and custom vehicle libraries before repair or uninstall work.",
+        "Do not assume every path-generation problem is an app install problem; drawing units and standards often matter."
+      ],
+      relatedLinks: [
+        { label: "AutoTURN product page", url: "https://www.transoftsolutions.com/uk/civil-and-transportation/software/swept-path-analysis/autoturn/" },
+        { label: "Transoft support", url: "https://www.transoftsolutions.com/support/" }
+      ]
     }
   },
   axiom: {

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>QuickBooks Web Connector Error Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../support.html">Support Pages</a>
+      <span>/</span>
+      <strong>QuickBooks Web Connector Errors</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">QuickBooks / Web Connector / Internal Troubleshooting</p>
+            <h1>QuickBooks Web Connector Error Reference</h1>
+            <p class="builder-copy">MSP triage notes for common QBWC errors, app authorization, QWC files, company-file context, and evidence capture before vendor escalation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Overview</p>
+            <h2>General troubleshooting checklist</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Fast checks</h4>
+            <ul>
+              <li>Confirm QuickBooks Desktop is installed, opens normally, and is updated enough for the integration vendor's requirements.</li>
+              <li>Open the correct company file before syncing unless the app is explicitly authorized for unattended access.</li>
+              <li>Run QuickBooks as admin when needed for app authorization, Web Connector setup, or first-time access prompts.</li>
+              <li>Close modal windows inside QuickBooks, such as preferences, company settings, update prompts, or payroll reminders.</li>
+              <li>Confirm the Windows profile running Web Connector is the same profile that authorized the app when applicable.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Company file and path</h4>
+            <ul>
+              <li>Confirm the right company file is open. Many QBWC errors are caused by the correct app talking to the wrong file.</li>
+              <li>Check single-user vs multi-user mode before authorizing apps. Some authorization steps require admin and single-user mode.</li>
+              <li>Prefer a stable UNC path for network files when mapped drives vary by user or RDS session.</li>
+              <li>Watch for file moves, renames, restored backups, or hosted desktop path changes after migration work.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Web Connector app authorization</h4>
+            <ul>
+              <li>Verify the app appears in Web Connector and in QuickBooks Integrated Applications preferences.</li>
+              <li>Confirm the Web Connector password or app token was entered exactly as supplied by the integration vendor.</li>
+              <li>If re-adding a QWC file, remove the existing app only after confirming the vendor supports re-add and you have the current QWC file.</li>
+              <li>Do not edit QWC XML values unless the integration vendor instructs you to do so.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Logs</h4>
+            <p>Check Web Connector logs such as <code>QWCLog.txt</code>. Common locations include <code>C:\ProgramData\Intuit\QBWebConnector\log</code> and user/public AppData paths depending on QuickBooks/Web Connector version.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">QBWC1013</p>
+            <h2>Error connecting to QuickBooks</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English meaning</h4>
+            <p>Web Connector tried to pass a QuickBooks connection error back to the application. The exact QuickBooks message matters more than the code alone.</p>
+          </div>
+          <div class="card-block">
+            <h4>Common causes</h4>
+            <ul>
+              <li>QuickBooks is closed, stuck behind a prompt, or cannot start cleanly.</li>
+              <li>No company file is open, or the wrong company file is open.</li>
+              <li>QuickBooks is waiting on an admin, update, license, or integrated-app authorization prompt.</li>
+              <li>RDS/hosted desktop session context differs from the session where the app was authorized.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fix steps</h4>
+            <ol>
+              <li>Open QuickBooks Desktop directly and confirm the company file opens without errors.</li>
+              <li>Sign in as the QuickBooks admin user if app authorization is required.</li>
+              <li>Close all QuickBooks modal windows, then rerun Update Selected in Web Connector.</li>
+              <li>If the message names the app vendor, capture the text and check vendor-specific instructions.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">QBWC1088</p>
+            <h2>Company file does not match</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English meaning</h4>
+            <p>Web Connector is trying to remove or update an app against a company file that does not match the file associated with that Web Connector entry.</p>
+          </div>
+          <div class="card-block">
+            <h4>Common causes</h4>
+            <ul>
+              <li>Company file was updated, restored, moved, renamed, or replaced.</li>
+              <li>The technician has a different company file open than the one originally authorized.</li>
+              <li>The QWC file is stale or belongs to another company/integration instance.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fix steps</h4>
+            <ol>
+              <li>Open the expected company file and confirm the company name/path.</li>
+              <li>Download the current QWC file from the integration vendor or app portal.</li>
+              <li>When prompted by Web Connector, replace the old file only if the company and app match the ticket request.</li>
+              <li>If unsure, stop and escalate with screenshots before removing or replacing the app.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">QBWC1003</p>
+            <h2>Application support URL or application could not be reached</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English meaning</h4>
+            <p>Web Connector cannot reach information it expects from the QWC-defined application, commonly the application support endpoint or vendor service reference.</p>
+          </div>
+          <div class="card-block">
+            <h4>Common causes</h4>
+            <ul>
+              <li>Vendor app service is down, blocked by firewall/proxy, or no longer accepts the URL in the QWC file.</li>
+              <li>The QWC file is outdated or was generated for a different customer, company file, or app instance.</li>
+              <li>Endpoint TLS/certificate or DNS resolution fails from the QuickBooks machine.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fix steps</h4>
+            <ol>
+              <li>Open the vendor portal/status page from the same Windows profile if possible.</li>
+              <li>Confirm DNS and HTTPS access to the vendor host without saving passwords in notes.</li>
+              <li>Download a fresh QWC file from the vendor and compare app name/company context.</li>
+              <li>Escalate to the integration vendor if the endpoint is unreachable or the QWC file looks wrong.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">QBWC1039</p>
+            <h2>Problem adding or authorizing the application</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English meaning</h4>
+            <p>QBWC1039 is a family of add/authorization failures. The message text may mention company file location, missing permission, prior access, FileID/OwnerID conflict, or a problem adding the application.</p>
+          </div>
+          <div class="card-block">
+            <h4>Common causes</h4>
+            <ul>
+              <li>The company file was moved, renamed, or is not open.</li>
+              <li>QuickBooks admin has not granted the app access in Integrated Applications.</li>
+              <li>The QWC file was added from the wrong Windows profile, wrong machine, or wrong company file.</li>
+              <li>The app has already been added and the OwnerID/FileID pair conflicts.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fix steps</h4>
+            <ol>
+              <li>Open the correct company file as the QuickBooks admin user.</li>
+              <li>Switch to single-user mode if the authorization flow requires it.</li>
+              <li>Review Integrated Applications and confirm the app is allowed to access the company file.</li>
+              <li>If re-adding, remove the app only through the documented Web Connector and QuickBooks preferences order.</li>
+              <li>If the message mentions FileID/OwnerID, escalate to the app vendor or QuickBooks support before editing QWC metadata.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">QBWC1085</p>
+            <h2>Unable to write to the log file</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English meaning</h4>
+            <p>QuickBooks or Web Connector could not write to the Web Connector log file. Sync may continue, but troubleshooting visibility is degraded.</p>
+          </div>
+          <div class="card-block">
+            <h4>Common causes</h4>
+            <ul>
+              <li><code>QWCLOG.TXT</code> is missing, damaged, locked, or not writable.</li>
+              <li>Windows permissions are wrong for the current user or RDS session.</li>
+              <li>Security software blocks writes to the log path.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fix steps</h4>
+            <ol>
+              <li>Close QuickBooks and Web Connector.</li>
+              <li>Open the log folder and rename <code>QWCLOG.TXT</code> to <code>QWCLOGOLD.TXT</code> if present.</li>
+              <li>Reopen Web Connector and QuickBooks so the log can be recreated.</li>
+              <li>If the company file is not connected to any third-party application, confirm whether Web Connector can be removed from Startup.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What To Gather Before Escalation</p>
+            <h2>Logs and screenshots</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Collect</h4>
+            <ul>
+              <li>Exact QBWC code and complete error text.</li>
+              <li>Screenshot of Web Connector with app name visible but secrets hidden.</li>
+              <li>QuickBooks Desktop edition/year, company file name, file path type (local, UNC, mapped drive, hosted desktop), and whether multi-user mode is active.</li>
+              <li>App vendor name, QWC file date, and whether the app was recently reconnected, migrated, or reauthorized.</li>
+              <li><code>QWCLog.txt</code> or relevant log excerpt from immediately after the failure.</li>
+              <li>Confirmation that the right company file was open and whether QuickBooks was run as admin.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Official documentation</h4>
+            <p><a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/install-products/set-quickbooks-web-connector/L4Vp7VI44_US_en_US" target="_blank" rel="noopener">Set up QuickBooks Web Connector</a>, <a href="https://quickbooks.intuit.com/learn-support/en-us/help-article/open-programs/fix-common-web-connector-errors-quickbooks-desktop/L9slolvg0_US_en_US" target="_blank" rel="noopener">common Web Connector errors</a>, <a href="https://quickbooks.intuit.com/learn-support/en-us/help-articles/fix-error-qbwc1039/00/294396" target="_blank" rel="noopener">QBWC1039</a>, and <a href="https://static.developer.intuit.com/resources/QBWC_proguide.pdf" target="_blank" rel="noopener">Intuit QBWC Programmer's Guide</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related Guides</p>
+            <h2>Internal references</h2>
+          </div>
+        </div>
+        <div class="support-link-board">
+          <a href="quickbooks-desktop-errors.html">QuickBooks Desktop errors</a>
+          <a href="../../guides/quickbooks/quickbooks-web-connector.html">Public Web Connector guide</a>
+          <a href="../support.html">Support hub</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

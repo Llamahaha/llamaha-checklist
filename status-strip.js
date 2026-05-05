@@ -91,7 +91,7 @@ const statusDashboards = [
   },
   {
     name: "TIBCO Spotfire",
-    url: "https://status.tibco.com/",
+    url: "https://status.cloud.tibco.com/",
     note: "Spotfire web client, library, identity, and TIBCO Cloud services"
   }
 ];

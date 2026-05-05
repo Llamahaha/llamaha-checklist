@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Fast File Downloads with Start-BitsTransfer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../support.html">Support Pages</a>
+      <span>/</span>
+      <strong>Start-BitsTransfer Downloads</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Windows / PowerShell / Datto RMM</p>
+            <h1>Fast File Downloads with Start-BitsTransfer / BITS</h1>
+            <p class="builder-copy">Safe copy/paste patterns for reliable file downloads in PowerShell, CMD, and Datto RMM remote command contexts.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Overview</p>
+            <h2>Why use BITS</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Plain-English meaning</h4>
+            <p><code>Start-BitsTransfer</code> uses Windows Background Intelligent Transfer Service to download files. It is often more reliable than a browser download in remote support because it can handle large files, network interruptions, and explicit destination paths.</p>
+          </div>
+          <div class="card-block">
+            <h4>Use cases</h4>
+            <ul>
+              <li>Download an installer, diagnostic bundle, agent package, or cleanup utility to a remote endpoint.</li>
+              <li>Place a file in a predictable path such as <code>C:\ProgramData\Temp</code> or <code>C:\Windows\Temp</code>.</li>
+              <li>Run from a Datto RMM Agent Browser command or PowerShell context when the user is not at the keyboard.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Warning</h4>
+            <p>Only download from trusted, approved URLs. Do not paste private package URLs, credentials, SAS tokens, license keys, or customer-specific download links into this guide or public ticket notes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">PowerShell Examples</p>
+            <h2>Local or remote PowerShell</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Simple download</h4>
+            <pre><code>$Source = "&lt;URL&gt;"
+$Destination = "C:\ProgramData\Temp\&lt;FILENAME&gt;"
+New-Item -ItemType Directory -Path (Split-Path $Destination) -Force | Out-Null
+Start-BitsTransfer -Source $Source -Destination $Destination</code></pre>
+          </div>
+          <div class="card-block">
+            <h4>TLS 1.2 and logging</h4>
+            <pre><code>[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$Source = "&lt;URL&gt;"
+$Destination = "C:\ProgramData\Temp\&lt;FILENAME&gt;"
+$Log = "C:\ProgramData\Temp\bits-download.log"
+New-Item -ItemType Directory -Path (Split-Path $Destination) -Force | Out-Null
+"$(Get-Date -Format s) Starting download from $Source to $Destination" | Out-File -FilePath $Log -Append
+Start-BitsTransfer -Source $Source -Destination $Destination -ErrorAction Stop
+"$(Get-Date -Format s) Download complete. Size: $((Get-Item $Destination).Length) bytes" | Out-File -FilePath $Log -Append</code></pre>
+          </div>
+          <div class="card-block">
+            <h4>Asynchronous job with status</h4>
+            <pre><code>$Job = Start-BitsTransfer -Source "&lt;URL&gt;" -Destination "C:\ProgramData\Temp\&lt;FILENAME&gt;" -Asynchronous
+while (($Job.JobState -eq "Connecting") -or ($Job.JobState -eq "Transferring")) {
+  Start-Sleep -Seconds 2
+  $Job = Get-BitsTransfer -JobId $Job.JobId
+}
+if ($Job.JobState -eq "Transferred") {
+  Complete-BitsTransfer -BitsJob $Job
+} else {
+  $Job | Format-List *
+  Remove-BitsTransfer -BitsJob $Job
+  throw "BITS download failed."
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Datto RMM Examples</p>
+            <h2>Agent Browser and online agent commands</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>PowerShell context</h4>
+            <pre><code>[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$Destination = "C:\ProgramData\Temp\&lt;FILENAME&gt;"
+New-Item -ItemType Directory -Path (Split-Path $Destination) -Force | Out-Null
+Start-BitsTransfer -Source "&lt;URL&gt;" -Destination $Destination -ErrorAction Stop
+Get-Item $Destination | Select-Object FullName, Length, LastWriteTime</code></pre>
+          </div>
+          <div class="card-block">
+            <h4>CMD-compatible command that launches PowerShell</h4>
+            <pre><code>powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12; $d='C:\ProgramData\Temp\&lt;FILENAME&gt;'; New-Item -ItemType Directory -Path (Split-Path $d) -Force | Out-Null; Start-BitsTransfer -Source '&lt;URL&gt;' -Destination $d -ErrorAction Stop; Get-Item $d | Select FullName,Length,LastWriteTime"</code></pre>
+          </div>
+          <div class="card-block">
+            <h4>When command context is SYSTEM</h4>
+            <ul>
+              <li>Use machine-wide paths such as <code>C:\ProgramData\Temp</code> or <code>C:\Windows\Temp</code>.</li>
+              <li>Do not download to <code>%USERPROFILE%</code> unless you know which user context is running.</li>
+              <li>Network shares may fail under SYSTEM unless computer-account permissions and network authentication are designed for it.</li>
+              <li>After downloading as SYSTEM, remember file ownership and permissions may differ from an interactive user download.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Common Symptoms</p>
+            <h2>Failure points and fast checks</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Common failures</h4>
+            <ul>
+              <li>URL requires an interactive login, cookie, or expiring token.</li>
+              <li>Endpoint cannot reach the host because of DNS, proxy, content filtering, or firewall policy.</li>
+              <li>Old PowerShell or .NET defaults do not negotiate TLS 1.2 without setting <code>SecurityProtocol</code>.</li>
+              <li>Destination folder does not exist or the running context lacks write access.</li>
+              <li>Execution policy blocks a larger script. A one-line command can use <code>-ExecutionPolicy Bypass</code> when policy allows.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Fast checks</h4>
+            <ul>
+              <li>Test DNS with <code>Resolve-DnsName &lt;HOSTNAME&gt;</code> or <code>nslookup &lt;HOSTNAME&gt;</code>.</li>
+              <li>Confirm the destination folder exists and the downloaded file size is nonzero.</li>
+              <li>Check <code>Get-BitsTransfer -AllUsers</code> for stuck jobs if run with admin rights.</li>
+              <li>Remove failed jobs with <code>Remove-BitsTransfer</code> after capturing error details.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Cleanup</h4>
+            <pre><code>Remove-Item -LiteralPath "C:\ProgramData\Temp\&lt;FILENAME&gt;" -Force
+Remove-Item -LiteralPath "C:\ProgramData\Temp\bits-download.log" -Force -ErrorAction SilentlyContinue
+Get-BitsTransfer -AllUsers | Where-Object DisplayName -like "*&lt;OPTIONAL_NAME&gt;*" | Remove-BitsTransfer</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What To Gather Before Escalation</p>
+            <h2>Evidence package</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Collect</h4>
+            <ul>
+              <li>Command used, with private URL tokens redacted.</li>
+              <li>Destination path, running context, and whether it was Datto RMM, local PowerShell, or CMD.</li>
+              <li>Error text from BITS, PowerShell, or Datto RMM job output.</li>
+              <li>DNS/proxy/firewall test results and endpoint hostname.</li>
+              <li>Whether the URL works from another network and whether it needs authentication.</li>
+            </ul>
+          </div>
+          <div class="card-block">
+            <h4>Official documentation</h4>
+            <p><a href="https://learn.microsoft.com/en-us/powershell/module/bitstransfer/start-bitstransfer" target="_blank" rel="noopener">Microsoft Start-BitsTransfer reference</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related Guides</p>
+            <h2>Internal references</h2>
+          </div>
+        </div>
+        <div class="support-link-board">
+          <a href="../snippets.html">Snippets</a>
+          <a href="../tools.html">Tools hub</a>
+          <a href="../support.html">Support hub</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>
