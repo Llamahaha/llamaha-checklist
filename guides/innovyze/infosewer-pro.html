@@ -13,10 +13,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfoSewer Pro | Innovyze App Help | Llamaha</title>
-  <meta name="description" content="ArcGIS Pro extension used to model wastewater collection networks, run gravity and force-main simulations, and evaluate sanitary or combined sewer scenarios.">
+  <meta name="description" content="Use this guide when InfoSewer Pro will not load inside ArcGIS Pro, the sewer model you expect is missing, or simulations fail after a version, ArcGIS, or...">
   <link rel="canonical" href="https://llamaha.com/guides/innovyze/infosewer-pro">
   <meta property="og:title" content="InfoSewer Pro | Innovyze App Help | Llamaha">
-  <meta property="og:description" content="ArcGIS Pro extension used to model wastewater collection networks, run gravity and force-main simulations, and evaluate sanitary or combined sewer scenarios.">
+  <meta property="og:description" content="Use this guide when InfoSewer Pro will not load inside ArcGIS Pro, the sewer model you expect is missing, or simulations fail after a version, ArcGIS, or...">
   <meta property="og:type" content="article">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +35,7 @@
         <div>
           <p id="guideKicker" class="section-kicker">Innovyze Application</p>
           <h1 id="guideTitle">InfoSewer Pro</h1>
-          <p id="guideSummary">ArcGIS Pro extension used to model wastewater collection networks, run gravity and force-main simulations, and evaluate sanitary or combined sewer scenarios.</p>
+          <p id="guideSummary">Use this guide when InfoSewer Pro will not load inside ArcGIS Pro, the sewer model you expect is missing, or simulations fail after a version, ArcGIS, or computer change.</p>
           <p class="guide-review-label" id="guideReviewLabel">Reviewed April 2026</p>
         </div>
       </div>
@@ -51,7 +51,7 @@
             <section id="overview" class="guide-section">
   <p class="section-kicker">Application Guide</p>
   <h2 class="guide-section-title">Overview</h2>
-  <div class="guide-copy-stack"><p class="guide-card-copy">ArcGIS Pro extension used to model wastewater collection networks, run gravity and force-main simulations, and evaluate sanitary or combined sewer scenarios.</p><p class="guide-card-copy">Use the checks below to confirm the right account, app version, and file or project path before contacting support.</p></div>
+  <div class="guide-copy-stack"><p class="guide-card-copy">InfoSewer Pro is an Autodesk Water Infrastructure (Innovyze) extension that runs inside ArcGIS Pro to model wastewater collection networks and run gravity and force-main simulations.</p><p class="guide-card-copy">Most InfoSewer Pro issues come from a mismatch between the ArcGIS Pro release and the InfoSewer Pro version, the wrong Autodesk account, missing model geodatabases, or extension licensing not refreshing on the computer.</p></div>
 </section>
 <section id="used-for" class="guide-section">
   <p class="section-kicker">Plain English</p>
@@ -62,26 +62,26 @@
   <p class="section-kicker">Common problems</p>
   <h2 class="guide-section-title">Common problems</h2>
   <div class="guide-card-grid"><article class="guide-card issue-card">
-  <h3 class="guide-card-title">Sign-in or access problem</h3>
-  <p class="guide-card-copy">InfoSewer Pro opens, but the expected account, subscription, or access is missing.</p>
-  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Sign out, sign back in with the correct work account, and compare the result to the browser version if one is available.</p></article>
-  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send a screenshot of the sign-in or access message and the work account you expected to use.</p></article>
+  <h3 class="guide-card-title">The InfoSewer Pro ribbon or tab is missing in ArcGIS Pro</h3>
+  <p class="guide-card-copy">ArcGIS Pro opens normally but the InfoSewer Pro tools, ribbon, or tab are not visible.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Confirm InfoSewer Pro is installed for the matching ArcGIS Pro version, then enable the extension in ArcGIS Pro under Settings &gt; Add-In Manager and restart ArcGIS Pro.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the ArcGIS Pro version, the InfoSewer Pro version, and a screenshot of the ribbon in ArcGIS Pro.</p></article>
 </article><article class="guide-card issue-card">
-  <h3 class="guide-card-title">A file, project, or workspace will not open</h3>
-  <p class="guide-card-copy">The app launches, but the item you need will not open or does not load correctly.</p>
-  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Test a second file or project and confirm the original path or location is still available before reinstalling the app.</p></article>
-  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the file, project, library, or mailbox name involved plus the exact error shown.</p></article>
+  <h3 class="guide-card-title">A sewer model will not open or a simulation fails to start</h3>
+  <p class="guide-card-copy">InfoSewer Pro is loaded, but the model geodatabase will not open or the gravity or force-main simulation refuses to start.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Confirm the geodatabase path, sign-in account, and that another approved computer can open the same model before reinstalling the extension.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the model name, geodatabase path, exact error text, and whether another computer reproduces it.</p></article>
 </article><article class="guide-card issue-card">
-  <h3 class="guide-card-title">The app is slow, frozen, or crashing</h3>
-  <p class="guide-card-copy">InfoSewer Pro opens slowly, stops responding, or closes unexpectedly.</p>
-  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Restart the computer, install pending updates, and note whether the issue began after a recent change.</p></article>
-  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the app version, when the issue started, and a screenshot of any crash message.</p></article>
+  <h3 class="guide-card-title">The extension says it cannot find a license</h3>
+  <p class="guide-card-copy">InfoSewer Pro displays a licensing or entitlement error even though Autodesk Access shows the user is signed in.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Sign out of Autodesk Access, sign back in with the assigned work account, restart ArcGIS Pro, and let InfoSewer Pro re-check the entitlement.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send a screenshot of the licensing error, the Autodesk account email shown in Autodesk Access, and the InfoSewer Pro version.</p></article>
 </article></div>
 </section>
 <section id="first-things-to-try" class="guide-section">
   <p class="section-kicker">First things to try</p>
   <h2 class="guide-section-title">First things to try</h2>
-  <article class="guide-card"><h3 class="guide-card-title">Quick checks before you change anything</h3><ul class="guide-list"><li>What exact InfoSewer Pro task is failing: sign-in, opening files, syncing, printing, or startup?</li><li>Did the issue begin after an update, restart, password change, or new computer?</li><li>Does the same task work in the browser or on another computer if that option is available?</li><li>Is the problem limited to one file, project, library, or mailbox, or does it affect the whole app?</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Try these fixes first</h3><ul class="guide-list"><li>Restart the app and computer before bigger changes.</li><li>If a browser version exists, compare it to the desktop app before reinstalling.</li><li>If only one file, project, or mailbox fails, test a second one before assuming InfoSewer Pro itself is broken.</li><li>Capture the exact message and when the problem started.</li></ul></article>
+  <article class="guide-card"><h3 class="guide-card-title">Quick checks before you change anything</h3><ul class="guide-list"><li>Is ArcGIS Pro itself opening, or does it fail before InfoSewer Pro can load?</li><li>Is the InfoSewer Pro tab or ribbon present in ArcGIS Pro?</li><li>Is the failure sign-in, opening a model, running a gravity or force-main simulation, or exporting results?</li><li>Did this start after an ArcGIS Pro update, an Autodesk update, or moving the model files?</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Try these fixes first</h3><ul class="guide-list"><li>Compare against one known-good model on the same computer before reinstalling.</li><li>Capture the ArcGIS Pro version, the InfoSewer Pro version, and the Autodesk account in use.</li><li>If only one model fails, confirm the geodatabase path, scenario, and any custom toolbox dependencies are reachable.</li></ul></article>
 </section>
 <section id="do-not-yet" class="guide-section">
   <p class="section-kicker">Slow down</p>
@@ -91,17 +91,17 @@
 <section id="what-support-needs" class="guide-section">
   <p class="section-kicker">What support needs</p>
   <h2 class="guide-section-title">What details support needs</h2>
-  <article class="guide-card"><h3 class="guide-card-title">Send these details</h3><ul class="guide-list"><li>A screenshot of the exact InfoSewer Pro message or screen where the problem happens.</li><li>The work account you used to sign in and whether the same task works in the browser or on another computer.</li><li>The InfoSewer Pro version shown in the app.</li><li>The file, project, library, or workflow name involved in the problem.</li></ul></article>
+  <article class="guide-card"><h3 class="guide-card-title">Send these details</h3><ul class="guide-list"><li>A screenshot of the exact InfoSewer Pro error or missing-ribbon view in ArcGIS Pro.</li><li>The ArcGIS Pro version (Settings &gt; About) and the InfoSewer Pro version.</li><li>The Autodesk account email shown in Autodesk Access on the computer.</li><li>The model or geodatabase name involved in the issue.</li></ul></article>
 </section>
 <section id="licensing-access" class="guide-section">
   <p class="section-kicker">Licensing &amp; access</p>
   <h2 class="guide-section-title">Licensing / access notes</h2>
-  <article class="guide-card"><h3 class="guide-card-title">Licensing / access checks</h3><ul class="guide-list"><li>Now delivered under Autodesk Water Infrastructure. Requires a compatible ArcGIS Pro install plus the InfoSewer Pro extension entitlement on the user&#39;s Autodesk account.</li></ul></article>
+  <article class="guide-card"><h3 class="guide-card-title">Licensing / access checks</h3><ul class="guide-list"><li>InfoSewer Pro is now delivered through Autodesk; sign in to ArcGIS Pro and the Autodesk Access app with the work account that has the entitlement assigned.</li><li>If sign-in works but the InfoSewer Pro ribbon is missing, the extension may not be enabled in ArcGIS Pro under Settings &gt; Add-In Manager.</li><li>If your team standardizes on a specific ArcGIS Pro plus InfoSewer Pro pairing, include both versions when describing the issue.</li></ul></article>
 </section>
 <section id="more-setup-checks" class="guide-section">
   <p class="section-kicker">More checks</p>
   <h2 class="guide-section-title">More setup checks</h2>
-  <article class="guide-card"><h3 class="guide-card-title">Install / update basics</h3><ul class="guide-list"><li>Install the matching ArcGIS Pro release first, then add InfoSewer Pro through the approved Autodesk delivery path, sign in, and test loading one known-good model and a small simulation.</li></ul></article>
+  <article class="guide-card"><h3 class="guide-card-title">Install / update basics</h3><ul class="guide-list"><li>Confirm a working ArcGIS Pro install at the team-standard release first.</li><li>Install or repair InfoSewer Pro through the approved Autodesk delivery path matching that ArcGIS Pro release.</li><li>Restart the computer if Windows asks you to.</li><li>Open ArcGIS Pro, confirm the InfoSewer Pro ribbon appears, and test loading one known-good model and a small simulation.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">More things to check</h3><ul class="guide-list"><li>Capture both the ArcGIS Pro version and the InfoSewer Pro version before any rebuild.</li><li>Verify the extension is enabled in ArcGIS Pro under Settings &gt; Add-In Manager.</li><li>Sign out and back in to Autodesk Access if licensing is the failure mode.</li><li>Compare the failing model against a known-good one on the same machine before reinstalling.</li></ul></article>
 </section>
 <section id="related-guides" class="guide-section">
   <p class="section-kicker">Related guides</p>
@@ -111,7 +111,7 @@
   <article class="guide-card"><h3 class="guide-card-title">Related apps</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/innovyze/infoworks-icm.html">InfoWorks ICM</a><a class="guide-chip-link" href="../../guides/innovyze/infowater-pro.html">InfoWater Pro</a><a class="guide-chip-link" href="../../guides/innovyze/xpswmm.html">XPSWMM</a></div></article>
   <article class="guide-card"><h3 class="guide-card-title">Need more help?</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../contact.html">Open contact page</a><a class="guide-chip-link" href="../../support.html">Support pages</a></div></article>
   <article class="guide-card"><h3 class="guide-card-title">Support articles</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../articles/app-will-not-open.html">App crashed or will not open</a><a class="guide-chip-link" href="../../articles/license-or-signin-error.html">License or sign-in error</a><a class="guide-chip-link" href="../../articles/project-files-will-not-sync.html">Project files will not sync</a><a class="guide-chip-link" href="../../articles/plotting-pdf-printer-issue.html">Plotting, PDF, or printer issue</a><a class="guide-chip-link" href="../../articles/slow-or-freezing-on-a-model.html">Slow or freezing on a model</a><a class="guide-chip-link" href="../../articles/remote-access-issue.html">Remote access issue</a><a class="guide-chip-link" href="../../articles/new-computer-new-user-new-phone-setup.html">New computer, new user, or new phone setup</a><a class="guide-chip-link" href="../../articles/before-contacting-it-what-to-collect.html">Before contacting IT: what to collect</a></div></article>
-  
+  <article class="guide-card"><h3 class="guide-card-title">Official / vendor links</h3><div class="guide-link-list"><a class="guide-chip-link" href="https://www.autodesk.com/solutions/water-infrastructure" target="_blank" rel="noreferrer">Autodesk Water Infrastructure</a><a class="guide-chip-link" href="https://www.autodesk.com/support" target="_blank" rel="noreferrer">InfoSewer Pro support</a></div></article>
 </div>
 </section>
           </div>

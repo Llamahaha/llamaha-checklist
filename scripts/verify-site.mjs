@@ -104,8 +104,13 @@ const populatedPublicGuides = [
   ["duo", "duo-mobile"],
   ["okta", "okta-verify"],
   ["innovyze", "infowater-pro"],
+  ["innovyze", "infosewer-pro"],
   ["innovyze", "xpswmm"],
-  ["qgis", "qgis"]
+  ["innovyze", "xpstorm"],
+  ["qgis", "qgis"],
+  ["rock", "rock-desktop"],
+  ["quickbooks", "quickbooks-web-connector"],
+  ["quickbooks", "quickbooks-time"]
 ];
 
 const dynamicAnchorFiles = new Set([

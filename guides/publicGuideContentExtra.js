@@ -783,6 +783,122 @@ export const publicGuideContentExtra = {
         { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
         { label: "XPSWMM support", url: "https://www.autodesk.com/support" }
       ]
+    },
+    "infosewer-pro": {
+      summary: "Use this guide when InfoSewer Pro will not load inside ArcGIS Pro, the sewer model you expect is missing, or simulations fail after a version, ArcGIS, or workstation change.",
+      overview: [
+        "InfoSewer Pro is an Autodesk Water Infrastructure (Innovyze) extension that runs inside ArcGIS Pro to model wastewater collection networks and run gravity and force-main simulations.",
+        "Most InfoSewer Pro issues come from a mismatch between the ArcGIS Pro release and the InfoSewer Pro version, the wrong Autodesk account, missing model geodatabases, or extension licensing not refreshing on the workstation."
+      ],
+      askFirst: [
+        "Is ArcGIS Pro itself opening, or does it fail before InfoSewer Pro can load?",
+        "Is the InfoSewer Pro tab or ribbon present in ArcGIS Pro?",
+        "Is the failure sign-in, opening a model, running a gravity or force-main simulation, or exporting results?",
+        "Did this start after an ArcGIS Pro update, an Autodesk update, or moving the model files?"
+      ],
+      licensing: [
+        "InfoSewer Pro is now delivered through Autodesk; sign in to ArcGIS Pro and the Autodesk Access app with the work account that has the entitlement assigned.",
+        "If sign-in works but the InfoSewer Pro ribbon is missing, the extension may not be enabled in ArcGIS Pro under Settings > Add-In Manager.",
+        "If your team standardizes on a specific ArcGIS Pro plus InfoSewer Pro pairing, include both versions when describing the issue."
+      ],
+      install: [
+        "Confirm a working ArcGIS Pro install at the team-standard release first.",
+        "Install or repair InfoSewer Pro through the approved Autodesk delivery path matching that ArcGIS Pro release.",
+        "Restart the computer if Windows asks you to.",
+        "Open ArcGIS Pro, confirm the InfoSewer Pro ribbon appears, and test loading one known-good model and a small simulation."
+      ],
+      supportCheckpoints: [
+        "Compare against one known-good model on the same workstation before reinstalling.",
+        "Capture the ArcGIS Pro version, the InfoSewer Pro version, and the Autodesk account in use.",
+        "If only one model fails, confirm the geodatabase path, scenario, and any custom toolbox dependencies are reachable."
+      ],
+      commonIssues: [
+        makeIssue(
+          "The InfoSewer Pro ribbon or tab is missing in ArcGIS Pro",
+          "ArcGIS Pro opens normally but the InfoSewer Pro tools, ribbon, or tab are not visible.",
+          "Confirm InfoSewer Pro is installed for the matching ArcGIS Pro version, then enable the extension in ArcGIS Pro under Settings > Add-In Manager and restart ArcGIS Pro.",
+          "Send the ArcGIS Pro version, the InfoSewer Pro version, and a screenshot of the ribbon in ArcGIS Pro."
+        ),
+        makeIssue(
+          "A sewer model will not open or a simulation fails to start",
+          "InfoSewer Pro is loaded, but the model geodatabase will not open or the gravity or force-main simulation refuses to start.",
+          "Confirm the geodatabase path, sign-in account, and that another approved workstation can open the same model before reinstalling the extension.",
+          "Send the model name, geodatabase path, exact error text, and whether another workstation reproduces it."
+        ),
+        makeIssue(
+          "The extension says it cannot find a license",
+          "InfoSewer Pro displays a licensing or entitlement error even though Autodesk Access shows the user is signed in.",
+          "Sign out of Autodesk Access, sign back in with the assigned work account, restart ArcGIS Pro, and let InfoSewer Pro re-check the entitlement.",
+          "Send a screenshot of the licensing error, the Autodesk account email shown in Autodesk Access, and the InfoSewer Pro version."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact InfoSewer Pro error or missing-ribbon view in ArcGIS Pro.",
+        "The ArcGIS Pro version (Settings > About) and the InfoSewer Pro version.",
+        "The Autodesk account email shown in Autodesk Access on the workstation.",
+        "The model or geodatabase name involved in the issue."
+      ],
+      relatedLinks: [
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "InfoSewer Pro support", url: "https://www.autodesk.com/support" }
+      ]
+    },
+    "xpstorm": {
+      summary: "Use this guide when XPSTORM will not open the model you expect, fails to run a 1D or 2D simulation, or behaves differently after a version, terrain, or workstation change.",
+      overview: [
+        "XPSTORM is an Autodesk Water Infrastructure (Innovyze) modeling tool with 1D and 2D hydraulic engines used for stormwater and urban drainage studies.",
+        "Most XPSTORM issues come from version mismatch, missing terrain or scenario data, simulation engine errors, or the wrong Autodesk account being signed in for licensing."
+      ],
+      askFirst: [
+        "Is the failure launch, opening a model, running a 1D or 2D simulation, or reviewing results?",
+        "Did the issue begin after a version update, a terrain or scenario change, or moving the project files?",
+        "Can another approved workstation open the same model and run the same scenario?"
+      ],
+      licensing: [
+        "XPSTORM is delivered through Autodesk; sign-in errors usually trace back to the wrong Autodesk account or a missing entitlement, not the local install.",
+        "If the app opens but the model will not load, confirm the project path and any external terrain or scenario files before changing the install.",
+        "Capture the exact XPSTORM version when reporting issues; team-standard versions matter for results comparability."
+      ],
+      install: [
+        "Use the approved Autodesk delivery path and the correct XPSTORM version for the team.",
+        "Restart the computer if Windows asks you to after install or update.",
+        "Open one known-good model, run a short simulation, and confirm result outputs before opening the project that was failing."
+      ],
+      supportCheckpoints: [
+        "If a 2D simulation fails, confirm the 2D engine licensing and any terrain or grid dependencies before reinstalling.",
+        "Compare a failing model against a known-good one on the same machine.",
+        "Capture the simulation log if the run starts and then errors out partway through."
+      ],
+      commonIssues: [
+        makeIssue(
+          "A model will not open",
+          "XPSTORM launches, but the project model file will not open or shows missing-data errors.",
+          "Confirm the project path, any linked terrain or scenario files, and the version that authored the file before reinstalling.",
+          "Send the project name, the path it lives at, and the exact error text."
+        ),
+        makeIssue(
+          "A 1D or 2D simulation fails to run",
+          "The model opens, but starting a 1D or 2D simulation fails or stops partway through.",
+          "Capture the simulation log, confirm the simulation engine licensing, and test a smaller known-good scenario before changing the install.",
+          "Send the simulation log, scenario name, model name, and the exact stop or error text."
+        ),
+        makeIssue(
+          "Results do not match what another workstation produces",
+          "The same model produces different results on a different workstation, or results changed after an update.",
+          "Confirm both workstations are on the same XPSTORM version and engine release before troubleshooting the model itself.",
+          "Send both XPSTORM versions, both engine versions, and a screenshot of the differing result summary."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact XPSTORM message or stuck simulation step.",
+        "The Autodesk account email signed in for licensing.",
+        "The XPSTORM version and the engine version shown in About.",
+        "The project, scenario, and simulation names involved."
+      ],
+      relatedLinks: [
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "XPSTORM support", url: "https://www.autodesk.com/support" }
+      ]
     }
   },
   qgis: {
@@ -844,6 +960,65 @@ export const publicGuideContentExtra = {
       relatedLinks: [
         { label: "QGIS Documentation", url: "https://docs.qgis.org/" },
         { label: "QGIS Downloads", url: "https://qgis.org/en/site/forusers/download.html" }
+      ]
+    }
+  },
+  rock: {
+    "rock-desktop": {
+      summary: "Use this guide when ROCK Desktop will not sign in, downloads or uploads stall, processing jobs fail, or the app runs slowly on heavy LiDAR datasets.",
+      overview: [
+        "ROCK Desktop is the desktop processing companion to the ROCK Robotic LiDAR ecosystem, used to download datasets from ROCK Robotic Cloud, classify point clouds, run processing, and export survey-grade deliverables.",
+        "Most ROCK Desktop issues come from ROCK Robotic Cloud sign-in, dataset transfer health, processing job failures, or insufficient local disk or GPU resources for the dataset size you are working with."
+      ],
+      askFirst: [
+        "Is the failure ROCK Robotic Cloud sign-in, downloading a dataset, uploading results, running a processing job, or exporting a deliverable?",
+        "Did the issue begin after a ROCK Desktop update, a Windows or GPU driver update, or moving to a new computer?",
+        "How big is the dataset you are working with, and how much free disk space does the workstation have?"
+      ],
+      licensing: [
+        "ROCK Desktop sign-in uses your ROCK Robotic Cloud account. Confirm the work email is the one your organization invited and that any required project access has been assigned.",
+        "If the app opens but project datasets are missing, the issue is usually project access in ROCK Robotic Cloud rather than the desktop install.",
+        "If your team standardizes on a specific ROCK Desktop release, include the version when describing the issue."
+      ],
+      install: [
+        "Install the company-approved ROCK Desktop build and sign in with the assigned ROCK Robotic Cloud account.",
+        "Confirm the workstation has enough free disk space for the dataset size and that a supported GPU is recognized in Windows.",
+        "Test downloading one small known-good dataset and running a short processing job before opening the project that was failing."
+      ],
+      supportCheckpoints: [
+        "Capture the ROCK Desktop version and the ROCK Robotic Cloud account email shown in the app before changes.",
+        "If processing fails, confirm whether the failure is at download, processing, or export stage.",
+        "Check available disk space and the GPU shown in Windows Display Settings before assuming the app is broken.",
+        "Test a smaller known-good dataset on the same workstation before reinstalling."
+      ],
+      commonIssues: [
+        makeIssue(
+          "ROCK Desktop will not sign in",
+          "The sign-in screen appears, but the ROCK Robotic Cloud account is rejected, hangs, or returns to the sign-in prompt.",
+          "Confirm the same work email signs in to ROCK Robotic Cloud in a browser at the company-approved URL, then retry sign-in in ROCK Desktop after a restart.",
+          "Send a screenshot of the sign-in error, the email being used, and whether browser sign-in works for the same account."
+        ),
+        makeIssue(
+          "A dataset will not download or upload",
+          "Download or upload of a project dataset stalls, fails, or restarts repeatedly.",
+          "Check available disk space, confirm a wired or stable network connection, and try a smaller test dataset before assuming the project is corrupt.",
+          "Send the dataset name, dataset size, available disk space, and the exact ROCK Desktop error text."
+        ),
+        makeIssue(
+          "A processing job fails or takes much longer than expected",
+          "A processing or classification job fails partway through, or runs much slower than past jobs of similar size.",
+          "Confirm the GPU is recognized, free disk space is adequate for processing scratch files, and try a smaller known-good dataset to compare timing.",
+          "Send the dataset size, GPU model, free disk space, ROCK Desktop version, and the exact error or stall point."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact ROCK Desktop error or stuck processing step.",
+        "The ROCK Desktop version (typically Help > About).",
+        "The ROCK Robotic Cloud account email shown in the app.",
+        "The dataset name and size and the workstation's free disk space."
+      ],
+      relatedLinks: [
+        { label: "ROCK Robotic Support", url: "https://rockrobotic.com/support/" }
       ]
     }
   },
@@ -1252,7 +1427,126 @@ export const publicGuideContentExtra = {
   },
   quickbooks: {
     "quickbooks-enterprise-desktop": makeQuickBooksGuide("QuickBooks Enterprise Desktop", "Windows desktop accounting with company files, multi-user access, reports, printing, and PDF workflows"),
-    "quickbooks-online": makeQuickBooksGuide("QuickBooks Online", "browser-based accounting, company access, roles, approvals, and finance workflows")
+    "quickbooks-online": makeQuickBooksGuide("QuickBooks Online", "browser-based accounting, company access, roles, approvals, and finance workflows"),
+    "quickbooks-web-connector": {
+      summary: "Use this guide when the QuickBooks Web Connector will not authorize a third-party app, fails to sync, or stops connecting to the company file you expect.",
+      overview: [
+        "The QuickBooks Web Connector is the small Intuit utility that lets approved third-party apps exchange data with a QuickBooks Desktop company file using a .qwc configuration and your QuickBooks login.",
+        "Most Web Connector issues come from the wrong company file being open, the .qwc not being authorized for the right user, password timing out, or QuickBooks Desktop not running with admin sign-in for the first authorization."
+      ],
+      askFirst: [
+        "Is QuickBooks Desktop open with the correct company file when the Web Connector is running?",
+        "Are you trying to add a new third-party connection, or is an existing one suddenly failing?",
+        "Was a QuickBooks password recently changed, or did the user role change?",
+        "Which third-party app is the .qwc connection for, and where did the .qwc file come from?"
+      ],
+      licensing: [
+        "The Web Connector is bundled with QuickBooks Desktop and does not have its own license.",
+        "Each connection is authorized against a specific company file and a specific QuickBooks user, so company-file ownership and the user's role matter more than any license check.",
+        "If your company file is hosted on a server, the Web Connector still has to run from a workstation that has the company file open in QuickBooks Desktop."
+      ],
+      install: [
+        "Install or repair the Web Connector through the QuickBooks Tool Hub or the bundled installer that ships with QuickBooks Desktop.",
+        "Open QuickBooks Desktop with the correct company file as the QuickBooks Admin user before adding a new .qwc.",
+        "Add the .qwc file from the third-party vendor through File > Update Web Services in QuickBooks, or by double-clicking the .qwc.",
+        "Authorize access against the right company file when QuickBooks prompts, choose the appropriate access mode for the third-party app, and then run a test sync with the company file still open."
+      ],
+      supportCheckpoints: [
+        "Confirm the company file is open before you start the Web Connector or run a sync.",
+        "Document which QuickBooks user owns the connection and whether the password is set to never expire on that user.",
+        "If a sync fails, expand the error in the Web Connector and capture the exact text and timestamp before retrying.",
+        "Test by removing and re-adding the connection only after you have confirmed the .qwc, the user, and the company file are correct."
+      ],
+      commonIssues: [
+        makeIssue(
+          "A new .qwc connection will not authorize",
+          "Adding a new third-party connection fails to prompt QuickBooks for authorization, or QuickBooks does not show the access dialog.",
+          "Make sure QuickBooks Desktop is open with the correct company file as the QuickBooks Admin, then re-run the .qwc and accept the authorization prompt.",
+          "Send the third-party app name, the .qwc file name, the QuickBooks user signed in, and a screenshot of any error from the Web Connector."
+        ),
+        makeIssue(
+          "An existing connection suddenly stops working",
+          "A connection that has been running for months starts failing, often after a QuickBooks update, password change, or company-file move.",
+          "Confirm the QuickBooks user password and role are unchanged, the company-file path matches what the connection expects, and re-enter the saved password in the Web Connector if QuickBooks prompts.",
+          "Send the Web Connector log entry, the third-party app name, when the connection last worked, and any QuickBooks updates or password changes since."
+        ),
+        makeIssue(
+          "Password keeps prompting or the connection asks for credentials repeatedly",
+          "The Web Connector keeps prompting for a QuickBooks password even after entering it correctly.",
+          "Confirm the connected QuickBooks user is allowed to sign in for the company file, retry with the company file open as the right user, and check whether the user account has password expiration enabled.",
+          "Send the QuickBooks user name, the third-party app name, and a screenshot of the password prompt."
+        )
+      ],
+      supportArtifacts: [
+        "The exact text from the Web Connector error log (right-click the connection > View Log).",
+        "The .qwc file name and the third-party app it was provided by.",
+        "The QuickBooks user signed into the company file when the issue happened.",
+        "The QuickBooks Desktop year and release level (F2 inside QuickBooks)."
+      ],
+      relatedLinks: [
+        { label: "QuickBooks Web Connector overview", url: "https://quickbooks.intuit.com/learn-support/" },
+        { label: "QuickBooks Tool Hub", url: "https://quickbooks.intuit.com/learn-support/en-us/help-article/install-products/quickbooks-tool-hub-fix-common-errors/L8j8jjLBy_US_en_US" }
+      ]
+    },
+    "quickbooks-time": {
+      summary: "Use this guide when QuickBooks Time will not sign in, timesheets are missing, mobile clock-ins do not appear, or hours do not sync into QuickBooks payroll.",
+      overview: [
+        "QuickBooks Time (formerly TSheets) is Intuit's cloud time-tracking and scheduling product used to capture employee hours, run approvals, and sync timesheets into QuickBooks for payroll.",
+        "Most QuickBooks Time issues come from sign-in mismatches between the work email and the Intuit account, missing user invites, mobile app permissions, or sync configuration between QuickBooks Time and QuickBooks Online or Desktop payroll."
+      ],
+      askFirst: [
+        "Is the issue sign-in, missing timesheets, mobile app behavior, or syncing hours to QuickBooks payroll?",
+        "Are you signing in with the work email or with an Intuit account, and which one was used to invite you?",
+        "Did the issue begin after a phone change, app update, role change, or QuickBooks payroll change?",
+        "Is the same user able to sign in to QuickBooks Time on the web with the same email?"
+      ],
+      licensing: [
+        "QuickBooks Time access is managed in the QuickBooks Time admin console; each tracked user has a seat tied to the work email or linked Intuit account.",
+        "If sign-in works but no timesheets are visible, your user role or team assignment may not be set up yet.",
+        "If timesheets do not sync into QuickBooks payroll, confirm the QuickBooks Time + QuickBooks pairing has been set up by an admin and that the user mapping matches the QuickBooks employee record."
+      ],
+      install: [
+        "If the user is new, an admin invites them in the QuickBooks Time admin console; the user finishes onboarding from the invitation email.",
+        "Install the QuickBooks Time mobile or desktop app from the official store, sign in with the invited work email, and allow location and notification permissions if your team uses geofencing or shift reminders.",
+        "Test one full clock-in, lunch break, and clock-out, then confirm the timesheet appears for the user and the manager.",
+        "If hours need to flow to QuickBooks payroll, an admin runs a sync from QuickBooks Time to QuickBooks and confirms the hours land on the right employee."
+      ],
+      supportCheckpoints: [
+        "Confirm whether QuickBooks Time on the web works for the same user before touching the mobile app.",
+        "If mobile clock-in fails, confirm the app has the location and notification permissions it needs.",
+        "If payroll sync is the issue, confirm the user is mapped between QuickBooks Time and the QuickBooks employee record.",
+        "Capture the QuickBooks Time company name, the user email, and the timesheet date range that is missing or wrong."
+      ],
+      commonIssues: [
+        makeIssue(
+          "Cannot sign in to QuickBooks Time",
+          "The user gets an error or password loop trying to sign in to QuickBooks Time on the web or in the mobile app.",
+          "Confirm the work email matches the email the admin used to invite the user, and try Forgot Password to reset against the right account before reinstalling the mobile app.",
+          "Send the email being used, a screenshot of the error, and whether the same user can sign in on the web."
+        ),
+        makeIssue(
+          "Mobile clock-in or location features do not work",
+          "The mobile app opens, but clock-in fails, the timesheet does not appear, or geofencing prompts do not work.",
+          "Confirm location services and notification permissions for QuickBooks Time in the phone settings, then sign out and back in.",
+          "Send the phone model, the app version, a screenshot of the failed clock-in, and which permissions are currently granted to the app."
+        ),
+        makeIssue(
+          "Hours are not syncing to QuickBooks payroll",
+          "Timesheets exist in QuickBooks Time but the hours never appear in QuickBooks payroll, or only some employees sync.",
+          "Confirm the QuickBooks Time and QuickBooks pairing is active, the user-to-employee mapping is set up, and run a fresh sync from the admin console.",
+          "Send the company name, the user email, the date range expected, the QuickBooks edition (Online or Desktop), and a screenshot of the QuickBooks Time integration page."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact QuickBooks Time error or missing-timesheet view.",
+        "The work email being used to sign in.",
+        "The QuickBooks Time company name shown in the app.",
+        "The QuickBooks edition (Online or Desktop) on the receiving side, if payroll sync is involved."
+      ],
+      relatedLinks: [
+        { label: "QuickBooks Time help", url: "https://quickbooks.intuit.com/learn-support/en-us/quickbooks-time/" }
+      ]
+    }
   },
   google: {
     "google-earth-pro": {
