@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New PC deployment with ImmyBot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body data-site-area="internal" data-root-path="../..">
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="../index.html">Internal Home</a>
+      <span>/</span>
+      <a href="../reference-guides.html">Reference Guides</a>
+      <span>/</span>
+      <strong>New PC deployment with ImmyBot</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Playbook (Skeleton)</p>
+            <h1>New PC deployment with ImmyBot</h1>
+            <p class="builder-copy">Internal-only. The repeatable path for taking a new workstation from the box to a fully deployed, signed-in machine using ImmyBot. This is a skeleton; expand each section with the exact tenant, naming, and approval details for the customer when documenting per-customer playbooks.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Before You Touch the Machine</p>
+            <h2>Pre-deployment checklist</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Confirm the request and the customer</h4>
+            <p>Ticket has the user's full name, work email, customer/tenant, role/department, computer use case (admin, CAD, finance), and any "must-have" apps beyond the standard role profile.</p>
+          </div>
+          <div class="card-block">
+            <h4>Confirm the hardware</h4>
+            <p>Make/model, asset tag, serial number, and MAC address logged in the RMM and the customer's asset list. Charge the device and connect to wired or known-good Wi-Fi before the build starts.</p>
+          </div>
+          <div class="card-block">
+            <h4>Pick the right ImmyBot deployment template</h4>
+            <p>Each customer in ImmyBot should have a baseline deployment plus role-specific deployments (CAD, finance, exec). Pick the template that matches the user's role; if no role-specific template exists, document the gap and start from the baseline plus a manual app list.</p>
+          </div>
+          <div class="card-block">
+            <h4>Stage accounts and licenses</h4>
+            <p>User exists in Microsoft 365 / customer tenant with the right license assignments before deployment. Any product-specific accounts (Autodesk, Adobe, Bluebeam, ArcGIS, ROCK, Innovyze) are assigned to the user before the build runs the licensing-dependent steps.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step 1</p>
+            <h2>OOBE and ImmyBot agent install</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Boot through the minimum OOBE</h4>
+            <p>Boot the PC, work through Out-of-Box Experience to the desktop using a temporary local account (or Autopilot if the customer is on Autopilot). Connect to network. Do not sign in with the end-user account at OOBE.</p>
+          </div>
+          <div class="card-block">
+            <h4>Install the ImmyBot agent</h4>
+            <p>Either via Autopilot enrollment (preferred where configured) or by manually downloading the customer's ImmyBot tenant agent from the ImmyBot portal and running it on the device. Confirm the device appears in ImmyBot under the right customer/tenant.</p>
+          </div>
+          <div class="card-block">
+            <h4>Confirm the device is registered to the customer in ImmyBot</h4>
+            <p>Wrong tenant assignment is the most common early mistake. Verify the device is under the correct customer in ImmyBot before triggering deployment.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step 2</p>
+            <h2>Run the ImmyBot deployment</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Assign the deployment</h4>
+            <p>In ImmyBot, assign the role-appropriate deployment to the device. Confirm the deployment includes: AV/EDR, RMM agent, AutoElevate, browser baseline, Microsoft 365 Apps, Teams, OneDrive, VPN client, password manager, and any role-specific software (CAD, finance, GIS, etc.).</p>
+          </div>
+          <div class="card-block">
+            <h4>Trigger and monitor</h4>
+            <p>Run the deployment from ImmyBot. Watch the deployment session live for the first run on a new template; long-running installs (Autodesk, ArcGIS, Adobe CC) should be expected to take time but not fail. Check the ImmyBot session log for any task that errors, retries, or is skipped.</p>
+          </div>
+          <div class="card-block">
+            <h4>Re-run failed tasks before manual installs</h4>
+            <p>If specific software fails, re-run just that task in ImmyBot before falling back to a manual install. ImmyBot will surface the failure reason; resolving the underlying cause keeps future deployments clean.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step 3</p>
+            <h2>User sign-in and personalization</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>First sign-in with the end user account</h4>
+            <p>Sign in with the user's work account. Complete Windows Hello / MFA prompts. Confirm BitLocker is enabled and the recovery key is escrowed where expected (Entra/Azure AD or the customer's chosen escrow).</p>
+          </div>
+          <div class="card-block">
+            <h4>Validate the core stack</h4>
+            <p>Open Outlook (mail loads), Teams (signed into right tenant), OneDrive (syncs), browser (right profile), and the RMM/EDR agents are reporting. Test print to one default printer if applicable.</p>
+          </div>
+          <div class="card-block">
+            <h4>Validate role-specific apps</h4>
+            <p>Open each role-specific app, sign in with the assigned account, and run one minimum smoke test (open a known file, run a simple action). Document any app that needs additional setup the user will have to finish on first use.</p>
+          </div>
+          <div class="card-block">
+            <h4>Migrate user data if applicable</h4>
+            <p>If replacing an existing PC, run the documented data-migration procedure (OneDrive Known Folder Move, profile copy via tooling, manual transfer for niche apps). Confirm completion before retiring the old machine.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Step 4</p>
+            <h2>Handoff and documentation</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Log the build in the RMM and asset list</h4>
+            <p>Update the device record: assigned user, build date, deployment template used, BitLocker recovery key location, any deviations from the standard.</p>
+          </div>
+          <div class="card-block">
+            <h4>Send the user a welcome packet</h4>
+            <p>Quick-start with sign-in instructions, MFA setup, AutoElevate prompt explanation, where to file tickets, and a link to the customer-facing help center.</p>
+          </div>
+          <div class="card-block">
+            <h4>Schedule a 7-day follow-up</h4>
+            <p>Brief check-in to catch any "missed" software, printer config, or shared-drive access that did not surface on day one.</p>
+          </div>
+          <div class="card-block">
+            <h4>Update the deployment template if needed</h4>
+            <p>If a manual install was required, decide whether to add it to the customer's ImmyBot template so the next deployment is cleaner. Keep skeleton playbook in sync with the template.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Common Issues</p>
+            <h2>What goes sideways and how to recover</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Device shows up in the wrong customer/tenant in ImmyBot</h4>
+            <p>Caused by running the wrong tenant's agent. Remove the device from ImmyBot, uninstall the agent, install the correct customer's agent, and re-register before deployment.</p>
+          </div>
+          <div class="card-block">
+            <h4>Deployment hangs on a long install</h4>
+            <p>Some apps (Autodesk Suite, ArcGIS Pro, full Adobe CC) genuinely take 30+ minutes. Check the ImmyBot session log for actual progress vs. a real hang. If hung, cancel the task, capture the log, and re-run.</p>
+          </div>
+          <div class="card-block">
+            <h4>License assignment failed at install time</h4>
+            <p>Usually means the user license was not assigned in the vendor portal before the deployment ran. Assign the license, sign the user in to the app, and confirm activation. Note the gap so the pre-deployment checklist catches it next time.</p>
+          </div>
+          <div class="card-block">
+            <h4>Software installed but user cannot launch it</h4>
+            <p>Check whether the install is per-machine or per-user, and whether the install ran under the right context. Some vendor installers expect the end user to sign in once to complete entitlement; document this on the welcome packet.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Reference</p>
+            <h2>Related internal docs</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Standard role-based deployment templates</h4>
+            <p>Maintain in ImmyBot per customer. Document each customer's role templates (admin, CAD, finance, exec) and what they include in the customer's onboarding packet.</p>
+          </div>
+          <div class="card-block">
+            <h4>BitLocker recovery key escrow location</h4>
+            <p>Per-customer policy. Default expectation: Entra/Azure AD for Microsoft 365 customers, customer's documented escrow for everyone else.</p>
+          </div>
+          <div class="card-block">
+            <h4>AutoElevate customer-facing instructions</h4>
+            <p><a href="../../articles/using-autoelevate-to-install-apps.html">Articles &rsaquo; Using AutoElevate to install applications</a> &mdash; share with end users in the welcome packet.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QGIS | QGIS App Help | Llamaha</title>
+  <meta name="description" content="Use this guide when QGIS will not open a project, plugins do not load, layers fail to display, or the app behaves differently after a version or computer...">
+  <link rel="canonical" href="https://llamaha.com/guides/qgis/qgis">
+  <meta property="og:title" content="QGIS | QGIS App Help | Llamaha">
+  <meta property="og:description" content="Use this guide when QGIS will not open a project, plugins do not load, layers fail to display, or the app behaves differently after a version or computer...">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../guide.css">
+  <style>html{scroll-behavior:smooth}</style>
+</head>
+<body data-page-type="app" data-vendor="qgis" data-app="qgis" data-root-path="../.." data-render-mode="static">
+  <div class="guide-shell">
+    <header class="guide-header">
+      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"><a class="guide-breadcrumb-link" href="../../index.html">Home</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../vendor-guides.html">App Help</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../guides/qgis.html">QGIS</a><span class="guide-breadcrumb-sep">&gt;</span><strong class="guide-breadcrumb-current">QGIS</strong></nav>
+      <a id="guideBackLink" class="back-link" href="../qgis.html">Back to QGIS</a>
+      <div class="guide-brand">
+        <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+        <div>
+          <p id="guideKicker" class="section-kicker">QGIS Application</p>
+          <h1 id="guideTitle">QGIS</h1>
+          <p id="guideSummary">Use this guide when QGIS will not open a project, plugins do not load, layers fail to display, or the app behaves differently after a version or computer change.</p>
+          <p class="guide-review-label" id="guideReviewLabel">Reviewed April 2026</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="guide-layout">
+      <div class="guide-main">
+        <div id="guideJumpLinks" class="guide-jump-shell">
+  <nav class="guide-jump-links" aria-label="Jump to a section"><a class="guide-jump-link" href="#overview">Overview</a><a class="guide-jump-link" href="#used-for">What this app is usually used for</a><a class="guide-jump-link" href="#common-problems">Common problems</a><a class="guide-jump-link" href="#first-things-to-try">First things to try</a><a class="guide-jump-link" href="#do-not-yet">Do not do this yet / warnings</a><a class="guide-jump-link" href="#what-support-needs">What details support needs</a><a class="guide-jump-link" href="#licensing-access">Licensing / access notes</a><a class="guide-jump-link" href="#more-setup-checks">More setup checks</a><a class="guide-jump-link" href="#related-guides">Related guides</a></nav>
+</div>
+        <div class="guide-main-scroll">
+          <div id="guideContent" class="guide-content">
+            <section id="overview" class="guide-section">
+  <p class="section-kicker">Application Guide</p>
+  <h2 class="guide-section-title">Overview</h2>
+  <div class="guide-copy-stack"><p class="guide-card-copy">QGIS is the open-source desktop GIS used to view and edit spatial data, build maps, run geoprocessing, and connect to shared GIS data sources.</p><p class="guide-card-copy">Most QGIS issues come from a version mismatch with a project file, plugin compatibility with the active QGIS release, missing data sources, or a corrupted user profile.</p></div>
+</section>
+<section id="used-for" class="guide-section">
+  <p class="section-kicker">Plain English</p>
+  <h2 class="guide-section-title">What this app is usually used for</h2>
+  <div class="guide-copy-stack"><p class="guide-card-copy">Open-source desktop GIS used to view, edit, and analyze spatial data, build maps, run geoprocessing, and connect to shared GIS data sources.</p><p class="guide-card-copy">It is part of the QGIS family covered in our app help.</p></div>
+</section>
+<section id="common-problems" class="guide-section">
+  <p class="section-kicker">Common problems</p>
+  <h2 class="guide-section-title">Common problems</h2>
+  <div class="guide-card-grid"><article class="guide-card issue-card">
+  <h3 class="guide-card-title">A project will not open or layers do not display</h3>
+  <p class="guide-card-copy">QGIS launches, but a .qgz or .qgs project will not open, or layers in the project show as broken or invalid.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Confirm the layer data sources are reachable at the paths in the project, and test the project on another computer before reinstalling QGIS.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the project file name, the broken layer names, and a screenshot of the layer panel showing the issue.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">A plugin will not install, load, or run</h3>
+  <p class="guide-card-copy">A plugin is missing from the menu, fails to install, or errors out when used.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Disable the plugin, restart QGIS, then re-install or update the plugin from the Plugin Repository, confirming it supports your QGIS release.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the plugin name and version, the QGIS version, and the exact error text from the QGIS message log.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">QGIS itself will not launch or crashes on startup</h3>
+  <p class="guide-card-copy">Double-clicking QGIS does nothing, or it opens for a moment and closes, or it errors out before the main window appears.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Test launching with a fresh user profile (Settings &gt; User Profiles &gt; New Profile) to rule out a corrupted profile before reinstalling.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the exact QGIS version, when the issue started, and any error text from the Windows Event Viewer or QGIS log.</p></article>
+</article></div>
+</section>
+<section id="first-things-to-try" class="guide-section">
+  <p class="section-kicker">First things to try</p>
+  <h2 class="guide-section-title">First things to try</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Quick checks before you change anything</h3><ul class="guide-list"><li>Which QGIS release are you on — the long-term release (LTR) or the latest stable release?</li><li>Is the problem launching QGIS, opening one project, loading a plugin, or rendering layers?</li><li>Did the issue start after a version update, a plugin update, or moving project or data files?</li><li>Does the same project open correctly on another computer?</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Try these fixes first</h3><ul class="guide-list"><li>If a project will not open, test a second known-good project before reinstalling QGIS.</li><li>If a plugin causes problems, disable it, restart QGIS, and confirm the issue follows the plugin and not the install.</li><li>Capture the exact QGIS version (Help &gt; About) and the active plugin list when reporting issues.</li><li>If the user profile looks corrupted, create a new profile (Settings &gt; User Profiles &gt; New Profile) and test the same project there before reinstalling.</li></ul></article>
+</section>
+<section id="do-not-yet" class="guide-section">
+  <p class="section-kicker">Slow down</p>
+  <h2 class="guide-section-title">Do not do this yet / warnings</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Avoid these until support says it is safe</h3><ul class="guide-list"><li>Preserve project files, custom Python scripts or processing models, and any plugin profiles before removing the local app.</li></ul></article>
+</section>
+<section id="what-support-needs" class="guide-section">
+  <p class="section-kicker">What support needs</p>
+  <h2 class="guide-section-title">What details support needs</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Send these details</h3><ul class="guide-list"><li>A screenshot of the exact QGIS message or layer issue.</li><li>The QGIS version from Help &gt; About.</li><li>The active plugins list (Plugins &gt; Manage and Install Plugins &gt; Installed).</li><li>The project file name and path, plus the names of any broken layers or data sources.</li></ul></article>
+</section>
+<section id="licensing-access" class="guide-section">
+  <p class="section-kicker">Licensing &amp; access</p>
+  <h2 class="guide-section-title">Licensing / access notes</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Licensing / access checks</h3><ul class="guide-list"><li>QGIS is open source and does not require a paid license. Access depends on the installed version and the GIS data, plugins, or services your team uses.</li><li>If the issue is plugin-related, confirm whether the plugin is from the official QGIS Plugin Repository or an internal source, and whether it supports your QGIS version.</li><li>If your team standardizes on the LTR release, capture the exact LTR version when reporting issues so support can match.</li></ul></article>
+</section>
+<section id="more-setup-checks" class="guide-section">
+  <p class="section-kicker">More checks</p>
+  <h2 class="guide-section-title">More setup checks</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Install / update basics</h3><ul class="guide-list"><li>Install the QGIS LTR release or the version your team standardizes on.</li><li>Open QGIS once cleanly to let it create the user profile, then load one known-good project to confirm the install.</li><li>If plugins are required, install them from the QGIS Plugin Repository (Plugins menu &gt; Manage and Install Plugins) or your internal source after the base install is verified.</li><li>Restart QGIS after enabling new plugins so they initialize correctly.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">More things to check</h3><ul class="guide-list"><li>Capture the exact QGIS version and the active plugins list before changes.</li><li>Test with a fresh user profile (Settings &gt; User Profiles &gt; New Profile) to rule out profile corruption.</li><li>Disable suspect plugins and restart QGIS to isolate plugin-specific failures.</li><li>If a project fails, test a second known-good project on the same machine.</li></ul></article>
+</section>
+<section id="related-guides" class="guide-section">
+  <p class="section-kicker">Related guides</p>
+  <h2 class="guide-section-title">Related guides</h2>
+  <div class="guide-card-grid">
+  <article class="guide-card"><h3 class="guide-card-title">Back to vendor</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/qgis.html">Back to QGIS</a></div></article>
+  
+  <article class="guide-card"><h3 class="guide-card-title">Need more help?</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../contact.html">Open contact page</a><a class="guide-chip-link" href="../../support.html">Support pages</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Support articles</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../articles/app-will-not-open.html">App crashed or will not open</a><a class="guide-chip-link" href="../../articles/license-or-signin-error.html">License or sign-in error</a><a class="guide-chip-link" href="../../articles/project-files-will-not-sync.html">Project files will not sync</a><a class="guide-chip-link" href="../../articles/plotting-pdf-printer-issue.html">Plotting, PDF, or printer issue</a><a class="guide-chip-link" href="../../articles/slow-or-freezing-on-a-model.html">Slow or freezing on a model</a><a class="guide-chip-link" href="../../articles/remote-access-issue.html">Remote access issue</a><a class="guide-chip-link" href="../../articles/new-computer-new-user-new-phone-setup.html">New computer, new user, or new phone setup</a><a class="guide-chip-link" href="../../articles/before-contacting-it-what-to-collect.html">Before contacting IT: what to collect</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Official / vendor links</h3><div class="guide-link-list"><a class="guide-chip-link" href="https://docs.qgis.org/" target="_blank" rel="noreferrer">QGIS Documentation</a><a class="guide-chip-link" href="https://qgis.org/en/site/forusers/download.html" target="_blank" rel="noreferrer">QGIS Downloads</a></div></article>
+</div>
+</section>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

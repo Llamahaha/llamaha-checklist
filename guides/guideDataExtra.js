@@ -1,6 +1,9 @@
 export const vendorOrderExtra = [
   "google",
   "spotfire",
+  "innovyze",
+  "qgis",
+  "rock",
   "hec",
   "mctrans",
   "axiom",
@@ -21,10 +24,82 @@ export const vendorGuidesExtra = {
       "InDesign workflows are sensitive to fonts, linked assets, packaged jobs, and the Adobe profile the user selects at sign-in."
     ]
   },
-  autodesk: {
-    products: ["InfoWorks ICM"],
+  innovyze: {
+    title: "Innovyze",
+    summary: "Use this for Innovyze water-infrastructure modeling apps (InfoWorks ICM, InfoWater Pro, InfoSewer Pro, XPSWMM, XPSTORM) now delivered through Autodesk Water Infrastructure.",
+    overview:
+      "Innovyze is now part of Autodesk and the apps are delivered through the Autodesk account, but the modeling workflows, project databases, ArcGIS dependencies, and team-standard versions still drive most support work. Confirm which app, which Autodesk account, and which project model is involved before changing anything.",
+    products: ["InfoWorks ICM", "InfoWater Pro", "InfoSewer Pro", "XPSWMM", "XPSTORM"],
     sharedNotes: [
-      "InfoWorks ICM workflows depend on the approved Autodesk-delivered version plus the correct model, database, and project paths."
+      "Innovyze apps are now delivered under Autodesk Water Infrastructure, so sign-in problems usually trace back to the assigned Autodesk account, not a separate Innovyze portal.",
+      "InfoWater Pro and InfoSewer Pro are ArcGIS Pro extensions, so the matching ArcGIS Pro release and the GIS data sources matter as much as the extension itself.",
+      "Test a second known-good model or scenario before reinstalling, and capture exact app version, model name, and storage path before contacting support."
+    ],
+    adminSurfaces: [
+      "Autodesk Account assignments for Innovyze water apps",
+      "ArcGIS Pro install for InfoWater Pro and InfoSewer Pro extensions",
+      "Project model, database, and scenario storage paths"
+    ],
+    escalationNotes: [
+      "Escalate after confirming the Autodesk account, exact app version, and a second-model comparison rule out app-only problems."
+    ],
+    supportLinks: [
+      { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+      { label: "Innovyze (Autodesk) support", url: "https://www.autodesk.com/support" }
+    ]
+  },
+  qgis: {
+    title: "QGIS",
+    summary: "Use this for QGIS Desktop installs, project files, plugins, and everyday open-source GIS workflows.",
+    overview:
+      "QGIS is the open-source desktop GIS most commonly used alongside or instead of ArcGIS. Most issues come down to which version is installed, project file health, missing plugins, or shared data paths the project relies on.",
+    products: ["QGIS"],
+    sharedNotes: [
+      "Confirm whether the team is on the LTR (long-term) release or the latest stable release before troubleshooting plugin or project compatibility.",
+      "If only one project fails, test a second .qgz or .qgs file before assuming the install is broken.",
+      "Plugin behavior is profile- and version-specific; capture the QGIS version and active plugins when a tool stops working."
+    ],
+    adminSurfaces: [
+      "QGIS Desktop install (LTR or current release)",
+      "QGIS plugin repository and any internal plugin distribution",
+      "Project files and shared GIS data paths the team relies on"
+    ],
+    escalationNotes: [
+      "Escalate after a known-good project comparison and a fresh QGIS profile or version check rules out local profile corruption."
+    ],
+    supportLinks: [
+      { label: "QGIS Documentation", url: "https://docs.qgis.org/" },
+      { label: "QGIS Downloads", url: "https://qgis.org/en/site/forusers/download.html" }
+    ]
+  },
+  rock: {
+    title: "ROCK Robotic",
+    summary: "Use this for ROCK Desktop installs, ROCK Robotic Cloud sign-in, LiDAR dataset processing, and survey deliverable workflows.",
+    overview:
+      "ROCK Desktop is the processing companion to the ROCK Robotic LiDAR ecosystem. Most issues come down to ROCK Robotic Cloud sign-in, dataset download or upload health, processing job failures, or local disk and GPU resources during heavy point-cloud work.",
+    products: ["ROCK Desktop"],
+    sharedNotes: [
+      "ROCK Desktop is paired with ROCK Robotic Cloud; sign-in problems are the most common starting symptom.",
+      "Heavy datasets need adequate disk space and a supported GPU; capture system specs and dataset size when processing jobs fail.",
+      "Preserve datasets, processed outputs, and any in-flight project work before reinstalling or moving workstations."
+    ],
+    adminSurfaces: [
+      "ROCK Robotic Cloud account and organization membership",
+      "ROCK Desktop install and version on the workstation",
+      "Local dataset and processing output storage"
+    ],
+    escalationNotes: [
+      "Escalate after sign-in is confirmed, system specs are captured, and a second dataset has been tested."
+    ],
+    supportLinks: [
+      { label: "ROCK Robotic Support", url: "https://rockrobotic.com/support/" }
+    ]
+  },
+  quickbooks: {
+    products: ["QuickBooks Enterprise Desktop", "QuickBooks Online", "QuickBooks Web Connector", "QuickBooks Time"],
+    sharedNotes: [
+      "QuickBooks Web Connector configurations are tied to a specific company file and user; document the .qwc source app, the company file path, and the QuickBooks user before changing anything.",
+      "QuickBooks Time is cloud-managed in the QuickBooks Time admin console; user lifecycle (invite, archive, payroll sync) belongs there, not in QuickBooks Desktop."
     ]
   },
   google: {

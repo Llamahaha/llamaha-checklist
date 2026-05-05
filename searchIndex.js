@@ -21,7 +21,7 @@ function articleText(item) {
 }
 
 export function buildSearchIndex() {
-  const hiddenPublicSearchVendors = new Set(["quickbooks"]);
+  const hiddenPublicSearchVendors = new Set();
   const hiddenPublicSearchApps = new Set(["outlook-mobile", "teams-mobile"]);
   const articles = [
     {

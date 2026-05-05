@@ -8,7 +8,7 @@ import { decisionTrees, emergencyPlaybooks, servicePlaybooks } from "./operation
 import { snippetLibrary } from "./resourceLibrary.js";
 import { buildSearchIndex } from "./searchIndex.js";
 
-const hiddenInternalReferenceVendors = new Set(["quickbooks"]);
+const hiddenInternalReferenceVendors = new Set();
 
 function entry(title, text, url, category, typeLabel, keywords = "", scope = "internal") {
   return { title, text, url, category, typeLabel, keywords, scope };
@@ -285,6 +285,14 @@ function buildCheatsheetEntries() {
       "internalReference",
       "Cheatsheet",
       "warranty serial service tag dell lenovo hp apple surface oem hardware lookup"
+    ),
+    entry(
+      "New PC deployment with ImmyBot",
+      "Skeleton playbook for taking a new workstation from OOBE through ImmyBot deployment, license validation, user sign-in, and handoff. Internal-only.",
+      "reference/immybot-new-pc-deployment.html",
+      "internalPlaybook",
+      "Playbook",
+      "immybot new pc deployment provisioning oobe autopilot rmm autoelevate role template handoff onboarding bitlocker"
     )
   ];
 }

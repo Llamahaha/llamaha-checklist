@@ -19,14 +19,6 @@ export const applicationCatalogExtra = {
   ],
   autodesk: [
     {
-      name: "InfoWorks ICM",
-      slug: "infoworks-icm",
-      focus: "Hydraulic and hydrologic modeling platform used for drainage, flood, network, and scenario modeling with project databases and model dependencies.",
-      licensing: "Typically depends on the Autodesk account assigned to the user plus the exact InfoWorks ICM product access and version approved by the organization.",
-      install: "Use the approved Autodesk delivery path, match the expected year or version, and test sign-in plus one known-good model or database connection after setup.",
-      uninstall: "Preserve model databases, simulation outputs, templates, and custom libraries before removing the application or changing the workstation."
-    },
-    {
       name: "Autodesk Construction Cloud",
       slug: "construction-cloud",
       focus: "Cloud project-hub for construction and AEC teams covering Autodesk Docs, Build, Takeoff, and what used to be the BIM 360 family, with project access, roles, and document workflows.",
@@ -279,6 +271,87 @@ export const applicationCatalogExtra = {
       licensing: "Requires a Spotfire user account on the company's Spotfire server, plus the appropriate license type for the dashboards or analyses you need to open.",
       install: "There is usually no local install for the web client. Validate sign-in to the company Spotfire URL with the correct work account, confirm the expected dashboards appear, and test opening one known-good analysis.",
       uninstall: "Offboarding means removing the user account in Spotfire admin and reassigning ownership of any analyses or dashboards the user authored."
+    }
+  ]
+,
+  innovyze: [
+    {
+      name: "InfoWorks ICM",
+      slug: "infoworks-icm",
+      focus: "Hydraulic and hydrologic modeling platform used for drainage, flood, network, and scenario modeling with project databases and model dependencies.",
+      licensing: "Now delivered under Autodesk Water Infrastructure. Typically depends on the Autodesk account assigned to the user plus the exact InfoWorks ICM product access and version approved by the organization.",
+      install: "Use the approved Autodesk delivery path, match the expected year or version, and test sign-in plus one known-good model or database connection after setup.",
+      uninstall: "Preserve model databases, simulation outputs, templates, and custom libraries before removing the application or changing the workstation."
+    },
+    {
+      name: "InfoWater Pro",
+      slug: "infowater-pro",
+      focus: "ArcGIS Pro extension used to model water distribution networks, run hydraulic and water-quality simulations, and analyze pressure, flow, and demand scenarios.",
+      licensing: "Now delivered under Autodesk Water Infrastructure. Requires a compatible ArcGIS Pro install plus the InfoWater Pro extension entitlement on the user's Autodesk account.",
+      install: "Install the matching ArcGIS Pro release first, then add InfoWater Pro through the approved Autodesk delivery path, sign in, and test loading one known-good model and a small simulation.",
+      uninstall: "Preserve model geodatabases, scenario libraries, and any custom ArcGIS toolboxes before removing the extension."
+    },
+    {
+      name: "InfoSewer Pro",
+      slug: "infosewer-pro",
+      focus: "ArcGIS Pro extension used to model wastewater collection networks, run gravity and force-main simulations, and evaluate sanitary or combined sewer scenarios.",
+      licensing: "Now delivered under Autodesk Water Infrastructure. Requires a compatible ArcGIS Pro install plus the InfoSewer Pro extension entitlement on the user's Autodesk account.",
+      install: "Install the matching ArcGIS Pro release first, then add InfoSewer Pro through the approved Autodesk delivery path, sign in, and test loading one known-good model and a small simulation.",
+      uninstall: "Preserve sewer model geodatabases, scenario data, and custom ArcGIS toolboxes before removing the extension."
+    },
+    {
+      name: "XPSWMM",
+      slug: "xpswmm",
+      focus: "Integrated stormwater, wastewater, and floodplain modeling platform with 1D/2D hydraulic engines used for drainage and flood-risk studies.",
+      licensing: "Now delivered under Autodesk Water Infrastructure. Depends on the Autodesk account, the approved XPSWMM version for the team, and any solver or 2D module add-ons the organization licenses.",
+      install: "Use the approved Autodesk delivery path, match the expected version, and test opening one known-good model and running a short simulation after sign-in.",
+      uninstall: "Preserve project files, results databases, and any solver outputs the team still relies on before removing the application."
+    },
+    {
+      name: "XPSTORM",
+      slug: "xpstorm",
+      focus: "Stormwater-focused modeling tool with 1D/2D hydraulic engines used for urban drainage, channels, and surface flooding analysis.",
+      licensing: "Now delivered under Autodesk Water Infrastructure. Depends on the Autodesk account, the approved XPSTORM version, and any extension or solver licenses required by the workflow.",
+      install: "Use the approved Autodesk delivery path, match the expected version, and test opening one known-good model and running a short simulation after sign-in.",
+      uninstall: "Preserve project files, results databases, and exported scenarios before removing the application or changing workstation."
+    }
+  ],
+  qgis: [
+    {
+      name: "QGIS",
+      slug: "qgis",
+      focus: "Open-source desktop GIS used to view, edit, and analyze spatial data, build maps, run geoprocessing, and connect to shared GIS data sources.",
+      licensing: "QGIS is open source and does not require a paid end-user seat. Access usually depends on the installed version and the GIS data, plugins, or services the team relies on.",
+      install: "Install the LTR or release version your team standardizes on, confirm the app launches cleanly, and test loading one known-good project plus any required plugins after setup.",
+      uninstall: "Preserve project files, custom Python scripts or processing models, and any plugin profiles before removing the local app."
+    }
+  ],
+  rock: [
+    {
+      name: "ROCK Desktop",
+      slug: "rock-desktop",
+      focus: "Desktop processing and visualization tool from ROCK Robotic used to manage LiDAR datasets, classify point clouds, generate deliverables, and prepare survey-grade outputs.",
+      licensing: "Requires a ROCK Robotic Cloud account and an active subscription tied to the user's organization, plus any project access the admin assigns.",
+      install: "Install the company-approved ROCK Desktop build, sign in with the assigned ROCK Robotic Cloud account, and validate dataset download, processing, and one known-good export after setup.",
+      uninstall: "Preserve local datasets, processed deliverables, and any in-flight project work before removing the desktop client."
+    }
+  ],
+  quickbooks: [
+    {
+      name: "QuickBooks Web Connector",
+      slug: "quickbooks-web-connector",
+      focus: "Intuit utility that lets approved third-party apps exchange data with a QuickBooks Desktop company file using a .qwc configuration and the user's QuickBooks login.",
+      licensing: "Bundled with QuickBooks Desktop. Each connection is authorized against a specific company file and user role, so company-file ownership and permissions matter more than a separate license.",
+      install: "Install or repair the Web Connector through the QuickBooks Tool Hub or the bundled installer, add the .qwc file from the third-party vendor, authorize access against the right company file, and test a sync with the company file open.",
+      uninstall: "Remove the third-party connection from the Web Connector list first, confirm finance has signed off, then uninstall the utility only if no other integration relies on it."
+    },
+    {
+      name: "QuickBooks Time",
+      slug: "quickbooks-time",
+      focus: "Cloud time-tracking and scheduling product (formerly TSheets) used to capture employee hours, run approvals, and sync timesheets into QuickBooks payroll.",
+      licensing: "Subscription managed in the QuickBooks Time admin console and tied to each tracked user. Sign-in uses the work email on the QuickBooks Time account or the linked Intuit account.",
+      install: "Confirm the user is invited in the QuickBooks Time admin console, finish onboarding from the invitation email, install the mobile or desktop app if needed, and test one clock-in plus a synced timesheet to QuickBooks.",
+      uninstall: "Archive the user in QuickBooks Time so timesheets remain auditable, confirm payroll has the final period synced, and only then remove the mobile or desktop app."
     }
   ]
 };

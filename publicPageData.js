@@ -3,7 +3,7 @@ import { vendorGuides, vendorOrder } from "./guides/guideData.js";
 import { getPublicGuideContent } from "./guides/publicGuideContent.js";
 import { computerIssueSections, tipsAndTricksSections } from "./supportData.js";
 
-const hiddenAppHelpVendors = new Set(["browsers", "quickbooks"]);
+const hiddenAppHelpVendors = new Set(["browsers"]);
 const hiddenAppHelpApps = new Set(["outlook-mobile", "teams-mobile"]);
 
 function getApp(vendorSlug, appSlug) {
@@ -782,6 +782,91 @@ function createPublicTipsSections() {
             { label: "Outlook for iOS and Android Help", url: "https://support.microsoft.com/en-us/office/outlook-for-ios-and-android-help-cd84214e-a5ac-4e95-9ea3-e07f78d0cde6" },
             { label: "How to add your accounts to Microsoft Authenticator", url: "https://support.microsoft.com/en-us/account-billing/how-to-add-your-accounts-to-microsoft-authenticator-92544b53-7706-4581-a142-30344a2a2a57" },
             { label: "Sign in and get started with Teams", url: "https://support.microsoft.com/en-us/office/sign-in-and-get-started-with-teams-6723dc43-dbc0-46e6-af49-8a2d1c5cb937" }
+          ]
+        }
+      ]
+    },
+    {
+      title: "AI in the Workplace",
+      description: "Use these habits when AI tools (Microsoft Copilot, ChatGPT, Gemini, Claude, and similar) are part of your daily work. The goal is to get useful results without putting client data, intellectual property, or sign-in details somewhere they should not be.",
+      items: [
+        {
+          title: "Know which AI tool is approved for what kind of work",
+          text: "Not every AI tool is appropriate for every task. The same prompt can be safe in one tool and a policy violation in another, depending on which one your company has reviewed and signed contracts for.",
+          fixes: [
+            "Check with IT or your manager which AI tools your company has formally approved for work use, and which ones are off limits.",
+            "Treat unapproved consumer AI tools (free ChatGPT, free Gemini, random AI sites) the same way you would treat any other unsanctioned cloud app for work data.",
+            "Prefer the enterprise version of an AI tool when one is available (e.g., Copilot for Microsoft 365, ChatGPT Enterprise, Claude for Work) because those typically have data-handling and privacy terms appropriate for business use.",
+            "If you are not sure whether a use case is approved, ask first \u2014 it is faster than unwinding a data exposure later."
+          ],
+          links: []
+        },
+        {
+          title: "Never paste sensitive client or company data into a public AI tool",
+          text: "Anything you type into a consumer AI tool can leave the company. Treat the prompt box like a public chat with a stranger.",
+          fixes: [
+            "Do not paste client names, addresses, project numbers, contract details, or financial figures into a public AI tool.",
+            "Do not paste source code, internal documents, drawings, models, or anything marked confidential into a public AI tool.",
+            "Do not paste credentials, API keys, license keys, or any sign-in information into any AI tool, ever.",
+            "When in doubt, redact identifying details before asking a question, or use the company-approved enterprise AI tool which keeps data inside the tenant."
+          ],
+          links: []
+        },
+        {
+          title: "Verify AI output before you use it",
+          text: "AI tools can produce confident-sounding results that are partially or completely wrong. Treat AI output as a draft you review, not a final answer.",
+          fixes: [
+            "Spot-check facts, citations, and numbers against an authoritative source before sending AI output to a client or putting it into a deliverable.",
+            "Read AI-generated code, formulas, or scripts line by line before running them in a production environment.",
+            "Cross-check legal, financial, medical, or compliance-related answers with a qualified human \u2014 AI is not a substitute for licensed expertise.",
+            "If the AI cites a document or law that sounds too convenient, search for it directly. Hallucinated citations are common."
+          ],
+          links: []
+        },
+        {
+          title: "Use AI for drafts, summaries, and brainstorming, not final decisions",
+          text: "AI is best at the early-stage thinking and the heavy lifting around editing, summarizing, and reformatting. It is least reliable when a decision must be exactly right the first time.",
+          fixes: [
+            "Use AI to summarize long meeting transcripts, email threads, or documents and pull out the action items, then verify against the source.",
+            "Use AI to draft routine emails, status updates, or first-pass meeting notes that you will edit before sending.",
+            "Use AI to brainstorm options or critique your own thinking, not to make the final call.",
+            "Use AI to translate technical jargon into plainer language for a non-technical audience, then read the result for accuracy."
+          ],
+          links: []
+        },
+        {
+          title: "Be explicit when content is AI-assisted",
+          text: "Most companies and clients expect transparency about AI involvement, especially in deliverables, communications, or anything that will be reused by others.",
+          fixes: [
+            "Note in your project record or commit history when AI generated a meaningful portion of a draft or piece of code.",
+            "If a deliverable will be reviewed by a regulator, client, or third party, follow your company\u2019s disclosure practice for AI-assisted work.",
+            "Do not present AI output as your independent expert opinion when the AI did the analysis.",
+            "If a client asks whether AI was used, answer truthfully \u2014 it is becoming a standard expectation."
+          ],
+          links: []
+        },
+        {
+          title: "Keep AI tools out of confidential meetings unless approved",
+          text: "AI meeting assistants (transcription bots, note-takers, recall tools) can record and store sensitive conversations. Make sure recording is allowed before letting an AI listen.",
+          fixes: [
+            "Confirm with your company whether AI meeting assistants are allowed before adding one to a Teams or Zoom call.",
+            "Disclose to participants when an AI tool is recording or transcribing the meeting and let them opt out before sensitive topics begin.",
+            "Avoid using AI meeting assistants in client meetings, HR meetings, legal discussions, or anything covered by NDA without explicit written approval.",
+            "After the meeting, confirm where the transcript is stored and how long it is retained \u2014 some tools keep transcripts in third-party cloud storage by default."
+          ],
+          links: []
+        },
+        {
+          title: "Watch for AI-generated phishing and impersonation",
+          text: "AI makes it easier to produce convincing fake emails, voice messages, and even video calls. The old \"check for typos\" rule no longer works on its own.",
+          fixes: [
+            "Treat unexpected requests for money, credentials, or sensitive data as suspicious even when the writing is polished and the sender looks correct.",
+            "Verify any urgent or unusual request through a known, trusted channel \u2014 a phone number you already have, not the one in the message.",
+            "Be especially cautious with voice or video that asks for an immediate decision; voice cloning is now within reach of casual attackers.",
+            "Report suspected AI-generated phishing the same way you would report any other phishing attempt."
+          ],
+          links: [
+            { label: "Recognizing phishing", url: "articles/recognizing-phishing.html", external: false }
           ]
         }
       ]

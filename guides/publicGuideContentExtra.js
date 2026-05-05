@@ -616,11 +616,11 @@ export const publicGuideContentExtra = {
       ]
     }
   },
-  autodesk: {
+  innovyze: {
     "infoworks-icm": {
       summary: "Use this guide when InfoWorks ICM will not sign in, open the model or database you expect, or runs slowly or incorrectly after a version or workstation change.",
       overview: [
-        "InfoWorks ICM is Autodesk's hydraulic and hydrologic modeling platform for drainage, flood, network, and scenario analysis workflows.",
+        "InfoWorks ICM is the hydraulic and hydrologic modeling platform from Innovyze (now delivered under Autodesk Water Infrastructure) used for drainage, flood, network, and scenario analysis workflows.",
         "Most InfoWorks ICM issues come from the wrong Autodesk account, version mismatch, unavailable model data, or a project database path that no longer matches what the team expects."
       ],
       askFirst: [
@@ -668,6 +668,186 @@ export const publicGuideContentExtra = {
         { label: "Autodesk Support", url: "https://www.autodesk.com/support" }
       ]
     },
+    "infowater-pro": {
+      summary: "Use this guide when InfoWater Pro will not load inside ArcGIS Pro, the model you expect is missing, or simulations fail after a version, ArcGIS, or workstation change.",
+      overview: [
+        "InfoWater Pro is an Autodesk Water Infrastructure (Innovyze) extension that runs inside ArcGIS Pro to model water distribution networks and run hydraulic and water-quality simulations.",
+        "Most InfoWater Pro issues come from a mismatch between the ArcGIS Pro release and the InfoWater Pro version, the wrong Autodesk account, missing model geodatabases, or extension licensing not refreshing on the workstation."
+      ],
+      askFirst: [
+        "Is ArcGIS Pro itself opening, or does it fail before InfoWater Pro can load?",
+        "Is the InfoWater Pro tab or ribbon present in ArcGIS Pro?",
+        "Is the failure sign-in, opening a model, running a simulation, or exporting results?",
+        "Did this start after an ArcGIS Pro update, an Autodesk update, or moving the model files?"
+      ],
+      licensing: [
+        "InfoWater Pro is now delivered through Autodesk; sign in to ArcGIS Pro and the Autodesk Access app with the work account that has the entitlement assigned.",
+        "If sign-in works but the InfoWater Pro ribbon is missing, the extension may not be enabled in ArcGIS Pro under Settings > Add-In Manager.",
+        "If your team standardizes on a specific ArcGIS Pro plus InfoWater Pro pairing, include both versions when describing the issue."
+      ],
+      install: [
+        "Confirm a working ArcGIS Pro install at the team-standard release first.",
+        "Install or repair InfoWater Pro through the approved Autodesk delivery path matching that ArcGIS Pro release.",
+        "Restart the computer if Windows asks you to.",
+        "Open ArcGIS Pro, confirm the InfoWater Pro ribbon appears, and test loading one known-good model and a small simulation."
+      ],
+      supportCheckpoints: [
+        "Compare against one known-good model on the same workstation before reinstalling.",
+        "Capture the ArcGIS Pro version, the InfoWater Pro version, and the Autodesk account in use.",
+        "If only one model fails, confirm the geodatabase path, scenario, and any custom toolbox dependencies are reachable."
+      ],
+      commonIssues: [
+        makeIssue(
+          "The InfoWater Pro ribbon or tab is missing in ArcGIS Pro",
+          "ArcGIS Pro opens normally but the InfoWater Pro tools, ribbon, or tab are not visible.",
+          "Confirm InfoWater Pro is installed for the matching ArcGIS Pro version, then enable the extension in ArcGIS Pro under Settings > Add-In Manager and restart ArcGIS Pro.",
+          "Send the ArcGIS Pro version, the InfoWater Pro version, and a screenshot of the ribbon in ArcGIS Pro."
+        ),
+        makeIssue(
+          "A model will not open or a simulation fails to start",
+          "InfoWater Pro is loaded, but the model geodatabase will not open or the simulation refuses to start.",
+          "Confirm the geodatabase path, sign-in account, and that another approved workstation can open the same model before reinstalling the extension.",
+          "Send the model name, geodatabase path, exact error text, and whether another workstation reproduces it."
+        ),
+        makeIssue(
+          "The extension says it cannot find a license",
+          "InfoWater Pro displays a licensing or entitlement error even though Autodesk Access shows the user is signed in.",
+          "Sign out of Autodesk Access, sign back in with the assigned work account, restart ArcGIS Pro, and let InfoWater Pro re-check the entitlement.",
+          "Send a screenshot of the licensing error, the Autodesk account email shown in Autodesk Access, and the InfoWater Pro version."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact InfoWater Pro error or missing-ribbon view in ArcGIS Pro.",
+        "The ArcGIS Pro version (Settings > About) and the InfoWater Pro version.",
+        "The Autodesk account email shown in Autodesk Access on the workstation.",
+        "The model or geodatabase name involved in the issue."
+      ],
+      relatedLinks: [
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "InfoWater Pro support", url: "https://www.autodesk.com/support" }
+      ]
+    },
+    "xpswmm": {
+      summary: "Use this guide when XPSWMM will not open the model you expect, fails to run a 1D or 2D simulation, or behaves differently after a version, terrain, or workstation change.",
+      overview: [
+        "XPSWMM is an Autodesk Water Infrastructure (Innovyze) modeling tool with 1D and 2D hydraulic engines used for stormwater, wastewater, and floodplain studies.",
+        "Most XPSWMM issues come from version mismatch, missing terrain or scenario data, simulation engine errors, or the wrong Autodesk account being signed in for licensing."
+      ],
+      askFirst: [
+        "Is the failure launch, opening a model, running a 1D or 2D simulation, or reviewing results?",
+        "Did the issue begin after a version update, a terrain or scenario change, or moving the project files?",
+        "Can another approved workstation open the same model and run the same scenario?"
+      ],
+      licensing: [
+        "XPSWMM is delivered through Autodesk; sign-in errors usually trace back to the wrong Autodesk account or a missing entitlement, not the local install.",
+        "If the app opens but the model will not load, confirm the project path and any external terrain or scenario files before changing the install.",
+        "Capture the exact XPSWMM version when reporting issues; team-standard versions matter for results comparability."
+      ],
+      install: [
+        "Use the approved Autodesk delivery path and the correct XPSWMM version for the team.",
+        "Restart the computer if Windows asks you to after install or update.",
+        "Open one known-good model, run a short simulation, and confirm result outputs before opening the project that was failing."
+      ],
+      supportCheckpoints: [
+        "If a 2D simulation fails, confirm the 2D engine licensing and any terrain or grid dependencies before reinstalling.",
+        "Compare a failing model against a known-good one on the same machine.",
+        "Capture the simulation log if the run starts and then errors out partway through."
+      ],
+      commonIssues: [
+        makeIssue(
+          "A model will not open",
+          "XPSWMM launches, but the project model file will not open or shows missing-data errors.",
+          "Confirm the project path, any linked terrain or scenario files, and the version that authored the file before reinstalling.",
+          "Send the project name, the path it lives at, and the exact error text."
+        ),
+        makeIssue(
+          "A 1D or 2D simulation fails to run",
+          "The model opens, but starting a 1D or 2D simulation fails or stops partway through.",
+          "Capture the simulation log, confirm the simulation engine licensing, and test a smaller known-good scenario before changing the install.",
+          "Send the simulation log, scenario name, model name, and the exact stop or error text."
+        ),
+        makeIssue(
+          "Results do not match what another workstation produces",
+          "The same model produces different results on a different workstation, or results changed after an update.",
+          "Confirm both workstations are on the same XPSWMM version and engine release before troubleshooting the model itself.",
+          "Send both XPSWMM versions, both engine versions, and a screenshot of the differing result summary."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact XPSWMM message or stuck simulation step.",
+        "The Autodesk account email signed in for licensing.",
+        "The XPSWMM version and the engine version shown in About.",
+        "The project, scenario, and simulation names involved."
+      ],
+      relatedLinks: [
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "XPSWMM support", url: "https://www.autodesk.com/support" }
+      ]
+    }
+  },
+  qgis: {
+    "qgis": {
+      summary: "Use this guide when QGIS will not open a project, plugins do not load, layers fail to display, or the app behaves differently after a version or computer change.",
+      overview: [
+        "QGIS is the open-source desktop GIS used to view and edit spatial data, build maps, run geoprocessing, and connect to shared GIS data sources.",
+        "Most QGIS issues come from a version mismatch with a project file, plugin compatibility with the active QGIS release, missing data sources, or a corrupted user profile."
+      ],
+      askFirst: [
+        "Which QGIS release are you on — the long-term release (LTR) or the latest stable release?",
+        "Is the problem launching QGIS, opening one project, loading a plugin, or rendering layers?",
+        "Did the issue start after a version update, a plugin update, or moving project or data files?",
+        "Does the same project open correctly on another workstation?"
+      ],
+      licensing: [
+        "QGIS is open source and does not require a paid license. Access depends on the installed version and the GIS data, plugins, or services your team uses.",
+        "If the issue is plugin-related, confirm whether the plugin is from the official QGIS Plugin Repository or an internal source, and whether it supports your QGIS version.",
+        "If your team standardizes on the LTR release, capture the exact LTR version when reporting issues so support can match."
+      ],
+      install: [
+        "Install the QGIS LTR release or the version your team standardizes on.",
+        "Open QGIS once cleanly to let it create the user profile, then load one known-good project to confirm the install.",
+        "If plugins are required, install them from the QGIS Plugin Repository (Plugins menu > Manage and Install Plugins) or your internal source after the base install is verified.",
+        "Restart QGIS after enabling new plugins so they initialize correctly."
+      ],
+      supportCheckpoints: [
+        "If a project will not open, test a second known-good project before reinstalling QGIS.",
+        "If a plugin causes problems, disable it, restart QGIS, and confirm the issue follows the plugin and not the install.",
+        "Capture the exact QGIS version (Help > About) and the active plugin list when reporting issues.",
+        "If the user profile looks corrupted, create a new profile (Settings > User Profiles > New Profile) and test the same project there before reinstalling."
+      ],
+      commonIssues: [
+        makeIssue(
+          "A project will not open or layers do not display",
+          "QGIS launches, but a .qgz or .qgs project will not open, or layers in the project show as broken or invalid.",
+          "Confirm the layer data sources are reachable at the paths in the project, and test the project on another workstation before reinstalling QGIS.",
+          "Send the project file name, the broken layer names, and a screenshot of the layer panel showing the issue."
+        ),
+        makeIssue(
+          "A plugin will not install, load, or run",
+          "A plugin is missing from the menu, fails to install, or errors out when used.",
+          "Disable the plugin, restart QGIS, then re-install or update the plugin from the Plugin Repository, confirming it supports your QGIS release.",
+          "Send the plugin name and version, the QGIS version, and the exact error text from the QGIS message log."
+        ),
+        makeIssue(
+          "QGIS itself will not launch or crashes on startup",
+          "Double-clicking QGIS does nothing, or it opens for a moment and closes, or it errors out before the main window appears.",
+          "Test launching with a fresh user profile (Settings > User Profiles > New Profile) to rule out a corrupted profile before reinstalling.",
+          "Send the exact QGIS version, when the issue started, and any error text from the Windows Event Viewer or QGIS log."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact QGIS message or layer issue.",
+        "The QGIS version from Help > About.",
+        "The active plugins list (Plugins > Manage and Install Plugins > Installed).",
+        "The project file name and path, plus the names of any broken layers or data sources."
+      ],
+      relatedLinks: [
+        { label: "QGIS Documentation", url: "https://docs.qgis.org/" },
+        { label: "QGIS Downloads", url: "https://qgis.org/en/site/forusers/download.html" }
+      ]
+    }
+  },
+  autodesk: {
     "construction-cloud": {
       summary: "Use this guide when Autodesk Construction Cloud (Docs, Build, Takeoff, or BIM 360) will not sign in, the project you expect is missing, or Desktop Connector or Revit cannot reach the cloud model.",
       overview: [

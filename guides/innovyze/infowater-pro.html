@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfoWater Pro | Innovyze App Help | Llamaha</title>
+  <meta name="description" content="Use this guide when InfoWater Pro will not load inside ArcGIS Pro, the model you expect is missing, or simulations fail after a version, ArcGIS, or...">
+  <link rel="canonical" href="https://llamaha.com/guides/innovyze/infowater-pro">
+  <meta property="og:title" content="InfoWater Pro | Innovyze App Help | Llamaha">
+  <meta property="og:description" content="Use this guide when InfoWater Pro will not load inside ArcGIS Pro, the model you expect is missing, or simulations fail after a version, ArcGIS, or...">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="../guide.css">
+  <style>html{scroll-behavior:smooth}</style>
+</head>
+<body data-page-type="app" data-vendor="innovyze" data-app="infowater-pro" data-root-path="../.." data-render-mode="static">
+  <div class="guide-shell">
+    <header class="guide-header">
+      <nav id="breadcrumbs" class="guide-breadcrumbs" aria-label="Breadcrumb"><a class="guide-breadcrumb-link" href="../../index.html">Home</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../vendor-guides.html">App Help</a><span class="guide-breadcrumb-sep">&gt;</span><a class="guide-breadcrumb-link" href="../../guides/innovyze.html">Innovyze</a><span class="guide-breadcrumb-sep">&gt;</span><strong class="guide-breadcrumb-current">InfoWater Pro</strong></nav>
+      <a id="guideBackLink" class="back-link" href="../innovyze.html">Back to Innovyze</a>
+      <div class="guide-brand">
+        <img class="brand-icon" src="../../assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+        <div>
+          <p id="guideKicker" class="section-kicker">Innovyze Application</p>
+          <h1 id="guideTitle">InfoWater Pro</h1>
+          <p id="guideSummary">Use this guide when InfoWater Pro will not load inside ArcGIS Pro, the model you expect is missing, or simulations fail after a version, ArcGIS, or computer change.</p>
+          <p class="guide-review-label" id="guideReviewLabel">Reviewed April 2026</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="guide-layout">
+      <div class="guide-main">
+        <div id="guideJumpLinks" class="guide-jump-shell">
+  <nav class="guide-jump-links" aria-label="Jump to a section"><a class="guide-jump-link" href="#overview">Overview</a><a class="guide-jump-link" href="#used-for">What this app is usually used for</a><a class="guide-jump-link" href="#common-problems">Common problems</a><a class="guide-jump-link" href="#first-things-to-try">First things to try</a><a class="guide-jump-link" href="#do-not-yet">Do not do this yet / warnings</a><a class="guide-jump-link" href="#what-support-needs">What details support needs</a><a class="guide-jump-link" href="#licensing-access">Licensing / access notes</a><a class="guide-jump-link" href="#more-setup-checks">More setup checks</a><a class="guide-jump-link" href="#related-guides">Related guides</a></nav>
+</div>
+        <div class="guide-main-scroll">
+          <div id="guideContent" class="guide-content">
+            <section id="overview" class="guide-section">
+  <p class="section-kicker">Application Guide</p>
+  <h2 class="guide-section-title">Overview</h2>
+  <div class="guide-copy-stack"><p class="guide-card-copy">InfoWater Pro is an Autodesk Water Infrastructure (Innovyze) extension that runs inside ArcGIS Pro to model water distribution networks and run hydraulic and water-quality simulations.</p><p class="guide-card-copy">Most InfoWater Pro issues come from a mismatch between the ArcGIS Pro release and the InfoWater Pro version, the wrong Autodesk account, missing model geodatabases, or extension licensing not refreshing on the computer.</p></div>
+</section>
+<section id="used-for" class="guide-section">
+  <p class="section-kicker">Plain English</p>
+  <h2 class="guide-section-title">What this app is usually used for</h2>
+  <div class="guide-copy-stack"><p class="guide-card-copy">ArcGIS Pro extension used to model water distribution networks, run hydraulic and water-quality simulations, and analyze pressure, flow, and demand scenarios.</p><p class="guide-card-copy">It is part of the Innovyze family covered in our app help.</p></div>
+</section>
+<section id="common-problems" class="guide-section">
+  <p class="section-kicker">Common problems</p>
+  <h2 class="guide-section-title">Common problems</h2>
+  <div class="guide-card-grid"><article class="guide-card issue-card">
+  <h3 class="guide-card-title">The InfoWater Pro ribbon or tab is missing in ArcGIS Pro</h3>
+  <p class="guide-card-copy">ArcGIS Pro opens normally but the InfoWater Pro tools, ribbon, or tab are not visible.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Confirm InfoWater Pro is installed for the matching ArcGIS Pro version, then enable the extension in ArcGIS Pro under Settings &gt; Add-In Manager and restart ArcGIS Pro.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the ArcGIS Pro version, the InfoWater Pro version, and a screenshot of the ribbon in ArcGIS Pro.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">A model will not open or a simulation fails to start</h3>
+  <p class="guide-card-copy">InfoWater Pro is loaded, but the model geodatabase will not open or the simulation refuses to start.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Confirm the geodatabase path, sign-in account, and that another approved computer can open the same model before reinstalling the extension.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send the model name, geodatabase path, exact error text, and whether another computer reproduces it.</p></article>
+</article><article class="guide-card issue-card">
+  <h3 class="guide-card-title">The extension says it cannot find a license</h3>
+  <p class="guide-card-copy">InfoWater Pro displays a licensing or entitlement error even though Autodesk Access shows the user is signed in.</p>
+  <article class="guide-card"><h3 class="guide-card-title">Likely fix</h3><p class="guide-card-copy">Sign out of Autodesk Access, sign back in with the assigned work account, restart ArcGIS Pro, and let InfoWater Pro re-check the entitlement.</p></article>
+  <article class="guide-card"><h3 class="guide-card-title">What to collect</h3><p class="guide-card-copy">Send a screenshot of the licensing error, the Autodesk account email shown in Autodesk Access, and the InfoWater Pro version.</p></article>
+</article></div>
+</section>
+<section id="first-things-to-try" class="guide-section">
+  <p class="section-kicker">First things to try</p>
+  <h2 class="guide-section-title">First things to try</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Quick checks before you change anything</h3><ul class="guide-list"><li>Is ArcGIS Pro itself opening, or does it fail before InfoWater Pro can load?</li><li>Is the InfoWater Pro tab or ribbon present in ArcGIS Pro?</li><li>Is the failure sign-in, opening a model, running a simulation, or exporting results?</li><li>Did this start after an ArcGIS Pro update, an Autodesk update, or moving the model files?</li></ul></article><article class="guide-card"><h3 class="guide-card-title">Try these fixes first</h3><ul class="guide-list"><li>Compare against one known-good model on the same computer before reinstalling.</li><li>Capture the ArcGIS Pro version, the InfoWater Pro version, and the Autodesk account in use.</li><li>If only one model fails, confirm the geodatabase path, scenario, and any custom toolbox dependencies are reachable.</li></ul></article>
+</section>
+<section id="do-not-yet" class="guide-section">
+  <p class="section-kicker">Slow down</p>
+  <h2 class="guide-section-title">Do not do this yet / warnings</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Avoid these until support says it is safe</h3><ul class="guide-list"><li>Preserve model geodatabases, scenario libraries, and any custom ArcGIS toolboxes before removing the extension.</li></ul></article>
+</section>
+<section id="what-support-needs" class="guide-section">
+  <p class="section-kicker">What support needs</p>
+  <h2 class="guide-section-title">What details support needs</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Send these details</h3><ul class="guide-list"><li>A screenshot of the exact InfoWater Pro error or missing-ribbon view in ArcGIS Pro.</li><li>The ArcGIS Pro version (Settings &gt; About) and the InfoWater Pro version.</li><li>The Autodesk account email shown in Autodesk Access on the computer.</li><li>The model or geodatabase name involved in the issue.</li></ul></article>
+</section>
+<section id="licensing-access" class="guide-section">
+  <p class="section-kicker">Licensing &amp; access</p>
+  <h2 class="guide-section-title">Licensing / access notes</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Licensing / access checks</h3><ul class="guide-list"><li>InfoWater Pro is now delivered through Autodesk; sign in to ArcGIS Pro and the Autodesk Access app with the work account that has the entitlement assigned.</li><li>If sign-in works but the InfoWater Pro ribbon is missing, the extension may not be enabled in ArcGIS Pro under Settings &gt; Add-In Manager.</li><li>If your team standardizes on a specific ArcGIS Pro plus InfoWater Pro pairing, include both versions when describing the issue.</li></ul></article>
+</section>
+<section id="more-setup-checks" class="guide-section">
+  <p class="section-kicker">More checks</p>
+  <h2 class="guide-section-title">More setup checks</h2>
+  <article class="guide-card"><h3 class="guide-card-title">Install / update basics</h3><ul class="guide-list"><li>Confirm a working ArcGIS Pro install at the team-standard release first.</li><li>Install or repair InfoWater Pro through the approved Autodesk delivery path matching that ArcGIS Pro release.</li><li>Restart the computer if Windows asks you to.</li><li>Open ArcGIS Pro, confirm the InfoWater Pro ribbon appears, and test loading one known-good model and a small simulation.</li></ul></article><article class="guide-card"><h3 class="guide-card-title">More things to check</h3><ul class="guide-list"><li>Capture both the ArcGIS Pro version and the InfoWater Pro version before any rebuild.</li><li>Verify the extension is enabled in ArcGIS Pro under Settings &gt; Add-In Manager.</li><li>Sign out and back in to Autodesk Access if licensing is the failure mode.</li><li>Compare the failing model against a known-good one on the same machine before reinstalling.</li></ul></article>
+</section>
+<section id="related-guides" class="guide-section">
+  <p class="section-kicker">Related guides</p>
+  <h2 class="guide-section-title">Related guides</h2>
+  <div class="guide-card-grid">
+  <article class="guide-card"><h3 class="guide-card-title">Back to vendor</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/innovyze.html">Back to Innovyze</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Related apps</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../guides/innovyze/infoworks-icm.html">InfoWorks ICM</a><a class="guide-chip-link" href="../../guides/innovyze/infosewer-pro.html">InfoSewer Pro</a><a class="guide-chip-link" href="../../guides/innovyze/xpswmm.html">XPSWMM</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Need more help?</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../contact.html">Open contact page</a><a class="guide-chip-link" href="../../support.html">Support pages</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Support articles</h3><div class="guide-link-list"><a class="guide-chip-link" href="../../articles/app-will-not-open.html">App crashed or will not open</a><a class="guide-chip-link" href="../../articles/license-or-signin-error.html">License or sign-in error</a><a class="guide-chip-link" href="../../articles/project-files-will-not-sync.html">Project files will not sync</a><a class="guide-chip-link" href="../../articles/plotting-pdf-printer-issue.html">Plotting, PDF, or printer issue</a><a class="guide-chip-link" href="../../articles/slow-or-freezing-on-a-model.html">Slow or freezing on a model</a><a class="guide-chip-link" href="../../articles/remote-access-issue.html">Remote access issue</a><a class="guide-chip-link" href="../../articles/new-computer-new-user-new-phone-setup.html">New computer, new user, or new phone setup</a><a class="guide-chip-link" href="../../articles/before-contacting-it-what-to-collect.html">Before contacting IT: what to collect</a></div></article>
+  <article class="guide-card"><h3 class="guide-card-title">Official / vendor links</h3><div class="guide-link-list"><a class="guide-chip-link" href="https://www.autodesk.com/solutions/water-infrastructure" target="_blank" rel="noreferrer">Autodesk Water Infrastructure</a><a class="guide-chip-link" href="https://www.autodesk.com/support" target="_blank" rel="noreferrer">InfoWater Pro support</a></div></article>
+</div>
+</section>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="../../siteChrome.js"></script>
+</body>
+</html>

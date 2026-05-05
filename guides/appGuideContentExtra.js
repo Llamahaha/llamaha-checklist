@@ -122,7 +122,7 @@ export const appGuideContentExtra = {
       ]
     }
   },
-  autodesk: {
+  innovyze: {
     "infoworks-icm": {
       highlights: [
         "Fastest likely fix: confirm the approved version, Autodesk account, and exact model or database path before any rebuild.",
@@ -158,6 +158,163 @@ export const appGuideContentExtra = {
         { label: "Autodesk Support", url: "https://www.autodesk.com/support" }
       ]
     },
+    "infowater-pro": {
+      highlights: [
+        "Fastest likely fix: confirm the ArcGIS Pro release matches the installed InfoWater Pro version, then enable the extension in ArcGIS Pro's Add-In Manager before reinstalling.",
+        "Most ribbon-missing tickets are an ArcGIS-Pro/InfoWater-Pro version mismatch or a disabled extension, not a broken install."
+      ],
+      askFirst: [
+        "What ArcGIS Pro release is the team standardized on, and what InfoWater Pro version is installed?",
+        "Is the failure ArcGIS Pro itself, the InfoWater Pro ribbon, opening a model, or running a simulation?",
+        "Is the user signed into Autodesk Access with the assigned work account?",
+        "Can another approved workstation open the same model and load InfoWater Pro?"
+      ],
+      supportCheckpoints: [
+        "Capture both the ArcGIS Pro version and the InfoWater Pro version before any rebuild.",
+        "Verify the extension is enabled in ArcGIS Pro under Settings > Add-In Manager.",
+        "Sign out and back in to Autodesk Access if licensing is the failure mode.",
+        "Compare the failing model against a known-good one on the same machine before reinstalling."
+      ],
+      commonIssues: [
+        issue(
+          "InfoWater Pro ribbon is missing in ArcGIS Pro",
+          "ArcGIS Pro opens, but the InfoWater Pro ribbon, tab, or tools are not visible.",
+          "Confirm the ArcGIS Pro release matches the InfoWater Pro version, enable the add-in in ArcGIS Pro's Add-In Manager, and restart ArcGIS Pro.",
+          "Collect ArcGIS Pro version, InfoWater Pro version, screenshot of the ArcGIS Pro ribbon, and the Add-In Manager view.",
+          "Escalate when version pairing is correct, the add-in is enabled, and the ribbon still does not appear."
+        ),
+        issue(
+          "Licensing or entitlement error in InfoWater Pro",
+          "InfoWater Pro reports a license or entitlement issue even though Autodesk Access shows signed in.",
+          "Sign out and back in to Autodesk Access with the assigned account, restart ArcGIS Pro, and let the extension re-check entitlement.",
+          "Collect a screenshot of the licensing error, the Autodesk account email shown in Autodesk Access, and the InfoWater Pro version.",
+          "Escalate when entitlement is confirmed assigned in Autodesk Account but the workstation still fails."
+        ),
+        issue(
+          "A model fails to open or simulation will not start",
+          "InfoWater Pro is loaded but the model geodatabase will not open or a simulation refuses to start.",
+          "Confirm the geodatabase path, sign-in account, and that another workstation can reproduce the issue on the same model.",
+          "Collect the model name, geodatabase path, the exact error text, and known-good comparison results.",
+          "Escalate after a known-good comparison reproduces the failure on multiple workstations."
+        )
+      ],
+      usefulInfo: {
+        paths: ["Model geodatabase path", "Custom ArcGIS toolbox path", "Scenario library path"],
+        logs: ["ArcGIS Pro version screenshot", "InfoWater Pro version screenshot", "Add-In Manager screenshot", "Autodesk Access account screenshot"],
+        services: [],
+        processes: ["ArcGISPro.exe"]
+      },
+      relatedLinks: [
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "InfoWater Pro support", url: "https://www.autodesk.com/support" }
+      ]
+    },
+    "xpswmm": {
+      highlights: [
+        "Fastest likely fix: capture the XPSWMM version, the engine version, and the project path before any rebuild — version mismatches drive most simulation differences.",
+        "1D vs 2D simulation failures usually trace back to engine licensing or terrain/scenario data, not the base install."
+      ],
+      askFirst: [
+        "What exact XPSWMM version and engine version is the team standardized on?",
+        "Is the failure launch, opening a model, running a 1D or 2D simulation, or reviewing results?",
+        "Is the project local, on a network share, or dependent on external terrain or scenario data?",
+        "Can another approved workstation open the same model and run the same scenario?"
+      ],
+      supportCheckpoints: [
+        "Capture XPSWMM version, engine version, and Autodesk account before reinstalling anything.",
+        "If a 2D simulation fails, confirm the 2D engine licensing and any terrain or grid dependencies.",
+        "If results differ between machines, confirm both are on the same XPSWMM and engine release.",
+        "Save the simulation log when a run starts and errors out partway."
+      ],
+      commonIssues: [
+        issue(
+          "Project model will not open",
+          "XPSWMM launches, but the project file will not open or shows missing-data errors.",
+          "Confirm the project path, linked terrain, and scenario files, plus the version that authored the file.",
+          "Collect the project name, path, authoring version, and the exact error text.",
+          "Escalate when the same model fails to open across multiple approved workstations."
+        ),
+        issue(
+          "1D or 2D simulation fails to run",
+          "Model opens but starting a simulation fails or stops partway through.",
+          "Capture the simulation log, confirm engine licensing, and test a smaller known-good scenario on the same workstation.",
+          "Collect the simulation log, scenario name, model name, and stop or error text.",
+          "Escalate after a known-good scenario fails on the same machine with current licensing confirmed."
+        ),
+        issue(
+          "Different results from another workstation",
+          "Same model produces different results between two workstations, or results changed after an update.",
+          "Compare both XPSWMM versions and both engine versions before troubleshooting the model.",
+          "Collect both versions and a screenshot of the differing result summary.",
+          "Escalate when both versions match and results still differ between machines."
+        )
+      ],
+      usefulInfo: {
+        paths: ["Project model path", "Linked terrain or scenario data path", "Results database path"],
+        logs: ["Simulation log", "Version screenshot", "About-screen screenshot showing engine version"],
+        services: [],
+        processes: ["XPX.exe", "XPSWMM.exe"]
+      },
+      relatedLinks: [
+        { label: "Autodesk Water Infrastructure", url: "https://www.autodesk.com/solutions/water-infrastructure" },
+        { label: "XPSWMM support", url: "https://www.autodesk.com/support" }
+      ]
+    }
+  },
+  qgis: {
+    "qgis": {
+      highlights: [
+        "Fastest likely fix: capture the QGIS version, confirm whether the team is on LTR or current release, and test a fresh user profile before reinstalling.",
+        "Plugin and project issues are usually version- or profile-scoped, not install-wide."
+      ],
+      askFirst: [
+        "Is the team on the QGIS LTR release or the latest stable release?",
+        "Is the failure launch, opening a project, plugin loading, or layer rendering?",
+        "Does the same project or plugin work on another approved workstation?",
+        "Did the issue start after a version update, plugin update, or profile change?"
+      ],
+      supportCheckpoints: [
+        "Capture the exact QGIS version and the active plugins list before changes.",
+        "Test with a fresh user profile (Settings > User Profiles > New Profile) to rule out profile corruption.",
+        "Disable suspect plugins and restart QGIS to isolate plugin-specific failures.",
+        "If a project fails, test a second known-good project on the same machine."
+      ],
+      commonIssues: [
+        issue(
+          "Project will not open or layers show broken",
+          "QGIS launches, but a project file will not open or layers display as broken/invalid.",
+          "Confirm layer data sources are reachable at their paths, and test the project on another workstation.",
+          "Collect the project file name, broken layer names, and a screenshot of the layer panel.",
+          "Escalate when the same project fails on multiple workstations and data paths are confirmed reachable."
+        ),
+        issue(
+          "Plugin will not install or load",
+          "A plugin is missing, fails to install, or errors when used.",
+          "Disable the plugin, restart QGIS, and reinstall from the Plugin Repository confirming version compatibility.",
+          "Collect the plugin name and version, the QGIS version, and the QGIS message log error text.",
+          "Escalate when the plugin supports the QGIS version but still fails on multiple machines."
+        ),
+        issue(
+          "QGIS will not launch or crashes on startup",
+          "QGIS does nothing, opens briefly and closes, or errors before the main window appears.",
+          "Try a fresh user profile to rule out profile corruption before reinstalling QGIS itself.",
+          "Collect the QGIS version, when the issue started, and any error text from Event Viewer or QGIS log.",
+          "Escalate when a fresh profile does not resolve and a clean reinstall reproduces the same crash."
+        )
+      ],
+      usefulInfo: {
+        paths: ["User profile path (~/AppData/Roaming/QGIS/QGIS3/profiles)", "Project file path", "Plugin directory"],
+        logs: ["QGIS message log (View > Panels > Log Messages)", "Windows Event Viewer entries for qgis-bin.exe", "Plugin error text"],
+        services: [],
+        processes: ["qgis-bin.exe", "qgis-ltr-bin.exe"]
+      },
+      relatedLinks: [
+        { label: "QGIS Documentation", url: "https://docs.qgis.org/" },
+        { label: "QGIS Downloads", url: "https://qgis.org/en/site/forusers/download.html" }
+      ]
+    }
+  },
+  autodesk: {
     "construction-cloud": {
       highlights: [
         "Fastest likely fix: confirm which project-hub product (Docs, Build, Takeoff, BIM 360) and which account or hub the user was actually invited into before rebuilding anything.",

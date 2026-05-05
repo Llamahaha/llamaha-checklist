@@ -56,7 +56,7 @@
     "autodesk/revit": "Revit",
     "autodesk/civil-3d": "Civil 3D",
     "autodesk/autodesk-desktop-app": "Autodesk Desktop App",
-    "autodesk/infoworks-icm": "InfoWorks ICM",
+    "innovyze/infoworks-icm": "InfoWorks ICM",
     "autodesk/recap-pro": "ReCap Pro",
     "esri/arcgis-pro": "ArcGIS Pro",
     "esri/arcgis-online": "ArcGIS Online",

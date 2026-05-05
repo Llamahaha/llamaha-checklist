@@ -41,7 +41,8 @@ const internalRoutes = [
   "internal/playbooks.html",
   "internal/checklist.html",
   "internal/reference/mailbox-decommission.html",
-  "internal/reference/warranty-lookup.html"
+  "internal/reference/warranty-lookup.html",
+  "internal/reference/immybot-new-pc-deployment.html"
 ];
 
 const populatedPublicGuides = [
@@ -58,7 +59,7 @@ const populatedPublicGuides = [
   ["autodesk", "autocad"],
   ["autodesk", "revit"],
   ["autodesk", "civil-3d"],
-  ["autodesk", "infoworks-icm"],
+  ["innovyze", "infoworks-icm"],
   ["esri", "arcgis-pro"],
   ["esri", "arcgis-online"],
   ["bentley", "projectwise"],
@@ -101,7 +102,10 @@ const populatedPublicGuides = [
   ["box", "box-drive"],
   ["dropbox", "dropbox-desktop"],
   ["duo", "duo-mobile"],
-  ["okta", "okta-verify"]
+  ["okta", "okta-verify"],
+  ["innovyze", "infowater-pro"],
+  ["innovyze", "xpswmm"],
+  ["qgis", "qgis"]
 ];
 
 const dynamicAnchorFiles = new Set([
