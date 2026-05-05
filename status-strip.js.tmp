@@ -2,12 +2,12 @@ const statusDashboards = [
   {
     name: "Autodesk",
     url: "https://health.autodesk.com/",
-    note: "ACC, BIM 360, Revit Cloud Worksharing, licensing, Autodesk account, and Innovyze water apps"
+    note: "ACC, BIM 360, Revit Cloud Worksharing, licensing, and Autodesk account"
   },
   {
     name: "Bentley",
     url: "https://status.bentley.com/",
-    note: "CONNECTION Client, ProjectWise cloud services, IMS login, and Bentley licensing"
+    note: "CONNECTION Client, cloud services, IMS login, and Bentley licensing"
   },
   {
     name: "Bluebeam",
@@ -20,79 +20,9 @@ const statusDashboards = [
     note: "ArcGIS Online, identity, hosted services, content, and sharing"
   },
   {
-    name: "Trimble Connect",
-    url: "https://status.connect.trimble.com/",
-    note: "Trimble Connect projects, sync, sign-in, and shared model access"
-  },
-  {
     name: "Microsoft 365",
     url: "https://status.cloud.microsoft/",
     note: "Teams, Exchange Online, SharePoint, OneDrive, sign-in, and Office services"
-  },
-  {
-    name: "Adobe",
-    url: "https://status.adobe.com/",
-    note: "Creative Cloud, Acrobat sign-in, Acrobat Sign, and Adobe entitlements"
-  },
-  {
-    name: "Citrix Cloud",
-    url: "https://status.cloud.com/",
-    note: "Citrix Workspace sign-in, Cloud Connectors, gateway, and DaaS services"
-  },
-  {
-    name: "DocuSign",
-    url: "https://status.docusign.com/",
-    note: "DocuSign envelopes, signing, sending, and account sign-in"
-  },
-  {
-    name: "Zoom",
-    url: "https://status.zoom.us/",
-    note: "Zoom meetings, webinars, phone, chat, and sign-in"
-  },
-  {
-    name: "Cisco Webex",
-    url: "https://status.webex.com/",
-    note: "Webex meetings, calling, messaging, and sign-in"
-  },
-  {
-    name: "Box",
-    url: "https://status.box.com/",
-    note: "Box Drive, web app, sync, sharing, and sign-in"
-  },
-  {
-    name: "Dropbox",
-    url: "https://status.dropbox.com/",
-    note: "Dropbox desktop sync, web app, sharing, and sign-in"
-  },
-  {
-    name: "Egnyte",
-    url: "https://status.egnyte.com/",
-    note: "Egnyte Desktop App, Web UI, sync, and sign-in"
-  },
-  {
-    name: "Duo Security",
-    url: "https://status.duo.com/",
-    note: "Duo Push, MFA prompts, Duo SSO, and admin console"
-  },
-  {
-    name: "Okta",
-    url: "https://status.okta.com/",
-    note: "Okta sign-in, Okta Verify, SSO, and MFA flows"
-  },
-  {
-    name: "Deltek",
-    url: "https://trust.deltek.com/",
-    note: "Vantagepoint, Vision, project ERP cloud services, and Deltek sign-in"
-  },
-  {
-    name: "Intuit (QuickBooks)",
-    url: "https://status.quickbooks.intuit.com/",
-    note: "QuickBooks Online, QuickBooks Time, payroll sync, and Intuit account sign-in"
-  },
-  {
-    name: "TIBCO Spotfire",
-    url: "https://status.tibco.com/",
-    note: "Spotfire web client, library, identity, and TIBCO Cloud services"
   }
 ];
 
@@ -162,7 +92,7 @@ function hideStatusPanel() {
   panel.hidden = true;
   strip.dataset.statusState = "unchecked";
   title.textContent = "Check Vendor Status";
-  summary.textContent = "Open the live vendor dashboards for the apps we support to see if a current issue is on the vendor side.";
+  summary.textContent = "Use the live vendor dashboards for Autodesk, Bentley, Bluebeam, Esri, and Microsoft 365.";
   button.textContent = "Check Status";
   button.setAttribute("aria-expanded", "false");
 }

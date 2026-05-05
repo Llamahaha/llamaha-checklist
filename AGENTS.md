@@ -1,0 +1,1 @@
+This folder contains my site for customers at my msp job and an internal site for techs I work with.
