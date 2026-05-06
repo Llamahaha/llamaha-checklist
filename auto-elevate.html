@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoElevate: How install approvals work | Llamaha</title>
+  <meta name="description" content="AutoElevate is the approval bridge that lets IT clear a single install or admin action on your work computer without giving you full control. This page explains why we use it, how to respond to a prompt, what each outcome means, and the security rules to follow.">
+  <link rel="canonical" href="https://llamaha.com/auto-elevate">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>AutoElevate</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">Install &amp; Admin Approvals</p>
+            <h1>AutoElevate: how IT approves an install without giving you the keys</h1>
+            <p class="builder-copy">AutoElevate is the tool that lets IT approve a single install or higher-permission action on your work computer without making you a full administrator. When something on your computer would normally ask for an IT password, AutoElevate replaces that prompt with a request your IT team can approve on their side. This page explains why we use it, what to expect when a prompt appears, and how to make your request easy to approve.</p>
+            <p class="review-label">Reviewed May 2026</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card toc-shell">
+        <p class="section-kicker">On This Page</p>
+        <h2>Jump to a section</h2>
+        <p class="hub-section-copy">Skim the section that fits where you are right now &mdash; before a prompt, during a prompt, or after a result.</p>
+        <nav class="toc-links" aria-label="AutoElevate sections">
+          <a href="#whatItIs">What AutoElevate is</a>
+          <a href="#whyWeUseIt">Why we use it</a>
+          <a href="#whatYouWillSee">What a prompt looks like</a>
+          <a href="#howToRespond">How to respond</a>
+          <a href="#outcomes">Approval, denial, or queued</a>
+          <a href="#security">Security rules</a>
+          <a href="#examples">Common situations</a>
+          <a href="#troubleshooting">If something goes wrong</a>
+        </nav>
+      </section>
+
+      <section id="whatItIs" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What It Is</p>
+            <h2>AutoElevate in plain English</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">Your account on a company-managed computer is a standard user account, not an administrator. That is by design &mdash; it stops random apps and malware from quietly making changes. AutoElevate is the bridge that lets you ask IT to approve a single elevated action without handing you full control of the machine.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>It replaces the IT-password prompt</h4>
+            <p>When an installer or change requires admin rights, Windows usually shows a User Account Control box asking for an admin username and password. On a managed computer, AutoElevate intercepts that prompt and turns it into an approval request you can submit to IT.</p>
+          </div>
+          <div class="card-block">
+            <h4>Approval is per-action, not per-machine</h4>
+            <p>Each request approves a specific installer or task &mdash; it does not turn your account into an administrator. When that action finishes, you are back to a standard user.</p>
+          </div>
+          <div class="card-block">
+            <h4>Some apps approve automatically</h4>
+            <p>For installers your company has already vetted (signed apps with a known publisher, common updaters), AutoElevate may approve instantly with no IT interaction. Less common installers wait for a real human to review.</p>
+          </div>
+          <div class="card-block">
+            <h4>Every request is logged</h4>
+            <p>Approvals, denials, and the reason you typed are recorded. That is part of why surprise prompts &mdash; ones you did not start &mdash; are taken seriously and should always be denied.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="whyWeUseIt" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Why We Use It</p>
+            <h2>Why your account is locked down in the first place</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>It is the cheapest, strongest security control we have</h4>
+            <p>The single biggest predictor of whether ransomware or a malicious app can damage a computer is whether the user running it is an administrator. Keeping you a standard user blocks the majority of common attacks before they start.</p>
+          </div>
+          <div class="card-block">
+            <h4>You still get to install legitimate software</h4>
+            <p>Locked-down does not mean "tickets for everything." AutoElevate exists so a real install that would have needed an IT visit can happen in seconds, with a one-line note instead of a phone call.</p>
+          </div>
+          <div class="card-block">
+            <h4>It gives IT a paper trail</h4>
+            <p>If an installer turns out to be bad, IT can trace exactly when it ran, what was approved, and on which machines. Without AutoElevate, that history would not exist.</p>
+          </div>
+          <div class="card-block">
+            <h4>It catches social-engineering attacks</h4>
+            <p>If someone tricks you into running a malicious installer, AutoElevate forces a stop so you can read the request before you approve. That pause is the point. A surprise prompt is the warning sign.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="whatYouWillSee" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">What A Prompt Looks Like</p>
+            <h2>How to recognize an AutoElevate prompt</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>It appears right after you double-click an installer</h4>
+            <p>Run a setup file or click an in-app updater that needs admin rights, and within a few seconds an AutoElevate window opens on top of your other apps. If a prompt appears without you starting anything, that is a red flag &mdash; deny it.</p>
+          </div>
+          <div class="card-block">
+            <h4>It shows the app name, publisher, and file path</h4>
+            <p>Read these before you do anything. The app name should match what you expected to install. The publisher should be the real vendor (Autodesk, Bluebeam, Microsoft, Adobe, etc.). The file path should be a folder you actually downloaded to.</p>
+          </div>
+          <div class="card-block">
+            <h4>It asks for a reason and a short note</h4>
+            <p>You will see a dropdown with a few common reasons (Install, Update, Configure, etc.) and a free-text field for a one-line note explaining what you are doing.</p>
+          </div>
+          <div class="card-block">
+            <h4>It has a Submit and a Deny button</h4>
+            <p>Submit sends the request to IT. Deny closes the prompt and stops the action. You can deny safely &mdash; it does not penalize you, and it is the right move if anything looks off.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="howToRespond" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">How To Respond</p>
+            <h2>Submitting a request IT can approve quickly</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>1. Confirm you started the action</h4>
+            <p>Did you just double-click an installer or click an Update button? If yes, continue. If no &mdash; deny it and contact IT. Surprise prompts are the most important thing this tool catches.</p>
+          </div>
+          <div class="card-block">
+            <h4>2. Read the app name and publisher</h4>
+            <p>Make sure the app and publisher match what you expected. "Bluebeam Software" for a Bluebeam Revu update is fine; "Unknown publisher" or a vaguely similar name is not.</p>
+          </div>
+          <div class="card-block">
+            <h4>3. Pick the closest reason from the dropdown</h4>
+            <p>Install, Update, Configure, Driver, etc. If "Other" is the only fit, keep the typed reason short and specific.</p>
+          </div>
+          <div class="card-block">
+            <h4>4. Write a one-line note IT can read in two seconds</h4>
+            <p>Good: "Bluebeam Revu 21 update for project review." Bad: "needed", "test", "idk." A specific note gets approved faster because the tech does not have to look anything up.</p>
+          </div>
+          <div class="card-block">
+            <h4>5. Submit once and wait</h4>
+            <p>Click Submit and let it sit for one to two minutes. Do not re-click the installer or resubmit &mdash; that creates duplicate requests and slows everything down. If the request is auto-approved, the installer continues on its own.</p>
+          </div>
+          <div class="card-block">
+            <h4>6. Continue through the installer normally</h4>
+            <p>After approval, follow the installer's normal prompts. If it asks "Restart now?" choose Restart Later when you have unsaved work, then restart manually after you save.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="outcomes" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Outcomes</p>
+            <h2>What approval, denial, or no response actually mean</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Approved &mdash; the installer runs</h4>
+            <p>AutoElevate runs the installer with elevated rights after IT approves. Your account is still a standard user once the install finishes. Carry on through the installer's normal screens.</p>
+          </div>
+          <div class="card-block">
+            <h4>Denied &mdash; you will see a message</h4>
+            <p>Common reasons: the installer is not approved by company policy, the app has a known security issue, or it is the wrong version. Read the denial reason and open a normal IT ticket if you need to escalate &mdash; do not try to bypass the prompt.</p>
+          </div>
+          <div class="card-block">
+            <h4>Queued &mdash; nothing happens for a few minutes</h4>
+            <p>The request is waiting for an IT tech to review. Do not resubmit. If the install is urgent, send a ticket pointing IT at the existing AutoElevate request rather than starting a new one.</p>
+          </div>
+          <div class="card-block">
+            <h4>"Already approved" &mdash; just try again</h4>
+            <p>Sometimes a previous approval is cached. The installer may run on a second attempt without prompting again.</p>
+          </div>
+          <div class="card-block">
+            <h4>Auto-approved &mdash; instant pass-through</h4>
+            <p>Common, signed installers your company already trusts may approve in seconds with no human review. That is normal. The install just continues.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="security" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Security Rules</p>
+            <h2>The four rules that keep AutoElevate working</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>1. Never approve a prompt you did not start</h4>
+            <p>If AutoElevate appears for an app you did not double-click yourself, deny it and contact IT. This is the most important rule. Surprise prompts can be malware trying to escalate.</p>
+          </div>
+          <div class="card-block">
+            <h4>2. Never write generic reasons like "test" or "needed"</h4>
+            <p>Vague reasons are the fastest way to get denied. Take ten seconds to describe what the install is for.</p>
+          </div>
+          <div class="card-block">
+            <h4>3. Never submit the same request multiple times</h4>
+            <p>One submission, one wait. Multiple submissions clutter the IT queue and make it harder to know which one to approve.</p>
+          </div>
+          <div class="card-block">
+            <h4>4. Never try to bypass AutoElevate</h4>
+            <p>Closing AutoElevate and trying right-click "Run as administrator" usually fails on a managed computer, and it bypasses the security control IT relies on. Always use the AutoElevate prompt path. If you are stuck, open a ticket.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="examples" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Common Situations</p>
+            <h2>Examples of when you will see AutoElevate</h2>
+          </div>
+        </div>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>Installing or updating an Autodesk product</h4>
+            <p>Run the company-approved installer normally. When AutoElevate prompts, pick Install or Update, name the product and version (for example "AutoCAD 2026 update"), submit, and let IT approve. Continue through the Autodesk installer.</p>
+          </div>
+          <div class="card-block">
+            <h4>Installing a Bluebeam, Adobe, or Microsoft 365 update</h4>
+            <p>If the app's built-in updater asks for higher permission, AutoElevate may pop up automatically. Approve with a one-line note like "Bluebeam Revu update from in-app updater" and let it run.</p>
+          </div>
+          <div class="card-block">
+            <h4>Adding a printer driver from a vendor's site</h4>
+            <p>Use the company-approved driver if there is one. If you have to use the vendor download, name the printer and the driver version in the AutoElevate request &mdash; that is enough for IT to verify.</p>
+          </div>
+          <div class="card-block">
+            <h4>Installing a small utility you found online</h4>
+            <p>Be cautious. AutoElevate is a security control &mdash; random utilities should usually be denied. If you genuinely need a less common tool, send a ticket first describing what you need to do; IT can recommend an approved alternative or pre-approve the install.</p>
+          </div>
+          <div class="card-block">
+            <h4>A vendor support tech is asking you to run something</h4>
+            <p>Stop and confirm with IT before approving. Vendor screen-share sessions are a common social-engineering path. If the install is real, IT will approve it &mdash; if it is not, denying it costs nothing.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="troubleshooting" class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">If Something Goes Wrong</p>
+            <h2>What to send IT when a request was denied or stuck</h2>
+          </div>
+        </div>
+        <p class="hub-section-copy">If a request did not go through, give IT the four pieces of information below in your ticket. With these in hand, the tech can almost always resolve it on the first reply.</p>
+        <div class="card-stack">
+          <div class="card-block">
+            <h4>The exact app name and version</h4>
+            <p>"Bluebeam Revu 21.0.50 update," "Autodesk AutoCAD 2026.0.1 patch" &mdash; not "the CAD update."</p>
+          </div>
+          <div class="card-block">
+            <h4>Where the installer came from</h4>
+            <p>Vendor's official download page, an emailed link, the IT-provided installer share, the in-app updater. IT needs this to confirm the source.</p>
+          </div>
+          <div class="card-block">
+            <h4>What you were trying to do</h4>
+            <p>"Install Bluebeam Revu update so I can open the project's Studio Session." That gives IT the business reason and the urgency in one sentence.</p>
+          </div>
+          <div class="card-block">
+            <h4>The denial reason if you saw one</h4>
+            <p>Copy the message AutoElevate showed you, or take a screenshot. That tells IT whether to override, recommend an alternative, or escalate the request.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Related</p>
+            <h2>Related guides</h2>
+          </div>
+        </div>
+        <div class="hub-quick-grid">
+          <article class="hub-card">
+            <h2>Using AutoElevate to install applications</h2>
+            <p>The detailed walkthrough for what to click and what to type when an AutoElevate prompt appears.</p>
+            <a class="hub-link" href="articles/using-autoelevate-to-install-apps.html">Open article</a>
+          </article>
+          <article class="hub-card">
+            <h2>App crashed or will not open</h2>
+            <p>If an app is broken in a way that an install or update should fix, check this first.</p>
+            <a class="hub-link" href="articles/app-will-not-open.html">Open article</a>
+          </article>
+          <article class="hub-card">
+            <h2>License or sign-in error</h2>
+            <p>If the prompt is sign-in related rather than install related, start here.</p>
+            <a class="hub-link" href="articles/license-or-signin-error.html">Open article</a>
+          </article>
+          <article class="hub-card">
+            <h2>Recognizing phishing</h2>
+            <p>Most surprise install prompts trace back to a phishing email or a malicious link. Learn the patterns.</p>
+            <a class="hub-link" href="articles/recognizing-phishing.html">Open article</a>
+          </article>
+          <article class="hub-card">
+            <h2>Before contacting IT: what to collect</h2>
+            <p>The five details every IT ticket should include &mdash; including AutoElevate denials.</p>
+            <a class="hub-link" href="articles/before-contacting-it-what-to-collect.html">Open article</a>
+          </article>
+          <article class="hub-card">
+            <h2>Install &amp; uninstall guides</h2>
+            <p>Per-app installer notes for the products that most often trigger an AutoElevate prompt.</p>
+            <a class="hub-link" href="install-uninstall.html">Open install guides</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta-panel">
+        <div>
+          <h3>Still need help?</h3>
+          <p>Send the app name, the installer source, what you were trying to do, and the denial wording or screenshot if you have one.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="cta-btn-primary" href="contact.html">Open a ticket</a>
+          <a class="cta-btn-secondary" href="search.html">Search the help center</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="siteChrome.js"></script>
+</body>
+</html>
