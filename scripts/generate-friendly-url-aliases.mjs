@@ -126,6 +126,9 @@ const topLevelAliases = [
   { slug: "contact", title: "Contact IT", summary: "Open the contact page.", targetUrl: "/contact.html" },
   { slug: "licensing", title: "App Licensing Help", summary: "Open the licensing help page.", targetUrl: "/app-licensing.html" },
   { slug: "app-licensing", title: "App Licensing Help", summary: "Open the licensing help page.", targetUrl: "/app-licensing.html" },
+  { slug: "auto-elevate", title: "AutoElevate Install Approvals", summary: "Open the AutoElevate install-approval guide.", targetUrl: "/auto-elevate.html" },
+  { slug: "autoelevate", title: "AutoElevate Install Approvals", summary: "Open the AutoElevate install-approval guide.", targetUrl: "/auto-elevate.html" },
+  { slug: "elevate", title: "AutoElevate Install Approvals", summary: "Open the AutoElevate install-approval guide.", targetUrl: "/auto-elevate.html" },
   { slug: "search", title: "Search", summary: "Open site search.", targetUrl: "/search.html" }
 ];
 
