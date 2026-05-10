@@ -8,9 +8,11 @@
 //   id                  — stable string ID (kebab/iso style is fine)
 //   appName             — product name shown in the badge ("Exchange Online")
 //   vendor              — vendor name shown in the badge ("Microsoft")
-//   category            — one of: "Outage" | "Security" | "Service Impact"
-//                          | "Product Change" | "Deprecation" | "Advisory"
-//   severity            — one of: "Critical" | "High" | "Medium" | "Low" | "Info"
+//   category            — one of: "Outage" | "Security Vulnerability"
+//                          | "Service Impact" | "Product Change"
+//                          | "Deprecation" | "Other"
+//   severity            — one of: "Critical" | "High" | "Medium" | "Low"
+//                          | "Informational"
 //   title               — short headline (avoid trailing punctuation)
 //   summary             — 1–2 sentence plain-English summary
 //   affectedUsers       — who is affected, in plain English
@@ -49,11 +51,11 @@
 
 export const APP_NEWS_CATEGORIES = [
   "Outage",
-  "Security",
+  "Security Vulnerability",
   "Service Impact",
   "Product Change",
   "Deprecation",
-  "Advisory"
+  "Other"
 ];
 
 export const APP_NEWS_SEVERITIES = [
@@ -61,15 +63,141 @@ export const APP_NEWS_SEVERITIES = [
   "High",
   "Medium",
   "Low",
-  "Info"
+  "Informational"
 ];
 
 export const APP_NEWS_AUDIENCES = ["public", "internal"];
 
-// Sample / placeholder items. Every title is prefixed with [SAMPLE] and every
-// item has isPlaceholder: true. Replace these with real, sourced content
-// before going live — do not invent vendor advisories.
+// Active items appear first. The older sample records below are kept only as
+// layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  {
+    id: "2026-05-05-google-chrome-148-security-update",
+    appName: "Google Chrome",
+    vendor: "Google",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Chrome 148 fixes 127 security vulnerabilities",
+    summary:
+      "Google promoted Chrome 148 to stable with 127 security fixes, including critical Blink, Mobile, and Chromoting CVEs. Managed browsers should be updated and relaunched promptly.",
+    affectedUsers:
+      "Windows, macOS, and Linux users running Chrome below 148.0.7778.96/97 on managed or unmanaged endpoints.",
+    recommendedMspAction:
+      "Force Chrome updates through browser management, RMM, Intune, or patch tooling. Confirm browser relaunch completion on a sample of endpoints, especially shared workstations and kiosk devices.",
+    sourceUrls: [
+      "https://chromereleases.googleblog.com/2026/05/stable-channel-update-for-desktop.html",
+      "https://www.securityweek.com/chrome-148-rolls-out-with-127-security-fixes/"
+    ],
+    publishedDate: "2026-05-05",
+    lastUpdatedDate: "2026-05-05",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "chrome", "browser", "security", "patch", "cve"]
+  },
+  {
+    id: "2026-04-28-zoom-ashburn-maintenance",
+    appName: "Zoom Meetings",
+    vendor: "Zoom",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Zoom Ashburn data center maintenance may briefly affect meetings",
+    summary:
+      "Zoom scheduled maintenance for its Ashburn data center from May 10 at 9:00 PM CT to May 11 at 3:00 AM CT. Zoom says users may experience brief impact to meetings, webinars, Zoom Phone, Zoom Rooms, recordings, live transcription, and related services.",
+    affectedUsers:
+      "Users hosting or joining Zoom meetings, webinars, phone calls, room sessions, or recordings that route through the Ashburn data center during the maintenance window.",
+    recommendedMspAction:
+      "Notify clients with late Sunday or overnight Zoom usage, avoid scheduling critical webinars during the window, and keep the Zoom status page open if users report transient meeting or telephony issues.",
+    sourceUrls: [
+      "https://status.zoom.us/",
+      "https://stspg.io/4bmct4l2r5ky"
+    ],
+    publishedDate: "2026-04-28",
+    lastUpdatedDate: "2026-04-28",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["zoom", "zoom-meetings", "maintenance", "service-impact", "status"]
+  },
+  {
+    id: "2026-04-14-adobe-acrobat-reader-security-updates",
+    appName: "Acrobat Pro / Reader",
+    vendor: "Adobe",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Adobe Acrobat and Reader April updates include exploited CVE",
+    summary:
+      "Adobe released April Acrobat and Reader security updates for Windows and macOS, including a Priority 1 fix for actively exploited CVE-2026-34621 and a follow-up Priority 2 update for additional critical and important issues.",
+    affectedUsers:
+      "Endpoints with Acrobat DC, Acrobat Reader DC, or Acrobat 2024 at affected April 2026 builds or earlier.",
+    recommendedMspAction:
+      "Prioritize Acrobat and Reader patch deployment, especially on endpoints that open PDFs from email or browsers. Confirm patched versions through inventory and have users relaunch Acrobat after updates land.",
+    sourceUrls: [
+      "https://helpx.adobe.com/security/products/acrobat/apsb26-43.html",
+      "https://helpx.adobe.com/security/products/acrobat/apsb26-44.html",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    ],
+    publishedDate: "2026-04-14",
+    lastUpdatedDate: "2026-04-14",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["adobe", "acrobat", "reader", "security", "patch", "kev"]
+  },
+  {
+    id: "2026-04-06-fortinet-forticlient-ems-cve-2026-35616",
+    appName: "FortiClient EMS",
+    vendor: "Fortinet",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "FortiClient EMS API bypass is exploited in the wild",
+    summary:
+      "Fortinet says CVE-2026-35616 in FortiClient EMS can let an unauthenticated attacker execute unauthorized code or commands, and Fortinet has observed exploitation in the wild. CISA added it to KEV on April 6.",
+    affectedUsers:
+      "Clients running FortiClient EMS 7.4.5 or 7.4.6, especially if the EMS service is reachable from untrusted networks.",
+    recommendedMspAction:
+      "Inventory FortiClient EMS servers immediately, apply Fortinet's hotfix or upgrade path, restrict EMS access to trusted admin networks, and review logs for suspicious API activity before closing the item.",
+    sourceUrls: [
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-099",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-35616"
+    ],
+    publishedDate: "2026-04-04",
+    lastUpdatedDate: "2026-04-06",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["fortinet", "forticlient", "ems", "security", "kev", "patch"]
+  },
+  {
+    id: "2026-03-12-microsoft-exchange-online-ews-retirement",
+    appName: "Exchange Online",
+    vendor: "Microsoft",
+    category: "Deprecation",
+    severity: "Medium",
+    title: "Exchange Online EWS global disablement starts October 2026",
+    summary:
+      "Microsoft's current EWS deprecation guidance says Exchange Web Services starts being disabled globally for all Exchange Online organizations in October 2026 and is fully disabled in April 2027.",
+    affectedUsers:
+      "Microsoft 365 tenants with line-of-business apps, public-folder sync, backup, migration, CRM, copier, or reporting tools that still use Exchange Web Services.",
+    recommendedMspAction:
+      "Use EWS Usage Reports and vendor inventory to find dependencies now. Move internal integrations to Microsoft Graph, ask vendors for migration timelines, and document any temporary allow-list decisions before October 2026.",
+    sourceUrls: [
+      "https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online",
+      "https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361"
+    ],
+    publishedDate: "2026-03-12",
+    lastUpdatedDate: "2026-03-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "exchange-online", "ews", "deprecation", "graph"]
+  },
   {
     id: "sample-2026-05-09-m365-exchange-online",
     appName: "Exchange Online",
@@ -253,7 +381,7 @@ export const appNewsItems = [
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-const SEVERITY_RANK = { Critical: 5, High: 4, Medium: 3, Low: 2, Info: 1 };
+const SEVERITY_RANK = { Critical: 5, High: 4, Medium: 3, Low: 2, Informational: 1, Info: 1 };
 
 export function severityRank(severity) {
   return SEVERITY_RANK[severity] ?? 0;
@@ -261,6 +389,7 @@ export function severityRank(severity) {
 
 export function isItemVisible(item, { area = "public" } = {}) {
   if (!item || item.isPublished === false) return false;
+  if (item.isPlaceholder === true) return false;
   if (area === "public" && item.audience === "internal") return false;
   return true;
 }
@@ -278,7 +407,7 @@ export function getVisibleItems({ area = "public" } = {}) {
     .sort(sortByPublishedDesc);
 }
 
-export function getHomeItems({ area = "public", limit = 4 } = {}) {
+export function getHomeItems({ area = "public", limit = 5 } = {}) {
   return getVisibleItems({ area })
     .filter(item => item.suggestedPlacement === "home" || item.suggestedPlacement === "both")
     .slice(0, limit);
@@ -302,6 +431,7 @@ export function severityClass(severity) {
     case "High": return "is-high";
     case "Medium": return "is-medium";
     case "Low": return "is-low";
+    case "Informational": return "is-info";
     case "Info": return "is-info";
     default: return "is-info";
   }
@@ -311,10 +441,12 @@ export function categoryClass(category) {
   switch (category) {
     case "Outage": return "is-outage";
     case "Security": return "is-security";
+    case "Security Vulnerability": return "is-security";
     case "Service Impact": return "is-service-impact";
     case "Product Change": return "is-product-change";
     case "Deprecation": return "is-deprecation";
     case "Advisory": return "is-advisory";
+    case "Other": return "is-advisory";
     default: return "is-advisory";
   }
 }
@@ -326,5 +458,5 @@ export function audienceClass(audience) {
 // Truthy if any item in the active set is a placeholder. The renderer uses
 // this to display the "review before going live" banner.
 export function hasPlaceholders(items = appNewsItems) {
-  return items.some(item => item.isPlaceholder === true);
+  return items.some(item => item.isPlaceholder === true && isItemVisible(item));
 }

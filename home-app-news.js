@@ -20,7 +20,7 @@ import {
   appNewsItems
 } from "./appNewsData.js";
 
-const HOME_LIMIT = 4;
+const HOME_LIMIT = 5;
 
 function renderEmpty(container) {
   const empty = document.createElement("div");
