@@ -1,0 +1,373 @@
+/* ── Supported App News ────────────────────────────────────────────────────
+   Compact, scannable news/advisory feed used on the home page card and on
+   /app-news. Critical and High severity get a colored left rail so they
+   catch the eye without making the section look alarmist. Severity /
+   category badges use tinted neutrals, not saturated red blocks.
+   Tokens depend on the base styles.css palette and are scoped under :root
+   so they are inert anywhere these classes are not used.
+   -------------------------------------------------------------------------- */
+
+:root {
+  --news-critical: #f87171;
+  --news-critical-soft: rgba(248, 113, 113, 0.16);
+  --news-critical-line: rgba(248, 113, 113, 0.45);
+  --news-high: #fb923c;
+  --news-high-soft: rgba(251, 146, 60, 0.16);
+  --news-high-line: rgba(251, 146, 60, 0.42);
+  --news-medium: #fbbf24;
+  --news-medium-soft: rgba(251, 191, 36, 0.14);
+  --news-medium-line: rgba(251, 191, 36, 0.40);
+  --news-low: #60a5fa;
+  --news-low-soft: rgba(96, 165, 250, 0.16);
+  --news-low-line: rgba(96, 165, 250, 0.42);
+  --news-info: #94a3b8;
+  --news-info-soft: rgba(148, 163, 184, 0.16);
+  --news-info-line: rgba(148, 163, 184, 0.4);
+
+  --news-cat-outage: rgba(248, 113, 113, 0.14);
+  --news-cat-outage-line: rgba(248, 113, 113, 0.4);
+  --news-cat-security: rgba(167, 139, 250, 0.16);
+  --news-cat-security-line: rgba(167, 139, 250, 0.4);
+  --news-cat-service: rgba(251, 146, 60, 0.14);
+  --news-cat-service-line: rgba(251, 146, 60, 0.4);
+  --news-cat-product: rgba(96, 165, 250, 0.14);
+  --news-cat-product-line: rgba(96, 165, 250, 0.4);
+  --news-cat-deprecation: rgba(148, 163, 184, 0.16);
+  --news-cat-deprecation-line: rgba(148, 163, 184, 0.4);
+  --news-cat-advisory: rgba(45, 212, 191, 0.14);
+  --news-cat-advisory-line: rgba(45, 212, 191, 0.4);
+}
+
+.appnews-home-card,
+.appnews-page-card {
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 30px rgba(0, 0, 0, 0.32);
+}
+
+.appnews-page-card { padding: 24px; }
+
+.appnews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.appnews-list-detail { gap: 14px; }
+
+.appnews-row {
+  display: grid;
+  grid-template-columns: 6px 1fr auto;
+  gap: 14px;
+  align-items: stretch;
+  padding: 12px 14px 14px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  background: rgba(15, 20, 36, 0.5);
+  transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+a.appnews-row:hover {
+  border-color: var(--line-purple);
+  background: var(--accent-soft);
+}
+
+.appnews-row-detail {
+  grid-template-columns: 6px 1fr;
+  padding: 18px 18px 18px 12px;
+}
+
+.appnews-rail {
+  display: block;
+  align-self: stretch;
+  border-radius: 4px;
+  background: var(--news-info);
+  opacity: 0.7;
+}
+
+.appnews-row.is-critical .appnews-rail { background: var(--news-critical); opacity: 1; }
+.appnews-row.is-high .appnews-rail     { background: var(--news-high); opacity: 0.95; }
+.appnews-row.is-medium .appnews-rail   { background: var(--news-medium); }
+.appnews-row.is-low .appnews-rail      { background: var(--news-low); }
+.appnews-row.is-info .appnews-rail     { background: var(--news-info); }
+
+.appnews-row.is-critical {
+  border-color: var(--news-critical-line);
+  background: linear-gradient(90deg, var(--news-critical-soft) 0%, rgba(15, 20, 36, 0.5) 28%);
+}
+.appnews-row.is-high { border-color: var(--news-high-line); }
+
+.appnews-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.appnews-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.appnews-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.appnews-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--pill-bg);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.appnews-sev.is-critical { background: var(--news-critical-soft); border-color: var(--news-critical-line); color: var(--news-critical); }
+.appnews-sev.is-high     { background: var(--news-high-soft); border-color: var(--news-high-line); color: var(--news-high); }
+.appnews-sev.is-medium   { background: var(--news-medium-soft); border-color: var(--news-medium-line); color: var(--news-medium); }
+.appnews-sev.is-low      { background: var(--news-low-soft); border-color: var(--news-low-line); color: var(--news-low); }
+.appnews-sev.is-info     { background: var(--news-info-soft); border-color: var(--news-info-line); color: var(--news-info); }
+
+.appnews-cat.is-outage          { background: var(--news-cat-outage); border-color: var(--news-cat-outage-line); }
+.appnews-cat.is-security        { background: var(--news-cat-security); border-color: var(--news-cat-security-line); }
+.appnews-cat.is-service-impact  { background: var(--news-cat-service); border-color: var(--news-cat-service-line); }
+.appnews-cat.is-product-change  { background: var(--news-cat-product); border-color: var(--news-cat-product-line); }
+.appnews-cat.is-deprecation     { background: var(--news-cat-deprecation); border-color: var(--news-cat-deprecation-line); }
+.appnews-cat.is-advisory        { background: var(--news-cat-advisory); border-color: var(--news-cat-advisory-line); }
+
+.appnews-vendor {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+  background: var(--accent-secondary-soft);
+  border-color: var(--line-blue);
+  color: #cad3f6;
+}
+
+.appnews-audience.is-internal {
+  background: var(--accent-soft);
+  border-color: var(--line-purple);
+  color: #d8a5dd;
+}
+
+.appnews-audience.is-public {
+  background: rgba(52, 211, 153, 0.14);
+  border-color: rgba(52, 211, 153, 0.36);
+  color: var(--success);
+}
+
+.appnews-placeholder-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: rgba(251, 191, 36, 0.16);
+  border: 1px dashed rgba(251, 191, 36, 0.55);
+  color: var(--news-medium);
+  white-space: nowrap;
+}
+
+.appnews-title {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.appnews-title-detail {
+  margin: 4px 0 0;
+  font-size: 18px;
+}
+
+.appnews-summary {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.appnews-row-detail .appnews-summary { font-size: 14.5px; }
+
+.appnews-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.appnews-date { font-variant-numeric: tabular-nums; }
+
+.appnews-arrow {
+  align-self: center;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.appnews-empty {
+  padding: 28px 20px;
+  border-radius: 12px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(15, 20, 36, 0.4);
+  color: var(--muted);
+  text-align: center;
+  font-size: 14px;
+}
+
+.appnews-placeholder-banner {
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px dashed rgba(251, 191, 36, 0.55);
+  background: rgba(251, 191, 36, 0.08);
+  color: #fde68a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.appnews-detail-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 6px 14px;
+  margin: 8px 0 4px;
+  font-size: 13.5px;
+}
+
+.appnews-detail-grid dt {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  color: var(--muted);
+  align-self: start;
+  padding-top: 2px;
+}
+
+.appnews-detail-grid dd {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.appnews-sources a {
+  color: #aebbef;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.appnews-sources a:hover { color: var(--ink); }
+
+.appnews-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.appnews-tag {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.appnews-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px 14px;
+  align-items: end;
+  margin-bottom: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(15, 20, 36, 0.5);
+}
+
+.appnews-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.appnews-filter > span {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10.5px;
+}
+
+.appnews-filter select,
+.appnews-filter input[type="date"] {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-strong);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.appnews-filter select:focus,
+.appnews-filter input[type="date"]:focus {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 1px;
+  border-color: var(--accent-secondary);
+}
+
+.appnews-clear {
+  align-self: end;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--soft-btn-bg);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+
+.appnews-clear:hover {
+  border-color: var(--line-purple);
+  background: var(--accent-soft);
+}
+
+.appnews-count {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.appnews-hero { margin-bottom: 16px; }
+
+@media (max-width: 720px) {
+  .appnews-row { grid-template-columns: 6px 1fr; }
+  .appnews-arrow { display: none; }
+  .appnews-detail-grid { grid-template-columns: 1fr; }
+  .appnews-detail-grid dt { margin-top: 4px; }
+  .appnews-filters { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+}

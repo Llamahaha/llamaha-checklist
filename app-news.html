@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supported App News — Outages, Advisories & Updates | Llamaha</title>
+  <meta name="description" content="Recent outages, security advisories, service impacts, deprecations, and vendor announcements affecting apps Llamaha supports — Autodesk, Bentley, Bluebeam, Esri, Microsoft 365, Adobe, Citrix, and more.">
+  <link rel="canonical" href="https://llamaha.com/app-news">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="app-news.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <strong>Supported App News</strong>
+    </nav>
+
+    <main class="hub-shell resource-page">
+
+      <section class="hero-card appnews-hero" aria-labelledby="appNewsHeroTitle">
+        <div class="section-heading">
+          <p class="section-kicker">Heads-up feed</p>
+          <h1 id="appNewsHeroTitle">Supported App News</h1>
+          <p>Recent outages, security advisories, service impacts, and vendor changes affecting apps commonly supported by MSPs. Items are reviewed before they appear here — automated discovery never auto-publishes.</p>
+        </div>
+      </section>
+
+      <section class="hub-section appnews-page" aria-labelledby="appNewsPageTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">All updates</p>
+            <h2 id="appNewsPageTitle">Filter and browse</h2>
+            <p class="section-sub">Newest first. Filter by vendor, category, severity, audience, or date range.</p>
+          </div>
+          <a class="section-link" href="index.html">Back to home</a>
+        </div>
+
+        <form id="appNewsFilters" class="appnews-filters" aria-label="Filter app news">
+          <label class="appnews-filter">
+            <span>Vendor / app</span>
+            <select id="filterVendor" name="vendor" aria-label="Filter by vendor or app">
+              <option value="">All vendors</option>
+            </select>
+          </label>
+
+          <label class="appnews-filter">
+            <span>Category</span>
+            <select id="filterCategory" name="category" aria-label="Filter by category">
+              <option value="">All categories</option>
+            </select>
+          </label>
+
+          <label class="appnews-filter">
+            <span>Severity</span>
+            <select id="filterSeverity" name="severity" aria-label="Filter by severity">
+              <option value="">All severities</option>
+            </select>
+          </label>
+
+          <label class="appnews-filter">
+            <span>Audience</span>
+            <select id="filterAudience" name="audience" aria-label="Filter by audience">
+              <option value="">All audiences</option>
+              <option value="public">Public</option>
+              <option value="internal">Internal</option>
+            </select>
+          </label>
+
+          <label class="appnews-filter">
+            <span>From</span>
+            <input id="filterDateFrom" name="dateFrom" type="date" aria-label="Filter by start date">
+          </label>
+
+          <label class="appnews-filter">
+            <span>To</span>
+            <input id="filterDateTo" name="dateTo" type="date" aria-label="Filter by end date">
+          </label>
+
+          <button type="reset" class="appnews-clear" aria-label="Clear all filters">Clear filters</button>
+        </form>
+
+        <div class="appnews-page-card">
+          <p id="appNewsCount" class="appnews-count" aria-live="polite"></p>
+          <div id="appNewsPageList"
+               class="appnews-list appnews-list-detail"
+               data-empty-state="No items match these filters. Clear a filter or widen the date range to see more.">
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="app-news.js"></script>
+</body>
+</html>
+" src="app-news.js"></script>
+</body>
+</html>

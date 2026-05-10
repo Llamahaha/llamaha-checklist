@@ -20,6 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/llamaha-icon-purple-navy.png">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="app-news.css">
 </head>
 <body>
   <div class="page-shell">
@@ -224,6 +225,25 @@
         </div>
       </section>
 
+      <!-- Supported App News — outages, advisories, vendor changes -->
+      <section class="hub-section appnews-home" aria-labelledby="appNewsHomeTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Heads-up feed</p>
+            <h2 id="appNewsHomeTitle">App Outages, Advisories &amp; Updates</h2>
+            <p class="section-sub">Recent outages, security advisories, service impacts, and vendor changes affecting apps commonly supported by MSPs.</p>
+          </div>
+          <a class="section-link" href="app-news.html">View all app news</a>
+        </div>
+
+        <div class="appnews-home-card">
+          <div id="appNewsHomeList"
+               class="appnews-list"
+               data-empty-state="No major supported-app outages, service impacts, or security advisories posted right now.">
+          </div>
+        </div>
+      </section>
+
       <!-- Recently updated + self-serve split -->
       <section class="hub-section">
         <div class="home-split">
@@ -340,5 +360,36 @@
 
   <script type="module" src="siteChrome.js"></script>
   <script type="module" src="status-strip.js"></script>
+  <script type="module" src="home-app-news.js"></script>
+</body>
+</html>
+12 2 2 4-4"/></svg></span>
+              <span class="self-text">AutoElevate install approvals<small>Why the prompt appears and how to respond</small></span>
+            </a>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Big contact CTA -->
+      <section class="cta-panel">
+        <div>
+          <h3>Still stuck? We've got you.</h3>
+          <p>Open a ticket and we'll route it to the right tech. Include the project, the file, and what you were doing — we'll take it from there.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="cta-btn-primary" href="contact.html">Open a ticket</a>
+          <a class="cta-btn-secondary" href="contact.html">Report a missing guide</a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="status-strip.js"></script>
+  <script type="module" src="home-app-news.js"></script>
+</body>
+</html>
+="home-app-news.js"></script>
 </body>
 </html>
