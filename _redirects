@@ -1,3 +1,7 @@
 https://www.llamaha.com/* https://llamaha.com/:splat 301!
 http://www.llamaha.com/* https://llamaha.com/:splat 301!
 http://llamaha.com/* https://llamaha.com/:splat 301!
+
+# Friendly aliases — keep /app-news as the canonical, send /news there.
+/news       /app-news.html  301!
+/news/*     /app-news.html  301!
