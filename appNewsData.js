@@ -72,6 +72,30 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
   {
+    id: "2026-05-11-zoom-web-portal-release",
+    appName: "Zoom Web Portal",
+    vendor: "Zoom",
+    category: "Product Change",
+    severity: "Informational",
+    title: "Zoom web portal May release adds fixes and admin-facing changes",
+    summary:
+      "Zoom's May 11 web portal release lists minor bug fixes, following the May 6 release with changes to keep-me-signed-in behavior, AI Companion web access, dashboard fields, and several admin/reporting fixes.",
+    affectedUsers:
+      "Zoom account owners, admins, helpdesk teams, and users whose sign-in sessions, AI Companion settings, dashboards, or web portal reports are managed through the Zoom web portal.",
+    recommendedMspAction:
+      "Review the May release notes, spot-check tenant settings that affect sign-in persistence, AI Companion, dashboard reporting, and account administration, and update support scripts for changed web portal behavior.",
+    sourceUrls: [
+      "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060437"
+    ],
+    publishedDate: "2026-05-11",
+    lastUpdatedDate: "2026-05-11",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["zoom", "web-portal", "release-notes", "admin", "ai-companion"]
+  },
+  {
     id: "2026-05-05-google-chrome-148-security-update",
     appName: "Google Chrome",
     vendor: "Google",
@@ -89,7 +113,7 @@ export const appNewsItems = [
       "https://www.securityweek.com/chrome-148-rolls-out-with-127-security-fixes/"
     ],
     publishedDate: "2026-05-05",
-    lastUpdatedDate: "2026-05-05",
+    lastUpdatedDate: "2026-05-11",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
@@ -97,29 +121,52 @@ export const appNewsItems = [
     tags: ["google", "chrome", "browser", "security", "patch", "cve"]
   },
   {
-    id: "2026-04-28-zoom-ashburn-maintenance",
-    appName: "Zoom Meetings",
-    vendor: "Zoom",
+    id: "2026-05-05-bluebeam-de-service-degradation",
+    appName: "Bluebeam Studio / Bluebeam web",
+    vendor: "Bluebeam",
     category: "Service Impact",
     severity: "Low",
-    title: "Zoom Ashburn data center maintenance may briefly affect meetings",
+    title: "Bluebeam DE service degradation affected Studio, web, and login",
     summary:
-      "Zoom scheduled maintenance for its Ashburn data center from May 10 at 9:00 PM CT to May 11 at 3:00 AM CT. Zoom says users may experience brief impact to meetings, webinars, Zoom Phone, Zoom Rooms, recordings, live transcription, and related services.",
+      "Bluebeam's status history shows a resolved DE-region degradation from May 5 into May 6 affecting Studio Projects, Studio Sessions, Bluebeam web, and Bluebeam ID login.",
     affectedUsers:
-      "Users hosting or joining Zoom meetings, webinars, phone calls, room sessions, or recordings that route through the Ashburn data center during the maintenance window.",
+      "Users tied to Bluebeam's DE services who accessed Studio Projects, Studio Sessions, Bluebeam web, or Bluebeam ID login during the incident window.",
     recommendedMspAction:
-      "Notify clients with late Sunday or overnight Zoom usage, avoid scheduling critical webinars during the window, and keep the Zoom status page open if users report transient meeting or telephony issues.",
+      "If German-region Bluebeam users reported access issues during the window, treat them as vendor-side unless symptoms continued after resolution. Keep the status history link with related tickets for closure notes.",
     sourceUrls: [
-      "https://status.zoom.us/",
-      "https://stspg.io/4bmct4l2r5ky"
+      "https://status.bluebeam.com/history?locale=en"
     ],
-    publishedDate: "2026-04-28",
-    lastUpdatedDate: "2026-04-28",
+    publishedDate: "2026-05-05",
+    lastUpdatedDate: "2026-05-11",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["bluebeam", "studio", "service-impact", "login", "de-region"]
+  },
+  {
+    id: "2026-05-04-microsoft-intune-may-updates",
+    appName: "Microsoft Intune",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Intune May updates add app inventory, Edge baseline, and Autopatch reporting",
+    summary:
+      "Microsoft's Week of May 4 Intune updates include enhanced app inventory data, a minimum Intune Management Extension version of 1.58.103.0, a new Autopatch update risk visibility report, and the Microsoft Edge v139 security baseline.",
+    affectedUsers:
+      "IT admins managing Windows 10/11 endpoints, Edge security baselines, Windows Autopatch reporting, or Win32 app/script/remediation delivery through Microsoft Intune.",
+    recommendedMspAction:
+      "Verify Intune Management Extension versions, review whether enhanced app inventory should be enabled for managed Windows devices, evaluate the Edge v139 baseline before deployment, and add Autopatch risk reporting to patch review routines.",
+    sourceUrls: [
+      "https://learn.microsoft.com/en-us/intune/whats-new/"
+    ],
+    publishedDate: "2026-05-04",
+    lastUpdatedDate: "2026-05-11",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
     isPlaceholder: false,
-    tags: ["zoom", "zoom-meetings", "maintenance", "service-impact", "status"]
+    tags: ["microsoft", "intune", "autopatch", "edge", "endpoint-management"]
   },
   {
     id: "2026-04-14-adobe-acrobat-reader-security-updates",
@@ -127,11 +174,11 @@ export const appNewsItems = [
     vendor: "Adobe",
     category: "Security Vulnerability",
     severity: "High",
-    title: "Adobe Acrobat and Reader April updates include exploited CVE",
+    title: "Adobe Acrobat and Reader April updates include exploited and critical CVEs",
     summary:
-      "Adobe released April Acrobat and Reader security updates for Windows and macOS, including a Priority 1 fix for actively exploited CVE-2026-34621 and a follow-up Priority 2 update for additional critical and important issues.",
+      "Adobe's April Acrobat and Reader bulletins include a Priority 1 update for actively exploited CVE-2026-34621 and a Priority 2 follow-up for additional critical and important issues that can lead to code execution or file system reads.",
     affectedUsers:
-      "Endpoints with Acrobat DC, Acrobat Reader DC, or Acrobat 2024 at affected April 2026 builds or earlier.",
+      "Windows and macOS endpoints with Acrobat DC, Acrobat Reader DC, or Acrobat 2024 at the affected April 2026 builds or earlier.",
     recommendedMspAction:
       "Prioritize Acrobat and Reader patch deployment, especially on endpoints that open PDFs from email or browsers. Confirm patched versions through inventory and have users relaunch Acrobat after updates land.",
     sourceUrls: [
@@ -148,30 +195,29 @@ export const appNewsItems = [
     tags: ["adobe", "acrobat", "reader", "security", "patch", "kev"]
   },
   {
-    id: "2026-04-06-fortinet-forticlient-ems-cve-2026-35616",
+    id: "2026-04-14-fortinet-forticlient-ems-sql-injection",
     appName: "FortiClient EMS",
     vendor: "Fortinet",
     category: "Security Vulnerability",
-    severity: "Critical",
-    title: "FortiClient EMS API bypass is exploited in the wild",
+    severity: "High",
+    title: "Fortinet patches FortiClient EMS SQL injection and database exposure issues",
     summary:
-      "Fortinet says CVE-2026-35616 in FortiClient EMS can let an unauthenticated attacker execute unauthorized code or commands, and Fortinet has observed exploitation in the wild. CISA added it to KEV on April 6.",
+      "Fortinet's April PSIRT batch includes FortiClient EMS fixes for authenticated SQL injection (CVE-2026-39809) and a hardcoded encryption key issue (CVE-2026-39810). Fortinet lists fixed releases for affected 7.4 and 7.2 environments.",
     affectedUsers:
-      "Clients running FortiClient EMS 7.4.5 or 7.4.6, especially if the EMS service is reachable from untrusted networks.",
+      "Clients running on-premises FortiClient EMS 7.4.0 through 7.4.5, 7.2.0 through 7.2.12, or older unsupported 7.0 builds.",
     recommendedMspAction:
-      "Inventory FortiClient EMS servers immediately, apply Fortinet's hotfix or upgrade path, restrict EMS access to trusted admin networks, and review logs for suspicious API activity before closing the item.",
+      "Inventory FortiClient EMS servers, upgrade to 7.4.6 or 7.2.13 as appropriate, restrict EMS administration to trusted networks, and review privileged account/database activity around EMS.",
     sourceUrls: [
-      "https://fortiguard.fortinet.com/psirt/FG-IR-26-099",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-      "https://nvd.nist.gov/vuln/detail/CVE-2026-35616"
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-102",
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-107"
     ],
-    publishedDate: "2026-04-04",
-    lastUpdatedDate: "2026-04-06",
+    publishedDate: "2026-04-14",
+    lastUpdatedDate: "2026-05-11",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
     isPlaceholder: false,
-    tags: ["fortinet", "forticlient", "ems", "security", "kev", "patch"]
+    tags: ["fortinet", "forticlient", "ems", "security", "sql-injection", "patch"]
   },
   {
     id: "2026-03-12-microsoft-exchange-online-ews-retirement",
