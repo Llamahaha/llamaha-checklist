@@ -72,23 +72,48 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
   {
+    id: "2026-05-12-windows-autopatch-hotpatch-default",
+    appName: "Windows Autopatch",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Windows Autopatch enables hotpatch by default for eligible devices",
+    summary:
+      "Microsoft says Windows Autopatch will enable hotpatch security updates by default for eligible Intune-managed devices starting with the May 2026 Windows security update, with tenant-level and quality update policy controls available for opt-out or scoping.",
+    affectedUsers:
+      "IT admins managing eligible Windows devices through Microsoft Intune and Windows Autopatch, especially environments that tightly control restart behavior or quality update rings.",
+    recommendedMspAction:
+      "Review Autopatch hotpatch eligibility, decide whether any tenants need opt-out or policy scoping, and update patch-window notes so helpdesk teams understand which devices may install security fixes with fewer restarts.",
+    sourceUrls: [
+      "https://learn.microsoft.com/en-us/windows/release-health/windows-message-center",
+      "https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/whats-new"
+    ],
+    publishedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "intune", "autopatch", "windows", "hotpatch", "endpoint-management"]
+  },
+  {
     id: "2026-05-11-zoom-web-portal-release",
     appName: "Zoom Web Portal",
     vendor: "Zoom",
     category: "Product Change",
     severity: "Informational",
-    title: "Zoom web portal May release adds fixes and admin-facing changes",
+    title: "Zoom web portal May releases add admin controls and a phased web redesign",
     summary:
-      "Zoom's May 11 web portal release lists minor bug fixes, following the May 6 release with changes to keep-me-signed-in behavior, AI Companion web access, dashboard fields, and several admin/reporting fixes.",
+      "Zoom's web release notes list May 11 bug fixes and a May 18 upcoming release with a phased new Zoom Web experience, dashboard sorting, report privacy masking, and Customer Managed Key proxy/certificate options.",
     affectedUsers:
-      "Zoom account owners, admins, helpdesk teams, and users whose sign-in sessions, AI Companion settings, dashboards, or web portal reports are managed through the Zoom web portal.",
+      "Zoom account owners, admins, helpdesk teams, and users whose sign-in sessions, dashboards, reporting, privacy settings, or web portal navigation are managed through Zoom Web.",
     recommendedMspAction:
-      "Review the May release notes, spot-check tenant settings that affect sign-in persistence, AI Companion, dashboard reporting, and account administration, and update support scripts for changed web portal behavior.",
+      "Review tenant settings for dashboard/reporting privacy, Customer Managed Key environments, and admin navigation changes. Update helpdesk notes for the phased web interface so technicians can support both old and new layouts during rollout.",
     sourceUrls: [
       "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060437"
     ],
     publishedDate: "2026-05-11",
-    lastUpdatedDate: "2026-05-11",
+    lastUpdatedDate: "2026-05-12",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
@@ -96,24 +121,96 @@ export const appNewsItems = [
     tags: ["zoom", "web-portal", "release-notes", "admin", "ai-companion"]
   },
   {
+    id: "2026-05-10-autodesk-revit-cloud-model-publishing",
+    appName: "Revit Cloud Worksharing / Cloud Models",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk resolved Revit cloud model publishing issue in Docs",
+    summary:
+      "Autodesk reported and resolved an issue on May 10 where customers were unable to publish Revit cloud models in Docs. The incident moved from investigating to resolved in about 90 minutes.",
+    affectedUsers:
+      "Project teams using Revit Cloud Worksharing, Cloud Models, Autodesk Docs, BIM 360, or Autodesk Construction Cloud workflows that publish Revit cloud models.",
+    recommendedMspAction:
+      "If users reported publishing failures during the May 10 window, close related tickets as vendor-side once publishing succeeds again. If failures continue, collect the model name, project, timestamp, and Autodesk account region before escalating.",
+    sourceUrls: [
+      "https://health.autodesk.com/incidents/b4vfxd8bflpj"
+    ],
+    publishedDate: "2026-05-10",
+    lastUpdatedDate: "2026-05-10",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "revit", "cloud-models", "docs", "acc", "service-impact"]
+  },
+  {
+    id: "2026-05-07-microsoft-edge-148-stable",
+    appName: "Microsoft Edge",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Edge 148 adds Copilot, autofill, authentication, and policy changes",
+    summary:
+      "Microsoft Edge Stable 148.0.3967.54 includes Workspaces migration updates, Microsoft 365 Copilot Chat changes, Copilot New Tab controls, password affiliation service behavior, enhanced autofill, Microsoft 365 auth popup handling, and several new policies.",
+    affectedUsers:
+      "Managed Edge for Business users, admins who configure Edge policies, and organizations using Copilot, Workspaces, password manager controls, or Microsoft 365 web sign-in flows.",
+    recommendedMspAction:
+      "Review new Edge 148 policies before broad rollout, confirm any URL allow/block rules do not break Microsoft 365 Copilot Chat, and validate password/autofill behavior in managed work profiles.",
+    sourceUrls: [
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel"
+    ],
+    publishedDate: "2026-05-07",
+    lastUpdatedDate: "2026-05-07",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "edge", "browser", "copilot", "policy", "autofill"]
+  },
+  {
+    id: "2026-05-05-microsoft-teams-brand-impersonation-calling",
+    appName: "Teams Calling",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Teams Calling brand impersonation warnings roll out in mid-May",
+    summary:
+      "Microsoft's updated message center notice says Teams Calling will warn users about suspicious first-contact external callers that appear to impersonate trusted brands. The feature is enabled by default and is now scheduled for mid-May rollout.",
+    affectedUsers:
+      "Organizations using Microsoft Teams Calling on desktop or Mac that receive inbound VoIP calls from external first-contact callers.",
+    recommendedMspAction:
+      "Brief helpdesk and security-awareness teams so users understand the new call warnings. No admin action is expected, but technicians should be ready to explain accept, block, and end-call options for flagged calls.",
+    sourceUrls: [
+      "https://mc.merill.net/message/MC1219793"
+    ],
+    publishedDate: "2026-05-05",
+    lastUpdatedDate: "2026-05-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "teams", "calling", "security-awareness", "vishing"]
+  },
+  {
     id: "2026-05-05-google-chrome-148-security-update",
     appName: "Google Chrome",
     vendor: "Google",
-    category: "Security Vulnerability",
-    severity: "Critical",
-    title: "Chrome 148 fixes 127 security vulnerabilities",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Chrome 148 reaches stable for desktop and Android",
     summary:
-      "Google promoted Chrome 148 to stable with 127 security fixes, including critical Blink, Mobile, and Chromoting CVEs. Managed browsers should be updated and relaunched promptly.",
+      "Google promoted Chrome 148 to stable for Windows, macOS, Linux, and Android. Google notes the desktop release will roll out over the coming days and that security changes will be updated separately.",
     affectedUsers:
-      "Windows, macOS, and Linux users running Chrome below 148.0.7778.96/97 on managed or unmanaged endpoints.",
+      "Windows, macOS, Linux, and Android users running Chrome below the 148 stable builds, especially managed browsers that require relaunch to complete updates.",
     recommendedMspAction:
-      "Force Chrome updates through browser management, RMM, Intune, or patch tooling. Confirm browser relaunch completion on a sample of endpoints, especially shared workstations and kiosk devices.",
+      "Keep Chrome auto-update policies healthy, monitor managed browser versions, and prompt users to relaunch where the 148 update is staged but not applied. Recheck Google's release notes when the security section is updated.",
     sourceUrls: [
       "https://chromereleases.googleblog.com/2026/05/stable-channel-update-for-desktop.html",
-      "https://www.securityweek.com/chrome-148-rolls-out-with-127-security-fixes/"
+      "https://chromereleases.googleblog.com/2026/05/chrome-for-android-update.html"
     ],
     publishedDate: "2026-05-05",
-    lastUpdatedDate: "2026-05-11",
+    lastUpdatedDate: "2026-05-12",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
@@ -145,28 +242,28 @@ export const appNewsItems = [
     tags: ["bluebeam", "studio", "service-impact", "login", "de-region"]
   },
   {
-    id: "2026-05-04-microsoft-intune-may-updates",
-    appName: "Microsoft Intune",
-    vendor: "Microsoft",
-    category: "Product Change",
-    severity: "Medium",
-    title: "Intune May updates add app inventory, Edge baseline, and Autopatch reporting",
+    id: "2026-04-27-autodesk-account-maintenance-may-16",
+    appName: "Autodesk Account",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk account maintenance may interrupt user management on May 16",
     summary:
-      "Microsoft's Week of May 4 Intune updates include enhanced app inventory data, a minimum Intune Management Extension version of 1.58.103.0, a new Autopatch update risk visibility report, and the Microsoft Edge v139 security baseline.",
+      "Autodesk has scheduled Autodesk account maintenance for May 16 from 9:00 AM to 11:00 AM PDT. Autodesk says account user management features may be intermittently unavailable during the window.",
     affectedUsers:
-      "IT admins managing Windows 10/11 endpoints, Edge security baselines, Windows Autopatch reporting, or Win32 app/script/remediation delivery through Microsoft Intune.",
+      "Admins changing Autodesk account users, assignments, licensing, or account management settings during the maintenance window.",
     recommendedMspAction:
-      "Verify Intune Management Extension versions, review whether enhanced app inventory should be enabled for managed Windows devices, evaluate the Edge v139 baseline before deployment, and add Autopatch risk reporting to patch review routines.",
+      "Avoid planned Autodesk user-management changes during the maintenance window. If users report Autodesk account admin issues at that time, check Autodesk Health before treating it as a local licensing problem.",
     sourceUrls: [
-      "https://learn.microsoft.com/en-us/intune/whats-new/"
+      "https://health.autodesk.com/incidents/2py3nthtpkty"
     ],
-    publishedDate: "2026-05-04",
-    lastUpdatedDate: "2026-05-11",
-    suggestedPlacement: "both",
+    publishedDate: "2026-04-27",
+    lastUpdatedDate: "2026-05-12",
+    suggestedPlacement: "news-page",
     audience: "public",
     isPublished: true,
     isPlaceholder: false,
-    tags: ["microsoft", "intune", "autopatch", "edge", "endpoint-management"]
+    tags: ["autodesk", "account", "maintenance", "licensing", "admin"]
   },
   {
     id: "2026-04-14-adobe-acrobat-reader-security-updates",
