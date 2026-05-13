@@ -72,6 +72,85 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
   {
+    id: "2026-05-12-microsoft-may-patch-tuesday",
+    appName: "Windows / Microsoft 365",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Microsoft May 2026 Patch Tuesday addresses about 120 CVEs, 17 Critical, no zero-days",
+    summary:
+      "Microsoft's May 2026 cumulative update fixes around 120 vulnerabilities across Windows, Office, Azure, and developer tools, with 17 rated Critical and many of those remote code execution. Notable issues include several Word RCEs that can trigger via the Preview Pane, a Windows Netlogon RCE (CVE-2026-41089) on domain controllers, and a DNS Client RCE. No zero-days were disclosed.",
+    affectedUsers:
+      "Any managed Windows endpoint or server, Microsoft 365 Apps install, and Windows Server domain controller running affected May 2026 builds.",
+    recommendedMspAction:
+      "Schedule the May 2026 cumulative update through normal patch tooling, prioritizing internet-exposed servers and domain controllers. Validate Office line-of-business apps after the Word fixes land. This is also the last comfortable patch window before the Secure Boot certificate refresh deadline on June 26, 2026 \u2014 confirm Secure Boot readiness on managed fleets as part of the same cycle.",
+    sourceUrls: [
+      "https://msrc.microsoft.com/update-guide/releaseNote/2026-May",
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-may-2026-patch-tuesday-fixes-120-flaws-no-zero-days/",
+      "https://www.tenable.com/blog/microsofts-may-2026-patch-tuesday-addresses-118-cves-cve-2026-41103",
+      "https://blog.talosintelligence.com/microsoft-patch-tuesday-may-2026/"
+    ],
+    publishedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "patch-tuesday", "windows", "office", "security", "netlogon", "dns", "word", "secure-boot"]
+  },
+  {
+    id: "2026-05-04-esri-arcgis-server-security-2026-update-1",
+    appName: "ArcGIS Server / Portal for ArcGIS",
+    vendor: "Esri",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Esri releases ArcGIS Server Security 2026 Update 1 patch for versions 11.1 through 12.0",
+    summary:
+      "Esri published the ArcGIS Server Security 2026 Update 1 patch on May 4 for ArcGIS Server 12.0, 11.5, 11.4, 11.3, and 11.1. The companion Portal for ArcGIS Security 2026 Update 1 patch released in mid-April also resolves two critical-severity issues: an incorrect privilege assignment that lets highly privileged users create developer credentials with elevated permissions, and an incorrect authorization check on developer credentials.",
+    affectedUsers:
+      "On-premises ArcGIS Server and Portal for ArcGIS deployments on the affected versions. ArcGIS Online customers are not affected by the on-premises patches.",
+    recommendedMspAction:
+      "Inventory on-premises ArcGIS Server and Portal for ArcGIS instances, identify versions in scope, and schedule patch application during a maintenance window. Review developer credential usage in Portal for any signs of overly broad privileges after applying the Portal patch.",
+    sourceUrls: [
+      "https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch",
+      "https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch",
+      "https://trust.arcgis.com/en/security/security-overview.htm"
+    ],
+    publishedDate: "2026-05-04",
+    lastUpdatedDate: "2026-05-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["esri", "arcgis-server", "portal-for-arcgis", "security", "patch", "on-premises"]
+  },
+  {
+    id: "2026-03-24-citrix-netscaler-cve-2026-3055",
+    appName: "NetScaler ADC / NetScaler Gateway",
+    vendor: "Citrix",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Citrix NetScaler critical SAML and Gateway flaws (CVE-2026-3055, CVE-2026-4368) exploited in the wild",
+    summary:
+      "Citrix disclosed two NetScaler flaws in late March: CVE-2026-3055 (CVSS 9.3), an out-of-bounds read in NetScaler appliances configured as a SAML Identity Provider that can leak session tokens to unauthenticated attackers, and CVE-2026-4368 (CVSSv4 7.7), a race condition affecting Gateway, SSL VPN, ICA Proxy, CVPN, RDP proxy, or AAA virtual servers. CVE-2026-3055 exploitation has been reported in the wild.",
+    affectedUsers:
+      "Clients running on-premises NetScaler ADC or NetScaler Gateway on 13.1, 14.1, 13.1-FIPS, or 13.1-NDcPP that are exposed to the internet and use the affected SAML IDP or Gateway/AAA configurations.",
+    recommendedMspAction:
+      "Patch immediately: NetScaler ADC and Gateway 13.1 to 13.1-62.23, 14.1 to 14.1-66.59, and 13.1-FIPS / 13.1-NDcPP to 13.1-37.262. After patching, terminate active sessions, rotate any SAML signing material that may have been exposed, and review authentication logs for unusual activity around the disclosure window.",
+    sourceUrls: [
+      "https://support.citrix.com/external/article/CTX696300/netscaler-adc-and-netscaler-gateway-secu.html",
+      "https://www.bleepingcomputer.com/news/security/citrix-urges-admins-to-patch-netscaler-flaws-as-soon-as-possible/",
+      "https://www.ncsc.gov.uk/news/vulnerabilities-affecting-citrix-netscaler-adc-gateway"
+    ],
+    publishedDate: "2026-03-24",
+    lastUpdatedDate: "2026-05-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["citrix", "netscaler", "adc", "gateway", "security", "saml", "patch", "kev"]
+  },
+  {
     id: "2026-05-12-windows-autopatch-hotpatch-default",
     appName: "Windows Autopatch",
     vendor: "Microsoft",
@@ -340,185 +419,6 @@ export const appNewsItems = [
     isPublished: true,
     isPlaceholder: false,
     tags: ["microsoft", "exchange-online", "ews", "deprecation", "graph"]
-  },
-  {
-    id: "sample-2026-05-09-m365-exchange-online",
-    appName: "Exchange Online",
-    vendor: "Microsoft",
-    category: "Outage",
-    severity: "High",
-    title: "[SAMPLE] Outlook desktop dropping connection to Exchange Online",
-    summary:
-      "Some Outlook for Windows users see repeated 'Need password' prompts and intermittent disconnects from Exchange Online. OWA is unaffected.",
-    affectedUsers:
-      "Users on the Outlook for Windows desktop client connecting to Exchange Online; Outlook on the web (OWA) and mobile clients are not affected.",
-    recommendedMspAction:
-      "Direct affected users to Outlook on the web as a workaround. Track the Microsoft 365 admin center incident page until restored, then advise a one-time Outlook restart on each affected machine.",
-    sourceUrls: ["https://status.cloud.microsoft/"],
-    publishedDate: "2026-05-09",
-    lastUpdatedDate: "2026-05-10",
-    suggestedPlacement: "both",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: true,
-    tags: ["microsoft-365", "outlook", "exchange-online", "outage"]
-  },
-  {
-    id: "sample-2026-05-08-fortinet-ssl-vpn-cve",
-    appName: "FortiGate SSL VPN",
-    vendor: "Fortinet",
-    category: "Security",
-    severity: "Critical",
-    title: "[SAMPLE] Critical FortiGate SSL VPN advisory — patch this week",
-    summary:
-      "A placeholder critical advisory in FortiGate SSL VPN. Fortinet has released firmware updates and recommends patching all internet-facing FortiGate devices immediately.",
-    affectedUsers:
-      "Any client running FortiGate appliances with SSL VPN exposed to the internet on affected firmware trains.",
-    recommendedMspAction:
-      "Identify all affected FortiGate devices, schedule emergency maintenance windows, apply the vendor-recommended firmware, and rotate any credentials that may have been used during the exposure window. Confirm logging is intact.",
-    sourceUrls: [
-      "https://www.fortiguard.com/psirt",
-      "https://docs.fortinet.com/"
-    ],
-    publishedDate: "2026-05-08",
-    lastUpdatedDate: "2026-05-10",
-    suggestedPlacement: "both",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: true,
-    tags: ["fortinet", "fortigate", "vpn", "security", "patch"]
-  },
-  {
-    id: "sample-2026-05-07-autodesk-acc-degraded",
-    appName: "Autodesk Construction Cloud",
-    vendor: "Autodesk",
-    category: "Service Impact",
-    severity: "Medium",
-    title: "[SAMPLE] ACC document sync slow in EU region",
-    summary:
-      "Autodesk Construction Cloud document sync is reporting elevated latency for EU-region tenants. Uploads and downloads still complete but take noticeably longer than usual.",
-    affectedUsers:
-      "Project teams using ACC Docs and BIM 360 in the EU region; users in the US region are not affected.",
-    recommendedMspAction:
-      "Set expectations with affected project teams that uploads will be slow today. No client action required; monitor Autodesk Health and clear status when restored.",
-    sourceUrls: ["https://health.autodesk.com/"],
-    publishedDate: "2026-05-07",
-    lastUpdatedDate: "2026-05-09",
-    suggestedPlacement: "both",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: true,
-    tags: ["autodesk", "acc", "bim-360", "service-impact"]
-  },
-  {
-    id: "sample-2026-05-05-bluebeam-studio-maintenance",
-    appName: "Bluebeam Studio",
-    vendor: "Bluebeam",
-    category: "Service Impact",
-    severity: "Low",
-    title: "[SAMPLE] Bluebeam Studio scheduled maintenance window — Saturday",
-    summary:
-      "Bluebeam has announced a Studio maintenance window for Saturday from 22:00–02:00 PT. Studio Sessions and Projects will be read-only or unavailable during the window.",
-    affectedUsers:
-      "Any user actively working in Studio Sessions or syncing Studio Projects during the maintenance window.",
-    recommendedMspAction:
-      "Email a heads-up to design leads who run weekend coordination sessions. No technical action required; Studio resumes automatically after the window.",
-    sourceUrls: ["https://status.bluebeam.com/"],
-    publishedDate: "2026-05-05",
-    lastUpdatedDate: "2026-05-05",
-    suggestedPlacement: "news-page",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: true,
-    tags: ["bluebeam", "studio", "maintenance", "scheduled"]
-  },
-  {
-    id: "sample-2026-05-04-windows-11-feature-update",
-    appName: "Windows 11",
-    vendor: "Microsoft",
-    category: "Product Change",
-    severity: "Info",
-    title: "[SAMPLE] Windows 11 next feature update preview ring announced",
-    summary:
-      "Microsoft has previewed the next Windows 11 feature update for the Release Preview ring. Expect general availability in the following months; review compatibility with line-of-business apps before broad rollout.",
-    affectedUsers:
-      "Eventually affects all managed Windows 11 endpoints once general availability is reached. Currently only impacts machines opted into the Release Preview ring.",
-    recommendedMspAction:
-      "Pin the current Windows feature update in your patch tooling. Pilot the new build on 1–2 lab machines and validate AutoCAD, Revit, ArcGIS Pro, Bluebeam Revu, and remote-access clients before broad deployment.",
-    sourceUrls: ["https://blogs.windows.com/windows-insider/"],
-    publishedDate: "2026-05-04",
-    lastUpdatedDate: "2026-05-04",
-    suggestedPlacement: "news-page",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: true,
-    tags: ["microsoft", "windows-11", "feature-update", "product-change"]
-  },
-  {
-    id: "sample-2026-05-02-bentley-ims-deprecation",
-    appName: "Bentley IMS legacy auth",
-    vendor: "Bentley",
-    category: "Deprecation",
-    severity: "Medium",
-    title: "[SAMPLE] Legacy Bentley IMS sign-in flow scheduled for retirement",
-    summary:
-      "Bentley has placeholder-announced a deprecation of legacy IMS sign-in for the CONNECTION Client and ProjectWise Explorer. New sign-in flow becomes mandatory later this year.",
-    affectedUsers:
-      "Users on older CONNECTION Client or ProjectWise Explorer builds that have not yet migrated to the new sign-in flow.",
-    recommendedMspAction:
-      "Inventory installed CONNECTION Client and ProjectWise Explorer versions across the fleet. Schedule upgrades for any clients still on the legacy auth flow before the deprecation date.",
-    sourceUrls: ["https://docs.bentley.com/"],
-    publishedDate: "2026-05-02",
-    lastUpdatedDate: "2026-05-06",
-    suggestedPlacement: "news-page",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: true,
-    tags: ["bentley", "ims", "projectwise", "connection-client", "deprecation"]
-  },
-  {
-    id: "sample-2026-04-29-adobe-acrobat-advisory",
-    appName: "Adobe Acrobat",
-    vendor: "Adobe",
-    category: "Advisory",
-    severity: "High",
-    title: "[SAMPLE] Adobe Acrobat security update — install on managed endpoints",
-    summary:
-      "Adobe has placeholder-released a security update for Acrobat Reader and Acrobat Pro addressing several memory-corruption issues. Update is available through Creative Cloud Desktop or admin packaging.",
-    affectedUsers:
-      "Any endpoint with Acrobat Reader or Acrobat Pro installed at a version below the patched build.",
-    recommendedMspAction:
-      "Push the update through your standard patch tooling. Confirm the patched build number on a sample of endpoints, and notify users to relaunch Acrobat once the update is staged.",
-    sourceUrls: ["https://helpx.adobe.com/security.html"],
-    publishedDate: "2026-04-29",
-    lastUpdatedDate: "2026-05-01",
-    suggestedPlacement: "news-page",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: true,
-    tags: ["adobe", "acrobat", "security", "patch", "advisory"]
-  },
-  {
-    id: "sample-2026-04-28-internal-rmm-tip",
-    appName: "Internal RMM",
-    vendor: "Internal",
-    category: "Advisory",
-    severity: "Info",
-    title: "[SAMPLE — INTERNAL] Reminder: tag tickets with vendor when forwarding to escalation",
-    summary:
-      "Internal-only note demonstrating audience filtering. This item is hidden from the public home page and the public /app-news page. It only renders inside /internal/.",
-    affectedUsers:
-      "Llamaha technicians escalating vendor outages to senior engineers.",
-    recommendedMspAction:
-      "Use the vendor field on the ticket form so internal dashboards roll up impact correctly. Coordinate with senior engineers in the on-call channel before contacting the vendor directly.",
-    sourceUrls: ["internal/playbooks.html"],
-    publishedDate: "2026-04-28",
-    lastUpdatedDate: "2026-04-28",
-    suggestedPlacement: "news-page",
-    audience: "internal",
-    isPublished: true,
-    isPlaceholder: true,
-    tags: ["internal", "process", "escalation"]
   }
 ];
 
@@ -540,7 +440,6 @@ export function isItemVisible(item, { area = "public" } = {}) {
 export function sortByPublishedDesc(a, b) {
   const left = (a.publishedDate ?? "").localeCompare(b.publishedDate ?? "");
   if (left !== 0) return -left;
-  // Tiebreak: higher severity first
   return severityRank(b.severity) - severityRank(a.severity);
 }
 
@@ -598,8 +497,6 @@ export function audienceClass(audience) {
   return audience === "internal" ? "is-internal" : "is-public";
 }
 
-// Truthy if any item in the active set is a placeholder. The renderer uses
-// this to display the "review before going live" banner.
 export function hasPlaceholders(items = appNewsItems) {
   return items.some(item => item.isPlaceholder === true && isItemVisible(item));
 }
