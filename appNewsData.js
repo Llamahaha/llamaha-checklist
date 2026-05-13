@@ -71,6 +71,165 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // ── DRAFTS (isPublished: false) ─────────────────────────────────────────────
+  // Auto-discovered on 2026-05-13. Review, edit, and flip isPublished: true
+  // before these render on the site.
+  {
+    id: "2026-05-13-microsoft-365-south-america-outage-mo1309330",
+    appName: "Microsoft 365 / Outlook",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Microsoft 365 South America network issue impacted Outlook and other services (MO1309330)",
+    summary:
+      "Microsoft identified a portion of network infrastructure in South America causing intermittent disruption to regional Microsoft 365 services on May 13, including users unable to download attachments in Outlook. Microsoft says it scaled additional resources and telemetry indicates impact is mitigated. The incident is tracked in the Microsoft 365 admin center as MO1309330.",
+    affectedUsers:
+      "Microsoft 365 tenants with users hosted primarily in South America, especially anyone reporting Outlook attachment download failures or intermittent service connectivity on May 13, 2026.",
+    recommendedMspAction:
+      "Check Microsoft 365 admin center incident MO1309330 for the current state before treating reports as local issues. If users in South America reported attachment or service access failures in the May 13 window, close related tickets as vendor-side once Microsoft confirms resolution.",
+    sourceUrls: [
+      "https://status.cloud.microsoft/",
+      "https://www.neowin.net/news/microsoft-confirms-outage-as-outlook-and-other-m365-services-are-down-in-some-places/"
+    ],
+    publishedDate: "2026-05-13",
+    lastUpdatedDate: "2026-05-13",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "outlook", "service-impact", "south-america", "mo1309330"]
+  },
+  {
+    id: "2026-05-12-adobe-may-2026-security-bulletins",
+    appName: "Acrobat / Connect / Commerce / Creative Cloud apps",
+    vendor: "Adobe",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Adobe May 2026 patch day: 10 advisories, 52 CVEs across Connect, Commerce, and Creative Cloud apps",
+    summary:
+      "Adobe released 10 security advisories on May 12 addressing about 52 vulnerabilities across Premiere Pro, Media Encoder, After Effects, Commerce/Magento (APSB26-49), Connect (APSB26-50), Illustrator, Substance 3D Designer/Sampler/Painter, and the Content Credentials SDK. Adobe rates 27 of the issues Critical, with impacts including arbitrary code execution, privilege escalation, security feature bypass, and arbitrary file system read. Adobe says it is not aware of in-the-wild exploitation for any of these.",
+    affectedUsers:
+      "Endpoints and servers running affected Adobe products, particularly Adobe Connect on-premises, Adobe Commerce / Magento Open Source, and Creative Cloud workstations with Premiere Pro, After Effects, Illustrator, or the Substance 3D tools.",
+    recommendedMspAction:
+      "Inventory Creative Cloud installs, Acrobat/Reader, Commerce deployments, and any Adobe Connect on-prem instances. Schedule updates through normal patch tooling and prioritize Connect, Commerce, and the apps marked Priority 2 or Critical. Confirm users relaunch Adobe apps after updates land.",
+    sourceUrls: [
+      "https://helpx.adobe.com/security/security-bulletin.html",
+      "https://helpx.adobe.com/security/products/connect/apsb26-50.html",
+      "https://www.ravedigital.agency/blog/adobe-commerce-security-update-apsb26-49/",
+      "https://www.hkcert.org/security-bulletin/adobe-monthly-security-update-may-2026"
+    ],
+    publishedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-13",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["adobe", "acrobat", "connect", "commerce", "creative-cloud", "security", "patch"]
+  },
+  {
+    id: "2026-05-12-fortinet-fortisandbox-cve-2026-26083",
+    appName: "FortiSandbox / FortiSandbox Cloud / FortiSandbox PaaS",
+    vendor: "Fortinet",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Fortinet patches critical unauthenticated FortiSandbox authorization bypass (CVE-2026-26083, FG-IR-26-136)",
+    summary:
+      "Fortinet's May 12 PSIRT batch addresses five vulnerabilities across FortiAP, FortiOS, and management products. The highest-impact issue is CVE-2026-26083, a missing authorization flaw in FortiSandbox, FortiSandbox Cloud, and FortiSandbox PaaS that requires no authentication and could let a remote attacker reach restricted functionality or sandbox analysis data. Affected versions include FortiSandbox 5.0 and 4.4, FortiSandbox Cloud 24, 23, and 5.0, and FortiSandbox PaaS 22.1 through 23.4.",
+    affectedUsers:
+      "Clients running on-premises FortiSandbox 4.4 or 5.0, or consuming FortiSandbox Cloud / FortiSandbox PaaS at the affected versions, especially environments where the sandbox is reachable from untrusted networks.",
+    recommendedMspAction:
+      "Inventory FortiSandbox instances, upgrade to the fixed builds called out in FG-IR-26-136, and restrict FortiSandbox management interfaces to trusted networks until patched. Review FortiSandbox access logs for anomalies during the disclosure window.",
+    sourceUrls: [
+      "https://www.fortiguard.com/psirt",
+      "https://cybersecuritynews.com/fortinet-enterprise-products-vulnerabilities/"
+    ],
+    publishedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-13",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["fortinet", "fortisandbox", "security", "patch", "psirt", "unauthenticated"]
+  },
+  {
+    id: "2026-05-12-cisco-ios-xe-may-2026-advisories",
+    appName: "Cisco IOS / IOS XE",
+    vendor: "Cisco",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Cisco patches roughly a dozen IOS and IOS XE flaws including secure boot bypass on Catalyst 9300",
+    summary:
+      "Cisco released its May 2026 IOS / IOS XE bundle, fixing about a dozen vulnerabilities that could lead to denial of service, secure boot bypass, information disclosure, and privilege escalation. Six are rated high severity, including a secure boot bypass on Catalyst 9300 Series switches. Publicly disclosed issues include CVE-2026-20110, CVE-2026-20112, CVE-2026-20113, and CVE-2026-20114.",
+    affectedUsers:
+      "Networking environments running affected Cisco IOS or IOS XE images, especially Catalyst 9300 Series switches and devices where local CLI access or the maintenance command is reachable to lower-privilege users.",
+    recommendedMspAction:
+      "Pull Cisco IOS / IOS XE versions from inventory, map them to the May 2026 advisories, and schedule firmware upgrades during a standard change window. Prioritize Catalyst 9300 fleets for the secure boot bypass and review who can run maintenance commands on managed gear.",
+    sourceUrls: [
+      "https://sec.cloudapps.cisco.com/security/center/publicationListing.x",
+      "https://www.securityweek.com/cisco-patches-multiple-vulnerabilities-in-ios-software/"
+    ],
+    publishedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-13",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["cisco", "ios", "ios-xe", "catalyst-9300", "secure-boot", "security", "patch"]
+  },
+  {
+    id: "2026-05-07-ivanti-epmm-cve-2026-6973-kev",
+    appName: "Endpoint Manager Mobile (EPMM)",
+    vendor: "Ivanti",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Ivanti EPMM authenticated admin RCE (CVE-2026-6973) exploited in the wild, added to CISA KEV",
+    summary:
+      "Ivanti disclosed CVE-2026-6973 (CVSS 7.2), an improper input validation issue in Endpoint Manager Mobile that lets a remotely authenticated admin user achieve remote code execution. Ivanti and multiple researchers confirm in-the-wild exploitation, with attackers reusing admin credentials harvested in earlier compromises. CISA added the CVE to the Known Exploited Vulnerabilities catalog with a federal due date of May 10. Fixed in EPMM 12.6.1.1, 12.7.0.1, and 12.8.0.1; four additional flaws were patched in the same cycle (CVE-2026-5786, CVE-2026-5787, CVE-2026-5788, CVE-2026-7821).",
+    affectedUsers:
+      "Organizations running Ivanti EPMM 12.8.0.0 and prior, especially deployments with internet-exposed admin interfaces or reused admin credentials.",
+    recommendedMspAction:
+      "Upgrade EPMM to 12.6.1.1, 12.7.0.1, or 12.8.0.1 immediately. After patching, rotate all EPMM admin credentials, enforce MFA on admin accounts, review admin login history for unfamiliar IPs, and restrict the EPMM admin interface to trusted networks.",
+    sourceUrls: [
+      "https://www.ivanti.com/blog/may-2026-epmm-security-update",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://thehackernews.com/2026/05/ivanti-epmm-cve-2026-6973-rce-under.html",
+      "https://www.helpnetsecurity.com/2026/05/08/ivanti-epmm-zero-day-cve-2026-6973/"
+    ],
+    publishedDate: "2026-05-07",
+    lastUpdatedDate: "2026-05-13",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["ivanti", "epmm", "mdm", "security", "patch", "kev", "rce", "actively-exploited"]
+  },
+  {
+    id: "2026-04-openssh-cve-2026-35414-principals",
+    appName: "OpenSSH",
+    vendor: "OpenSSH",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "OpenSSH authorized_keys principals flaw (CVE-2026-35414) can bypass auth to root on CA-trusted hosts",
+    summary:
+      "CVE-2026-35414 (CVSS 8.1) is a 15-year-old bug in OpenSSH's handling of the authorized_keys principals option when combined with a Certificate Authority. A comma in an SSH certificate principal name is parsed as a list separator, which can let a user holding a valid CA-issued certificate authenticate as root on a vulnerable server without leaving normal log traces. Fixed in OpenSSH 10.3 (April 2026). OpenSSH has not reported active exploitation.",
+    affectedUsers:
+      "Linux and other Unix-like servers running OpenSSH before 10.3 that rely on Certificate Authority-issued SSH certificates with an authorized_keys principals list.",
+    recommendedMspAction:
+      "Inventory OpenSSH versions on managed servers and bump anything below 10.3. For SSH CA setups, audit issued certificates for unusual principal names containing commas and rotate the CA signing key if abuse is suspected. Treat this as a priority on any internet-reachable bastion or jump host.",
+    sourceUrls: [
+      "https://www.cisecurity.org/advisory/a-vulnerability-in-openssh-could-allow-for-authentication-bypass_2026-040",
+      "https://www.securityweek.com/openssh-flaw-allowing-full-root-shell-access-lurked-for-15-years/",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-35414"
+    ],
+    publishedDate: "2026-04-20",
+    lastUpdatedDate: "2026-05-13",
+    suggestedPlacement: "news-page",
+    audience: "internal",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["openssh", "linux", "ssh", "security", "patch", "ca", "authentication-bypass"]
+  },
+  // ── PUBLISHED ───────────────────────────────────────────────────────────────
   {
     id: "2026-05-12-microsoft-may-patch-tuesday",
     appName: "Windows / Microsoft 365",
