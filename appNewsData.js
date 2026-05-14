@@ -71,85 +71,112 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
-  // ── DRAFTS (isPublished: false) ─────────────────────────────────────────────
-  // Auto-discovered on 2026-05-13. Review, edit, and flip isPublished: true
-  // before these render on the site.
+  // -- LATEST REVIEWED FINDINGS ------------------------------------------------
+  // Reviewed from current vendor/status/security sources on 2026-05-14.
+  // Future automation discoveries still start with isPublished: false.
   {
     id: "2026-05-13-microsoft-365-south-america-outage-mo1309330",
     appName: "Microsoft 365 / Outlook",
     vendor: "Microsoft",
     category: "Service Impact",
     severity: "Medium",
-    title: "Microsoft 365 South America network issue impacted Outlook and other services (MO1309330)",
+    title: "Microsoft 365 South America network issue impacted Outlook, Teams, SharePoint, and OneDrive (MO1309330)",
     summary:
-      "Microsoft identified a portion of network infrastructure in South America causing intermittent disruption to regional Microsoft 365 services on May 13, including users unable to download attachments in Outlook. Microsoft says it scaled additional resources and telemetry indicates impact is mitigated. The incident is tracked in the Microsoft 365 admin center as MO1309330.",
+      "Microsoft 365 service-health mirrors and Microsoft 365 Status updates reported MO1309330, a May 13 South America connectivity issue that caused email delays, intermittent 503 errors in Outlook and Teams, and SharePoint/OneDrive access problems. Microsoft redirected traffic and brought additional network resources online while monitoring recovery.",
     affectedUsers:
-      "Microsoft 365 tenants with users hosted primarily in South America, especially anyone reporting Outlook attachment download failures or intermittent service connectivity on May 13, 2026.",
+      "Microsoft 365 tenants with users hosted primarily in South America, especially anyone reporting Outlook, Teams, SharePoint, or OneDrive failures during the May 13, 2026 incident window.",
     recommendedMspAction:
-      "Check Microsoft 365 admin center incident MO1309330 for the current state before treating reports as local issues. If users in South America reported attachment or service access failures in the May 13 window, close related tickets as vendor-side once Microsoft confirms resolution.",
+      "Check Microsoft 365 admin center incident MO1309330 before treating matching reports as local endpoint or tenant issues. If South America users reported service access failures in the May 13 window, attach the incident ID to tickets and close them as vendor-side after Microsoft confirms recovery.",
     sourceUrls: [
       "https://status.cloud.microsoft/",
-      "https://www.neowin.net/news/microsoft-confirms-outage-as-outlook-and-other-m365-services-are-down-in-some-places/"
+      "https://status.tsc.fl.edu/",
+      "https://windowsreport.com/outlook-other-microsoft-365-services-are-down-right-now-in-some-regions/"
     ],
     publishedDate: "2026-05-13",
-    lastUpdatedDate: "2026-05-13",
+    lastUpdatedDate: "2026-05-14",
     suggestedPlacement: "both",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
-    tags: ["microsoft", "microsoft-365", "outlook", "service-impact", "south-america", "mo1309330"]
+    tags: ["microsoft", "microsoft-365", "outlook", "teams", "sharepoint", "onedrive", "service-impact", "south-america", "mo1309330"]
+  },
+  {
+    id: "2026-05-13-microsoft-365-apps-install-portal-issue",
+    appName: "Microsoft 365 Apps / Windows 365",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Microsoft 365 portal install button may not download Office apps",
+    summary:
+      "Microsoft Support says some users may be unable to download and install Microsoft 365 Apps from portal.office.com; selecting Install Office can make the button disappear without starting the installer. BleepingComputer also reported Windows 365 advisory WP1309017, tied to a recent service-update configuration change affecting Office downloads on Cloud PCs.",
+    affectedUsers:
+      "Users provisioning Microsoft 365 Apps from the Microsoft 365 portal, especially Windows 365 Cloud PC users or technicians rebuilding Office on managed endpoints.",
+    recommendedMspAction:
+      "Check the Microsoft Support known issue and Microsoft 365 admin center advisory WP1309017 before rebuilding devices or blaming local profile corruption. Use the Office Deployment Tool or an alternate Microsoft 365 download path until the portal install flow is fixed.",
+    sourceUrls: [
+      "https://support.microsoft.com/en-gb/office/office-installation-from-portal-office-com-not-starting-after-selecting-install-ec3c17ad-33e8-4336-9020-d211d6c0bfc6",
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-says-some-users-cant-install-office-on-windows-365-devices/"
+    ],
+    publishedDate: "2026-05-13",
+    lastUpdatedDate: "2026-05-14",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365-apps", "office", "windows-365", "cloud-pc", "service-impact", "wp1309017"]
   },
   {
     id: "2026-05-12-adobe-may-2026-security-bulletins",
-    appName: "Acrobat / Connect / Commerce / Creative Cloud apps",
+    appName: "Connect / Commerce / Creative Cloud apps",
     vendor: "Adobe",
     category: "Security Vulnerability",
     severity: "High",
-    title: "Adobe May 2026 patch day: 10 advisories, 52 CVEs across Connect, Commerce, and Creative Cloud apps",
+    title: "Adobe May 2026 patch day covers Connect, Commerce, and Creative Cloud apps",
     summary:
-      "Adobe released 10 security advisories on May 12 addressing about 52 vulnerabilities across Premiere Pro, Media Encoder, After Effects, Commerce/Magento (APSB26-49), Connect (APSB26-50), Illustrator, Substance 3D Designer/Sampler/Painter, and the Content Credentials SDK. Adobe rates 27 of the issues Critical, with impacts including arbitrary code execution, privilege escalation, security feature bypass, and arbitrary file system read. Adobe says it is not aware of in-the-wild exploitation for any of these.",
+      "Adobe's May 12 security bulletins include critical fixes for Adobe Connect (APSB26-50) and Adobe Commerce/Magento Open Source (APSB26-49), plus advisories for Premiere Pro, Media Encoder, After Effects, Illustrator, Substance 3D apps, and Content Credentials SDK. Adobe says the Connect and Commerce issues are not known exploited in the wild.",
     affectedUsers:
-      "Endpoints and servers running affected Adobe products, particularly Adobe Connect on-premises, Adobe Commerce / Magento Open Source, and Creative Cloud workstations with Premiere Pro, After Effects, Illustrator, or the Substance 3D tools.",
+      "Endpoints and servers running affected Adobe products, particularly Adobe Connect desktop clients, Adobe Commerce / Magento Open Source stores, and Creative Cloud workstations with Premiere Pro, After Effects, Illustrator, Media Encoder, or Substance 3D tools.",
     recommendedMspAction:
-      "Inventory Creative Cloud installs, Acrobat/Reader, Commerce deployments, and any Adobe Connect on-prem instances. Schedule updates through normal patch tooling and prioritize Connect, Commerce, and the apps marked Priority 2 or Critical. Confirm users relaunch Adobe apps after updates land.",
+      "Inventory Creative Cloud installs, Commerce deployments, and Adobe Connect clients. Schedule updates through normal patch tooling, prioritize Commerce/Connect where exposed to untrusted users, and confirm users relaunch Adobe apps after updates land.",
     sourceUrls: [
       "https://helpx.adobe.com/security/security-bulletin.html",
       "https://helpx.adobe.com/security/products/connect/apsb26-50.html",
-      "https://www.ravedigital.agency/blog/adobe-commerce-security-update-apsb26-49/",
+      "https://helpx.adobe.com/security/products/magento/apsb26-49.html",
       "https://www.hkcert.org/security-bulletin/adobe-monthly-security-update-may-2026"
     ],
     publishedDate: "2026-05-12",
-    lastUpdatedDate: "2026-05-13",
+    lastUpdatedDate: "2026-05-14",
     suggestedPlacement: "both",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
-    tags: ["adobe", "acrobat", "connect", "commerce", "creative-cloud", "security", "patch"]
+    tags: ["adobe", "connect", "commerce", "magento", "creative-cloud", "security", "patch"]
   },
   {
-    id: "2026-05-12-fortinet-fortisandbox-cve-2026-26083",
-    appName: "FortiSandbox / FortiSandbox Cloud / FortiSandbox PaaS",
+    id: "2026-05-12-fortinet-fortisandbox-fortiauthenticator-critical-rce",
+    appName: "FortiSandbox / FortiAuthenticator",
     vendor: "Fortinet",
     category: "Security Vulnerability",
     severity: "Critical",
-    title: "Fortinet patches critical unauthenticated FortiSandbox authorization bypass (CVE-2026-26083, FG-IR-26-136)",
+    title: "Fortinet patches critical unauthenticated FortiSandbox and FortiAuthenticator RCE paths",
     summary:
-      "Fortinet's May 12 PSIRT batch addresses five vulnerabilities across FortiAP, FortiOS, and management products. The highest-impact issue is CVE-2026-26083, a missing authorization flaw in FortiSandbox, FortiSandbox Cloud, and FortiSandbox PaaS that requires no authentication and could let a remote attacker reach restricted functionality or sandbox analysis data. Affected versions include FortiSandbox 5.0 and 4.4, FortiSandbox Cloud 24, 23, and 5.0, and FortiSandbox PaaS 22.1 through 23.4.",
+      "Fortinet published two May 12 critical advisories: CVE-2026-26083, a missing authorization flaw in FortiSandbox, FortiSandbox Cloud, and FortiSandbox PaaS Web UI, and CVE-2026-44277, improper access control in FortiAuthenticator API endpoints. Both are CVSS 9.1, unauthenticated, and marked not known exploited at publication.",
     affectedUsers:
-      "Clients running on-premises FortiSandbox 4.4 or 5.0, or consuming FortiSandbox Cloud / FortiSandbox PaaS at the affected versions, especially environments where the sandbox is reachable from untrusted networks.",
+      "Clients running affected FortiSandbox 4.4/5.0, FortiSandbox Cloud/PaaS, or FortiAuthenticator 8.0, 6.6, or 6.5 versions, especially where management, Web UI, or API interfaces are reachable from untrusted networks.",
     recommendedMspAction:
-      "Inventory FortiSandbox instances, upgrade to the fixed builds called out in FG-IR-26-136, and restrict FortiSandbox management interfaces to trusted networks until patched. Review FortiSandbox access logs for anomalies during the disclosure window.",
+      "Upgrade FortiSandbox and FortiAuthenticator to the fixed builds named in FG-IR-26-136 and FG-IR-26-128. Until patched, restrict management interfaces to trusted networks and disable FortiAuthenticator API access on exposed interfaces where feasible. Review access logs around the disclosure window.",
     sourceUrls: [
-      "https://www.fortiguard.com/psirt",
-      "https://cybersecuritynews.com/fortinet-enterprise-products-vulnerabilities/"
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-136",
+      "https://fortiguard.fortinet.com/psirt/FG-IR-26-128",
+      "https://www.bleepingcomputer.com/news/security/fortinet-warns-of-critical-rce-flaws-in-fortisandbox-and-fortiauthenticator/"
     ],
     publishedDate: "2026-05-12",
-    lastUpdatedDate: "2026-05-13",
+    lastUpdatedDate: "2026-05-14",
     suggestedPlacement: "both",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
-    tags: ["fortinet", "fortisandbox", "security", "patch", "psirt", "unauthenticated"]
+    tags: ["fortinet", "fortisandbox", "fortiauthenticator", "security", "patch", "psirt", "unauthenticated", "rce"]
   },
   {
     id: "2026-05-12-cisco-ios-xe-may-2026-advisories",
@@ -184,22 +211,22 @@ export const appNewsItems = [
     severity: "Critical",
     title: "Ivanti EPMM authenticated admin RCE (CVE-2026-6973) exploited in the wild, added to CISA KEV",
     summary:
-      "Ivanti disclosed CVE-2026-6973 (CVSS 7.2), an improper input validation issue in Endpoint Manager Mobile that lets a remotely authenticated admin user achieve remote code execution. Ivanti and multiple researchers confirm in-the-wild exploitation, with attackers reusing admin credentials harvested in earlier compromises. CISA added the CVE to the Known Exploited Vulnerabilities catalog with a federal due date of May 10. Fixed in EPMM 12.6.1.1, 12.7.0.1, and 12.8.0.1; four additional flaws were patched in the same cycle (CVE-2026-5786, CVE-2026-5787, CVE-2026-5788, CVE-2026-7821).",
+      "Ivanti's May 7 EPMM security update disclosed CVE-2026-6973, an improper input validation issue that can let a remotely authenticated admin achieve remote code execution. Ivanti says it is aware of very limited exploitation; NVD's CISA ADP record lists the issue in the Known Exploited Vulnerabilities catalog with a May 10 federal due date. Fixed builds include EPMM 12.6.1.1, 12.7.0.1, and 12.8.0.1.",
     affectedUsers:
-      "Organizations running Ivanti EPMM 12.8.0.0 and prior, especially deployments with internet-exposed admin interfaces or reused admin credentials.",
+      "Organizations running on-premises Ivanti EPMM before 12.6.1.1, 12.7.0.1, or 12.8.0.1, especially deployments with internet-exposed admin interfaces or reused admin credentials.",
     recommendedMspAction:
       "Upgrade EPMM to 12.6.1.1, 12.7.0.1, or 12.8.0.1 immediately. After patching, rotate all EPMM admin credentials, enforce MFA on admin accounts, review admin login history for unfamiliar IPs, and restrict the EPMM admin interface to trusted networks.",
     sourceUrls: [
       "https://www.ivanti.com/blog/may-2026-epmm-security-update",
       "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-      "https://thehackernews.com/2026/05/ivanti-epmm-cve-2026-6973-rce-under.html",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-6973",
       "https://www.helpnetsecurity.com/2026/05/08/ivanti-epmm-zero-day-cve-2026-6973/"
     ],
     publishedDate: "2026-05-07",
-    lastUpdatedDate: "2026-05-13",
+    lastUpdatedDate: "2026-05-14",
     suggestedPlacement: "both",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
     tags: ["ivanti", "epmm", "mdm", "security", "patch", "kev", "rce", "actively-exploited"]
   },
@@ -434,21 +461,21 @@ export const appNewsItems = [
     id: "2026-05-05-google-chrome-148-security-update",
     appName: "Google Chrome",
     vendor: "Google",
-    category: "Product Change",
-    severity: "Medium",
-    title: "Chrome 148 reaches stable for desktop and Android",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Chrome 148 stable includes 127 security fixes, including Critical Blink, Mobile, and Chromoting CVEs",
     summary:
-      "Google promoted Chrome 148 to stable for Windows, macOS, Linux, and Android. Google notes the desktop release will roll out over the coming days and that security changes will be updated separately.",
+      "Google promoted Chrome 148 to stable for Windows, macOS, Linux, and Android. The desktop release notes now list 127 security fixes, including Critical CVE-2026-7896, CVE-2026-7897, and CVE-2026-7898, plus many High-severity V8, ANGLE, WebRTC, Skia, DOM, and GPU issues.",
     affectedUsers:
       "Windows, macOS, Linux, and Android users running Chrome below the 148 stable builds, especially managed browsers that require relaunch to complete updates.",
     recommendedMspAction:
-      "Keep Chrome auto-update policies healthy, monitor managed browser versions, and prompt users to relaunch where the 148 update is staged but not applied. Recheck Google's release notes when the security section is updated.",
+      "Keep Chrome auto-update policies healthy, monitor managed browser versions, and prompt users to relaunch where the 148 update is staged but not applied. Prioritize shared workstations, kiosks, and browsers used for privileged admin portals.",
     sourceUrls: [
       "https://chromereleases.googleblog.com/2026/05/stable-channel-update-for-desktop.html",
       "https://chromereleases.googleblog.com/2026/05/chrome-for-android-update.html"
     ],
     publishedDate: "2026-05-05",
-    lastUpdatedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-14",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
