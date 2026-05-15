@@ -71,6 +71,112 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- NEW DRAFTS (2026-05-14 second-pass scan) --------------------------------
+  // Auto-discovered on second pass. Review, edit, and flip isPublished: true
+  // before these render on the site.
+  {
+    id: "2026-05-13-palo-alto-pan-os-cve-2026-0300",
+    appName: "PAN-OS / GlobalProtect Authentication Portal",
+    vendor: "Palo Alto Networks",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Palo Alto Networks begins shipping PAN-OS patches for actively exploited User-ID Authentication Portal RCE (CVE-2026-0300)",
+    summary:
+      "CVE-2026-0300 (CVSS 9.3) is an unauthenticated buffer-overflow / out-of-bounds write in the PAN-OS User-ID Authentication Portal (Captive Portal) that lets a remote attacker run code as root on PA-Series and VM-Series firewalls by sending specially crafted packets. Palo Alto Networks confirms in-the-wild exploitation observed as early as April 9, 2026, and CISA added the CVE to KEV on May 6. First-round patches began rolling out May 13, with a second round expected May 28. Prisma Access, Cloud NGFW, and Panorama appliances are not affected.",
+    affectedUsers:
+      "Organizations running PAN-OS 10.2, 11.1, 11.2, or 12.1 on PA-Series or VM-Series firewalls, especially anyone with the User-ID Authentication Portal / Captive Portal reachable from untrusted networks or the public internet.",
+    recommendedMspAction:
+      "Apply the May 13 PAN-OS patches for affected branches as soon as change windows allow. Until patched, disable or restrict the Authentication Portal where possible and front it with source-IP allow-lists. Review firewall logs and Authentication Portal access history back to early April for unfamiliar source IPs. Plan a follow-up window after the May 28 second round drops.",
+    sourceUrls: [
+      "https://security.paloaltonetworks.com/CVE-2026-0300",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://www.securityweek.com/palo-alto-networks-to-patch-zero-day-exploited-to-hack-firewalls/",
+      "https://thehackernews.com/2026/05/palo-alto-pan-os-flaw-under-active.html"
+    ],
+    publishedDate: "2026-05-13",
+    lastUpdatedDate: "2026-05-14",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["palo-alto-networks", "pan-os", "firewall", "globalprotect", "captive-portal", "security", "patch", "kev", "actively-exploited", "zero-day"]
+  },
+  {
+    id: "2026-05-13-microsoft-yellowkey-greenplasma-zerodays-disclosed",
+    appName: "Windows (BitLocker / privilege escalation)",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Researcher publicly discloses two unpatched Microsoft zero-days: \"YellowKey\" BitLocker bypass and \"GreenPlasma\" LPE",
+    summary:
+      "The day after Patch Tuesday, an independent researcher publicly released details on two Microsoft zero-days dubbed YellowKey (a BitLocker bypass) and GreenPlasma (a local privilege escalation). Neither was addressed in the May 2026 cumulative updates, and Microsoft has not yet issued advisories or CVEs. Treat as an evolving situation pending Microsoft's response.",
+    affectedUsers:
+      "Managed Windows endpoints \u2014 especially laptops that rely on BitLocker for at-rest protection, and multi-user shared workstations where local privilege escalation matters.",
+    recommendedMspAction:
+      "Watch MSRC for follow-up advisories and CVE assignments. In the meantime, reinforce BitLocker hardening (TPM + PIN, suspend BitLocker before firmware updates, audit recovery-key handling), confirm least-privilege on standard user accounts, and brief helpdesk so they recognize related ticket symptoms. Re-rank severity once Microsoft publishes details.",
+    sourceUrls: [
+      "https://www.theregister.com/security/2026/05/13/disgruntled-researcher-releases-two-more-microsoft-zero-days/5239758"
+    ],
+    publishedDate: "2026-05-13",
+    lastUpdatedDate: "2026-05-14",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "windows", "bitlocker", "privilege-escalation", "zero-day", "disclosure", "security"]
+  },
+  {
+    id: "2026-05-12-apple-macos-ios-may-2026-security-updates",
+    appName: "macOS / iOS",
+    vendor: "Apple",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Apple ships macOS Tahoe 26.5, Sequoia 15.7.7, Sonoma 14.8.7, and iOS 26.5 with 80+ CVE fixes",
+    summary:
+      "Apple released macOS Tahoe 26.5 (79 CVEs), macOS Sequoia 15.7.7 (45 CVEs), macOS Sonoma 14.8.7 (42 CVEs), and iOS 26.5 (50+ CVEs). Notable issues include CVE-2026-28819, a Wi-Fi flaw that may let an app execute code with kernel privileges, and CVE-2026-28972, a kernel out-of-bounds write present across all three macOS lines. Apple says none of the CVEs have been observed exploited in the wild.",
+    affectedUsers:
+      "Mac fleets (Apple silicon and Intel) on any of the three supported macOS lines, plus company-managed iPhones or iPads on iOS 26.4 or earlier.",
+    recommendedMspAction:
+      "Stage the Apple updates through MDM with a short soak ring, then push broadly. Confirm FileVault, Wi-Fi, and any kernel extensions still work on a sample machine before tenant-wide rollout. Remind users with personal Macs / iPhones used for work to install the updates.",
+    sourceUrls: [
+      "https://support.apple.com/en-us/100100",
+      "https://www.zerodayinitiative.com/blog/2026/5/12/the-apple-macos-security-update-review",
+      "https://www.macrumors.com/2026/05/11/ios-26-5-security-fixes/"
+    ],
+    publishedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-14",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["apple", "macos", "ios", "security", "patch", "kernel", "wifi"]
+  },
+  {
+    id: "2026-05-07-mozilla-firefox-150-esr-security-updates",
+    appName: "Firefox / Firefox ESR",
+    vendor: "Mozilla",
+    category: "Security Vulnerability",
+    severity: "Medium",
+    title: "Mozilla patches memory-safety and DOM bugs across Firefox 150 and ESR 140.10 / 115.35",
+    summary:
+      "Mozilla published MFSA 2026-30 (Firefox 150), MFSA 2026-31 (ESR 115.35), and MFSA 2026-32 (ESR 140.10) on May 7, addressing memory-safety bugs, a DOM use-after-free (CVE-2026-8090), and boundary issues in audio/video components. Mozilla rates several Critical because some bugs show evidence of memory corruption that could be exploited for arbitrary code execution. No in-the-wild exploitation reported.",
+    affectedUsers:
+      "Endpoints running Firefox below 150.0.1 or Firefox ESR below 140.10.1 / 115.35.1, especially managed installs that only auto-update on relaunch.",
+    recommendedMspAction:
+      "Push Firefox / ESR updates through your endpoint management tool and prompt relaunch on managed machines. Confirm version reporting in inventory after the rollout. If users run portable Firefox builds, alert them to update manually.",
+    sourceUrls: [
+      "https://www.mozilla.org/en-US/security/advisories/",
+      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-30/",
+      "https://www.cisecurity.org/advisory/multiple-vulnerabilities-in-mozilla-products-could-allow-for-arbitrary-code-execution_2026-032"
+    ],
+    publishedDate: "2026-05-07",
+    lastUpdatedDate: "2026-05-14",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["mozilla", "firefox", "browser", "security", "patch", "memory-safety"]
+  },
   // -- LATEST REVIEWED FINDINGS ------------------------------------------------
   // Reviewed from current vendor/status/security sources on 2026-05-14.
   // Future automation discoveries still start with isPublished: false.
@@ -263,21 +369,23 @@ export const appNewsItems = [
     vendor: "Microsoft",
     category: "Security Vulnerability",
     severity: "High",
-    title: "Microsoft May 2026 Patch Tuesday addresses about 120 CVEs, 17 Critical, no zero-days",
+    title: "Microsoft May 2026 Patch Tuesday: 120 first-party / 137 total CVEs, zero-click Outlook RCE, no zero-days",
     summary:
-      "Microsoft's May 2026 cumulative update fixes around 120 vulnerabilities across Windows, Office, Azure, and developer tools, with 17 rated Critical and many of those remote code execution. Notable issues include several Word RCEs that can trigger via the Preview Pane, a Windows Netlogon RCE (CVE-2026-41089) on domain controllers, and a DNS Client RCE. No zero-days were disclosed.",
+      "Microsoft's May 2026 cumulative update fixes about 120 first-party CVEs (around 137 when counting bundled third-party fixes) across Windows, Office, Azure, and developer tools. Highlights include a zero-click Outlook use-after-free RCE (CVE-2026-40361) that can fire on preview, four Word RCEs (two flagged \"more likely to be exploited\") including preview-pane vectors, a Windows Netlogon stack overflow RCE on domain controllers (CVE-2026-41089, CVSS 9.8), and a heap-overflow DNS Client RCE (CVE-2026-41096, CVSS 9.8). No zero-days were disclosed in the bundle itself.",
     affectedUsers:
-      "Any managed Windows endpoint or server, Microsoft 365 Apps install, and Windows Server domain controller running affected May 2026 builds.",
+      "Any managed Windows endpoint or server, Microsoft 365 Apps install (especially Outlook and Word), and Windows Server domain controller running affected May 2026 builds.",
     recommendedMspAction:
-      "Schedule the May 2026 cumulative update through normal patch tooling, prioritizing internet-exposed servers and domain controllers. Validate Office line-of-business apps after the Word fixes land. This is also the last comfortable patch window before the Secure Boot certificate refresh deadline on June 26, 2026 \u2014 confirm Secure Boot readiness on managed fleets as part of the same cycle.",
+      "Schedule the May 2026 cumulative update through normal patch tooling, prioritizing domain controllers (Netlogon), internet-exposed servers, and any host that handles untrusted email (Outlook zero-click). Validate Office line-of-business apps after the Word fixes land. This is also the last comfortable patch window before the Secure Boot certificate refresh deadline on June 26, 2026 \u2014 confirm Secure Boot readiness on managed fleets as part of the same cycle.",
     sourceUrls: [
       "https://msrc.microsoft.com/update-guide/releaseNote/2026-May",
       "https://www.bleepingcomputer.com/news/microsoft/microsoft-may-2026-patch-tuesday-fixes-120-flaws-no-zero-days/",
-      "https://www.tenable.com/blog/microsofts-may-2026-patch-tuesday-addresses-118-cves-cve-2026-41103",
-      "https://blog.talosintelligence.com/microsoft-patch-tuesday-may-2026/"
+      "https://www.scworld.com/news/patch-tuesday-no-zero-days-among-137-microsoft-cves-4-word-rces",
+      "https://www.securityweek.com/microsoft-patches-critical-zero-click-outlook-vulnerability-threatening-enterprises/",
+      "https://blog.talosintelligence.com/microsoft-patch-tuesday-may-2026/",
+      "https://socradar.io/blog/may-2026-patch-tuesday-zero-day/"
     ],
     publishedDate: "2026-05-12",
-    lastUpdatedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-14",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
