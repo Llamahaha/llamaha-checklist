@@ -71,35 +71,84 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
-  // -- NEW DRAFTS (2026-05-14 second-pass scan) --------------------------------
-  // Auto-discovered on second pass. Review, edit, and flip isPublished: true
-  // before these render on the site.
+  // -- LATEST REVIEWED FINDINGS ------------------------------------------------
+  // Reviewed from current vendor/status/security sources on 2026-05-16.
+  // Future automation discoveries still start with isPublished: false.
   {
-    id: "2026-05-13-palo-alto-pan-os-cve-2026-0300",
+    id: "2026-05-16-palo-alto-pan-os-cve-2026-0300-fix-timeline",
     appName: "PAN-OS / GlobalProtect Authentication Portal",
     vendor: "Palo Alto Networks",
     category: "Security Vulnerability",
     severity: "Critical",
-    title: "Palo Alto Networks begins shipping PAN-OS patches for actively exploited User-ID Authentication Portal RCE (CVE-2026-0300)",
+    title: "Palo Alto updates PAN-OS CVE-2026-0300 fix timeline for actively exploited Authentication Portal RCE",
     summary:
-      "CVE-2026-0300 (CVSS 9.3) is an unauthenticated buffer-overflow / out-of-bounds write in the PAN-OS User-ID Authentication Portal (Captive Portal) that lets a remote attacker run code as root on PA-Series and VM-Series firewalls by sending specially crafted packets. Palo Alto Networks confirms in-the-wild exploitation observed as early as April 9, 2026, and CISA added the CVE to KEV on May 6. First-round patches began rolling out May 13, with a second round expected May 28. Prisma Access, Cloud NGFW, and Panorama appliances are not affected.",
+      "Palo Alto Networks updated its CVE-2026-0300 advisory on May 16 with more PAN-OS fix-timeline detail. The CVSS 9.3 issue is an unauthenticated buffer overflow in the User-ID Authentication Portal / Captive Portal that can let a remote attacker execute code as root on PA-Series and VM-Series firewalls; Palo Alto marks exploit maturity as attacked.",
     affectedUsers:
-      "Organizations running PAN-OS 10.2, 11.1, 11.2, or 12.1 on PA-Series or VM-Series firewalls, especially anyone with the User-ID Authentication Portal / Captive Portal reachable from untrusted networks or the public internet.",
+      "Organizations running affected PAN-OS 10.2, 11.1, 11.2, or 12.1 builds on PA-Series or VM-Series firewalls, especially where the User-ID Authentication Portal / Captive Portal is reachable from untrusted networks or the public internet.",
     recommendedMspAction:
-      "Apply the May 13 PAN-OS patches for affected branches as soon as change windows allow. Until patched, disable or restrict the Authentication Portal where possible and front it with source-IP allow-lists. Review firewall logs and Authentication Portal access history back to early April for unfamiliar source IPs. Plan a follow-up window after the May 28 second round drops.",
+      "Apply fixed PAN-OS builds as they become available for the deployed branch. Until patched, restrict Authentication Portal access to trusted internal IP ranges or disable the portal where possible. Review firewall and portal access logs for unfamiliar source IPs, and schedule a follow-up patch window for branches whose fixed release remains in the May 28 wave.",
     sourceUrls: [
       "https://security.paloaltonetworks.com/CVE-2026-0300",
-      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-      "https://www.securityweek.com/palo-alto-networks-to-patch-zero-day-exploited-to-hack-firewalls/",
-      "https://thehackernews.com/2026/05/palo-alto-pan-os-flaw-under-active.html"
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
     ],
-    publishedDate: "2026-05-13",
-    lastUpdatedDate: "2026-05-14",
+    publishedDate: "2026-05-16",
+    lastUpdatedDate: "2026-05-16",
     suggestedPlacement: "both",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
     tags: ["palo-alto-networks", "pan-os", "firewall", "globalprotect", "captive-portal", "security", "patch", "kev", "actively-exploited", "zero-day"]
+  },
+  {
+    id: "2026-05-15-microsoft-edge-148-3967-70-security-update",
+    appName: "Microsoft Edge",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Microsoft Edge 148.0.3967.70 ships May 15 security fixes",
+    summary:
+      "Microsoft released Edge Stable 148.0.3967.70 on May 15 with the latest Chromium security updates plus three Edge-specific CVEs: CVE-2026-45495, CVE-2026-45494, and CVE-2026-45492. Microsoft says CVE links will be added as available.",
+    affectedUsers:
+      "Managed Windows, macOS, and Linux endpoints running Microsoft Edge Stable below 148.0.3967.70, especially devices that defer browser restarts or use Edge for admin portals and Microsoft 365 work.",
+    recommendedMspAction:
+      "Confirm Edge auto-update rings are delivering 148.0.3967.70 or later, and prompt users to restart Edge where the update is staged. Check any kiosk, shared, or server-adjacent browser installs that do not follow normal user auto-update behavior.",
+    sourceUrls: [
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnotes-security",
+      "https://msrc.microsoft.com/update-guide"
+    ],
+    publishedDate: "2026-05-15",
+    lastUpdatedDate: "2026-05-16",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "edge", "browser", "security", "chromium", "patch", "cve"]
+  },
+  {
+    id: "2026-05-14-cisco-sd-wan-controller-cve-2026-20182",
+    appName: "Catalyst SD-WAN Controller / Manager",
+    vendor: "Cisco",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Cisco patches actively exploited Catalyst SD-WAN auth bypass (CVE-2026-20182)",
+    summary:
+      "Cisco published a May 14 advisory for CVE-2026-20182, a CVSS 10.0 authentication bypass in Catalyst SD-WAN Controller and Manager peering authentication. Cisco PSIRT says it is aware of limited exploitation; successful exploitation can grant an internal high-privileged non-root account and enable SD-WAN fabric configuration manipulation.",
+    affectedUsers:
+      "Organizations running Cisco Catalyst SD-WAN Controller or Manager across on-prem, Cisco SD-WAN Cloud-Pro, Cisco-managed SD-WAN Cloud, or FedRAMP deployments.",
+    recommendedMspAction:
+      "Before upgrading, collect admin-tech output from SD-WAN control components to preserve indicators. Upgrade to the fixed release for the deployed branch as soon as possible, then review auth.log, control-connection detail, and peering events for unknown IPs or suspicious vmanage/vsmart/vbond relationships.",
+    sourceUrls: [
+      "https://www.cisco.com/c/en/us/support/docs/csa/cisco-sa-sdwan-rpa2-v69WY2SW.html",
+      "https://www.cisco.com/c/en/us/support/docs/csa/cisco-sa-sdwan-mltvnps2-JxpWm7R.html",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-20182"
+    ],
+    publishedDate: "2026-05-14",
+    lastUpdatedDate: "2026-05-16",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["cisco", "sd-wan", "vmanage", "vsmart", "security", "patch", "kev", "actively-exploited", "authentication-bypass"]
   },
   {
     id: "2026-05-13-microsoft-yellowkey-greenplasma-zerodays-disclosed",
@@ -127,59 +176,60 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-12-apple-macos-ios-may-2026-security-updates",
-    appName: "macOS / iOS",
+    appName: "macOS / iOS / Safari",
     vendor: "Apple",
     category: "Security Vulnerability",
     severity: "High",
-    title: "Apple ships macOS Tahoe 26.5, Sequoia 15.7.7, Sonoma 14.8.7, and iOS 26.5 with 80+ CVE fixes",
+    title: "Apple ships May platform security updates for macOS, iOS, iPadOS, and Safari",
     summary:
-      "Apple released macOS Tahoe 26.5 (79 CVEs), macOS Sequoia 15.7.7 (45 CVEs), macOS Sonoma 14.8.7 (42 CVEs), and iOS 26.5 (50+ CVEs). Notable issues include CVE-2026-28819, a Wi-Fi flaw that may let an app execute code with kernel privileges, and CVE-2026-28972, a kernel out-of-bounds write present across all three macOS lines. Apple says none of the CVEs have been observed exploited in the wild.",
+      "Apple published security content for macOS Tahoe 26.5, macOS Sequoia 15.7.7, iOS/iPadOS 26.5, and Safari 26.5. The updates include kernel, WebKit, Wi-Fi, ImageIO, and sandbox-related fixes such as CVE-2026-28819 and CVE-2026-28972.",
     affectedUsers:
-      "Mac fleets (Apple silicon and Intel) on any of the three supported macOS lines, plus company-managed iPhones or iPads on iOS 26.4 or earlier.",
+      "Mac fleets on supported macOS Tahoe, Sequoia, or Sonoma lines, company-managed iPhones or iPads on iOS/iPadOS 26.4 or earlier, and Safari users on macOS Sonoma or Sequoia.",
     recommendedMspAction:
-      "Stage the Apple updates through MDM with a short soak ring, then push broadly. Confirm FileVault, Wi-Fi, and any kernel extensions still work on a sample machine before tenant-wide rollout. Remind users with personal Macs / iPhones used for work to install the updates.",
+      "Stage the Apple updates through MDM with a short soak ring, then push broadly. Confirm FileVault, Wi-Fi, VPN, security tools, and any kernel/system extensions still work on a sample machine before tenant-wide rollout. Remind BYOD users who access company data to update personal Apple devices.",
     sourceUrls: [
-      "https://support.apple.com/en-us/100100",
-      "https://www.zerodayinitiative.com/blog/2026/5/12/the-apple-macos-security-update-review",
-      "https://www.macrumors.com/2026/05/11/ios-26-5-security-fixes/"
+      "https://support.apple.com/en-us/127115",
+      "https://support.apple.com/en-us/127116",
+      "https://support.apple.com/en-us/127117",
+      "https://support.apple.com/en-us/127110",
+      "https://support.apple.com/en-us/127121"
     ],
     publishedDate: "2026-05-12",
-    lastUpdatedDate: "2026-05-14",
+    lastUpdatedDate: "2026-05-16",
     suggestedPlacement: "both",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
-    tags: ["apple", "macos", "ios", "security", "patch", "kernel", "wifi"]
+    tags: ["apple", "macos", "ios", "ipados", "safari", "security", "patch", "kernel", "webkit", "wifi"]
   },
   {
-    id: "2026-05-07-mozilla-firefox-150-esr-security-updates",
+    id: "2026-05-12-mozilla-firefox-150-0-3-security-update",
     appName: "Firefox / Firefox ESR",
     vendor: "Mozilla",
     category: "Security Vulnerability",
-    severity: "Medium",
-    title: "Mozilla patches memory-safety and DOM bugs across Firefox 150 and ESR 140.10 / 115.35",
+    severity: "High",
+    title: "Mozilla ships Firefox 150.0.3 after 150.0.2 and ESR security fixes",
     summary:
-      "Mozilla published MFSA 2026-30 (Firefox 150), MFSA 2026-31 (ESR 115.35), and MFSA 2026-32 (ESR 140.10) on May 7, addressing memory-safety bugs, a DOM use-after-free (CVE-2026-8090), and boundary issues in audio/video components. Mozilla rates several Critical because some bugs show evidence of memory corruption that could be exploited for arbitrary code execution. No in-the-wild exploitation reported.",
+      "Mozilla published Firefox 150.0.3 on May 12 for high-impact JavaScript/JIT, WebAssembly, and Profile Backup sandbox issues, following May 7 Firefox 150.0.2 and ESR 140.10.2 / 115.35.2 fixes for CVE-2026-8090 and memory-safety bugs. Mozilla says some memory-safety bugs showed evidence of memory corruption that could be exploitable with enough effort.",
     affectedUsers:
-      "Endpoints running Firefox below 150.0.1 or Firefox ESR below 140.10.1 / 115.35.1, especially managed installs that only auto-update on relaunch.",
+      "Endpoints running Firefox below 150.0.3 or Firefox ESR below 140.10.2 / 115.35.2, especially managed installs that only auto-update after relaunch.",
     recommendedMspAction:
       "Push Firefox / ESR updates through your endpoint management tool and prompt relaunch on managed machines. Confirm version reporting in inventory after the rollout. If users run portable Firefox builds, alert them to update manually.",
     sourceUrls: [
       "https://www.mozilla.org/en-US/security/advisories/",
-      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-30/",
-      "https://www.cisecurity.org/advisory/multiple-vulnerabilities-in-mozilla-products-could-allow-for-arbitrary-code-execution_2026-032"
+      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-45/",
+      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-40/",
+      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-41/",
+      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-42/"
     ],
-    publishedDate: "2026-05-07",
-    lastUpdatedDate: "2026-05-14",
-    suggestedPlacement: "news-page",
+    publishedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-16",
+    suggestedPlacement: "both",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
-    tags: ["mozilla", "firefox", "browser", "security", "patch", "memory-safety"]
+    tags: ["mozilla", "firefox", "browser", "security", "patch", "memory-safety", "jit", "webassembly"]
   },
-  // -- LATEST REVIEWED FINDINGS ------------------------------------------------
-  // Reviewed from current vendor/status/security sources on 2026-05-14.
-  // Future automation discoveries still start with isPublished: false.
   {
     id: "2026-05-13-microsoft-365-south-america-outage-mo1309330",
     appName: "Microsoft 365 / Outlook",
