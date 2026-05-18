@@ -72,8 +72,60 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
   // -- LATEST REVIEWED FINDINGS ------------------------------------------------
-  // Reviewed from current vendor/status/security sources on 2026-05-16.
+  // Reviewed from current vendor/status/security sources on 2026-05-18.
   // Future automation discoveries still start with isPublished: false.
+  {
+    id: "2026-05-18-microsoft-365-teams-connectors-infopath-cutoffs",
+    appName: "Teams / SharePoint Online",
+    vendor: "Microsoft",
+    category: "Deprecation",
+    severity: "High",
+    title: "Microsoft 365 May 18 cutoff starts for Teams Office 365 Connectors and InfoPath publishing",
+    summary:
+      "Microsoft's final Office 365 Connectors retirement rollout for Teams starts May 18 and completes May 22, after which connector-based webhooks stop functioning and must move to Power Automate Workflows webhooks. Microsoft is also blocking new or updated InfoPath form publishing in SharePoint Online after May 18 ahead of full InfoPath Forms Services retirement on July 14, 2026.",
+    affectedUsers:
+      "Teams channels using legacy Office 365 Connectors or webhook.office.com URLs, and SharePoint Online sites that still publish or update InfoPath forms.",
+    recommendedMspAction:
+      "Audit Teams connector usage immediately and move remaining webhooks to Power Automate Workflows. For SharePoint, identify InfoPath form libraries and list forms, stop promising new InfoPath changes, and start migration plans to Power Apps, Power Automate, or Microsoft Forms before the July 14 retirement.",
+    sourceUrls: [
+      "https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/",
+      "https://learn.microsoft.com/en-us/microsoftteams/m365-custom-connectors",
+      "https://mc.merill.net/message/MC1255407",
+      "https://techcommunity.microsoft.com/t5/microsoft-sharepoint-blog/support-update-for-infopath-forms-services-in-microsoft-365/ba-p/3858190"
+    ],
+    publishedDate: "2026-05-18",
+    lastUpdatedDate: "2026-05-18",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "teams", "sharepoint", "office-365-connectors", "webhooks", "infopath", "deprecation", "power-automate"]
+  },
+  {
+    id: "2026-05-18-zoom-web-portal-admin-release",
+    appName: "Zoom Web Portal",
+    vendor: "Zoom",
+    category: "Product Change",
+    severity: "Informational",
+    title: "Zoom May 18 web release adds admin dashboard, privacy masking, CMK, and new web experience controls",
+    summary:
+      "Zoom's May 18 web release details include Usage Data Dashboard improvements for client-version sorting, pagination, and date filtering; report/dashboard PII masking controls; Customer Managed Key proxy and certificate support; and the phased new Zoom Web experience with redesigned home, product menu, profile menu, and Admin Center navigation.",
+    affectedUsers:
+      "Zoom account owners, admins, helpdesk teams, and users affected by web portal navigation, reporting, privacy masking, Customer Managed Key, or admin dashboard workflows.",
+    recommendedMspAction:
+      "Review report privacy defaults, Customer Managed Key environments, and admin dashboard workflows. Update support notes for the new Zoom Web experience so technicians can help users who see either the legacy or redesigned web portal during phased rollout.",
+    sourceUrls: [
+      "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060437",
+      "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0084872"
+    ],
+    publishedDate: "2026-05-18",
+    lastUpdatedDate: "2026-05-18",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["zoom", "web-portal", "release-notes", "admin", "dashboard", "privacy", "cmk"]
+  },
   {
     id: "2026-05-16-palo-alto-pan-os-cve-2026-0300-fix-timeline",
     appName: "PAN-OS / GlobalProtect Authentication Portal",
@@ -229,6 +281,30 @@ export const appNewsItems = [
     isPublished: true,
     isPlaceholder: false,
     tags: ["mozilla", "firefox", "browser", "security", "patch", "memory-safety", "jit", "webassembly"]
+  },
+  {
+    id: "2026-04-27-foxit-pdf-reader-editor-security-updates",
+    appName: "Foxit PDF Reader / PDF Editor",
+    vendor: "Foxit",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Foxit PDF Reader 2026.1.1 and PDF Editor 2026.1.1/14.0.4 fix PDF handling vulnerabilities",
+    summary:
+      "Foxit's latest PDF Reader and PDF Editor security bulletin covers multiple Windows fixes, including denial-of-service issues and several use-after-free or input-validation flaws that could allow arbitrary code execution or information disclosure when handling crafted PDFs, XFA files, annotations, signatures, or form structures.",
+    affectedUsers:
+      "Windows endpoints running Foxit PDF Reader 2026.1.0.36452 or earlier, Foxit PDF Editor 2026.1.0.36452 or earlier, older supported 2025/2024/2023 branches, or perpetual 14.x / 13.x builds in scope.",
+    recommendedMspAction:
+      "Update managed Foxit installs to Foxit PDF Reader 2026.1.1 and Foxit PDF Editor 2026.1.1, 14.0.4, or 13.2.4 as appropriate for the licensing branch. Prioritize users who open PDFs from email, portals, shared project folders, or unknown external senders.",
+    sourceUrls: [
+      "https://www.foxit.com/support/security-bulletins.html"
+    ],
+    publishedDate: "2026-04-27",
+    lastUpdatedDate: "2026-05-18",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["foxit", "pdf-reader", "pdf-editor", "security", "patch", "pdf", "use-after-free"]
   },
   {
     id: "2026-05-13-microsoft-365-south-america-outage-mo1309330",
@@ -518,30 +594,6 @@ export const appNewsItems = [
     isPublished: true,
     isPlaceholder: false,
     tags: ["microsoft", "intune", "autopatch", "windows", "hotpatch", "endpoint-management"]
-  },
-  {
-    id: "2026-05-11-zoom-web-portal-release",
-    appName: "Zoom Web Portal",
-    vendor: "Zoom",
-    category: "Product Change",
-    severity: "Informational",
-    title: "Zoom web portal May releases add admin controls and a phased web redesign",
-    summary:
-      "Zoom's web release notes list May 11 bug fixes and a May 18 upcoming release with a phased new Zoom Web experience, dashboard sorting, report privacy masking, and Customer Managed Key proxy/certificate options.",
-    affectedUsers:
-      "Zoom account owners, admins, helpdesk teams, and users whose sign-in sessions, dashboards, reporting, privacy settings, or web portal navigation are managed through Zoom Web.",
-    recommendedMspAction:
-      "Review tenant settings for dashboard/reporting privacy, Customer Managed Key environments, and admin navigation changes. Update helpdesk notes for the phased web interface so technicians can support both old and new layouts during rollout.",
-    sourceUrls: [
-      "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060437"
-    ],
-    publishedDate: "2026-05-11",
-    lastUpdatedDate: "2026-05-12",
-    suggestedPlacement: "both",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: false,
-    tags: ["zoom", "web-portal", "release-notes", "admin", "ai-companion"]
   },
   {
     id: "2026-05-10-autodesk-revit-cloud-model-publishing",
