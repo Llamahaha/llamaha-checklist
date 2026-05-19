@@ -71,6 +71,113 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- NEW DRAFTS (2026-05-19 third-pass scan) ---------------------------------
+  // Auto-discovered on 2026-05-19. Review, edit, and flip isPublished: true
+  // before these render on the site.
+  {
+    id: "2026-05-14-microsoft-exchange-server-cve-2026-42897-zero-day",
+    appName: "Exchange Server (on-premises)",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Microsoft Exchange Server zero-day (CVE-2026-42897) actively exploited via crafted email, EEMS mitigation only",
+    summary:
+      "CVE-2026-42897 (CVSS 8.1) is a spoofing / cross-site-scripting flaw in on-premises Exchange Server (Subscription Edition, 2019, and 2016) that lets an attacker run arbitrary JavaScript in a victim's Outlook Web Access browser context when a crafted email is opened. Microsoft disclosed it May 14 and confirmed in-the-wild exploitation; CISA added the CVE to KEV on May 15 with a federal mitigation deadline of May 29. No permanent patch yet \u2014 Microsoft deployed an emergency mitigation through Exchange Emergency Mitigation Service (EEMS).",
+    affectedUsers:
+      "Clients with on-premises Microsoft Exchange Server Subscription Edition, 2019, or 2016, especially anywhere Outlook Web Access is reachable from the internet.",
+    recommendedMspAction:
+      "Confirm EEMS is enabled and current on all on-prem Exchange servers so the May 14 mitigation is in place. Limit OWA exposure to trusted networks where possible, monitor MSRC for the permanent patch, and review Exchange transport / OWA logs for unusual external mail from the disclosure window forward. Track CISA KEV due date of May 29.",
+    sourceUrls: [
+      "https://www.securityweek.com/microsoft-warns-of-exchange-server-zero-day-exploited-in-the-wild/",
+      "https://thehackernews.com/2026/05/on-prem-microsoft-exchange-server-cve.html",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://securityaffairs.com/192240/hacking/u-s-cisa-adds-a-flaw-in-microsoft-exchange-server-to-its-known-exploited-vulnerabilities-catalog.html"
+    ],
+    publishedDate: "2026-05-14",
+    lastUpdatedDate: "2026-05-19",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "exchange-server", "owa", "security", "zero-day", "kev", "actively-exploited", "no-patch", "eems"]
+  },
+  {
+    id: "2026-05-18-bluebeam-us-studio-projects-login-outage",
+    appName: "Bluebeam Studio Projects / Bluebeam ID / Webstore US",
+    vendor: "Bluebeam",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Bluebeam US Studio Projects, Bluebeam ID login, and Webstore US degraded on May 18",
+    summary:
+      "Bluebeam's status mirrors reported confirmed issues with US Services \u2014 Login (Bluebeam ID), US Services \u2014 Bluebeam Webstore US, and US Services \u2014 Studio Projects, with roughly 95 user reports in the 24-hour window around May 18. Bluebeam communicated the issue on its status page and via @Bluebeam updates.",
+    affectedUsers:
+      "US-region Bluebeam customers using Studio Projects, Bluebeam ID sign-in, or the Bluebeam Webstore, including AEC project teams that share session-based markup work.",
+    recommendedMspAction:
+      "Confirm reports against the Bluebeam status page before treating them as local issues. Capture timestamps, project, and user IDs for impacted tickets and close as vendor-side once Bluebeam confirms full recovery. Brief helpdesk on workarounds (local saves, retry once status clears).",
+    sourceUrls: [
+      "https://status.bluebeam.com/",
+      "https://status.bluebeam.com/history?locale=en"
+    ],
+    publishedDate: "2026-05-18",
+    lastUpdatedDate: "2026-05-19",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["bluebeam", "studio-projects", "bluebeam-id", "webstore", "service-impact", "us-region", "aec"]
+  },
+  {
+    id: "2026-05-14-vmware-fusion-cve-2026-41702-root-escalation",
+    appName: "VMware Fusion (macOS)",
+    vendor: "Broadcom / VMware",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Broadcom VMSA-2026-0003 fixes VMware Fusion TOCTOU root escalation (CVE-2026-41702)",
+    summary:
+      "Broadcom published VMSA-2026-0003 on May 14 patching CVE-2026-41702, a time-of-check / time-of-use flaw in a SETUID binary shipped with VMware Fusion on macOS that lets a local attacker escalate to root. The advisory is rated High severity.",
+    affectedUsers:
+      "Mac users running affected VMware Fusion builds locally, including developers and admins who run Windows VMs on macOS for testing or admin tooling.",
+    recommendedMspAction:
+      "Inventory managed Macs for VMware Fusion installs and push the VMSA-2026-0003 fixed build through MDM. Where Fusion is not required, consider removing it. Re-check the advisory if your fleet uses any other Broadcom/VMware desktop hypervisor products.",
+    sourceUrls: [
+      "https://www.cyber.gc.ca/en/alerts-advisories/broadcom-vmware-security-advisory-av26-434",
+      "https://securityaffairs.com/192136/security/broadcom-releases-vmware-fusion-security-update-for-root-access-bug"
+    ],
+    publishedDate: "2026-05-14",
+    lastUpdatedDate: "2026-05-19",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["broadcom", "vmware", "fusion", "macos", "security", "patch", "privilege-escalation", "setuid"]
+  },
+  {
+    id: "2026-05-01-linux-kernel-cve-2026-31431-copy-fail-kev",
+    appName: "Linux kernel (Copy Fail)",
+    vendor: "Linux Kernel",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Linux kernel \"Copy Fail\" CVE-2026-31431 actively exploited for local root, added to CISA KEV",
+    summary:
+      "CVE-2026-31431 (CVSS 7.8) is a Linux kernel local privilege escalation bug introduced by a 2017 in-place crypto optimization. Abusing AF_ALG sockets with splice() lets an unprivileged user perform a controlled 4-byte write into the kernel page cache of any readable file (for example /usr/bin/su), so the next execution runs as root. The exploit is deterministic and roughly 732 bytes. CISA added the CVE to KEV on May 1 after confirming in-the-wild exploitation. Fixes are in Linux kernels 6.18.22, 6.19.12, and 7.0; major distros (Ubuntu, RHEL, SUSE, Amazon Linux 2023) have shipped backports.",
+    affectedUsers:
+      "Internal Linux servers, jump hosts, build machines, container hosts, and developer VMs running unpatched kernels released between 2017 and the fixed builds.",
+    recommendedMspAction:
+      "Inventory Linux kernel versions across managed servers and CI runners. Push distro updates with kernel rollover and reboot windows \u2014 Ubuntu, RHEL/Rocky/Alma, SUSE, and Amazon Linux 2023 all have patches. Where reboot is gated, apply live-patch updates where available. Audit /var/log/auth.log and audit logs for unexpected root sessions from non-admin accounts.",
+    sourceUrls: [
+      "https://www.microsoft.com/en-us/security/blog/2026/05/01/cve-2026-31431-copy-fail-vulnerability-enables-linux-root-privilege-escalation/",
+      "https://www.tenable.com/blog/copy-fail-cve-2026-31431-frequently-asked-questions-about-linux-kernel-privilege-escalation",
+      "https://thehackernews.com/2026/05/cisa-adds-actively-exploited-linux-root.html",
+      "https://cert.europa.eu/publications/security-advisories/2026-005/"
+    ],
+    publishedDate: "2026-05-01",
+    lastUpdatedDate: "2026-05-19",
+    suggestedPlacement: "news-page",
+    audience: "internal",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["linux", "kernel", "copy-fail", "security", "kev", "actively-exploited", "privilege-escalation", "patch"]
+  },
   // -- LATEST REVIEWED FINDINGS ------------------------------------------------
   // Reviewed from current vendor/status/security sources on 2026-05-18.
   // Future automation discoveries still start with isPublished: false.
