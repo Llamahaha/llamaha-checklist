@@ -71,6 +71,131 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- NEW DRAFTS (2026-05-21 scan) --------------------------------------------
+  // Auto-discovered on 2026-05-21 (window: May 19-21). Review, edit, and flip
+  // isPublished: true before these render on the site.
+  {
+    id: "2026-05-19-zoom-phone-mail-service-degradation",
+    appName: "Zoom Phone / Zoom Contact Center / Zoom Mail",
+    vendor: "Zoom",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Zoom Phone and Contact Center MMS plus Zoom Mail and Calendar degraded in North America",
+    summary:
+      "Zoom's status page shows two overlapping incidents still open as of May 21. An intermittent service degradation affecting inbound and outbound MMS delivery for Zoom Phone and Zoom Contact Center in the US and Canada began May 19, and a separate degradation of web Zoom Mail and Zoom Calendar began May 18. Other Zoom components are reported operational.",
+    affectedUsers:
+      "Zoom customers in the US and Canada who rely on Zoom Phone or Contact Center SMS/MMS messaging, and anyone using web Zoom Mail or Zoom Calendar.",
+    recommendedMspAction:
+      "Check the Zoom status page before treating matching reports as local issues, and attach the incident reference to affected tickets. Advise impacted users that MMS delivery may be delayed and that Zoom Mail and Calendar problems are vendor-side. Close related tickets once Zoom confirms full recovery.",
+    sourceUrls: [
+      "https://status.zoom.us/",
+      "https://statusgator.com/services/zoom"
+    ],
+    publishedDate: "2026-05-19",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["zoom", "zoom-phone", "contact-center", "zoom-mail", "zoom-calendar", "service-impact", "mms", "north-america"]
+  },
+  {
+    id: "2026-05-21-outlook-lite-app-retirement-mc1276508",
+    appName: "Outlook Lite (Android)",
+    vendor: "Microsoft",
+    category: "Deprecation",
+    severity: "Low",
+    title: "Microsoft completes Outlook Lite app retirement on May 25",
+    summary:
+      "Microsoft 365 message center notice MC1276508 confirms the Outlook Lite mobile app is fully retired on May 25, 2026. After that date users may still be able to open the app, but mailbox access is disabled and they must move to the standard Outlook for Android app.",
+    affectedUsers:
+      "Android users on the lightweight Outlook Lite app, often on lower-end or storage-constrained devices.",
+    recommendedMspAction:
+      "Identify any users still on Outlook Lite and help them install and sign in to the standard Outlook for Android app before May 25. Update onboarding and helpdesk notes so technicians stop recommending Outlook Lite.",
+    sourceUrls: [
+      "https://mc.merill.net/message/MC1276508"
+    ],
+    publishedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "outlook-lite", "outlook-mobile", "android", "deprecation", "message-center"]
+  },
+  {
+    id: "2026-05-21-dropbox-scheduled-maintenance-may-26",
+    appName: "Dropbox",
+    vendor: "Dropbox",
+    category: "Service Impact",
+    severity: "Informational",
+    title: "Dropbox scheduled maintenance on May 26 may briefly interrupt access",
+    summary:
+      "Dropbox has scheduled routine maintenance starting May 26, 2026 at 5:00 PM Pacific. Dropbox says users may be unable to access the service for a short period during the window.",
+    affectedUsers:
+      "Dropbox users and teams who may need file access during the May 26 maintenance window.",
+    recommendedMspAction:
+      "Note the May 26 window and let affected users know Dropbox access may briefly drop. Advise anyone with deadline-sensitive work to sync or download needed files beforehand, and check the Dropbox status page if access problems persist after the window.",
+    sourceUrls: [
+      "https://status.dropbox.com/"
+    ],
+    publishedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["dropbox", "maintenance", "service-impact", "file-sync"]
+  },
+  {
+    id: "2026-05-21-autodesk-account-maintenance-may-30",
+    appName: "Autodesk Account",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk Account scheduled maintenance on May 30 may interrupt user management",
+    summary:
+      "Autodesk has scheduled Autodesk Account maintenance for May 30, 2026 from 10:00 AM to 1:00 PM PDT to improve platform resiliency. Autodesk says account and user-management features may be intermittently unavailable during the window.",
+    affectedUsers:
+      "Admins changing Autodesk account users, assignments, licensing, or account settings during the May 30 maintenance window.",
+    recommendedMspAction:
+      "Avoid planned Autodesk user-management or licensing changes during the May 30 window. If users report Autodesk account admin issues at that time, check the Autodesk Health dashboard before treating it as a local problem.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["autodesk", "account", "maintenance", "licensing", "admin"]
+  },
+  {
+    id: "2026-05-19-autodesk-account-brief-outage",
+    appName: "Autodesk Account",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk Account had a brief service incident on May 19",
+    summary:
+      "Status monitoring shows Autodesk logged a short Autodesk Account incident on May 19 that has since been resolved. Autodesk Account covers sign-in, user management, and license assignment, so brief disruptions can intermittently affect admin tasks and product activation.",
+    affectedUsers:
+      "Admins and users signing in to Autodesk Account or managing Autodesk users, assignments, or licensing during the May 19 incident window.",
+    recommendedMspAction:
+      "If users reported Autodesk sign-in or licensing problems on May 19, check the Autodesk Health dashboard and close matching tickets as vendor-side once the incident shows resolved. If symptoms continued afterward, collect the account region, user ID, and timestamp before escalating.",
+    sourceUrls: [
+      "https://health.autodesk.com/",
+      "https://statusgator.com/services/autodesk"
+    ],
+    publishedDate: "2026-05-19",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["autodesk", "account", "sign-in", "licensing", "service-impact"]
+  },
   // -- NEW DRAFTS (2026-05-19 third-pass scan) ---------------------------------
   // Auto-discovered on 2026-05-19. Review, edit, and flip isPublished: true
   // before these render on the site.
@@ -82,19 +207,20 @@ export const appNewsItems = [
     severity: "Critical",
     title: "Microsoft Exchange Server zero-day (CVE-2026-42897) actively exploited via crafted email, EEMS mitigation only",
     summary:
-      "CVE-2026-42897 (CVSS 8.1) is a spoofing / cross-site-scripting flaw in on-premises Exchange Server (Subscription Edition, 2019, and 2016) that lets an attacker run arbitrary JavaScript in a victim's Outlook Web Access browser context when a crafted email is opened. Microsoft disclosed it May 14 and confirmed in-the-wild exploitation; CISA added the CVE to KEV on May 15 with a federal mitigation deadline of May 29. No permanent patch yet \u2014 Microsoft deployed an emergency mitigation through Exchange Emergency Mitigation Service (EEMS).",
+      "CVE-2026-42897 (CVSS 8.1) is a spoofing / cross-site-scripting flaw in on-premises Exchange Server (Subscription Edition, 2019, and 2016) that lets an attacker run arbitrary JavaScript in a victim's Outlook Web Access browser context when a crafted email is opened. Microsoft disclosed it May 14 and confirmed in-the-wild exploitation; CISA added the CVE to KEV on May 15 with a federal mitigation deadline of May 29. Microsoft deployed an automatic mitigation through Exchange Emergency Mitigation Service (EEMS), and on May 20 published guidance confirming the Exchange Server SE fix ships as a public security update while Exchange Server 2016 and 2019 fixes are released only to organizations enrolled in the Period 2 Exchange Server ESU program.",
     affectedUsers:
       "Clients with on-premises Microsoft Exchange Server Subscription Edition, 2019, or 2016, especially anywhere Outlook Web Access is reachable from the internet.",
     recommendedMspAction:
-      "Confirm EEMS is enabled and current on all on-prem Exchange servers so the May 14 mitigation is in place. Limit OWA exposure to trusted networks where possible, monitor MSRC for the permanent patch, and review Exchange transport / OWA logs for unusual external mail from the disclosure window forward. Track CISA KEV due date of May 29.",
+      "Confirm EEMS is enabled and current on all on-prem Exchange servers so the May 14 mitigation is in place. Apply the Exchange Server SE security update once available (Exchange 2016 and 2019 fixes require Period 2 ESU enrollment), limit OWA exposure to trusted networks where possible, and review Exchange transport / OWA logs for unusual external mail from the disclosure window forward. Track CISA KEV due date of May 29.",
     sourceUrls: [
       "https://www.securityweek.com/microsoft-warns-of-exchange-server-zero-day-exploited-in-the-wild/",
       "https://thehackernews.com/2026/05/on-prem-microsoft-exchange-server-cve.html",
       "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-      "https://securityaffairs.com/192240/hacking/u-s-cisa-adds-a-flaw-in-microsoft-exchange-server-to-its-known-exploited-vulnerabilities-catalog.html"
+      "https://securityaffairs.com/192240/hacking/u-s-cisa-adds-a-flaw-in-microsoft-exchange-server-to-its-known-exploited-vulnerabilities-catalog.html",
+      "https://techcommunity.microsoft.com/blog/exchange/addressing-exchange-server-may-2026-vulnerability-cve-2026-42897/4518498"
     ],
     publishedDate: "2026-05-14",
-    lastUpdatedDate: "2026-05-19",
+    lastUpdatedDate: "2026-05-21",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: false,
