@@ -4,6 +4,7 @@ const publicLinks = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "search", label: "Search", href: "search.html" },
   { id: "support", label: "Support Pages", href: "support.html" },
+  { id: "news", label: "News", href: "app-news.html" },
   { id: "contact", label: "Contact", href: "contact.html" }
 ];
 
@@ -34,7 +35,7 @@ function getPublicSection(currentFile, body, pathname) {
   if (currentFile === "applications.html") return "support";
   if (currentFile === "app-licensing.html") return "support";
   if (currentFile === "tips-and-tricks.html") return "support";
-  if (currentFile === "app-news.html") return "home";
+  if (currentFile === "app-news.html") return "news";
   if (currentFile === "contact.html" || currentFile === "ticket.html" || currentFile === "ticket") return "contact";
   if (body.dataset.pageType || currentFile === "vendor-guides.html" || pathname.includes("/guides/")) return "support";
   return "home";
