@@ -75,6 +75,130 @@ export const appNewsItems = [
   // Auto-discovered on 2026-05-21 (window: May 19-21). Review, edit, and flip
   // isPublished: true before these render on the site.
   {
+    id: "2026-05-20-microsoft-defender-cves-41091-45498-kev",
+    appName: "Microsoft Defender",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Microsoft Defender flaws added to CISA KEV with June 3 mitigation deadline",
+    summary:
+      "Microsoft published Defender advisories for CVE-2026-41091, a link-following privilege escalation in the Malware Protection Engine, and CVE-2026-45498, a Defender Antimalware Platform denial-of-service flaw. NVD shows both CVEs were added to CISA's Known Exploited Vulnerabilities catalog on May 20, with required mitigation by June 3; affected versions are before Malware Protection Engine 1.1.26040.8 and Defender Antimalware Platform 4.18.26040.7.",
+    affectedUsers:
+      "Windows endpoints and servers using Microsoft Defender or the Microsoft Malware Protection Engine below the fixed engine/platform versions.",
+    recommendedMspAction:
+      "Confirm Defender security intelligence, engine, and platform updates are reaching managed endpoints. Prioritize devices where Defender updates are disabled, delayed by WSUS/ConfigMgr rings, or blocked by third-party security tooling, and verify versions are at or above 1.1.26040.8 for the engine and 4.18.26040.7 for the platform.",
+    sourceUrls: [
+      "https://www.cyber.gc.ca/en/alerts-advisories/microsoft-security-advisory-av26-489",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-41091",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-45498",
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-41091",
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-45498"
+    ],
+    publishedDate: "2026-05-20",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "defender", "malware-protection-engine", "security", "kev", "actively-exploited", "cve", "endpoint-security"]
+  },
+  {
+    id: "2026-05-21-zoom-contact-center-call-drops-north-america",
+    appName: "Zoom Contact Center",
+    vendor: "Zoom",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Zoom Contact Center inbound and outbound calls briefly dropped in North America",
+    summary:
+      "Zoom reported that users may have experienced inbound and outbound call drops with Zoom Contact Center in the North America region between 14:59 UTC and 15:15 UTC on May 21. Zoom later marked the incident resolved and said affected services were restored.",
+    affectedUsers:
+      "Zoom Contact Center customers in North America handling inbound or outbound calls during the May 21 incident window.",
+    recommendedMspAction:
+      "If users reported dropped contact-center calls around 14:59-15:15 UTC on May 21, attach the Zoom incident to related tickets and treat matching symptoms as vendor-side. Continue watching Zoom status for the separate MMS and web mail/calendar incidents before closing broader Zoom reports.",
+    sourceUrls: [
+      "https://status.zoom.us/"
+    ],
+    publishedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["zoom", "zoom-contact-center", "calling", "service-impact", "north-america", "call-drops"]
+  },
+  {
+    id: "2026-05-19-docusign-esignature-latency-eu-na",
+    appName: "Docusign eSignature / CLM",
+    vendor: "Docusign",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Docusign resolved recent sending, signing, and reporting latency incidents",
+    summary:
+      "Docusign status history shows recent resolved incidents affecting sending and signing latency in EU on May 19, sending and signing latency in NA1 and NA3 on May 18, and report failures/loading delays in EU11 and EU21 on May 18. Current status shows all systems operational.",
+    affectedUsers:
+      "Docusign users sending or signing envelopes in EU, NA1, or NA3, and admins or users loading document/reporting views in EU11 or EU21 during the May 18-19 incident windows.",
+    recommendedMspAction:
+      "Use Docusign incident IDs 4915, 4902, and 4896 when reconciling tickets from those windows. Ask users to retry failed sends/signatures now that Docusign reports resolution, and collect envelope IDs plus site/region if any errors persist.",
+    sourceUrls: [
+      "https://status.docusign.com/"
+    ],
+    publishedDate: "2026-05-19",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["docusign", "esignature", "clm", "service-impact", "latency", "eu", "na"]
+  },
+  {
+    id: "2026-05-18-dropbox-availability-sharing-degradation",
+    appName: "Dropbox",
+    vendor: "Dropbox",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Dropbox resolved May 18 availability issue affecting sharing and team-member changes",
+    summary:
+      "Dropbox status history shows a resolved May 18 incident where multiple services experienced slower than expected load times between 17:01:50 and 17:42:50 UTC. Dropbox says the impact included the ability to add members to teams and share content.",
+    affectedUsers:
+      "Dropbox teams adding members or sharing content during the May 18 incident window.",
+    recommendedMspAction:
+      "If users reported Dropbox sharing, team-member, or slow-load issues during the May 18 window, close matching tickets as vendor-side once users can retry successfully. Keep the scheduled May 26 maintenance draft separate because it is a future access-impact window.",
+    sourceUrls: [
+      "https://status.dropbox.com/"
+    ],
+    publishedDate: "2026-05-18",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["dropbox", "service-impact", "sharing", "teams", "availability"]
+  },
+  {
+    id: "2026-05-12-autodesk-identity-authorization-maintenance-june-6",
+    appName: "Autodesk Identity, Licensing & Entitlement",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk identity maintenance on June 6 may briefly affect product sign-in",
+    summary:
+      "Autodesk has scheduled Identity Authorization Service maintenance for June 6, 2026 from 7:30 PM to 8:30 PM PDT. Autodesk says users may intermittently be unable to log in to Autodesk products and services during the window, while users already logged in before maintenance should not be affected.",
+    affectedUsers:
+      "Autodesk users who need to sign in during the June 6 maintenance window, especially new sessions, newly provisioned users, and users switching devices.",
+    recommendedMspAction:
+      "Avoid planned Autodesk sign-in, licensing, or onboarding work during the maintenance window. Tell users to stay signed in before the window where practical, and check Autodesk Health before troubleshooting authentication failures during that hour.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-05-12",
+    lastUpdatedDate: "2026-05-21",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "identity", "licensing", "entitlement", "maintenance", "sign-in", "authentication"]
+  },
+  {
     id: "2026-05-19-zoom-phone-mail-service-degradation",
     appName: "Zoom Phone / Zoom Contact Center / Zoom Mail",
     vendor: "Zoom",
