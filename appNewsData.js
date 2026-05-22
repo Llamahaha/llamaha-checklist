@@ -71,9 +71,152 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
-  // -- NEW DRAFTS (2026-05-21 scan) --------------------------------------------
-  // Auto-discovered on 2026-05-21 (window: May 19-21). Review, edit, and flip
-  // isPublished: true before these render on the site.
+  // -- LATEST PUBLISHED FINDINGS (2026-05-22 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-05-22.
+  {
+    id: "2026-05-22-box-drive-login-errors",
+    appName: "Box Drive",
+    vendor: "Box",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Box Drive login errors and timeouts resolved early May 22",
+    summary:
+      "Box reported a medium-severity issue on May 22 where users attempting to log in to Box Drive could see errors or timeouts. Box restored service and marked the incident resolved after monitoring, with the Box Web Application available as a temporary workaround during the incident.",
+    affectedUsers:
+      "Users signing in to Box Drive on desktop during the May 22 incident window.",
+    recommendedMspAction:
+      "If users reported Box Drive sign-in errors around 1:46-2:18 AM PDT on May 22, treat matching tickets as vendor-side once retry succeeds. If errors continue, have the user test the Box Web Application and collect Box Drive logs before escalating to Box Support.",
+    sourceUrls: [
+      "https://status.box.com/"
+    ],
+    publishedDate: "2026-05-22",
+    lastUpdatedDate: "2026-05-22",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["box", "box-drive", "login", "desktop", "service-impact", "timeout"]
+  },
+  {
+    id: "2026-05-22-docusign-salesforce-integration-impact",
+    appName: "Docusign eSignature / Salesforce integration",
+    vendor: "Docusign",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Docusign Salesforce integration impact resolved after Salesforce outage",
+    summary:
+      "Docusign reported that Salesforce experienced an outage beginning May 21 at 23:12 UTC that may have impacted customers using Docusign's Salesforce integration. Docusign stated its own services were not experiencing an outage, and marked the integration impact resolved after Salesforce recovered on May 22.",
+    affectedUsers:
+      "Docusign customers who use the Salesforce integration for envelope, agreement, or CRM workflows.",
+    recommendedMspAction:
+      "For Salesforce-connected Docusign failures reported late May 21 or early May 22 UTC, note Docusign incident 4935 and ask users to retry after Salesforce recovery. If the integration still fails, collect the Salesforce org, Docusign account, envelope ID, and timestamp before escalation.",
+    sourceUrls: [
+      "https://status.docusign.com/"
+    ],
+    publishedDate: "2026-05-22",
+    lastUpdatedDate: "2026-05-22",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["docusign", "salesforce", "integration", "service-impact", "esignature", "clm"]
+  },
+  {
+    id: "2026-05-21-microsoft-edge-148-3967-83-copilot-preview",
+    appName: "Microsoft Edge",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Edge 148.0.3967.83 opens Browsing with Copilot preview signups",
+    summary:
+      "Microsoft Edge Stable 148.0.3967.83 was released on May 21. The release notes say Browsing with Copilot for Edge for Business is now open for limited public-preview admin signups, alongside fixes and the normal security-update pointer.",
+    affectedUsers:
+      "Organizations managing Microsoft Edge for Business, especially tenants evaluating Copilot-assisted browser workflows or tightly controlling enterprise AI features.",
+    recommendedMspAction:
+      "Review Edge 148.0.3967.83 release notes and decide whether any tenant should request or block the Browsing with Copilot preview. Confirm existing Edge policies around Copilot, browsing assistance, developer tools, and Microsoft 365 authentication popups still match client expectations.",
+    sourceUrls: [
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel"
+    ],
+    publishedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-22",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "edge", "browser", "copilot", "edge-for-business", "policy", "product-change"]
+  },
+  {
+    id: "2026-05-20-google-chrome-149-early-stable",
+    appName: "Google Chrome",
+    vendor: "Google",
+    category: "Product Change",
+    severity: "Low",
+    title: "Chrome 149 early stable begins for desktop, Android, and iOS",
+    summary:
+      "Google began the Chrome 149 early stable rollout on May 20. Chrome 149.0.7827.22/.23 is rolling to a small percentage of Windows and Mac desktop users, Chrome 149.0.7827.22 is rolling to Android, and Chrome Stable 149.0.7827.26 is rolling to iOS.",
+    affectedUsers:
+      "Managed Chrome users on Windows, macOS, Android, or iOS where early stable rollout may reach a subset of devices before broad stable deployment.",
+    recommendedMspAction:
+      "Watch managed Chrome version reporting over the next few days, especially for browser-policy or extension regressions. Keep auto-update policies enabled, and use a small test ring if clients tightly control browser updates.",
+    sourceUrls: [
+      "https://chromereleases.googleblog.com/"
+    ],
+    publishedDate: "2026-05-20",
+    lastUpdatedDate: "2026-05-22",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "chrome", "browser", "early-stable", "android", "ios", "desktop", "product-change"]
+  },
+  {
+    id: "2026-05-21-autodesk-support-chat-incident",
+    appName: "Autodesk Support",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk Support chat contact issue resolved May 21",
+    summary:
+      "Autodesk Health shows a resolved May 21 incident where customers were unable to contact Autodesk Support via chat. Autodesk began investigating at 15:29 PDT and marked the issue resolved at 16:02 PDT.",
+    affectedUsers:
+      "Admins and end users trying to reach Autodesk Support via chat during the short May 21 incident window.",
+    recommendedMspAction:
+      "If Autodesk chat contact attempts failed during the incident window, retry now that Autodesk reports resolution. Use alternate support channels only if chat still fails, and include Autodesk account, product, and timestamp if a support escalation is needed.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-22",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "support", "chat", "service-impact"]
+  },
+  {
+    id: "2026-05-21-autodesk-upchain-maintenance-june-6",
+    appName: "Autodesk Upchain",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk Upchain maintenance on June 6 may pause GPS job processing",
+    summary:
+      "Autodesk scheduled Upchain maintenance for June 6, 2026 from 1:00 PM to 3:00 PM PDT to improve platform resiliency. Autodesk says Upchain GPS job processing may be unavailable during the maintenance window.",
+    affectedUsers:
+      "Upchain users and admins who rely on GPS job processing during the June 6 maintenance window.",
+    recommendedMspAction:
+      "Avoid planning Upchain GPS job-processing work during the June 6 window. If jobs fail or queue during maintenance, check Autodesk Health before troubleshooting locally and ask users to retry after the window closes.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-22",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "upchain", "maintenance", "gps", "service-impact"]
+  },
   {
     id: "2026-05-20-microsoft-defender-cves-41091-45498-kev",
     appName: "Microsoft Defender",
@@ -95,7 +238,7 @@ export const appNewsItems = [
       "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-45498"
     ],
     publishedDate: "2026-05-20",
-    lastUpdatedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-22",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
@@ -204,22 +347,21 @@ export const appNewsItems = [
     vendor: "Zoom",
     category: "Service Impact",
     severity: "Medium",
-    title: "Zoom Phone and Contact Center MMS plus Zoom Mail and Calendar degraded in North America",
+    title: "Zoom Web Mail recovered while Zoom Phone and Contact Center MMS remains degraded",
     summary:
-      "Zoom's status page shows two overlapping incidents still open as of May 21. An intermittent service degradation affecting inbound and outbound MMS delivery for Zoom Phone and Zoom Contact Center in the US and Canada began May 19, and a separate degradation of web Zoom Mail and Zoom Calendar began May 18. Other Zoom components are reported operational.",
+      "Zoom marked the Web Zoom Mail and Web Calendar service degradation resolved late May 21 after monitoring. A separate intermittent degradation affecting inbound and outbound MMS delivery for Zoom Phone and Zoom Contact Center in the US and Canada remained under vendor work as of Zoom's latest May 21 update, with impact noted for AT&T and Verizon subscribers.",
     affectedUsers:
-      "Zoom customers in the US and Canada who rely on Zoom Phone or Contact Center SMS/MMS messaging, and anyone using web Zoom Mail or Zoom Calendar.",
+      "Zoom customers in the US and Canada who rely on Zoom Phone or Contact Center MMS messaging, especially AT&T and Verizon subscribers; web Zoom Mail and Calendar users affected during the now-resolved incident window.",
     recommendedMspAction:
-      "Check the Zoom status page before treating matching reports as local issues, and attach the incident reference to affected tickets. Advise impacted users that MMS delivery may be delayed and that Zoom Mail and Calendar problems are vendor-side. Close related tickets once Zoom confirms full recovery.",
+      "Keep Zoom MMS tickets open or tagged vendor-side until Zoom confirms full recovery, and advise users that MMS delivery may be delayed. For Web Zoom Mail and Calendar reports from May 18-21, ask users to retry and close matching tickets as vendor-side if service is stable.",
     sourceUrls: [
-      "https://status.zoom.us/",
-      "https://statusgator.com/services/zoom"
+      "https://status.zoom.us/"
     ],
     publishedDate: "2026-05-19",
-    lastUpdatedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-22",
     suggestedPlacement: "both",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
     tags: ["zoom", "zoom-phone", "contact-center", "zoom-mail", "zoom-calendar", "service-impact", "mms", "north-america"]
   },
@@ -240,10 +382,10 @@ export const appNewsItems = [
       "https://mc.merill.net/message/MC1276508"
     ],
     publishedDate: "2026-05-21",
-    lastUpdatedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-22",
     suggestedPlacement: "news-page",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
     tags: ["microsoft", "outlook-lite", "outlook-mobile", "android", "deprecation", "message-center"]
   },
@@ -264,10 +406,10 @@ export const appNewsItems = [
       "https://status.dropbox.com/"
     ],
     publishedDate: "2026-05-21",
-    lastUpdatedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-22",
     suggestedPlacement: "news-page",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
     tags: ["dropbox", "maintenance", "service-impact", "file-sync"]
   },
@@ -288,10 +430,10 @@ export const appNewsItems = [
       "https://health.autodesk.com/"
     ],
     publishedDate: "2026-05-21",
-    lastUpdatedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-22",
     suggestedPlacement: "news-page",
     audience: "public",
-    isPublished: false,
+    isPublished: true,
     isPlaceholder: false,
     tags: ["autodesk", "account", "maintenance", "licensing", "admin"]
   },
