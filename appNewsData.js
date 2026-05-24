@@ -71,8 +71,107 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
-  // -- LATEST PUBLISHED FINDINGS (2026-05-22 scan) -----------------------------
-  // Reviewed from current vendor/status/security sources on 2026-05-22.
+  // -- LATEST PUBLISHED FINDINGS (2026-05-24 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-05-24.
+  {
+    id: "2026-05-23-zoom-mail-calendar-mms-presence-resolved",
+    appName: "Zoom Mail / Calendar / Phone / Contact Center",
+    vendor: "Zoom",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Zoom marks mail, calendar, MMS, and presence incidents resolved",
+    summary:
+      "Zoom status history now shows the Web Zoom Mail and Web Calendar degradation restored and resolved on May 23. Zoom also resolved separate May 22 incidents affecting North America presence interoperability and inbound/outbound MMS delivery for Zoom Phone and Zoom Contact Center in the US and Canada.",
+    affectedUsers:
+      "Zoom users affected by Web Zoom Mail or Web Calendar degradation from May 18-23, Zoom Phone or Contact Center users with MMS delivery issues in the US and Canada, and North America users relying on Zoom presence interoperability on May 22.",
+    recommendedMspAction:
+      "Reconcile matching Zoom tickets as vendor-side once users can retry successfully. For persistent issues, collect the affected Zoom service, region, user, phone number or meeting context, timestamp, and whether the symptom is mail/calendar access, MMS delivery, or presence status.",
+    sourceUrls: [
+      "https://status.zoom.us/"
+    ],
+    publishedDate: "2026-05-23",
+    lastUpdatedDate: "2026-05-24",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["zoom", "zoom-mail", "zoom-calendar", "zoom-phone", "contact-center", "mms", "presence", "service-impact", "north-america"]
+  },
+  {
+    id: "2026-05-22-google-chromeos-lts-144-security-fixes",
+    appName: "ChromeOS / ChromeOS Flex",
+    vendor: "Google",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Google rolls ChromeOS LTS-144 security update with multiple high-severity fixes",
+    summary:
+      "Google released ChromeOS LTS-144 version 144.0.7559.252 on May 22. The release includes selected security fixes, including high-severity use-after-free and out-of-bounds-read issues in Navigation, Viz, Blink, CSS, Media, Web Speech, and Extensions.",
+    affectedUsers:
+      "Managed ChromeOS and ChromeOS Flex devices pinned to the LTS-144 channel before version 144.0.7559.252.",
+    recommendedMspAction:
+      "Confirm ChromeOS LTS devices are allowed to update, then verify fleet version reporting after rollout. Ask users to restart devices that have downloaded the update but have not applied it, and prioritize shared kiosks, loaners, and classroom or conference-room devices that stay signed in for long periods.",
+    sourceUrls: [
+      "https://chromereleases.googleblog.com/"
+    ],
+    publishedDate: "2026-05-22",
+    lastUpdatedDate: "2026-05-24",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "chromeos", "chromeos-flex", "lts", "security", "patch", "browser", "managed-devices"]
+  },
+  {
+    id: "2026-05-21-autodesk-forma-fptr-data-incidents",
+    appName: "Forma Build / Forma Carbon Insights / FPTR",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk resolves Forma and FPTR data incidents from May 19-21",
+    summary:
+      "Autodesk Health shows resolved May 21 incidents for Forma Build sheet uploads in the US region and Forma Carbon Insights data retrieval or viewing in the US region. Autodesk also posted a retroactive FPTR notice for missing user-login and attachment-view events on May 19.",
+    affectedUsers:
+      "Autodesk Forma users uploading sheets or viewing Carbon Insights data in the US region, and Flow Production Tracking admins or users reviewing login and attachment-view activity from the May 19 window.",
+    recommendedMspAction:
+      "If users reported Forma upload or Carbon Insights errors on May 21, ask them to retry before deeper troubleshooting. For audit questions around FPTR activity on May 19, note Autodesk's retroactive incident and capture the site, user, object, and timestamp before escalation.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-05-21",
+    lastUpdatedDate: "2026-05-24",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "forma-build", "forma-carbon-insights", "fptr", "flow-production-tracking", "service-impact", "us-region", "aec"]
+  },
+  {
+    id: "2026-05-19-mozilla-firefox-151-esr-thunderbird-security-updates",
+    appName: "Firefox / Firefox ESR / Thunderbird",
+    vendor: "Mozilla",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Mozilla ships Firefox 151, ESR, iOS, and Thunderbird security updates",
+    summary:
+      "Mozilla's May 19 advisories cover Firefox 151, Firefox ESR 140.11 and 115.36, Firefox for iOS 151.0, Thunderbird 151, and Thunderbird 140.11. The Firefox 151 advisory includes high-impact issues such as an Android sandbox escape, WebCodecs boundary-condition bugs, DOM use-after-free, same-origin-policy bypass, and memory-safety fixes.",
+    affectedUsers:
+      "Endpoints running Firefox below 151, Firefox ESR below 140.11 or 115.36, Firefox for iOS below 151.0, or Thunderbird below the May 19 security releases.",
+    recommendedMspAction:
+      "Push Firefox, Firefox ESR, and Thunderbird updates through endpoint management and prompt users to relaunch. Confirm managed browser and mail-client inventory after rollout, with extra attention to portable installs and machines that keep browser sessions open for days.",
+    sourceUrls: [
+      "https://www.mozilla.org/en-US/security/advisories/",
+      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-46/",
+      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-48/",
+      "https://www.mozilla.org/en-US/security/advisories/mfsa2026-50/"
+    ],
+    publishedDate: "2026-05-19",
+    lastUpdatedDate: "2026-05-24",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["mozilla", "firefox", "firefox-esr", "thunderbird", "browser", "email", "security", "patch", "memory-safety"]
+  },
   {
     id: "2026-05-22-box-drive-login-errors",
     appName: "Box Drive",
@@ -340,30 +439,6 @@ export const appNewsItems = [
     isPublished: true,
     isPlaceholder: false,
     tags: ["autodesk", "identity", "licensing", "entitlement", "maintenance", "sign-in", "authentication"]
-  },
-  {
-    id: "2026-05-19-zoom-phone-mail-service-degradation",
-    appName: "Zoom Phone / Zoom Contact Center / Zoom Mail",
-    vendor: "Zoom",
-    category: "Service Impact",
-    severity: "Medium",
-    title: "Zoom Web Mail recovered while Zoom Phone and Contact Center MMS remains degraded",
-    summary:
-      "Zoom marked the Web Zoom Mail and Web Calendar service degradation resolved late May 21 after monitoring. A separate intermittent degradation affecting inbound and outbound MMS delivery for Zoom Phone and Zoom Contact Center in the US and Canada remained under vendor work as of Zoom's latest May 21 update, with impact noted for AT&T and Verizon subscribers.",
-    affectedUsers:
-      "Zoom customers in the US and Canada who rely on Zoom Phone or Contact Center MMS messaging, especially AT&T and Verizon subscribers; web Zoom Mail and Calendar users affected during the now-resolved incident window.",
-    recommendedMspAction:
-      "Keep Zoom MMS tickets open or tagged vendor-side until Zoom confirms full recovery, and advise users that MMS delivery may be delayed. For Web Zoom Mail and Calendar reports from May 18-21, ask users to retry and close matching tickets as vendor-side if service is stable.",
-    sourceUrls: [
-      "https://status.zoom.us/"
-    ],
-    publishedDate: "2026-05-19",
-    lastUpdatedDate: "2026-05-22",
-    suggestedPlacement: "both",
-    audience: "public",
-    isPublished: true,
-    isPlaceholder: false,
-    tags: ["zoom", "zoom-phone", "contact-center", "zoom-mail", "zoom-calendar", "service-impact", "mms", "north-america"]
   },
   {
     id: "2026-05-21-outlook-lite-app-retirement-mc1276508",
