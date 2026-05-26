@@ -1822,6 +1822,27 @@ input[type="checkbox"] {
   text-transform: uppercase;
 }
 
+.ai-pill-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(7, 11, 18, 0.34);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.ai-pill-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.4;
+}
+
 .ai-table-wrap {
   width: 100%;
   overflow-x: auto;

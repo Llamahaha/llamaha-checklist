@@ -68,8 +68,16 @@
             <p class="section-kicker">Snapshot</p>
             <h2>LLM knowledge cutoff dates, sorted by freshness</h2>
             <p class="hub-section-copy">Cutoff dates change as vendors release new model versions. This table favors official vendor documentation where available, with third-party AI visibility sources used only as cross-checks for rows that vendors do not clearly publish.</p>
+            <p class="hub-section-copy"><strong>Two-date note:</strong> Anthropic publishes both a <em>training data cutoff</em> (the last date in the training set) and a <em>reliable knowledge cutoff</em> (the date through which the model is most trustworthy). Other vendors usually publish a single date. When both are available, both are shown.</p>
           </div>
         </div>
+
+        <ul class="ai-pill-legend" aria-label="Web access legend">
+          <li><span class="ai-status-pill is-live">Live search</span> built-in browsing every request</li>
+          <li><span class="ai-status-pill is-tool">Optional tools</span> web access if the app or user enables it</li>
+          <li><span class="ai-status-pill is-varies">Product-dependent</span> depends on which model card or deployment</li>
+          <li><span class="ai-status-pill is-none">None by default</span> trained weights only unless the host app adds retrieval</li>
+        </ul>
 
         <div class="ai-table-wrap">
           <table class="ai-cutoff-table">
@@ -102,11 +110,11 @@
                 <td>Gemini 3-family models list a January 2025 cutoff. Use Google Search grounding or URL context for newer facts.</td>
               </tr>
               <tr>
-                <td><strong>Grok 4.3 / Grok 4</strong></td>
+                <td><strong>Grok 4.3</strong></td>
                 <td>xAI</td>
-                <td>Grok 4 commonly listed as November 2024; 4.3 cutoff not clearly published on the model page</td>
+                <td>December 2025</td>
                 <td><span class="ai-status-pill is-tool">Web + X Search tools</span></td>
-                <td>xAI documents live web search and X Search tools for Grok 4.3. Treat it as current only when those tools are used.</td>
+                <td>Released April 30, 2026 as xAI's flagship API model. Pairs a December 2025 training cutoff with live web and X Search tools. Older Grok 4 was commonly cited at November 2024.</td>
               </tr>
 
               <tr class="ai-band-row">
@@ -120,6 +128,13 @@
                 <td>Most recent clearly vendor-stated cutoff in this snapshot. Claude may still need web tools for anything after January 2026.</td>
               </tr>
               <tr>
+                <td><strong>Claude Sonnet 4.6</strong></td>
+                <td>Anthropic</td>
+                <td>January 2026 training data; August 2025 reliable knowledge</td>
+                <td><span class="ai-status-pill is-tool">Optional tools</span></td>
+                <td>Anthropic publishes two dates: training data extends to January 2026, while the &ldquo;reliable knowledge&rdquo; window is August 2025. Use web tools for events after that.</td>
+              </tr>
+              <tr>
                 <td><strong>GPT-5.5</strong></td>
                 <td>OpenAI</td>
                 <td>December 1, 2025</td>
@@ -127,25 +142,39 @@
                 <td>Current OpenAI docs list GPT-5.5 as the recommended flagship model. Older cutoff lists may still name GPT-5.2.</td>
               </tr>
               <tr>
-                <td><strong>GPT-5.4 / GPT-5.2</strong></td>
+                <td><strong>Mistral Large 3</strong></td>
+                <td>Mistral AI</td>
+                <td>December 2025</td>
+                <td><span class="ai-status-pill is-varies">Product-dependent</span></td>
+                <td>Released December 2, 2025. Other Mistral model cards (Medium, Small) are versioned independently and may not list a cutoff in the same format.</td>
+              </tr>
+              <tr>
+                <td><strong>Claude Opus 4.6</strong></td>
+                <td>Anthropic</td>
+                <td>August 2025 training data; May 2025 reliable knowledge</td>
+                <td><span class="ai-status-pill is-tool">Optional tools</span></td>
+                <td>Older flagship still widely deployed. Reliable knowledge cutoff is earlier than Sonnet 4.6, despite the higher tier.</td>
+              </tr>
+              <tr>
+                <td><strong>GPT-5.4</strong></td>
                 <td>OpenAI</td>
                 <td>August 31, 2025</td>
                 <td><span class="ai-status-pill is-tool">Optional tools</span></td>
-                <td>Useful reference because many public cutoff tables still cite GPT-5.2 as a recent OpenAI model.</td>
+                <td>Mid-cycle update between GPT-5.2 and GPT-5.5. Shares the August 2025 cutoff with GPT-5.2.</td>
               </tr>
               <tr>
-                <td><strong>Claude Sonnet 4.6 / Opus 4.6</strong></td>
-                <td>Anthropic</td>
-                <td>August 2025</td>
+                <td><strong>GPT-5.2</strong></td>
+                <td>OpenAI</td>
+                <td>August 31, 2025</td>
                 <td><span class="ai-status-pill is-tool">Optional tools</span></td>
-                <td>Anthropic lists both Sonnet 4.6 and Opus 4.6 as trained through August 2025.</td>
+                <td>Launched December 2025. Still appears as the &ldquo;recent&rdquo; OpenAI flagship in many third-party cutoff tables.</td>
               </tr>
               <tr>
-                <td><strong>Mistral Large 3 / Medium 3.5</strong></td>
-                <td>Mistral AI</td>
-                <td>Varies by release; public model cards are versioned</td>
-                <td><span class="ai-status-pill is-varies">Product-dependent</span></td>
-                <td>Mistral publishes a frequently refreshed model catalog, but not every model card states a training cutoff in the same way.</td>
+                <td><strong>Claude Haiku 4.5</strong></td>
+                <td>Anthropic</td>
+                <td>July 2025 training data; February 2025 reliable knowledge</td>
+                <td><span class="ai-status-pill is-tool">Optional tools</span></td>
+                <td>Fast, lower-cost Claude. Useful for routing or high-volume tasks where the older reliable-knowledge window is acceptable.</td>
               </tr>
               <tr>
                 <td><strong>Llama 4 Scout / Maverick</strong></td>
