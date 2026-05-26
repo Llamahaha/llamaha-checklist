@@ -71,8 +71,81 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
-  // -- LATEST PUBLISHED FINDINGS (2026-05-24 scan) -----------------------------
-  // Reviewed from current vendor/status/security sources on 2026-05-24.
+  // -- LATEST PUBLISHED FINDINGS (2026-05-26 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-05-26.
+  {
+    id: "2026-05-24-microsoft-365-exchange-entra-mfa-outage",
+    appName: "Exchange Online / Microsoft Teams / Entra ID",
+    vendor: "Microsoft",
+    category: "Outage",
+    severity: "High",
+    title: "Microsoft 365 outage disrupts Exchange Online, Teams, and Entra MFA authentication",
+    summary:
+      "A Microsoft infrastructure issue starting at 11:00 PM UTC on May 24 caused intermittent failures for users accessing Exchange Online and Microsoft Teams, and blocked Multi-Factor Authentication (MFA) messages via Microsoft Entra. Microsoft attributed the outage to SQL infrastructure backing Exchange Online not performing efficiently, with downstream impact on Entra SSO. Services were confirmed operational by May 26.",
+    affectedUsers:
+      "Microsoft 365 users accessing Exchange Online and Teams, and users of any application relying on Entra ID SSO or MFA for sign-in during the May 24-25 UTC incident window.",
+    recommendedMspAction:
+      "Reconcile affected Exchange, Teams, and Entra sign-in tickets as vendor-side if symptoms match the May 24-25 UTC window and users can now authenticate successfully. For any remaining MFA failures, verify Conditional Access policies, check Entra sign-in logs for that window, and contact Microsoft Support if persistent auth issues remain. Review whether MFA fallback options or SSPR are configured for tenants that experienced extended lockouts.",
+    sourceUrls: [
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-365-outage-blocks-access-to-teams-exchange-online/",
+      "https://www.techzine.eu/news/applications/135283/microsoft-365-outage-disrupts-teams-and-exchange-access-globally/"
+    ],
+    publishedDate: "2026-05-24",
+    lastUpdatedDate: "2026-05-26",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "exchange-online", "teams", "entra-id", "mfa", "outage", "authentication", "sso"]
+  },
+  {
+    id: "2026-05-30-autodesk-account-maintenance",
+    appName: "Autodesk account",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk account scheduled maintenance on May 30 may cause intermittent disruptions",
+    summary:
+      "Autodesk has scheduled maintenance for the Autodesk account service on May 30, 2026 from 10:00 AM to 1:00 PM PDT to improve platform resiliency. Intermittent sign-in or account access issues may occur during the window.",
+    affectedUsers:
+      "Users and admins signing in to Autodesk account or performing account management tasks — such as license assignments, user provisioning, or subscription management — during the May 30 maintenance window.",
+    recommendedMspAction:
+      "Advise clients to avoid scheduling Autodesk account management tasks, license assignments, or new user provisioning during the May 30 10:00 AM – 1:00 PM PDT window. If sign-in or account access fails during that period, check Autodesk Health before opening a support ticket.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-05-26",
+    lastUpdatedDate: "2026-05-26",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "autodesk-account", "maintenance", "scheduled-maintenance", "licensing"]
+  },
+  {
+    id: "2026-05-24-autodesk-fusion-automated-modeling-us",
+    appName: "Autodesk Fusion",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Autodesk Fusion automated modeling job submissions failed for US region users",
+    summary:
+      "On May 24, Autodesk identified an issue where customers were unable to submit new automated modeling jobs and encountered errors when triggering workflows within Fusion in the US region. The issue began at approximately 07:55 AM PDT and was resolved at 12:22 PM PDT.",
+    affectedUsers:
+      "Autodesk Fusion users in the US region attempting to submit or trigger automated modeling jobs on May 24 between approximately 07:55 AM and 12:22 PM PDT.",
+    recommendedMspAction:
+      "If users reported Fusion automated modeling errors on May 24, ask them to retry and verify jobs complete successfully. For jobs that failed or were left queued during the window, check whether they need to be resubmitted and confirm results were not lost before closing related tickets.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-05-24",
+    lastUpdatedDate: "2026-05-26",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "fusion", "automated-modeling", "service-impact", "us-region"]
+  },
   {
     id: "2026-05-23-zoom-mail-calendar-mms-presence-resolved",
     appName: "Zoom Mail / Calendar / Phone / Contact Center",
