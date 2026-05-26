@@ -218,6 +218,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   padding: 8px 11px;
   border-radius: 999px;
   border: 1px solid var(--line);
@@ -1776,6 +1777,157 @@ input[type="checkbox"] {
   white-space: pre;
 }
 
+.ai-info-page .hub-section-copy {
+  max-width: 86ch;
+}
+
+.ai-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ai-summary-card {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--panel-start), var(--panel-end));
+  box-shadow: var(--shadow-sm);
+}
+
+.ai-summary-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.ai-summary-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.ai-summary-label {
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--accent-secondary-soft);
+  color: #b9c7ff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ai-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(7, 11, 18, 0.34);
+}
+
+.ai-cutoff-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  color: var(--ink);
+}
+
+.ai-cutoff-table caption {
+  padding: 12px 16px;
+  caption-side: bottom;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.ai-cutoff-table th,
+.ai-cutoff-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.ai-cutoff-table thead th {
+  background: rgba(31, 37, 64, 0.92);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ai-cutoff-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.ai-band-row th {
+  padding: 10px 16px;
+  background: linear-gradient(90deg, rgba(53, 74, 155, 0.24), rgba(129, 62, 137, 0.18));
+  color: #dfe6ff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ai-status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--pill-bg);
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.ai-status-pill.is-live {
+  border-color: rgba(52, 211, 153, 0.45);
+  background: rgba(52, 211, 153, 0.13);
+  color: #9df0ca;
+}
+
+.ai-status-pill.is-tool {
+  border-color: var(--line-blue);
+  background: var(--accent-secondary-soft);
+  color: #b9c7ff;
+}
+
+.ai-status-pill.is-varies {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.12);
+  color: #facc8a;
+}
+
+.ai-status-pill.is-none {
+  border-color: rgba(248, 113, 113, 0.38);
+  background: rgba(248, 113, 113, 0.1);
+  color: #f9b4b4;
+}
+
+.ai-source-list a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.ai-source-list a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
 .issue-card ul {
   margin: 14px 0 0;
   padding-left: 18px;
@@ -2222,7 +2374,8 @@ input[type="checkbox"] {
 
   .system-groups,
   .toggle-grid,
-  .checkbox-grid {
+  .checkbox-grid,
+  .ai-summary-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -2255,6 +2408,7 @@ input[type="checkbox"] {
   .checkbox-grid,
   .system-groups,
   .toggle-grid,
+  .ai-summary-grid,
   .results-header,
   .tracker-grid,
   .tracker-field-grid {
@@ -3935,4 +4089,3 @@ input[type="checkbox"] {
     background: white;
   }
 }
-

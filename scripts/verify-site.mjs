@@ -26,6 +26,7 @@ const publicRoutes = [
   "applications.html",
   "app-licensing.html",
   "tips-and-tricks.html",
+  "ai-information.html",
   "contact.html",
   "ticket.html"
 ];

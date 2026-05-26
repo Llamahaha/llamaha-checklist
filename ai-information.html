@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCQW995ZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-PMCQW995ZM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Model Freshness and Knowledge Cutoffs | Llamaha Plan Room</title>
+  <meta name="description" content="A practical snapshot of AI model knowledge cutoff dates, web access, and what to verify before trusting current information from ChatGPT, Claude, Gemini, Grok, Perplexity, Llama, and Mistral.">
+  <link rel="canonical" href="https://llamaha.com/ai-information">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/llamaha-icon-purple-navy.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="page-nav" aria-label="Page">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="support.html">Support Pages</a>
+      <span>/</span>
+      <strong>AI Information</strong>
+    </nav>
+
+    <main class="hub-shell resource-page ai-info-page">
+      <section class="hero-card">
+        <div class="builder-header">
+          <img class="brand-icon" src="assets/llamaha-icon-purple-navy.png" alt="Llamaha icon">
+          <div class="section-heading">
+            <p class="section-kicker">AI Reference</p>
+            <h1>AI model freshness and knowledge cutoffs</h1>
+            <p class="builder-copy">A practical snapshot of what major AI tools know from training, when they need live search, and how to avoid stale answers on current products, prices, policies, and news.</p>
+            <p class="review-label">Reviewed May 26, 2026</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ai-summary-grid" aria-label="AI freshness summary">
+        <article class="ai-summary-card">
+          <span class="ai-summary-label">Current Events</span>
+          <h2>Use search-grounded tools</h2>
+          <p>For anything that changes weekly or daily, ask the tool to search the web and show sources. Perplexity, Gemini with Search Grounding, Grok with web or X Search, and ChatGPT with web search can retrieve newer facts than training alone.</p>
+        </article>
+        <article class="ai-summary-card">
+          <span class="ai-summary-label">Training Memory</span>
+          <h2>Cutoffs still matter</h2>
+          <p>Web access supplements the model; it does not rewrite the model. If search is off, unavailable, or skipped, the answer falls back to the model's trained knowledge window.</p>
+        </article>
+        <article class="ai-summary-card">
+          <span class="ai-summary-label">Rule of Thumb</span>
+          <h2>Verify date-sensitive claims</h2>
+          <p>For software versions, licensing rules, product availability, vendor outages, laws, prices, and security issues, verify against the official vendor page before acting.</p>
+        </article>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Snapshot</p>
+            <h2>LLM knowledge cutoff dates, sorted by freshness</h2>
+            <p class="hub-section-copy">Cutoff dates change as vendors release new model versions. This table favors official vendor documentation where available, with third-party AI visibility sources used only as cross-checks for rows that vendors do not clearly publish.</p>
+          </div>
+        </div>
+
+        <div class="ai-table-wrap">
+          <table class="ai-cutoff-table">
+            <caption>AI model knowledge cutoff and web access snapshot reviewed May 26, 2026.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Model or tool</th>
+                <th scope="col">Company</th>
+                <th scope="col">Training cutoff</th>
+                <th scope="col">Web access</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="ai-band-row">
+                <th scope="row" colspan="5">Search-grounded or live-web capable</th>
+              </tr>
+              <tr>
+                <td><strong>Perplexity Sonar / Perplexity AI</strong></td>
+                <td>Perplexity</td>
+                <td>N/A for the user-facing answer layer</td>
+                <td><span class="ai-status-pill is-live">Live search</span></td>
+                <td>Search-first answer engine. Best for current questions when citations matter, but still check the cited pages.</td>
+              </tr>
+              <tr>
+                <td><strong>Gemini 3.1 / Gemini 3</strong></td>
+                <td>Google</td>
+                <td>January 2025</td>
+                <td><span class="ai-status-pill is-tool">Google Search grounding</span></td>
+                <td>Gemini 3-family models list a January 2025 cutoff. Use Google Search grounding or URL context for newer facts.</td>
+              </tr>
+              <tr>
+                <td><strong>Grok 4.3 / Grok 4</strong></td>
+                <td>xAI</td>
+                <td>Grok 4 commonly listed as November 2024; 4.3 cutoff not clearly published on the model page</td>
+                <td><span class="ai-status-pill is-tool">Web + X Search tools</span></td>
+                <td>xAI documents live web search and X Search tools for Grok 4.3. Treat it as current only when those tools are used.</td>
+              </tr>
+
+              <tr class="ai-band-row">
+                <th scope="row" colspan="5">Static training memory, newest cutoff first</th>
+              </tr>
+              <tr>
+                <td><strong>Claude Opus 4.7</strong></td>
+                <td>Anthropic</td>
+                <td>January 2026</td>
+                <td><span class="ai-status-pill is-tool">Optional tools</span></td>
+                <td>Most recent clearly vendor-stated cutoff in this snapshot. Claude may still need web tools for anything after January 2026.</td>
+              </tr>
+              <tr>
+                <td><strong>GPT-5.5</strong></td>
+                <td>OpenAI</td>
+                <td>December 1, 2025</td>
+                <td><span class="ai-status-pill is-tool">Optional tools</span></td>
+                <td>Current OpenAI docs list GPT-5.5 as the recommended flagship model. Older cutoff lists may still name GPT-5.2.</td>
+              </tr>
+              <tr>
+                <td><strong>GPT-5.4 / GPT-5.2</strong></td>
+                <td>OpenAI</td>
+                <td>August 31, 2025</td>
+                <td><span class="ai-status-pill is-tool">Optional tools</span></td>
+                <td>Useful reference because many public cutoff tables still cite GPT-5.2 as a recent OpenAI model.</td>
+              </tr>
+              <tr>
+                <td><strong>Claude Sonnet 4.6 / Opus 4.6</strong></td>
+                <td>Anthropic</td>
+                <td>August 2025</td>
+                <td><span class="ai-status-pill is-tool">Optional tools</span></td>
+                <td>Anthropic lists both Sonnet 4.6 and Opus 4.6 as trained through August 2025.</td>
+              </tr>
+              <tr>
+                <td><strong>Mistral Large 3 / Medium 3.5</strong></td>
+                <td>Mistral AI</td>
+                <td>Varies by release; public model cards are versioned</td>
+                <td><span class="ai-status-pill is-varies">Product-dependent</span></td>
+                <td>Mistral publishes a frequently refreshed model catalog, but not every model card states a training cutoff in the same way.</td>
+              </tr>
+              <tr>
+                <td><strong>Llama 4 Scout / Maverick</strong></td>
+                <td>Meta</td>
+                <td>August 2024</td>
+                <td><span class="ai-status-pill is-none">None by default</span></td>
+                <td>Open-weight model family. It can become web-aware only if the app around it adds retrieval or browsing.</td>
+              </tr>
+              <tr>
+                <td><strong>GPT-4o</strong></td>
+                <td>OpenAI</td>
+                <td>October 1, 2023</td>
+                <td><span class="ai-status-pill is-tool">Optional tools</span></td>
+                <td>Still common in integrations. Without web search, it is stale for late-2023 onward changes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">How to Use This</p>
+            <h2>What to ask an AI tool before trusting it</h2>
+          </div>
+        </div>
+        <div class="hub-quick-grid">
+          <article class="hub-card">
+            <h2>Ask it to search</h2>
+            <p>Use language like, "Search the web and cite current official sources." This is especially important for outages, pricing, product names, laws, release dates, and security issues.</p>
+          </article>
+          <article class="hub-card">
+            <h2>Ask for the source date</h2>
+            <p>A current answer should point to a source that was published or updated recently enough for the question. A 2024 source may be fine for a definition, but not for a 2026 license change.</p>
+          </article>
+          <article class="hub-card">
+            <h2>Check the actual model</h2>
+            <p>Chat apps often route between models. If a workflow matters, check which model answered, whether web search ran, and whether the answer includes citations.</p>
+          </article>
+          <article class="hub-card">
+            <h2>Use vendor docs for action</h2>
+            <p>AI is great for summarizing and comparing. For configuration, licensing, legal, security, or production changes, use the vendor's current documentation as the final authority.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="results-card hub-section">
+        <div class="results-header">
+          <div>
+            <p class="section-kicker">Sources Reviewed</p>
+            <h2>Reference links</h2>
+          </div>
+        </div>
+        <div class="card-stack ai-source-list">
+          <div class="card-block">
+            <h4>Official vendor sources</h4>
+            <p>
+              <a href="https://developers.openai.com/api/docs/models">OpenAI model docs</a>,
+              <a href="https://support.claude.com/en/articles/8114494-how-up-to-date-is-claude-s-training-data">Anthropic Claude training data help</a>,
+              <a href="https://ai.google.dev/gemini-api/docs/gemini-3">Google Gemini 3 developer guide</a>,
+              <a href="https://docs.perplexity.ai/docs/sonar/models/sonar">Perplexity Sonar docs</a>,
+              <a href="https://docs.x.ai/developers/models/grok-4">xAI Grok model docs</a>,
+              <a href="https://docs.x.ai/developers/tools/web-search">xAI Web Search docs</a>,
+              <a href="https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md">Meta Llama 4 model card</a>,
+              and <a href="https://docs.mistral.ai/getting-started/models/">Mistral model catalog</a>.
+            </p>
+          </div>
+          <div class="card-block">
+            <h4>Third-party cutoff trackers</h4>
+            <p>
+              Cross-checked against <a href="https://www.temso.ai/blog/ai-knowledge-cutoff-dates-every-major-llm-updated-for-2026">Temso AI</a>,
+              <a href="https://otterly.ai/blog/knowledge-cutoff/">OtterlyAI</a>, and
+              <a href="https://www.allmo.ai/articles/list-of-large-language-model-cut-off-dates">ALLMO</a>. These are useful snapshots, but official vendor docs should win when the two disagree.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="siteChrome.js"></script>
+</body>
+</html>

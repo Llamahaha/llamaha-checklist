@@ -128,6 +128,7 @@ export function buildSearchIndex() {
     entry("App Guides", "Browse application guides by software family and vendor from Support Pages.", "applications.html", "helpPage", "Support Pages", "app guides autodesk bentley bluebeam esri microsoft adobe trimble citrix projectwise"),
     entry("Licensing Help", "Support page section for app access, activation, assigned seats, vendor accounts, roles, editions, profiles, and subscriptions.", "app-licensing.html", "helpPage", "Support Pages", "licensing access activation seats subscriptions named user vendor account role edition profile"),
     entry("Tips & Tricks", "Support page section for everyday Windows, browser, file, meeting, phone, cleanup, and safer troubleshooting habits.", "tips-and-tricks.html", "helpPage", "Support Pages", "tips tricks windows browser files meeting phone cleanup troubleshooting"),
+    entry("AI Model Freshness and Knowledge Cutoffs", "Plain-English snapshot of major AI model knowledge cutoff dates, live web access, search grounding, and when to verify ChatGPT, Claude, Gemini, Grok, Perplexity, Llama, and Mistral answers.", "ai-information.html", "helpPage", "AI Reference", "ai llm model knowledge cutoff training data web access browsing search grounding chatgpt gpt claude gemini grok perplexity llama mistral"),
     entry(
       "Articles",
       "Topical articles for everyday work-tech situations: new phone & MFA, moving to a new computer, recognizing phishing, work-from-home essentials, password manager basics, IT glossary, and more.",
