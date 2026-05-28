@@ -71,6 +71,58 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-05-28 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-05-28.
+  {
+    id: "2026-05-27-autodesk-revit-cloud-worksharing-outage",
+    appName: "Revit Cloud Worksharing / Cloud Models",
+    vendor: "Autodesk",
+    category: "Outage",
+    severity: "Medium",
+    title: "Autodesk Revit Cloud Worksharing outage briefly blocked access to cloud models",
+    summary:
+      "Autodesk reported an outage affecting Revit Cloud Worksharing / Cloud Models beginning around 4:47 AM UTC on May 27, 2026. Users were intermittently unable to access cloud workshared and cloud models from Revit. The incident lasted approximately one hour and was resolved the same day; services are confirmed operational.",
+    affectedUsers:
+      "Project teams using Revit Cloud Worksharing, Cloud Models, Autodesk Docs, BIM 360, or Autodesk Construction Cloud workflows that open or sync cloud-hosted Revit models during the early-morning May 27 UTC window.",
+    recommendedMspAction:
+      "Reconcile any May 27 tickets reporting 'unable to access cloud workshared models' or cloud worksharing communication errors as vendor-side if symptoms match the incident window and users can now sync normally. For lingering local errors, have users restart Revit and re-open the cloud model; if problems persist, check Autodesk Health before opening a support case.",
+    sourceUrls: [
+      "https://health.autodesk.com/",
+      "https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Unable-to-access-Cloud-Workshared-and-Cloud-Models-from-Revit-home-page.html"
+    ],
+    publishedDate: "2026-05-27",
+    lastUpdatedDate: "2026-05-28",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "revit", "cloud-worksharing", "cloud-models", "bim-360", "construction-cloud", "outage"]
+  },
+  {
+    id: "2026-05-25-microsoft-365-admin-center-usage-reports-issue",
+    appName: "Microsoft 365 admin center",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Some admins temporarily unable to view usage reports in Microsoft 365 admin center",
+    summary:
+      "Microsoft reported a service issue on May 25, 2026 in which some administrators were unable to view usage reports in the Microsoft 365 admin center. The problem was limited to reporting/analytics views and did not affect end-user access to Microsoft 365 services. Microsoft resolved the issue.",
+    affectedUsers:
+      "Microsoft 365 administrators attempting to open usage and activity reports in the Microsoft 365 admin center during the May 25 incident window. End users and core services were not affected.",
+    recommendedMspAction:
+      "Treat any May 25 reports of blank or failing M365 admin-center usage reports as vendor-side. Confirm reporting views now load; if a specific tenant still shows missing data, check the Microsoft 365 Service Health dashboard and Message Center for the related advisory before escalating to Microsoft Support.",
+    sourceUrls: [
+      "https://status.cloud.microsoft/",
+      "https://learn.microsoft.com/en-us/microsoft-365/enterprise/view-service-health?view=o365-worldwide"
+    ],
+    publishedDate: "2026-05-25",
+    lastUpdatedDate: "2026-05-28",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "admin-center", "usage-reports", "service-impact", "reporting"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-05-26 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-05-26.
   {
