@@ -1620,6 +1620,114 @@ export const publicGuideContentExtra = {
       { label: "HEC-GeoRAS", url: "https://www.hec.usace.army.mil/software/hec-georas/" }
     ])
   },
+  h20net: {
+    "hydraulic-toolbox": {
+      summary: "Use this guide when Hydraulic Toolbox will not open, cannot save or report a calculation, or gives results that need to be checked against the approved project assumptions.",
+      overview: [
+        "Hydraulic Toolbox is an FHWA desktop suite of calculators for routine hydrologic and hydraulic analysis and design computations.",
+        "Most Hydraulic Toolbox issues come from version differences, Windows install permissions, a project file behaving differently than expected, or calculation assumptions that need to be checked before the software is blamed."
+      ],
+      askFirst: [
+        "Which Hydraulic Toolbox version is your team expecting to use?",
+        "Is the problem app launch, one calculator, saving a .hyd file, creating a report, or interpreting a result?",
+        "Can another approved computer open the same .hyd file or reproduce the same calculation?",
+        "Are the input assumptions, units, and selected calculator type the same as the approved project workflow?"
+      ],
+      licensing: [
+        "Hydraulic Toolbox is a free FHWA utility, so access usually depends on using the approved version and having a compatible 64-bit Windows computer.",
+        "The installer may require administrator permissions. If the install is blocked, capture the Windows or installer message before retrying.",
+        "If the app opens but a result looks wrong, keep the .hyd file and assumptions available so the calculation can be reviewed."
+      ],
+      install: [
+        "Use the official FHWA download page or the company-approved package for the version your team supports.",
+        "Run the installer with administrator permissions if Windows requires it, then restart if prompted.",
+        "Open Hydraulic Toolbox and test one simple known-good calculation before opening the project file that failed earlier."
+      ],
+      supportCheckpoints: [
+        "Compare the same calculation on another approved computer before reinstalling the app.",
+        "Confirm the units, calculator type, input values, and scenario selection before treating the output as a software problem.",
+        "If reports or files will not save, test a simple local folder path and avoid saving directly to a locked or synced project folder until the app is stable."
+      ],
+      commonIssues: [
+        makeIssue(
+          "One calculation or scenario looks wrong",
+          "Hydraulic Toolbox opens, but one calculator result, plot, or report does not match what you expected.",
+          "Check units, selected calculator, input assumptions, and the same calculation on another approved computer before reinstalling.",
+          "Send the .hyd file, calculator name, inputs, version, and screenshot of the result or warning."
+        ),
+        makeIssue(
+          "The app cannot save, open, or report a project file",
+          "Hydraulic Toolbox launches, but a .hyd file, output report, or plot export fails.",
+          "Test a simple file in a local folder, check whether the project path is locked or synced, and compare a second .hyd file.",
+          "Send the file path, exact message, app version, and whether another computer opens the same file."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact Hydraulic Toolbox message or result screen.",
+        "The Hydraulic Toolbox version shown in the app.",
+        "The .hyd project file name and where it is stored.",
+        "The calculator type, units, and main input assumptions involved in the problem.",
+        "A note about whether another approved computer can reproduce the same result."
+      ],
+      relatedLinks: [
+        { label: "FHWA Hydraulic Toolbox", url: "https://www.fhwa.dot.gov/engineering/hydraulics/software/toolbox404.cfm" }
+      ],
+      lastReviewed: "Reviewed May 2026"
+    },
+    "hy-8": {
+      summary: "Use this guide when HY-8 will not open a culvert model, cannot save or report a .hy8 file, or gives culvert results that need to be checked against approved assumptions.",
+      overview: [
+        "HY-8 is the FHWA culvert hydraulic analysis program used for culvert crossings, roadway overtopping, water-surface profiles, and related design checks.",
+        "Most HY-8 issues come from version differences, 64-bit Windows compatibility, one .hy8 file behaving differently than expected, or input assumptions that need review before changing the installation."
+      ],
+      askFirst: [
+        "Which HY-8 version is your team expecting to use?",
+        "Is the problem app launch, opening one .hy8 file, culvert calculations, water-surface profile output, overtopping, or report export?",
+        "Can another approved computer open the same HY-8 file and produce the same result?",
+        "Are the culvert geometry, roadway data, tailwater assumptions, flow range, and units correct for the project?"
+      ],
+      licensing: [
+        "HY-8 is a free FHWA utility, so access usually depends on using the approved version and having a compatible 64-bit Windows computer.",
+        "The installer may require administrator permissions. If the install is blocked, capture the Windows or installer message before retrying.",
+        "If a model opens but results look wrong, keep the .hy8 file and assumptions available so the calculation can be reviewed."
+      ],
+      install: [
+        "Use the official FHWA HY-8 download page or the company-approved package for the version your team supports.",
+        "Run the installer with administrator permissions if Windows requires it, then restart if prompted.",
+        "Open HY-8 and test one small known-good culvert model before opening the production file that failed earlier."
+      ],
+      supportCheckpoints: [
+        "Compare the same .hy8 file on another approved computer before reinstalling the app.",
+        "Confirm units, culvert geometry, roadway crest data, tailwater setup, flow range, and selected analysis options before trusting or rejecting the output.",
+        "If report generation or saving fails, test a simple local folder path and avoid saving directly to a locked or synced project folder until the app is stable."
+      ],
+      commonIssues: [
+        makeIssue(
+          "One culvert model gives unexpected results",
+          "HY-8 opens, but the headwater, outlet condition, overtopping, or water-surface profile does not match what you expected.",
+          "Check geometry, units, flow range, tailwater assumptions, and the same .hy8 file on another approved computer before reinstalling.",
+          "Send the .hy8 file, app version, key assumptions, and screenshot of the result or warning."
+        ),
+        makeIssue(
+          "The app cannot open, save, or report a HY-8 file",
+          "HY-8 launches, but a .hy8 project file, generated report, or export fails.",
+          "Test a simple file in a local folder, check whether the project path is locked or synced, and compare a second .hy8 file.",
+          "Send the file path, exact message, app version, and whether another computer opens the same file."
+        )
+      ],
+      supportArtifacts: [
+        "A screenshot of the exact HY-8 message or result screen.",
+        "The HY-8 version shown in the app.",
+        "The .hy8 project file name and where it is stored.",
+        "The culvert geometry, roadway, tailwater, flow range, and units involved in the problem.",
+        "A note about whether another approved computer can reproduce the same result."
+      ],
+      relatedLinks: [
+        { label: "FHWA HY-8", url: "https://www.fhwa.dot.gov/engineering/hydraulics/software/hy8/" }
+      ],
+      lastReviewed: "Reviewed May 2026"
+    }
+  },
   mctrans: {
     hcs: {
       summary: "Use this guide when HCS will not open the study you expect, behaves differently after a version change, or needs help around setup, access, or file handling.",

@@ -201,6 +201,12 @@ const friendlyAliases = {
   // Bentley
   "openroads": "/guides/bentley/openroads-designer.html",
   "openbridge": "/guides/bentley/openbridge-designer.html",
+  // H20Net / FHWA hydraulics
+  "h2onet": "/guides/h20net.html",
+  "fhwa": "/guides/h20net.html",
+  "fhwa-hydraulics": "/guides/h20net.html",
+  "hy8": "/guides/h20net/hy-8.html",
+  "hydraulics-toolbox": "/guides/h20net/hydraulic-toolbox.html",
   // Bluebeam
   "revu": "/guides/bluebeam/revu-21.html",
   "bluebeam-revu": "/guides/bluebeam/revu-21.html",

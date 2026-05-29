@@ -94,6 +94,8 @@ const populatedPublicGuides = [
   ["hec", "hec-dss"],
   ["hec", "hec-ssp"],
   ["hec", "hec-georas"],
+  ["h20net", "hydraulic-toolbox"],
+  ["h20net", "hy-8"],
   ["mctrans", "hcs"],
   ["mctrans", "hss"],
   ["transoft", "autoturn"],

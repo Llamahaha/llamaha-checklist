@@ -5,6 +5,7 @@ export const vendorOrderExtra = [
   "qgis",
   "rock",
   "hec",
+  "h20net",
   "mctrans",
   "transoft",
   "axiom",
@@ -143,6 +144,31 @@ export const vendorGuidesExtra = {
     supportLinks: [
       { label: "HEC Software overview", url: "https://www.hec.usace.army.mil/software/" },
       { label: "HEC software fact sheet", url: "https://www.hec.usace.army.mil/factsheets/Software/HEC_FactSheet_Software.pdf" }
+    ]
+  },
+  h20net: {
+    title: "H20Net",
+    summary: "Use this for FHWA hydraulic design utilities collected under the H20Net app family, especially Hydraulic Toolbox and HY-8.",
+    overview:
+      "These tools are lightweight hydraulic-design utilities where support usually depends on the exact FHWA version, Windows compatibility, calculation files, and whether the same project behaves correctly on another approved computer.",
+    products: ["Hydraulic Toolbox", "HY-8"],
+    sharedNotes: [
+      "Capture the exact app version and project file before changing the installation.",
+      "If a calculation looks wrong, test a small known-good example first and cross-check the result with engineering judgment or another approved method.",
+      "Preserve .hyd and .hy8 project files, exported reports, and calculation assumptions during repair or workstation replacement."
+    ],
+    adminSurfaces: [
+      "Official FHWA Hydraulics software download pages",
+      "Company-approved install package or software center entry",
+      "Project folders containing .hyd, .hy8, reports, and calculation notes"
+    ],
+    escalationNotes: [
+      "Escalate after confirming the approved version, 64-bit Windows compatibility, install permissions, and whether the issue follows one project file.",
+      "Collect the app version, project file name, error screenshot, and a known-good comparison before handing off."
+    ],
+    supportLinks: [
+      { label: "FHWA Hydraulic Toolbox", url: "https://www.fhwa.dot.gov/engineering/hydraulics/software/toolbox404.cfm" },
+      { label: "FHWA HY-8", url: "https://www.fhwa.dot.gov/engineering/hydraulics/software/hy8/" }
     ]
   },
   mctrans: {

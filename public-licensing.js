@@ -50,6 +50,20 @@ const customerLicensingReference = {
       "If relevant, whether your team uses a cloud-connected, cached, or offline-capable P6 setup"
     ]
   },
+  h20net: {
+    summary: "H20Net tools such as Hydraulic Toolbox and HY-8 are free FHWA utilities, so access usually depends on the approved version, 64-bit Windows compatibility, and install permissions rather than a paid seat.",
+    howItWorks: [
+      "Hydraulic Toolbox and HY-8 are typically installed as Windows desktop utilities from the official FHWA pages or a company-approved package.",
+      "The version matters because project files, reports, and results can be sensitive to app updates or team standards.",
+      "If the installer is blocked, the issue is usually Windows permissions, endpoint policy, or using an unapproved download path rather than a license assignment."
+    ],
+    whatYouNeed: [
+      "The exact app name, Hydraulic Toolbox or HY-8",
+      "The version your team expects to use",
+      "The .hyd or .hy8 file involved, if the issue is project-specific",
+      "A screenshot of any Windows installer, save, report, or calculation message"
+    ]
+  },
   mctrans: {
     summary: "MCTRANS access usually depends on the exact HCS or HSS version or edition your organization purchased or standardized on, plus the workstation or user it was assigned to.",
     howItWorks: [

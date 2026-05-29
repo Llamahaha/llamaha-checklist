@@ -119,6 +119,24 @@ export const applicationCatalogExtra = {
       uninstall: "Preserve GIS project data, extensions, and HEC-RAS-linked content before cleanup."
     }
   ],
+  h20net: [
+    {
+      name: "Hydraulic Toolbox",
+      slug: "hydraulic-toolbox",
+      focus: "FHWA stand-alone calculator suite for routine hydrologic and hydraulic analysis, design computations, plots, and reports.",
+      licensing: "Hydraulic Toolbox is a free FHWA utility. Access usually depends on using the approved version, a 64-bit Windows computer, and install permissions.",
+      install: "Use the official FHWA download or the company-approved package, run the installer with admin permissions if needed, and test one known calculation before using project data.",
+      uninstall: "Preserve .hyd project files, exported reports, assumptions, and version notes before removing or replacing the app."
+    },
+    {
+      name: "HY-8",
+      slug: "hy-8",
+      focus: "FHWA culvert hydraulic analysis program used to model culvert crossings, roadway overtopping, water-surface profiles, and related design scenarios.",
+      licensing: "HY-8 is a free FHWA utility. Access usually depends on using the approved version, a 64-bit Windows computer, and install permissions.",
+      install: "Use the official FHWA download or the company-approved package, run the installer with admin permissions if needed, and test one known culvert model before using production files.",
+      uninstall: "Preserve .hy8 project files, reports, roadway and culvert assumptions, and version notes before removing or replacing the app."
+    }
+  ],
   mctrans: [
     {
       name: "HCS",

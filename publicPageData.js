@@ -1016,6 +1016,8 @@ export const publicAppHelpSections = [
           ["hec", "hec-hms"],
           ["hec", "hec-ras"],
           ["hec", "hec-dssvue"],
+          ["h20net", "hydraulic-toolbox"],
+          ["h20net", "hy-8"],
           ["mctrans", "hcs"],
           ["mctrans", "hss"],
           ["transoft", "autoturn"],

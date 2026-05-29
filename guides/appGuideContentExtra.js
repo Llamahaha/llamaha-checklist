@@ -1337,6 +1337,100 @@ export const appGuideContentExtra = {
     "hec-ssp": hecInternalGuide("HEC-SSP", "study or data", "statistical analysis", "https://www.hec.usace.army.mil/software/hec-ssp/"),
     "hec-georas": hecInternalGuide("HEC-GeoRAS", "GIS project", "preprocessing workflow", "https://www.hec.usace.army.mil/software/hec-georas/")
   },
+  h20net: {
+    "hydraulic-toolbox": {
+      highlights: [
+        "Fastest likely fix: confirm the approved Hydraulic Toolbox version, then compare the same .hyd file or calculation on another approved workstation.",
+        "Treat unexpected output as an input, unit, scenario, or method-review issue before treating it as app corruption."
+      ],
+      askFirst: [
+        "What Hydraulic Toolbox version is approved for this client or team?",
+        "Is the failure launch, a specific calculator, save/open, plotting, report generation, or result interpretation?",
+        "Does the same .hyd file or calculation work on another approved machine?",
+        "Is the file local, on a network share, or inside a sync folder?"
+      ],
+      supportCheckpoints: [
+        "Capture version, calculator name, units, input assumptions, .hyd path, and whether a known-good sample works.",
+        "Test save/open/report generation from a simple local folder before blaming the application.",
+        "Preserve .hyd files, exports, and assumptions before repair or uninstall work."
+      ],
+      commonIssues: [
+        issue(
+          "Calculation or report differs by machine",
+          "Hydraulic Toolbox opens, but a result, plot, or report differs from another machine or the expected workflow.",
+          "Compare the version and inputs side by side, then test the same .hyd file on another approved install before changing the workstation.",
+          "Collect the .hyd file, version screenshot, calculator name, units, input assumptions, and output screenshot.",
+          "Escalate when the same approved version and inputs reproduce the discrepancy on multiple machines."
+        ),
+        issue(
+          "File save or report generation fails",
+          "The app launches, but a .hyd file, report, or plot export fails.",
+          "Test a local non-synced path, check file locks and path permissions, then compare a second .hyd file.",
+          "Collect the source path, destination path, exact message, version, and whether another machine opens the file.",
+          "Escalate when local-path testing and a second file rule out storage and path issues."
+        )
+      ],
+      usefulInfo: {
+        paths: [".hyd project file path", "Report/export destination", "Company-approved installer or software center entry"],
+        logs: ["Version/about screenshot", "Calculation input screenshots", "Exact error or report-generation message"],
+        services: [],
+        processes: []
+      },
+      escalationNotes: [
+        "Preserve .hyd project files and exported reports before repair or uninstall work.",
+        "Do not change engineering assumptions just to make the software output look right; capture them and escalate for technical review."
+      ],
+      relatedLinks: [
+        { label: "FHWA Hydraulic Toolbox", url: "https://www.fhwa.dot.gov/engineering/hydraulics/software/toolbox404.cfm" }
+      ]
+    },
+    "hy-8": {
+      highlights: [
+        "Fastest likely fix: confirm the approved HY-8 version, then compare the same .hy8 file on another approved workstation.",
+        "HY-8 issues are often model/input-specific: units, culvert geometry, tailwater, flow range, roadway data, or report path."
+      ],
+      askFirst: [
+        "What HY-8 version is approved for this client or team?",
+        "Is the failure launch, opening a .hy8 file, culvert calculation, profile output, overtopping, save/open, or report generation?",
+        "Does the same .hy8 file work on another approved machine?",
+        "Is the file local, on a network share, or inside a sync folder?"
+      ],
+      supportCheckpoints: [
+        "Capture version, .hy8 path, units, culvert geometry, roadway/tailwater assumptions, flow range, and a known-good comparison.",
+        "Test save/open/report generation from a simple local folder before blaming the application.",
+        "Preserve .hy8 files, reports, and model assumptions before repair or uninstall work."
+      ],
+      commonIssues: [
+        issue(
+          "Culvert result differs by machine or version",
+          "The same HY-8 model produces unexpected headwater, overtopping, outlet, or profile results.",
+          "Compare version and inputs, then test the same .hy8 file on another approved install before editing the model or reinstalling.",
+          "Collect the .hy8 file, version screenshot, geometry and unit assumptions, result screenshot, and known-good comparison.",
+          "Escalate when the approved version and same input file reproduce the discrepancy on multiple machines."
+        ),
+        issue(
+          "HY-8 file save/open or report generation fails",
+          "The app launches, but a .hy8 file, report, or export fails.",
+          "Test a local non-synced path, check file locks and path permissions, then compare a second .hy8 file.",
+          "Collect source path, destination path, exact message, version, and whether another machine opens the file.",
+          "Escalate when local-path testing and a second file rule out storage and path issues."
+        )
+      ],
+      usefulInfo: {
+        paths: [".hy8 project file path", "Report/export destination", "Company-approved installer or software center entry"],
+        logs: ["Version/about screenshot", "Model input screenshots", "Exact error or report-generation message"],
+        services: [],
+        processes: []
+      },
+      escalationNotes: [
+        "Preserve .hy8 project files and exported reports before repair or uninstall work.",
+        "Do not edit culvert geometry, roadway, tailwater, or flow assumptions just to make the output look right; capture them and escalate for technical review."
+      ],
+      relatedLinks: [
+        { label: "FHWA HY-8", url: "https://www.fhwa.dot.gov/engineering/hydraulics/software/hy8/" }
+      ]
+    }
+  },
   mctrans: {
     hcs: {
       highlights: [
