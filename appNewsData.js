@@ -71,6 +71,161 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-06-02 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-06-02.
+  {
+    id: "2026-06-01-microsoft-365-office-teams-file-open-outage-mo1329446",
+    appName: "Office for the web / Microsoft Teams / SharePoint Online",
+    vendor: "Microsoft",
+    category: "Outage",
+    severity: "High",
+    title: "Microsoft 365 outage blocked opening files in Office for the web and Teams (MO1329446)",
+    summary:
+      "On June 1, 2026 Microsoft tracked incident MO1329446 after users were unable to open files in Office for the web (Word, Excel, PowerPoint) and Microsoft Teams. Microsoft saw elevated error rates across Office for the web and pointed to a cross-service backend dependency. The impact lasted roughly six hours from detection to full restoration and Microsoft confirmed the impact is no longer occurring.",
+    affectedUsers:
+      "Microsoft 365 users opening shared Word, Excel, or PowerPoint files in Microsoft Teams or in the browser-based Office for the web apps during the June 1 incident window.",
+    recommendedMspAction:
+      "Treat June 1 reports of files that would not open in Teams or Office for the web (endless loading spinners or load errors) as vendor-side, matched to incident MO1329446 in the Microsoft 365 admin center. Confirm file open now works in a browser and in Teams; for any tenant still seeing errors, check Service Health and the final MO1329446 post before escalating to Microsoft Support.",
+    sourceUrls: [
+      "https://status.cloud.microsoft/",
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-investigates-office-apps-teams-file-access-issues/",
+      "https://www.neowin.net/news/microsoft-confirms-outage-affecting-office-files-and-teams/"
+    ],
+    publishedDate: "2026-06-01",
+    lastUpdatedDate: "2026-06-02",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "office-for-the-web", "teams", "sharepoint", "outage", "file-access", "mo1329446"]
+  },
+  {
+    id: "2026-05-29-palo-alto-pan-os-globalprotect-cve-2026-0257-kev",
+    appName: "PAN-OS / GlobalProtect",
+    vendor: "Palo Alto Networks",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Palo Alto PAN-OS GlobalProtect authentication-override bypass (CVE-2026-0257) actively exploited, added to CISA KEV",
+    summary:
+      "CVE-2026-0257 is an authentication bypass in the PAN-OS GlobalProtect portal/gateway \"authentication override\" feature that lets a remote unauthenticated attacker forge authentication-override cookies and establish unauthorized VPN connections. It is exploitable only when the certificate used to encrypt these cookies is shared with another feature such as the portal/gateway HTTPS service. Palo Alto published its advisory May 13; Rapid7 observed exploitation starting May 17, and CISA added the CVE to the Known Exploited Vulnerabilities catalog on May 29 with a federal mitigation deadline of June 1. This is a separate issue from the earlier User-ID Authentication Portal RCE CVE-2026-0300.",
+    affectedUsers:
+      "Organizations running PAN-OS GlobalProtect portals or gateways that use the non-default authentication-override feature with a shared certificate, especially where GlobalProtect is internet-facing.",
+    recommendedMspAction:
+      "Apply the fixed PAN-OS release for the deployed branch. Until patched, ensure the authentication-override cookie certificate is not shared with the portal/gateway HTTPS service, and review GlobalProtect authentication logs for unexpected VPN sessions or full IP assignments around mid-to-late May. Track the CISA KEV June 1 deadline and do not confuse this with the separate CVE-2026-0300 Captive Portal RCE.",
+    sourceUrls: [
+      "https://security.paloaltonetworks.com/CVE-2026-0257",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://www.bleepingcomputer.com/news/security/palo-alto-globalprotect-vpn-auth-bypass-flaw-now-exploited-in-attacks/",
+      "https://www.rapid7.com/blog/post/etr-rapid7-observed-exploitation-of-pan-os-globalprotect-authentication-bypass-vulnerability-cve-2026-0257/"
+    ],
+    publishedDate: "2026-05-29",
+    lastUpdatedDate: "2026-06-02",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["palo-alto-networks", "pan-os", "globalprotect", "vpn", "security", "kev", "actively-exploited", "authentication-bypass", "patch"]
+  },
+  {
+    id: "2026-05-30-microsoft-365-exchange-shared-calendar-meetings",
+    appName: "Exchange Online / Outlook",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Exchange Online issue blocks creating online meetings from shared calendar events",
+    summary:
+      "Starting around May 30, 2026 Microsoft reported a service degradation in Exchange Online where some users were unable to create new online meetings from shared calendar events. Microsoft traced it to a recent service update that introduced an issue in an authorization component of the calendar service. Existing shared-calendar events are unaffected, and Microsoft was developing and validating a code fix.",
+    affectedUsers:
+      "Outlook / Exchange Online users who schedule Teams or other online meetings directly from a shared calendar (for example delegates and assistants booking on a manager's calendar).",
+    recommendedMspAction:
+      "Tell affected users the documented workaround: create the online meeting from their own personal calendar and add the shared calendar's owner or attendees, rather than creating it from the shared calendar event. Match reports to the Exchange Online advisory in the Microsoft 365 admin center and watch Message Center for the code-fix deployment timeline before treating it as a client or permissions problem.",
+    sourceUrls: [
+      "https://status.cloud.microsoft/",
+      "https://learn.microsoft.com/en-us/microsoft-365/enterprise/view-service-health?view=o365-worldwide"
+    ],
+    publishedDate: "2026-05-30",
+    lastUpdatedDate: "2026-06-02",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "exchange-online", "outlook", "calendar", "shared-calendar", "teams-meetings", "service-impact"]
+  },
+  {
+    id: "2026-06-02-google-chrome-149-stable",
+    appName: "Google Chrome",
+    vendor: "Google",
+    category: "Product Change",
+    severity: "Low",
+    title: "Chrome 149 reaches broad desktop stable",
+    summary:
+      "Google's Chrome 149 stable release reached broad desktop rollout around June 2, 2026 (Chrome 149.0.7827.x for Windows and Mac), following the late-May early-stable wave. As with every milestone, the stable channel ships the latest Chromium security fixes and the update completes only after users relaunch the browser.",
+    affectedUsers:
+      "Managed Chrome users on Windows, macOS, Linux, and mobile as the 149 stable milestone rolls out fleet-wide.",
+    recommendedMspAction:
+      "Keep Chrome auto-update policies enabled and watch managed-browser version reporting as 149 lands. Prompt users to relaunch where the update is staged but not applied, and prioritize shared workstations, kiosks, and browsers used for privileged admin portals. Validate any extension or browser-policy dependencies on a small test ring if a client tightly controls browser updates.",
+    sourceUrls: [
+      "https://chromereleases.googleblog.com/",
+      "https://chromereleases.googleblog.com/2026/05/early-stable-update-for-desktop.html"
+    ],
+    publishedDate: "2026-06-02",
+    lastUpdatedDate: "2026-06-02",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "chrome", "browser", "stable", "product-change", "patch"]
+  },
+  {
+    id: "2026-05-27-cisa-kev-supply-chain-daemon-tools-tanstack-nx",
+    appName: "DAEMON Tools Lite / TanStack npm / Nx Console",
+    vendor: "Multiple (CISA KEV)",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "CISA adds three actively exploited supply-chain compromises to KEV (Daemon Tools Lite, TanStack, Nx Console)",
+    summary:
+      "On May 27, 2026 CISA added three supply-chain compromises to its Known Exploited Vulnerabilities catalog with a June 10 federal remediation deadline: CVE-2026-8398, trojanized DAEMON Tools Lite installers (DTHelper.exe, DiscSoftBusServiceLite.exe, DTShellHlp.exe) distributed with valid code-signing from daemon-tools.cc between April and May 2026; CVE-2026-45321, 42 compromised @tanstack npm packages published via abused GitHub Actions trusted-publisher workflows; and CVE-2026-48027, a malicious Nx Console extension (v18.95.0) briefly published to the Visual Studio Marketplace and OpenVSX on May 19.",
+    affectedUsers:
+      "Endpoints that installed DAEMON Tools Lite in the April-May window, developer machines and CI pipelines that pulled affected @tanstack npm packages, and developer workstations that installed the malicious Nx Console extension on May 19.",
+    recommendedMspAction:
+      "Hunt for and remove the trojanized DAEMON Tools Lite binaries on any endpoint where it was installed, and reimage if compromise is confirmed. Audit npm lockfiles and CI build logs for affected @tanstack package versions and pin/rollback to known-good releases. Check developer IDEs for Nx Console v18.95.0 and remove it. Rotate any developer or CI credentials that may have been exposed to the compromised tooling.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/05/27/cisa-adds-three-known-exploited-vulnerabilities-catalog",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://securityaffairs.com/192776/security/u-s-cisa-adds-daemon-tools-tanstack-and-nx-console-flaws-to-its-known-exploited-vulnerabilities-catalog.html"
+    ],
+    publishedDate: "2026-05-27",
+    lastUpdatedDate: "2026-06-02",
+    suggestedPlacement: "news-page",
+    audience: "internal",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["cisa", "kev", "supply-chain", "daemon-tools", "tanstack", "npm", "nx-console", "security", "actively-exploited", "developer-tools"]
+  },
+  {
+    id: "2026-05-29-autodesk-forma-reports-admin-console-incidents",
+    appName: "Autodesk Forma / Fusion",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk resolves Forma Reports and Admin Console incidents from May 29-30",
+    summary:
+      "Autodesk Health logged short, resolved incidents at the end of May: on May 29 customers were unable to generate reports for newly created Forms in Forma - Reports (a retroactive notice, identified ~3:04 AM PDT and resolved ~7:30 AM PDT), and Autodesk's most recent end-of-May incident touched the Forma Admin Console and Fusion. Services were reported operational afterward.",
+    affectedUsers:
+      "Autodesk Forma users generating reports for newly created Forms or using the Forma Admin Console, and Fusion users, during the May 29-30 incident windows.",
+    recommendedMspAction:
+      "If users reported Forma report-generation or Admin Console errors on May 29-30, ask them to retry and confirm reports now generate. Match any matching tickets to the Autodesk Health incidents and close as vendor-side once retries succeed; capture the project, object, and timestamp before escalating only if symptoms persist.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-05-29",
+    lastUpdatedDate: "2026-06-02",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "forma", "forma-reports", "admin-console", "fusion", "service-impact"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-05-28 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-05-28.
   {
