@@ -71,6 +71,183 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-06-05 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-06-05.
+  {
+    id: "2026-06-03-microsoft-teams-private-channel-remediation-july",
+    appName: "Microsoft Teams",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Microsoft extends Teams private-channel remediation deadline to end of July",
+    summary:
+      "Microsoft updated Message Center post MC1134737 on June 3, 2026: Teams private-channel migration is complete except for channels that need admin remediation. Ownerless private channels and channels with only guests and no in-tenant owner now need an in-tenant owner added by the end of July 2026, otherwise impacted channels will be soft deleted for 30 days and then permanently deleted. The change also moves private-channel compliance copies to the team group mailbox and raises private-channel limits once migration completes.",
+    affectedUsers:
+      "Microsoft Teams tenants with ownerless private channels, empty private channels, guest-only private channels, or compliance/eDiscovery/retention policies scoped to private-channel user mailboxes.",
+    recommendedMspAction:
+      "Run Get-TenantPrivateChannelMigrationStatus, identify ownerless or guest-only channels, add an in-tenant owner, and confirm Purview retention, legal hold, DLP, and eDiscovery policies are scoped to the parent team's group mailbox as needed. Update any June 5 runbooks: the latest archived Microsoft message shows the remediation deadline moved to the end of July 2026.",
+    sourceUrls: [
+      "https://mc.merill.net/message/MC1134737",
+      "https://learn.microsoft.com/en-us/MicrosoftTeams/private-channels"
+    ],
+    publishedDate: "2026-06-03",
+    lastUpdatedDate: "2026-06-05",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "teams", "private-channels", "compliance", "purview", "message-center", "admin-action"]
+  },
+  {
+    id: "2026-06-03-autodesk-fusion-mobile-team-incidents",
+    appName: "Fusion Mobile / Fusion Team",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk resolves Fusion Mobile upload and Fusion Team BOM incidents",
+    summary:
+      "Autodesk Health shows June 3 resolved Fusion incidents: a retroactive Fusion Mobile file-upload failure that ran from June 2 at 6:30 AM PDT until June 3 at 6:30 AM PDT, and a Fusion Team issue where customers were unable to view the BOM (Bill of Materials) and Properties tabs until Autodesk marked it resolved at 7:33 AM PDT.",
+    affectedUsers:
+      "Fusion Mobile users uploading files during the June 2-3 incident window, and Fusion Team users trying to view BOM or Properties tabs on June 3.",
+    recommendedMspAction:
+      "Tie matching June 2-3 upload, BOM, or Properties-tab tickets to the Autodesk Health incidents and ask affected users to retry now that Autodesk reports resolution. If symptoms persist, capture the hub/project, file or item, affected tab, timestamp, and Autodesk account before escalating.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-06-03",
+    lastUpdatedDate: "2026-06-05",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "fusion", "fusion-mobile", "fusion-team", "bom", "properties", "service-impact"]
+  },
+  {
+    id: "2026-06-03-google-chromeos-stable-lts-security-updates",
+    appName: "ChromeOS / ChromeOS Flex",
+    vendor: "Google",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Google rolls ChromeOS Stable and LTS security updates",
+    summary:
+      "On June 3, Google promoted ChromeOS Stable M-148 platform 16640.57.0 (browser 148.0.7778.250) and ChromeOS LTS-144 version 144.0.7559.254. Stable includes a high-severity Linux local privilege escalation fix (CVE-2026-43284), while LTS-144 includes selected security fixes including critical use-after-free issues in Proxy, Network, and Extensions.",
+    affectedUsers:
+      "Managed ChromeOS and ChromeOS Flex fleets on the Stable M-148 or LTS-144 channels, especially shared devices, kiosks, labs, loaners, and admin workstations that delay restarts.",
+    recommendedMspAction:
+      "Confirm ChromeOS auto-update policies are healthy, verify version reporting after rollout, and ask users to restart devices that have downloaded but not applied the update. Prioritize shared or privileged-use devices and keep a small validation ring for clients with tightly controlled browser/device policies.",
+    sourceUrls: [
+      "https://chromereleases.googleblog.com/2026/06/stable-channel-update-for-chromeos.html",
+      "https://chromereleases.googleblog.com/2026/06/long-term-support-channel-update-for.html"
+    ],
+    publishedDate: "2026-06-03",
+    lastUpdatedDate: "2026-06-05",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "chromeos", "chromeos-flex", "lts", "security", "patch", "cve", "device-management"]
+  },
+  {
+    id: "2026-06-02-microsoft-exchange-online-mail-flow-delays-ex1331830",
+    appName: "Exchange Online",
+    vendor: "Microsoft",
+    category: "Outage",
+    severity: "High",
+    title: "Exchange Online mail-flow incident causes delays and failures across multiple regions (EX1331830)",
+    summary:
+      "On June 2, 2026 Microsoft acknowledged Exchange Online incident EX1331830 after customers reported delayed or failed mail flow. Public service-health text cited affected customers across North America, APAC, and Europe, with SMTP deferral errors and abrupt connection closures while Microsoft analyzed mail queue backlogs.",
+    affectedUsers:
+      "Exchange Online tenants sending or receiving email during the June 2 incident window, especially users seeing delayed delivery, undelivered mail, SMTP deferrals, or mail-flow connector failures.",
+    recommendedMspAction:
+      "Check Microsoft 365 Service Health for EX1331830, attach the incident to matching tickets, run message trace for delayed or undelivered messages, and avoid emergency routing changes unless Microsoft directs them. For any postmortem or SLA review, record tenant, sender, recipient, message ID, timestamps, and the exact SMTP error.",
+    sourceUrls: [
+      "https://status.cloud.microsoft/",
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-exchange-online-outage-causes-email-delays-failures/"
+    ],
+    publishedDate: "2026-06-02",
+    lastUpdatedDate: "2026-06-05",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "exchange-online", "microsoft-365", "mail-flow", "outage", "ex1331830", "smtp", "email-delays"]
+  },
+  {
+    id: "2026-06-02-google-android-june-security-cve-2025-48595",
+    appName: "Android / Google Play Protect",
+    vendor: "Google",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Android June security update patches exploited Framework flaw CVE-2025-48595",
+    summary:
+      "Google's June 2026 Android Security Bulletin covers the 2026-06-01 and 2026-06-05 patch levels and notes indications that CVE-2025-48595 may be under limited, targeted exploitation. The high-severity Framework issue affects Android 14, 15, 16, and 16 QPR2, and NVD/CISA list it in KEV with a June 5 federal mitigation due date; the bulletin also includes critical Framework fixes.",
+    affectedUsers:
+      "Managed Android devices on Android 14, 15, 16, or 16 QPR2, plus any BYOD Android devices allowed to access business mail, files, VPN, or administrative apps.",
+    recommendedMspAction:
+      "Push June 2026 Android security updates through MDM, prioritize devices that can reach the 2026-06-05 patch level, and flag stale Android 14-16 devices as compliance exceptions until patched. Keep Google Play Protect enabled and remind users not to sideload apps while targeted exploitation is being investigated.",
+    sourceUrls: [
+      "https://source.android.com/docs/security/bulletin/2026/2026-06-01",
+      "https://nvd.nist.gov/vuln/detail/CVE-2025-48595",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-48595"
+    ],
+    publishedDate: "2026-06-02",
+    lastUpdatedDate: "2026-06-05",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "android", "mobile", "security", "cve-2025-48595", "kev", "actively-exploited", "patch"]
+  },
+  {
+    id: "2026-05-29-microsoft-365-archive-file-level-preview",
+    appName: "SharePoint Online / Microsoft 365 Archive",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Low",
+    title: "Microsoft 365 Archive file-level archiving enters public preview",
+    summary:
+      "Microsoft Message Center post MC1326254 says file-level archiving for Microsoft 365 Archive is available in public preview, with worldwide general availability beginning in late June 2026 and expected to complete by late July. Admins must enable Microsoft 365 Archive and file-level archiving; archived SharePoint files remain visible with metadata, permissions, and compliance coverage but cannot be opened until reactivated, are excluded from Copilot responses and default search, and use pay-as-you-go archive billing.",
+    affectedUsers:
+      "SharePoint Online administrators, records/content owners, and users in tenants that enable Microsoft 365 Archive file-level archiving.",
+    recommendedMspAction:
+      "Decide whether to enable the preview per tenant or site, document user impact before rollout, and update support notes so archived files are not misdiagnosed as missing or permission-broken. Review billing, search, Copilot, retention, and reactivation expectations with data owners before broad enablement.",
+    sourceUrls: [
+      "https://mc.merill.net/message/MC1326254",
+      "https://www.microsoft.com/microsoft-365/roadmap?featureid=477371"
+    ],
+    publishedDate: "2026-05-29",
+    lastUpdatedDate: "2026-06-05",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "sharepoint-online", "archive", "file-level-archiving", "copilot", "storage", "product-change"]
+  },
+  {
+    id: "2026-05-27-esri-arcgis-server-security-2026-update-2",
+    appName: "ArcGIS Server",
+    vendor: "Esri",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Esri releases ArcGIS Server Security 2026 Update 2 patch",
+    summary:
+      "Esri published ArcGIS Server Security 2026 Update 2 Patch for ArcGIS Server 12.0, 11.5, 11.4, 11.3, and 11.1. The patch addresses ArcGIS Server security vulnerabilities including BUG-000184499 and BUG-000181376, stops and restarts the ArcGIS Server service during installation, and is the last patch for version 11.4 because ArcGIS Enterprise 11.4 moved to Mature Support on May 1, 2026.",
+    affectedUsers:
+      "Organizations running ArcGIS Enterprise / ArcGIS Server 12.0, 11.5, 11.4, 11.3, or 11.1, especially internet-facing GIS portals, map services, feature services, and high-availability deployments.",
+    recommendedMspAction:
+      "Schedule a maintenance window, back up the Enterprise deployment, test the patch, and apply it first to exposed or high-risk ArcGIS Server environments. Warn users about the ArcGIS Server restart, verify published services afterward, and plan an upgrade path for 11.4 sites because this is its final security patch.",
+    sourceUrls: [
+      "https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-2-patch",
+      "https://www.esri.com/arcgis-blog/products/arcgis-enterprise/administration/may-2026-arcgis-security-bulletin"
+    ],
+    publishedDate: "2026-05-27",
+    lastUpdatedDate: "2026-06-05",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["esri", "arcgis-server", "arcgis-enterprise", "security", "patch", "gis", "server"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-06-02 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-06-02.
   {
