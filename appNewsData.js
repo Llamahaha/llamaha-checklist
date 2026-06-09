@@ -71,6 +71,89 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-06-09 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-06-09.
+  {
+    id: "2026-06-09-microsoft-june-2026-patch-tuesday",
+    appName: "Windows / Microsoft Office / Exchange Server",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Microsoft June 2026 Patch Tuesday ships ~142 fixes including exploited Exchange Server flaw CVE-2026-42897",
+    summary:
+      "Microsoft's June 9, 2026 Patch Tuesday addresses roughly 142 CVEs across Windows, Office, SharePoint, and Exchange Server. It includes the permanent fix for CVE-2026-42897, a critical Exchange Server Outlook Web Access (OWA) cross-site-scripting/spoofing flaw already exploited in the wild via a crafted email and listed in CISA KEV. This release is also the last Patch Tuesday before the June 26, 2026 Secure Boot certificate deadline, when Microsoft replaces the original 2011 Secure Boot certificates that expire in late June.",
+    affectedUsers:
+      "All managed Windows endpoints and servers, Microsoft Office/SharePoint deployments, and on-premises Exchange Server 2016, 2019, and Subscription Edition. CVE-2026-42897 affects on-prem Exchange only; Exchange Online is not impacted. The Secure Boot certificate rollover affects Windows devices fleet-wide.",
+    recommendedMspAction:
+      "Deploy June 2026 security updates through your patch rings, prioritizing on-prem Exchange Server (apply the OWA fix for CVE-2026-42897 and confirm the Exchange Emergency Mitigation Service is enabled until patched). Validate the June update against critical line-of-business systems, then complete Secure Boot certificate validation and updated-certificate deployment before the June 26, 2026 deadline to avoid boot/trust issues when the 2011 certificates expire.",
+    sourceUrls: [
+      "https://msrc.microsoft.com/update-guide",
+      "https://techcommunity.microsoft.com/blog/exchange/addressing-exchange-server-may-2026-vulnerability-cve-2026-42897/4518498",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-42897",
+      "https://www.helpnetsecurity.com/2026/06/05/june-2026-patch-tuesday-forecast/"
+    ],
+    publishedDate: "2026-06-09",
+    lastUpdatedDate: "2026-06-09",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "patch-tuesday", "windows", "office", "exchange-server", "owa", "cve-2026-42897", "secure-boot", "security", "patch", "kev"]
+  },
+  {
+    id: "2026-06-08-check-point-vpn-cve-2026-50751-kev",
+    appName: "Check Point Remote Access VPN / Mobile Access / Spark",
+    vendor: "Check Point",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Check Point VPN authentication bypass (CVE-2026-50751) exploited by ransomware affiliate, added to CISA KEV",
+    summary:
+      "CVE-2026-50751 is a critical (CVSS 9.3) improper-authentication flaw in Check Point Remote Access VPN, Mobile Access, and Spark products. A logic weakness in how Remote Access and Mobile Access components validate certificates during IKEv1 key exchange lets a remote unauthenticated attacker establish a VPN session without valid credentials. It is exploitable on gateways using the deprecated IKEv1 protocol that accept legacy Remote Access clients and do not require a machine certificate. Check Point published a hotfix on June 8, 2026 and observed exploitation dating back to May 7 with an early-June increase; at least one intrusion is linked with medium confidence to a Qilin ransomware affiliate. CISA added it to KEV on June 8 with a three-day federal remediation deadline.",
+    affectedUsers:
+      "Organizations running Check Point Remote Access VPN, Mobile Access, or Spark gateways configured for the deprecated IKEv1 key exchange that accept legacy clients without requiring a machine certificate, especially internet-facing gateways.",
+    recommendedMspAction:
+      "Apply Check Point's June 8 hotfix immediately for affected gateways. Until patched, disable or restrict the deprecated IKEv1 Remote Access configuration and require machine certificates for connections. Review VPN authentication and session logs for unexpected or credential-less sessions back to early May, watch for the listed attacker VPS providers (Kaupo Cloud HK, Shock Hosting, Vultr), and treat any matching access as a potential ransomware precursor given the Qilin link.",
+    sourceUrls: [
+      "https://blog.checkpoint.com/security/check-point-releases-important-hotfix-for-vulnerabilities-in-deprecated-ikev1-vpn-protocol/",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://www.rapid7.com/blog/post/etr-critical-check-point-vpn-zero-day-exploited-in-the-wild-cve-2026-50751/",
+      "https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-check-point-flaw-exploited-by-ransomware-gangs/"
+    ],
+    publishedDate: "2026-06-08",
+    lastUpdatedDate: "2026-06-09",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["check-point", "vpn", "remote-access", "mobile-access", "ikev1", "security", "kev", "actively-exploited", "authentication-bypass", "qilin", "ransomware", "patch"]
+  },
+  {
+    id: "2026-06-08-cisa-kev-litellm-magento-mirasvit",
+    appName: "BerriAI LiteLLM / Mirasvit Full Page Cache Warmer (Magento)",
+    vendor: "Multiple (CISA KEV)",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "CISA adds exploited LiteLLM and Magento (Mirasvit) RCE flaws to KEV",
+    summary:
+      "On June 8, 2026 CISA added two actively exploited flaws to its Known Exploited Vulnerabilities catalog. CVE-2026-42271 (CVSS 8.7) is a command-injection issue in BerriAI LiteLLM's MCP-server preview functionality that lets an authenticated user run commands on the host; researchers chained it with the Starlette \"BadHost\" bypass CVE-2026-48710 to achieve unauthenticated remote code execution, exposing model-provider credentials and API keys (federal deadline June 22). Separately, CVE-2026-45247 (CVSS 9.8), added to KEV June 3, is an unauthenticated PHP-deserialization RCE in the Mirasvit Full Page Cache Warmer extension for Magento 2 / Adobe Commerce, exploited via a crafted CacheWarmer cookie; Mirasvit patched it in version 1.11.12 on May 25, 2026.",
+    affectedUsers:
+      "Teams running self-hosted BerriAI LiteLLM AI gateways (especially internet-facing or with MCP preview enabled), and any Magento 2 / Adobe Commerce storefront using the Mirasvit Full Page Cache Warmer extension below version 1.11.12.",
+    recommendedMspAction:
+      "Inventory any LiteLLM deployments, restrict network exposure, update to a fixed release, and rotate model-provider credentials and API keys that the proxy could reach. For Magento/Adobe Commerce sites, confirm whether the Mirasvit Full Page Cache Warmer extension is installed and upgrade to 1.11.12 or later immediately; review web logs for serialized-object payloads in the CacheWarmer cookie and check for signs of code execution on affected stores.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/06/08/cisa-adds-two-known-exploited-vulnerabilities-catalog",
+      "https://thehackernews.com/2026/06/litellm-flaw-cve-2026-42271-exploited.html",
+      "https://thehackernews.com/2026/06/cisa-adds-exploited-magento-rce-flaw.html",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    ],
+    publishedDate: "2026-06-08",
+    lastUpdatedDate: "2026-06-09",
+    suggestedPlacement: "news-page",
+    audience: "internal",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["cisa", "kev", "litellm", "ai-gateway", "magento", "adobe-commerce", "mirasvit", "rce", "deserialization", "command-injection", "security", "actively-exploited"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-06-05 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-06-05.
   {
