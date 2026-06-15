@@ -71,6 +71,226 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-06-15 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-06-15.
+  {
+    id: "2026-06-13-autodesk-forma-account-fusion-incidents",
+    appName: "Forma Build / Autodesk Account / Fusion / APS Data Management",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Autodesk resolves short Forma Build, Account, Fusion, and APS Data Management incidents",
+    summary:
+      "Autodesk Health tracking shows several minor resolved incidents since the last scan: a June 13 Forma Build ACS Forms access issue, a June 11 Autodesk Account Product Details loading issue, a June 11 Fusion issue copying files with drawings, and a June 10 APS Data Management Canada issue creating new items and versions.",
+    affectedUsers:
+      "AEC, manufacturing, and platform teams using Forma Build ACS Forms, Autodesk Account product/license details, Fusion drawings, or APS Data Management in the Canada region during the listed windows.",
+    recommendedMspAction:
+      "Tie matching tickets to the resolved Autodesk incidents and ask users to retry affected workflows. If symptoms continue after Autodesk's resolution windows, capture the Autodesk account, hub/project, file or item, service region, timestamp, and browser/app version before escalating.",
+    sourceUrls: [
+      "https://health.autodesk.com/",
+      "https://statussight.com/status/autodesk-health-dashboard"
+    ],
+    publishedDate: "2026-06-13",
+    lastUpdatedDate: "2026-06-15",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["autodesk", "forma-build", "autodesk-account", "fusion", "aps-data-management", "service-impact", "resolved"]
+  },
+  {
+    id: "2026-06-12-cisa-kev-oracle-peoplesoft-ivanti-sentry",
+    appName: "Oracle PeopleSoft / Ivanti Sentry",
+    vendor: "Multiple (CISA KEV)",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "CISA adds Oracle PeopleSoft and Ivanti Sentry exploited RCE flaws to KEV",
+    summary:
+      "CISA added Ivanti Sentry CVE-2026-10520 on June 11 and Oracle PeopleSoft Enterprise PeopleTools CVE-2026-35273 on June 12 after evidence of active exploitation. Ivanti's flaw is a pre-auth OS command injection that can give a remote unauthenticated attacker root-level RCE on Sentry before R10.5.2, R10.6.2, and R10.7.1. Oracle's PeopleTools flaw affects versions 8.61 and 8.62, is exploitable over HTTP without authentication, and can result in full PeopleTools takeover; CISA marks known ransomware use for the Oracle entry.",
+    affectedUsers:
+      "Organizations running Ivanti Sentry mobile/email gateway appliances below the fixed releases, and Oracle PeopleSoft Enterprise PeopleTools 8.61 or 8.62 deployments, especially internet-reachable PeopleSoft environments.",
+    recommendedMspAction:
+      "Patch Ivanti Sentry to R10.5.2, R10.6.2, R10.7.1, or later and isolate exposed appliances until upgraded. Apply Oracle's June 10 PeopleSoft security alert patch, restrict HTTP exposure, review web/app logs for suspicious access, rotate PeopleSoft integration credentials if compromise is suspected, and perform forensic triage before closing remediation tickets because the KEV due dates were June 14 for Ivanti and June 15 for Oracle.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/06/11/cisa-adds-one-known-exploited-vulnerability-catalog",
+      "https://www.cisa.gov/news-events/alerts/2026/06/12/cisa-adds-one-known-exploited-vulnerability-catalog",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://hub.ivanti.com/s/article/Security-Advisory-Ivanti-Sentry-CVE-2026-10520-CVE-2026-10523",
+      "https://www.oracle.com/security-alerts/alert-cve-2026-35273.html",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-10520",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-35273"
+    ],
+    publishedDate: "2026-06-12",
+    lastUpdatedDate: "2026-06-15",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["cisa", "kev", "oracle", "peoplesoft", "peopletools", "ivanti", "sentry", "rce", "command-injection", "ransomware", "actively-exploited", "patch"]
+  },
+  {
+    id: "2026-06-11-microsoft-edge-two-week-release-cycle",
+    appName: "Microsoft Edge",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Microsoft Edge Stable moves to a two-week release cycle starting with Edge 152",
+    summary:
+      "Microsoft announced on June 11 that Edge Stable will move from a four-week major release cycle to a two-week cycle starting with Edge 152, targeted for August 27, 2026. Extended Stable remains on an eight-week rhythm and will receive every fourth release, so organizations can stay on the slower validation cadence if needed.",
+    affectedUsers:
+      "Admins managing Microsoft Edge for Business, browser testing rings, extension compatibility, kiosk/browser-lockdown policies, or customers that rely on Stable versus Extended Stable release timing.",
+    recommendedMspAction:
+      "Update Edge release-management runbooks before August 27, confirm which clients should remain on Stable versus Extended Stable, and add a small Beta or Enterprise Preview pilot group so policy, extension, SSO, and line-of-business web app regressions are caught before Stable reaches production.",
+    sourceUrls: [
+      "https://blogs.windows.com/msedgedev/2026/06/11/faster-updates-enterprise-friendly-schedule-the-new-microsoft-edge-release-cycle/",
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-release-schedule",
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel"
+    ],
+    publishedDate: "2026-06-11",
+    lastUpdatedDate: "2026-06-15",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "edge", "browser", "release-cadence", "extended-stable", "enterprise-preview", "browser-management"]
+  },
+  {
+    id: "2026-06-10-cisa-bod-26-04-risk-based-patching",
+    appName: "Vulnerability Management / Patch Operations",
+    vendor: "CISA",
+    category: "Other",
+    severity: "Medium",
+    title: "CISA BOD 26-04 moves federal vulnerability remediation to risk-based deadlines",
+    summary:
+      "On June 10, CISA issued BOD 26-04 and implementation guidance, replacing the flat CVSS/KEV patching model for federal civilian systems with a risk decision tree based on public exposure, KEV status, exploit automation, and technical impact. The highest-risk vulnerabilities can require remediation within three calendar days plus forensic triage; other outcomes are 14 days, 60 days, or next major system upgrade.",
+    affectedUsers:
+      "Federal civilian customers directly, plus MSPs and regulated organizations that use CISA KEV and federal directives as a benchmark for vulnerability-management SLAs, cyber insurance evidence, or customer contract language.",
+    recommendedMspAction:
+      "Adjust patch-priority runbooks to capture internet exposure, KEV status, exploit automation, and technical impact for each vulnerable asset. Build an emergency three-day remediation path for public, actively exploited, automatable, high-impact flaws, and make forensic triage part of closure criteria for the highest-risk items.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk",
+      "https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    ],
+    publishedDate: "2026-06-10",
+    lastUpdatedDate: "2026-06-15",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["cisa", "bod-26-04", "kev", "vulnerability-management", "patching", "forensic-triage", "risk-based-remediation"]
+  },
+  {
+    id: "2026-06-10-adobe-june-2026-security-updates",
+    appName: "Acrobat Reader / ColdFusion / AEM / Creative Cloud apps",
+    vendor: "Adobe",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Adobe June security batch covers Acrobat Reader, ColdFusion, AEM, and creative apps",
+    summary:
+      "Adobe's June security batch includes 11 advisories for Experience Manager, Experience Manager Forms, InDesign, InCopy, Substance 3D Sampler, Content Credentials SDK, Dreamweaver, Acrobat/Reader, ColdFusion, Format Plugins, and Campaign Classic. Public roundups count 123 vulnerabilities, including 47 critical issues; Adobe's Acrobat/Reader bulletin says Adobe is not aware of in-the-wild exploitation for those Acrobat issues, while ColdFusion is a Priority 1 update.",
+    affectedUsers:
+      "Windows and macOS endpoints running Acrobat or Acrobat Reader, creative teams with InDesign/InCopy/Dreamweaver/Substance components, and server teams running Adobe ColdFusion or Experience Manager.",
+    recommendedMspAction:
+      "Deploy Acrobat/Reader and Creative Cloud updates through normal endpoint rings, but treat internet-facing ColdFusion and Experience Manager servers as higher priority. Confirm fixed versions through inventory, restart affected apps/services where required, and keep the April Acrobat KEV item tracked separately because this June Acrobat batch is not currently reported by Adobe as exploited in the wild.",
+    sourceUrls: [
+      "https://helpx.adobe.com/security/security-bulletin.html",
+      "https://helpx.adobe.com/security/products/acrobat/apsb26-63.html",
+      "https://helpx.adobe.com/security/products/coldfusion/apsb26-64.html",
+      "https://www.hkcert.org/security-bulletin/adobe-monthly-security-update-june-2026",
+      "https://blog.qualys.com/vulnerabilities-threat-research/2026/06/09/microsoft-and-adobe-patch-tuesday-june-2026-security-update-review"
+    ],
+    publishedDate: "2026-06-10",
+    lastUpdatedDate: "2026-06-15",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["adobe", "acrobat", "reader", "coldfusion", "experience-manager", "creative-cloud", "security", "patch", "apsb26-63", "apsb26-64"]
+  },
+  {
+    id: "2026-06-09-google-chrome-v8-cve-2026-11645-kev",
+    appName: "Chrome / Chromium / Microsoft Edge",
+    vendor: "Google / Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Chrome V8 zero-day CVE-2026-11645 patched, added to CISA KEV",
+    summary:
+      "Google's June 8 Chrome Stable update 149.0.7827.102/.103 includes 74 security fixes and calls out CVE-2026-11645, an out-of-bounds memory access issue in V8 with exploitation in the wild. NVD describes it as an out-of-bounds read/write issue before Chrome 149.0.7827.103 that can let a remote attacker execute arbitrary code inside the sandbox via crafted HTML; CISA added it to KEV on June 9 with a June 23 due date. Microsoft also released Edge Stable security updates that incorporate the Chromium fixes.",
+    affectedUsers:
+      "Managed Chrome desktop users on Windows, macOS, and Linux, plus users of Chromium-based browsers such as Microsoft Edge before the corresponding security update and relaunch.",
+    recommendedMspAction:
+      "Force Chrome and Edge update checks where possible, then verify browser versions and successful relaunch across managed devices. Prioritize browsers used for privileged admin portals, shared workstations, kiosks, developers, finance users, and users with elevated webmail or SaaS permissions.",
+    sourceUrls: [
+      "https://chromereleases.googleblog.com/2026/06/stable-channel-update-for-desktop_0153744567.html",
+      "https://www.cisa.gov/news-events/alerts/2026/06/09/cisa-adds-three-known-exploited-vulnerabilities-catalog",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-11645",
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnotes-security"
+    ],
+    publishedDate: "2026-06-09",
+    lastUpdatedDate: "2026-06-15",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "chrome", "chromium", "edge", "browser", "v8", "cve-2026-11645", "kev", "actively-exploited", "patch"]
+  },
+  {
+    id: "2026-06-09-cisa-kev-cisco-sdwan-arista-eos",
+    appName: "Cisco Catalyst SD-WAN Manager / Arista EOS",
+    vendor: "Cisco / Arista",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "CISA adds exploited Cisco SD-WAN Manager and Arista EOS network-device flaws to KEV",
+    summary:
+      "On June 9, CISA added Cisco Catalyst SD-WAN Manager CVE-2026-20245 and Arista EOS CVE-2026-7473 to KEV. Cisco's flaw can let an authenticated local attacker on Catalyst SD-WAN Controller, Manager, or Validator execute arbitrary commands as root by supplying a crafted file. Arista's EOS issue affects switches configured as tunnel endpoints, such as VXLAN, GRE, or decap-groups, and can cause unexpected decapsulation/forwarding of non-configured tunnel traffic; Arista says exploitation has been reported and provides mitigations instead of a planned patch.",
+    affectedUsers:
+      "Clients running Cisco Catalyst SD-WAN management/control-plane components or Arista EOS-based data-center/campus switches that perform tunnel decapsulation, especially where management access, local admin access, or overlay/tunnel traffic paths are not tightly restricted.",
+    recommendedMspAction:
+      "Inventory Cisco Catalyst SD-WAN controllers/managers/validators and apply Cisco's fixed release or workaround when available. For Arista, identify EOS platforms with VXLAN, GRE, or ip decap-group configuration, apply Arista's mitigation ACLs or configuration guidance, monitor for unexpected tunneled traffic, and document exposure decisions before the June 23 KEV due date.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/06/09/cisa-adds-three-known-exploited-vulnerabilities-catalog",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sdwan-privesc-4uxFrdzx",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-20245",
+      "https://www.arista.com/en/support/advisories-notices/security-advisory/24005-security-advisory-0137",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-7473"
+    ],
+    publishedDate: "2026-06-09",
+    lastUpdatedDate: "2026-06-15",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["cisa", "kev", "cisco", "sd-wan", "arista", "eos", "network-infrastructure", "tunnel", "vxlan", "gre", "actively-exploited"]
+  },
+  {
+    id: "2026-06-04-esri-portal-arcgis-security-patch-reissue",
+    appName: "Portal for ArcGIS / ArcGIS Server",
+    vendor: "Esri",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Esri reissues Portal for ArcGIS 11.5 security patch and keeps ArcGIS Server security updates active",
+    summary:
+      "Esri's Portal for ArcGIS Security 2026 Update 1 Patch page now notes a corrected 11.5 patch with a June 4 release date to address Windows upgrade failures to ArcGIS Enterprise 12.0 and 12.1 caused by the earlier security patch. Esri's May security bulletin also points customers to ArcGIS Server Security 2026 Update 2, which resolves Critical and Medium vulnerabilities in ArcGIS Server 12.0 and prior.",
+    affectedUsers:
+      "On-premises ArcGIS Enterprise environments running Portal for ArcGIS 11.5 on Windows and organizations running ArcGIS Server 12.0 or earlier that have not yet applied the 2026 security updates.",
+    recommendedMspAction:
+      "For Portal 11.5 on Windows, deploy the corrected Portal for ArcGIS Security 2026 Update 1 Patch before attempting upgrades to ArcGIS Enterprise 12.0 or 12.1. For ArcGIS Server, verify Patch Notification Tool output, schedule the current security patch, and keep rollback/backup steps in the change record.",
+    sourceUrls: [
+      "https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch",
+      "https://www.esri.com/arcgis-blog/products/arcgis-enterprise/administration/may-2026-arcgis-security-bulletin",
+      "https://trust.arcgis.com/en/"
+    ],
+    publishedDate: "2026-06-04",
+    lastUpdatedDate: "2026-06-15",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["esri", "arcgis", "portal-for-arcgis", "arcgis-server", "security", "patch", "enterprise", "windows"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-06-09 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-06-09.
   {
@@ -79,9 +299,9 @@ export const appNewsItems = [
     vendor: "Microsoft",
     category: "Security Vulnerability",
     severity: "High",
-    title: "Microsoft June 2026 Patch Tuesday ships ~142 fixes including exploited Exchange Server flaw CVE-2026-42897",
+    title: "Microsoft June 2026 Patch Tuesday ships 200+ fixes and finalizes Exchange OWA CVE-2026-42897 remediation",
     summary:
-      "Microsoft's June 9, 2026 Patch Tuesday addresses roughly 142 CVEs across Windows, Office, SharePoint, and Exchange Server. It includes the permanent fix for CVE-2026-42897, a critical Exchange Server Outlook Web Access (OWA) cross-site-scripting/spoofing flaw already exploited in the wild via a crafted email and listed in CISA KEV. This release is also the last Patch Tuesday before the June 26, 2026 Secure Boot certificate deadline, when Microsoft replaces the original 2011 Secure Boot certificates that expire in late June.",
+      "Microsoft's June 9, 2026 Patch Tuesday is one of the larger recent Microsoft security releases: Qualys counts 206 Microsoft vulnerabilities, including 33 critical and 167 important issues, while Rapid7 describes 200 vulnerabilities published that day and notes three publicly disclosed zero-days. The release also includes the permanent Exchange Server fix for CVE-2026-42897, the Outlook Web Access (OWA) cross-site-scripting/spoofing flaw that Microsoft disclosed in May as actively exploited in the wild. This release is also the last Patch Tuesday before the June 26, 2026 Secure Boot certificate deadline, when Microsoft replaces the original 2011 Secure Boot certificates that expire in late June.",
     affectedUsers:
       "All managed Windows endpoints and servers, Microsoft Office/SharePoint deployments, and on-premises Exchange Server 2016, 2019, and Subscription Edition. CVE-2026-42897 affects on-prem Exchange only; Exchange Online is not impacted. The Secure Boot certificate rollover affects Windows devices fleet-wide.",
     recommendedMspAction:
@@ -90,10 +310,12 @@ export const appNewsItems = [
       "https://msrc.microsoft.com/update-guide",
       "https://techcommunity.microsoft.com/blog/exchange/addressing-exchange-server-may-2026-vulnerability-cve-2026-42897/4518498",
       "https://nvd.nist.gov/vuln/detail/CVE-2026-42897",
-      "https://www.helpnetsecurity.com/2026/06/05/june-2026-patch-tuesday-forecast/"
+      "https://blog.qualys.com/vulnerabilities-threat-research/2026/06/09/microsoft-and-adobe-patch-tuesday-june-2026-security-update-review",
+      "https://www.rapid7.com/blog/post/em-patch-tuesday-june-2026/",
+      "https://learn.microsoft.com/en-us/windows/release-health/windows-message-center"
     ],
     publishedDate: "2026-06-09",
-    lastUpdatedDate: "2026-06-09",
+    lastUpdatedDate: "2026-06-15",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
