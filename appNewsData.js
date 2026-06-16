@@ -71,6 +71,60 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-06-16 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-06-16.
+  {
+    id: "2026-06-16-bluebeam-revu-20-end-of-support-end-of-life",
+    appName: "Bluebeam Revu 20 (and below)",
+    vendor: "Bluebeam",
+    category: "Deprecation",
+    severity: "High",
+    title: "Bluebeam Revu 20 reaches End of Support July 31, 2026 and End of Life December 31, 2026",
+    summary:
+      "Per Bluebeam's official EOL notice, Revu 20 reaches End of Support on July 31, 2026 and End of Life on December 31, 2026. After July 31, 2026, technical support and self-service license management for Revu 20 end, including the ability to release/reassign seats to different machines or workstations. After December 31, 2026, Revu 20 loses access to Bluebeam Studio Sessions and Projects (including joining and collaborating in Studio through an integration). This applies to all Revu 20 license types: perpetual, open, site, enterprise, academic, and not-for-resale (NFR). Bluebeam already stopped selling Revu 20 licenses after September 30, 2023. Separately, for Revu 2019 and below, Studio functionality is no longer supported.",
+    affectedUsers:
+      "Any client still running Bluebeam Revu 20 or earlier, especially perpetual-license holders who rely on Studio Sessions/Projects for collaboration and any workflow that depends on releasing or moving Revu 20 seats between machines.",
+    recommendedMspAction:
+      "Inventory clients on Revu 20 and below now. Complete any pending Revu 20 seat releases or machine reassignments before the July 31, 2026 End of Support date, because self-service license management ends then. Plan migration to a current Bluebeam subscription (Revu 21+) before December 31, 2026 for any user who needs Studio Sessions/Projects, since cloud Studio access for Revu 20 is removed at End of Life. Note the Terms of Use do not allow converted customers to run Revu 21 and Revu 20 together.",
+    sourceUrls: [
+      "https://support.bluebeam.com/revu/resources/revu-20-eol.html",
+      "https://www.bluebeam.com/revu-20-eol/",
+      "https://support.bluebeam.com/revu/licensing/licensing.html",
+      "https://support.bluebeam.com/legacy/resources/bluebeam-eol-support.html"
+    ],
+    publishedDate: "2026-06-16",
+    lastUpdatedDate: "2026-06-16",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["bluebeam", "revu", "revu-20", "end-of-support", "end-of-life", "deprecation", "studio", "licensing", "subscription", "migration"]
+  },
+  {
+    id: "2026-06-16-egnyte-no-outage-operational",
+    appName: "Egnyte Platform",
+    vendor: "Egnyte",
+    category: "Service Impact",
+    severity: "Informational",
+    title: "Egnyte reports All Systems Operational on the morning of June 16, 2026 (no outage)",
+    summary:
+      "As of the morning of June 16, 2026, Egnyte's official platform status page shows All Systems Operational across all components (Collaboration, Web UI, Sync, Desktop App, Mobile, Login, Public APIs, Security & Govern, and others) with no incident reported today. The most recent resolved Egnyte incident noted in recent monitoring was a June 9, 2026 login issue in the US-West region, which has since been resolved. Egnyte is not experiencing an outage this morning.",
+    affectedUsers:
+      "No active impact. This entry documents the verified operational status for Egnyte users and Llamaha techs fielding 'is Egnyte down?' questions on June 16.",
+    recommendedMspAction:
+      "Treat any single-user Egnyte access problems reported this morning as local (network, SSO/Conditional Access, Desktop App auth, or client-side) rather than a platform outage. Verify the live status at status.egnyte.com before escalating, capture the affected user, region, component (Web UI / Desktop App / Sync), and exact error, and subscribe to the Egnyte status page for real-time incident alerts.",
+    sourceUrls: [
+      "https://status.egnyte.com/",
+      "https://helpdesk.egnyte.com/hc/en-us/articles/224161027-Egnyte-Status-Page"
+    ],
+    publishedDate: "2026-06-16",
+    lastUpdatedDate: "2026-06-16",
+    suggestedPlacement: "news-page",
+    audience: "internal",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["egnyte", "status", "operational", "no-outage", "service-status", "verification"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-06-15 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-06-15.
   {
