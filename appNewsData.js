@@ -71,6 +71,120 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-06-18 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-06-18.
+  {
+    id: "2026-06-18-sharepoint-restricted-search-retirement",
+    appName: "SharePoint Online / Microsoft 365 Copilot",
+    vendor: "Microsoft",
+    category: "Deprecation",
+    severity: "Medium",
+    title: "Microsoft is retiring Restricted SharePoint Search in SharePoint Online",
+    summary:
+      "Microsoft 365 Message Center item MC1395311 says Restricted SharePoint Search is being retired in SharePoint Online. The feature was used as a temporary governance control to limit how SharePoint content appears in Microsoft Search and Microsoft 365 Copilot while admins review permissions and oversharing risk.",
+    affectedUsers:
+      "Microsoft 365 tenants that enabled Restricted SharePoint Search as part of Copilot rollout, SharePoint permissions cleanup, search governance, or data exposure mitigation.",
+    recommendedMspAction:
+      "Identify tenants using Restricted SharePoint Search and update Copilot readiness plans. Treat the retirement as a cue to finish SharePoint permissions reviews, sensitivity labeling, external sharing cleanup, and Purview governance work instead of relying on Restricted SharePoint Search as a long-term control.",
+    sourceUrls: [
+      "https://mc.merill.net/message/MC1395311",
+      "https://learn.microsoft.com/en-us/sharepoint/restricted-sharepoint-search",
+      "https://mwpro.co.uk/blog/2026/06/18/microsoft-sharepoint-online-retirement-of-restricted-sharepoint-search-mc1395311/"
+    ],
+    publishedDate: "2026-06-18",
+    lastUpdatedDate: "2026-06-18",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "sharepoint-online", "restricted-sharepoint-search", "copilot", "search", "governance", "deprecation", "message-center", "mc1395311"]
+  },
+  {
+    id: "2026-06-17-fortibleed-fortinet-credential-compromise",
+    appName: "FortiGate / Fortinet VPN / FortiSandbox",
+    vendor: "Fortinet",
+    category: "Other",
+    severity: "Critical",
+    title: "FortiBleed reports point to large-scale Fortinet firewall and VPN credential compromise",
+    summary:
+      "Multiple security firms reported a mid-June campaign dubbed FortiBleed affecting internet-facing Fortinet firewalls and VPN gateways. Reports agree the risk centers on verified Fortinet administrator/VPN credentials at large scale; some reporting frames it as a credential-compromise campaign rather than a single new Fortinet zero-day, while other advisories note attackers are also weaponizing recently patched Fortinet vulnerabilities such as FortiSandbox issues. Either way, exposed Fortinet perimeter devices should be treated as high-risk until credentials, firmware, MFA, and logs are reviewed.",
+    affectedUsers:
+      "Organizations with internet-facing FortiGate, Fortinet SSL VPN, Fortinet administrative portals, FortiSandbox, or related Fortinet perimeter/security appliances, especially where credentials may have been reused or MFA is missing.",
+    recommendedMspAction:
+      "Rotate Fortinet admin, VPN, and service credentials immediately for exposed devices; enforce MFA; remove management interfaces from the public internet; patch FortiGate, FortiSandbox, FortiClient EMS, and other Fortinet products to current fixed releases; and review VPN/admin logs for unexpected geolocations, successful logins, configuration exports, new accounts, or policy changes. If a client appears in an exposure dataset or shows suspicious access, treat the firewall/VPN as potentially compromised and start incident response.",
+    sourceUrls: [
+      "https://arcticwolf.com/resources/blog/active-fortibleed-campaign-impacting-fortinet-devices-across-194-countries/",
+      "https://kudelskisecurity.com/research/fortinet-fortibleed-global-compromise-active-exploitation-of-fortinet-vulnerabilities",
+      "https://www.darkreading.com/cyberattacks-data-breaches/sweeping-credential-harvesting-heist-compromises-30k-fortinet-devices",
+      "https://fortiguard.fortinet.com/psirt"
+    ],
+    publishedDate: "2026-06-17",
+    lastUpdatedDate: "2026-06-18",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["fortinet", "fortigate", "ssl-vpn", "fortibleed", "credential-compromise", "credential-stuffing", "mfa", "perimeter-security", "incident-response", "fortisandbox"]
+  },
+  {
+    id: "2026-06-17-microsoft-teams-presence-emergency-calling-incidents",
+    appName: "Microsoft Teams",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Microsoft resolves Teams presence incident and emergency-calling address search issue",
+    summary:
+      "Microsoft Teams incident TM1394359 was restored on June 17 after some users saw incorrect presence information, primarily in EMEA, due to a configuration issue in the region. The same Microsoft 365 incident feed also shows a resolved Teams issue where users attempting to search for emergency-calling locations may have been unable to find or add addresses; Microsoft reverted the responsible change and marked that impact resolved on June 17.",
+    affectedUsers:
+      "Teams users who relied on presence/status accuracy during the June 17 EMEA incident, and Teams Phone / emergency-calling users or admins searching for emergency locations during the June 8-17 address-search impact window.",
+    recommendedMspAction:
+      "Tie matching Teams presence/status tickets to TM1394359 and close as vendor-side if symptoms ended after Microsoft's restoration. For Teams Phone clients, verify emergency location/address search now works, document any E911-related user reports separately, and capture tenant, user, location, client type, and timestamps if the issue persists.",
+    sourceUrls: [
+      "https://x.com/MSFT365Status/status/2067182248114237852",
+      "https://x.com/MSFT365Status/status/2067199650797441490",
+      "https://mailservices.isc.upenn.edu/computing/email/penno365/alerts/ms-incidents.html",
+      "https://status.cloud.microsoft/"
+    ],
+    publishedDate: "2026-06-17",
+    lastUpdatedDate: "2026-06-18",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "teams", "presence", "tm1394359", "service-impact", "emea", "teams-phone", "emergency-calling", "e911", "resolved"]
+  },
+  {
+    id: "2026-06-16-cisa-kev-joomla-cisco-litespeed",
+    appName: "Joomla JCE / Cisco Catalyst SD-WAN Manager / LiteSpeed cPanel Plugin",
+    vendor: "Multiple (CISA KEV)",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "CISA adds exploited Joomla JCE RCE plus Cisco SD-WAN and LiteSpeed cPanel flaws to KEV",
+    summary:
+      "CISA added three more actively exploited items to KEV since the prior scan: CVE-2026-48907 in Widget Factory Joomla Content Editor (JCE), CVE-2026-20262 in Cisco Catalyst SD-WAN Manager, and CVE-2026-54420 in the LiteSpeed cPanel Plugin. JCE's flaw can let unauthenticated attackers create editor profiles and upload/execute PHP; Cisco's SD-WAN Manager flaw lets a low-privileged authenticated attacker create or overwrite files that can later support root escalation; and the LiteSpeed cPanel Plugin symlink issue can let a user with FTP or web shell access escalate to root on shared CloudLinux/CageFS hosting.",
+    affectedUsers:
+      "Joomla sites using JCE before 2.9.99.5, Cisco Catalyst SD-WAN Manager/vManage deployments on affected releases, and shared-hosting servers using LiteSpeed WHM/cPanel Plugin versions before the fixed cPanel user-end plugin 2.4.8 / WHM plugin 5.3.2.x releases.",
+    recommendedMspAction:
+      "Patch JCE to 2.9.99.6 or later, then hunt for rogue JCE editor profiles and unexpected PHP files in images, media, or tmp folders because patching does not clean an already compromised Joomla site. Upgrade Cisco Catalyst SD-WAN Manager to a fixed release and review API/upload/admin logs for suspicious low-privileged activity. Upgrade LiteSpeed WHM/cPanel Plugin or uninstall the cPanel user-end plugin if you cannot update, then check cPanel logs for the vendor-provided exploit patterns.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/06/16/cisa-adds-one-known-exploited-vulnerability-catalog",
+      "https://www.cisa.gov/news-events/alerts/2026/06/15/cisa-adds-two-known-exploited-vulnerabilities-catalog",
+      "https://www.joomlacontenteditor.net/news/jce-security-update-and-a-free-patch-for-older-sites",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-48907",
+      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sdwan-arbfw-c2rZvQ",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-20262",
+      "https://blog.litespeedtech.com/2026/06/01/security-update-for-litespeed-cpanel-plugin-2/",
+      "https://support.cpanel.net/hc/en-us/articles/40868195661207-Security-LiteSpeed-cPanel-Plugin-May-31-2026",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-54420"
+    ],
+    publishedDate: "2026-06-16",
+    lastUpdatedDate: "2026-06-18",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["cisa", "kev", "joomla", "jce", "cve-2026-48907", "cisco", "sd-wan", "cve-2026-20262", "litespeed", "cpanel", "cve-2026-54420", "rce", "privilege-escalation", "actively-exploited"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-06-16 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-06-16.
   {
