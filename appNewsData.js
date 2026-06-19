@@ -71,6 +71,37 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-06-19 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-06-19.
+  {
+    id: "2026-06-18-splunk-enterprise-cve-2026-20253-kev",
+    appName: "Splunk Enterprise",
+    vendor: "Splunk (Cisco)",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Splunk Enterprise unauthenticated RCE CVE-2026-20253 exploited in the wild, added to CISA KEV",
+    summary:
+      "CVE-2026-20253 is a critical (CVSS 9.8) Missing Authentication for Critical Function flaw in Splunk Enterprise. A PostgreSQL sidecar service endpoint enforces no authentication, letting a remote unauthenticated attacker create or truncate arbitrary files, which can lead to denial of service, loss of log integrity, and remote code execution with full control of the Splunk environment. Splunk released fixes on June 10 and confirmed on June 15 that disabling the PostgreSQL sidecar service mitigates the issue with some loss of functionality. CISA added the CVE to its Known Exploited Vulnerabilities catalog on June 18, 2026 with a June 21 federal remediation deadline after active exploitation was confirmed within days of disclosure.",
+    affectedUsers:
+      "On-premises Splunk Enterprise deployments running 10.2 versions below 10.2.4 or 10 versions below 10.0.7, especially internet-reachable Splunk instances. Splunk Cloud is not affected because it does not use the PostgreSQL sidecar.",
+    recommendedMspAction:
+      "Inventory Splunk Enterprise instances and upgrade to 10.2.4, 10.0.7, 10.4.0, or later immediately. If you cannot patch right away, disable the PostgreSQL sidecar service as a temporary mitigation per Splunk guidance. Remove Splunk management/web interfaces from the public internet, review logs for unexpected file creation or truncation and signs of code execution, and treat any exposed unpatched instance as potentially compromised given confirmed in-the-wild exploitation.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/06/18/cisa-adds-one-known-exploited-vulnerability-catalog",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-20253",
+      "https://www.helpnetsecurity.com/2026/06/19/splunk-vulnerability-cve-2026-20253-exploited/",
+      "https://www.securityweek.com/splunk-enterprise-vulnerability-exploited-in-attacks-days-after-disclosure/",
+      "https://thehackernews.com/2026/06/critical-splunk-enterprise-flaw-lets.html"
+    ],
+    publishedDate: "2026-06-18",
+    lastUpdatedDate: "2026-06-19",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["splunk", "cisco", "splunk-enterprise", "cve-2026-20253", "cisa", "kev", "rce", "missing-authentication", "postgresql-sidecar", "actively-exploited", "patch"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-06-18 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-06-18.
   {
