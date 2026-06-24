@@ -71,6 +71,160 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-06-24 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-06-24.
+  {
+    id: "2026-06-24-exchange-online-mailbox-access-degradation",
+    appName: "Exchange Online",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Microsoft investigates Exchange Online mailbox access errors in North America",
+    summary:
+      "Microsoft 365 service-health reporting mirrored by PennO365 shows active incident EX1402802 on June 24, 2026. Some users in North America may see errors or failures when accessing Exchange Online mailboxes through one or more connection methods. Microsoft attributes the impact to a subset of mailbox-database infrastructure that had not been placed into maintenance mode for an extended period and is working to restore affected mailboxes while moving the infrastructure into maintenance.",
+    affectedUsers:
+      "Some North America users accessing Exchange Online mailboxes through Outlook, Outlook on the web, mobile clients, or other Exchange Online connection methods during the June 24 incident window.",
+    recommendedMspAction:
+      "Check Microsoft 365 admin center service health for EX1402802 and correlate matching mailbox-access tickets to the vendor incident before making tenant-side changes. Capture tenant, user, connection method, error text, region, and UTC timestamps for any continuing impact, and point users to an alternate working mail client only if one is unaffected.",
+    sourceUrls: [
+      "https://mailservices.isc.upenn.edu/computing/email/penno365/alerts/ms-incidents.html",
+      "https://status.cloud.microsoft/"
+    ],
+    publishedDate: "2026-06-24",
+    lastUpdatedDate: "2026-06-24",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "exchange-online", "mailbox-access", "ex1402802", "service-impact", "north-america", "microsoft-365", "outlook"]
+  },
+  {
+    id: "2026-06-24-windows-secure-boot-kek-expiration",
+    appName: "Windows Secure Boot",
+    vendor: "Microsoft",
+    category: "Product Change",
+    severity: "Medium",
+    title: "Windows Secure Boot 2011 KEK certificate reaches its June 24 expiration date",
+    summary:
+      "Microsoft's Secure Boot certificate guidance lists Microsoft Corporation KEK CA 2011 as expiring on June 24, 2026, with Microsoft Corporation KEK 2K CA 2023 as the replacement. The immediate issue is not a fleet-wide boot failure, but devices that miss the 2023 certificate rollout can drift into a weaker boot-trust state over time and may have trouble receiving future Secure Boot DB/DBX protections.",
+    affectedUsers:
+      "Managed Windows endpoints, Windows Server systems, specialized workstations, lab devices, embedded systems, and older or unsupported Windows devices that may not have received the 2023 Secure Boot certificate updates through Windows Update or OEM firmware.",
+    recommendedMspAction:
+      "Confirm current Windows updates and OEM firmware are deployed, then sample-check Secure Boot certificate state on managed fleets, servers, and high-value workstations. Prioritize devices with blocked firmware updates, disabled Secure Boot, custom boot chains, or unsupported Windows versions, and document exceptions before future boot-level security updates depend on the new trust anchors.",
+    sourceUrls: [
+      "https://support.microsoft.com/en-us/topic/windows-secure-boot-certificate-expiration-and-ca-updates-7ff40d33-95dc-4c3c-8725-a9b95457578e",
+      "https://techcommunity.microsoft.com/blog/windows-itpro-blog/secure-boot-playbook-for-certificates-expiring-in-2026/4469235",
+      "https://learn.microsoft.com/en-us/windows/release-health/windows-message-center"
+    ],
+    publishedDate: "2026-06-24",
+    lastUpdatedDate: "2026-06-24",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "windows", "secure-boot", "kek", "certificate-rollover", "uefi", "firmware", "dbx", "patching"]
+  },
+  {
+    id: "2026-06-22-docusign-insight-maintenance-june-23-25",
+    appName: "Docusign Insight",
+    vendor: "Docusign",
+    category: "Service Impact",
+    severity: "Low",
+    title: "Docusign schedules regional Insight maintenance June 23-25",
+    summary:
+      "Docusign posted scheduled Insight maintenance for June 23-25, 2026 with regional service-unavailable windows. US West, US Northeast, and several Europe production regions were scheduled for June 23; US East for June 24 from 3:00-9:00 UTC; and US Central for June 25 from 3:00-9:00 UTC.",
+    affectedUsers:
+      "Customers using Docusign Insight in the listed production regions during their maintenance windows. Core eSignature users are not necessarily affected unless their workflow depends on Insight in the impacted region.",
+    recommendedMspAction:
+      "Check client region before treating Insight errors as a break/fix issue. Reschedule Insight-heavy reporting or agreement-analysis work outside the maintenance window, advise users to retry after the window, and keep the Docusign alert with related tickets for closure notes.",
+    sourceUrls: [
+      "https://www.docusign.com/trust/alerts/planned-maintenance-for-insight-june-23-25-2026",
+      "https://health.docusign.com/"
+    ],
+    publishedDate: "2026-06-22",
+    lastUpdatedDate: "2026-06-24",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["docusign", "insight", "maintenance", "service-impact", "regional", "agreement-management"]
+  },
+  {
+    id: "2026-06-18-esri-arcgis-enterprise-account-recovery-targeted",
+    appName: "ArcGIS Enterprise",
+    vendor: "Esri",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Esri warns ArcGIS Enterprise account recovery is being targeted",
+    summary:
+      "Esri's June 18 ArcGIS Security Bulletin says Esri is responding to reports that an ArcGIS Enterprise account-recovery configuration has been used in targeted attempts against customer environments. Esri recommends immediate hardening for deployments with built-in accounts and says it will release a security patch in the next several weeks to further improve the remote user account-recovery workflow, including requiring SMTP for remote password reset.",
+    affectedUsers:
+      "ArcGIS Enterprise deployments that use built-in application accounts, especially environments with weak account-recovery answers, common administrator names, enabled Portal PSA or Server IAA accounts, or service accounts with administrator privileges.",
+    recommendedMspAction:
+      "For ArcGIS Enterprise clients, review built-in accounts now: remove weak recovery answers, avoid common admin usernames, disable Portal PSA and Server IAA accounts, keep service accounts out of admin roles, enable SMTP for account validation, and run Esri's Security & Privacy Adviser. Prefer centralized identity providers with MFA for admins, and watch Esri's bulletin for the follow-up patch.",
+    sourceUrls: [
+      "https://www.esri.com/arcgis-blog/products/trust-arcgis/administration/june-2026-arcgis-security-bulletin",
+      "https://trust.arcgis.com/en/"
+    ],
+    publishedDate: "2026-06-18",
+    lastUpdatedDate: "2026-06-24",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["esri", "arcgis-enterprise", "account-recovery", "built-in-accounts", "smtp", "mfa", "security-adviser", "hardening"]
+  },
+  {
+    id: "2026-06-17-microsoft-defender-rogueplanet-cve-2026-50656",
+    appName: "Microsoft Defender",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Microsoft Defender RoguePlanet EoP CVE-2026-50656 has public PoC while a fix is pending",
+    summary:
+      "Microsoft has acknowledged CVE-2026-50656, a Microsoft Malware Protection Engine elevation-of-privilege issue in Microsoft Defender publicly referred to as RoguePlanet. NVD lists Microsoft as the source, rates the issue High, and records CISA-ADP enrichment showing public proof-of-concept exploitation with total technical impact; Microsoft says it is working on a security update. Reporting from Help Net Security notes Microsoft had not detected in-the-wild exploitation at publication time, but rated exploitation more likely.",
+    affectedUsers:
+      "Windows endpoints using Microsoft Defender where an attacker can already run low-privileged code. This is a post-compromise privilege-escalation risk rather than a remote initial-access flaw.",
+    recommendedMspAction:
+      "Track the MSRC/NVD record for a fixed engine or platform version, keep Defender engine, platform, and security intelligence updates current, and verify the fix when Microsoft publishes it. Until then, reduce chances of low-privileged code execution through application control, EDR monitoring, attachment controls, and least-privilege enforcement; do not treat toggling Defender real-time protection or signature blocking as a remediation.",
+    sourceUrls: [
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-50656",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-50656",
+      "https://www.helpnetsecurity.com/2026/06/17/rogueplanet-zero-day-cve-2026-50656/"
+    ],
+    publishedDate: "2026-06-17",
+    lastUpdatedDate: "2026-06-24",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "defender", "malware-protection-engine", "cve-2026-50656", "rogueplanet", "privilege-escalation", "poc", "patch-pending"]
+  },
+  {
+    id: "2026-06-16-chrome-edge-149-security-update",
+    appName: "Chrome / Chromium / Microsoft Edge",
+    vendor: "Google / Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Chrome 149.0.7827.155/.156 ships 33 security fixes; Edge Stable follows on June 18",
+    summary:
+      "Google promoted Chrome Stable 149.0.7827.155/.156 for Windows and macOS and 149.0.7827.155 for Linux on June 16, with 33 security fixes including multiple Critical issues in WebShare, WebView, Digital Credentials, File Input, Passwords, and Web Authentication. Microsoft Edge Stable 149.0.4022.80 followed on June 18 with security updates from Chromium plus feature and performance fixes.",
+    affectedUsers:
+      "Managed Chrome and Microsoft Edge users on Windows, macOS, and Linux, especially shared workstations, kiosks, developer machines, and browsers used for privileged SaaS or admin portals.",
+    recommendedMspAction:
+      "Verify Chrome is at 149.0.7827.155/.156 or later and Edge Stable is at 149.0.4022.80 or later where applicable, then force relaunch for browsers with staged updates. Pay extra attention to devices with disabled auto-update, long uptime, kiosk mode, or tightly controlled browser rings.",
+    sourceUrls: [
+      "https://chromereleases.googleblog.com/2026/06/stable-channel-update-for-desktop_01750511403.html",
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel"
+    ],
+    publishedDate: "2026-06-16",
+    lastUpdatedDate: "2026-06-24",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "chrome", "chromium", "microsoft", "edge", "browser", "security", "patch", "critical", "relaunch"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-06-19 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-06-19.
   {
@@ -138,24 +292,25 @@ export const appNewsItems = [
     severity: "Critical",
     title: "FortiBleed reports point to large-scale Fortinet firewall and VPN credential compromise",
     summary:
-      "Multiple security firms reported a mid-June campaign dubbed FortiBleed affecting internet-facing Fortinet firewalls and VPN gateways. Reports agree the risk centers on verified Fortinet administrator/VPN credentials at large scale; some reporting frames it as a credential-compromise campaign rather than a single new Fortinet zero-day, while other advisories note attackers are also weaponizing recently patched Fortinet vulnerabilities such as FortiSandbox issues. Either way, exposed Fortinet perimeter devices should be treated as high-risk until credentials, firmware, MFA, and logs are reviewed.",
+      "Multiple security firms reported a mid-June campaign dubbed FortiBleed affecting internet-facing Fortinet firewalls and VPN gateways. Reports agree the risk centers on verified Fortinet administrator/VPN credentials at large scale. Fortinet's June 19 PSIRT analysis says this is not a new Fortinet vulnerability or recent advisory, and that the activity appears tied to credential reuse from previous incidents plus brute-force attacks against devices with weak password hygiene and no MFA. Either way, exposed Fortinet perimeter devices should be treated as high-risk until credentials, firmware, MFA, configuration, and logs are reviewed.",
     affectedUsers:
       "Organizations with internet-facing FortiGate, Fortinet SSL VPN, Fortinet administrative portals, FortiSandbox, or related Fortinet perimeter/security appliances, especially where credentials may have been reused or MFA is missing.",
     recommendedMspAction:
       "Rotate Fortinet admin, VPN, and service credentials immediately for exposed devices; enforce MFA; remove management interfaces from the public internet; patch FortiGate, FortiSandbox, FortiClient EMS, and other Fortinet products to current fixed releases; and review VPN/admin logs for unexpected geolocations, successful logins, configuration exports, new accounts, or policy changes. If a client appears in an exposure dataset or shows suspicious access, treat the firewall/VPN as potentially compromised and start incident response.",
     sourceUrls: [
+      "https://www.fortinet.com/blog/psirt-blogs/analysis-of-reported-credential-compromise-of-fortigate-devices",
       "https://arcticwolf.com/resources/blog/active-fortibleed-campaign-impacting-fortinet-devices-across-194-countries/",
       "https://kudelskisecurity.com/research/fortinet-fortibleed-global-compromise-active-exploitation-of-fortinet-vulnerabilities",
       "https://www.darkreading.com/cyberattacks-data-breaches/sweeping-credential-harvesting-heist-compromises-30k-fortinet-devices",
       "https://fortiguard.fortinet.com/psirt"
     ],
     publishedDate: "2026-06-17",
-    lastUpdatedDate: "2026-06-18",
+    lastUpdatedDate: "2026-06-24",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
     isPlaceholder: false,
-    tags: ["fortinet", "fortigate", "ssl-vpn", "fortibleed", "credential-compromise", "credential-stuffing", "mfa", "perimeter-security", "incident-response", "fortisandbox"]
+    tags: ["fortinet", "fortigate", "ssl-vpn", "fortibleed", "credential-compromise", "credential-stuffing", "credential-reuse", "mfa", "perimeter-security", "incident-response", "fortisandbox"]
   },
   {
     id: "2026-06-17-microsoft-teams-presence-emergency-calling-incidents",
@@ -500,11 +655,11 @@ export const appNewsItems = [
     severity: "High",
     title: "Microsoft June 2026 Patch Tuesday ships 200+ fixes and finalizes Exchange OWA CVE-2026-42897 remediation",
     summary:
-      "Microsoft's June 9, 2026 Patch Tuesday is one of the larger recent Microsoft security releases: Qualys counts 206 Microsoft vulnerabilities, including 33 critical and 167 important issues, while Rapid7 describes 200 vulnerabilities published that day and notes three publicly disclosed zero-days. The release also includes the permanent Exchange Server fix for CVE-2026-42897, the Outlook Web Access (OWA) cross-site-scripting/spoofing flaw that Microsoft disclosed in May as actively exploited in the wild. This release is also the last Patch Tuesday before the June 26, 2026 Secure Boot certificate deadline, when Microsoft replaces the original 2011 Secure Boot certificates that expire in late June.",
+      "Microsoft's June 9, 2026 Patch Tuesday is one of the larger recent Microsoft security releases: Qualys counts 206 Microsoft vulnerabilities, including 33 critical and 167 important issues, while Rapid7 describes 200 vulnerabilities published that day and notes three publicly disclosed zero-days. The release also includes the permanent Exchange Server fix for CVE-2026-42897, the Outlook Web Access (OWA) cross-site-scripting/spoofing flaw that Microsoft disclosed in May as actively exploited in the wild. This release is also the last Patch Tuesday before the June 24, 2026 Microsoft Corporation KEK CA 2011 Secure Boot certificate expiration date.",
     affectedUsers:
       "All managed Windows endpoints and servers, Microsoft Office/SharePoint deployments, and on-premises Exchange Server 2016, 2019, and Subscription Edition. CVE-2026-42897 affects on-prem Exchange only; Exchange Online is not impacted. The Secure Boot certificate rollover affects Windows devices fleet-wide.",
     recommendedMspAction:
-      "Deploy June 2026 security updates through your patch rings, prioritizing on-prem Exchange Server (apply the OWA fix for CVE-2026-42897 and confirm the Exchange Emergency Mitigation Service is enabled until patched). Validate the June update against critical line-of-business systems, then complete Secure Boot certificate validation and updated-certificate deployment before the June 26, 2026 deadline to avoid boot/trust issues when the 2011 certificates expire.",
+      "Deploy June 2026 security updates through your patch rings, prioritizing on-prem Exchange Server (apply the OWA fix for CVE-2026-42897 and confirm the Exchange Emergency Mitigation Service is enabled until patched). Validate the June update against critical line-of-business systems, then complete Secure Boot certificate validation and updated-certificate deployment around the June 24, 2026 KEK CA 2011 expiration date to avoid boot-trust gaps as the 2011 certificates age out.",
     sourceUrls: [
       "https://msrc.microsoft.com/update-guide",
       "https://techcommunity.microsoft.com/blog/exchange/addressing-exchange-server-may-2026-vulnerability-cve-2026-42897/4518498",
@@ -2036,7 +2191,7 @@ export const appNewsItems = [
     affectedUsers:
       "Any managed Windows endpoint or server, Microsoft 365 Apps install (especially Outlook and Word), and Windows Server domain controller running affected May 2026 builds.",
     recommendedMspAction:
-      "Schedule the May 2026 cumulative update through normal patch tooling, prioritizing domain controllers (Netlogon), internet-exposed servers, and any host that handles untrusted email (Outlook zero-click). Validate Office line-of-business apps after the Word fixes land. This is also the last comfortable patch window before the Secure Boot certificate refresh deadline on June 26, 2026 \u2014 confirm Secure Boot readiness on managed fleets as part of the same cycle.",
+      "Schedule the May 2026 cumulative update through normal patch tooling, prioritizing domain controllers (Netlogon), internet-exposed servers, and any host that handles untrusted email (Outlook zero-click). Validate Office line-of-business apps after the Word fixes land. This is also the last comfortable patch window before the Secure Boot KEK CA 2011 certificate expiration date on June 24, 2026 \u2014 confirm Secure Boot readiness on managed fleets as part of the same cycle.",
     sourceUrls: [
       "https://msrc.microsoft.com/update-guide/releaseNote/2026-May",
       "https://www.bleepingcomputer.com/news/microsoft/microsoft-may-2026-patch-tuesday-fixes-120-flaws-no-zero-days/",
