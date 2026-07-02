@@ -71,6 +71,135 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-07-02 scan) -----------------------------
+  // Reviewed from current vendor/status/security sources on 2026-07-02.
+  {
+    id: "2026-07-02-copilot-researcher-service-degradation",
+    appName: "Microsoft 365 Copilot Researcher",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Microsoft investigates Copilot Researcher errors on July 2",
+    summary:
+      "Microsoft 365 service-health reporting mirrored by PennO365 shows active incident CP1412052 on July 2, 2026. Some users may see errors, failed responses, or a degraded experience when using Researcher in Microsoft 365 Copilot; Microsoft attributes the issue to a recent service configuration change affecting infrastructure that supports Researcher.",
+    affectedUsers:
+      "Users attempting to submit or process Researcher requests in Microsoft 365 Copilot during the July 2 incident window.",
+    recommendedMspAction:
+      "Check Microsoft 365 admin center service health for CP1412052 before troubleshooting locally. For matching tickets, capture tenant, user, prompt/task type, conversation ID if available, error text, and UTC timestamp, then advise retry or an alternate research workflow until Microsoft restores the service.",
+    sourceUrls: [
+      "https://mailservices.isc.upenn.edu/computing/email/penno365/alerts/ms-incidents.html",
+      "https://status.cloud.microsoft/"
+    ],
+    publishedDate: "2026-07-02",
+    lastUpdatedDate: "2026-07-02",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "copilot", "researcher", "cp1412052", "service-impact", "ai"]
+  },
+  {
+    id: "2026-07-01-sharepoint-server-cve-2026-45659-kev",
+    appName: "SharePoint Server",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "CISA flags exploited SharePoint Server RCE CVE-2026-45659",
+    summary:
+      "NVD now shows CVE-2026-45659 in CISA's Known Exploited Vulnerabilities catalog with a July 1, 2026 date added and July 4, 2026 due date. The Microsoft-sourced flaw is a deserialization-of-untrusted-data issue in Microsoft Office SharePoint that lets an authorized attacker execute code over a network, with affected SharePoint Server 2016, 2019, and Subscription Edition builds listed in the NVD record.",
+    affectedUsers:
+      "Organizations running on-premises Microsoft SharePoint Server 2016, SharePoint Server 2019, or SharePoint Server Subscription Edition below the fixed builds. SharePoint Online is a separate cloud service and is not the on-prem server asset to inventory for this item.",
+    recommendedMspAction:
+      "Inventory internet-facing and internally exposed SharePoint Server farms immediately, apply the current Microsoft security update or vendor mitigation, and confirm build levels after patching. Prioritize externally reachable farms, review web and SharePoint logs for exploitation indicators, and keep emergency-change evidence because CISA lists active exploitation and a short remediation window.",
+    sourceUrls: [
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-45659",
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-45659",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-45659"
+    ],
+    publishedDate: "2026-07-01",
+    lastUpdatedDate: "2026-07-02",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "sharepoint-server", "cve-2026-45659", "cisa", "kev", "rce", "deserialization", "actively-exploited", "patch"]
+  },
+  {
+    id: "2026-06-30-defender-endpoint-linux-upgrade-disabled-service",
+    appName: "Microsoft Defender for Endpoint on Linux",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "High",
+    title: "Defender for Endpoint on Linux may stay disabled after some upgrades",
+    summary:
+      "Microsoft 365 service-health reporting mirrored by PennO365 shows advisory DZ1410811 for Defender for Endpoint on Linux. After upgrades or some reinstall scenarios involving builds 101.26042.0009 and 101.26052.0007, the mdatp service may not remain configured to start automatically after reboot, leaving active protection disabled until remediated.",
+    affectedUsers:
+      "Linux endpoints and servers protected by Microsoft Defender for Endpoint where the agent was upgraded to build 101.26042.0009 or 101.26052.0007 and then rebooted.",
+    recommendedMspAction:
+      "Pause upgrades to the impacted Defender for Endpoint on Linux builds where possible and watch DZ1410811 for Microsoft's fixed deployment. For devices already upgraded, verify the mdatp service starts after reboot, manually start the service or downgrade where needed, and use monitoring or scripts to report any Linux endpoint with protection disabled.",
+    sourceUrls: [
+      "https://mailservices.isc.upenn.edu/computing/email/penno365/alerts/ms-incidents.html",
+      "https://status.cloud.microsoft/"
+    ],
+    publishedDate: "2026-06-30",
+    lastUpdatedDate: "2026-07-02",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["microsoft", "defender", "defender-for-endpoint", "linux", "mdatp", "dz1410811", "service-impact", "endpoint-protection"]
+  },
+  {
+    id: "2026-06-30-netscaler-ctx696604-security-update",
+    appName: "NetScaler ADC / NetScaler Gateway",
+    vendor: "Citrix / NetScaler",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Citrix publishes June 30 NetScaler security bulletin CTX696604",
+    summary:
+      "Citrix published CTX696604 for customer-managed NetScaler ADC, NetScaler Gateway, and Citrix Secure Private Access Hybrid deployments using NetScaler instances. The bulletin addresses multiple configuration-dependent vulnerabilities, including CVE-2026-8451, CVE-2026-8452, CVE-2026-8655, CVE-2026-10816, CVE-2026-10817, and NetScaler-specific CVE-2026-13474 for the HTTP/2 Bomb issue.",
+    affectedUsers:
+      "Customer-managed NetScaler appliances on 14.1 before 14.1-72.61, 13.1 before 13.1-63.18, 14.1-FIPS before 14.1-72.61 FIPS, or 13.1-FIPS/NDcPP before 13.1-37.272, depending on enabled SAML IdP, Gateway/AAA, DNS, Oracle load balancing, management UI, TCP timestamp, or HTTP/2 configurations.",
+    recommendedMspAction:
+      "Review all customer-managed NetScaler estates for the affected builds and configurations, then upgrade to the fixed releases. Citrix says cloud-managed services are updated by Citrix, but customer-managed appliances need action; for HTTP/2 Bomb exposure, confirm HTTP/2 profiles and configure the new http2SmallWndTimeout parameter after upgrading when strict profiles are not in use.",
+    sourceUrls: [
+      "https://support.citrix.com/support-home/kbsearch/article?articleNumber=CTX696604",
+      "https://community.citrix.com/techzone-blogs/110_security-updates/security-update-for-citrix-netscaler-and-netscaler-gateway-customers-r1570/",
+      "https://community.citrix.com/forums/topic/259047-netscaler-security-bulletin-ctx696604-june-30-2026/"
+    ],
+    publishedDate: "2026-06-30",
+    lastUpdatedDate: "2026-07-02",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["citrix", "netscaler", "adc", "gateway", "ctx696604", "cve-2026-8451", "cve-2026-13474", "http2-bomb", "patch"]
+  },
+  {
+    id: "2026-06-30-chrome-150-security-update-edge-pending",
+    appName: "Chrome / Chromium / Microsoft Edge",
+    vendor: "Google / Microsoft",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Chrome 150 ships large security batch while Edge fix is pending",
+    summary:
+      "Google promoted Chrome 150 to stable on June 30, 2026 for Windows, macOS, and Linux. The desktop release notes list Chrome 150.0.7871.46 for Linux and 150.0.7871.46/.47 for Windows and Mac, with 433 security fixes; Microsoft's Edge security notes for June 30 say Microsoft is aware of the recent Chromium security fixes and is working on a security fix.",
+    affectedUsers:
+      "Managed Chrome and Microsoft Edge users on Windows, macOS, and Linux, especially devices used for privileged SaaS, browser-based admin portals, kiosk workflows, and long-running sessions where browser relaunches are delayed.",
+    recommendedMspAction:
+      "Verify Chrome endpoints have updated to 150.0.7871.46/.47 or later and force relaunch where the update is staged. Track Microsoft Edge security release notes for the follow-up Chromium security update, then validate Edge update rings and restart behavior once Microsoft ships the fix.",
+    sourceUrls: [
+      "https://chromereleases.googleblog.com/2026/06/stable-channel-update-for-desktop_0175352312.html",
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnotes-security"
+    ],
+    publishedDate: "2026-06-30",
+    lastUpdatedDate: "2026-07-02",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["google", "chrome", "chromium", "microsoft", "edge", "browser", "security", "patch", "critical", "relaunch"]
+  },
   // -- LATEST PUBLISHED FINDINGS (2026-06-24 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-06-24.
   {
@@ -155,24 +284,25 @@ export const appNewsItems = [
     vendor: "Esri",
     category: "Security Vulnerability",
     severity: "High",
-    title: "Esri warns ArcGIS Enterprise account recovery is being targeted",
+    title: "Esri releases Portal patch for targeted ArcGIS Enterprise account-recovery issue",
     summary:
-      "Esri's June 18 ArcGIS Security Bulletin says Esri is responding to reports that an ArcGIS Enterprise account-recovery configuration has been used in targeted attempts against customer environments. Esri recommends immediate hardening for deployments with built-in accounts and says it will release a security patch in the next several weeks to further improve the remote user account-recovery workflow, including requiring SMTP for remote password reset.",
+      "Esri's June 18 ArcGIS Security Bulletin says ArcGIS Enterprise account-recovery configurations have been used in targeted attempts against customer environments. Esri has now released the Portal for ArcGIS Security 2026 Update 2 Patch, dated June 23, 2026, for Portal for ArcGIS 12.1 and earlier; the patch addresses the account-recovery issue, CVE-2026-13020, and CVE-2026-13019, and changes how built-in users self-serve password resets.",
     affectedUsers:
-      "ArcGIS Enterprise deployments that use built-in application accounts, especially environments with weak account-recovery answers, common administrator names, enabled Portal PSA or Server IAA accounts, or service accounts with administrator privileges.",
+      "ArcGIS Enterprise deployments using Portal for ArcGIS 12.1, 12.0, 11.5, 11.3, or 11.1, especially environments with built-in accounts, weak account-recovery answers, common administrator names, enabled Portal PSA or Server IAA accounts, or service accounts with administrator privileges.",
     recommendedMspAction:
-      "For ArcGIS Enterprise clients, review built-in accounts now: remove weak recovery answers, avoid common admin usernames, disable Portal PSA and Server IAA accounts, keep service accounts out of admin roles, enable SMTP for account validation, and run Esri's Security & Privacy Adviser. Prefer centralized identity providers with MFA for admins, and watch Esri's bulletin for the follow-up patch.",
+      "Schedule the Portal for ArcGIS Security 2026 Update 2 Patch promptly, allowing for the Portal service stop/restart and a rollback plan or WebGIS DR backup first. Continue hardening built-in accounts, disable Portal PSA and Server IAA accounts, keep service accounts out of admin roles, enable SMTP for password reset workflows, run Esri's Security & Privacy Adviser, and prefer SAML/OIDC with MFA for administrators.",
     sourceUrls: [
       "https://www.esri.com/arcgis-blog/products/trust-arcgis/administration/june-2026-arcgis-security-bulletin",
+      "https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-2-patch",
       "https://trust.arcgis.com/en/"
     ],
     publishedDate: "2026-06-18",
-    lastUpdatedDate: "2026-06-24",
+    lastUpdatedDate: "2026-07-02",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
     isPlaceholder: false,
-    tags: ["esri", "arcgis-enterprise", "account-recovery", "built-in-accounts", "smtp", "mfa", "security-adviser", "hardening"]
+    tags: ["esri", "arcgis-enterprise", "portal-for-arcgis", "account-recovery", "built-in-accounts", "cve-2026-13020", "cve-2026-13019", "smtp", "mfa", "security-adviser", "patch", "hardening"]
   },
   {
     id: "2026-06-17-microsoft-defender-rogueplanet-cve-2026-50656",
