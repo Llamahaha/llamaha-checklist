@@ -71,6 +71,111 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- AUTOMATED FINDINGS (2026-07-15 scheduled scan) --------------------------
+  // Discovered by the daily-site-check scheduled task on 2026-07-15 from vendor
+  // status pages, CISA KEV, and security press. Added as drafts per the
+  // automation contract above — review, edit, then flip isPublished: true.
+  {
+    id: "2026-07-14-microsoft-july-2026-patch-tuesday",
+    appName: "Windows / Office / SharePoint / AD FS",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "July 2026 Patch Tuesday fixes record 570+ flaws including exploited AD FS and SharePoint zero-days",
+    summary:
+      "Microsoft's July 8, 2026 Patch Tuesday is its largest ever, addressing roughly 570 CVEs (622 counting non-Microsoft components) with 59 rated Critical. Two zero-days are under active attack — CVE-2026-56155, an Active Directory Federation Services elevation-of-privilege flaw that grants administrative privileges, and a SharePoint Server elevation-of-privilege flaw — and a Windows BitLocker security-feature bypass (CVE-2026-50661) was publicly disclosed. Microsoft attributes the record volume to AI-assisted vulnerability discovery and now recommends installing Windows 11 quality updates within three days.",
+    affectedUsers:
+      "All organizations running Windows clients and servers, on-prem SharePoint Server, and AD FS. Environments with AD FS or on-prem SharePoint exposed to users are the highest-risk assets this cycle.",
+    recommendedMspAction:
+      "Prioritize the July cumulative updates on AD FS servers and on-prem SharePoint farms first (both zero-days are exploited in the wild and CVE-2026-56155 is on the CISA KEV list with a remediation deadline), then roll the standard client/server rings. Verify BitLocker-protected laptops receive the fix for CVE-2026-50661 given physical-attack scenarios.",
+    sourceUrls: [
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-july-2026-patch-tuesday-fixes-massive-570-flaws-3-zero-days/",
+      "https://krebsonsecurity.com/2026/07/microsoft-patches-a-record-570-security-flaws/",
+      "https://thehackernews.com/2026/07/microsoft-patches-record-622-flaws.html"
+    ],
+    publishedDate: "2026-07-14",
+    lastUpdatedDate: "2026-07-15",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "patch-tuesday", "windows", "sharepoint", "ad-fs", "bitlocker", "zero-day", "cve-2026-56155", "cve-2026-50661"]
+  },
+  {
+    id: "2026-07-14-cisa-kev-sonicwall-adfs-sharepoint",
+    appName: "SonicWall SMA1000 / AD FS / SharePoint",
+    vendor: "Multiple",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "CISA KEV adds SonicWall SMA1000 and Microsoft AD FS/SharePoint flaws under active exploitation",
+    summary:
+      "On July 14, 2026 CISA added four actively exploited vulnerabilities to the Known Exploited Vulnerabilities catalog, including CVE-2026-15409 and CVE-2026-15410 in SonicWall SMA1000 remote-access appliances and CVE-2026-56155 in Active Directory Federation Services. Earlier July additions covered JoomShaper SP Page Builder, Langflow, iCagenda, Balbooa Forms, and a legacy Cisco IOS CSRF (CVE-2008-4128).",
+    affectedUsers:
+      "Organizations running SonicWall SMA1000 remote-access appliances, AD FS, or on-prem SharePoint; sites on Joomla/WordPress page-builder plugins listed in the early-July additions.",
+    recommendedMspAction:
+      "Inventory client environments for SonicWall SMA1000 appliances and patch or isolate them immediately — edge remote-access devices are the most commonly exploited class. Confirm AD FS and SharePoint remediation is covered by the July Patch Tuesday rollout, and track KEV due dates for compliance-bound clients.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/07/14/cisa-adds-four-known-exploited-vulnerabilities-catalog",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    ],
+    publishedDate: "2026-07-14",
+    lastUpdatedDate: "2026-07-15",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["cisa", "kev", "sonicwall", "sma1000", "ad-fs", "sharepoint", "cve-2026-15409", "cve-2026-15410", "cve-2026-56155"]
+  },
+  {
+    id: "2026-07-10-m365-portal-copilot-access-incident",
+    appName: "Microsoft 365 portal / Copilot",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "July 10 routing change broke Microsoft 365 suite portal and Copilot web access for nearly 9 hours",
+    summary:
+      "On July 10, 2026, some users were intermittently unable to access the Microsoft 365 suite portal (m365.cloud.microsoft) and Copilot web for roughly 8 hours 50 minutes. Microsoft's preliminary root cause was a change that modified the route back-end service calls take when users access the affected apps. Separate brief regional disruptions hit Japan on July 3 and Australia on July 2.",
+    affectedUsers:
+      "Users navigating to the M365 suite portal, Copilot web, or any URL redirecting to m365.cloud.microsoft during the July 10 window.",
+    recommendedMspAction:
+      "For similar reports, verify service health in the Microsoft 365 admin center before local troubleshooting, and remind users of the workaround pattern: go directly to product URLs (outlook.office.com, teams.microsoft.com) or use desktop apps when the suite portal is degraded.",
+    sourceUrls: [
+      "https://isdown.app/status/microsoft365/incidents/620408-some-users-are-intermittently-unable-to-access-the-microsoft-365-suite-portal",
+      "https://status.cloud.microsoft/"
+    ],
+    publishedDate: "2026-07-10",
+    lastUpdatedDate: "2026-07-15",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "copilot", "portal", "outage", "service-impact"]
+  },
+  {
+    id: "2026-07-15-autodesk-midjuly-incidents-identity-maintenance",
+    appName: "Autodesk cloud services",
+    vendor: "Autodesk",
+    category: "Service Impact",
+    severity: "Medium",
+    title: "Autodesk mid-July incident cluster resolved; Identity Service maintenance July 18 and August 1",
+    summary:
+      "The Autodesk Health Dashboard shows a cluster of resolved mid-July incidents: a sign-in interruption across multiple Autodesk products on July 13 (retroactively reported), Fusion Team Large Model Viewer unavailable July 14, and A360 design/drawing viewing plus intermittent Forma Takeoff access issues on July 15. Autodesk has also scheduled Identity Service maintenance for July 18 and August 1 (7:00–7:29 PM PDT) that may briefly disrupt first-time SSO sign-ins and user/project management, and a broader APS platform maintenance window August 15–16.",
+    affectedUsers:
+      "AEC teams using Autodesk sign-in (all desktop and cloud products), Fusion Team, A360, Forma Takeoff, and admins managing SSO or hub/project membership during the maintenance windows.",
+    recommendedMspAction:
+      "Close out any lingering July 13–15 sign-in or viewer tickets as vendor-side and resolved. Note the July 18 and August 1 Identity maintenance windows in the ops calendar — avoid scheduling new-user onboarding or SSO changes for AEC clients during those windows.",
+    sourceUrls: [
+      "https://health.autodesk.com/"
+    ],
+    publishedDate: "2026-07-15",
+    lastUpdatedDate: "2026-07-15",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["autodesk", "sso", "identity", "fusion-team", "a360", "forma", "maintenance", "service-impact"]
+  },
+
   // -- LATEST PUBLISHED FINDINGS (2026-07-02 scan) -----------------------------
   // Reviewed from current vendor/status/security sources on 2026-07-02.
   {
