@@ -1996,6 +1996,7 @@ input[type="checkbox"] {
   margin: 0;
 }
 
+.help-toc-header h1,
 .help-toc-header h2 {
   margin: 0;
   font-size: 0.95rem;
@@ -2437,9 +2438,11 @@ input[type="checkbox"] {
   }
 
   .site-chrome {
+    grid-template-columns: auto minmax(0, 1fr);
     gap: 10px;
     align-items: center;
-    padding: 10px 12px;
+    padding: 10px;
+    border-radius: 30px;
   }
 
   .site-brand-icon {
@@ -2457,13 +2460,20 @@ input[type="checkbox"] {
   }
 
   .site-links {
-    gap: 5px;
+    min-width: 0;
+    gap: 6px;
+    justify-content: flex-start;
     overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .site-links::-webkit-scrollbar {
+    display: none;
   }
 
   .site-link {
-    padding: 7px 9px;
-    font-size: 0.8rem;
+    padding: 7px 8px;
+    font-size: clamp(0.7rem, 2.6vw, 0.76rem);
   }
 
   .accordion-summary {

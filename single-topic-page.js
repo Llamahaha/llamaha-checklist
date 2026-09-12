@@ -80,7 +80,7 @@ export function renderSingleTopicPage(options) {
   const header = createElement("div", { className: "help-toc-header" });
   header.append(
     createElement("p", { className: "section-kicker", textContent: "On This Page" }),
-    createElement("h2", { textContent: title }),
+    createElement("h1", { textContent: title }),
     createElement("p", { textContent: description })
   );
 

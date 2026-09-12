@@ -3,7 +3,7 @@ import { publicizeText } from "./resourceCommon.js";
 const publicLinks = [
   { id: "home", label: "Home", href: "index.html" },
   { id: "search", label: "Search", href: "search.html" },
-  { id: "support", label: "Support Pages", href: "support.html" },
+  { id: "support", label: "Support", href: "support.html" },
   { id: "news", label: "News", href: "app-news.html" },
   { id: "contact", label: "Contact", href: "contact.html" }
 ];
@@ -11,7 +11,7 @@ const publicLinks = [
 const internalLinks = [
   { id: "internal-home", label: "Internal Home", href: "internal/index.html" },
   { id: "internal-search", label: "Search", href: "internal/search.html" },
-  { id: "internal-support", label: "Support Pages", href: "internal/support.html" },
+  { id: "internal-support", label: "Support", href: "internal/support.html" },
   { id: "public-home", label: "Public Home", href: "index.html" }
 ];
 
