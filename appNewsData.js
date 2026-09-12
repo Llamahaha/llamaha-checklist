@@ -71,6 +71,271 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- AUTOMATED FINDINGS (2026-09-12 scan) ------------------------------------
+  // Discovered 2026-09-12 from vendor security advisories, status/service-health
+  // reporting, CISA KEV, and security press, covering roughly 2026-08-29 through
+  // 2026-09-12. Added as drafts per the automation contract above — review, edit
+  // severity/audience/placement, then flip isPublished: true.
+  {
+    id: "2026-09-10-autodesk-fusion-desktop-mitm-adsk-sa-2026-0016",
+    appName: "Autodesk Fusion",
+    vendor: "Autodesk",
+    category: "Security Vulnerability",
+    severity: "Medium",
+    title: "Autodesk warns of man-in-the-middle flaw in Fusion desktop",
+    summary:
+      "Autodesk published ADSK-SA-2026-0016 on September 10, 2026, covering a man-in-the-middle weakness in the Fusion desktop client. Autodesk states that exploitation may expose sensitive information tied to the signed-in user or compromise the user's Autodesk account, and that exploitation requires user interaction.",
+    affectedUsers:
+      "Anyone running the Fusion desktop client, especially staff who work from hotel, coworking, jobsite, or other untrusted networks where traffic interception is plausible.",
+    recommendedMspAction:
+      "Read ADSK-SA-2026-0016 for the mitigated build, then push the Fusion update through Autodesk Access or the Accounts Portal. Until fleet-wide patching completes, remind mobile and field users to use the company VPN rather than open Wi-Fi when signing in to Autodesk services, and treat any unexpected Autodesk sign-in prompt as suspicious.",
+    sourceUrls: [
+      "https://www.autodesk.com/trust/security-advisories",
+      "https://www.autodesk.com/trust/security-advisories/adsk-sa-2026-0016"
+    ],
+    publishedDate: "2026-09-10",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["autodesk", "fusion", "mitm", "adsk-sa-2026-0016", "security", "account-compromise"]
+  },
+  {
+    id: "2026-09-09-cisa-kev-cisco-fmc-citrix-netscaler-fortinet",
+    appName: "Cisco Secure FMC / Citrix NetScaler / FortiOS",
+    vendor: "CISA",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "CISA adds exploited Cisco, Citrix, and Fortinet flaws with a Sept 12 federal deadline",
+    summary:
+      "On September 9, 2026, CISA added three actively exploited edge-device flaws to the Known Exploited Vulnerabilities catalog and set a September 12 remediation deadline for federal agencies. They are CVE-2026-20079 (CVSS 10.0) in Cisco Secure Firewall Management Center, allowing unauthenticated attackers to bypass authentication and reach root; CVE-2026-19490 (CVSS 9.3), the Citrix NetScaler ADC/Gateway authentication bypass; and CVE-2025-25249 (CVSS 7.3), a heap overflow in FortiOS, FortiSwitchManager, and FortiSASE.",
+    affectedUsers:
+      "Any client whose perimeter or remote-access stack includes Cisco Secure FMC, Citrix NetScaler ADC or Gateway configured as an AAA vServer / SSL VPN / ICA Proxy / CVPN / RDP Proxy, or FortiOS, FortiSwitchManager, or FortiSASE. Reporting cites exploitation attempts against NetScaler since September 3 and a Fortinet campaign that compromised roughly 178 devices.",
+    recommendedMspAction:
+      "Treat this as an emergency patch cycle for edge gear, not routine maintenance. Inventory every NetScaler, FMC, and Fortinet appliance under management, confirm firmware against the vendor bulletins (Citrix CTX696939 for NetScaler), and schedule upgrades this week. Because all three are authentication-bypass or RCE classes, patching alone is not enough — after upgrading, rotate admin credentials and any session/SAML signing material, kill active sessions, and review appliance logs and config for web shells or unfamiliar admin accounts.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/09/09/cisa-adds-four-known-exploited-vulnerabilities-catalog",
+      "https://thehackernews.com/2026/09/cisa-flags-exploited-cisco-citrix.html",
+      "https://www.bleepingcomputer.com/news/security/hackers-target-critical-citrix-netscaler-auth-bypass-in-attacks/",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    ],
+    publishedDate: "2026-09-09",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["cisa", "kev", "cisco", "citrix", "netscaler", "fortinet", "fortios", "vpn", "cve-2026-20079", "cve-2026-19490", "cve-2025-25249", "security"]
+  },
+  {
+    id: "2026-09-08-microsoft-september-2026-patch-tuesday",
+    appName: "Windows / Office / Microsoft 365 Apps",
+    vendor: "Microsoft",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Microsoft's September 2026 Patch Tuesday fixes two exploited zero-days in a record release",
+    summary:
+      "Microsoft shipped its September 2026 updates on September 8, addressing roughly 964–966 CVEs — the largest Patch Tuesday on record — including about 105 rated Critical. Two are actively exploited: CVE-2026-81963, an elevation-of-privilege flaw in the Windows Update Stack caused by improper link resolution, and CVE-2026-85880, a heap-based buffer overflow in Windows Advanced Local Procedure Call (ALPC) that escalates to SYSTEM.",
+    affectedUsers:
+      "Every managed Windows workstation and server, plus Microsoft 365 Apps installs. Both zero-days are local privilege escalation, so the realistic risk is an attacker who already has a foothold (phishing, a malicious installer, a compromised account) turning it into full SYSTEM control of a design workstation or file server.",
+    recommendedMspAction:
+      "Approve and deploy the September cumulative updates on the normal ring schedule, but pull the pilot ring forward given two exploited EoP bugs. Verify patch compliance in Datto RMM rather than trusting Windows Update reporting alone. Note that this release also carries known regressions — see the KB5124008 item below — so stage the pilot ring for at least a few days before broad release and be ready to field Explorer and RDS tickets.",
+    sourceUrls: [
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-september-2026-patch-tuesday-fixes-966-flaws-2-zero-days/",
+      "https://www.tenable.com/blog/microsofts-september-2026-patch-tuesday-addresses-964-cves-cve-2026-81963-cve-2026-85880",
+      "https://www.securityweek.com/microsoft-patches-record-974-vulnerabilities-including-two-exploited-zero-days/",
+      "https://msrc.microsoft.com/update-guide/releaseNote/2026-Sep"
+    ],
+    publishedDate: "2026-09-08",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "windows", "patch-tuesday", "zero-day", "cve-2026-81963", "cve-2026-85880", "security", "patching"]
+  },
+  {
+    id: "2026-09-08-windows-11-kb5124008-known-issues",
+    appName: "Windows 11",
+    vendor: "Microsoft",
+    category: "Service Impact",
+    severity: "High",
+    title: "Windows 11 KB5124008 linked to Explorer crashes, RDS problems, and File History failures",
+    summary:
+      "KB5124008 (build 26200.9445), the mandatory September 8, 2026 security update for Windows 11, is being tied to several regressions: explorer.exe crashes that take out the desktop, taskbar, and Start menu; Remote Desktop Services connection and stability problems; File History no longer detecting external drives; and AMD Radeon driver instability on some systems. Microsoft has acknowledged the reports and said the September updates were extensive and need more data to root-cause.",
+    affectedUsers:
+      "Windows 11 24H2 and 25H2 devices that took the September update. RDS regressions are the sharpest risk for firms whose staff reach CAD workstations or a terminal server remotely; the Explorer crashes are the most visible to end users.",
+    recommendedMspAction:
+      "Do not uninstall the update — it carries the September security fixes, including two exploited zero-days. Instead, pause or slow broad deployment rings while the pilot ring is observed, and pre-stage the ticket response: for Explorer crashes capture the faulting module from Event Viewer before restarting explorer.exe, and for RDS failures confirm the build number on both endpoints. Check the Windows release health dashboard before deep-diving any matching ticket, and flag affected clients proactively so the first call is not a surprise.",
+    sourceUrls: [
+      "https://www.windowslatest.com/2026/09/12/microsoft-admits-windows-11s-biggest-september-update-is-breaking-multiple-features-days-after-it-warned-users-not-to-delay-updates/",
+      "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2",
+      "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-24h2"
+    ],
+    publishedDate: "2026-09-08",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "windows-11", "kb5124008", "explorer", "rds", "remote-desktop", "file-history", "amd", "known-issue"]
+  },
+  {
+    id: "2026-09-08-adobe-september-2026-security-updates",
+    appName: "Acrobat / Reader / Photoshop / Illustrator",
+    vendor: "Adobe",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Adobe's September 2026 updates patch 32 Acrobat and Reader CVEs",
+    summary:
+      "Adobe released ten security bulletins on September 8, 2026 covering roughly 172 CVEs. The ones that matter on design workstations are APSB26-141 for Acrobat and Reader (32 CVEs, highest CVSS 8.8), APSB26-130 for Photoshop (8 CVEs), APSB26-131 for Illustrator (3 CVEs), and APSB26-132 for Animate. Separately, APSB26-146 for Adobe Commerce is a CVSS 10.0 template-engine injection that Adobe reports is being exploited in the wild.",
+    affectedUsers:
+      "Anyone running Acrobat, Acrobat Reader, or Creative Cloud desktop apps — which on an AEC fleet is effectively everyone, since markup and submittal review runs through PDF all day. Commerce is unlikely to be in scope for design firms but should be checked if a client runs an e-commerce site.",
+    recommendedMspAction:
+      "Push Acrobat and Reader updates first; they are the highest-exposure apps because users open PDFs from outside parties constantly. Confirm the Acrobat continuous track lands on 26.002.21901 or later. Then schedule Creative Cloud app updates through the Adobe Admin Console or Creative Cloud Desktop. If any client runs Adobe Commerce, treat APSB26-146 as an emergency — it is exploited in the wild.",
+    sourceUrls: [
+      "https://helpx.adobe.com/security/products/acrobat/apsb26-141.html",
+      "https://www.zerodayinitiative.com/blog/2026/9/8/the-september-2026-security-update-review",
+      "https://helpx.adobe.com/security/security-bulletin.html",
+      "https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/continuous/dccontinuousaug2026sec.html"
+    ],
+    publishedDate: "2026-09-08",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["adobe", "acrobat", "reader", "photoshop", "illustrator", "apsb26-141", "pdf", "security", "creative-cloud"]
+  },
+  {
+    id: "2026-09-04-chrome-edge-v8-zero-day-cve-2026-85046",
+    appName: "Google Chrome / Microsoft Edge",
+    vendor: "Google",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Chrome patches an exploited V8 zero-day; Edge picks up the same fix",
+    summary:
+      "Google released Chrome 152.0.7977.82/.83 for Windows and macOS (152.0.7977.82 for Linux) on September 4, 2026 to fix CVE-2026-85046, a type-confusion bug in the V8 engine that lets a crafted web page run arbitrary code in the renderer sandbox. Google confirmed an exploit exists in the wild — the seventh exploited Chrome zero-day of 2026. CISA added it to the KEV catalog with a September 18 federal deadline, and Microsoft Edge shipped the Chromium fix in 152.0.4191.66.",
+    affectedUsers:
+      "Every user of Chrome, Edge, or any other Chromium-based browser, which in practice includes the browser-based side of ACC/BIM 360, ArcGIS Online, Bluebeam Studio web, Trimble Connect, and Microsoft 365.",
+    recommendedMspAction:
+      "Force a browser relaunch rather than waiting for users to restart — Chrome and Edge both stage the update but only apply it on relaunch, and CAD users routinely leave browsers open for weeks. Verify the installed build matches the running build (Chrome 152.0.7977.82+ / Edge 152.0.4191.66+) and confirm the update services are enabled; a Datto RMM component or Intune remediation script is the reliable way to prove compliance across the fleet.",
+    sourceUrls: [
+      "https://thehackernews.com/2026/09/google-releases-chrome-update-to-patch.html",
+      "https://www.helpnetsecurity.com/2026/09/04/google-chrome-zero-day-cve-2026-85046/",
+      "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    ],
+    publishedDate: "2026-09-04",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["google", "chrome", "microsoft", "edge", "v8", "zero-day", "cve-2026-85046", "kev", "browser", "security"]
+  },
+  {
+    id: "2026-09-02-autodesk-shared-components-ifc-dos-cve-2026-14255",
+    appName: "Revit / AutoCAD / Civil 3D / Inventor / Vault",
+    vendor: "Autodesk",
+    category: "Security Vulnerability",
+    severity: "Medium",
+    title: "Malicious IFC files can crash Revit, AutoCAD, and Civil 3D via shared components",
+    summary:
+      "Autodesk advisory ADSK-SA-2026-0015, published September 2, 2026, covers CVE-2026-14255: uncontrolled recursion triggered by a maliciously crafted IFC file causes the application to terminate unexpectedly — a denial of service. It affects the Autodesk Shared Components used across the 2026 and 2027 product lines, including AutoCAD and its toolsets, Civil 3D, Revit, Revit LT, InfraWorks, Inventor, Advance Steel, 3ds Max, and Vault Client.",
+    affectedUsers:
+      "2027 products on Shared Components 2027.1 or earlier and 2026 products on Shared Components 2026.7 or earlier. IFC is the standard handoff format between disciplines, so the exposure is real: the malicious file arrives as an ordinary consultant deliverable.",
+    recommendedMspAction:
+      "Update Autodesk Shared Components to 2027.2 (v2.2.0) for the 2027 line and 2026.8 (v1.12.0) for the 2026 line, delivered through Autodesk Access or the Accounts Portal. Because this is a crash rather than code execution, it can ride the normal maintenance window — but it is worth prioritizing at firms doing heavy IFC coordination, where a repeated 'Revit just closes when I link this IFC' ticket is easy to misdiagnose as a corrupt model.",
+    sourceUrls: [
+      "https://www.autodesk.com/trust/security-advisories/adsk-sa-2026-0015",
+      "https://www.autodesk.com/trust/security-advisories"
+    ],
+    publishedDate: "2026-09-02",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["autodesk", "revit", "autocad", "civil-3d", "inventor", "ifc", "cve-2026-14255", "adsk-sa-2026-0015", "denial-of-service", "shared-components"]
+  },
+  {
+    id: "2026-09-02-cisa-kev-sonicwall-sma-jfrog-kestra",
+    appName: "SonicWall SMA 1000 / JFrog Artifactory / Kestra",
+    vendor: "CISA",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "CISA adds seven exploited flaws, including two in SonicWall SMA 1000",
+    summary:
+      "CISA added seven actively exploited vulnerabilities to the KEV catalog on September 2, 2026. The remote-access entries are the notable ones for managed environments: CVE-2026-83548 (CVSS 10.0), an unauthenticated SSRF in SonicWall SMA 1000, and CVE-2026-83549 (CVSS 7.8), OS command injection on the same appliance. The list also includes Sangoma Switchvox (CVE-2026-9586), JFrog Artifactory (CVE-2026-82329), Starlette (CVE-2026-48710), Kestra OSS (CVE-2026-49869), and LiteLLM (CVE-2026-59822), with reporting of reverse shells and crypto miners deployed through them.",
+    affectedUsers:
+      "Clients with a SonicWall SMA 1000 series remote-access appliance in front of their network. The remaining entries mostly affect developer and automation infrastructure rather than typical AEC fleets, but are worth a look where a client runs an internal build or AI-gateway stack.",
+    recommendedMspAction:
+      "Check the managed appliance inventory for SMA 1000 units and patch to SonicWall's fixed firmware; the SSRF is unauthenticated and rated 10.0. After patching, review appliance logs for unexpected outbound requests and rotate administrative credentials. Add the KEV catalog to the weekly review routine — the federal deadlines are a useful urgency signal even for private-sector clients.",
+    sourceUrls: [
+      "https://www.cisa.gov/news-events/alerts/2026/09/02/cisa-adds-seven-known-exploited-vulnerabilities-catalog",
+      "https://thehackernews.com/2026/09/cisa-adds-seven-exploited-flaws-as.html"
+    ],
+    publishedDate: "2026-09-02",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["cisa", "kev", "sonicwall", "sma-1000", "jfrog", "artifactory", "kestra", "litellm", "remote-access", "security"]
+  },
+  {
+    id: "2026-08-31-microsoft-365-exchange-online-auth-outage-mo1465074",
+    appName: "Exchange Online / Teams / SharePoint / OneDrive",
+    vendor: "Microsoft",
+    category: "Outage",
+    severity: "Critical",
+    title: "Multi-day Microsoft 365 authentication outage disrupted mail, Teams, and file access",
+    summary:
+      "A Microsoft 365 outage that began around 5:30 PM UTC on August 31, 2026 ran until September 3. Tracked as EX1464935 and then MO1465074, Microsoft attributed it to core authentication configuration issues in internal services supporting Exchange Online. Impact spread well past mail to Teams, Microsoft Graph, OneDrive for Business, SharePoint Online, Purview, the Microsoft 365 admin center, Microsoft 365 Copilot, Universal Print, and Defender XDR.",
+    affectedUsers:
+      "Tenants worldwide, with symptoms including mail delivery failures, search errors, sign-in and token failures, and attachment download problems. For design teams the practical damage was file access: OneDrive and SharePoint sit under project folders and Teams channels.",
+    recommendedMspAction:
+      "Now that it is resolved, use it as a review item rather than a live incident. Confirm the post-incident report in the Microsoft 365 admin center service health history, and check whether any client hit lasting side effects — stuck mail queues on hybrid Exchange connectors, OneDrive sync clients that need a reset, or Universal Print queues that never recovered. Worth revisiting with clients who have no offline fallback for drawings and specs during a multi-day identity outage.",
+    sourceUrls: [
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-exchange-online-outage-causes-email-failures-auth-issues/",
+      "https://techcrunch.com/2026/09/01/microsoft-365-outage-drags-on-but-things-are-improving/",
+      "https://status.cloud.microsoft/"
+    ],
+    publishedDate: "2026-08-31",
+    lastUpdatedDate: "2026-09-12",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["microsoft", "microsoft-365", "exchange-online", "teams", "sharepoint", "onedrive", "outage", "mo1465074", "ex1464935", "authentication"]
+  },
+  {
+    id: "2026-08-06-autodesk-revit-autocad-tif-bmp-code-execution-adsk-sa-2026-0012",
+    appName: "Revit / AutoCAD / Civil 3D / DWG TrueView",
+    vendor: "Autodesk",
+    category: "Security Vulnerability",
+    severity: "High",
+    title: "Revit and AutoCAD code-execution flaws in image parsing — advisory revised Sept 2",
+    summary:
+      "Autodesk advisory ADSK-SA-2026-0012, first published August 6, 2026 and last revised September 2, covers CVE-2026-7405 (out-of-bounds read via a malicious TIF file) and CVE-2026-7406 (arbitrary code execution via a malicious BMP file), both rated High. Affected products include Revit 2027/2026/2024, the AutoCAD 2027 family and toolsets, Civil 3D, Advance Steel, AutoCAD LT, and DWG TrueView 2027. Exploitation runs code in the context of the current process and requires user interaction.",
+    affectedUsers:
+      "Design staff who link or import raster images — site photos, scanned survey exhibits, aerial TIFs — into Revit or AutoCAD. That content routinely arrives from outside the firm, which is exactly the delivery path this flaw needs.",
+    recommendedMspAction:
+      "Deploy the mitigated builds through Autodesk Access or the Accounts Portal: Revit 2027.1, 2026.5, or 2024.3.5, and AutoCAD 2027.1. This is the highest-priority Autodesk item currently open because it is code execution rather than a crash. Pair the rollout with a short reminder to users that images from outside parties should come through the normal project transfer channel rather than an emailed attachment.",
+    sourceUrls: [
+      "https://www.autodesk.com/trust/security-advisories/adsk-sa-2026-0012",
+      "https://www.autodesk.com/trust/security-advisories"
+    ],
+    publishedDate: "2026-08-06",
+    lastUpdatedDate: "2026-09-02",
+    suggestedPlacement: "news-page",
+    audience: "public",
+    isPublished: false,
+    isPlaceholder: false,
+    tags: ["autodesk", "revit", "autocad", "civil-3d", "dwg-trueview", "cve-2026-7405", "cve-2026-7406", "adsk-sa-2026-0012", "code-execution", "security"]
+  },
   // -- AUTOMATED FINDINGS (2026-07-15 scheduled scan) --------------------------
   // Discovered by the daily-site-check scheduled task on 2026-07-15 from vendor
   // status pages, CISA KEV, and security press. Added as drafts per the
