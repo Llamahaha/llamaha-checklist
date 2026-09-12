@@ -30,10 +30,11 @@ function publicizeText(value = "") {
     .replace(/\bworkstations\b/gi, "computers")
     .replace(/\bworkstation\b/gi, "computer")
     .replace(/\bhandoff\b/gi, "setup")
+    .replace(/\badmin-console\b/gi, "Admin Console")
     .replace(/\bproject admin\b/gi, "project owner")
     .replace(/\bIT admin\b/gi, "IT")
     .replace(/\badmins\b/gi, "support team")
-    .replace(/\badmin\b/gi, "support team")
+    .replace(/\badmin\b(?![-\s]+console)/gi, "support team")
     .replace(/\bSSO\b/g, "company sign-in")
     .replace(/\bMFA\b/g, "multi-factor sign-in")
     .replace(/\bMDM\b/g, "company device management")
@@ -58,11 +59,11 @@ function publicizeText(value = "") {
     .replace(/\bdatasources\b/gi, "data sources")
     .replace(/\bdatasource\b/gi, "data source")
     .replace(/\bstale\b/gi, "out of date")
-    .replace(/\bcaches\b/gi, "saved local data")
-    .replace(/\bcache\b/gi, "saved local data")
     .replace(/\bregistry edits\b/gi, "advanced system changes")
     .replace(/\bregistry\b/gi, "system settings")
     .replace(/\ban multi-factor sign-in\b/gi, "a multi-factor sign-in")
+    .replace(/\bcompany company sign-in\b/gi, "company sign-in")
+    .replace(/\bsupport team can\b/gi, "the support team can")
     .replace(/\bcompany sign-in sign-in\b/gi, "company sign-in")
     .replace(/\bmulti-factor sign-in sign-in\b/gi, "multi-factor sign-in");
 }
@@ -201,7 +202,7 @@ const friendlyAliases = {
   // Bentley
   "openroads": "/guides/bentley/openroads-designer.html",
   "openbridge": "/guides/bentley/openbridge-designer.html",
-  // H20Net / FHWA hydraulics
+  // FHWA hydraulics
   "h2onet": "/guides/h20net.html",
   "fhwa": "/guides/h20net.html",
   "fhwa-hydraulics": "/guides/h20net.html",

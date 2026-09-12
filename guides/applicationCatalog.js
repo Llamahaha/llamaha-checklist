@@ -415,15 +415,6 @@ const baseApplicationCatalog = {
       ]
     }
   ],
-  sketchup: [
-    {
-      name: "SketchUp",
-      focus: "Trimble-managed subscription product with strong dependence on the right Trimble identity and extensions.",
-      licensing: "Assign the SketchUp seat in Trimble admin first and verify the user's identity will authenticate against the correct account.",
-      install: "Install the approved version plus required extensions, templates, and companion tools used by the client.",
-      uninstall: "Deauthorize or remove the seat assignment and preserve local templates, extensions, and components before cleanup."
-    }
-  ],
   trimble: [
     {
       name: "SketchUp",

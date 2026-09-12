@@ -2138,7 +2138,7 @@ export const publicGuideContentExtra = {
         "Did the issue start after a Webex update, OS update, new computer, or peripheral change?"
       ],
       licensing: [
-        "Webex access depends on your firm's Webex site and the user provisioning your firm has set up.",
+        "Webex access depends on your firm's Webex site and the account your firm created for you.",
         "If your firm uses Webex Calling, calling features only appear once the calling license is assigned.",
         "Sign-in usually goes through your firm's Webex site URL — using a generic Webex URL may land you in a personal account."
       ],

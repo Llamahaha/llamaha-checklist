@@ -16,7 +16,7 @@
     oracle: "Oracle",
     google: "Google",
     hec: "HEC",
-    h20net: "H20Net",
+    h20net: "FHWA Hydraulics",
     mctrans: "MCTRANS",
     axiom: "Axiom",
     autodesk: "Autodesk",

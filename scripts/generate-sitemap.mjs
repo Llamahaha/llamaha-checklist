@@ -11,6 +11,7 @@ const excludedHtmlFiles = new Set([
   "checklist.html",
   "decision-trees.html",
   "emergency-playbooks.html",
+  "guides/sketchup.html",
   "index-redesign.html",
   "snippets.html",
   "templates.html"

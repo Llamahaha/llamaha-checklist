@@ -147,8 +147,8 @@ export const vendorGuidesExtra = {
     ]
   },
   h20net: {
-    title: "H20Net",
-    summary: "Use this for FHWA hydraulic design utilities collected under the H20Net app family, especially Hydraulic Toolbox and HY-8.",
+    title: "FHWA Hydraulics",
+    summary: "Use this for FHWA hydraulic design utilities, especially Hydraulic Toolbox and HY-8.",
     overview:
       "These tools are lightweight hydraulic-design utilities where support usually depends on the exact FHWA version, Windows compatibility, calculation files, and whether the same project behaves correctly on another approved computer.",
     products: ["Hydraulic Toolbox", "HY-8"],
@@ -305,12 +305,12 @@ export const vendorGuidesExtra = {
     title: "Cisco",
     summary: "Use this for Cisco Webex Meetings sign-in, join issues, audio and video setup, and everyday Webex support questions.",
     overview:
-      "Webex issues usually come down to the correct Webex site URL, sign-in method, device routing in the client, or Outlook integration. Web Webex is a helpful fallback when the desktop app is stuck.",
+      "Webex issues usually come down to the correct Webex site URL, sign-in method, device routing in the client, or Outlook integration. Webex in the browser is a helpful fallback when the desktop app is stuck.",
     products: ["Webex"],
     sharedNotes: [
       "Confirm the exact Webex site URL your company uses before troubleshooting a sign-in problem.",
       "If meetings fail audio or video, verify the microphone, speaker, and camera in Webex and in Windows or macOS sound settings.",
-      "Web Webex is a useful fallback when the desktop app refuses to sign in or hangs on startup."
+      "Webex in the browser is a useful fallback when the desktop app refuses to sign in or hangs on startup."
     ],
     adminSurfaces: [
       "Webex Control Hub for admins",

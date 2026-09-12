@@ -51,7 +51,7 @@ const customerLicensingReference = {
     ]
   },
   h20net: {
-    summary: "H20Net tools such as Hydraulic Toolbox and HY-8 are free FHWA utilities, so access usually depends on the approved version, 64-bit Windows compatibility, and install permissions rather than a paid seat.",
+    summary: "FHWA Hydraulics tools such as Hydraulic Toolbox and HY-8 are free FHWA utilities, so access usually depends on the approved version, 64-bit Windows compatibility, and install permissions rather than a paid seat.",
     howItWorks: [
       "Hydraulic Toolbox and HY-8 are typically installed as Windows desktop utilities from the official FHWA pages or a company-approved package.",
       "The version matters because project files, reports, and results can be sensitive to app updates or team standards.",

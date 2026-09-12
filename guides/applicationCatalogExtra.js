@@ -239,7 +239,7 @@ export const applicationCatalogExtra = {
       slug: "webex",
       focus: "Cisco Webex Meetings desktop app, browser client, and Outlook integration for video meetings, calling, and messaging where the firm has licensed those features.",
       licensing: "Requires a Webex account on the firm's Webex site with the expected Meetings, Calling, or Messaging entitlements.",
-      install: "Install the approved Webex app, sign in with the correct account on the firm's Webex site, and test joining one meeting with audio, video, and screen share. Web Webex can be used as a diagnostic when the desktop app hangs.",
+      install: "Install the approved Webex app, sign in with the correct account on the firm's Webex site, and test joining one meeting with audio, video, and screen share. Webex in the browser can be used as a diagnostic when the desktop app hangs.",
       uninstall: "Remove the user in Control Hub or the Webex site admin page, reassign any scheduled meetings or recordings, then uninstall the desktop client."
     }
   ],
