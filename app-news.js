@@ -17,6 +17,7 @@ import {
   APP_NEWS_SEVERITIES,
   sortByPublishedDesc
 } from "./appNewsData.js";
+import { NEWS_STATUSES, appFilterValue, newsStatus, isArchivedNews, matchesNewsFilters, customerAction, formatCheckedAt } from "./newsLifecycle.js";
 
 // Detect area from <body data-site-area="...">; default to public.
 const AREA = document.body?.dataset?.siteArea === "internal" ? "internal" : "public";
@@ -32,6 +33,8 @@ const els = {
   dateFrom: document.getElementById("filterDateFrom"),
   dateTo: document.getElementById("filterDateTo")
 };
+els.status = document.getElementById("filterStatus");
+els.view = document.getElementById("filterView");
 
 function unique(values) {
   return Array.from(new Set(values.filter(Boolean))).sort((a, b) =>
@@ -54,10 +57,19 @@ function populateFilters(items) {
   // can filter by either granularity. Storing the raw vendor in the value
   // keeps matching logic simple.
   const vendors = unique(items.map(item => item.vendor));
-  populateOptions(els.vendor, vendors);
+  for (const vendor of vendors) {
+    const group = document.createElement("optgroup");
+    group.label = vendor;
+    group.append(new Option(`All ${vendor}`, `vendor:${vendor}`));
+    for (const appName of unique(items.filter(item => item.vendor === vendor).map(item => item.appName))) {
+      group.append(new Option(appName, appFilterValue({ vendor, appName })));
+    }
+    els.vendor.append(group);
+  }
 
   populateOptions(els.category, APP_NEWS_CATEGORIES);
   populateOptions(els.severity, APP_NEWS_SEVERITIES);
+  for (const [value, label] of Object.entries(NEWS_STATUSES)) els.status.append(new Option(label, value));
 
   // On the public site we hide the audience filter — only one option matters.
   if (AREA === "public" && els.audience) {
@@ -73,19 +85,10 @@ function readFilters() {
     severity: els.severity?.value || "",
     audience: els.audience?.value || "",
     dateFrom: els.dateFrom?.value || "",
-    dateTo: els.dateTo?.value || ""
+    dateTo: els.dateTo?.value || "",
+    status: els.status?.value || "",
+    view: els.view?.value || "recent"
   };
-}
-
-function matchesFilters(item, f) {
-  if (f.vendor && item.vendor !== f.vendor) return false;
-  if (f.category && item.category !== f.category) return false;
-  if (f.severity && item.severity !== f.severity) return false;
-  if (f.audience && item.audience !== f.audience) return false;
-  const date = item.publishedDate || "";
-  if (f.dateFrom && date && date < f.dateFrom) return false;
-  if (f.dateTo && date && date > f.dateTo) return false;
-  return true;
 }
 
 function makeBadge(className, text) {
@@ -120,9 +123,9 @@ function renderRow(item) {
     makeBadge(`appnews-badge appnews-sev ${severityClass(item.severity)}`, item.severity),
     makeBadge(`appnews-badge appnews-cat ${categoryClass(item.category)}`, item.category),
     makeBadge("appnews-badge appnews-vendor", item.appName ? `${item.vendor} · ${item.appName}` : item.vendor),
-    makeBadge(`appnews-badge appnews-audience ${audienceClass(item.audience)}`,
-      item.audience === "internal" ? "Internal" : "Public")
+    makeBadge(`appnews-badge appnews-state is-${newsStatus(item)}`, NEWS_STATUSES[newsStatus(item)])
   );
+  if (AREA === "internal") badges.append(makeBadge("appnews-badge", item.audience === "internal" ? "Internal" : "Public"));
   if (item.isPlaceholder) {
     badges.appendChild(makeBadge("appnews-placeholder-tag", "Sample"));
   }
@@ -147,13 +150,21 @@ function renderRow(item) {
     detailGrid.append(dt, dd);
   }
 
-  if (item.recommendedMspAction) {
+  {
     const dt = document.createElement("dt");
-    dt.textContent = "Recommended action";
+    dt.textContent = "What you should do";
     const dd = document.createElement("dd");
-    dd.textContent = item.recommendedMspAction;
+    dd.textContent = customerAction(item);
     detailGrid.append(dt, dd);
   }
+
+  const technician = document.createElement("details");
+  technician.className = "appnews-technician";
+  const technicianTitle = document.createElement("summary");
+  technicianTitle.textContent = "For your IT team";
+  const technicianCopy = document.createElement("p");
+  technicianCopy.textContent = item.recommendedMspAction || "Check the linked vendor guidance for technical details.";
+  technician.append(technicianTitle, technicianCopy);
 
   const meta = document.createElement("div");
   meta.className = "appnews-meta";
@@ -168,6 +179,10 @@ function renderRow(item) {
     dates.textContent = `Published ${published || updated}`;
   }
   meta.appendChild(dates);
+  const checked = document.createElement("span");
+  checked.className = "appnews-checked";
+  checked.textContent = formatCheckedAt(item.lastCheckedAt);
+  meta.append(checked);
 
   if (Array.isArray(item.sourceUrls) && item.sourceUrls.length) {
     const linksWrap = document.createElement("span");
@@ -204,8 +219,14 @@ function renderRow(item) {
   }
 
   body.append(top, title, summary);
+  if (isArchivedNews(item)) {
+    const archived = document.createElement("p");
+    archived.className = "appnews-history-note";
+    archived.textContent = "Archived report. This does not establish current service status or confirm that your devices are patched.";
+    body.append(archived);
+  }
   if (detailGrid.children.length) body.appendChild(detailGrid);
-  body.appendChild(meta);
+  body.append(technician, meta);
 
   article.append(rail, body);
   return article;
@@ -235,7 +256,12 @@ function update() {
   if (!els.list) return;
   const baseItems = getVisibleItems({ area: AREA });
   const filters = readFilters();
-  const matched = baseItems.filter(item => matchesFilters(item, filters)).sort(sortByPublishedDesc);
+  if (filters.dateFrom && filters.dateTo && filters.dateFrom > filters.dateTo) {
+    els.count.textContent = "The start date must be on or before the end date.";
+    els.list.replaceChildren();
+    return;
+  }
+  const matched = baseItems.filter(item => matchesNewsFilters(item, filters)).sort(sortByPublishedDesc);
 
   if (els.count) {
     if (matched.length === baseItems.length) {
@@ -256,12 +282,41 @@ function update() {
   }
   els.list.replaceChildren(fragment);
 
-  // Anchor scroll if URL has #id
-  const hash = window.location.hash;
-  if (hash) {
-    const target = document.querySelector(hash);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const filterNames = ["vendor", "category", "severity", "audience", "dateFrom", "dateTo", "status", "view"];
+
+function saveFilters() {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(readFilters())) {
+    if (value && !(key === "view" && value === "recent")) params.set(key, value);
   }
+  window.history.replaceState({}, "", `${location.pathname}${params.size ? `?${params}` : ""}${location.hash}`);
+  update();
+}
+
+function loadFilters() {
+  const params = new URLSearchParams(location.search);
+  for (const name of filterNames) {
+    const input = els[name];
+    const fallback = name === "view" ? "recent" : "";
+    const requested = params.get(name) ?? fallback;
+    input.value = input.tagName === "SELECT" && ![...input.options].some(option => option.value === requested) ? fallback : requested;
+  }
+  if (AREA === "public") els.audience.value = "";
+  update();
+}
+
+function revealHash() {
+  let id;
+  try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+  if (!id) return;
+  if (!getVisibleItems({ area: AREA }).some(item => item.id === id)) return;
+  if (!document.getElementById(id)) {
+    for (const name of filterNames) els[name].value = name === "view" ? "all" : "";
+    saveFilters();
+  }
+  document.getElementById(id)?.scrollIntoView({ block: "start", behavior: "instant" });
 }
 
 function init() {
@@ -271,10 +326,13 @@ function init() {
   populateFilters(items);
   renderPlaceholderBanner();
 
-  els.filters?.addEventListener("change", update);
-  els.filters?.addEventListener("reset", () => requestAnimationFrame(update));
-
-  update();
+  els.filters?.addEventListener("submit", event => event.preventDefault());
+  els.filters?.addEventListener("change", saveFilters);
+  els.filters?.addEventListener("reset", () => requestAnimationFrame(() => { history.replaceState({}, "", location.pathname); update(); }));
+  window.addEventListener("popstate", () => { loadFilters(); revealHash(); });
+  window.addEventListener("hashchange", revealHash);
+  loadFilters();
+  revealHash();
 }
 
 if (document.readyState === "loading") {

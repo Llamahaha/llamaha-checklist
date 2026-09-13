@@ -19,6 +19,7 @@ import {
   hasPlaceholders,
   appNewsItems
 } from "./appNewsData.js";
+import { NEWS_STATUSES, newsStatus, formatCheckedAt } from "./newsLifecycle.js";
 
 const HOME_LIMIT = 5;
 
@@ -66,6 +67,10 @@ function renderRow(item) {
   vendorBadge.className = "appnews-badge appnews-vendor";
   vendorBadge.textContent = item.appName ? `${item.vendor} · ${item.appName}` : item.vendor;
   badges.appendChild(vendorBadge);
+  const state = document.createElement("span");
+  state.className = "appnews-badge appnews-state";
+  state.textContent = NEWS_STATUSES[newsStatus(item)];
+  badges.append(state);
 
   top.appendChild(badges);
 
@@ -82,7 +87,7 @@ function renderRow(item) {
 
   const date = document.createElement("span");
   date.className = "appnews-date";
-  date.textContent = `Updated ${formatNewsDate(item.lastUpdatedDate || item.publishedDate)}`;
+  date.textContent = `Published ${formatNewsDate(item.publishedDate)} | ${formatCheckedAt(item.lastCheckedAt)}`;
   meta.appendChild(date);
 
   if (item.audience === "internal") {

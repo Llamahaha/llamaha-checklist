@@ -24,24 +24,6 @@
 <body>
   <div class="page-shell">
 
-    <!-- Status strip lives below the sticky chrome so the nav can stay edge-to-edge -->
-    <div id="vendor-status" class="status-strip" data-status-strip data-status-state="unchecked" role="region" aria-labelledby="vendorStatusTitle">
-      <span class="status-dot" aria-hidden="true"></span>
-      <span id="vendorStatusTitle" class="status-label">Check Vendor Status</span>
-      <span id="vendorStatusSummary" class="status-summary">Open the live vendor dashboards for the apps we support to see if a current issue is on the vendor side.</span>
-      <div class="status-actions">
-        <button id="statusCheckBtn" class="status-check-btn" type="button" aria-controls="vendorStatusPanel" aria-expanded="false">Check Status</button>
-        <a href="contact.html" class="status-link">Report an issue</a>
-      </div>
-      <div id="vendorStatusPanel" class="status-panel" hidden>
-        <div class="status-panel-head">
-          <strong>Official Status Dashboards</strong>
-          <span id="vendorStatusTimestamp">Not opened yet</span>
-        </div>
-        <div id="vendorStatusList" class="status-list" aria-label="Official vendor status links"></div>
-      </div>
-    </div>
-
     <main class="hub-shell">
 
       <!-- Brand hero with AEC/CAD positioning + big search -->
@@ -50,14 +32,11 @@
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h18v18H3z"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
           Built for AEC &amp; CAD teams
         </span>
-        <h1 id="heroTitle">
-          <span class="hero-title-line">Support for the environment</span>
-          <span class="hero-title-line">your <span class="accent">design teams</span> live in.</span>
-        </h1>
-        <p class="lede">Help with Revit, AutoCAD, Civil 3D, MicroStation, Bluebeam Revu, ArcGIS Pro, ProjectWise, ACC / BIM 360, Trimble, Adobe, and Microsoft 365 — written for the way design firms actually work.</p>
+        <h1 id="heroTitle">Llamaha Plan Room</h1>
+        <p class="lede">AEC and CAD support for your apps, project files, and work devices.</p>
 
         <form class="hero-search-wrap" action="search.html" method="get" role="search">
-          <input class="hero-search-input" type="text" name="q" placeholder="Try: revit license error, plotter offline, ACC won't sync, civil 3D crashes on open..." aria-label="Search the help center">
+          <input class="hero-search-input" type="search" name="q" placeholder="Search apps and issues" aria-label="Search the help center">
           <button class="hero-search-btn" type="submit">Search</button>
         </form>
 
@@ -72,31 +51,12 @@
         </div>
       </section>
 
-      <!-- Vendor row: who we support -->
-      <section class="vendor-row" aria-label="Supported vendors">
-        <span class="vendor-row-label">We support</span>
-        <div class="vendor-row-list">
-          <a class="vendor-row-name" href="guides/autodesk.html">Autodesk</a>
-          <a class="vendor-row-name" href="guides/bentley.html">Bentley</a>
-          <a class="vendor-row-name" href="guides/bluebeam.html">Bluebeam</a>
-          <a class="vendor-row-name" href="guides/esri.html">Esri</a>
-          <a class="vendor-row-name" href="guides/trimble.html">Trimble</a>
-          <a class="vendor-row-name" href="guides/adobe.html">Adobe</a>
-          <a class="vendor-row-name" href="guides/microsoft.html">Microsoft</a>
-          <a class="vendor-row-name" href="guides/citrix.html">Citrix</a>
-          <a class="vendor-row-name" href="guides/deltek.html">Deltek</a>
-          <a class="vendor-row-name" href="guides/dropbox.html">Dropbox</a>
-          <a class="vendor-row-name" href="guides/box.html">Box</a>
-        </div>
-      </section>
-
       <!-- Symptom-first triage grid -->
       <section class="hub-section" aria-labelledby="triageTitle">
         <div class="section-head">
           <div>
             <p class="section-kicker">Start with what's broken</p>
             <h2 id="triageTitle">What's going on?</h2>
-            <p class="section-sub">Pick the closest match — every tile leads straight into a focused triage path with the steps support actually wants you to try first.</p>
           </div>
         </div>
 
@@ -177,13 +137,48 @@
         </div>
       </section>
 
+    <!-- Status strip lives below the sticky chrome so the nav can stay edge-to-edge -->
+    <div id="vendor-status" class="status-strip" data-status-strip data-status-state="unchecked" role="region" aria-labelledby="vendorStatusTitle">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span id="vendorStatusTitle" class="status-label">Check Vendor Status</span>
+      <span id="vendorStatusSummary" class="status-summary">Open the live vendor dashboards for the apps we support to see if a current issue is on the vendor side.</span>
+      <div class="status-actions">
+        <button id="statusCheckBtn" class="status-check-btn" type="button" aria-controls="vendorStatusPanel" aria-expanded="false">Check Status</button>
+        <a href="contact.html" class="status-link">Report an issue</a>
+      </div>
+      <div id="vendorStatusPanel" class="status-panel" hidden>
+        <div class="status-panel-head">
+          <strong>Official Status Dashboards</strong>
+          <span id="vendorStatusTimestamp">Not opened yet</span>
+        </div>
+        <div id="vendorStatusList" class="status-list" aria-label="Official vendor status links"></div>
+      </div>
+    </div>
+
+      <!-- Vendor row: who we support -->
+      <section class="vendor-row" aria-label="Supported vendors">
+        <span class="vendor-row-label">We support</span>
+        <div class="vendor-row-list">
+          <a class="vendor-row-name" href="guides/autodesk.html">Autodesk</a>
+          <a class="vendor-row-name" href="guides/bentley.html">Bentley</a>
+          <a class="vendor-row-name" href="guides/bluebeam.html">Bluebeam</a>
+          <a class="vendor-row-name" href="guides/esri.html">Esri</a>
+          <a class="vendor-row-name" href="guides/trimble.html">Trimble</a>
+          <a class="vendor-row-name" href="guides/adobe.html">Adobe</a>
+          <a class="vendor-row-name" href="guides/microsoft.html">Microsoft</a>
+          <a class="vendor-row-name" href="guides/citrix.html">Citrix</a>
+          <a class="vendor-row-name" href="guides/deltek.html">Deltek</a>
+          <a class="vendor-row-name" href="guides/dropbox.html">Dropbox</a>
+          <a class="vendor-row-name" href="guides/box.html">Box</a>
+        </div>
+      </section>
+
       <!-- Vendor browse grid -->
       <section class="hub-section" aria-labelledby="vendorTitle">
         <div class="section-head">
           <div>
             <p class="section-kicker">Pick your software</p>
             <h2 id="vendorTitle">Browse by vendor</h2>
-            <p class="section-sub">If you already know the app, jump straight in. Each vendor lands on the products and licensing path you actually use.</p>
           </div>
           <a class="section-link" href="applications.html">View all guides</a>
         </div>
@@ -217,8 +212,8 @@
             <span class="v-name">Microsoft</span>
             <span class="v-list">Outlook, Teams, OneDrive, SharePoint, Office</span>
           </a>
-          <a class="vendor-browse-card" href="guides/citrix.html">
-            <span class="v-name">Citrix &amp; Cloud PC</span>
+          <a class="vendor-browse-card" href="articles/remote-access-issue.html">
+            <span class="v-name">Remote access</span>
             <span class="v-list">Workspace, Cloud PC, FortiClient VPN, RDP</span>
           </a>
         </div>
@@ -230,77 +225,12 @@
           <div class="recent-card">
             <div class="section-head" style="margin-bottom: 0;">
               <div>
-                <p class="section-kicker">Recently updated</p>
-                <h2 style="font-size: 1.4rem;">Fresh guides</h2>
+                <p class="section-kicker">Recently reviewed</p>
+                <h2 style="font-size: 1.4rem;">Updated guides</h2>
               </div>
-              <a class="section-link" href="search.html">All updates</a>
+              <a class="section-link" href="articles/index.html">All articles</a>
             </div>
-            <div class="recent-list">
-              <a class="recent-row" href="ai-information.html">
-                <span class="recent-tag is-app">AI</span>
-                <div>
-                  <div class="recent-title">AI model freshness and knowledge cutoffs</div>
-                  <span class="recent-meta">Updated May 2026 · ChatGPT, Claude, Gemini, Grok, Perplexity</span>
-                </div>
-                <span class="recent-arrow">→</span>
-              </a>
-              <a class="recent-row" href="computer-issues.html#phone-replacement-for-work-apps-and-mfa">
-                <span class="recent-tag is-pc">PC Help</span>
-                <div>
-                  <div class="recent-title">Phone replacement for work apps and multi-factor sign-in</div>
-                  <span class="recent-meta">Updated April 2026 · Authenticator, Outlook Mobile</span>
-                </div>
-                <span class="recent-arrow">→</span>
-              </a>
-              <a class="recent-row" href="computer-issues.html#shared-mailbox-access-in-outlook">
-                <span class="recent-tag is-pc">PC Help</span>
-                <div>
-                  <div class="recent-title">Shared mailbox access in Outlook</div>
-                  <span class="recent-meta">Updated April 2026 · Outlook Web, classic, new</span>
-                </div>
-                <span class="recent-arrow">→</span>
-              </a>
-              <a class="recent-row" href="computer-issues.html#restoring-deleted-or-overwritten-files">
-                <span class="recent-tag is-pc">PC Help</span>
-                <div>
-                  <div class="recent-title">Restoring deleted or overwritten project files</div>
-                  <span class="recent-meta">Updated April 2026 · OneDrive, SharePoint, ProjectWise</span>
-                </div>
-                <span class="recent-arrow">→</span>
-              </a>
-              <a class="recent-row" href="computer-issues.html#unable-to-scan-from-a-scanner-or-multifunction-printer">
-                <span class="recent-tag is-pc">PC Help</span>
-                <div>
-                  <div class="recent-title">Unable to scan from a scanner or multifunction printer</div>
-                  <span class="recent-meta">Updated April 2026 · Windows Scan, multifunction</span>
-                </div>
-                <span class="recent-arrow">→</span>
-              </a>
-              <a class="recent-row" href="guides/adobe/creative-cloud-desktop.html">
-                <span class="recent-tag is-app">App Help</span>
-                <div>
-                  <div class="recent-title">Creative Cloud Desktop</div>
-                  <span class="recent-meta">Updated April 2026 · Adobe sign-in, profiles</span>
-                </div>
-                <span class="recent-arrow">→</span>
-              </a>
-              <a class="recent-row" href="guides/esri/arcgis-online.html">
-                <span class="recent-tag is-app">App Help</span>
-                <div>
-                  <div class="recent-title">ArcGIS Online</div>
-                  <span class="recent-meta">Updated April 2026 · Org access, layers, sharing</span>
-                </div>
-                <span class="recent-arrow">→</span>
-              </a>
-              <a class="recent-row" href="guides/trimble/trimble-business-center.html">
-                <span class="recent-tag is-app">App Help</span>
-                <div>
-                  <div class="recent-title">Trimble Business Center</div>
-                  <span class="recent-meta">Updated April 2026 · License state, projects</span>
-                </div>
-                <span class="recent-arrow">→</span>
-              </a>
-            </div>
+            <div id="recentGuidesList" class="recent-list"><noscript><a href="articles/index.html">Browse support articles</a></noscript></div>
           </div>
 
           <aside class="self-serve-card">
@@ -347,6 +277,7 @@
   </div>
 
   <script type="module" src="siteChrome.js"></script>
+  <script type="module" src="recent-guides.js"></script>
   <script type="module" src="status-strip.js"></script>
 </body>
 </html>

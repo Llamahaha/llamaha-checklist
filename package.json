@@ -8,6 +8,8 @@
   "scripts": {
     "serve": "node scripts/serve.mjs",
     "audit": "node scripts/audit-site.mjs",
+    "test": "node --test tests/site-behavior.test.mjs",
+    "check": "node scripts/check-site.mjs",
     "guide-indexes": "node scripts/generate-guide-directory-indexes.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "verify": "node scripts/verify-site.mjs",

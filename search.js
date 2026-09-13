@@ -1,104 +1,92 @@
 import { buildSearchIndex } from "./searchIndex.js";
 import { publicizeText } from "./resourceCommon.js";
+import { findSearchResults, prepareSearchIndex } from "./searchMatching.js";
 
-const searchForm = document.getElementById("searchForm");
-const searchInput = document.getElementById("searchInput");
-const searchCategory = document.getElementById("searchCategory");
-const resultsLabel = document.getElementById("resultsLabel");
-const resultCount = document.getElementById("resultCount");
-const searchResults = document.getElementById("searchResults");
+const form = document.getElementById("searchForm");
+const input = document.getElementById("searchInput");
+const category = document.getElementById("searchCategory");
+const label = document.getElementById("resultsLabel");
+const count = document.getElementById("resultCount");
+const results = document.getElementById("searchResults");
+const more = document.getElementById("searchMore");
+const index = prepareSearchIndex(buildSearchIndex());
+const PAGE_SIZE = 40;
+let matches = [];
+let shown = 0;
 
-const index = buildSearchIndex();
-
-function scoreResult(item, query) {
-  const haystack = `${item.title} ${item.text} ${item.keywords}`.toLowerCase();
-  const title = item.title.toLowerCase();
-  let score = 0;
-
-  if (title.includes(query)) score += 6;
-  if (haystack.includes(query)) score += 3;
-
-  query.split(/\s+/).filter(Boolean).forEach(term => {
-    if (title.includes(term)) score += 3;
-    if (haystack.includes(term)) score += 1;
-  });
-
-  return score;
-}
-
-function renderResults(query = "", category = "all") {
-  searchResults.innerHTML = "";
-  const normalizedQuery = query.trim().toLowerCase();
-
-  if (!normalizedQuery) {
-    resultsLabel.textContent = "Start with a search";
-    resultCount.textContent = "Try a product name, Cloud PC, mobile app, browser, vendor, shortcut, saved website data, or help page.";
-    return;
-  }
-
-  const matches = index
-    .filter(item => category === "all" || item.category === category)
-    .map(item => ({ ...item, score: scoreResult(item, normalizedQuery) }))
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
-
-  resultsLabel.textContent = `Results for \"${query}\"`;
-  resultCount.textContent = `${matches.length} result${matches.length === 1 ? "" : "s"} found`;
-
-  if (!matches.length) {
-    const empty = document.createElement("div");
-    empty.className = "empty-state";
-    empty.textContent = "No matching help page was found. Try a broader product name, Cloud PC, vendor, mobile app, browser, shortcut, cleanup term, or help page.";
-    searchResults.appendChild(empty);
-    return;
-  }
-
-  matches.slice(0, 40).forEach(item => {
+function appendResults(focusNew = false) {
+  const fragment = document.createDocumentFragment();
+  let firstLink;
+  for (const item of matches.slice(shown, shown + PAGE_SIZE)) {
     const card = document.createElement("article");
-    card.className = "issue-card";
-
+    card.className = "search-result";
     const title = document.createElement("h3");
-    title.textContent = publicizeText(item.title);
-
+    const link = document.createElement("a");
+    link.href = item.url;
+    link.textContent = publicizeText(item.title);
+    if (/^https?:/.test(item.url)) {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    }
+    firstLink ??= link;
+    title.append(link);
     const meta = document.createElement("p");
     meta.className = "result-meta";
     meta.textContent = publicizeText(item.typeLabel);
-
     const text = document.createElement("p");
     text.textContent = publicizeText(item.text);
-
-    const link = document.createElement("a");
-    link.className = "hub-link";
-    link.href = item.url;
-    link.textContent = "Open page";
-    if (item.url.startsWith("http")) {
-      link.target = "_blank";
-      link.rel = "noreferrer";
-    }
-
-    card.append(title, meta, text, link);
-    searchResults.appendChild(card);
-  });
+    card.append(meta, title, text);
+    fragment.append(card);
+  }
+  results.append(fragment);
+  shown = Math.min(matches.length, shown + PAGE_SIZE);
+  count.textContent = `Showing ${shown} of ${matches.length} result${matches.length === 1 ? "" : "s"}`;
+  more.hidden = shown >= matches.length;
+  if (focusNew) firstLink?.focus();
 }
 
-function syncFromQueryString() {
+function render() {
+  const query = input.value.trim();
+  results.replaceChildren();
+  shown = 0;
+  more.hidden = true;
+  if (!query) {
+    label.textContent = "Search help";
+    count.textContent = "";
+    return;
+  }
+  matches = findSearchResults(index, query, category.value);
+  label.textContent = `Results for "${query}"`;
+  appendResults();
+  if (!matches.length) {
+    const empty = document.createElement("p");
+    empty.textContent = "No matching guides. Try the app name or contact IT for help.";
+    const contact = document.createElement("a");
+    contact.href = "contact.html";
+    contact.textContent = "Contact IT";
+    results.append(empty, contact);
+  }
+}
+
+function syncFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  const query = params.get("q") ?? "";
-  const category = params.get("category") ?? "all";
-  searchInput.value = query;
-  searchCategory.value = category;
-  renderResults(query, category);
+  input.value = params.get("q") ?? "";
+  const requestedCategory = params.get("category") ?? "all";
+  category.value = [...category.options].some(option => option.value === requestedCategory) ? requestedCategory : "all";
+  render();
 }
 
-searchForm.addEventListener("submit", event => {
-  event.preventDefault();
-  const query = searchInput.value.trim();
-  const category = searchCategory.value;
+function search() {
   const params = new URLSearchParams();
-  if (query) params.set("q", query);
-  if (category !== "all") params.set("category", category);
-  window.history.replaceState({}, "", `${window.location.pathname}${params.toString() ? `?${params}` : ""}`);
-  renderResults(query, category);
-});
+  if (input.value.trim()) params.set("q", input.value.trim());
+  if (category.value !== "all") params.set("category", category.value);
+  const url = `${window.location.pathname}${params.size ? `?${params}` : ""}`;
+  if (url !== `${window.location.pathname}${window.location.search}`) window.history.pushState({}, "", url);
+  render();
+}
 
-syncFromQueryString();
+form.addEventListener("submit", event => { event.preventDefault(); search(); });
+category.addEventListener("change", search);
+more.addEventListener("click", () => appendResults(true));
+window.addEventListener("popstate", syncFromUrl);
+syncFromUrl();

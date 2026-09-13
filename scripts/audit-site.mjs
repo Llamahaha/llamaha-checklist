@@ -4,9 +4,15 @@ import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 import { applicationCatalog, getAllApplications } from "../guides/applicationCatalog.js";
+import { contentReviewData, getContentReview, getReviewLabel, reviewDateBounds, reviewStatus } from "../contentReviews.js";
+import { getSiteSection, normalizeRoute } from "../siteNavigation.js";
+import { appNewsItems } from "../appNewsData.js";
+import { NEWS_STATUSES } from "../newsLifecycle.js";
+import { findContentProblems } from "./audit-rules.mjs";
 
 const rootDir = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const errors = [];
+const reviewWarnings = [];
 
 const METADATA_MIN_DESCRIPTION_LENGTH = 80;
 const METADATA_MAX_DESCRIPTION_LENGTH = 180;
@@ -195,6 +201,28 @@ function checkMetadata(files) {
     }
 
     indexableCount += 1;
+    for (const problem of findContentProblems(html)) addError(`${problem}: ${relativePath}`);
+    const route = normalizeRoute(relativePath);
+    const review = getContentReview(route);
+    if (!review) addError(`Missing content review record: ${relativePath}`);
+    else {
+      if (review.reviewedOn !== null && !reviewDateBounds(review.reviewedOn)) addError(`Invalid review date: ${relativePath}`);
+      const status = reviewStatus(review);
+      if (status === "future") addError(`Review date is in the future: ${relativePath}`);
+      if (["undated", "overdue"].includes(status)) reviewWarnings.push(`${status}: ${relativePath}`);
+      if (!Number.isInteger(review.reviewIntervalDays) || review.reviewIntervalDays < 1) addError(`Invalid review interval: ${relativePath}`);
+      if (!Array.isArray(review.sources) || review.sources.some(source => !source.label || !/^https:\/\//.test(source.url))) addError(`Invalid review sources: ${relativePath}`);
+      const dateAttribute = html.match(/data-review-date="([^"]+)"/);
+      if (dateAttribute && dateAttribute[1] !== review.reviewedOn) addError(`Rendered review date disagrees with record: ${relativePath}`);
+      if (relativePath.startsWith("guides/") && html.includes('data-render-mode="static"')) {
+        const renderedLabel = html.match(/id="guideReviewLabel"[^>]*>([^<]*)<\/p>/)?.[1] ?? "";
+        if (renderedLabel !== getReviewLabel(review)) addError(`Generated guide review label is out of date: ${relativePath}`);
+      }
+    }
+    const expectedSection = route === "" ? "home" : route === "search" ? "search" : route === "app-news" ? "news" : ["contact", "ticket"].includes(route) ? "contact" : "support";
+    for (const variant of [relativePath, route, `${route}/`]) {
+      if (getSiteSection(variant) !== expectedSection) addError(`Navigation section mismatch: ${variant}`);
+    }
 
     if (!metadata.title) {
       addError(`Indexable page is missing a title: ${relativePath}`);
@@ -226,12 +254,39 @@ function verifyWorkspaceRoot() {
   }
 }
 
+function checkReviewRecords(files) {
+  const routes = new Set(files.filter(file => extname(file) === ".html").map(file => normalizeRoute(displayPath(file))));
+  for (const route of Object.keys(contentReviewData)) {
+    if (!routes.has(route)) addError(`Review record has no page: ${route}`);
+  }
+}
+
+function checkNews() {
+  const ids = new Set();
+  for (const item of appNewsItems) {
+    if (ids.has(item.id)) addError(`Duplicate news ID: ${item.id}`);
+    ids.add(item.id);
+    if (!item.isPublished || item.isPlaceholder) continue;
+    if (!NEWS_STATUSES[item.status]) addError(`Unknown news status: ${item.id}`);
+    if (!Object.hasOwn(item, "lastCheckedAt")) addError(`Missing news verification field: ${item.id}`);
+    if (item.lastCheckedAt !== null && (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(item.lastCheckedAt) || !Number.isFinite(Date.parse(item.lastCheckedAt)) || Date.parse(item.lastCheckedAt) > Date.now())) addError(`Invalid news verification timestamp: ${item.id}`);
+    if (["investigating", "monitoring", "resolved"].includes(item.status) && !item.lastCheckedAt) addError(`News status needs a documented check: ${item.id}`);
+    if (!item.sourceUrls?.length || item.sourceUrls.some(url => !/^https:\/\//.test(url))) addError(`Published news needs source URLs: ${item.id}`);
+  }
+}
+
 verifyWorkspaceRoot();
 
 const files = walk(rootDir);
 const stalePhraseSummary = checkStalePhrases(files);
 const catalogSummary = checkCatalogCoverage(files);
 const metadataSummary = checkMetadata(files);
+checkReviewRecords(files);
+checkNews();
+if (reviewWarnings.length) {
+  console.warn(`Review queue: ${reviewWarnings.filter(item => item.startsWith("overdue")).length} overdue; ${reviewWarnings.filter(item => item.startsWith("undated")).length} without a recorded date. Dates were not advanced automatically.`);
+  if (process.argv.includes("--reviews")) reviewWarnings.forEach(item => console.warn(`- ${item}`));
+}
 
 if (errors.length > 0) {
   console.error("Site audit failed:");

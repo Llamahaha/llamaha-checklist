@@ -36,7 +36,6 @@
           <div class="section-heading">
             <p class="section-kicker">Search</p>
             <h1>Search the help center</h1>
-            <p class="builder-copy">Search Support Pages, app guides, CAD / AEC issue articles, licensing references, tips, and public help pages from one place when you need the right answer quickly.</p>
           </div>
         </div>
         <form id="searchForm" class="search-form">
@@ -62,8 +61,9 @@
             <h2 id="resultsLabel">Start with a search</h2>
           </div>
         </div>
-        <div id="resultCount" class="hub-section-copy"></div>
+        <div id="resultCount" class="hub-section-copy" role="status" aria-live="polite"></div>
         <div id="searchResults" class="search-results"></div>
+        <button id="searchMore" class="secondary-btn" type="button" hidden>Load more results</button>
       </section>
     </main>
   </div>

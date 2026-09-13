@@ -129,7 +129,7 @@ a.appnews-row:hover {
   gap: 4px;
   font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
   padding: 4px 8px;
   border-radius: 999px;
@@ -182,7 +182,7 @@ a.appnews-row:hover {
   align-items: center;
   font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
   padding: 3px 7px;
   border-radius: 4px;
@@ -262,7 +262,7 @@ a.appnews-row:hover {
 .appnews-detail-grid dt {
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
   font-size: 11px;
   color: var(--muted);
   align-self: start;
@@ -320,7 +320,7 @@ a.appnews-row:hover {
 .appnews-filter > span {
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   font-size: 10.5px;
 }
 

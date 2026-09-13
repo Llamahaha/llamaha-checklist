@@ -52,7 +52,7 @@
         </div>
         <div class="card-stack">
           <div class="card-block">
-            <h4>Almost always means: signed in with the wrong account</h4>
+            <h4>Check the signed-in account and assigned product</h4>
             <p>Trial wording usually appears when the app cannot find a valid license attached to the signed-in account. Look at which account the app shows in the top-right corner.</p>
           </div>
           <div class="card-block">
@@ -75,7 +75,7 @@
         </div>
         <div class="card-stack">
           <div class="card-block">
-            <h4>Means: the app needs to refresh your account, not that something is broken</h4>
+            <h4>The app is requesting authentication</h4>
             <p>This usually appears after a password change, multi-factor sign-in reset, or after the app has not been opened for a long time.</p>
           </div>
           <div class="card-block">
@@ -94,8 +94,8 @@
         </div>
         <div class="card-stack">
           <div class="card-block">
-            <h4>Means: a license isn't assigned to your account yet</h4>
-            <p>This is real. IT or your license owner needs to assign a license to your work account in Microsoft 365, Adobe Admin Console, Autodesk Account, or wherever the license lives.</p>
+            <h4>May mean missing access or failed activation</h4>
+            <p>Ask IT or the license owner to verify the product assignment, subscription status, account, and app version. An unlicensed message alone does not distinguish missing entitlement from a local activation failure.</p>
           </div>
           <div class="card-block">
             <h4>What to send IT</h4>
@@ -118,7 +118,7 @@
           </div>
           <div class="card-block">
             <h4>Try: another network</h4>
-            <p>If you are on the office network and activation fails, try off VPN or on a phone hotspot to see if the issue follows the network or the computer.</p>
+            <p>Only compare another network or VPN state when your company permits it. Keep required security controls enabled. Record which connection failed and ask IT to check the activation endpoint.</p>
           </div>
           <div class="card-block">
             <h4>What to send IT</h4>
@@ -136,8 +136,8 @@
         </div>
         <div class="card-stack">
           <div class="card-block">
-            <h4>Means: a network license server is not reachable from your computer</h4>
-            <p>Common with engineering apps that pull a "floating" license from a server on the company network. Often requires VPN.</p>
+            <h4>Check the license server, availability, and connection</h4>
+            <p>For products configured with a floating license, the server may be unreachable, all seats may be in use, or the requested feature or version may be unavailable. Record the exact error code. Some deployments require company VPN.</p>
           </div>
           <div class="card-block">
             <h4>Fix: confirm VPN is connected, then retry</h4>
@@ -164,7 +164,7 @@
           </div>
           <div class="card-block">
             <h4>The signed-in account matters more than the install</h4>
-            <p>Most license problems are account problems. Confirm what account the app shows before assuming the install is broken.</p>
+            <p>Confirm the account and product assignment early. Connectivity, policy, installation conflicts, or activation state may still need investigation.</p>
           </div>
           <div class="card-block">
             <h4>Take a screenshot</h4>

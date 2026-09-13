@@ -1,4 +1,6 @@
 import { publicizeText } from "./resourceCommon.js";
+import { getSiteSection, normalizeRoute } from "./siteNavigation.js";
+import { renderPageReview } from "./review-ui.js";
 
 const publicLinks = [
   { id: "home", label: "Home", href: "index.html" },
@@ -27,37 +29,6 @@ function getArea(body) {
   return window.location.pathname.includes("/internal/") ? "internal" : "public";
 }
 
-function getPublicSection(currentFile, body, pathname) {
-  if (currentFile === "index.html") return "home";
-  if (currentFile === "search.html") return "search";
-  if (currentFile === "support.html") return "support";
-  if (currentFile === "computer-issues.html") return "support";
-  if (currentFile === "applications.html") return "support";
-  if (currentFile === "app-licensing.html") return "support";
-  if (currentFile === "tips-and-tricks.html") return "support";
-  if (currentFile === "ai-information.html") return "support";
-  if (currentFile === "app-news.html") return "news";
-  if (currentFile === "contact.html" || currentFile === "ticket.html" || currentFile === "ticket") return "contact";
-  if (body.dataset.pageType || currentFile === "vendor-guides.html" || pathname.includes("/guides/")) return "support";
-  return "home";
-}
-
-function getInternalSection(currentFile, pathname) {
-  if (currentFile === "index.html") return "internal-home";
-  if (currentFile === "search.html") return "internal-search";
-  if (currentFile === "support.html") return "internal-support";
-  if (currentFile === "reference-guides.html") return "internal-support";
-  if (currentFile === "tips-and-tricks.html") return "internal-support";
-  if (currentFile === "tools.html") return "internal-support";
-  if (currentFile === "snippets.html") return "internal-support";
-  if (currentFile === "playbooks.html") return "internal-support";
-  if (currentFile === "decision-trees.html") return "internal-support";
-  if (currentFile === "checklist.html") return "internal-support";
-  if (currentFile === "templates.html") return "internal-support";
-  if (currentFile === "licensing.html") return "internal-support";
-  if (pathname.includes("/internal/reference/")) return "internal-support";
-  return "internal-home";
-}
 
 function appendSiteFooter(shell) {
   if (shell.querySelector(".site-footer")) {
@@ -85,12 +56,20 @@ function initSiteChrome() {
 
   const body = document.body;
   const rootPath = body.dataset.rootPath ?? ".";
-  const currentFile = window.location.pathname.split("/").filter(Boolean).pop() || "index.html";
   const area = getArea(body);
   const navLinks = area === "internal" ? internalLinks : publicLinks;
-  const activeSection = area === "internal"
-    ? getInternalSection(currentFile, window.location.pathname)
-    : getPublicSection(currentFile, body, window.location.pathname);
+  const activeSection = getSiteSection(window.location.pathname, area);
+  if (normalizeRoute(window.location.pathname).startsWith("articles/")) body.classList.add("article-page");
+  const main = shell.querySelector("main");
+  if (main) {
+    main.id ||= "main-content";
+    main.tabIndex = -1;
+    const skip = document.createElement("a");
+    skip.className = "skip-link";
+    skip.href = `#${main.id}`;
+    skip.textContent = "Skip to content";
+    document.body.prepend(skip);
+  }
 
   const chrome = document.createElement("header");
   chrome.className = "site-chrome";
@@ -138,6 +117,7 @@ function initSiteChrome() {
     link.className = "site-link";
     if (item.id === activeSection) {
       link.classList.add("is-active");
+      link.setAttribute("aria-current", "page");
     }
     link.href = buildHref(rootPath, item.href);
     link.textContent = item.label;
@@ -147,6 +127,7 @@ function initSiteChrome() {
   chrome.append(brand, nav);
   shell.prepend(chrome);
   appendSiteFooter(shell);
+  requestAnimationFrame(renderPageReview);
 }
 
 const skipPublicizeTags = new Set([
@@ -174,7 +155,7 @@ function publicizeVisibleText() {
 
       let parent = node.parentElement;
       while (parent) {
-        if (skipPublicizeTags.has(parent.tagName)) {
+        if (skipPublicizeTags.has(parent.tagName) || parent.classList.contains("appnews-technician")) {
           return NodeFilter.FILTER_REJECT;
         }
         parent = parent.parentElement;

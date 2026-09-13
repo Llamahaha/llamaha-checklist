@@ -24,6 +24,7 @@ import {
 } from "../guides/applicationCatalog.js";
 import { getAppGuideContent } from "../guides/appGuideContent.js";
 import { getPublicGuideContent } from "../guides/publicGuideContent.js";
+import { getContentReview, getReviewLabel } from "../contentReviews.js";
 import {
   vendorFaqs,
   vendorInstallIssues,
@@ -32,7 +33,6 @@ import {
 
 const rootDir = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const guidesDir = join(rootDir, "guides");
-const defaultReviewLabel = "Reviewed April 2026";
 
 const licensedVendors = new Set([
   "microsoft", "oracle", "autodesk", "bentley", "esri", "ptc",
@@ -97,6 +97,7 @@ function renderCardList(title, items, listClass = "guide-list") {
 }
 
 function renderSection({ id, kicker, title, body }) {
+  if (!body) return "";
   return `<section id="${escapeAttr(id)}" class="guide-section">
   <p class="section-kicker">${escapeHtml(kicker)}</p>
   <h2 class="guide-section-title">${escapeHtml(title)}</h2>
@@ -427,8 +428,8 @@ function buildAppModel(vendorSlug, app, vendor, apps) {
       ...(publicContent.relatedLinks ?? [])
     ]),
     doNotYet,
-    adminNotes,
-    lastReviewed: publicContent.lastReviewed ?? defaultReviewLabel
+    adminNotes: adminNotes.filter(note => ![...supportCheckpoints, ...install, ...doNotYet, ...licensing].includes(note)),
+    lastReviewed: getReviewLabel(getContentReview(`guides/${vendorSlug}/${appSlug}`))
   };
 }
 
@@ -670,14 +671,14 @@ function buildAppHtml(vendorSlug, vendor, app, apps) {
           <p id="guideKicker" class="section-kicker">${escapeHtml(vendor.title)} Application</p>
           <h1 id="guideTitle">${escapeHtml(app.name)}</h1>
           <p id="guideSummary">${escapeHtml(model.summary)}</p>
-          <p class="guide-review-label" id="guideReviewLabel">${escapeHtml(model.lastReviewed.startsWith("Reviewed") || model.lastReviewed.startsWith("Updated") ? model.lastReviewed : "Reviewed " + model.lastReviewed)}</p>
+          ${model.lastReviewed ? `<p class="guide-review-label" id="guideReviewLabel" data-review-date="${escapeAttr(getContentReview(canonicalPath).reviewedOn)}">${escapeHtml(model.lastReviewed)}</p>` : ""}
         </div>
       </div>
     </header>
 
     <main class="guide-layout">
       <div class="guide-main">
-        ${renderJumpLinks(sections)}
+        ${renderJumpLinks(sections.filter(([id]) => sectionsHtml.includes(`id="${id}"`)))}
         <div class="guide-main-scroll">
           <div id="guideContent" class="guide-content">
             ${sectionsHtml}
@@ -691,7 +692,7 @@ function buildAppHtml(vendorSlug, vendor, app, apps) {
 </body>
 </html>
 `;
-  return html;
+  return html.replace(/[\t ]+$/gm, "");
 }
 
 // ---------------------------------------------------------------------------
@@ -732,8 +733,14 @@ function buildVendorHtml(vendorSlug, vendor, apps) {
 
   // FAQ items
   const faqItems = (vendorFaqs[vendorSlug] ?? []).map(item => publicizeText(`${item.q} - ${item.a}`));
-  const installItems = (vendorInstallIssues[vendorSlug] ?? []).map(item => publicizeText(`${item.issue}: ${item.fix}`));
-  const usageItems = (vendorUsageIssues[vendorSlug] ?? []).map(item => publicizeText(`${item.issue}: ${item.fix}`));
+  const seenNotes = new Set(vendorSharedNotes);
+  const distinctNotes = items => items.filter(item => {
+    if (seenNotes.has(item)) return false;
+    seenNotes.add(item);
+    return true;
+  });
+  const installItems = distinctNotes((vendorInstallIssues[vendorSlug] ?? []).map(item => publicizeText(`${item.issue}: ${item.fix}`)));
+  const usageItems = distinctNotes((vendorUsageIssues[vendorSlug] ?? []).map(item => publicizeText(`${item.issue}: ${item.fix}`)));
 
   const supportLinks = [{ label: "Open contact page", url: `${rootPath}/contact.html` }];
   if (licensedVendors.has(vendorSlug)) {
@@ -775,7 +782,7 @@ function buildVendorHtml(vendorSlug, vendor, apps) {
       intro: "Use these vendor-wide tips before you dive into a single application.",
       body: [
         renderCardList("Shared notes", vendorSharedNotes),
-        renderCardList("FAQ", faqItems.length ? faqItems : ["No vendor-specific FAQ is captured yet. Use the shared notes and application guides as the first-pass reference."])
+        renderCardList("FAQ", faqItems)
       ].filter(Boolean).join("")
     }),
     renderSection({
@@ -784,8 +791,8 @@ function buildVendorHtml(vendorSlug, vendor, apps) {
       title: "Recurring vendor-wide problems",
       intro: "Keep these vendor-wide patterns in mind as you narrow down the issue.",
       body: [
-        renderCardList("Usage issues", usageItems.length ? usageItems : vendorSharedNotes),
-        renderCardList("Setup / update tips", installItems.length ? installItems : vendorSharedNotes)
+        renderCardList("Usage issues", usageItems),
+        renderCardList("Setup / update tips", installItems)
       ].filter(Boolean).join("")
     }),
     renderSection({
@@ -819,14 +826,14 @@ function buildVendorHtml(vendorSlug, vendor, apps) {
           <p id="guideKicker" class="section-kicker">App Help</p>
           <h1 id="guideTitle">${escapeHtml(vendor.title)}</h1>
           <p id="guideSummary">${escapeHtml(vendorSummary)}</p>
-          <p class="guide-review-label" id="guideReviewLabel">${escapeHtml(defaultReviewLabel)}</p>
+          ${getReviewLabel(getContentReview(canonicalPath)) ? `<p class="guide-review-label" id="guideReviewLabel" data-review-date="${escapeAttr(getContentReview(canonicalPath).reviewedOn)}">${escapeHtml(getReviewLabel(getContentReview(canonicalPath)))}</p>` : ""}
         </div>
       </div>
     </header>
 
     <main class="guide-layout">
       <div class="guide-main">
-        ${renderJumpLinks(sections)}
+        ${renderJumpLinks(sections.filter(([id]) => sectionsHtml.includes(`id="${id}"`)))}
         <div class="guide-main-scroll">
           <div id="guideContent" class="guide-content">
             ${sectionsHtml}
@@ -840,7 +847,7 @@ function buildVendorHtml(vendorSlug, vendor, apps) {
 </body>
 </html>
 `;
-  return html;
+  return html.replace(/[\t ]+$/gm, "");
 }
 
 // ---------------------------------------------------------------------------

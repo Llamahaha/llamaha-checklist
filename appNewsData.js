@@ -21,6 +21,12 @@
 //                          NVD entry, etc.). Always include at least one.
 //   publishedDate       — ISO date the story was first noted ("2026-05-09")
 //   lastUpdatedDate     — ISO date this record was last edited
+//   status              — investigating | monitoring | resolved | advisory
+//                         | historical | unconfirmed. Historical does not mean resolved.
+//   lastCheckedAt       — actual source-check UTC timestamp, or null if undocumented.
+//                         Never copy the build or edit date into this field.
+//   customerAction      — optional customer-facing instructions. Technical steps
+//                         remain in recommendedMspAction.
 //   suggestedPlacement  — "home" | "news-page" | "both"
 //                          home   = featured on the public index.html section
 //                          both   = appears on home + on /app-news
@@ -48,6 +54,8 @@
 //   reviewer flips isPublished: true after editing summary, severity, and
 //   audience. Do not auto-publish.
 // ----------------------------------------------------------------------------
+
+import { isArchivedNews } from "./newsLifecycle.js";
 
 export const APP_NEWS_CATEGORIES = [
   "Outage",
@@ -77,6 +85,9 @@ export const appNewsItems = [
   // 2026-09-12. Manually reviewed, edited, and published on 2026-09-12.
   {
     id: "2026-09-11-connectwise-screenconnect-cve-2026-84869-kev",
+    status: "advisory",
+    lastCheckedAt: "2026-09-13T16:00:10Z",
+    customerAction: "Ask your IT team to confirm that ScreenConnect and its installed agents are updated. Report unexpected remote sessions or file transfers promptly; do not change remote-support permissions yourself.",
     appName: "ScreenConnect",
     vendor: "ConnectWise",
     category: "Security Vulnerability",
@@ -102,6 +113,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-11-cisa-kev-gitlab-jfrog-artifactory",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "GitLab / JFrog Artifactory",
     vendor: "CISA",
     category: "Security Vulnerability",
@@ -128,6 +141,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-10-mikrotik-routeros-mikrotrick-kev",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "RouterOS",
     vendor: "MikroTik",
     category: "Security Vulnerability",
@@ -153,6 +168,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-08-nable-ncentral-preauth-rce-cve-2026-86218-kev",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "N-central",
     vendor: "N-able",
     category: "Security Vulnerability",
@@ -179,6 +196,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-10-autodesk-fusion-desktop-mitm-adsk-sa-2026-0016",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "Autodesk Fusion",
     vendor: "Autodesk",
     category: "Security Vulnerability",
@@ -204,6 +223,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-09-cisa-kev-cisco-fmc-citrix-netscaler-fortinet",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "Cisco Secure FMC / Citrix NetScaler / FortiOS / Chromium",
     vendor: "CISA",
     category: "Security Vulnerability",
@@ -229,6 +250,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-08-microsoft-september-2026-patch-tuesday",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "Windows / Office / Microsoft 365 Apps",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -256,6 +279,9 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-08-windows-11-kb5124008-known-issues",
+    status: "investigating",
+    lastCheckedAt: "2026-09-13T16:00:10Z",
+    customerAction: "If remote desktop, USB audio, or a shared VM folder stopped working after the September update, contact IT with your Windows version and the error. Keep required security updates installed unless IT directs otherwise.",
     appName: "Windows 11",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -281,6 +307,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-08-adobe-september-2026-security-updates",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "Acrobat / Reader / Photoshop / Illustrator",
     vendor: "Adobe",
     category: "Security Vulnerability",
@@ -307,6 +335,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-08-chrome-edge-v8-kev-cve-2026-87491",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "Google Chrome / Microsoft Edge",
     vendor: "Google",
     category: "Security Vulnerability",
@@ -333,6 +363,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-02-autodesk-shared-components-ifc-dos-cve-2026-14255",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "Revit / AutoCAD / Civil 3D / Inventor / Vault",
     vendor: "Autodesk",
     category: "Security Vulnerability",
@@ -358,6 +390,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-02-cisa-kev-sonicwall-sma-jfrog-kestra",
+    status: "advisory",
+    lastCheckedAt: null,
     appName: "SonicWall SMA 1000 / JFrog Artifactory / Kestra",
     vendor: "CISA",
     category: "Security Vulnerability",
@@ -383,6 +417,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-08-31-microsoft-365-exchange-online-auth-outage-mo1465074",
+    status: "unconfirmed",
+    lastCheckedAt: null,
     appName: "Exchange Online / Teams / SharePoint / OneDrive",
     vendor: "Microsoft",
     category: "Outage",
@@ -409,6 +445,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-08-06-autodesk-revit-autocad-tif-bmp-code-execution-adsk-sa-2026-0012",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Revit / AutoCAD / Civil 3D / DWG TrueView",
     vendor: "Autodesk",
     category: "Security Vulnerability",
@@ -438,6 +476,8 @@ export const appNewsItems = [
   // automation contract above — review, edit, then flip isPublished: true.
   {
     id: "2026-07-14-microsoft-july-2026-patch-tuesday",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Windows / Office / SharePoint / AD FS",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -464,6 +504,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-07-14-cisa-kev-sonicwall-adfs-sharepoint",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "SonicWall SMA1000 / AD FS / SharePoint",
     vendor: "Multiple",
     category: "Security Vulnerability",
@@ -489,6 +531,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-07-10-m365-portal-copilot-access-incident",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft 365 portal / Copilot",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -514,6 +558,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-07-15-autodesk-midjuly-incidents-identity-maintenance",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk cloud services",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -541,6 +587,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-07-02.
   {
     id: "2026-07-02-copilot-researcher-service-degradation",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft 365 Copilot Researcher",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -566,6 +614,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-07-01-sharepoint-server-cve-2026-45659-kev",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "SharePoint Server",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -592,6 +642,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-30-defender-endpoint-linux-upgrade-disabled-service",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Defender for Endpoint on Linux",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -617,6 +669,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-30-netscaler-ctx696604-security-update",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "NetScaler ADC / NetScaler Gateway",
     vendor: "Citrix / NetScaler",
     category: "Security Vulnerability",
@@ -643,6 +697,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-30-chrome-150-security-update-edge-pending",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Chrome / Chromium / Microsoft Edge",
     vendor: "Google / Microsoft",
     category: "Security Vulnerability",
@@ -670,6 +726,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-06-24.
   {
     id: "2026-06-24-exchange-online-mailbox-access-degradation",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Exchange Online",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -695,6 +753,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-24-windows-secure-boot-kek-expiration",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Windows Secure Boot",
     vendor: "Microsoft",
     category: "Product Change",
@@ -721,6 +781,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-22-docusign-insight-maintenance-june-23-25",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Docusign Insight",
     vendor: "Docusign",
     category: "Service Impact",
@@ -746,6 +808,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-18-esri-arcgis-enterprise-account-recovery-targeted",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "ArcGIS Enterprise",
     vendor: "Esri",
     category: "Security Vulnerability",
@@ -772,6 +836,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-17-microsoft-defender-rogueplanet-cve-2026-50656",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Defender",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -798,6 +864,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-16-chrome-edge-149-security-update",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Chrome / Chromium / Microsoft Edge",
     vendor: "Google / Microsoft",
     category: "Security Vulnerability",
@@ -825,6 +893,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-06-19.
   {
     id: "2026-06-18-splunk-enterprise-cve-2026-20253-kev",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Splunk Enterprise",
     vendor: "Splunk (Cisco)",
     category: "Security Vulnerability",
@@ -856,6 +926,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-06-18.
   {
     id: "2026-06-18-sharepoint-restricted-search-retirement",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "SharePoint Online / Microsoft 365 Copilot",
     vendor: "Microsoft",
     category: "Deprecation",
@@ -882,6 +954,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-17-fortibleed-fortinet-credential-compromise",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "FortiGate / Fortinet VPN / FortiSandbox",
     vendor: "Fortinet",
     category: "Other",
@@ -910,6 +984,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-17-microsoft-teams-presence-emergency-calling-incidents",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Teams",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -937,6 +1013,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-16-cisa-kev-joomla-cisco-litespeed",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Joomla JCE / Cisco Catalyst SD-WAN Manager / LiteSpeed cPanel Plugin",
     vendor: "Multiple (CISA KEV)",
     category: "Security Vulnerability",
@@ -971,6 +1049,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-06-16.
   {
     id: "2026-06-16-bluebeam-revu-20-end-of-support-end-of-life",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Bluebeam Revu 20 (and below)",
     vendor: "Bluebeam",
     category: "Deprecation",
@@ -998,6 +1078,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-16-egnyte-no-outage-operational",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Egnyte Platform",
     vendor: "Egnyte",
     category: "Service Impact",
@@ -1025,6 +1107,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-06-15.
   {
     id: "2026-06-13-autodesk-forma-account-fusion-incidents",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Forma Build / Autodesk Account / Fusion / APS Data Management",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -1050,6 +1134,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-12-cisa-kev-oracle-peoplesoft-ivanti-sentry",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Oracle PeopleSoft / Ivanti Sentry",
     vendor: "Multiple (CISA KEV)",
     category: "Security Vulnerability",
@@ -1080,6 +1166,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-11-microsoft-edge-two-week-release-cycle",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Edge",
     vendor: "Microsoft",
     category: "Product Change",
@@ -1106,6 +1194,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-10-cisa-bod-26-04-risk-based-patching",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Vulnerability Management / Patch Operations",
     vendor: "CISA",
     category: "Other",
@@ -1132,6 +1222,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-10-adobe-june-2026-security-updates",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Acrobat Reader / ColdFusion / AEM / Creative Cloud apps",
     vendor: "Adobe",
     category: "Security Vulnerability",
@@ -1160,6 +1252,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-09-google-chrome-v8-cve-2026-11645-kev",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Chrome / Chromium / Microsoft Edge",
     vendor: "Google / Microsoft",
     category: "Security Vulnerability",
@@ -1188,6 +1282,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-09-cisa-kev-cisco-sdwan-arista-eos",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Cisco Catalyst SD-WAN Manager / Arista EOS",
     vendor: "Cisco / Arista",
     category: "Security Vulnerability",
@@ -1217,6 +1313,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-04-esri-portal-arcgis-security-patch-reissue",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Portal for ArcGIS / ArcGIS Server",
     vendor: "Esri",
     category: "Security Vulnerability",
@@ -1245,6 +1343,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-06-09.
   {
     id: "2026-06-09-microsoft-june-2026-patch-tuesday",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Windows / Microsoft Office / Exchange Server",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -1274,6 +1374,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-08-check-point-vpn-cve-2026-50751-kev",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Check Point Remote Access VPN / Mobile Access / Spark",
     vendor: "Check Point",
     category: "Security Vulnerability",
@@ -1301,6 +1403,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-08-cisa-kev-litellm-magento-mirasvit",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "BerriAI LiteLLM / Mirasvit Full Page Cache Warmer (Magento)",
     vendor: "Multiple (CISA KEV)",
     category: "Security Vulnerability",
@@ -1330,6 +1434,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-06-05.
   {
     id: "2026-06-03-microsoft-teams-private-channel-remediation-july",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Teams",
     vendor: "Microsoft",
     category: "Product Change",
@@ -1355,6 +1461,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-03-autodesk-fusion-mobile-team-incidents",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Fusion Mobile / Fusion Team",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -1379,6 +1487,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-03-google-chromeos-stable-lts-security-updates",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "ChromeOS / ChromeOS Flex",
     vendor: "Google",
     category: "Security Vulnerability",
@@ -1404,6 +1514,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-02-microsoft-exchange-online-mail-flow-delays-ex1331830",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Exchange Online",
     vendor: "Microsoft",
     category: "Outage",
@@ -1429,6 +1541,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-02-google-android-june-security-cve-2025-48595",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Android / Google Play Protect",
     vendor: "Google",
     category: "Security Vulnerability",
@@ -1455,6 +1569,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-29-microsoft-365-archive-file-level-preview",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "SharePoint Online / Microsoft 365 Archive",
     vendor: "Microsoft",
     category: "Product Change",
@@ -1480,6 +1596,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-27-esri-arcgis-server-security-2026-update-2",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "ArcGIS Server",
     vendor: "Esri",
     category: "Security Vulnerability",
@@ -1507,6 +1625,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-06-02.
   {
     id: "2026-06-01-microsoft-365-office-teams-file-open-outage-mo1329446",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Office for the web / Microsoft Teams / SharePoint Online",
     vendor: "Microsoft",
     category: "Outage",
@@ -1533,6 +1653,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-29-palo-alto-pan-os-globalprotect-cve-2026-0257-kev",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "PAN-OS / GlobalProtect",
     vendor: "Palo Alto Networks",
     category: "Security Vulnerability",
@@ -1560,6 +1682,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-30-microsoft-365-exchange-shared-calendar-meetings",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Exchange Online / Outlook",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -1585,6 +1709,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-06-02-google-chrome-149-stable",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Google Chrome",
     vendor: "Google",
     category: "Product Change",
@@ -1610,6 +1736,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-27-cisa-kev-supply-chain-daemon-tools-tanstack-nx",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "DAEMON Tools Lite / TanStack npm / Nx Console",
     vendor: "Multiple (CISA KEV)",
     category: "Security Vulnerability",
@@ -1636,6 +1764,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-29-autodesk-forma-reports-admin-console-incidents",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk Forma / Fusion",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -1662,6 +1792,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-05-28.
   {
     id: "2026-05-27-autodesk-revit-cloud-worksharing-outage",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Revit Cloud Worksharing / Cloud Models",
     vendor: "Autodesk",
     category: "Outage",
@@ -1687,6 +1819,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-25-microsoft-365-admin-center-usage-reports-issue",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft 365 admin center",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -1714,6 +1848,8 @@ export const appNewsItems = [
   // Reviewed from current vendor/status/security sources on 2026-05-26.
   {
     id: "2026-05-24-microsoft-365-exchange-entra-mfa-outage",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Exchange Online / Microsoft Teams / Entra ID",
     vendor: "Microsoft",
     category: "Outage",
@@ -1739,6 +1875,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-30-autodesk-account-maintenance",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk account",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -1763,6 +1901,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-24-autodesk-fusion-automated-modeling-us",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk Fusion",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -1787,6 +1927,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-23-zoom-mail-calendar-mms-presence-resolved",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Zoom Mail / Calendar / Phone / Contact Center",
     vendor: "Zoom",
     category: "Service Impact",
@@ -1811,6 +1953,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-22-google-chromeos-lts-144-security-fixes",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "ChromeOS / ChromeOS Flex",
     vendor: "Google",
     category: "Security Vulnerability",
@@ -1835,6 +1979,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-21-autodesk-forma-fptr-data-incidents",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Forma Build / Forma Carbon Insights / FPTR",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -1859,6 +2005,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-19-mozilla-firefox-151-esr-thunderbird-security-updates",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Firefox / Firefox ESR / Thunderbird",
     vendor: "Mozilla",
     category: "Security Vulnerability",
@@ -1886,6 +2034,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-22-box-drive-login-errors",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Box Drive",
     vendor: "Box",
     category: "Service Impact",
@@ -1910,6 +2060,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-22-docusign-salesforce-integration-impact",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Docusign eSignature / Salesforce integration",
     vendor: "Docusign",
     category: "Service Impact",
@@ -1934,6 +2086,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-21-microsoft-edge-148-3967-83-copilot-preview",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Edge",
     vendor: "Microsoft",
     category: "Product Change",
@@ -1958,6 +2112,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-20-google-chrome-149-early-stable",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Google Chrome",
     vendor: "Google",
     category: "Product Change",
@@ -1982,6 +2138,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-21-autodesk-support-chat-incident",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk Support",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -2006,6 +2164,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-21-autodesk-upchain-maintenance-june-6",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk Upchain",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -2030,6 +2190,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-20-microsoft-defender-cves-41091-45498-kev",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Defender",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -2058,6 +2220,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-21-zoom-contact-center-call-drops-north-america",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Zoom Contact Center",
     vendor: "Zoom",
     category: "Service Impact",
@@ -2082,6 +2246,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-19-docusign-esignature-latency-eu-na",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Docusign eSignature / CLM",
     vendor: "Docusign",
     category: "Service Impact",
@@ -2106,6 +2272,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-18-dropbox-availability-sharing-degradation",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Dropbox",
     vendor: "Dropbox",
     category: "Service Impact",
@@ -2130,6 +2298,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-12-autodesk-identity-authorization-maintenance-june-6",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk Identity, Licensing & Entitlement",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -2154,6 +2324,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-21-outlook-lite-app-retirement-mc1276508",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Outlook Lite (Android)",
     vendor: "Microsoft",
     category: "Deprecation",
@@ -2178,6 +2350,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-21-dropbox-scheduled-maintenance-may-26",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Dropbox",
     vendor: "Dropbox",
     category: "Service Impact",
@@ -2202,6 +2376,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-21-autodesk-account-maintenance-may-30",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk Account",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -2226,6 +2402,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-19-autodesk-account-brief-outage",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk Account",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -2254,6 +2432,8 @@ export const appNewsItems = [
   // before these render on the site.
   {
     id: "2026-05-14-microsoft-exchange-server-cve-2026-42897-zero-day",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Exchange Server (on-premises)",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -2282,6 +2462,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-18-bluebeam-us-studio-projects-login-outage",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Bluebeam Studio Projects / Bluebeam ID / Webstore US",
     vendor: "Bluebeam",
     category: "Service Impact",
@@ -2307,6 +2489,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-14-vmware-fusion-cve-2026-41702-root-escalation",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "VMware Fusion (macOS)",
     vendor: "Broadcom / VMware",
     category: "Security Vulnerability",
@@ -2332,6 +2516,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-01-linux-kernel-cve-2026-31431-copy-fail-kev",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Linux kernel (Copy Fail)",
     vendor: "Linux Kernel",
     category: "Security Vulnerability",
@@ -2362,6 +2548,8 @@ export const appNewsItems = [
   // Future automation discoveries still start with isPublished: false.
   {
     id: "2026-05-18-microsoft-365-teams-connectors-infopath-cutoffs",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Teams / SharePoint Online",
     vendor: "Microsoft",
     category: "Deprecation",
@@ -2389,6 +2577,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-18-zoom-web-portal-admin-release",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Zoom Web Portal",
     vendor: "Zoom",
     category: "Product Change",
@@ -2414,6 +2604,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-16-palo-alto-pan-os-cve-2026-0300-fix-timeline",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "PAN-OS / GlobalProtect Authentication Portal",
     vendor: "Palo Alto Networks",
     category: "Security Vulnerability",
@@ -2439,6 +2631,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-15-microsoft-edge-148-3967-70-security-update",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Edge",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -2464,6 +2658,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-14-cisco-sd-wan-controller-cve-2026-20182",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Catalyst SD-WAN Controller / Manager",
     vendor: "Cisco",
     category: "Security Vulnerability",
@@ -2490,6 +2686,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-13-microsoft-yellowkey-greenplasma-zerodays-disclosed",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Windows (BitLocker / privilege escalation)",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -2514,6 +2712,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-12-apple-macos-ios-may-2026-security-updates",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "macOS / iOS / Safari",
     vendor: "Apple",
     category: "Security Vulnerability",
@@ -2542,6 +2742,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-12-mozilla-firefox-150-0-3-security-update",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Firefox / Firefox ESR",
     vendor: "Mozilla",
     category: "Security Vulnerability",
@@ -2570,6 +2772,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-04-27-foxit-pdf-reader-editor-security-updates",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Foxit PDF Reader / PDF Editor",
     vendor: "Foxit",
     category: "Security Vulnerability",
@@ -2594,6 +2798,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-13-microsoft-365-south-america-outage-mo1309330",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft 365 / Outlook",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -2620,6 +2826,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-13-microsoft-365-apps-install-portal-issue",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft 365 Apps / Windows 365",
     vendor: "Microsoft",
     category: "Service Impact",
@@ -2645,6 +2853,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-12-adobe-may-2026-security-bulletins",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Connect / Commerce / Creative Cloud apps",
     vendor: "Adobe",
     category: "Security Vulnerability",
@@ -2672,6 +2882,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-12-fortinet-fortisandbox-fortiauthenticator-critical-rce",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "FortiSandbox / FortiAuthenticator",
     vendor: "Fortinet",
     category: "Security Vulnerability",
@@ -2698,6 +2910,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-12-cisco-ios-xe-may-2026-advisories",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Cisco IOS / IOS XE",
     vendor: "Cisco",
     category: "Security Vulnerability",
@@ -2723,6 +2937,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-07-ivanti-epmm-cve-2026-6973-kev",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Endpoint Manager Mobile (EPMM)",
     vendor: "Ivanti",
     category: "Security Vulnerability",
@@ -2750,6 +2966,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-04-openssh-cve-2026-35414-principals",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "OpenSSH",
     vendor: "OpenSSH",
     category: "Security Vulnerability",
@@ -2777,6 +2995,8 @@ export const appNewsItems = [
   // ── PUBLISHED ───────────────────────────────────────────────────────────────
   {
     id: "2026-05-12-microsoft-may-patch-tuesday",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Windows / Microsoft 365",
     vendor: "Microsoft",
     category: "Security Vulnerability",
@@ -2806,6 +3026,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-04-esri-arcgis-server-security-2026-update-1",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "ArcGIS Server / Portal for ArcGIS",
     vendor: "Esri",
     category: "Security Vulnerability",
@@ -2832,6 +3054,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-03-24-citrix-netscaler-cve-2026-3055",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "NetScaler ADC / NetScaler Gateway",
     vendor: "Citrix",
     category: "Security Vulnerability",
@@ -2858,6 +3082,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-12-windows-autopatch-hotpatch-default",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Windows Autopatch",
     vendor: "Microsoft",
     category: "Product Change",
@@ -2883,6 +3109,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-10-autodesk-revit-cloud-model-publishing",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Revit Cloud Worksharing / Cloud Models",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -2907,6 +3135,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-07-microsoft-edge-148-stable",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Microsoft Edge",
     vendor: "Microsoft",
     category: "Product Change",
@@ -2931,6 +3161,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-05-microsoft-teams-brand-impersonation-calling",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Teams Calling",
     vendor: "Microsoft",
     category: "Product Change",
@@ -2955,6 +3187,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-05-google-chrome-148-security-update",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Google Chrome",
     vendor: "Google",
     category: "Security Vulnerability",
@@ -2980,6 +3214,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-05-05-bluebeam-de-service-degradation",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Bluebeam Studio / Bluebeam web",
     vendor: "Bluebeam",
     category: "Service Impact",
@@ -3004,6 +3240,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-04-27-autodesk-account-maintenance-may-16",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Autodesk Account",
     vendor: "Autodesk",
     category: "Service Impact",
@@ -3028,6 +3266,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-04-14-adobe-acrobat-reader-security-updates",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Acrobat Pro / Reader",
     vendor: "Adobe",
     category: "Security Vulnerability",
@@ -3054,6 +3294,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-04-14-fortinet-forticlient-ems-sql-injection",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "FortiClient EMS",
     vendor: "Fortinet",
     category: "Security Vulnerability",
@@ -3079,6 +3321,8 @@ export const appNewsItems = [
   },
   {
     id: "2026-03-12-microsoft-exchange-online-ews-retirement",
+    status: "historical",
+    lastCheckedAt: null,
     appName: "Exchange Online",
     vendor: "Microsoft",
     category: "Deprecation",
@@ -3133,6 +3377,7 @@ export function getVisibleItems({ area = "public" } = {}) {
 
 export function getHomeItems({ area = "public", limit = 5 } = {}) {
   return getVisibleItems({ area })
+    .filter(item => !isArchivedNews(item))
     .filter(item => item.suggestedPlacement === "home" || item.suggestedPlacement === "both")
     .slice(0, limit);
 }

@@ -1,4 +1,5 @@
 import "../siteChrome.js";
+import { getContentReview, getReviewLabel } from "../contentReviews.js";
 import { copyTextToClipboard } from "../resourceCommon.js";
 import { vendorGuides } from "./guideData.js";
 import {
@@ -33,7 +34,7 @@ const guideHubUrl = `${rootPath}/vendor-guides.html`;
 const vendorUrl = slug => `${rootPath}/guides/${slug}.html`;
 const appUrl = (slug, childSlug) => `${rootPath}/${buildAppGuideUrl(slug, childSlug)}`;
 const licensedVendors = new Set(["microsoft", "oracle", "autodesk", "bentley", "esri", "ptc", "trimble", "adobe", "bluebeam", "foxit", "quickbooks", "egnyte", "mctrans", "axiom"]);
-const defaultReviewLabel = "Reviewed April 2026";
+const defaultReviewLabel = getReviewLabel(getContentReview(location.pathname));
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -135,6 +136,10 @@ function formatReviewLabel(label = defaultReviewLabel) {
 }
 
 function renderReviewLabel(label = defaultReviewLabel) {
+  if (!label) {
+    document.getElementById("guideReviewLabel")?.remove();
+    return;
+  }
   if (!elements.summary?.parentElement) {
     return;
   }
@@ -370,7 +375,7 @@ function buildAppModel() {
     supportArtifacts: publicContent.supportArtifacts?.length ? publicizeItems(publicContent.supportArtifacts) : defaultSupportArtifacts(),
     relatedApps: extra.relatedApps?.length ? extra.relatedApps : apps.filter(item => item.slug !== appSlug).slice(0, 3).map(item => ({ vendor: vendorSlug, app: item.slug })),
     relatedLinks: uniqueLinks([...(app.supportLinks ?? []), ...(extra.relatedLinks ?? []), ...(publicContent.relatedLinks ?? [])]),
-    lastReviewed: publicContent.lastReviewed ?? defaultReviewLabel
+    lastReviewed: defaultReviewLabel
   };
 }
 
@@ -558,12 +563,12 @@ function renderVendorPage() {
   const notes = section("shared-notes", "Start Here", "Helpful starting points", "Use these vendor-wide tips before you dive into a single application.");
   notes.appendChild(card("Shared Notes", vendorSharedNotes));
   const faqItems = (vendorFaqs[vendorSlug] ?? []).map(item => publicizeText(`${item.q}: ${item.a}`));
-  notes.appendChild(card("FAQ", faqItems.length ? faqItems : ["No vendor-specific FAQ is captured yet. Use the shared notes and application guides as the first-pass reference."]));
+  if (faqItems.length) notes.appendChild(card("FAQ", faqItems));
 
   const accountSetup = section("account-setup", "Access", "Accounts, setup, and official tools", "Use these official vendor pages when you need account access, downloads, or setup details from the source.");
   accountSetup.appendChild(card("Account and setup pages", vendorAdminSurfaces));
   const installItems = (vendorInstallIssues[vendorSlug] ?? []).map(item => publicizeText(`${item.issue}: ${item.fix}`));
-  accountSetup.appendChild(card("Setup / Update Tips", installItems.length ? installItems : vendorSharedNotes));
+  if (installItems.length) accountSetup.appendChild(card("Setup / Update Tips", installItems));
 
   const directory = section("app-directory", "Applications", "Application Directory", "Open the exact app guide first when you already know which product is involved.");
   const grid = el("div", "guide-card-grid guide-app-grid");
@@ -581,12 +586,12 @@ function renderVendorPage() {
 
   const patterns = section("common-patterns", "Common Problems", "Recurring vendor-wide issues", "Keep these vendor-wide patterns in mind as you narrow down the issue.");
   const usageItems = (vendorUsageIssues[vendorSlug] ?? []).map(item => publicizeText(`${item.issue}: ${item.fix}`));
-  patterns.appendChild(card("Usage Issues", usageItems.length ? usageItems : vendorSharedNotes));
+  if (usageItems.length) patterns.appendChild(card("Usage Issues", usageItems));
 
   const links = section("official-links", "Links", "Official Links", "Use these vendor resources when you need the official website.");
   links.appendChild(card("Vendor Links", linkList(uniqueLinks(vendor.supportLinks ?? []))));
 
-  elements.content.append(directory, overview, notes, patterns, accountSetup, links);
+  elements.content.append(...[directory, overview, notes, patterns, accountSetup, links].filter(section => section.querySelector(".guide-card")));
 }
 
 function renderAppPage(model) {

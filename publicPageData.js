@@ -437,11 +437,13 @@ function createFilesAndHandoffsSection() {
           "Identify where the file lived: OneDrive, SharePoint, a network share, local disk, ProjectWise, Egnyte, or another app.",
           "Capture the exact file name and folder path before searching different places.",
           "Estimate when the file was deleted, overwritten, or last known good.",
-          "Check the closest recycle bin or version history first if you can safely do so.",
+          "For OneDrive or SharePoint, check the correct work account's web recycle bin for deleted files, or version history for overwritten files. Local and cloud recycle bins can differ.",
+          "OneDrive work or school recycle-bin items are normally kept for 93 days, subject to service settings. Recovery is not guaranteed; contact IT promptly if the item is missing.",
           "Do not save new files over the same location if you are trying to recover a previous version.",
-          "If project or finance data is involved, confirm who owns the restore decision before replacing anything."
+          "If project or finance data is involved, confirm who owns the restore decision before replacing anything. Preserve the current copy before restoring an older version."
         ],
         links: [
+          { label: "Microsoft file recovery guidance", url: "https://support.microsoft.com/en-us/onedrive/restore-deleted-files-or-folders-in-onedrive" },
           { label: "OneDrive guide", url: buildAppGuideUrl("microsoft", "onedrive"), external: false },
           { label: "SharePoint guide", url: buildAppGuideUrl("microsoft", "sharepoint"), external: false },
           { label: "ProjectWise guide", url: buildAppGuideUrl("bentley", "projectwise"), external: false }
