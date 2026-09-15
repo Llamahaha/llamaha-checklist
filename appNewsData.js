@@ -79,6 +79,38 @@ export const APP_NEWS_AUDIENCES = ["public", "internal"];
 // Active items appear first. The older sample records below are kept only as
 // layout fixtures and are hidden by isItemVisible because isPlaceholder is true.
 export const appNewsItems = [
+  // -- LATEST PUBLISHED FINDINGS (2026-09-15 scan) -----------------------------
+  // Checked 2026-09-15 against Cisco, CISA KEV, and Microsoft Windows Release
+  // Health. Manually reviewed, edited, and published on 2026-09-15.
+  {
+    id: "2026-09-14-cisco-secure-email-gateway-cve-2026-76461-kev",
+    status: "advisory",
+    lastCheckedAt: "2026-09-15T11:40:21Z",
+    customerAction: "Ask IT to confirm whether your company or any managed client uses Cisco Secure Email Gateway. Do not try to change mail-security settings yourself; report unusual mail filtering behavior or suspected missing mail promptly.",
+    appName: "Secure Email Gateway",
+    vendor: "Cisco",
+    category: "Security Vulnerability",
+    severity: "Critical",
+    title: "Cisco patches exploited Secure Email Gateway SQL injection",
+    summary:
+      "Cisco published a September 14 advisory for CVE-2026-76461, a critical SQL injection flaw in AsyncOS for Cisco Secure Email Gateway. A crafted email can let an unauthenticated remote attacker execute commands with root privileges on affected physical or virtual appliances; CISA added the flaw to KEV the same day with a September 17 remediation due date.",
+    affectedUsers:
+      "Any organization running Cisco Secure Email Gateway appliances, physical or virtual, regardless of configuration. Cisco Secure Email Cloud devices have been upgraded to 16.5.0-780, but Cisco says it contacted cloud customers where possible compromise indicators were found.",
+    recommendedMspAction:
+      "Inventory Cisco SEG / ESA appliances immediately and upgrade to a fixed AsyncOS release: 15.5.5-014, 16.0.4-302, or preferably 16.5.0-780. There are no workarounds. Review mail_logs for suspicious SQL such as COPY TO PROGRAM, cross-check network and firewall logs because root-level compromise can hide local evidence, and if exploitation is suspected on a virtual appliance, preserve forensics, rebuild on a fixed release, and renew credentials plus cryptographic material.",
+    sourceUrls: [
+      "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-esa-inj-2bLVGmhX",
+      "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+    ],
+    publishedDate: "2026-09-14",
+    lastUpdatedDate: "2026-09-15",
+    suggestedPlacement: "both",
+    audience: "public",
+    isPublished: true,
+    isPlaceholder: false,
+    tags: ["cisco", "secure-email-gateway", "asyncos", "cve-2026-76461", "sql-injection", "root", "kev", "email-security", "security"]
+  },
   // -- AUTOMATED FINDINGS (2026-09-12 scan) ------------------------------------
   // Discovered 2026-09-12 from vendor security advisories, status/service-health
   // reporting, CISA KEV, and security press, covering roughly 2026-08-29 through
@@ -279,31 +311,32 @@ export const appNewsItems = [
   },
   {
     id: "2026-09-08-windows-11-kb5124008-known-issues",
-    status: "investigating",
-    lastCheckedAt: "2026-09-13T16:00:10Z",
-    customerAction: "If remote desktop, USB audio, or a shared VM folder stopped working after the September update, contact IT with your Windows version and the error. Keep required security updates installed unless IT directs otherwise.",
+    status: "monitoring",
+    lastCheckedAt: "2026-09-15T11:40:21Z",
+    customerAction: "If remote desktop, USB audio, WSL, or a Hyper-V shared folder stopped working after the September update, contact IT with your Windows version and the exact error. IT may need to install the September 14 out-of-band update; keep required security updates installed unless IT directs otherwise.",
     appName: "Windows 11",
     vendor: "Microsoft",
     category: "Service Impact",
     severity: "High",
-    title: "KB5124008 linked to RDS, USB audio, and Hyper-V/WSL shared-folder issues",
+    title: "KB5124008 follow-up: RDS and Hyper-V shares fixed, USB audio still partial",
     summary:
-      "Microsoft's Windows release health dashboard lists multiple issues after the September 8, 2026 security update KB5124008: Remote Desktop Services instability is mitigated but not fully resolved, USB Audio Class 1.0 devices may fail or lose sound, and Plan9 host-folder shares may disappear inside Hyper-V-based Linux VMs, including some WSL scenarios.",
+      "Microsoft updated the Windows release health dashboard on September 14: the out-of-band KB5129195 update resolves the Remote Desktop Services instability and the Plan9 host-folder issue affecting Hyper-V-based Linux VMs, including some WSL scenarios. USB Audio Class 1.0 failures are only partially mitigated; 8-channel and 3D audio symptoms are resolved, while other Code 10, no-audio, and unresponsive-control symptoms remain under investigation.",
     affectedUsers:
       "Windows 11 24H2 and 25H2 devices that took the September update, plus Windows Server environments providing RDS. Remote CAD workstation access, terminal servers, USB audio peripherals, and developer/automation workflows that rely on WSL or Hyper-V folder sharing are the most likely helpdesk drivers.",
     recommendedMspAction:
-      "Do not broadly uninstall the update because it carries September security fixes, including exploited Windows zero-days. Slow broad deployment rings while pilots are observed, monitor the release health dashboard, and prepare ticket macros: for RDS failures capture the affected build and restart/deallocate affected VMs where that applies; for USB audio test two-channel mode; for WSL or Hyper-V share failures note that Microsoft is still working on a resolution.",
+      "Do not broadly uninstall KB5124008 because it carries September security fixes, including exploited Windows zero-days. For affected RDS or Hyper-V/WSL shared-folder tickets, install cumulative OOB KB5129195 or later and restart; if a temporary Group Policy mitigation was used for Plan9 shares, re-enable the policy before applying the OOB update. For USB audio, install KB5129195 for the multichannel fix, capture device model and Device Manager status, and escalate remaining symptoms through Microsoft Support for Business if needed.",
     sourceUrls: [
       "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2",
-      "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-24h2"
+      "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-24h2",
+      "https://support.microsoft.com/help/5129195"
     ],
     publishedDate: "2026-09-08",
-    lastUpdatedDate: "2026-09-12",
+    lastUpdatedDate: "2026-09-15",
     suggestedPlacement: "both",
     audience: "public",
     isPublished: true,
     isPlaceholder: false,
-    tags: ["microsoft", "windows-11", "kb5124008", "rds", "remote-desktop", "usb-audio", "hyper-v", "wsl", "known-issue"]
+    tags: ["microsoft", "windows-11", "kb5124008", "kb5129195", "rds", "remote-desktop", "usb-audio", "hyper-v", "wsl", "known-issue"]
   },
   {
     id: "2026-09-08-adobe-september-2026-security-updates",
